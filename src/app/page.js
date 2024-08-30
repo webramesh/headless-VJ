@@ -3,6 +3,7 @@ import Navbar from '../app/Components/Navbar.jsx';
 import React from 'react';
 import Hero from './Components/Hero.jsx';
 import Card from './Components/Card.jsx';
+import Subscription from './Components/Subscription.jsx';
 
 export default function Home() {
   return (
@@ -14,6 +15,7 @@ export default function Home() {
       <Navbar />
       <Hero />
       <Card />
+      <Subscription />
     </>
   );
 }

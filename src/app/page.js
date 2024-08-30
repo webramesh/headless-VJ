@@ -4,6 +4,7 @@ import React from 'react';
 import Hero from './Components/Hero.jsx';
 import Card from './Components/Card.jsx';
 import Subscription from './Components/Subscription.jsx';
+import Wine from './Components/Wine.jsx';
 
 export default function Home() {
   return (
@@ -16,6 +17,7 @@ export default function Home() {
       <Hero />
       <Card />
       <Subscription />
+      <Wine />
     </>
   );
 }

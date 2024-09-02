@@ -8,6 +8,7 @@ import Subscription from "./Components/Subscription.jsx";
 import Wine from "./Components/Wine.jsx";
 import SkeletonLoader from "./Components/SkeletonLoader.jsx";
 import { useState, useEffect } from 'react';
+import Info from './Components/Info.jsx';
  
 
 export default function Home() {
@@ -44,6 +45,7 @@ export default function Home() {
             title="TRENDIGT"
             subtitle="Artiklar värda att läsa från våra redaktörer"
           />
+          <Info />
         </>
       )}
     </>

@@ -7,14 +7,14 @@ import food4 from "@/public/food4.png";
 import food5 from "@/public/food5.png";
 import food6 from "@/public/food6.png";
 
-const Card = () => {
+const Card = ({title,subtitle}) => {
   return (
     <div className="mt-8 px-4 md:px-6 lg:px-8">
       <div className="font-outfit text-center font-extralight text-red-500">
-        NYHETER
+       {title}
       </div>
       <div className="text-center font-outfit text-xl md:text-2xl font-medium mt-4">
-        Den mest populära artikeln i dryckesvärlden
+     {subtitle}
       </div>
       <div className="flex flex-col md:flex-row flex-wrap justify-center gap-8 mt-8">
         <div className="flex flex-col w-full md:w-[calc(50%-1rem)] lg:w-[calc(33.333%-1rem)] max-w-sm mx-auto">

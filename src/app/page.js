@@ -9,6 +9,7 @@ import Wine from "./Components/Wine.jsx";
 import SkeletonLoader from "./Components/SkeletonLoader.jsx";
 import { useState, useEffect } from 'react';
 import Info from './Components/Info.jsx';
+import Footer from './Components/Footer.jsx';
  
 
 export default function Home() {
@@ -46,6 +47,7 @@ export default function Home() {
             subtitle="Artiklar värda att läsa från våra redaktörer"
           />
           <Info />
+          <Footer />
         </>
       )}
     </>

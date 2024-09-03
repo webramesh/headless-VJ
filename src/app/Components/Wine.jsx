@@ -17,7 +17,7 @@ export default function Component() {
             aria-hidden="true"
           ></div>
           <div className="absolute inset-0 flex items-center justify-center text-center">
-            <h2 className="text-white text-5xl font-bold leading-snug group-hover:opacity-0 transition-opacity duration-300 ease-in-out">
+            <h2 className="text-white text-3xl md:text-5xl font-bold leading-snug group-hover:opacity-0 transition-opacity duration-300 ease-in-out">
               Vin
               <br />
               Tips
@@ -32,7 +32,7 @@ export default function Component() {
                 </div>
               </div>
 
-              <p className="font-outfit text-3xl flex items-end leading-snug p-7 text-white font-medium justify-end ">
+              <p className="font-outfit  text-xl md:text-3xl flex items-end leading-snug p-7 text-white font-medium justify-end ">
                 Upptäck artiklar som täcker allt från mat och vin...
               </p>
             </div>
@@ -51,7 +51,7 @@ export default function Component() {
           ></div>
           <div className="absolute inset-0 flex items-center justify-center">
             <div className="text-center">
-              <h2 className="text-white text-5xl font-bold leading-snug group-hover:opacity-0 transition-opacity duration-300 ease-in-out">
+              <h2 className="text-white  text-3xl md:text-5xl font-bold leading-snug group-hover:opacity-0 transition-opacity duration-300 ease-in-out">
                 Ekologiskt
                 <br />
                 Viner
@@ -66,7 +66,7 @@ export default function Component() {
                   </div>
                 </div>
 
-                <p className="font-outfit text-3xl flex items-end leading-snug p-7 text-white font-medium justify-end ">
+                <p className="font-outfit  text-xl md:text-3xl flex items-end leading-snug p-7 text-white font-medium justify-end ">
                   Upptäck fakta om olika vinrelaterade ämnen...
                 </p>
               </div>
@@ -86,7 +86,7 @@ export default function Component() {
           ></div>
           <div className="absolute inset-0 flex items-center justify-center">
             <div className="text-center">
-              <h2 className="text-white text-5xl font-bold leading-snug group-hover:opacity-0 transition-opacity duration-300 ease-in-out">
+              <h2 className="text-white  text-3xl md:text-5xl font-bold leading-snug group-hover:opacity-0 transition-opacity duration-300 ease-in-out">
                 Online
                 <br />
                 Vin
@@ -101,7 +101,7 @@ export default function Component() {
                   </div>
                 </div>
 
-                <p className="font-outfit text-3xl flex items-end leading-snug p-7 text-white font-medium justify-end ">
+                <p className="font-outfit  text-xl md:text-3xl flex items-end leading-snug p-7 text-white font-medium justify-end ">
                   Lär känna förklaringar och vägledning inom olika ämnen in...
                 </p>
               </div>
@@ -121,7 +121,7 @@ export default function Component() {
           ></div>
           <div className="absolute inset-0 flex items-center justify-center">
             <div className="text-center">
-              <h2 className="text-white text-5xl font-bold leading-snug group-hover:opacity-0 transition-opacity duration-300 ease-in-out">
+              <h2 className="text-white  text-3xl md:text-5xl font-bold leading-snug group-hover:opacity-0 transition-opacity duration-300 ease-in-out">
                 Vin
                 <br />
                 Guide
@@ -136,7 +136,7 @@ export default function Component() {
                   </div>
                 </div>
 
-                <p className="font-outfit text-3xl flex items-end leading-snug p-7 text-white font-medium justify-end ">
+                <p className="font-outfit  text-xl md:text-3xl flex items-end leading-snug p-7 text-white font-medium justify-end ">
                   Vi hjälper dig på vägen att hitta rätt dryck för dig...
                 </p>
               </div>

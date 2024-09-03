@@ -18,14 +18,20 @@ export default function Navbar() {
   };
 
   return (
-    <nav className='p-3 flex flex-col md:flex-row md:items-center md:justify-between bg-[#F5F5F5]'>
-      <div className="w-full md:w-auto flex justify-between items-center  md:mb-0">
-        <div className="flex-grow md:flex-grow-0 flex justify-start md:justify-start">
-          <a href="#" className="flex items-center">
-            <Image src={logo} alt="Logo" className="object-cover" />
+    <nav className='p-3 flex flex-col lg:flex-row lg:items-center lg:justify-between bg-[#F5F5F5]'>
+      <div className="w-full lg:w-auto flex justify-between items-center lg:mb-0">
+        <div className="flex-grow lg:flex-grow-0 flex justify-start lg:justify-start">
+          <a href="#" className="flex items-center lg:ml-4">
+            <Image 
+              src={logo} 
+              alt="Logo" 
+              className="object-cover" 
+              width={250} 
+              height={100} 
+            />
           </a>
         </div>
-        <div className="md:hidden">
+        <div className="lg:hidden">
           <button onClick={toggleMenu} className="flex flex-col justify-center items-center p-2">
             <FontAwesomeIcon icon={isMenuOpen ? faTimes : faBars} className="text-2xl w-6 h-6" />
           </button>
@@ -33,13 +39,13 @@ export default function Navbar() {
       </div>
 
       {isMenuOpen && (
-        <div className="w-full md:hidden my-4">
+        <div className="w-full lg:hidden my-4">
           <Searchbar />
         </div>
       )}
 
-      <div className="w-full md:flex md:justify-center md:items-center md:space-x-8">
-        <div className={`${isMenuOpen ? 'flex' : 'hidden'} flex-col md:flex md:flex-row gap-6 font-outfit items-center mb-4 md:mb-0`}>
+      <div className="w-full lg:flex lg:justify-center lg:items-center lg:space-x-8">
+        <div className={`${isMenuOpen ? 'flex' : 'hidden'} flex-col lg:flex lg:flex-row gap-6 font-outfit items-center mb-4 lg:mb-0`}>
           <Link href="VinMat" onClick={closeMenu} className="flex items-center hover:text-gray-600">Vin & Mat</Link>
           <Link href="Vinfakta" onClick={closeMenu} className="flex items-center hover:text-gray-600">Vinfakta</Link>
           <Link href="Vintips" onClick={closeMenu} className="flex items-center hover:text-gray-600">Vintips</Link>
@@ -51,7 +57,7 @@ export default function Navbar() {
         </div>
       </div>
 
-      <div className="hidden md:block">
+      <div className="hidden lg:block lg:mr-4">
         <Searchbar />
       </div>
     </nav>

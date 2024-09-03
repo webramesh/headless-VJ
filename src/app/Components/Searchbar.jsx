@@ -13,13 +13,13 @@ const Searchbar = () => {
           placeholder="Search..."
         />
         <FontAwesomeIcon icon="fa-solid fa-magnifying-glass" />
-        {/* <Image
+        <Image
           src={search}
           alt="search"
-          width={40}
-          height={40}
+          width={38}
+          height={38}
           className="absolute right-0 top-1/2 transform -translate-y-1/2"
-        /> */}
+        />
       </div>
     </div>
   )

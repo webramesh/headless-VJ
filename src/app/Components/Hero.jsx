@@ -11,11 +11,11 @@ const Hero = () => {
       <div className="flex flex-col md:flex-row gap-8 md:gap-12">
         {/* Main Article */}
         <div className="w-full md:w-1/2 bg-[#f5f5f5] overflow-hidden">
-          <div className="relative h-48 md:h-96">
-            <Image src={pasta} alt="Vin & pasta" className="object-cover" />
+          <div className="relative h-48 sm:h-64 md:h-96">
+            <Image src={pasta} alt="Vin & pasta" className="object-cover h-full w-full" />
           </div>
           <div className="p-4">
-            <h2 className="font-outfit font-medium text-black text-lg mt-16 sm:mt-4">
+            <h2 className="font-outfit font-medium text-black text-lg mt-4 sm:mt-8">
               Vin & pasta - vilka viner passar bäst?
             </h2>
             <p className="mt-4 font-outfit text-gray-900 text-xs">
@@ -37,7 +37,7 @@ const Hero = () => {
           {/* Ekologiskt Article */}
           <div className="flex flex-col sm:flex-row gap-4 bg-[#f5f5f5] overflow-hidden">
             <div className="relative h-48 sm:h-auto sm:w-1/3">
-              <Image src={ekologiskt} alt="Ekologiskt" className="object-cover h-full w-full" />
+              <Image src={ekologiskt} alt="Ekologiskt" className="object-cover w-full h-full sm:h-auto" />
             </div>
             <div className="p-4 sm:w-2/3">
               <h3 className="font-outfit font-medium text-black text-lg">
@@ -58,7 +58,7 @@ const Hero = () => {
           {/* Lugana Article */}
           <div className="flex flex-col sm:flex-row gap-4 bg-[#f5f5f5] overflow-hidden">
             <div className="relative h-48 sm:h-auto sm:w-1/3">
-              <Image src={lugana} alt="Lugana" className="object-cover h-full w-full"/>
+              <Image src={lugana} alt="Lugana" className="object-cover w-full h-full sm:h-auto"/>
             </div>
             <div className="p-4 sm:w-2/3">
               <h3 className="font-outfit font-medium text-black text-lg">
@@ -79,7 +79,7 @@ const Hero = () => {
           {/* Vanliga Article */}
           <div className="flex flex-col sm:flex-row gap-4 bg-[#f5f5f5]  overflow-hidden">
             <div className="relative h-48 sm:h-auto sm:w-1/3">
-              <Image src={vanliga} alt="Vanliga" className="object-cover h-full w-full"  />
+              <Image src={vanliga} alt="Vanliga" className="object-cover w-full h-full sm:h-auto" />
             </div>
             <div className="p-4 sm:w-2/3">
               <h3 className="font-outfit font-medium text-black text-lg">

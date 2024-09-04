@@ -13,7 +13,7 @@ const Info = () => {
           Ett vinmagasin om mat och vin samt andra drycker
         </h1>
         <div className="mt-4">
-          <h3 className="font-outfit text-xs text-gray-500 w-full justify-normal leading-4">
+          <h3 className="font-outfit text-sm text-gray-500 w-full justify-normal leading-4">
             {" "}
             Vi skriver om mat och vin samt andra drycker. Du kan även läsa om
             annat som händer i vinvärlden. Vinjournalen.se har ständigt kunnat
@@ -29,7 +29,7 @@ const Info = () => {
           </h2>
         </div>
         <div className="mt-4">
-          <h3 className="font-outfit text-xs text-gray-500 w-full justify-normal leading-4">
+          <h3 className="font-outfit text-sm text-gray-500 w-full justify-normal leading-4">
             Vinjournalen.se startade 2011 och är Sveriges ledande online tidning
             för vinentusiaster med allt som du behöver veta om vin. Vi siktar
             mot att bli en portal om vin och andra alkoholhaltiga drycker så att
@@ -43,7 +43,7 @@ const Info = () => {
           </h3>
         </div>
         <div className="mt-4">
-          <h2 className="font-outfit font-medium text-xl text-black tracking-normal">
+          <h2 className="font-outfit font-medium  text-lg md:text-xl text-black tracking-normal">
             Frågor och Svar om Vinjournalen.se
           </h2>
         </div>

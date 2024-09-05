@@ -7,10 +7,10 @@ import vanliga from "@/public/vanliga.png";
 
 const Hero = () => {
   return (
-    <div className="container mx-auto px-4 py-8 md:py-14">
-      <div className="flex flex-col md:flex-row gap-8 md:gap-12">
+    <div className="container mx-auto px-4 py-8 lg:py-12">
+      <div className="flex flex-col lg:flex-row gap-8 lg:gap-12">
         {/* Main Article */}
-        <div className="w-full md:w-1/2 bg-[#f5f5f5] overflow-hidden">
+        <div className="w-full lg:w-1/2 bg-[#f5f5f5] overflow-hidden">
           <div className="relative h-48 sm:h-64 md:h-96">
             <Image src={pasta} alt="Vin & pasta" className="object-cover h-full w-full" />
           </div>
@@ -33,7 +33,7 @@ const Hero = () => {
         </div>
 
         {/* Side Articles */}
-        <div className="w-full md:w-1/2 flex flex-col gap-8">
+        <div className="w-full lg:w-1/2 flex flex-col gap-8">
           {/* Ekologiskt Article */}
           <div className="flex flex-col sm:flex-row gap-4 bg-[#f5f5f5] overflow-hidden">
             <div className="relative h-48 sm:h-auto sm:w-1/3">

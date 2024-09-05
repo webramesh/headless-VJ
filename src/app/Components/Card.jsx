@@ -9,15 +9,15 @@ import food6 from "@/public/food6.png";
 
 const Card = ({title,subtitle}) => {
   return (
-    <div className="mt-8 px-4 md:px-6 lg:px-8">
+    <div className="container mx-auto mt-8 px-4 md:px-6 lg:px-8">
       <div className="font-outfit text-center font-extralight text-red-500">
-       {title}
+        {title}
       </div>
       <div className="text-center font-outfit text-xl md:text-2xl font-medium mt-4">
-     {subtitle}
+        {subtitle}
       </div>
-      <div className="flex flex-col md:flex-row flex-wrap justify-center gap-8 mt-8">
-        <div className="flex flex-col w-full md:w-[calc(50%-1rem)] lg:w-[calc(33.333%-1rem)] max-w-sm mx-auto">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 mt-8">
+        <div className="flex flex-col max-w-sm mx-auto">
           <Image
             src={food1}
             alt="Food 1"
@@ -39,7 +39,7 @@ const Card = ({title,subtitle}) => {
             </p>
           </div>
         </div>
-        <div className="flex flex-col w-full md:w-1/2 lg:w-1/3 max-w-sm mx-auto">
+        <div className="flex flex-col max-w-sm mx-auto">
           <Image
             src={food2}
             alt="Food 2"
@@ -61,7 +61,7 @@ const Card = ({title,subtitle}) => {
             </p>
           </div>
         </div>
-        <div className="flex flex-col w-full md:w-1/2 lg:w-1/3 max-w-sm mx-auto">
+        <div className="flex flex-col max-w-sm mx-auto">
           <Image
             src={food3}
             alt="Food 3"
@@ -83,7 +83,7 @@ const Card = ({title,subtitle}) => {
             </p>
           </div>
         </div>
-        <div className="flex flex-col w-full md:w-1/2 lg:w-1/3 max-w-sm mx-auto">
+        <div className="flex flex-col max-w-sm mx-auto">
           <Image
             src={food4}
             alt="Food 4"
@@ -105,7 +105,7 @@ const Card = ({title,subtitle}) => {
             </p>
           </div>
         </div>
-        <div className="flex flex-col w-full md:w-1/2 lg:w-1/3 max-w-sm mx-auto">
+        <div className="flex flex-col max-w-sm mx-auto">
           <Image
             src={food5}
             alt="Food 5"
@@ -127,7 +127,7 @@ const Card = ({title,subtitle}) => {
             </p>
           </div>
         </div>
-        <div className="flex flex-col w-full md:w-1/2 lg:w-1/3 max-w-sm mx-auto">
+        <div className="flex flex-col max-w-sm mx-auto">
           <Image
             src={food6}
             alt="Food 6"

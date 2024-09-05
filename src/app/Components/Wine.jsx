@@ -2,10 +2,10 @@
 
 import React from "react";
 
-export default function Component() {
+export default function Wine() {
   return (
-    <div className="m-12">
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-5">
+    <div className="container mx-auto">
+      <div className="m-4 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-4 gap-4">
         {/* Wine Card 1 */}
         <div
           className="relative w-full h-64 bg-cover bg-center transition-all duration-300 ease-in-out group"
@@ -17,22 +17,21 @@ export default function Component() {
             aria-hidden="true"
           ></div>
           <div className="absolute inset-0 flex items-center justify-center text-center">
-            <h2 className="text-white text-3xl md:text-5xl font-bold leading-snug group-hover:opacity-0 transition-opacity duration-300 ease-in-out">
+            <h2 className="text-white text-3xl lg:text-4xl font-bold leading-snug group-hover:opacity-0 transition-opacity duration-300 ease-in-out">
               Vin
               <br />
               Tips
             </h2>
-            <div className="absolute inset-0  mt-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300 ease-in-out">
+            <div className="absolute inset-0 mt-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300 ease-in-out">
               <div className="flex items-center">
                 <div className="bg-green-500 flex flex-start m-4 w-fit px-3 text-white font-outfit text-sm font-thin rounded-lg">
                   Vin & Mat
                 </div>
-                <div className="text-white text-sm font-outfit m">
+                <div className="text-white text-sm font-outfit">
                   465 ARTIKLAR
                 </div>
               </div>
-
-              <p className="font-outfit  text-xl md:text-3xl flex items-end leading-snug p-7 text-white font-medium justify-end ">
+              <p className="font-outfit text-xl md:text-3xl flex items-end leading-snug p-7 text-white font-medium justify-end">
                 Upptäck artiklar som täcker allt från mat och vin...
               </p>
             </div>
@@ -51,22 +50,21 @@ export default function Component() {
           ></div>
           <div className="absolute inset-0 flex items-center justify-center">
             <div className="text-center">
-              <h2 className="text-white  text-3xl md:text-5xl font-bold leading-snug group-hover:opacity-0 transition-opacity duration-300 ease-in-out">
+              <h2 className="text-white text-3xl lg:text-4xl font-bold leading-snug group-hover:opacity-0 transition-opacity duration-300 ease-in-out">
                 Ekologiskt
                 <br />
                 Viner
               </h2>
-              <div className="absolute inset-0  mt-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300 ease-in-out">
+              <div className="absolute inset-0 mt-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300 ease-in-out">
                 <div className="flex items-center">
                   <div className="bg-blue-500 flex flex-start m-4 w-fit px-3 text-white font-outfit text-sm font-thin rounded-lg">
                     Vin Fakta
                   </div>
-                  <div className="text-white text-sm font-outfit m">
+                  <div className="text-white text-sm font-outfit">
                     519 ARTIKLAR
                   </div>
                 </div>
-
-                <p className="font-outfit  text-xl md:text-3xl flex items-end leading-snug p-7 text-white font-medium justify-end ">
+                <p className="font-outfit text-xl md:text-3xl flex items-end leading-snug p-7 text-white font-medium justify-end">
                   Upptäck fakta om olika vinrelaterade ämnen...
                 </p>
               </div>
@@ -86,22 +84,21 @@ export default function Component() {
           ></div>
           <div className="absolute inset-0 flex items-center justify-center">
             <div className="text-center">
-              <h2 className="text-white  text-3xl md:text-5xl font-bold leading-snug group-hover:opacity-0 transition-opacity duration-300 ease-in-out">
+              <h2 className="text-white text-3xl lg:text-4xl font-bold leading-snug group-hover:opacity-0 transition-opacity duration-300 ease-in-out">
                 Online
                 <br />
                 Vin
               </h2>
-              <div className="absolute inset-0  mt-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300 ease-in-out">
+              <div className="absolute inset-0 mt-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300 ease-in-out">
                 <div className="flex items-center">
                   <div className="bg-red-500 flex flex-start m-4 w-fit px-3 text-white font-outfit text-sm font-thin rounded-lg">
                     Vin Skola
                   </div>
-                  <div className="text-white text-sm font-outfit m">
+                  <div className="text-white text-sm font-outfit">
                     406 ARTIKLAR
                   </div>
                 </div>
-
-                <p className="font-outfit  text-xl md:text-3xl flex items-end leading-snug p-7 text-white font-medium justify-end ">
+                <p className="font-outfit text-xl md:text-3xl flex items-end leading-snug p-7 text-white font-medium justify-end">
                   Lär känna förklaringar och vägledning inom olika ämnen in...
                 </p>
               </div>
@@ -121,22 +118,21 @@ export default function Component() {
           ></div>
           <div className="absolute inset-0 flex items-center justify-center">
             <div className="text-center">
-              <h2 className="text-white  text-3xl md:text-5xl font-bold leading-snug group-hover:opacity-0 transition-opacity duration-300 ease-in-out">
+              <h2 className="text-white text-3xl lg:text-4xl font-bold leading-snug group-hover:opacity-0 transition-opacity duration-300 ease-in-out">
                 Vin
                 <br />
                 Guide
               </h2>
-              <div className="absolute inset-0  mt-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300 ease-in-out">
+              <div className="absolute inset-0 mt-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300 ease-in-out">
                 <div className="flex items-center">
                   <div className="bg-green-500 flex flex-start m-4 w-fit px-3 text-white font-outfit text-sm font-thin rounded-lg">
                     Vin Tester
                   </div>
-                  <div className="text-white text-sm font-outfit m">
+                  <div className="text-white text-sm font-outfit">
                     235 ARTIKLAR
                   </div>
                 </div>
-
-                <p className="font-outfit  text-xl md:text-3xl flex items-end leading-snug p-7 text-white font-medium justify-end ">
+                <p className="font-outfit text-xl md:text-3xl flex items-end leading-snug p-7 text-white font-medium justify-end">
                   Vi hjälper dig på vägen att hitta rätt dryck för dig...
                 </p>
               </div>

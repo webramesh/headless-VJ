@@ -16,7 +16,7 @@ const Accordion = () => {
           onClick={() => toggleAccordion(1)}
           className="w-full flex justify-between items-center bg-[#F5F5F5] pl-3 text-slate-800"
         >
-          <h3 className="font-outfit text-left text-black text-xs md:text-sm font-medium">
+          <h3 className="font-outfit text-left text-black text-sm font-medium">
             <span>
               Hur ofta kommer Vinjournalen.se ’s populära nyhetsbrev ut?
             </span>
@@ -60,7 +60,7 @@ const Accordion = () => {
             openIndex === 1 ? "max-h-screen" : "max-h-0"
           }`}
         >
-          <div className="pb-5 text-xs md:text-sm font-outfit text-slate-500">
+          <div className="pb-5 text-xs md:text-sm font-outfit pl-3 text-slate-500">
             Vinjournalen.se skickar ut sitt nyhetsbrev varje fredag, inför
             storhelger ibland oftare. På så sätt får du tips direkt i din inbox
             från Vinjournalen.se!
@@ -74,7 +74,7 @@ const Accordion = () => {
           onClick={() => toggleAccordion(2)}
           className="w-full flex justify-between items-center bg-[#F5F5F5] pl-3 text-slate-800"
         >
-          <h3 className="font-outfit text-left text-black text-xs md:text-sm font-medium">
+          <h3 className="font-outfit text-left text-black text-sm font-medium">
             <span>
             Skriver Vinjournalen.se även om ekologiska och naturviner samt vegetrarisk/vegansk mat?
             </span>
@@ -118,7 +118,7 @@ const Accordion = () => {
             openIndex === 2 ? "max-h-screen" : "max-h-0"
           }`}
         >
-          <div className="pb-5 text-xs md:text-sm font-outfit text-slate-500">
+          <div className="pb-5 text-xs md:text-sm font-outfit pl-3 text-slate-500">
             Vinjournalen.se skickar ut sitt nyhetsbrev varje fredag, inför
             storhelger ibland oftare. På så sätt får du tips direkt i din inbox
             från Vinjournalen.se!
@@ -134,7 +134,7 @@ const Accordion = () => {
           onClick={() => toggleAccordion(3)}
           className="w-full flex justify-between items-center bg-[#F5F5F5] pl-3 text-slate-800"
         >
-          <h3 className="font-outfit text-black text-left text-xs md:text-sm font-medium">
+          <h3 className="font-outfit text-black text-left text-sm font-medium">
             <span>
             Skriver Vinjournalen.se även om Vinturism?
             </span>
@@ -178,7 +178,7 @@ const Accordion = () => {
             openIndex === 3 ? "max-h-screen" : "max-h-0"
           }`}
         >
-          <div className="pb-5 text-xs md:text-sm font-outfit text-slate-500">
+          <div className="pb-5 text-xs md:text-sm font-outfit pl-3 text-slate-500">
             Vinjournalen.se skickar ut sitt nyhetsbrev varje fredag, inför
             storhelger ibland oftare. På så sätt får du tips direkt i din inbox
             från Vinjournalen.se!
@@ -192,7 +192,7 @@ const Accordion = () => {
           onClick={() => toggleAccordion(4)}
           className="w-full flex justify-between items-center bg-[#F5F5F5] pl-3 text-slate-800"
         >
-          <h3 className="font-outfit text-left text-black text-xs md:text-sm font-medium">
+          <h3 className="font-outfit text-left text-black text-sm font-medium">
             <span>
             Hur ofta publicerar Vinjournalen.se nytt innehåll?
             </span>
@@ -236,7 +236,7 @@ const Accordion = () => {
             openIndex === 4 ? "max-h-screen" : "max-h-0"
           }`}
         >
-          <div className="pb-5 text-xs md:text-sm font-outfit text-slate-500">
+          <div className="pb-5 text-xs md:text-sm font-outfit pl-3 text-slate-500">
             Vinjournalen.se skickar ut sitt nyhetsbrev varje fredag, inför
             storhelger ibland oftare. På så sätt får du tips direkt i din inbox
             från Vinjournalen.se!
@@ -250,7 +250,7 @@ const Accordion = () => {
           onClick={() => toggleAccordion(5)}
           className="w-full flex justify-between items-center bg-[#F5F5F5] pl-3 text-slate-800"
         >
-          <h3 className="font-outfit text-left text-black text-xs md:text-sm font-medium">
+          <h3 className="font-outfit text-left text-black text-sm font-medium">
             <span>
             Är Vinjournalen.se ett passande magasin om jag vill lära mig om vin?
             </span>
@@ -294,7 +294,7 @@ const Accordion = () => {
             openIndex === 5 ? "max-h-screen" : "max-h-0"
           }`}
         >
-          <div className="pb-5 text-xs md:text-sm font-outfit text-slate-500">
+          <div className="pb-5 text-xs md:text-sm font-outfit pl-3 text-slate-500">
             Vinjournalen.se skickar ut sitt nyhetsbrev varje fredag, inför
             storhelger ibland oftare. På så sätt får du tips direkt i din inbox
             från Vinjournalen.se!
@@ -308,7 +308,7 @@ const Accordion = () => {
           onClick={() => toggleAccordion(6)}
           className="w-full flex justify-between items-center bg-[#F5F5F5] pl-3 text-slate-800"
         >
-          <h3 className="font-outfit text-left text-black text-xs md:text-sm font-medium">
+          <h3 className="font-outfit text-left text-black text-sm font-medium">
             <span>
             Vad skriver Vinjournalen.se om?
             </span>
@@ -352,7 +352,7 @@ const Accordion = () => {
             openIndex === 6 ? "max-h-screen" : "max-h-0"
           }`}
         >
-          <div className="pb-5 text-xs md:text-sm font-outfit text-slate-500">
+          <div className="pb-5 text-xs md:text-sm font-outfit pl-3 text-slate-500">
             Vinjournalen.se skickar ut sitt nyhetsbrev varje fredag, inför
             storhelger ibland oftare. På så sätt får du tips direkt i din inbox
             från Vinjournalen.se!
@@ -365,7 +365,7 @@ const Accordion = () => {
           onClick={() => toggleAccordion(7)}
           className="w-full flex justify-between items-center bg-[#F5F5F5] pl-3 text-slate-800"
         >
-          <h3 className="font-outfit text-left text-black text-xs md:text-sm font-medium">
+          <h3 className="font-outfit text-left text-black text-sm font-medium">
             <span>
             Skriver Vinjournalen.se något om Vinprovningar?
             </span>
@@ -409,7 +409,7 @@ const Accordion = () => {
             openIndex === 7 ? "max-h-screen" : "max-h-0"
           }`}
         >
-          <div className="pb-5 text-xs md:text-sm font-outfit text-slate-500">
+          <div className="pb-5 text-xs md:text-sm font-outfit pl-3 text-slate-500">
             Vinjournalen.se skickar ut sitt nyhetsbrev varje fredag, inför
             storhelger ibland oftare. På så sätt får du tips direkt i din inbox
             från Vinjournalen.se!
@@ -422,7 +422,7 @@ const Accordion = () => {
           onClick={() => toggleAccordion(8)}
           className="w-full flex justify-between items-center bg-[#F5F5F5] pl-3 text-slate-800"
         >
-          <h3 className="font-outfit text-left text-black text-xs md:text-sm font-medium">
+          <h3 className="font-outfit text-left text-black text-sm font-medium">
             <span>
             Har ni någon guide om vinimportörer och vinproducenter?
             </span>
@@ -466,7 +466,7 @@ const Accordion = () => {
             openIndex === 8 ? "max-h-screen" : "max-h-0"
           }`}
         >
-          <div className="pb-5 text-xs md:text-sm font-outfit text-slate-500">
+          <div className="pb-5 text-xs md:text-sm font-outfit pl-3 text-slate-500">
             Vinjournalen.se skickar ut sitt nyhetsbrev varje fredag, inför
             storhelger ibland oftare. På så sätt får du tips direkt i din inbox
             från Vinjournalen.se!

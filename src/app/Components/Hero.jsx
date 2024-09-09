@@ -11,8 +11,18 @@ const Hero = () => {
       <div className="flex flex-col lg:flex-row gap-8 lg:gap-12">
         {/* Main Article */}
         <div className="w-full lg:w-1/2 bg-[#f5f5f5] overflow-hidden">
-          <div className="relative h-48 sm:h-64 md:h-96">
-            <Image src={pasta} alt="Vin & pasta" className="object-cover h-full w-full" />
+          <div className="relative w-full">
+            {/* Image container with responsive padding */}
+            <div className="relative w-full h-0 pb-[66.67%] sm:pb-[50%] lg:pb-[66.67%]">
+              <Image 
+                src={pasta} 
+                alt="Vin & pasta" 
+                layout="fill"
+                objectFit="cover"
+                objectPosition="center"
+                className="sm:object-contain lg:object-cover"
+              />
+            </div>
           </div>
           <div className="p-4">
             <h2 className="font-outfit font-medium text-black text-lg mt-4 sm:mt-8">
@@ -37,7 +47,7 @@ const Hero = () => {
           {/* Ekologiskt Article */}
           <div className="flex flex-col sm:flex-row gap-4 bg-[#f5f5f5] overflow-hidden">
             <div className="relative h-48 sm:h-auto sm:w-1/3">
-              <Image src={ekologiskt} alt="Ekologiskt" className="object-cover w-full h-full sm:h-auto" />
+              <Image src={ekologiskt} alt="Ekologiskt" layout="fill" objectFit="cover" />
             </div>
             <div className="p-4 sm:w-2/3">
               <h3 className="font-outfit font-medium text-black text-lg">
@@ -58,7 +68,7 @@ const Hero = () => {
           {/* Lugana Article */}
           <div className="flex flex-col sm:flex-row gap-4 bg-[#f5f5f5] overflow-hidden">
             <div className="relative h-48 sm:h-auto sm:w-1/3">
-              <Image src={lugana} alt="Lugana" className="object-cover w-full h-full sm:h-auto"/>
+              <Image src={lugana} alt="Lugana" layout="fill" objectFit="cover" />
             </div>
             <div className="p-4 sm:w-2/3">
               <h3 className="font-outfit font-medium text-black text-lg">
@@ -77,9 +87,9 @@ const Hero = () => {
           </div>
 
           {/* Vanliga Article */}
-          <div className="flex flex-col sm:flex-row gap-4 bg-[#f5f5f5]  overflow-hidden">
+          <div className="flex flex-col sm:flex-row gap-4 bg-[#f5f5f5] overflow-hidden">
             <div className="relative h-48 sm:h-auto sm:w-1/3">
-              <Image src={vanliga} alt="Vanliga" className="object-cover w-full h-full sm:h-auto" />
+              <Image src={vanliga} alt="Vanliga" layout="fill" objectFit="cover" />
             </div>
             <div className="p-4 sm:w-2/3">
               <h3 className="font-outfit font-medium text-black text-lg">

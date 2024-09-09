@@ -6,7 +6,7 @@ import Hero from "./Components/Hero.jsx";
 import Card from "./Components/Card.jsx";
 import Subscription from "./Components/Subscription.jsx";
 import Wine from "./Components/Wine.jsx";
-import SkeletonLoader from "./Components/SkeletonLoader.jsx";
+import SkeletonLoader from "./Components/SkeletonLoading/SkeletonLoader.jsx";
 import { useState, useEffect } from 'react';
 import Info from './Components/Info.jsx';
 import Footer from './Components/Footer.jsx';
@@ -21,6 +21,7 @@ export default function Home() {
     }, 2000);
     return () => clearTimeout(timer);
   }, []);
+
   return (
     <>
       <Head>

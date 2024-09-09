@@ -4,7 +4,7 @@ import Link from "next/link";
 import food1 from "@/public/food1.png";
 import food2 from "@/public/food2.png";
 import food3 from "@/public/food3.png";
-import food4 from "@/public/food4.png";
+import food4 from "@/public/food4.png"; 
 import food5 from "@/public/food5.png";
 import food6 from "@/public/food6.png";
 

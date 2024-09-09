@@ -3,12 +3,13 @@ import Accordion from "./Accordion";
 import Image from "next/image";
 import winetourismlogo from "@/public/winetourism.png";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faArrowRight } from "@fortawesome/free-solid-svg-icons";
+import { faArrowUpRightFromSquare } from "@fortawesome/free-solid-svg-icons";
+import Link from "next/link";
 
 const Info = () => {
   return (
-    <div className="container mx-auto">
-      <div className="mt-4 mx-4 flex flex-col gap-4 md:flex-row md:mt-14 md:ml-12 md:gap-14">
+    <div className="container mx-auto mt-10 p-2">
+      <div className="flex flex-col gap-4 md:flex-row md:gap-14">
         <div className="w-full md:w-[64%] flex flex-col">
           <h1 className="font-outfit font-medium text-2xl text-black tracking-normal">
             Ett vinmagasin om mat och vin samt andra drycker
@@ -70,25 +71,27 @@ const Info = () => {
             <h1 className="font-outfit text-xl text-black">Senaste nytt</h1>
           </div>
           <div className="font-outfit text-lg mt-4 text-gray-500 font-extralight w-full justify-normal leading-5">
+          <Link href="#"> 
             <div className="flex justify-between items-center">
-              <h3>Vingårdar kämpar mot mögel</h3>
-              <FontAwesomeIcon icon={faArrowRight} className="w-4 h-4 text-black" />
+             <h3>Vingårdar kämpar mot mögel</h3>
+              <FontAwesomeIcon icon={faArrowUpRightFromSquare} className="w-3 h-3 text-black" />
             </div>
+            </Link> 
             <div className="flex justify-between items-center pt-3">
               <h3>Malmös presenterar en ny dryckesmässa!</h3>
-              <FontAwesomeIcon icon={faArrowRight} className="w-4 h-4 text-black" />
+              <FontAwesomeIcon icon={faArrowUpRightFromSquare} className="w-3 h-3 text-black" />
             </div>
             <div className="flex justify-between items-center pt-3">
               <h3>Missa inte Tranås Vinfestival i september!</h3>
-              <FontAwesomeIcon icon={faArrowRight} className="w-4 h-4 text-black" />
+              <FontAwesomeIcon icon={faArrowUpRightFromSquare} className="w-3 h-3 text-black" />
             </div>
             <div className="flex justify-between items-center pt-3">
               <h3>Missa inte Tranås Vinfestival i september!</h3>
-              <FontAwesomeIcon icon={faArrowRight} className="w-4 h-4 text-black" />
+              <FontAwesomeIcon icon={faArrowUpRightFromSquare} className="w-3 h-3 text-black" />
             </div>
             <div className="flex justify-between items-center pt-3">
               <h3>Påskön får egen vinappellation</h3>
-              <FontAwesomeIcon icon={faArrowRight} className="w-4 h-4 text-black" />
+              <FontAwesomeIcon icon={faArrowUpRightFromSquare} className="w-3 h-3 text-black" />
             </div>
           </div>
         </div>

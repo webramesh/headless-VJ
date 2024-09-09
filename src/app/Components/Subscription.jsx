@@ -5,8 +5,8 @@ import corkscrew from "@/public/corkscrew.png";
 
 const Subscription = () => {
   return (
-    <div className="containe mx-auto my-0">
-      <div className="m-16 flex flex-col md:flex-row gap-8">
+    <div className="container mx-auto m-10 p-2">
+      <div className=" flex flex-col md:flex-row gap-8">
         <div className="w-full md:w-2/3 bg-[#eb7272]">
           <div className="p-6 sm:p-8">
             <h1 className="font-outfit text-white text-2xl sm:text-3xl lg:text-4xl mb-4">
@@ -45,7 +45,7 @@ const Subscription = () => {
         </div>
         <div className="w-full md:w-1/3 bg-[#f5f5f5] p-6 sm:p-8">
           <div className="space-y-8">
-            <div className="flex md:flex-col items-center md:gap-4 ">
+            <div className="flex md:flex-col items-center gap-12 md:gap-4 ">
               <div className="w-12 h-12 flex-shrink-0">
                 <Image src={grape} alt="Grape" width={64} height={64} className="object-cover w-full h-full" />
               </div>
@@ -55,7 +55,7 @@ const Subscription = () => {
               </div>
             </div>
             <hr className="border-t border-gray-300" />
-            <div className="flex md:flex-col items-center md:gap-4">
+            <div className="flex md:flex-col items-center gap-12 md:gap-4">
               <div className="w-12 h-12 flex-shrink-0">
                 <Image src={corkscrew} alt="Corkscrew" width={64} height={64} className="object-cover w-full h-full" />
               </div>

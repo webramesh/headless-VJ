@@ -5,9 +5,8 @@ export default function SkeletonLoader() {
   return (
     <div className="p-4">
       {/* Navbar Skeleton */}
-      <div className="flex justify-between items-center mb-6">
-        <Skeleton height={40} width={150} />
-        <Skeleton height={40} width={200} count={8} />
+      <div className="container mx-auto px-8 py-4 flex flex-col lg:flex-row lg:items-center lg:justify-between">
+        <Skeleton height={2} width='100%' />
       </div>
       
       {/* Hero Section Skeleton */}

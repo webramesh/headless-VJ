@@ -4,8 +4,8 @@ import React from "react";
 
 export default function Wine() {
   return (
-    <div className="container mx-auto">
-      <div className="m-4 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-4 gap-4">
+    <div className="container mx-auto p-1">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-4 gap-4">
         {/* Wine Card 1 */}
         <div
           className="relative w-full h-64 bg-cover bg-center transition-all duration-300 ease-in-out group"

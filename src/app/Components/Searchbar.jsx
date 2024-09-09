@@ -3,6 +3,7 @@ import React from "react";
 export default function Searchbar() {
   return (
     <div className="relative">
+      <form>
       <input
         type="text"
         className="bg-white text-gray-600 text-sm py-2 pl-2 rounded-md border-2 border-gray-200 shadow-lg focus:outline-none focus:border-gray-500 "
@@ -22,6 +23,7 @@ export default function Searchbar() {
           d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
         />
       </svg>
+      </form>
     </div>
   );
 }

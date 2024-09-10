@@ -38,14 +38,14 @@ export default function Home() {
           <Navbar />
           <Hero />
           <Card
-            title="NYHETER"
-            subtitle="Den mest populära artikeln i dryckesvärlden"
+            title="TRENDIGT"
+            subtitle="Artiklar värda att läsa från våra redaktörer"
           />
           <Subscription />
           <Wine />
           <Card
-            title="TRENDIGT"
-            subtitle="Artiklar värda att läsa från våra redaktörer"
+            title="NYHETER"
+            subtitle="Den mest populära artikeln i dryckesvärlden"
           />
           <Info />
           <Footer />

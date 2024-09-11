@@ -171,12 +171,12 @@ const ProductSection = () => {
           </div>
 
           <div className="mt-4 p-4">
-            <div className="flex gap-20">
+            <div className="flex gap-32">
               <div className="flex flex-col items-center justify-center">
                 <Image
                   src={download1}
                   alt="Download1"
-                  className="object-cover w-48 h-48"
+                  className="object-cover w-36 h-36"
                 />
                 <div className="mt-4 ">Smakintensitet</div>
               </div>
@@ -185,7 +185,7 @@ const ProductSection = () => {
                 <Image
                   src={download2}
                   alt="Download2"
-                  className="object-cover w-48 h-48"
+                  className="object-cover w-36 h-36"
                 />
                 <div className="mt-4 ">Fyllighet/Strävhet</div>
               </div>
@@ -194,7 +194,7 @@ const ProductSection = () => {
                 <Image
                   src={download3}
                   alt="Download3"
-                  className="object-cover w-48 h-48"
+                  className="object-cover w-36 h-36"
                 />
                 <div className="mt-4 ">Syra</div>
               </div>
@@ -233,20 +233,12 @@ const ProductSection = () => {
           </div>
           <div className="flex gap-32">
             <div className="flex flex-col items-center">
-              <Image
-                src={lamb}
-                alt="Lamb"
-                className="object-cover w-20 h-20"
-              />
+              <Image src={lamb} alt="Lamb" className="object-cover w-20 h-20" />
               <div className="text-sm mt-6 text-gray-600">grönsaker</div>
             </div>
 
             <div className="flex flex-col items-center">
-              <Image
-                src={meat}
-                alt="Meat"
-                className="object-cover w-20 h-20"
-              />
+              <Image src={meat} alt="Meat" className="object-cover w-20 h-20" />
               <div className="text-sm mt-6 text-gray-600">lamm</div>
             </div>
             <div className="flex flex-col items-center">

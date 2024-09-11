@@ -3,6 +3,7 @@ import Head from "next/head";
 import Navbar from "../Components/Navbar";
 import React from "react";
 import ProductSection from "../Components/ProductSection";
+import InformationCards from "../Components/InformationCards";
 
 export default function Home() {
   return (
@@ -17,6 +18,7 @@ export default function Home() {
         <>
           <Navbar />
           <ProductSection />
+          <InformationCards />
         </>
     
     </>

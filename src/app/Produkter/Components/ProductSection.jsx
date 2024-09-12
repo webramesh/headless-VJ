@@ -1,23 +1,48 @@
 import React from "react";
 import Image from "next/image";
+import { PieChart, Pie, Cell, ResponsiveContainer } from 'recharts';
 import wine from "@/public/winevj.png";
 import message from "@/public/message.png";
 import fb from "@/public/fbblack.png";
 import twitter from "@/public/twitterblack.png";
 import ellipse from "@/public/ellipse.png";
-import download1 from "@/public/download1.png";
-import download2 from "@/public/download2.png";
-import download3 from "@/public/download3.png";
 import lamb from "@/public/lamb.png";
 import meat from "@/public/meat.png";
 import vegetables from "@/public/vegetables.png";
 import chicken from "@/public/chicken.png";
 
+const CustomPieChart = ({ data, title }) => (
+  <div className="flex flex-col items-center justify-center">
+    <ResponsiveContainer width={100} height={100}>
+      <PieChart>
+        <Pie
+          data={data}
+          cx="50%"
+          cy="50%"
+          innerRadius={25}
+          outerRadius={40}
+          fill="#8884d8"
+          dataKey="value"
+        >
+          {data.map((entry, index) => (
+            <Cell key={`cell-${index}`} fill={entry.color} />
+          ))}
+        </Pie>
+      </PieChart>
+    </ResponsiveContainer>
+    <div className="mt-4 text-center">{title}</div>
+  </div>
+);
+
 const ProductSection = () => {
+  const pieChartData = [
+    { name: 'Filled', value: 75, color: '#FF6384' },
+    { name: 'Empty', value: 25, color: '#E8E8E8' },
+  ];
+
   return (
     <div className="container mx-auto">
-      {/* Flex container for left and right sections */}
-      <div className="flex gap-6 mt-4 p-16 ">
+      <div className="flex gap-6 mt-4 p-16">
         {/* Left section */}
         <div className="w-1/3">
           <div className="sticky top-4">
@@ -37,14 +62,14 @@ const ProductSection = () => {
           </div>
         </div>
         {/* Right Section */}
-        <div className="flex flex-col  w-2/3">
+        <div className="flex flex-col w-2/3">
           <h1 className="font-outfit items-start text-black text-2xl w-full">
             Moulins de Citran 2012 | 750 ml
           </h1>
-          <div className="font-outfit text-red-500 mt-2 text-sm ">
+          <div className="font-outfit text-red-500 mt-2 text-sm">
             Rött Vin | Frankrike Bordeaux | Castillon Côtes de Bordeaux
           </div>
-          <div className="font-outfit text-sm text-gray-600 mt-2 ">
+          <div className="font-outfit text-sm text-gray-600 mt-2">
             Moulins de Citran 2012 är ett elegant rött vin från Haut-Médoc i
             Bordeaux, Frankrike. Denna blend av 58% Cabernet Sauvignon och 42%
             Merlot skapar en harmonisk smakprofil med mogen frukt, mjuka
@@ -63,20 +88,19 @@ const ProductSection = () => {
                 Artikel nr: 7661301
               </div>
             </div>
-            <div className=" relative p-4">
+            <div className="relative p-4">
               <input
                 type="file"
                 id="pdf"
-                className="opacity-0 absolute w-full h-full "
+                className="opacity-0 absolute w-full h-full"
                 required
               />
               <div className="w-full flex justify-between">
                 <div className="w-1/3 p-2 border-2 border-[#eb7272] rounded-full flex justify-center items-center bg-white">
-                  <span className="text-red-500 ">Skriv ut PDF</span>
+                  <span className="text-red-500">Skriv ut PDF</span>
                 </div>
                 <button
                   type="submit"
-                  placeholder="Köp på Systembolaget"
                   className="w-[65%] text-white border-red-600 border bg-red-600 rounded-full px-4"
                 >
                   Köp på Systembolaget
@@ -123,47 +147,45 @@ const ProductSection = () => {
               </div>
             </div>
             <div className="flex justify-between pb-8">
-              <div className="flex flex-col px-8 ">
+              <div className="flex flex-col px-8">
                 <div className="flex flex-col">
                   <span className="font-outfit text-black text-sm">
                     SORTIMENT
                   </span>
-                  <span className="text-gray-500  text-xs">
+                  <span className="text-gray-500 text-xs">
                     Beställning sortimentet
                   </span>
                   <div className="mt-8 flex flex-col">
                     <span className="font-outfit text-black text-sm">
                       ALKOHOL
                     </span>
-                    <span className="text-gray-500  text-xs">13%</span>
+                    <span className="text-gray-500 text-xs">13%</span>
                   </div>
                 </div>
               </div>
-
               <div className="flex flex-col px-8">
                 <div className="flex flex-col">
-                  <span className="font-outfit text-black text-sm">ÅRGåNG</span>
-                  <span className="text-gray-500  text-xs">2012</span>
+                  <span className="font-outfit text-black text-sm">ÅRGÅNG</span>
+                  <span className="text-gray-500 text-xs">2012</span>
                   <div className="mt-8 flex flex-col">
                     <span className="font-outfit text-black text-sm">
                       VOLYM
                     </span>
-                    <span className="text-gray-500  text-xs">750 ml</span>
+                    <span className="text-gray-500 text-xs">750 ml</span>
                   </div>
                 </div>
               </div>
-
               <div className="flex flex-col px-8">
                 <div className="flex flex-col">
                   <span className="font-outfit text-black text-sm">DRUVOR</span>
-                  <span className="text-gray-500  text-xs">
+                  <span className="text-gray-500 text-xs">
                     58% Cabernet Sauvignon <br /> 42% Merlot
                   </span>
                   <div className="mt-4 flex flex-col">
                     <span className="font-outfit text-black text-sm">
                       ALLERGENER
                     </span>
-                    <span className="text-gray-500  text-xs">
+                    <span className="text-gray-500 text-xs">
                       Innehåller: Sulfiter
                     </span>
                   </div>
@@ -171,74 +193,45 @@ const ProductSection = () => {
               </div>
             </div>
           </div>
-
           <div className="mt-4 p-4">
-            <div className="flex gap-32">
-              <div className="flex flex-col items-center justify-center">
-                <Image
-                  src={download1}
-                  alt="Download1"
-                  className="object-cover w-36 h-36"
-                />
-                <div className="mt-4 ">Smakintensitet</div>
-              </div>
-
-              <div className="flex flex-col items-center justify-center">
-                <Image
-                  src={download2}
-                  alt="Download2"
-                  className="object-cover w-36 h-36"
-                />
-                <div className="mt-4 ">Fyllighet/Strävhet</div>
-              </div>
-
-              <div className="flex flex-col items-center justify-center">
-                <Image
-                  src={download3}
-                  alt="Download3"
-                  className="object-cover w-36 h-36"
-                />
-                <div className="mt-4 ">Syra</div>
-              </div>
+            <div className="flex pl-4 gap-40">
+              <CustomPieChart data={pieChartData} title="Smakintensitet" />
+              <CustomPieChart data={pieChartData} title="Fyllighet/Strävhet" />
+              <CustomPieChart data={pieChartData} title="Syra" />
             </div>
           </div>
-
           <div className="mt-4">
             <div className="flex gap-20">
               <div className="flex flex-col items-center p-6 bg-[#f4f1ed]">
                 <div className="font-outfit text-black text-lg">SMAK</div>
-                <div className=" text-sm mt-4 text-gray-600">
+                <div className="text-sm mt-4 text-gray-600">
                   äpplen, fat, fruktig, <br /> mandel, plommon, söt, <br />
                   röda vinbär
                 </div>
               </div>
-
-              <div className="flex flex-col items-center p-6  bg-[#f4f1ed]">
+              <div className="flex flex-col items-center p-6 bg-[#f4f1ed]">
                 <div className="font-outfit text-black text-lg">AROM</div>
-                <div className=" text-sm mt-4 text-gray-600">
+                <div className="text-sm mt-4 text-gray-600">
                   äpplen, bär, fatkaraktär, <br />
                   fruktigt, mandel, <br /> plommon
                 </div>
               </div>
-
               <div className="flex flex-col items-center p-6 bg-[#f4f1ed]">
-                <div className="font-outfit text-black text-lg">FARG</div>
-                <div className=" text-sm  mt-4 text-gray-600">
+                <div className="font-outfit text-black text-lg">FÄRG</div>
+                <div className="text-sm mt-4 text-gray-600">
                   orangerosa, oklar
                 </div>
               </div>
             </div>
           </div>
-
           <div className="m-8 text-xl font-outfit flex items-center justify-center">
-            MAT SOM PASSER TILL VINET
+            MAT SOM PASSAR TILL VINET
           </div>
-          <div className="flex gap-32">
+          <div className="flex justify-between">
             <div className="flex flex-col items-center">
               <Image src={lamb} alt="Lamb" className="object-cover w-20 h-20" />
               <div className="text-sm mt-6 text-gray-600">grönsaker</div>
             </div>
-
             <div className="flex flex-col items-center">
               <Image src={meat} alt="Meat" className="object-cover w-20 h-20" />
               <div className="text-sm mt-6 text-gray-600">lamm</div>

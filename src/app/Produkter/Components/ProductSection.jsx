@@ -19,19 +19,21 @@ const ProductSection = () => {
       {/* Flex container for left and right sections */}
       <div className="flex gap-6 mt-4 p-16 ">
         {/* Left section */}
-        <div className=" w-1/3 flex flex-col items-start">
-          <div className="font-outfit text-xs text-black">
-            <span className="text-red-500">Hem </span>&gt;&gt; Produkter
-            &gt;&gt; Moulins de Citran 2012
-          </div>
-          <div className="">
-            <Image
-              src={wine}
-              alt="Citran Wine"
-              className="object-cover"
-              width={300}
-              height={500}
-            />
+        <div className="w-1/3">
+          <div className="sticky top-4">
+            <div className="font-outfit text-xs text-black">
+              <span className="text-red-500">Hem </span>&gt;&gt; Produkter
+              &gt;&gt; Moulins de Citran 2012
+            </div>
+            <div className="mt-4">
+              <Image
+                src={wine}
+                alt="Citran Wine"
+                className="object-cover"
+                width={300}
+                height={500}
+              />
+            </div>
           </div>
         </div>
         {/* Right Section */}

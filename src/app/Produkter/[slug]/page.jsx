@@ -6,7 +6,8 @@ import ProductSection from "../Components/ProductSection";
 import InformationCards from "../Components/InformationCards";
 import Price from "../Components/Price";
 import Subscription from "../Components/Subscription";
-
+import ProductInfo from "../Components/ProductInfo";
+import Footer from "../Components/Footer";
 export default function Home() {
   return (
     <>
@@ -23,6 +24,8 @@ export default function Home() {
           <InformationCards />
           <Price />
           <Subscription />
+         <ProductInfo />
+         <Footer />
         </>
     
     </>

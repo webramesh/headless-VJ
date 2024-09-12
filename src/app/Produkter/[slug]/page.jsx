@@ -4,6 +4,8 @@ import Navbar from "../Components/Navbar";
 import React from "react";
 import ProductSection from "../Components/ProductSection";
 import InformationCards from "../Components/InformationCards";
+import Price from "../Components/Price";
+import Subscription from "../Components/Subscription";
 
 export default function Home() {
   return (
@@ -19,6 +21,8 @@ export default function Home() {
           <Navbar />
           <ProductSection />
           <InformationCards />
+          <Price />
+          <Subscription />
         </>
     
     </>

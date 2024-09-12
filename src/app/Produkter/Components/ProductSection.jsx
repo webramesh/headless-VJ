@@ -15,7 +15,7 @@ import chicken from "@/public/chicken.png";
 
 const ProductSection = () => {
   return (
-    <div className="container mx-auto border-2">
+    <div className="container mx-auto">
       {/* Flex container for left and right sections */}
       <div className="flex gap-6 mt-4 p-16 ">
         {/* Left section */}

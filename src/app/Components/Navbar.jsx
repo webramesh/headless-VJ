@@ -6,6 +6,7 @@ import twitter from "@/public/twitter.png";
 import fb from "@/public/fb.png";
 import insta from "@/public/insta.png";
 import Searchbar from "./Searchbar";
+import vinlogo from "@/public/vinlogo.png";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBars, faTimes } from "@fortawesome/free-solid-svg-icons";
 
@@ -22,27 +23,38 @@ export default function Navbar() {
 
   return (
     <nav className="bg-[#F5F5F5]">
-      <div className="container mx-auto px-8 py-4 flex flex-col lg:flex-row lg:items-center lg:justify-between">
+      <div className="container mx-auto px-8 py-2 lg:py-4 flex flex-col lg:flex-row lg:items-center lg:justify-between">
         {/* Logo and Hamburger Icon */}
         <div className="w-full lg:w-auto flex justify-between items-center">
-          <a href="#" className="flex items-center">
-            <Image
-              src={logo}
-              alt="Logo"
-              className="object-cover"
-              width={180}
-              height={90}
-            />
-          </a>
-          <div className="lg:hidden">
-            <button onClick={toggleMenu} className="p-2 focus:outline-none">
-              <FontAwesomeIcon
-                icon={isMenuOpen ? faTimes : faBars}
-                className="text-2xl w-6 h-6"
-              />
-            </button>
-          </div>
-        </div>
+  <a href="#" className="flex items-center">
+    {/* Mobile Logo */}
+    <Image
+      src={vinlogo}
+      alt="VinLogo"
+      className="object-cover lg:hidden"
+      width={60} 
+      height={30}
+    />
+
+    {/* Desktop Logo */}
+    <Image
+      src={logo}
+      alt="Logo"
+      className="object-cover hidden lg:block"
+      width={180}
+      height={90}
+    />
+  </a>
+  <div className="lg:hidden">
+    <button onClick={toggleMenu} className="p-2 focus:outline-none">
+      <FontAwesomeIcon
+        icon={isMenuOpen ? faTimes : faBars}
+        className="text-2xl w-6 h-6"
+      />
+    </button>
+  </div>
+</div>
+
 
         {/* Hamburger Menu for Mobile */}
         <div

@@ -1,6 +1,6 @@
 import React from "react";
 import Image from "next/image";
-import { PieChart, Pie, Cell, ResponsiveContainer } from 'recharts';
+import { PieChart, Pie, Cell, ResponsiveContainer } from "recharts";
 import wine from "@/public/winevj.png";
 import message from "@/public/message.png";
 import fb from "@/public/fbblack.png";
@@ -12,7 +12,7 @@ import vegetables from "@/public/vegetables.png";
 import chicken from "@/public/chicken.png";
 
 const CustomPieChart = ({ data, title }) => (
-  <div className="flex flex-col items-center justify-center">
+  <div className="flex flex-col items-center justify-center w-full sm:w-auto">
     <ResponsiveContainer width={100} height={100}>
       <PieChart>
         <Pie
@@ -30,22 +30,32 @@ const CustomPieChart = ({ data, title }) => (
         </Pie>
       </PieChart>
     </ResponsiveContainer>
-    <div className="mt-4 text-center">{title}</div>
+    <div className="mt-2 text-center">{title}</div>
   </div>
 );
 
 const ProductSection = () => {
-  const pieChartData = [
-    { name: 'Filled', value: 75, color: '#FF6384' },
-    { name: 'Empty', value: 25, color: '#E8E8E8' },
+  const pieChartData1 = [
+    { name: "Filled", value: 25, color: "#f199a8" },
+    { name: "Empty", value: 45, color: "#e51136" },
+  ];
+
+  const pieChartData2 = [
+    { name: "Filled", value: 50, color: "#f199a8" },
+    { name: "Empty", value: 50, color: "#e51136" },
+  ];
+
+  const pieChartData3 = [
+    { name: "Filled", value: 15, color: "#f199a8" },
+    { name: "Empty", value: 65, color: "#e51136" },
   ];
 
   return (
-    <div className="container mx-auto">
-      <div className="flex gap-6 mt-4 p-16">
+    <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="flex flex-col lg:flex-row gap-6 mt-4 py-8 lg:py-16">
         {/* Left section */}
-        <div className="w-1/3">
-          <div className="sticky top-4">
+        <div className="w-full lg:w-1/3">
+          <div className="lg:sticky lg:top-4">
             <div className="font-outfit text-xs text-black">
               <span className="text-red-500">Hem </span>&gt;&gt; Produkter
               &gt;&gt; Moulins de Citran 2012
@@ -54,7 +64,7 @@ const ProductSection = () => {
               <Image
                 src={wine}
                 alt="Citran Wine"
-                className="object-cover"
+                className="object-cover w-full h-auto"
                 width={300}
                 height={500}
               />
@@ -62,7 +72,7 @@ const ProductSection = () => {
           </div>
         </div>
         {/* Right Section */}
-        <div className="flex flex-col w-2/3">
+        <div className="flex flex-col w-full lg:w-2/3">
           <h1 className="font-outfit items-start text-black text-2xl w-full">
             Moulins de Citran 2012 | 750 ml
           </h1>
@@ -82,8 +92,10 @@ const ProductSection = () => {
           </div>
           <div className="font-outfit font-sm text-pink-500">Läs mer</div>
           <div className="bg-[#f9d7e1] mt-6 w-full">
-            <div className="flex w-full p-4 justify-between">
-              <div className="font-outfit text-xl">pris: 222 :-</div>
+            <div className="flex flex-col sm:flex-row w-full p-4 justify-between">
+              <div className="font-outfit text-xl mb-2 sm:mb-0">
+                pris: 222 :-
+              </div>
               <div className="font-outfit text-xl text-gray-500">
                 Artikel nr: 7661301
               </div>
@@ -95,13 +107,13 @@ const ProductSection = () => {
                 className="opacity-0 absolute w-full h-full"
                 required
               />
-              <div className="w-full flex justify-between">
-                <div className="w-1/3 p-2 border-2 border-[#eb7272] rounded-full flex justify-center items-center bg-white">
+              <div className="w-full flex flex-col sm:flex-row justify-between gap-4 sm:gap-0">
+                <div className="w-full sm:w-1/3 p-2 border-2 border-[#eb7272] rounded-full flex justify-center items-center bg-white">
                   <span className="text-red-500">Skriv ut PDF</span>
                 </div>
                 <button
                   type="submit"
-                  className="w-[65%] text-white border-red-600 border bg-red-600 rounded-full px-4"
+                  className="w-full sm:w-[65%] text-white border-red-600 border bg-red-600 rounded-full px-4 py-2"
                 >
                   Köp på Systembolaget
                 </button>
@@ -146,8 +158,8 @@ const ProductSection = () => {
                 Faktaruta
               </div>
             </div>
-            <div className="flex justify-between pb-8">
-              <div className="flex flex-col px-8">
+            <div className="flex flex-col sm:flex-row justify-between pb-8">
+              <div className="flex flex-col px-8 mb-4 sm:mb-0">
                 <div className="flex flex-col">
                   <span className="font-outfit text-black text-sm">
                     SORTIMENT
@@ -163,7 +175,7 @@ const ProductSection = () => {
                   </div>
                 </div>
               </div>
-              <div className="flex flex-col px-8">
+              <div className="flex flex-col px-8 mb-4 sm:mb-0">
                 <div className="flex flex-col">
                   <span className="font-outfit text-black text-sm">ÅRGÅNG</span>
                   <span className="text-gray-500 text-xs">2012</span>
@@ -194,31 +206,31 @@ const ProductSection = () => {
             </div>
           </div>
           <div className="mt-4 p-4">
-            <div className="flex pl-4 gap-40">
-              <CustomPieChart data={pieChartData} title="Smakintensitet" />
-              <CustomPieChart data={pieChartData} title="Fyllighet/Strävhet" />
-              <CustomPieChart data={pieChartData} title="Syra" />
+            <div className="flex flex-col sm:flex-row sm:justify-between gap-8 sm:gap-4">
+              <CustomPieChart data={pieChartData1} title="Smakintensitet" />
+              <CustomPieChart data={pieChartData2} title="Fyllighet/Strävhet" />
+              <CustomPieChart data={pieChartData3} title="Syra" />
             </div>
           </div>
           <div className="mt-4">
-            <div className="flex gap-20">
-              <div className="flex flex-col items-center p-6 bg-[#f4f1ed]">
+            <div className="flex flex-col sm:flex-row gap-8 sm:gap-4">
+              <div className="flex flex-col items-center p-6 bg-[#f4f1ed] w-full sm:w-1/3">
                 <div className="font-outfit text-black text-lg">SMAK</div>
-                <div className="text-sm mt-4 text-gray-600">
+                <div className="text-sm mt-4 text-gray-600 text-center">
                   äpplen, fat, fruktig, <br /> mandel, plommon, söt, <br />
                   röda vinbär
                 </div>
               </div>
-              <div className="flex flex-col items-center p-6 bg-[#f4f1ed]">
+              <div className="flex flex-col items-center p-6 bg-[#f4f1ed] w-full sm:w-1/3">
                 <div className="font-outfit text-black text-lg">AROM</div>
-                <div className="text-sm mt-4 text-gray-600">
+                <div className="text-sm mt-4 text-gray-600 text-center">
                   äpplen, bär, fatkaraktär, <br />
                   fruktigt, mandel, <br /> plommon
                 </div>
               </div>
-              <div className="flex flex-col items-center p-6 bg-[#f4f1ed]">
+              <div className="flex flex-col items-center p-6 bg-[#f4f1ed] w-full sm:w-1/3">
                 <div className="font-outfit text-black text-lg">FÄRG</div>
-                <div className="text-sm mt-4 text-gray-600">
+                <div className="text-sm mt-4 text-gray-600 text-center">
                   orangerosa, oklar
                 </div>
               </div>
@@ -227,16 +239,16 @@ const ProductSection = () => {
           <div className="m-8 text-xl font-outfit flex items-center justify-center">
             MAT SOM PASSAR TILL VINET
           </div>
-          <div className="flex justify-between">
-            <div className="flex flex-col items-center">
+          <div className="flex flex-wrap justify-between">
+            <div className="flex flex-col items-center w-1/2 sm:w-1/4 mb-8 sm:mb-0">
               <Image src={lamb} alt="Lamb" className="object-cover w-20 h-20" />
               <div className="text-sm mt-6 text-gray-600">grönsaker</div>
             </div>
-            <div className="flex flex-col items-center">
+            <div className="flex flex-col items-center w-1/2 sm:w-1/4 mb-8 sm:mb-0">
               <Image src={meat} alt="Meat" className="object-cover w-20 h-20" />
               <div className="text-sm mt-6 text-gray-600">lamm</div>
             </div>
-            <div className="flex flex-col items-center">
+            <div className="flex flex-col items-center w-1/2 sm:w-1/4">
               <Image
                 src={vegetables}
                 alt="Vegetables"
@@ -244,7 +256,7 @@ const ProductSection = () => {
               />
               <div className="text-sm mt-6 text-gray-600">nöt</div>
             </div>
-            <div className="flex flex-col items-center">
+            <div className="flex flex-col items-center w-1/2 sm:w-1/4">
               <Image
                 src={chicken}
                 alt="Chicken"

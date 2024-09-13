@@ -8,7 +8,7 @@ import Link from "next/link";
 
 const Hero = () => {
   return (
-    <div className="container mt-10 mx-auto p-2">
+    <div className="container mt-6 mx-auto p-2">
       <div className="flex flex-col lg:flex-row gap-8 lg:gap-12">
         {/* Main Article */}
         <a

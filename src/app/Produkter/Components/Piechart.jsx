@@ -1,8 +1,7 @@
 "use client"
 
-import React from 'react'
 import { TrendingUp } from "lucide-react"
-import { Pie, PieChart, ResponsiveContainer, Cell, Legend } from "recharts"
+import { Pie, PieChart } from "recharts"
 
 import {
   Card,
@@ -12,45 +11,73 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card"
+import {
+  ChartContainer,
+  ChartTooltip,
+  ChartTooltipContent,
+} from "@/components/ui/chart"
+
+export const description = "A donut chart"
 
 const chartData = [
-  { browser: "Chrome", visitors: 275, color: "hsl(var(--chart-1))" },
-  { browser: "Safari", visitors: 200, color: "hsl(var(--chart-2))" },
-  { browser: "Firefox", visitors: 187, color: "hsl(var(--chart-3))" },
-  { browser: "Edge", visitors: 173, color: "hsl(var(--chart-4))" },
-  { browser: "Other", visitors: 90, color: "hsl(var(--chart-5))" },
+  { browser: "chrome", visitors: 275, fill: "var(--color-chrome)" },
+  { browser: "safari", visitors: 200, fill: "var(--color-safari)" },
+  { browser: "firefox", visitors: 187, fill: "var(--color-firefox)" },
+  { browser: "edge", visitors: 173, fill: "var(--color-edge)" },
+  { browser: "other", visitors: 90, fill: "var(--color-other)" },
 ]
+
+const chartConfig = {
+  visitors: {
+    label: "Visitors",
+  },
+  chrome: {
+    label: "Chrome",
+    color: "hsl(var(--chart-1))",
+  },
+  safari: {
+    label: "Safari",
+    color: "hsl(var(--chart-2))",
+  },
+  firefox: {
+    label: "Firefox",
+    color: "hsl(var(--chart-3))",
+  },
+  edge: {
+    label: "Edge",
+    color: "hsl(var(--chart-4))",
+  },
+  other: {
+    label: "Other",
+    color: "hsl(var(--chart-5))",
+  },
+}
 
 export function Component() {
   return (
-    <Card className="w-full max-w-3xl mx-auto">
-      <CardHeader className="text-center">
-        <CardTitle>Browser Usage</CardTitle>
+    <Card className="flex flex-col">
+      <CardHeader className="items-center pb-0">
+        <CardTitle>Pie Chart - Donut</CardTitle>
         <CardDescription>January - June 2024</CardDescription>
       </CardHeader>
-      <CardContent className="pt-6">
-        <div className="h-[300px] w-full">
-          <ResponsiveContainer width="100%" height="100%">
-            <PieChart>
-              <Pie
-                data={chartData}
-                dataKey="visitors"
-                nameKey="browser"
-                cx="50%"
-                cy="50%"
-                outerRadius={100}
-                innerRadius={60}
-                fill="#8884d8"
-                label
-              >
-                {chartData.map((entry, index) => (
-                  <Cell key={`cell-${index}`} fill={entry.color} />
-                ))}
-              </Pie>
-              <Legend />
-            </PieChart>
-          </ResponsiveContainer>
-        </div>
+      <CardContent className="flex-1 pb-0">
+        <ChartContainer
+          config={chartConfig}
+          className="mx-auto aspect-square max-h-[250px]"
+        >
+          <PieChart>
+            <ChartTooltip
+              cursor={false}
+              content={<ChartTooltipContent hideLabel />}
+            />
+            <Pie
+              data={chartData}
+              dataKey="visitors"
+              nameKey="browser"
+              innerRadius={60}
+            />
+          </PieChart>
+        </ChartContainer>
       </CardContent>
       <CardFooter className="flex-col gap-2 text-sm">
         <div className="flex items-center gap-2 font-medium leading-none">

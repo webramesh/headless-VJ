@@ -1,6 +1,6 @@
 import React from "react";
 import Image from "next/image";
-import { PieChart, Pie, Cell, ResponsiveContainer } from "recharts";
+import PieChart from "./PieChart";
 import wine from "@/public/winevj.png";
 import message from "@/public/message.png";
 import fb from "@/public/fbblack.png";
@@ -11,43 +11,20 @@ import meat from "@/public/meat.png";
 import vegetables from "@/public/vegetables.png";
 import chicken from "@/public/chicken.png";
 
-const CustomPieChart = ({ data, title }) => (
-  <div className="flex flex-col items-center justify-center w-full sm:w-auto">
-    <ResponsiveContainer width={100} height={100}>
-      <PieChart>
-        <Pie
-          data={data}
-          cx="50%"
-          cy="50%"
-          innerRadius={25}
-          outerRadius={40}
-          fill="#8884d8"
-          dataKey="value"
-        >
-          {data.map((entry, index) => (
-            <Cell key={`cell-${index}`} fill={entry.color} />
-          ))}
-        </Pie>
-      </PieChart>
-    </ResponsiveContainer>
-    <div className="mt-2 text-center">{title}</div>
-  </div>
-);
-
 const ProductSection = () => {
   const pieChartData1 = [
-    { name: "Filled", value: 25, color: "#f199a8" },
-    { name: "Empty", value: 45, color: "#e51136" },
+    { name: "Empty", value: 25, color: "#f199a8" },
+    { name: "Filled", value: 75, color: "#e51136" },
   ];
 
   const pieChartData2 = [
-    { name: "Filled", value: 50, color: "#f199a8" },
-    { name: "Empty", value: 50, color: "#e51136" },
+    { name: "Empty", value: 50, color: "#f199a8" },
+    { name: "Filled", value: 50, color: "#e51136" },
   ];
 
   const pieChartData3 = [
-    { name: "Filled", value: 15, color: "#f199a8" },
-    { name: "Empty", value: 65, color: "#e51136" },
+    { name: "Empty", value: 15, color: "#f199a8" },
+    { name: "Filled", value: 85, color: "#e51136" },
   ];
 
   return (
@@ -205,30 +182,30 @@ const ProductSection = () => {
               </div>
             </div>
           </div>
-          <div className="mt-4 p-4">
-            <div className="flex flex-col sm:flex-row sm:justify-between gap-8 sm:gap-4">
-              <CustomPieChart data={pieChartData1} title="Smakintensitet" />
-              <CustomPieChart data={pieChartData2} title="Fyllighet/Strävhet" />
-              <CustomPieChart data={pieChartData3} title="Syra" />
+          <div className="mt-8">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+              <PieChart data={pieChartData1} title="Smakintensitet" />
+              <PieChart data={pieChartData2} title="Fyllighet/Strävhet" />
+              <PieChart data={pieChartData3} title="Syra" />
             </div>
           </div>
-          <div className="mt-4">
-            <div className="flex flex-col sm:flex-row gap-8 sm:gap-4">
-              <div className="flex flex-col items-center p-6 bg-[#f4f1ed] w-full sm:w-1/3">
+          <div className="mt-8">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+              <div className="flex flex-col items-center p-6 bg-[#f4f1ed]">
                 <div className="font-outfit text-black text-lg">SMAK</div>
                 <div className="text-sm mt-4 text-gray-600 text-center">
                   äpplen, fat, fruktig, <br /> mandel, plommon, söt, <br />
                   röda vinbär
                 </div>
               </div>
-              <div className="flex flex-col items-center p-6 bg-[#f4f1ed] w-full sm:w-1/3">
+              <div className="flex flex-col items-center p-6 bg-[#f4f1ed]">
                 <div className="font-outfit text-black text-lg">AROM</div>
                 <div className="text-sm mt-4 text-gray-600 text-center">
                   äpplen, bär, fatkaraktär, <br />
                   fruktigt, mandel, <br /> plommon
                 </div>
               </div>
-              <div className="flex flex-col items-center p-6 bg-[#f4f1ed] w-full sm:w-1/3">
+              <div className="flex flex-col items-center p-6 bg-[#f4f1ed]">
                 <div className="font-outfit text-black text-lg">FÄRG</div>
                 <div className="text-sm mt-4 text-gray-600 text-center">
                   orangerosa, oklar

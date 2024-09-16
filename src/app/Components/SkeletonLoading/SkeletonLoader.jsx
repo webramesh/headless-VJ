@@ -12,10 +12,10 @@ const SkeletonLoader = () => {
     <>
       <NavbarSkeleton />
       <HeroSkeleton />
-      <CardSkeleton title="NYHETER" subtitle="Den mest populära artikeln i dryckesvärlden" />
+      <CardSkeleton title="TRENDIGT" subtitle="Artiklar värda att läsa från våra redaktörer" />
       <SubscriptionSkeleton />
       <WineSkeleton />
-      <CardSkeleton title="TRENDIGT" subtitle="Artiklar värda att läsa från våra redaktörer" />
+      <CardSkeleton title="NYHETER" subtitle="Den mest populära artikeln i dryckesvärlden" />
       <InfoSkeleton />
       <FooterSkeleton />
     </>

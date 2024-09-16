@@ -1,3 +1,5 @@
+"use client";
+
 import Link from "next/link";
 import { useState } from "react";
 import Image from "next/image";
@@ -6,8 +8,28 @@ import twitter from "@/public/twitter.png";
 import fb from "@/public/fb.png";
 import insta from "@/public/insta.png";
 import Searchbar from "./Searchbar";
+import vinlogo from "@/public/vinlogo.png";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBars, faTimes } from "@fortawesome/free-solid-svg-icons";
+import { Menu, Transition } from "@headlessui/react";
+import { ChevronDownIcon } from "@heroicons/react/20/solid";
+
+const CustomMenuItem = ({ href, children }) => {
+  return (
+    <Menu.Item>
+      {({ active }) => (
+        <Link
+          href={href}
+          className={`${
+            active ? "bg-gray-100 text-gray-900" : "text-gray-700"
+          } block px-4 py-2 text-sm`}
+        >
+          {children}
+        </Link>
+      )}
+    </Menu.Item>
+  );
+};
 
 export default function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -22,14 +44,24 @@ export default function Navbar() {
 
   return (
     <nav className="bg-[#F5F5F5]">
-      <div className="container mx-auto px-8 py-4 flex flex-col lg:flex-row lg:items-center lg:justify-between">
+      <div className="container mx-auto px-8 py-2 lg:py-4 flex flex-col lg:flex-row lg:items-center lg:justify-between">
         {/* Logo and Hamburger Icon */}
         <div className="w-full lg:w-auto flex justify-between items-center">
           <a href="#" className="flex items-center">
+            {/* Mobile Logo */}
+            <Image
+              src={vinlogo}
+              alt="VinLogo"
+              className="object-cover lg:hidden"
+              width={60}
+              height={30}
+            />
+
+            {/* Desktop Logo */}
             <Image
               src={logo}
               alt="Logo"
-              className="object-cover"
+              className="object-cover hidden lg:block"
               width={180}
               height={90}
             />
@@ -135,7 +167,7 @@ export default function Navbar() {
         </div>
 
         {/* Desktop View */}
-        <div className="hidden font-outfit lg:text-sm  xl:text-lg lg:flex lg:justify-center lg:items-center lg:space-x-4 xl:space-x-5">
+        <div className="hidden font-outfit lg:text-sm xl:text-lg lg:flex lg:justify-center lg:items-center lg:space-x-4 xl:space-x-5">
           <Link href="/VinMat" className="hover:text-gray-600">
             Vin & Mat
           </Link>
@@ -157,9 +189,48 @@ export default function Navbar() {
           <Link href="/Vinpanatet" className="hover:text-gray-600">
             Vin på nätet
           </Link>
-          <Link href="/Vinguide" className="hover:text-gray-600">
-            Vinguide
-          </Link>
+          <Menu as="div" className="relative inline-block text-left">
+            <div>
+              <Menu.Button className="inline-flex w-full justify-center items-center hover:text-gray-600">
+                Vinguide
+                <ChevronDownIcon
+                  className="-mr-1 ml-2 h-5 w-5"
+                  aria-hidden="true"
+                />
+              </Menu.Button>
+            </div>
+            <Transition
+              enter="transition ease-out duration-100"
+              enterFrom="transform opacity-0 scale-95"
+              enterTo="transform opacity-100 scale-100"
+              leave="transition ease-in duration-75"
+              leaveFrom="transform opacity-100 scale-100"
+              leaveTo="transform opacity-0 scale-95"
+            >
+              <Menu.Items className="absolute right-0 z-10 mt-2 w-56 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
+                <div className="py-1">
+                  <CustomMenuItem href="/Vinguide/RottVin">
+                    Rott Vin
+                  </CustomMenuItem>
+                  <CustomMenuItem href="/Vinguide/VittVin">
+                    Vitt Vin
+                  </CustomMenuItem>
+                  <CustomMenuItem href="/Vinguide/RoseVin">
+                    Rose Vin
+                  </CustomMenuItem>
+                  <CustomMenuItem href="/Vinguide/DessertVin">
+                    Dessert Vin
+                  </CustomMenuItem>
+                  <CustomMenuItem href="/Vinguide/Mousserande">
+                    Mousserande Vin
+                  </CustomMenuItem>
+                  <CustomMenuItem href="/Vinguide/ovrigtvin">
+                    Ovrigt Vin
+                  </CustomMenuItem>
+                </div>
+              </Menu.Items>
+            </Transition>
+          </Menu>
         </div>
 
         {/* Searchbar for Desktop */}

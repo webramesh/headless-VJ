@@ -41,7 +41,7 @@ const ProductSection = () => {
               <Image
                 src={wine}
                 alt="Citran Wine"
-                className="object-cover w-full h-auto"
+                className="object-cover w-2/3 sm:w-1/2 md:w-2/3 lg:w-full h-auto mx-auto"
                 width={300}
                 height={500}
               />
@@ -183,14 +183,14 @@ const ProductSection = () => {
             </div>
           </div>
           <div className="mt-8">
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-8">
               <PieChart data={pieChartData1} title="Smakintensitet" />
               <PieChart data={pieChartData2} title="Fyllighet/Strävhet" />
               <PieChart data={pieChartData3} title="Syra" />
             </div>
           </div>
           <div className="mt-8">
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-8">
               <div className="flex flex-col items-center p-6 bg-[#f4f1ed]">
                 <div className="font-outfit text-black text-lg">SMAK</div>
                 <div className="text-sm mt-4 text-gray-600 text-center">

@@ -90,8 +90,10 @@ const InformationCards = () => {
         APK (Alkhol per krona) <br /> 0.4 :-
       </div>
       <div className="text-xs font-outfit text-center text-gray-500 mt-2">
-        Alkohol per krona är ett mått som anger mängden alkohol som erhålls per <br /> 
-        nedlagd krona, vid köp av en alkoholhaltig dryck. APK stiger då dryckens pris <br />
+        Alkohol per krona är ett mått som anger mängden alkohol som erhålls per{" "}
+        <br />
+        nedlagd krona, vid köp av en alkoholhaltig dryck. APK stiger då dryckens
+        pris <br />
         sjunker eller alkoholhalten stiger.
       </div>
     </div>
@@ -102,11 +104,11 @@ const InformationCards = () => {
       <div className="font-outfit">Om Producenten</div>
       <hr className="w-[90%] border-t-2 m-4 border-gray-300" />
       <div className="text-xs font-outfit text-center mt-2">
-        Producent <br /> 
+        Producent <br />
         <div className="text-red-500 font-bold">Fuji Takasago Shuzo</div>
       </div>
       <div className="text-xs font-outfit text-center mt-2">
-        Land <br /> 
+        Land <br />
         <div className="text-red-500 font-bold">Japan</div>
       </div>
     </div>
@@ -133,7 +135,9 @@ const InformationCards = () => {
           {[...Array(5)].map((_, index) => (
             <svg
               key={index}
-              className={`w-8 h-8 ms-3 ${index < 4 ? 'text-red-500' : 'text-gray-300 dark:text-gray-500'}`}
+              className={`w-8 h-8 ms-3 ${
+                index < 4 ? "text-red-500" : "text-gray-300 dark:text-gray-500"
+              }`}
               aria-hidden="true"
               xmlns="http://www.w3.org/2000/svg"
               fill="currentColor"
@@ -152,7 +156,9 @@ const InformationCards = () => {
       <div className="flex flex-col md:flex-row gap-8 mt-8">
         <div className="flex flex-col w-full md:w-1/2 gap-4">
           <div>
-            <label htmlFor="name" className="sr-only">Name</label>
+            <label htmlFor="name" className="sr-only">
+              Name
+            </label>
             <input
               type="text"
               id="name"
@@ -162,7 +168,9 @@ const InformationCards = () => {
             />
           </div>
           <div>
-            <label htmlFor="email" className="sr-only">Email</label>
+            <label htmlFor="email" className="sr-only">
+              Email
+            </label>
             <input
               type="email"
               id="email"
@@ -172,7 +180,9 @@ const InformationCards = () => {
             />
           </div>
           <div>
-            <label htmlFor="captcha" className="sr-only">Captcha</label>
+            <label htmlFor="captcha" className="sr-only">
+              Captcha
+            </label>
             <legend className="font-outfit text-sm mb-1">
               Are you human? Please solve:
             </legend>
@@ -187,7 +197,9 @@ const InformationCards = () => {
         </div>
         <div className="flex flex-col w-full md:w-1/2 gap-12">
           <div className="flex flex-col flex-grow">
-            <label htmlFor="message" className="sr-only">Message</label>
+            <label htmlFor="message" className="sr-only">
+              Message
+            </label>
             <textarea
               id="message"
               className="p-2 bg-[#d9d9d9] rounded-xl flex-grow resize-none"
@@ -256,14 +268,14 @@ const InformationCards = () => {
   return (
     <div className="mt-8 border-y-2">
       <div className="container mx-auto">
-        <div className="flex flex-col sm:flex-row gap-4 sm:gap-8 px-4 sm:px-8 py-2 font-outfit items-center justify-center">
+        <div className="flex gap-4 sm:gap-8 px-4 sm:px-8 py-2 font-outfit items-center justify-center overflow-x-scroll lg:overflow-x-hidden ">
           {[
             "Hälsoinformation",
             "Övrig information",
             "Kundomdömen",
             "Utmärkelser och betyg",
             "Försäljning systembolaget",
-            "Frågor och svar"
+            "Frågor och svar",
           ].map((item, index) => (
             <div
               key={index}

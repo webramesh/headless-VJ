@@ -268,7 +268,7 @@ const InformationCards = () => {
   return (
     <div className="mt-8 border-y-2">
       <div className="container mx-auto">
-        <div className="flex gap-4 sm:gap-8 px-4 sm:px-8 py-2 font-outfit items-center justify-center overflow-x-scroll lg:overflow-x-hidden ">
+        <div className="flex gap-4 sm:gap-8 px-4 sm:px-8 py-2 font-outfit items-center justify-center overflow-x-scroll scroll-smooth lg:overflow-x-hidden ">
           {[
             "Hälsoinformation",
             "Övrig information",

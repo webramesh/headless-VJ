@@ -11,20 +11,20 @@ import meat from "@/public/meat.png";
 import vegetables from "@/public/vegetables.png";
 import chicken from "@/public/chicken.png";
 
-const ProductSection = () => {
+export default function ProductSection() {
   const pieChartData1 = [
-    { name: "Empty", value: 25, color: "#f199a8" },
-    { name: "Filled", value: 75, color: "#e51136" },
+    { name: "Filled", value: 5 },
+    { name: "Empty", value: 7 },
   ];
 
   const pieChartData2 = [
-    { name: "Empty", value: 50, color: "#f199a8" },
-    { name: "Filled", value: 50, color: "#e51136" },
+    { name: "Filled", value: 6 },
+    { name: "Empty", value: 6 },
   ];
 
   const pieChartData3 = [
-    { name: "Empty", value: 15, color: "#f199a8" },
-    { name: "Filled", value: 85, color: "#e51136" },
+    { name: "Filled", value: 9 },
+    { name: "Empty", value: 3 },
   ];
 
   return (
@@ -102,27 +102,9 @@ const ProductSection = () => {
               koppling till eller kommersiellt samarbete med Systembolaget.
             </div>
             <div className="flex p-4 gap-6">
-              <Image
-                src={message}
-                alt="Messagebox"
-                className="object-cover"
-                width={15}
-                height={10}
-              />
-              <Image
-                src={fb}
-                alt="Facebook icon"
-                className="object-cover"
-                width={15}
-                height={10}
-              />
-              <Image
-                src={twitter}
-                alt="Twitter"
-                className="object-cover"
-                width={15}
-                height={10}
-              />
+              <Image src={message} alt="Messagebox" className="object-cover" />
+              <Image src={fb} alt="Facebook icon" className="object-cover" />
+              <Image src={twitter} alt="Twitter" className="object-cover" />
               <div className="font-outfit text-black text-sm">
                 Berätta för en vän
               </div>
@@ -135,49 +117,35 @@ const ProductSection = () => {
                 Faktaruta
               </div>
             </div>
-            <div className="flex flex-col sm:flex-row justify-between pb-8">
-              <div className="flex flex-col px-8 mb-4 sm:mb-0">
-                <div className="flex flex-col">
-                  <span className="font-outfit text-black text-sm">
-                    SORTIMENT
-                  </span>
-                  <span className="text-gray-500 text-xs">
-                    Beställning sortimentet
-                  </span>
-                  <div className="mt-8 flex flex-col">
-                    <span className="font-outfit text-black text-sm">
-                      ALKOHOL
-                    </span>
-                    <span className="text-gray-500 text-xs">13%</span>
-                  </div>
+            <div className="grid grid-cols-2 sm:grid-cols-3 gap-6 pl-8 mb-4 py-4">
+              <div className="flex flex-col">
+                <div className="font-outfit text-black text-sm">SORTIMENT</div>
+                <div className="text-gray-500 text-xs">
+                  Beställning sortimentet
                 </div>
               </div>
-              <div className="flex flex-col px-8 mb-4 sm:mb-0">
-                <div className="flex flex-col">
-                  <span className="font-outfit text-black text-sm">ÅRGÅNG</span>
-                  <span className="text-gray-500 text-xs">2012</span>
-                  <div className="mt-8 flex flex-col">
-                    <span className="font-outfit text-black text-sm">
-                      VOLYM
-                    </span>
-                    <span className="text-gray-500 text-xs">750 ml</span>
-                  </div>
+              <div className="flex flex-col">
+                <div className="font-outfit text-black text-sm">ALKOHOL</div>
+                <div className="text-gray-500 text-xs">13%</div>
+              </div>
+              <div className="flex flex-col">
+                <div className="font-outfit text-black text-sm">ÅRGÅNG</div>
+                <div className="text-gray-500 text-xs">2012</div>
+              </div>
+              <div className="flex flex-col">
+                <div className="font-outfit text-black text-sm">VOLYM</div>
+                <div className="text-gray-500 text-xs">750 ml</div>
+              </div>
+              <div className="flex flex-col">
+                <div className="font-outfit text-black text-sm">DRUVOR</div>
+                <div className="text-gray-500 text-xs">
+                  58% Cabernet Sauvignon <br /> 42% Merlot
                 </div>
               </div>
-              <div className="flex flex-col px-8">
-                <div className="flex flex-col">
-                  <span className="font-outfit text-black text-sm">DRUVOR</span>
-                  <span className="text-gray-500 text-xs">
-                    58% Cabernet Sauvignon <br /> 42% Merlot
-                  </span>
-                  <div className="mt-4 flex flex-col">
-                    <span className="font-outfit text-black text-sm">
-                      ALLERGENER
-                    </span>
-                    <span className="text-gray-500 text-xs">
-                      Innehåller: Sulfiter
-                    </span>
-                  </div>
+              <div className="flex flex-col">
+                <div className="font-outfit text-black text-sm">ALLERGENER</div>
+                <div className="text-gray-500 text-xs">
+                  Innehåller: Sulfiter
                 </div>
               </div>
             </div>
@@ -246,6 +214,4 @@ const ProductSection = () => {
       </div>
     </div>
   );
-};
-
-export default ProductSection;
+}

@@ -1,10 +1,7 @@
 'use client'
 import Head from "next/head";
 import React from "react";
-import Navbar from "../Components/Navbar";
-import Hero from "../Components/Hero";
-import Paragraph from "../Components/Paragraph";
-import FilterSection from "../Components/FilterSection";
+import Navbar from "../../Components/Navbar";
 
 export default function Home() {
   return (
@@ -18,9 +15,7 @@ export default function Home() {
       </Head>
         <>
           <Navbar />
-          <Hero />
-          <Paragraph />
-          <FilterSection />
+        
         </>
     
     </>

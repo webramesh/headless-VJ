@@ -8,8 +8,8 @@ const Hero = () => {
       <Image
         src={bgimage}
         alt="Background image"
-        layout="fill"
-        objectFit="cover"
+        fill
+        className="object-cover"
         quality={100}
         priority
       />

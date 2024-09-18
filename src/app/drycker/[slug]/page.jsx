@@ -5,6 +5,8 @@ import Navbar from "../../Components/Navbar";
 import Hero from "../Components/Hero";
 import Paragraph from "../Components/Paragraph";
 import FilterSection from "../Components/FilterSection";
+import CountrySection from "../Components/CountrySection";
+import Card from "../../Components/Card";
 import Footer from "../../Components/Footer";
 
 export default function Home() {
@@ -22,6 +24,11 @@ export default function Home() {
           <Hero />
           <Paragraph />
           <FilterSection />
+          <CountrySection/>
+          <Card
+            title="Artiklar relaterade till Röda Viner Frankrike"
+            subtitle="Från vår redaktion"
+          />
           <Footer/>
         </>
     

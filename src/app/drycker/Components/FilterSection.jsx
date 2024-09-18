@@ -2,9 +2,6 @@ import React from "react";
 import Drykeracc from "../Components/Drykeracc";
 import Price from "../Components/Price";
 import Image from "next/image";
-import filterwine from "@/public/filterwine.webp";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faArrowUpRightFromSquare } from "@fortawesome/free-solid-svg-icons";
 
 const FilterSection = () => {
   return (
@@ -12,7 +9,7 @@ const FilterSection = () => {
       <div className="mt-10">
         {/* LeftSide */}
         <div className="flex gap-8">
-          <div className="w-[20%] sticky top-8 max-h-screen overflow-y-auto flex flex-col">
+          <div className="w-[20%] sticky top-6 max-h-screen overflow-y-auto flex flex-col">
             <div className="text-3xl font-outfit items-start pl-3 ">Filter</div>
             <div className="mt-8">
               <Drykeracc />

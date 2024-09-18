@@ -33,12 +33,12 @@ const Accordion = () => {
   return (
     <div className="container mx-auto">
       {accordionItems.map((item) => (
-        <div key={item.id} className="border-b mb-8 border-slate-200">
+        <div key={item.id} className="border-b mb-6 border-slate-200">
           <button
             onClick={() => toggleAccordion(item.id)}
-            className="w-full flex justify-between items-center bg-[#F5F5F5] pl-3 text-slate-800 py-2"
+            className="w-full flex justify-between items-center bg-[#F5F5F5] pl-3  py-1"
           >
-            <h3 className="font-outfit text-left text-xl">
+            <h3 className="font-outfit text-left text-lg">
               <span>{item.title}</span>
             </h3>
             <span

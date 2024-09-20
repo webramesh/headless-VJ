@@ -8,17 +8,17 @@ const FilterSection = () => {
     <div className="container mx-auto">
       <div className="mt-4 sm:mt-6 md:mt-10">
         {/* LeftSide */}
-        <div className="flex flex-col md:flex-row md:gap-8">
-          <div className="w-full md:w-[20%] mb-6 md:mb-0">
-            <div className="md:sticky md:top-6 md:max-h-screen md:overflow-y-auto flex flex-col">
-              <div className="text-2xl md:text-3xl font-outfit items-start pl-3 px-4 lg:px-0">Filter</div>
-              <div className="mt-4 md:mt-8 px-4 lg:px-0">
+        <div className="flex flex-col lg:flex-row md:gap-8">
+          <div className="w-full lg:w-[20%] mb-6 lg:mb-0 border-2 border-[#f5f5f5] p-4">
+            <div className="lg:sticky lg:top-6 lg:max-h-screen  flex flex-col">
+              <div className="text-2xl lg:text-3xl font-outfit items-start lg:pl-3 px-4 lg:px-0">Filter</div>
+              <div className="mt-2 lg:mt-4 px-4 lg:px-0">
                 <Drykeracc />
               </div>
             </div>
           </div>
           {/* Rightside */}
-          <div className="w-full md:w-[80%] flex flex-col">
+          <div className="w-full lg:w-[80%] flex flex-col">
             <div className="text-2xl md:text-3xl font-outfit text-center pl-3 mb-4 md:mb-6">
               Alla roséviner
             </div>

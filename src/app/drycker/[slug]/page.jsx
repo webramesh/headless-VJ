@@ -4,6 +4,7 @@ import React from "react";
 import Navbar from "../../Components/Navbar";
 import Hero from "../Components/Hero";
 import Paragraph from "../Components/Paragraph";
+import Scrolltodown from "@/Components/Scrolltodown"
 import FilterSection from "../Components/FilterSection";
 import CountrySection from "../Components/CountrySection";
 import Content from "../Components/Content";
@@ -24,6 +25,7 @@ export default function Home() {
         <Navbar />
         <Hero />
         <Paragraph />
+        <Scrolltodown />
         <FilterSection />
         <CountrySection />
         <Content />

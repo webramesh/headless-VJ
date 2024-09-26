@@ -1,56 +1,106 @@
-'use client'
-import Head from "next/head";
-import Navbar from "../app/Components/Navbar.jsx";
-import React from "react";
-import Hero from "./Components/Hero.jsx";
-import Card from "./Components/Card.jsx";
-import Subscription from "./Components/Subscription.jsx";
-import Wine from "./Components/Wine.jsx";
-import SkeletonLoader from "./Components/SkeletonLoading/SkeletonLoader.jsx";
-import { useState, useEffect } from 'react';
-import Info from './Components/Info.jsx';
-import Footer from './Components/Footer.jsx';
- 
+import { request } from 'graphql-request';
+import ClientHome from './clientHome';
 
-export default function Home() {
-  const [loading, setLoading] = useState(true);
+const WORDPRESS_GRAPHQL_ENDPOINT = 'https://www.vin.handworknepal.com/graphql';
 
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      setLoading(false);
-    }, );
-    return () => clearTimeout(timer);
-  }, []);
+const GET_HERO_POSTS = `
+  query GetHeroPosts {
+    posts(first: 4, where: { orderby: { field: DATE, order: DESC } }) {
+      nodes {
+        id
+        title
+        date
+        excerpt
+        slug
+        featuredImage {
+          node {
+            sourceUrl
+            altText
+          }
+        }
+        author {
+          node {
+            name
+          }
+        }
+      }
+    }
+  }
+`;
 
-  return (
-    <>
-      <Head>
-        <title>Home Page</title>
-        <meta
-          name="description"
-          content="This is the home page of my Next.js app"
-        />
-      </Head>
-      {loading ? (
-        <SkeletonLoader />
-      ) : (
-        <>
-          <Navbar />
-          <Hero />
-          <Card
-            title="TRENDIGT"
-            subtitle="Artiklar värda att läsa från våra redaktörer"
-          />
-          <Subscription />
-          <Wine />
-          <Card
-            title="NYHETER"
-            subtitle="Den mest populära artikeln i dryckesvärlden"
-          />
-          <Info />
-          <Footer />
-        </>
-      )}
-    </>
-  );
+const GET_NEWS_POSTS = `
+  query GetNewsPosts {
+    nyheter(first: 6, where: {orderby: {field: DATE, order: DESC}}) {
+      nodes {
+        id
+        title
+        date
+        excerpt
+        slug
+        featuredImage {
+          node {
+            sourceUrl
+            altText
+          }
+        }
+        author {
+          node {
+            name
+          }
+        }
+      }
+    }
+  }
+`;
+
+const GET_TRENDING_POSTS = `
+  query GetTrendingPosts {
+    popularPosts(first: 6) {
+      id
+      title
+      visitCount
+      excerpt
+      date
+      slug
+      featuredImage {
+        node {
+          altText
+          sourceUrl
+        }
+      }
+      author {
+        node {
+          name
+        }
+      }
+    }
+  }
+`;
+
+async function getPosts() {
+  try {
+    const heroData = await request(WORDPRESS_GRAPHQL_ENDPOINT, GET_HERO_POSTS);
+    const newsData = await request(WORDPRESS_GRAPHQL_ENDPOINT, GET_NEWS_POSTS);
+    const trendingData = await request(WORDPRESS_GRAPHQL_ENDPOINT, GET_TRENDING_POSTS);
+    return {
+      heroPosts: heroData.posts.nodes,
+      newsPosts: newsData.nyheter.nodes,
+      trendingPosts: trendingData.popularPosts,
+    };
+  } catch (error) {
+    console.error('Error fetching posts:', error);
+    return {
+      heroPosts: [],
+      newsPosts: [],
+      trendingPosts: [],
+    };
+  }
+}
+
+export default async function Home() {
+  const { heroPosts, newsPosts, trendingPosts } = await getPosts();
+  console.log('Hero Posts:', heroPosts);
+  console.log('News Posts:', newsPosts);
+  console.log('Trending Posts:', trendingPosts);
+  return <ClientHome initialHeroPosts={heroPosts} initialNewsPosts={newsPosts} initialTrendingPosts={trendingPosts} />;
 }

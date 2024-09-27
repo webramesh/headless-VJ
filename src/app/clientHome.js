@@ -139,16 +139,8 @@ const Card = ({ title, subtitle, posts }) => {
         {posts.map((post) => (
           <Link href={`/article/${post.slug}`} key={post.id} className="flex">
             <div className="flex flex-col cursor-pointer hover:shadow-lg transition-shadow w-full">
-              <div className="relative w-full h-48 md:h-56 lg:h-64">
-                <Image
-                  src={
-                    post.featuredImage?.node?.sourceUrl || "/placeholder.svg"
-                  }
-                  alt={post.featuredImage?.node?.altText || "Featured Image"}
-                  layout="fill"
-                  objectFit="cover"
-                  className="object-cover w-full h-full"
-                />
+              <div className="relative w-full">
+            
               </div>
               <div className="p-4 bg-[#f5f5f5] flex flex-col flex-grow">
                 <h3 className="font-outfit font-medium text-black text-lg">

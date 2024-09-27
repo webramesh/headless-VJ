@@ -37,12 +37,6 @@ const GET_NEWS_POSTS = `
         date
         excerpt
         slug
-        featuredImage {
-          node {
-            sourceUrl
-            altText
-          }
-        }
         author {
           node {
             name

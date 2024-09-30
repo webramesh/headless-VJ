@@ -8,11 +8,11 @@ import Slider from "react-slick";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 
 // Import components
-import Navbar from "./Components/Navbar";
-import Subscription from "./Components/Subscription";
-import SkeletonLoader from "./Components/SkeletonLoading/SkeletonLoader";
-import Info from "./Components/Info";
-import Footer from "./Components/Footer";
+import Navbar from "../app/Components/Navbar";
+import Subscription from "../app/Components/Subscription";
+import SkeletonLoader from "../app/Components/SkeletonLoading/SkeletonLoader";
+import Info from "../app/Components/Info";
+import Footer from "../app/Components/Footer";
 
 // Import styles
 import "slick-carousel/slick/slick.css";

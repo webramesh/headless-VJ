@@ -1,6 +1,6 @@
 import { Inter, Outfit } from 'next/font/google'
 import './globals.css'
-import ScrollToTopButton from '@/components/ScrollToTopButton'
+import ScrollToTopButton from '../app/Components/ScrollToTopButton'
 
 const inter = Inter({ subsets: ['latin'] })
 const outfit = Outfit({ subsets: ['latin'] })

@@ -139,9 +139,7 @@ const Card = ({ title, subtitle, posts }) => {
         {posts.map((post) => (
           <Link href={`/article/${post.slug}`} key={post.id} className="flex">
             <div className="flex flex-col cursor-pointer hover:shadow-lg transition-shadow w-full">
-              <div className="relative w-full">
-            
-              </div>
+              <div className="relative w-full"></div>
               <div className="p-4 bg-[#f5f5f5] flex flex-col flex-grow">
                 <h3 className="font-outfit font-medium text-black text-lg">
                   {post.title}
@@ -257,7 +255,7 @@ const WineCard = ({
           ))}
         </h2>
         <div className="absolute inset-0 mt-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300 ease-in-out">
-          <div className="flex items-center justify-center">
+          <div className="flex items-center justify-between px-4">
             <div
               className={`flex flex-start m-4 w-fit px-3 text-white font-outfit text-sm font-thin rounded-lg`}
               style={{ backgroundColor: colorPicker || "#000000" }}
@@ -268,7 +266,7 @@ const WineCard = ({
               {articles} ARTIKLAR
             </div>
           </div>
-          <p className="font-outfit text-lg md:text-2xl flex items-center leading-snug p-7 text-white font-medium justify-center">
+          <p className="font-outfit text-lg md:text-2xl flex items-center justify-center leading-snug p-7 text-white font-medium ">
             {description}
           </p>
         </div>

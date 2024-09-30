@@ -1,7 +1,7 @@
 import React from "react";
 import Drykeracc from "../Components/Drykeracc";
 import Price from "../Components/Price";
-import Image from "next/image";
+
 
 const FilterSection = () => {
   return (

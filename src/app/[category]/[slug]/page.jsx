@@ -1,48 +1,27 @@
-import { request } from "graphql-request";
-import ClientCategory from "../clientCategory.jsx";
+'use client'
 
-const WORDPRESS_GRAPHQL_ENDPOINT = "https://www.vin.handworknepal.com/graphql";
+import React from 'react';
+import Head from "next/head";
+import Navbar from "../../Components/Navbar";
+import CategoryHero from "../Components/CatagoryHero"
+import Title from "../Components/Title"
+import Footer from "../../Components/Footer";
 
-const GET_CATEGORY_POSTS = `
-  query GetCategoryPosts {
-    posts {
-      nodes {
-        id
-        title
-        date
-        slug
-        featuredImage {
-          node {
-            sourceUrl
-            altText
-          }
-        }
-        author {
-          node {
-            name
-          }
-        }
-        content
-      }
-    }
-  }
-`;
-
-async function getCategoryPosts() {
-  try {
-    const data = await request(WORDPRESS_GRAPHQL_ENDPOINT, GET_CATEGORY_POSTS);
-    return {
-      posts: data.posts.nodes,
-    };
-  } catch (error) {
-    console.error("Error fetching category posts:", error);
-    return {
-      posts: [],
-    };
-  }
+export default function Home() {
+  return (
+    <>
+      <Head>
+        <title>Product Page</title>
+        <meta
+          name="description"
+          content="This is the category page of Vinjournalen"
+        />
+      </Head>
+      <Navbar />
+      <Title/>
+      <CategoryHero/>
+      <Footer />
+    </>
+  );
 }
 
-export default async function CategoryPage() {
-  const { posts } = await getCategoryPosts();
-  return <ClientCategory initialPosts={posts} />;
-}

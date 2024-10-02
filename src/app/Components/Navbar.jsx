@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 import Image from "next/image";
 import logo from "@/public/vinjournalen-logo.png";
 import twitter from "@/public/twitter.png";
@@ -11,28 +11,23 @@ import Searchbar from "./Searchbar";
 import vinlogo from "@/public/vinlogo.png";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBars, faTimes } from "@fortawesome/free-solid-svg-icons";
-import { Menu, Transition } from "@headlessui/react";
 import { ChevronDownIcon } from "@heroicons/react/20/solid";
 
 const CustomMenuItem = ({ href, children }) => {
   return (
-    <Menu.Item>
-      {({ active }) => (
-        <Link
-          href={href}
-          className={`${
-            active ? "bg-gray-100 text-gray-900" : "text-gray-700"
-          } block px-4 py-2 text-sm`}
-        >
-          {children}
-        </Link>
-      )}
-    </Menu.Item>
+    <Link
+      href={href}
+      className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900"
+    >
+      {children}
+    </Link>
   );
 };
 
 export default function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const dropdownRef = useRef(null);
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
@@ -41,6 +36,19 @@ export default function Navbar() {
   const closeMenu = () => {
     setIsMenuOpen(false);
   };
+
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+        setIsDropdownOpen(false);
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
 
   return (
     <nav className="bg-[#F5F5F5]">
@@ -189,25 +197,21 @@ export default function Navbar() {
           <Link href="/Vinpanatet" className="hover:text-gray-600">
             Vin på nätet
           </Link>
-          <Menu as="div" className="relative inline-block text-left">
-            <div>
-              <Menu.Button className="inline-flex w-full justify-center items-center hover:text-gray-600">
-                Vinguide
-                <ChevronDownIcon
-                  className="-mr-1 ml-2 h-5 w-5"
-                  aria-hidden="true"
-                />
-              </Menu.Button>
-            </div>
-            <Transition
-              enter="transition ease-out duration-100"
-              enterFrom="transform opacity-0 scale-95"
-              enterTo="transform opacity-100 scale-100"
-              leave="transition ease-in duration-75"
-              leaveFrom="transform opacity-100 scale-100"
-              leaveTo="transform opacity-0 scale-95"
-            >
-              <Menu.Items className="absolute right-0 z-10 mt-2 w-56 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
+          <div
+            className="relative"
+            onMouseEnter={() => setIsDropdownOpen(true)}
+            onMouseLeave={() => setIsDropdownOpen(false)}
+            ref={dropdownRef}
+          >
+            <button className="inline-flex w-full justify-center items-center hover:text-gray-600">
+              Vinguide
+              <ChevronDownIcon
+                className="-mr-1 ml-2 h-5 w-5"
+                aria-hidden="true"
+              />
+            </button>
+            {isDropdownOpen && (
+              <div className="absolute right-0 z-10 mt-2 w-56 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
                 <div className="py-1">
                   <CustomMenuItem href="/Vinguide/RottVin">
                     Rott Vin
@@ -228,9 +232,9 @@ export default function Navbar() {
                     Ovrigt Vin
                   </CustomMenuItem>
                 </div>
-              </Menu.Items>
-            </Transition>
-          </Menu>
+              </div>
+            )}
+          </div>
         </div>
 
         {/* Searchbar for Desktop */}

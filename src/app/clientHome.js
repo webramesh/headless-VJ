@@ -28,7 +28,7 @@ const Hero = ({ posts }) => {
       <div className="flex flex-col lg:flex-row gap-8 lg:gap-12">
         {/* Main Article */}
         <Link
-          href={`/article/${posts[0].slug}`}
+          href={`/category/${posts[0].slug}`}
           className="w-full lg:w-1/2 bg-[#f5f5f5] overflow-hidden"
         >
           <div className="relative w-full">
@@ -70,7 +70,7 @@ const Hero = ({ posts }) => {
         {/* Side Articles */}
         <div className="w-full lg:w-1/2 flex flex-col gap-8">
           {posts.slice(1, 4).map((post) => (
-            <Link key={post.id} href={`/article/${post.slug}`}>
+            <Link key={post.id} href={`/category/${post.slug}`}>
               <div className="flex flex-col sm:flex-row gap-4 bg-[#f5f5f5] overflow-hidden">
                 <div className="relative h-48 sm:h-auto sm:w-1/3">
                   <Image

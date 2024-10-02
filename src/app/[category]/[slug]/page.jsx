@@ -1,7 +1,10 @@
 'use client'
+
+import React from 'react';
 import Head from "next/head";
-import React from "react";
 import Navbar from "../../Components/Navbar";
+import CategoryHero from "../Components/CatagoryHero"
+import Title from "../Components/Title"
 import Footer from "../../Components/Footer";
 
 export default function Home() {
@@ -11,15 +14,14 @@ export default function Home() {
         <title>Product Page</title>
         <meta
           name="description"
-          content="This is the product page of Vinjournalen"
+          content="This is the category page of Vinjournalen"
         />
       </Head>
-        <>
-          <Navbar />
-          <Footer/>
-        
-        </>
-    
+      <Navbar />
+      <Title/>
+      <CategoryHero/>
+      <Footer />
     </>
   );
 }
+

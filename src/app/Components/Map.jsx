@@ -1,4 +1,4 @@
-export default function MapComponent() {
+export default function Map() {
   return (
     <div className="md:w-1/2 p-2 border-2">
       <iframe

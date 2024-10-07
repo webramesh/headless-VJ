@@ -1,7 +1,9 @@
-export default function SubscriptionProducenter() {
+import React from "react";
+
+const SubscriptionForm = () => {
   return (
-    <div className=" flex flex-col md:flex-row gap-8">
-      <div className="w-full bg-[#eb7272]">
+    <div>
+      <div className="w-full  bg-[#eb7272]">
         <div className="p-6 sm:p-8">
           <h1 className="font-outfit text-white text-2xl sm:text-3xl lg:text-4xl mb-4">
             Vill du ha vårt nyhetsbrev?
@@ -17,7 +19,7 @@ export default function SubscriptionProducenter() {
               <input
                 type="email"
                 id="email"
-                className="w-full lg:w-1/2 p-2 border-4 border-[#eb7272] placeholder-gray-400 rounded-md"
+                className="w-full lg:w-2/3 p-2 border-4 border-[#eb7272] placeholder-gray-400 rounded-md"
                 placeholder="abc@gmail.com"
                 required
               />
@@ -39,4 +41,6 @@ export default function SubscriptionProducenter() {
       </div>
     </div>
   );
-}
+};
+
+export default SubscriptionForm;

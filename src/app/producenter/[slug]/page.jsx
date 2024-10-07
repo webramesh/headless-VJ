@@ -6,7 +6,9 @@ export default function page({ params }) {
     <div className="container mx-auto lg:my-10 p-2">
       <div className="md:flex gap-2">
         <Content params={params} />
-        <Map />
+        <div className="w-1/2">
+          <Map />
+        </div>
       </div>
     </div>
   );

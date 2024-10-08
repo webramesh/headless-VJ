@@ -4,7 +4,7 @@ import vinlogo from "@/public/vinlogo.png";
 const CircleImage = () => {
     return (
         <div className="container mx-auto">
-            <div className="items-center flex flex-col md:flex-row items-center">
+            <div className="items-center flex flex-col md:flex-row">
                 <div className="items-center md:w-1/3 ">
                     <Image
                         src={vinlogo}

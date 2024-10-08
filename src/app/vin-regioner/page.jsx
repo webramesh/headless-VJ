@@ -10,7 +10,9 @@ const page = () => {
   return (
     <div>
       <Navbar />
+
       <div className="container mx-auto md:max-w-6xl mt-5">
+      <h3 className="mb-5">Breadcrump</h3>
         <div className="block md:grid md:grid-cols-3   md:gap-8">
           <div className=" w-full col-span-2">
             <div className="h-[50vh] mx-4 md:mx-auto">
@@ -18,6 +20,12 @@ const page = () => {
             </div>
 
             <div className="  w-full mx-4 md:mx-auto mt-5 block md:grid md:grid-cols-3  gap-4 ">
+              <RegionalCardItem />
+              <RegionalCardItem />
+              <RegionalCardItem />
+              <RegionalCardItem />
+              <RegionalCardItem />
+              <RegionalCardItem />
               <RegionalCardItem />
               <RegionalCardItem />
               <RegionalCardItem />
@@ -35,7 +43,7 @@ const page = () => {
             </div>
           </div>
           <div className="block md:col-span-1 w-full">
-            <div className="hidden md:block">
+            <div className="hidden md:block sticky top-0">
               <Sidebar />
             </div>
           </div>
@@ -52,4 +60,3 @@ const page = () => {
 };
 
 export default page;
-

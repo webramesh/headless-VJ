@@ -76,23 +76,28 @@ function CountryItem({ country }) {
   return (
     <div className="flex flex-col items-center gap-3">
       <div
-        className="relative w-20 h-20 sm:w-24 sm:h-24 rounded-full bg-red-50 border-2 border-red-500 flex items-center justify-center overflow-hidden cursor-pointer"
+        className="relative w-24 h-24 sm:w-28 sm:h-28 rounded-full overflow-hidden cursor-pointer"
         onMouseEnter={() => setIsHovered(true)}
         onMouseLeave={() => setIsHovered(false)}
       >
         {isHovered ? (
-          <span className="text-xl sm:text-2xl font-bold">{country.count}</span>
-        ) : (
-          <>
-            <div className="absolute transform w-full h-full">
-              <Image
-                src={flag}
-                alt={`${country.name} Flag`}
-                layout="fill"
-                objectFit="cover"
-              />
+          <div className="absolute inset-0 flex items-center justify-center bg-red-50">
+            <div className="text-center">
+              <span className="text-xl sm:text-2xl font-bold">{country.count}</span>
+              <br />
+              <span className="text-sm sm:text-base">producenter</span>
             </div>
-          </>
+          </div>
+        ) : (
+          <div className="relative w-full h-full">
+            <Image
+              src={flag}
+              alt={`${country.name} Flag`}
+              layout="fill"
+              objectFit="cover"
+              className="rounded-full"
+            />
+          </div>
         )}
       </div>
       <div className="flex items-center gap-2">

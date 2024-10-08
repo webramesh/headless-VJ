@@ -29,14 +29,14 @@ const Accordion = () => {
   ];
 
   return (
-    <div className="container mx-auto">
+    <div className="container mx-auto px-4 lg:px-0">
       {accordionItems.map((item) => (
         <div key={item.id} className="border-b mb-2 border-slate-200">
           <button
             onClick={() => toggleAccordion(item.id)}
             className="w-full flex justify-between items-center bg-[#F5F5F5] pl-3 text-slate-800 py-2"
           >
-            <h3 className="font-outfit text-left font-semibold text-sm">
+            <h3 className="font-outfit text-left font-semibold text-xs sm:text-sm">
               <span>{item.title}</span>
             </h3>
             <span
@@ -49,7 +49,7 @@ const Accordion = () => {
                   xmlns="http://www.w3.org/2000/svg"
                   viewBox="0 0 16 16"
                   fill="currentColor"
-                  className="w-8 h-8 text-red-600"
+                  className="w-6 h-6 sm:w-8 sm:h-8 text-red-600"
                 >
                   <path
                     fillRule="evenodd"
@@ -62,7 +62,7 @@ const Accordion = () => {
                   xmlns="http://www.w3.org/2000/svg"
                   viewBox="0 0 16 16"
                   fill="currentColor"
-                  className="w-8 h-8 text-red-600"
+                  className="w-6 h-6 sm:w-8 sm:h-8 text-red-600"
                 >
                   <path
                     fillRule="evenodd"
@@ -78,15 +78,25 @@ const Accordion = () => {
               openIndex === item.id ? "max-h-screen" : "max-h-0"
             }`}
           >
-            <div className="pb-5 bg-[#F5F5F5] flex flex-col sm:flex-row sm:justify-start sm:gap-24 text-sm font-outfit pl-3 text-red-500">
+            <div className="pb-5 bg-[#F5F5F5] flex flex-col sm:flex-row sm:justify-start sm:gap-8 lg:gap-24 text-xs sm:text-sm font-outfit pl-3 text-red-500">
               <div className="flex flex-col gap-2 mb-4 sm:mb-0">
                 {accordionContent.slice(0, 5).map((content, index) => (
-                  <div key={index}>{content}</div>
+                  <div
+                    key={index}
+                    className="hover:text-red-700 cursor-pointer"
+                  >
+                    {content}
+                  </div>
                 ))}
               </div>
               <div className="flex flex-col gap-2">
                 {accordionContent.slice(5).map((content, index) => (
-                  <div key={index}>{content}</div>
+                  <div
+                    key={index}
+                    className="hover:text-red-700 cursor-pointer"
+                  >
+                    {content}
+                  </div>
                 ))}
               </div>
             </div>

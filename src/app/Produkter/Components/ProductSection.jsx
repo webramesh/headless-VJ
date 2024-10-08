@@ -1,6 +1,6 @@
 import React from "react";
 import Image from "next/image";
-import PieChart from "./PieChart";
+import PieChart from "./Piechart";
 import wine from "@/public/winevj.png";
 import message from "@/public/message.png";
 import fb from "@/public/fbblack.png";

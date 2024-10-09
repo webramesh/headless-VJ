@@ -7,4 +7,3 @@ export default function Map() {
       referrerPolicy="no-referrer-when-downgrade"
     ></iframe>
   );
-}

@@ -11,7 +11,7 @@ export const metadata = {
 }
 
 // Added revalidation
-export const revalidate = 0 
+// export const revalidate = 0 
 
 export default function RootLayout({ children }) {
   return (

@@ -12,7 +12,7 @@ const VinimportorHero = () => {
 
         <div className=" container mx-4 md:mx-auto max-w-6xl  ">
           <h1 className="text-2xl md:text-4xl text-white font-black ">
-            <span>Vinimportörer</span>
+            <span>Vinimportörer - </span>
             <br />
             <span>Concealed Wines AB
             </span>

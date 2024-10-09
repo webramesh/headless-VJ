@@ -5,10 +5,10 @@ import WineTourism from "./WineTourism";
 
 function Sidebar() {
   return (
-    <div className=" md:block">
+    <div>
       <SubscriptionBox />
       <SenasteNytt />
-      <div className="space-y-8  mt-4">
+      <div className="space-y-8 mt-4">
         {["/link1", "/link2", "/link3"].map((link, index) => (
           <RecentPostCard link={link} key={index} />
         ))}

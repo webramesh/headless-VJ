@@ -1,139 +1,56 @@
-import { request } from "graphql-request";
-import ClientHome from "./clientHome";
+'use client'
+import Head from "next/head";
+import Navbar from "../app/Components/Navbar.jsx";
+import React from "react";
+import Hero from "./Components/Hero.jsx";
+import Card from "./Components/Card.jsx";
+import Subscription from "./Components/Subscription.jsx";
+import Wine from "./Components/Wine.jsx";
+import SkeletonLoader from "./Components/SkeletonLoading/SkeletonLoader.jsx";
+import { useState, useEffect } from 'react';
+import Info from './Components/Info.jsx';
+import Footer from './Components/Footer.jsx';
+ 
 
-const WORDPRESS_GRAPHQL_ENDPOINT = "https://www.vin.handworknepal.com/graphql";
+export default function Home() {
+  const [loading, setLoading] = useState(true);
 
-const GET_HERO_POSTS = `
-  query GetHeroPosts {
-    posts(first: 4, where: { orderby: { field: DATE, order: DESC } }) {
-      nodes {
-        id
-        title
-        date
-        excerpt
-        slug
-        featuredImage {
-          node {
-            sourceUrl
-            altText
-          }
-        }
-        author {
-          node {
-            name
-          }
-        }
-      }
-    }
-  }
-`;
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setLoading(false);
+    }, );
+    return () => clearTimeout(timer);
+  }, []);
 
-const GET_NEWS_POSTS = `
-  query GetNewsPosts {
-    nyheter(first: 6, where: {orderby: {field: DATE, order: DESC}}) {
-      nodes {
-        id
-        title
-        date
-        excerpt
-        slug
-        author {
-          node {
-            name
-          }
-        }
-      }
-    }
-  }
-`;
-
-const GET_TRENDING_POSTS = `
-  query GetTrendingPosts {
-    popularPosts(first: 6) {
-      id
-      title
-      visitCount
-      excerpt
-      date
-      slug
-      featuredImage {
-        node {
-          altText
-          sourceUrl
-        }
-      }
-      author {
-        node {
-          name
-        }
-      }
-    }
-  }
-`;
-
-const GET_WINE_CATEGORIES = `
-  query GetWineCategories {
-    categories {
-      nodes {
-        categoryId
-        count
-        name
-        categoriesImagesAndOtherFields {
-          categoriesImage {
-            node {
-              sourceUrl
-            }
-          }
-          shortDescription
-          categorycolorpicker
-        }
-      }
-    }
-  }
-`;
-
-async function getPosts() {
-  try {
-    const heroData = await request(WORDPRESS_GRAPHQL_ENDPOINT, GET_HERO_POSTS);
-    const newsData = await request(WORDPRESS_GRAPHQL_ENDPOINT, GET_NEWS_POSTS);
-    const trendingData = await request(
-      WORDPRESS_GRAPHQL_ENDPOINT,
-      GET_TRENDING_POSTS
-    );
-    const wineData = await request(
-      WORDPRESS_GRAPHQL_ENDPOINT,
-      GET_WINE_CATEGORIES
-    );
-    return {
-      heroPosts: heroData.posts.nodes,
-      newsPosts: newsData.nyheter.nodes,
-      trendingPosts: trendingData.popularPosts,
-      wineCategories: wineData.categories.nodes,
-    };
-  } catch (error) {
-    console.error("Error fetching posts:", error);
-    return {
-      heroPosts: [],
-      newsPosts: [],
-      trendingPosts: [],
-      wineCategories: [],
-    };
-  }
-}
-
-export default async function Home() {
-  const { heroPosts, newsPosts, trendingPosts, wineCategories } =
-    await getPosts();
-  console.log("Hero Posts:", heroPosts);
-  console.log("News Posts:", newsPosts);
-  console.log("Trending Posts:", trendingPosts);
-  console.log("Wine Categories:", wineCategories);
   return (
-    <ClientHome
-      initialHeroPosts={heroPosts}
-      initialNewsPosts={newsPosts}
-      initialTrendingPosts={trendingPosts}
-      initialWineCategories={wineCategories}
-    />
+    <>
+      <Head>
+        <title>Home Page</title>
+        <meta
+          name="description"
+          content="This is the home page of my Next.js app"
+        />
+      </Head>
+      {loading ? (
+        <SkeletonLoader />
+      ) : (
+        <>
+          <Navbar />
+          <Hero />
+          <Card
+            title="TRENDIGT"
+            subtitle="Artiklar värda att läsa från våra redaktörer"
+          />
+          <Subscription />
+          <Wine />
+          <Card
+            title="NYHETER"
+            subtitle="Den mest populära artikeln i dryckesvärlden"
+          />
+          <Info />
+          <Footer />
+        </>
+      )}
+    </>
   );
 }

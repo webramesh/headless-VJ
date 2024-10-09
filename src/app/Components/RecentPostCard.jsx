@@ -5,7 +5,7 @@ import food1 from "@/public/food1.png";
 export default function RecentPostCard({ link }) {
   return (
     <Link href={link}>
-      <div className="cursor-pointer hover:shadow-lg transition-shadow">
+      <div className="cursor-pointer hover:shadow-lg transition-shadow my-10">
         <Image src={food1} alt={`Food `} className="object-cover w-full h-48" />
         <div className="p-4 bg-[#f5f5f5]">
           <h3 className="font-outfit font-medium text-black text-lg">

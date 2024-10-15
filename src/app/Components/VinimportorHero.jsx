@@ -4,10 +4,10 @@ import React from "react";
 
 const VinimportorHero = () => {
   return (
-    <div class="relative w-full text-white h-[80vh] bg-[url('/../bgimage.jpg')] bg-cover bg-center font-outfit">
-      <div class="absolute inset-0 bg-black bg-opacity-60"></div>
+    <div className="relative w-full text-white h-[80vh] bg-[url('/../bgimage.jpg')] bg-cover bg-center font-outfit">
+      <div className="absolute inset-0 bg-black bg-opacity-60"></div>
 
-      <div class="relative z-10 flex items-center  h-full ">
+      <div className="relative z-10 flex items-center  h-full ">
 
 
         <div className=" container mx-4 md:mx-auto max-w-6xl  ">

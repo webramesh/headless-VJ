@@ -1,15 +1,10 @@
 import Map from '@/src/app/Components/Map';
 import ProducenterCard from '@/src/app/Components/producenterCard/ProducenterCard';
-import Price from '../../drycker/Components/Price';
 import ProductCard from '../../Components/ProductCard';
-import SenasteNytt from '../../Components/SenasteNytt';
 
 function page({ params }) {
     return (
         <>
-            <div className="font-outfit text-xs lg:text-sm my-2">
-                Hem » Produktion-land » <span className="capitalize">{params.slug}</span>
-            </div>
             <h1 className="text-2xl lg:text-3xl font-outfit mb-4 font-semibold uppercase ">
                 vinproducenter från {params.slug}
             </h1>

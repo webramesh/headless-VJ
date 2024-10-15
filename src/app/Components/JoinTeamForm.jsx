@@ -10,15 +10,15 @@ function JoinTeamForm() {
             <form className="my-3 md:my-5 text-sm lg:text-base">
                 {/* for name */}
                 <div className="mb-4">
-                    <label htmlFor="first_name" className="block mb-2   font-medium text-gray-900">
-                        Name{' '}
-                        <span className="italic text-xs lg:text-sm  text-[#eb7272]">
+                    <label htmlFor="first_name" className="block mb-2 font-bold text-gray-900">
+                        Namn
+                        <span className="italic text-xs lg:text-sm  text-[#eb7272] font-normal">
                             (Obligatoriskt)
                         </span>
                     </label>
 
-                    <div className="flex gap-4">
-                        <div className="w-1/2">
+                    <div className="flex flex-col lg:flex-row gap-4">
+                        <div className="lg:w-1/2">
                             <input
                                 type="text"
                                 id="first_name"
@@ -28,7 +28,7 @@ function JoinTeamForm() {
                             />
                             <p className="  font-medium text-gray-900">Förnamn</p>
                         </div>
-                        <div className="w-1/2">
+                        <div className="lg:w-1/2">
                             <input
                                 type="text"
                                 id="last_name"
@@ -42,8 +42,8 @@ function JoinTeamForm() {
                 </div>
                 {/* Email */}
                 <div className="mb-4">
-                    <label htmlFor="email" className="block mb-2   font-medium text-gray-900">
-                        E-post{' '}
+                    <label htmlFor="email" className="block mb-2   font-bold text-gray-900">
+                        E-post
                         <span className="italic text-xs lg:text-sm  text-[#eb7272]">
                             (Obligatoriskt)
                         </span>
@@ -58,8 +58,8 @@ function JoinTeamForm() {
                 </div>
                 {/* Phone */}
                 <div className="mb-4">
-                    <label htmlFor="phone" className="block mb-2   font-medium text-gray-900">
-                        Telefon{' '}
+                    <label htmlFor="phone" className="block mb-2    font-bold text-gray-900">
+                        Telefon
                         <span className="italic text-xs lg:text-sm  text-[#eb7272]">
                             (Obligatoriskt)
                         </span>
@@ -74,7 +74,7 @@ function JoinTeamForm() {
                 </div>
                 {/* Address */}
                 <div className="mb-4">
-                    <label htmlFor="address" className="block mb-2   font-medium text-gray-900">
+                    <label htmlFor="address" className="block mb-2    font-bold text-gray-900">
                         I vilken stad/by bor du?
                         <span className="italic text-xs lg:text-sm  text-[#eb7272]">
                             (Obligatoriskt)
@@ -90,7 +90,7 @@ function JoinTeamForm() {
                 </div>
                 {/* Age */}
                 <div className="mb-4">
-                    <label htmlFor="age" className="block mb-2   font-medium text-gray-900">
+                    <label htmlFor="age" className="block mb-2    font-bold text-gray-900">
                         Ålder
                         <span className="italic text-xs lg:text-sm  text-[#eb7272]">
                             (Obligatoriskt)
@@ -99,15 +99,15 @@ function JoinTeamForm() {
                     <div className="flex items-center gap-5">
                         <div className="flex gap-1">
                             <input type="radio" id="young" name="age" value="young" />
-                            <label for="young">20-40</label>
+                            <label htmlFor="young">20-40</label>
                         </div>
                         <div className="flex gap-1">
                             <input type="radio" id="old" name="age" value="old" />
-                            <label for="old">40-60</label>
+                            <label htmlFor="old">40-60</label>
                         </div>
                         <div className="flex gap-1">
                             <input type="radio" id="older" name="age" value="older" />
-                            <label for="older">60-80</label>
+                            <label htmlFor="older">60-80</label>
                         </div>
                         <div className="flex gap-1">
                             <input
@@ -116,32 +116,36 @@ function JoinTeamForm() {
                                 name="age"
                                 value="moreThanEighty"
                             />
-                            <label for="moreThanEighty">80+</label>
+                            <label htmlFor="moreThanEighty">80+</label>
                         </div>
                     </div>
                 </div>
                 {/* Interests */}
                 <div className="mb-4">
-                    <label htmlFor="interests" className="block mb-2   font-medium text-gray-900">
+                    <label htmlFor="interests" className="block mb-2    font-bold text-gray-900">
                         Jag är intresserade av
                         <span className="italic text-xs lg:text-sm  text-[#eb7272]">
                             (Obligatoriskt)
                         </span>
                     </label>
-                    <div className="flex gap-1">
+                    <div className="flex gap-2 items-center ">
                         <input type="checkbox" />
-                        <label for="vehicle1">Att delta som vinprovare och betygsätta viner</label>
+                        <label htmlFor="vehicle1">
+                            Att delta som vinprovare och betygsätta viner
+                        </label>
                     </div>
-                    <div className="flex gap-1">
+                    <div className="flex gap-2 items-center ">
                         <input type="checkbox" />
-                        <label for="vehicle2">Att skriva inlägg och vara del av redaktionen</label>
+                        <label htmlFor="vehicle2">
+                            Att skriva inlägg och vara del av redaktionen
+                        </label>
                     </div>
                     <p className="mt-2">Du kan ticka i båda boxarna ovan.</p>
                 </div>
                 {/* Message */}
                 <div className="mb-4">
-                    <label htmlFor="message" className="block mb-2   font-medium text-gray-900">
-                        Vem är du?{' '}
+                    <label htmlFor="message" className="block mb-2    font-bold text-gray-900">
+                        Vem är du?
                         <span className="italic text-xs lg:text-sm  text-[#eb7272]">
                             (Obligatoriskt)
                         </span>
@@ -160,7 +164,7 @@ function JoinTeamForm() {
                     type="button"
                     className="focus:outline-none text-white w-full bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg px-5 py-2.5 me-2 mb-2 text-sm"
                 >
-                    Submit
+                    Skicka
                 </button>
             </form>
         </>

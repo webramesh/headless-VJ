@@ -10,15 +10,13 @@ function page() {
     return (
         <>
             <Navbar />
-            <div className="mt-10">
-                <div className="container mx-auto bg-[#b0b0b0] h-36 flex text-white justify-center items-center">
-                    <h1 className=" text-2xl sm:text-3xl md:text-4xl text-center">
-                        Vill du bli en del av Vinjournalen.se under 2024?
-                    </h1>
-                </div>
-            </div>
+
             <div className="container mx-auto flex  lg:flex-row gap-6 lg:gap-12 mt-4 lg:mt-10 bg-slate-50  p-4">
                 <div className="md:w-2/3 ">
+                    <h1 className="text-2xl lg:text-3xl font-outfit font-semibold uppercase my-5">
+                        Vill du bli en del av Vinjournalen.se under 2024?
+                    </h1>
+
                     <p className="text-sm lg:text-base mb-1 lg:mb-2">
                         Vi på Vinjournalen.se vill låta vårt team växa. Vi söker just nu personer
                         som vill hjälpa oss att skapa bättre innehåll samt vara med och prova massa

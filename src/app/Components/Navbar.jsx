@@ -125,7 +125,7 @@ export default function Navbar() {
                         <Link href="/Tester" onClick={closeMenu} className="mb-4 text-lg">
                             Tester
                         </Link>
-                        <Link href="/Ekologiskt" onClick={closeMenu} className="mb-4 text-lg">
+                        <Link href="/ekologiskt" onClick={closeMenu} className="mb-4 text-lg">
                             Ekologiskt
                         </Link>
                         <Link href="/Vinpanatet" onClick={closeMenu} className="mb-4 text-lg">

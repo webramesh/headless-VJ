@@ -1,12 +1,12 @@
-"use client";
+'use client';
 
-import { ChevronDown } from "lucide-react";
+import { ChevronDown } from 'lucide-react';
 
 export default function ScrollToBottom() {
   const handleScroll = () => {
-    const element = document.getElementById("arrow");
+    const element = document.getElementById('arrow');
     if (element) {
-      element.scrollIntoView({ behavior: "smooth" });
+      element.scrollIntoView({ behavior: 'smooth' });
     }
   };
 

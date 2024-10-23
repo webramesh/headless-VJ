@@ -1,10 +1,10 @@
-import React from "react";
-import Image from "next/image";
-import logo from "@/public/vinjournalen-logo.png";
-import twitter from "@/public/twitter.png";
-import fb from "@/public/fb.png";
-import insta from "@/public/insta.png";
-import Copyright from "./Copyright";
+import React from 'react';
+import Image from 'next/image';
+import logo from '@/public/vinjournalen-logo.png';
+import twitter from '@/public/twitter.png';
+import fb from '@/public/fb.png';
+import insta from '@/public/insta.png';
+import Copyright from './Copyright';
 
 const Footer = () => {
   return (
@@ -14,7 +14,7 @@ const Footer = () => {
           <a href="#" className="flex items-center mb-4 md:mb-0 md:ml-8">
             <Image src={logo} alt="Logo" className="object-cover" />
           </a>
-          <div className="flex flex-col md:flex-row font-outfit text-sm font-extralight gap-2 md:gap-4 text-center md:text-left mb-4 md:mb-0">
+          <div className="flex flex-col md:flex-row  text-sm font-extralight gap-2 md:gap-4 text-center md:text-left mb-4 md:mb-0">
             <h2>Om Oss</h2>
             <h2>Annonsera</h2>
             <h2>Kontact</h2>

@@ -1,8 +1,8 @@
-import React from "react";
-import Slider from "react-slick";
-import "slick-carousel/slick/slick.css";
-import "slick-carousel/slick/slick-theme.css";
-import { ChevronLeft, ChevronRight } from "lucide-react";
+import React from 'react';
+import Slider from 'react-slick';
+import 'slick-carousel/slick/slick.css';
+import 'slick-carousel/slick/slick-theme.css';
+import { ChevronLeft, ChevronRight } from 'lucide-react';
 
 const WineCard = ({ backgroundImage, hoverImage, title, category, articles, description }) => (
   <div
@@ -25,14 +25,14 @@ const WineCard = ({ backgroundImage, hoverImage, title, category, articles, desc
       </h2>
       <div className="absolute inset-0 mt-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300 ease-in-out">
         <div className="flex items-center">
-          <div className={`bg-${category.color}-500 flex flex-start m-4 w-fit px-3 text-white font-outfit text-sm font-thin rounded-lg`}>
+          <div
+            className={`bg-${category.color}-500 flex flex-start m-4 w-fit px-3 text-white  text-sm font-thin rounded-lg`}
+          >
             {category.name}
           </div>
-          <div className="text-white text-sm font-outfit">
-            {articles} ARTIKLAR
-          </div>
+          <div className="text-white text-sm ">{articles} ARTIKLAR</div>
         </div>
-        <p className="font-outfit text-xl md:text-3xl flex items-end leading-snug p-7 text-white font-medium justify-end">
+        <p className=" text-xl md:text-3xl flex items-end leading-snug p-7 text-white font-medium justify-end">
           {description}
         </p>
       </div>
@@ -68,21 +68,21 @@ export default function WineCarousel() {
         breakpoint: 1280,
         settings: {
           slidesToShow: 3,
-        }
+        },
       },
       {
         breakpoint: 1024,
         settings: {
           slidesToShow: 2,
-        }
+        },
       },
       {
         breakpoint: 640,
         settings: {
           slidesToShow: 1,
-        }
-      }
-    ]
+        },
+      },
+    ],
   };
 
   const wineCards = [
@@ -92,7 +92,7 @@ export default function WineCarousel() {
       title: 'Vin\nTips',
       category: { name: 'Vin & Mat', color: 'green' },
       articles: 465,
-      description: 'Upptäck artiklar som täcker allt från mat och vin...'
+      description: 'Upptäck artiklar som täcker allt från mat och vin...',
     },
     {
       backgroundImage: '/pic2.png',
@@ -100,7 +100,7 @@ export default function WineCarousel() {
       title: 'Ekologiskt\nViner',
       category: { name: 'Vin Fakta', color: 'blue' },
       articles: 519,
-      description: 'Upptäck fakta om olika vinrelaterade ämnen...'
+      description: 'Upptäck fakta om olika vinrelaterade ämnen...',
     },
     {
       backgroundImage: '/pic3.png',
@@ -108,7 +108,7 @@ export default function WineCarousel() {
       title: 'Online\nVin',
       category: { name: 'Vin Skola', color: 'red' },
       articles: 406,
-      description: 'Lär känna förklaringar och vägledning inom olika ämnen in...'
+      description: 'Lär känna förklaringar och vägledning inom olika ämnen in...',
     },
     {
       backgroundImage: '/pic4.png',
@@ -116,8 +116,8 @@ export default function WineCarousel() {
       title: 'Vin\nGuide',
       category: { name: 'Vin Tester', color: 'green' },
       articles: 235,
-      description: 'Vi hjälper dig på vägen att hitta rätt dryck för dig...'
-    }
+      description: 'Vi hjälper dig på vägen att hitta rätt dryck för dig...',
+    },
   ];
 
   return (

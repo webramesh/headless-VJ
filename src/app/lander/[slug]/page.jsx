@@ -1,4 +1,4 @@
-import LanderContent from "../components/LanderContent";
+import LanderContent from '../components/LanderContent';
 
 function page({ params }) {
   return (

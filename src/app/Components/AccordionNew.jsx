@@ -1,5 +1,5 @@
-"use client";
-import React, { useState } from "react";
+'use client';
+import React, { useState } from 'react';
 
 // AccordionItem Component for better reusability
 const AccordionItem = ({ index, openIndex, toggleAccordion, title, content }) => {
@@ -15,13 +15,11 @@ const AccordionItem = ({ index, openIndex, toggleAccordion, title, content }) =>
         id={`accordion-button-${index}`}
         role="button"
       >
-        <h3 className="font-outfit text-left text-black text-sm font-medium">
+        <h3 className=" text-left text-black text-sm font-medium">
           <span>{title}</span>
         </h3>
         <span
-          className={`text-slate-800 transition-transform duration-300 transform ${
-            isOpen ? "rotate-60" : "rotate-0"
-          }`}
+          className={`text-slate-800 transition-transform duration-300 transform ${isOpen ? 'rotate-60' : 'rotate-0'}`}
         >
           {isOpen ? (
             <svg
@@ -54,15 +52,11 @@ const AccordionItem = ({ index, openIndex, toggleAccordion, title, content }) =>
       </button>
       <div
         id={`accordion-content-${index}`}
-        className={`overflow-hidden transition-all duration-300 ease-in-out ${
-          isOpen ? "max-h-screen" : "max-h-0"
-        }`}
+        className={`overflow-hidden transition-all duration-300 ease-in-out ${isOpen ? 'max-h-screen' : 'max-h-0'}`}
         role="region"
         aria-labelledby={`accordion-button-${index}`}
       >
-        <div className="pb-5 mt-2 mb-2 text-xs md:text-sm font-outfit pl-3 text-slate-500">
-          {content}
-        </div>
+        <div className="pb-5 mt-2 mb-2 text-xs md:text-sm  pl-3 text-slate-500">{content}</div>
       </div>
     </div>
   );

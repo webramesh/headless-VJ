@@ -1,7 +1,7 @@
-import React from "react";
-import Image from "next/image";
-import grape from "@/public/grape.png";
-import corkscrew from "@/public/corkscrew.png";
+import React from 'react';
+import Image from 'next/image';
+import grape from '@/public/grape.png';
+import corkscrew from '@/public/corkscrew.png';
 
 const Subscription = () => {
   return (
@@ -9,10 +9,8 @@ const Subscription = () => {
       <div className=" flex flex-col md:flex-row gap-8">
         <div className="w-full md:w-2/3 bg-[#eb7272]">
           <div className="p-6 sm:p-8">
-            <h1 className="font-outfit text-white text-2xl sm:text-3xl lg:text-4xl mb-4">
-              Vill du ha vårt nyhetsbrev?
-            </h1>
-            <h3 className="font-outfit text-white text-sm sm:text-base mb-6">
+            <h1 className=" text-white text-2xl sm:text-3xl lg:text-4xl mb-4">Vill du ha vårt nyhetsbrev?</h1>
+            <h3 className=" text-white text-sm sm:text-base mb-6">
               Få handplockat innehåll i vårt nyhetsbrev, det är gratis.
             </h3>
             <form className="space-y-4">
@@ -36,7 +34,7 @@ const Subscription = () => {
               </div>
               <button
                 type="submit"
-                className="rounded-full font-outfit text-sm py-2 px-6 bg-red-600 text-white hover:bg-red-700 transition-colors"
+                className="rounded-full  text-sm py-2 px-6 bg-red-600 text-white hover:bg-red-700 transition-colors"
               >
                 Ja, skicka till mig!
               </button>

@@ -1,19 +1,19 @@
-import React, { useState } from "react";
+import React, { useState } from 'react';
 
 const InformationCards = () => {
   const [selected, setSelected] = useState(null);
 
   const renderInfoBox1 = () => (
     <div className="flex flex-col items-center p-4 sm:p-8 justify-center bg-[#f4f1ed]">
-      <div className="font-outfit">Kalorier (baserat på alkoholmängd)</div>
+      <div className="">Kalorier (baserat på alkoholmängd)</div>
       <hr className="w-[90%] border-t-2 m-4 border-gray-300" />
-      <div className="text-xs font-outfit text-center mt-2">
+      <div className="text-xs  text-center mt-2">
         Per Standardglas (15 cl) <br /> 92
       </div>
-      <div className="text-xs font-outfit text-center mt-2">
+      <div className="text-xs  text-center mt-2">
         Per Liter <br /> 609
       </div>
-      <div className="text-xs font-outfit text-center mt-2">
+      <div className="text-xs  text-center mt-2">
         Per Förpackning <br />
         183
       </div>
@@ -22,17 +22,15 @@ const InformationCards = () => {
 
   const renderInfoBox2 = () => (
     <div className="flex flex-col items-center p-4 sm:p-8 justify-center bg-[#f4f1ed]">
-      <div className="font-outfit text-center">
-        Kalorier (baserat på ungefärlig sockermängd)
-      </div>
+      <div className=" text-center">Kalorier (baserat på ungefärlig sockermängd)</div>
       <hr className="w-[90%] border-t-2 m-4 border-gray-300" />
-      <div className="text-xs font-outfit text-center mt-2">
+      <div className="text-xs  text-center mt-2">
         Per Standardglas (15 cl) <br /> 131.3
       </div>
-      <div className="text-xs font-outfit text-center mt-2">
+      <div className="text-xs  text-center mt-2">
         Per Liter <br /> 875
       </div>
-      <div className="text-xs font-outfit text-center mt-2">
+      <div className="text-xs  text-center mt-2">
         Per Förpackning <br />
         263
       </div>
@@ -41,15 +39,15 @@ const InformationCards = () => {
 
   const renderInfoBox3 = () => (
     <div className="flex flex-col items-center p-4 sm:p-8 justify-center bg-[#f4f1ed]">
-      <div className="font-outfit">Total mängd kalorier</div>
+      <div className="">Total mängd kalorier</div>
       <hr className="w-[90%] border-t-2 m-4 border-gray-300" />
-      <div className="text-xs font-outfit text-center mt-2">
+      <div className="text-xs  text-center mt-2">
         Per Standardglas (15 cl) <br /> 222.5
       </div>
-      <div className="text-xs font-outfit text-center mt-2">
+      <div className="text-xs  text-center mt-2">
         Per Liter <br /> 1484
       </div>
-      <div className="text-xs font-outfit text-center mt-2">
+      <div className="text-xs  text-center mt-2">
         Per Förpackning <br />
         445
       </div>
@@ -58,12 +56,12 @@ const InformationCards = () => {
 
   const renderInfoBox4 = () => (
     <div className="flex flex-col items-center p-4 sm:p-8 justify-center bg-[#f4f1ed]">
-      <div className="font-outfit">Sockerdetaljer</div>
+      <div className="">Sockerdetaljer</div>
       <hr className="w-[90%] border-t-2 m-4 border-gray-300" />
-      <div className="text-xs font-outfit text-center mt-2">
+      <div className="text-xs  text-center mt-2">
         Socker g/l <br /> 21.6
       </div>
-      <div className="text-xs font-outfit text-center mb-9 mt-2">
+      <div className="text-xs  text-center mb-9 mt-2">
         Socker Per Liter <br /> 216
       </div>
     </div>
@@ -71,12 +69,12 @@ const InformationCards = () => {
 
   const renderInfoBox5 = () => (
     <div className="flex flex-col items-center p-4 sm:p-8 justify-center bg-[#f4f1ed]">
-      <div className="font-outfit">Förpackning</div>
+      <div className="">Förpackning</div>
       <hr className="w-[90%] border-t-2 m-4 border-gray-300" />
-      <div className="text-xs font-outfit text-center mt-2">
+      <div className="text-xs  text-center mt-2">
         Förslutning <br /> Skruvkapsyl
       </div>
-      <div className="text-xs font-outfit text-center mt-2">
+      <div className="text-xs  text-center mt-2">
         Förpackning <br /> Flaska
       </div>
     </div>
@@ -84,16 +82,14 @@ const InformationCards = () => {
 
   const renderInfoBox6 = () => (
     <div className="flex flex-col items-center p-4 sm:p-8 justify-center bg-[#f4f1ed]">
-      <div className="font-outfit">Alkhol</div>
+      <div className="">Alkhol</div>
       <hr className="w-[90%] border-t-2 m-4 border-gray-300" />
-      <div className="text-xs font-outfit text-center mt-2">
+      <div className="text-xs  text-center mt-2">
         APK (Alkhol per krona) <br /> 0.4 :-
       </div>
-      <div className="text-xs font-outfit text-center text-gray-500 mt-2">
-        Alkohol per krona är ett mått som anger mängden alkohol som erhålls per{" "}
-        <br />
-        nedlagd krona, vid köp av en alkoholhaltig dryck. APK stiger då dryckens
-        pris <br />
+      <div className="text-xs  text-center text-gray-500 mt-2">
+        Alkohol per krona är ett mått som anger mängden alkohol som erhålls per <br />
+        nedlagd krona, vid köp av en alkoholhaltig dryck. APK stiger då dryckens pris <br />
         sjunker eller alkoholhalten stiger.
       </div>
     </div>
@@ -101,13 +97,13 @@ const InformationCards = () => {
 
   const renderInfoBox7 = () => (
     <div className="flex flex-col items-center p-4 sm:p-8 justify-center bg-[#f4f1ed]">
-      <div className="font-outfit">Om Producenten</div>
+      <div className="">Om Producenten</div>
       <hr className="w-[90%] border-t-2 m-4 border-gray-300" />
-      <div className="text-xs font-outfit text-center mt-2">
+      <div className="text-xs  text-center mt-2">
         Producent <br />
         <div className="text-red-500 font-bold">Fuji Takasago Shuzo</div>
       </div>
-      <div className="text-xs font-outfit text-center mt-2">
+      <div className="text-xs  text-center mt-2">
         Land <br />
         <div className="text-red-500 font-bold">Japan</div>
       </div>
@@ -116,9 +112,9 @@ const InformationCards = () => {
 
   const renderInfoBox8 = () => (
     <div className="flex flex-col items-center p-4 sm:p-8 justify-center bg-[#f4f1ed]">
-      <div className="font-outfit">Om Importören</div>
+      <div className="">Om Importören</div>
       <hr className="w-[90%] border-t-2 m-4 border-gray-300" />
-      <div className="text-xs font-outfit text-center mt-2">
+      <div className="text-xs  text-center mt-2">
         Importör <br />
         <div className="text-red-500 font-bold mb-9">Akebono Unlimited AB</div>
       </div>
@@ -128,16 +124,12 @@ const InformationCards = () => {
   const ratingbox = () => (
     <div className="w-full px-4 sm:px-0">
       <div className="flex flex-col items-center mt-6 justify-center">
-        <div className="font-outfit text-xl text-center">
-          Vad tycker du om Takasago Umeshu?
-        </div>
+        <div className=" text-xl text-center">Vad tycker du om Takasago Umeshu?</div>
         <div className="flex items-center mt-4">
           {[...Array(5)].map((_, index) => (
             <svg
               key={index}
-              className={`w-8 h-8 ms-3 ${
-                index < 4 ? "text-red-500" : "text-gray-300 dark:text-gray-500"
-              }`}
+              className={`w-8 h-8 ms-3 ${index < 4 ? 'text-red-500' : 'text-gray-300 dark:text-gray-500'}`}
               aria-hidden="true"
               xmlns="http://www.w3.org/2000/svg"
               fill="currentColor"
@@ -183,9 +175,7 @@ const InformationCards = () => {
             <label htmlFor="captcha" className="sr-only">
               Captcha
             </label>
-            <legend className="font-outfit text-sm mb-1">
-              Are you human? Please solve:
-            </legend>
+            <legend className=" text-sm mb-1">Are you human? Please solve:</legend>
             <input
               type="text"
               id="captcha"
@@ -208,14 +198,10 @@ const InformationCards = () => {
             />
           </div>
           <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4">
-            <button className="px-2 py-1 w-full sm:w-[40%] bg-[#e13768] text-white rounded-full">
-              Sticka
-            </button>
-            <div className="text-xs font-outfit">
+            <button className="px-2 py-1 w-full sm:w-[40%] bg-[#e13768] text-white rounded-full">Sticka</button>
+            <div className="text-xs ">
               Denna webbplats använder Akismet för att minska skräppost.
-              <span className="text-red-600 font-bold">
-                Lär dig hur din kommentardata bearbetas.
-              </span>
+              <span className="text-red-600 font-bold">Lär dig hur din kommentardata bearbetas.</span>
             </div>
           </div>
         </div>
@@ -225,36 +211,24 @@ const InformationCards = () => {
 
   const QNA = () => (
     <div className="w-full px-4 sm:px-20">
-      <div className="flex flex-col mt-4 text-center font-outfit text-lg font-medium">
+      <div className="flex flex-col mt-4 text-center  text-lg font-medium">
         Frågor och svar om Moulins de Citran 2012
       </div>
       <div className="flex flex-col">
         <div className="bg-[#f5f5f5] pt-6 pl-2">
-          <div className="font-outfit text-sm font-medium">
-            I vilket land proudceras Moulins de Citran 2012?
-          </div>
+          <div className=" text-sm font-medium">I vilket land proudceras Moulins de Citran 2012?</div>
         </div>
-        <div className="text-gray-600 text-sm font-outfit pl-2">
-          Vinet produceras i Frankrike, Bordeaux, Haut-Médoc .
-        </div>
+        <div className="text-gray-600 text-sm  pl-2">Vinet produceras i Frankrike, Bordeaux, Haut-Médoc .</div>
         <div className="mt-4">
           <div className="bg-[#f5f5f5] pt-6 pl-2">
-            <div className="font-outfit text-sm font-medium">
-              I vilket land proudceras Moulins de Citran 2012?
-            </div>
+            <div className=" text-sm font-medium">I vilket land proudceras Moulins de Citran 2012?</div>
           </div>
-          <div className="text-gray-600 text-sm font-outfit pl-2">
-            Vinet produceras i Frankrike, Bordeaux, Haut-Médoc .
-          </div>
+          <div className="text-gray-600 text-sm  pl-2">Vinet produceras i Frankrike, Bordeaux, Haut-Médoc .</div>
           <div className="mt-4">
             <div className="bg-[#f5f5f5] pt-6 pl-2">
-              <div className="font-outfit text-sm font-medium">
-                I vilket land proudceras Moulins de Citran 2012?
-              </div>
+              <div className=" text-sm font-medium">I vilket land proudceras Moulins de Citran 2012?</div>
             </div>
-            <div className="text-gray-600 text-sm font-outfit pl-2">
-              Vinet produceras i Frankrike, Bordeaux, Haut-Médoc .
-            </div>
+            <div className="text-gray-600 text-sm  pl-2">Vinet produceras i Frankrike, Bordeaux, Haut-Médoc .</div>
           </div>
         </div>
       </div>
@@ -268,19 +242,19 @@ const InformationCards = () => {
   return (
     <div className="mt-8 border-y-2">
       <div className="container mx-auto">
-        <div className="flex gap-4 sm:gap-8 px-4 sm:px-8 py-2 font-outfit items-center justify-center overflow-x-scroll scroll-smooth lg:overflow-x-hidden ">
+        <div className="flex gap-4 sm:gap-8 px-4 sm:px-8 py-2  items-center justify-center overflow-x-scroll scroll-smooth lg:overflow-x-hidden ">
           {[
-            "Hälsoinformation",
-            "Övrig information",
-            "Kundomdömen",
-            "Utmärkelser och betyg",
-            "Försäljning systembolaget",
-            "Frågor och svar",
+            'Hälsoinformation',
+            'Övrig information',
+            'Kundomdömen',
+            'Utmärkelser och betyg',
+            'Försäljning systembolaget',
+            'Frågor och svar',
           ].map((item, index) => (
             <div
               key={index}
               className={`px-2 py-2 w-full sm:w-auto text-center hover:bg-[#f4f1ed] hover:shadow-md cursor-pointer ${
-                selected === index + 1 ? "border-b-2 border-pink-500" : ""
+                selected === index + 1 ? 'border-b-2 border-pink-500' : ''
               }`}
               onClick={() => handleClick(index + 1)}
             >
@@ -315,11 +289,7 @@ const InformationCards = () => {
             </div>
           )}
 
-          {selected === 4 && (
-            <div className="flex flex-col items-center mt-6 justify-center">
-              {QNA()}
-            </div>
-          )}
+          {selected === 4 && <div className="flex flex-col items-center mt-6 justify-center">{QNA()}</div>}
         </div>
       </div>
     </div>

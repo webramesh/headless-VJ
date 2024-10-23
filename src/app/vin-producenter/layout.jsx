@@ -1,8 +1,8 @@
-import Navbar from "../Components/Navbar";
-import Footer from "../Components/Footer";
-import Sidebar from "../Components/Sidebar";
-import SubscriptionForm from "../Components/subscription/SubscriptionForm";
-import CatAccordion from "../[category]/Components/CatAccordion";
+import Navbar from '../Components/Navbar';
+import Footer from '../Components/Footer';
+import Sidebar from '../Components/Sidebar';
+import SubscriptionForm from '../Components/subscription/SubscriptionForm';
+import CatAccordion from '../[category]/Components/CatAccordion';
 
 function layout({ children }) {
   return (

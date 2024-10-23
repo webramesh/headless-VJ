@@ -1,14 +1,11 @@
-import React from "react";
+import React from 'react';
 
 const ContactForm = () => {
   return (
     <div>
       <form>
         <div className="mb-4">
-          <label
-            htmlFor="first_name"
-            className="block mb-2 text-sm font-medium text-gray-900"
-          >
+          <label htmlFor="first_name" className="block mb-2 text-sm font-medium text-gray-900">
             Name
           </label>
 
@@ -21,10 +18,7 @@ const ContactForm = () => {
           />
         </div>
         <div className="mb-4">
-          <label
-            htmlFor="first_name"
-            className="block mb-2 text-sm font-medium text-gray-900"
-          >
+          <label htmlFor="first_name" className="block mb-2 text-sm font-medium text-gray-900">
             Email
           </label>
           <input
@@ -36,10 +30,7 @@ const ContactForm = () => {
           />
         </div>
         <div className="mb-4">
-          <label
-            htmlFor="first_name"
-            className="block mb-2 text-sm font-medium text-gray-900"
-          >
+          <label htmlFor="first_name" className="block mb-2 text-sm font-medium text-gray-900">
             Message
           </label>
           <textarea

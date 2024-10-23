@@ -1,29 +1,25 @@
-import React from "react";
-import AuthorHero from "../author/Components/AuthorHero";
-import Navbar from "../Components/Navbar";
-import ContactForm from "../Components/contact/ContactForm.jsx";
-import ContactInfo from "../Components/contact/ContactInfo.jsx";
-import Map from "../Components/Map";
-import Footer from "../Components/Footer";
-import Subscription from "../Components/Subscription";
+import React from 'react';
+import AuthorHero from '../author/Components/AuthorHero';
+import Navbar from '../Components/Navbar';
+import ContactForm from '../Components/contact/ContactForm.jsx';
+import ContactInfo from '../Components/contact/ContactInfo.jsx';
+import Map from '../Components/Map';
+import Footer from '../Components/Footer';
+import Subscription from '../Components/Subscription';
 
 const page = () => {
   return (
-    <div className="font-outfit">
+    <div className="">
       <Navbar />
       {/* <AuthorHero title={"KONTAKT"} /> */}
       <div className="container mx-auto max-w-6xl">
         <div className="mt-16">
-          <h2 className="text-xl md:text-2xl font-bold  text-center mb-10 ">
-            KONTAKT
-          </h2>
+          <h2 className="text-xl md:text-2xl font-bold  text-center mb-10 ">KONTAKT</h2>
         </div>
         <p className="text-center mb-16 font-thin md:max-w-4xl  text-gray-600 text-sm mx-4 md:mx-auto">
-          För att vinjournalen ska vara en plats där alla vinfrågor besvaras är
-          det viktigt att ni besökare bidrar med kommentarer och frågor. Vi bryr
-          oss om era förslag och är tacksamma för feedback. Vare sig du inte
-          hittar svaret på just din vinfråga eller vill påpeka att du gillar ett
-          visst ämne, hör gärna av dig!
+          För att vinjournalen ska vara en plats där alla vinfrågor besvaras är det viktigt att ni besökare bidrar med
+          kommentarer och frågor. Vi bryr oss om era förslag och är tacksamma för feedback. Vare sig du inte hittar
+          svaret på just din vinfråga eller vill påpeka att du gillar ett visst ämne, hör gärna av dig!
         </p>
         {/* <h2 className="text-xl md:text-2xl font-bold text-center mb-10 ">
           KONTAKTPERSON

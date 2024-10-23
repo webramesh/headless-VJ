@@ -4,7 +4,7 @@ const InformationCardsSkeleton = () => {
   return (
     <div className="mt-8 border-y-2">
       <div className="container mx-auto">
-        <div className="flex gap-4 sm:gap-8 px-4 sm:px-8 py-2 font-outfit items-center justify-center overflow-x-scroll scroll-smooth lg:overflow-x-hidden">
+        <div className="flex gap-4 sm:gap-8 px-4 sm:px-8 py-2  items-center justify-center overflow-x-scroll scroll-smooth lg:overflow-x-hidden">
           {[...Array(6)].map((_, index) => (
             <div key={index} className="h-8 w-32 bg-gray-300 rounded animate-pulse"></div>
           ))}

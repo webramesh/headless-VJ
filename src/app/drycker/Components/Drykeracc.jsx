@@ -1,6 +1,6 @@
-"use client";
+'use client';
 
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState, useRef, useEffect } from 'react';
 
 export default function Accordion() {
   const [openIndex, setOpenIndex] = useState(null);
@@ -38,12 +38,12 @@ export default function Accordion() {
   };
 
   const accordionItems = [
-    { title: "Storlek", id: 1 },
-    { title: "Pris", id: 2 },
-    { title: "Typ", id: 3 },
-    { title: "Ekologisk", id: 4 },
-    { title: "Sortiment", id: 5 },
-    { title: "Hallbar", id: 6 },
+    { title: 'Storlek', id: 1 },
+    { title: 'Pris', id: 2 },
+    { title: 'Typ', id: 3 },
+    { title: 'Ekologisk', id: 4 },
+    { title: 'Sortiment', id: 5 },
+    { title: 'Hallbar', id: 6 },
   ];
 
   const renderRangeSlider = (title, range, setRange) => {
@@ -59,7 +59,7 @@ export default function Accordion() {
       const updateSlider = () => {
         const min = range[0];
         const max = range[1];
-        const maxValue = title === "Pris" ? 85000 : 18000;
+        const maxValue = title === 'Pris' ? 85000 : 18000;
         const percent1 = ((min - 0) / (maxValue - 0)) * 100;
         const percent2 = ((max - 0) / (maxValue - 0)) * 100;
         slider.style.background = `linear-gradient(to right, #e5e7eb ${percent1}%, #ef4444 ${percent1}%, #ef4444 ${percent2}%, #e5e7eb ${percent2}%)`;
@@ -74,7 +74,7 @@ export default function Accordion() {
       const slider = sliderRef.current;
       const rect = slider.getBoundingClientRect();
       const percent = (clientX - rect.left) / rect.width;
-      const maxValue = title === "Pris" ? 85000 : 18000;
+      const maxValue = title === 'Pris' ? 85000 : 18000;
       const value = Math.round(0 + percent * (maxValue - 0));
       setRange((prev) => {
         const newRange = [...prev];
@@ -89,15 +89,15 @@ export default function Accordion() {
         handleThumbMove(index, moveEvent.clientX);
       };
       const handleMouseUp = () => {
-        document.removeEventListener("mousemove", handleMouseMove);
-        document.removeEventListener("mouseup", handleMouseUp);
+        document.removeEventListener('mousemove', handleMouseMove);
+        document.removeEventListener('mouseup', handleMouseUp);
       };
-      document.addEventListener("mousemove", handleMouseMove);
-      document.addEventListener("mouseup", handleMouseUp);
+      document.addEventListener('mousemove', handleMouseMove);
+      document.addEventListener('mouseup', handleMouseUp);
     };
 
     return (
-      <div className="pb-5  flex flex-col sm:flex-row sm:justify-start sm:gap-18 text-sm font-outfit pl-3 ">
+      <div className="pb-5  flex flex-col sm:flex-row sm:justify-start sm:gap-18 text-sm  pl-3 ">
         <div className="w-full max-w-md mx-auto mt-2">
           <div className="flex justify-between mb-4">
             <input
@@ -114,10 +114,7 @@ export default function Accordion() {
             />
           </div>
           <div className="relative h-1 bg-gray-200 rounded-full">
-            <div
-              ref={sliderRef}
-              className="absolute top-0 left-0 right-0 bottom-0 rounded-full"
-            ></div>
+            <div ref={sliderRef} className="absolute top-0 left-0 right-0 bottom-0 rounded-full"></div>
             <div
               ref={minThumbRef}
               className="absolute top-1/2 w-3 h-3 -mt-1.5 -ml-1.5 bg-white border-2 border-red-500 rounded-full cursor-pointer"
@@ -135,9 +132,9 @@ export default function Accordion() {
   };
 
   const renderDropdown = (title, options, setOptions) => (
-    <div className="pb-5  flex flex-col sm:flex-row sm:justify-start sm:gap-24 text-sm font-outfit pl-3 text-red-500">
+    <div className="pb-5  flex flex-col sm:flex-row sm:justify-start sm:gap-24 text-sm  pl-3 text-red-500">
       <div className="w-full max-w-md mx-auto mt-4">
-        {title === "Typ"
+        {title === 'Typ'
           ? Array.from({ length: 4 }, (_, i) => (
               <select
                 key={i}
@@ -185,7 +182,7 @@ export default function Accordion() {
   );
 
   const renderCheckbox = (title, isChecked, setIsChecked) => (
-    <div className="pb-5 flex flex-col sm:flex-row sm:justify-start sm:gap-24 text-sm font-outfit pl-3 text-red-500">
+    <div className="pb-5 flex flex-col sm:flex-row sm:justify-start sm:gap-24 text-sm  pl-3 text-red-500">
       <div className="w-full max-w-md mx-auto mt-4">
         <label className="flex items-center">
           <input
@@ -206,14 +203,12 @@ export default function Accordion() {
         <div key={item.id} className="border-b mb-6 border-slate-200">
           {item.id <= 2 ? (
             <div>
-              <h3 className="font-outfit text-left text-lg  pl-3 py-1">
+              <h3 className=" text-left text-lg  pl-3 py-1">
                 <span>{item.title}</span>
               </h3>
               <div className="max-h-screen">
-                {item.id === 1 &&
-                  renderRangeSlider("Storlek", storlekRange, setStorlekRange)}
-                {item.id === 2 &&
-                  renderRangeSlider("Pris", prisRange, setPrisRange)}
+                {item.id === 1 && renderRangeSlider('Storlek', storlekRange, setStorlekRange)}
+                {item.id === 2 && renderRangeSlider('Pris', prisRange, setPrisRange)}
               </div>
             </div>
           ) : (
@@ -222,12 +217,12 @@ export default function Accordion() {
                 onClick={() => toggleAccordion(item.id)}
                 className="w-full flex justify-between items-center bg-[#F5F5F5] pl-3 py-1"
               >
-                <h3 className="font-outfit text-left text-lg">
+                <h3 className=" text-left text-lg">
                   <span>{item.title}</span>
                 </h3>
                 <span
                   className={`text-slate-800 transition-transform duration-300 transform ${
-                    openIndex === item.id ? "rotate-60" : "rotate-0"
+                    openIndex === item.id ? 'rotate-60' : 'rotate-0'
                   }`}
                 >
                   {openIndex === item.id ? (
@@ -261,22 +256,14 @@ export default function Accordion() {
               </button>
               <div
                 className={`overflow-hidden transition-all duration-300 ease-in-out ${
-                  openIndex === item.id ? "max-h-screen" : "max-h-0"
+                  openIndex === item.id ? 'max-h-screen' : 'max-h-0'
                 }`}
               >
-                <div className="pb-5 bg-[#F5F5F5] flex flex-col sm:flex-row sm:justify-start sm:gap-24 text-sm font-outfit pl-3 text-red-500">
-                  {item.id === 3 &&
-                    renderDropdown("Typ", typOptions, setTypOptions)}
-                  {item.id === 4 &&
-                    renderCheckbox("Ekologisk", isEkologisk, setIsEkologisk)}
-                  {item.id === 5 &&
-                    renderDropdown(
-                      "Sortiment",
-                      sortimentOptions,
-                      setSortimentOptions
-                    )}
-                  {item.id === 6 &&
-                    renderCheckbox("Hallbar", isHallbar, setIsHallbar)}
+                <div className="pb-5 bg-[#F5F5F5] flex flex-col sm:flex-row sm:justify-start sm:gap-24 text-sm  pl-3 text-red-500">
+                  {item.id === 3 && renderDropdown('Typ', typOptions, setTypOptions)}
+                  {item.id === 4 && renderCheckbox('Ekologisk', isEkologisk, setIsEkologisk)}
+                  {item.id === 5 && renderDropdown('Sortiment', sortimentOptions, setSortimentOptions)}
+                  {item.id === 6 && renderCheckbox('Hallbar', isHallbar, setIsHallbar)}
                 </div>
               </div>
             </>

@@ -8,7 +8,7 @@
 // import Footer from "../../../app/Components/Footer";
 
 // const CategoryPost = ({ post }) => (
-   
+
 //   <div>
 //     <h3>{post.title}</h3>
 //     <p>Date: {new Date(post.date).toLocaleDateString("sv-SE")}</p>

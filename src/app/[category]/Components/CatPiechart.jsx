@@ -1,14 +1,7 @@
-import React from "react";
-import {
-  PieChart as RechartsPieChart,
-  Pie,
-  Cell,
-  ResponsiveContainer,
-  Tooltip,
-  Label,
-} from "recharts";
+import React from 'react';
+import { PieChart as RechartsPieChart, Pie, Cell, ResponsiveContainer, Tooltip, Label } from 'recharts';
 
-const COLORS = ["#e51136", "#f199a8"];
+const COLORS = ['#e51136', '#f199a8'];
 
 export default function PieChart({ data, title }) {
   const totalValue = 12;
@@ -29,10 +22,7 @@ export default function PieChart({ data, title }) {
             endAngle={-270}
           >
             {data.map((entry, index) => (
-              <Cell
-                key={`cell-${index}`}
-                fill={COLORS[index % COLORS.length]}
-              />
+              <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
             ))}
             <Label
               content={({ viewBox }) => {
@@ -66,9 +56,7 @@ export default function PieChart({ data, title }) {
           />
         </RechartsPieChart>
       </ResponsiveContainer>
-      <div className="mt-2 text-center font-outfit text-xs md:text-sm lg:text-md">
-        {title}
-      </div>
+      <div className="mt-2 text-center  text-xs md:text-sm lg:text-md">{title}</div>
     </div>
   );
 }

@@ -21,7 +21,7 @@ const ProductSectionSkeleton = () => {
           <div className="h-4 w-full bg-gray-300 rounded animate-pulse mt-2"></div>
           <div className="h-4 w-full bg-gray-300 rounded animate-pulse mt-2"></div>
           <div className="h-4 w-1/4 bg-gray-300 rounded animate-pulse mt-2"></div>
-          
+
           <div className="bg-[#f9d7e1] mt-6 w-full p-4">
             <div className="flex flex-col sm:flex-row w-full justify-between">
               <div className="h-6 w-1/4 bg-gray-300 rounded animate-pulse"></div>
@@ -40,7 +40,7 @@ const ProductSectionSkeleton = () => {
               ))}
             </div>
           </div>
-          
+
           <div className="mt-4 bg-[#f4f1ed] w-full p-8">
             <div className="flex items-center">
               <div className="h-8 w-8 bg-gray-300 rounded-full animate-pulse"></div>
@@ -55,7 +55,7 @@ const ProductSectionSkeleton = () => {
               ))}
             </div>
           </div>
-          
+
           <div className="mt-8">
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-8">
               {[...Array(3)].map((_, index) => (
@@ -63,7 +63,7 @@ const ProductSectionSkeleton = () => {
               ))}
             </div>
           </div>
-          
+
           <div className="mt-8">
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-8">
               {[...Array(3)].map((_, index) => (
@@ -74,11 +74,11 @@ const ProductSectionSkeleton = () => {
               ))}
             </div>
           </div>
-          
+
           <div className="m-8 flex justify-center">
             <div className="h-6 w-1/2 bg-gray-300 rounded animate-pulse"></div>
           </div>
-          
+
           <div className="flex flex-wrap justify-between">
             {[...Array(4)].map((_, index) => (
               <div key={index} className="flex flex-col items-center w-1/2 sm:w-1/4 mb-8 sm:mb-0">

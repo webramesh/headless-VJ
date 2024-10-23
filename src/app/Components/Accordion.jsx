@@ -1,5 +1,5 @@
-"use client";
-import React, { useState } from "react";
+'use client';
+import React, { useState } from 'react';
 
 const Accordion = () => {
   const [openIndex, setOpenIndex] = useState(null);
@@ -16,14 +16,12 @@ const Accordion = () => {
           onClick={() => toggleAccordion(1)}
           className="w-full flex justify-between items-center bg-[#F5F5F5] pl-3 text-slate-800"
         >
-          <h3 className="font-outfit text-left text-black text-sm font-medium">
-            <span>
-              Hur ofta kommer Vinjournalen.se ’s populära nyhetsbrev ut?
-            </span>
+          <h3 className=" text-left text-black text-sm font-medium">
+            <span>Hur ofta kommer Vinjournalen.se ’s populära nyhetsbrev ut?</span>
           </h3>
           <span
             className={`text-slate-800 transition-transform duration-300 transform ${
-              openIndex === 1 ? "rotate-60" : "rotate-0"
+              openIndex === 1 ? 'rotate-60' : 'rotate-0'
             }`}
           >
             {openIndex === 1 ? (
@@ -57,13 +55,12 @@ const Accordion = () => {
         </button>
         <div
           className={`overflow-hidden transition-all duration-300 ease-in-out ${
-            openIndex === 1 ? "max-h-screen" : "max-h-0"
+            openIndex === 1 ? 'max-h-screen' : 'max-h-0'
           }`}
         >
-          <div className="pb-5 text-xs md:text-sm font-outfit pl-3 text-slate-500">
-            Vinjournalen.se skickar ut sitt nyhetsbrev varje fredag, inför
-            storhelger ibland oftare. På så sätt får du tips direkt i din inbox
-            från Vinjournalen.se!
+          <div className="pb-5 text-xs md:text-sm  pl-3 text-slate-500">
+            Vinjournalen.se skickar ut sitt nyhetsbrev varje fredag, inför storhelger ibland oftare. På så sätt får du
+            tips direkt i din inbox från Vinjournalen.se!
           </div>
         </div>
       </div>
@@ -74,15 +71,12 @@ const Accordion = () => {
           onClick={() => toggleAccordion(2)}
           className="w-full flex justify-between items-center bg-[#F5F5F5] pl-3 text-slate-800"
         >
-          <h3 className="font-outfit text-left text-black text-sm font-medium">
-            <span>
-              Skriver Vinjournalen.se även om ekologiska och naturviner samt
-              vegetrarisk/vegansk mat?
-            </span>
+          <h3 className=" text-left text-black text-sm font-medium">
+            <span>Skriver Vinjournalen.se även om ekologiska och naturviner samt vegetrarisk/vegansk mat?</span>
           </h3>
           <span
             className={`text-slate-800 transition-transform duration-300 transform ${
-              openIndex === 2 ? "rotate-60" : "rotate-0"
+              openIndex === 2 ? 'rotate-60' : 'rotate-0'
             }`}
           >
             {openIndex === 2 ? (
@@ -116,13 +110,12 @@ const Accordion = () => {
         </button>
         <div
           className={`overflow-hidden transition-all duration-300 ease-in-out ${
-            openIndex === 2 ? "max-h-screen" : "max-h-0"
+            openIndex === 2 ? 'max-h-screen' : 'max-h-0'
           }`}
         >
-          <div className="pb-5 text-xs md:text-sm font-outfit pl-3 text-slate-500">
-            Vinjournalen.se skickar ut sitt nyhetsbrev varje fredag, inför
-            storhelger ibland oftare. På så sätt får du tips direkt i din inbox
-            från Vinjournalen.se!
+          <div className="pb-5 text-xs md:text-sm  pl-3 text-slate-500">
+            Vinjournalen.se skickar ut sitt nyhetsbrev varje fredag, inför storhelger ibland oftare. På så sätt får du
+            tips direkt i din inbox från Vinjournalen.se!
           </div>
         </div>
       </div>
@@ -133,12 +126,12 @@ const Accordion = () => {
           onClick={() => toggleAccordion(3)}
           className="w-full flex justify-between items-center bg-[#F5F5F5] pl-3 text-slate-800"
         >
-          <h3 className="font-outfit text-black text-left text-sm font-medium">
+          <h3 className=" text-black text-left text-sm font-medium">
             <span>Skriver Vinjournalen.se även om Vinturism?</span>
           </h3>
           <span
             className={`text-slate-800 transition-transform duration-300 transform ${
-              openIndex === 3 ? "rotate-60" : "rotate-0"
+              openIndex === 3 ? 'rotate-60' : 'rotate-0'
             }`}
           >
             {openIndex === 3 ? (
@@ -172,13 +165,12 @@ const Accordion = () => {
         </button>
         <div
           className={`overflow-hidden transition-all duration-300 ease-in-out ${
-            openIndex === 3 ? "max-h-screen" : "max-h-0"
+            openIndex === 3 ? 'max-h-screen' : 'max-h-0'
           }`}
         >
-          <div className="pb-5 text-xs md:text-sm font-outfit pl-3 text-slate-500">
-            Vinjournalen.se skickar ut sitt nyhetsbrev varje fredag, inför
-            storhelger ibland oftare. På så sätt får du tips direkt i din inbox
-            från Vinjournalen.se!
+          <div className="pb-5 text-xs md:text-sm  pl-3 text-slate-500">
+            Vinjournalen.se skickar ut sitt nyhetsbrev varje fredag, inför storhelger ibland oftare. På så sätt får du
+            tips direkt i din inbox från Vinjournalen.se!
           </div>
         </div>
       </div>
@@ -189,12 +181,12 @@ const Accordion = () => {
           onClick={() => toggleAccordion(4)}
           className="w-full flex justify-between items-center bg-[#F5F5F5] pl-3 text-slate-800"
         >
-          <h3 className="font-outfit text-left text-black text-sm font-medium">
+          <h3 className=" text-left text-black text-sm font-medium">
             <span>Hur ofta publicerar Vinjournalen.se nytt innehåll?</span>
           </h3>
           <span
             className={`text-slate-800 transition-transform duration-300 transform ${
-              openIndex === 4 ? "rotate-60" : "rotate-0"
+              openIndex === 4 ? 'rotate-60' : 'rotate-0'
             }`}
           >
             {openIndex === 4 ? (
@@ -228,13 +220,12 @@ const Accordion = () => {
         </button>
         <div
           className={`overflow-hidden transition-all duration-300 ease-in-out ${
-            openIndex === 4 ? "max-h-screen" : "max-h-0"
+            openIndex === 4 ? 'max-h-screen' : 'max-h-0'
           }`}
         >
-          <div className="pb-5 text-xs md:text-sm font-outfit pl-3 text-slate-500">
-            Vinjournalen.se skickar ut sitt nyhetsbrev varje fredag, inför
-            storhelger ibland oftare. På så sätt får du tips direkt i din inbox
-            från Vinjournalen.se!
+          <div className="pb-5 text-xs md:text-sm  pl-3 text-slate-500">
+            Vinjournalen.se skickar ut sitt nyhetsbrev varje fredag, inför storhelger ibland oftare. På så sätt får du
+            tips direkt i din inbox från Vinjournalen.se!
           </div>
         </div>
       </div>
@@ -245,15 +236,12 @@ const Accordion = () => {
           onClick={() => toggleAccordion(5)}
           className="w-full flex justify-between items-center bg-[#F5F5F5] pl-3 text-slate-800"
         >
-          <h3 className="font-outfit text-left text-black text-sm font-medium">
-            <span>
-              Är Vinjournalen.se ett passande magasin om jag vill lära mig om
-              vin?
-            </span>
+          <h3 className=" text-left text-black text-sm font-medium">
+            <span>Är Vinjournalen.se ett passande magasin om jag vill lära mig om vin?</span>
           </h3>
           <span
             className={`text-slate-800 transition-transform duration-300 transform ${
-              openIndex === 5 ? "rotate-60" : "rotate-0"
+              openIndex === 5 ? 'rotate-60' : 'rotate-0'
             }`}
           >
             {openIndex === 5 ? (
@@ -287,13 +275,12 @@ const Accordion = () => {
         </button>
         <div
           className={`overflow-hidden transition-all duration-300 ease-in-out ${
-            openIndex === 5 ? "max-h-screen" : "max-h-0"
+            openIndex === 5 ? 'max-h-screen' : 'max-h-0'
           }`}
         >
-          <div className="pb-5 text-xs md:text-sm font-outfit pl-3 text-slate-500">
-            Vinjournalen.se skickar ut sitt nyhetsbrev varje fredag, inför
-            storhelger ibland oftare. På så sätt får du tips direkt i din inbox
-            från Vinjournalen.se!
+          <div className="pb-5 text-xs md:text-sm  pl-3 text-slate-500">
+            Vinjournalen.se skickar ut sitt nyhetsbrev varje fredag, inför storhelger ibland oftare. På så sätt får du
+            tips direkt i din inbox från Vinjournalen.se!
           </div>
         </div>
       </div>
@@ -304,12 +291,12 @@ const Accordion = () => {
           onClick={() => toggleAccordion(6)}
           className="w-full flex justify-between items-center bg-[#F5F5F5] pl-3 text-slate-800"
         >
-          <h3 className="font-outfit text-left text-black text-sm font-medium">
+          <h3 className=" text-left text-black text-sm font-medium">
             <span>Vad skriver Vinjournalen.se om?</span>
           </h3>
           <span
             className={`text-slate-800 transition-transform duration-300 transform ${
-              openIndex === 6 ? "rotate-60" : "rotate-0"
+              openIndex === 6 ? 'rotate-60' : 'rotate-0'
             }`}
           >
             {openIndex === 6 ? (
@@ -343,13 +330,12 @@ const Accordion = () => {
         </button>
         <div
           className={`overflow-hidden transition-all duration-300 ease-in-out ${
-            openIndex === 6 ? "max-h-screen" : "max-h-0"
+            openIndex === 6 ? 'max-h-screen' : 'max-h-0'
           }`}
         >
-          <div className="pb-5 text-xs md:text-sm font-outfit pl-3 text-slate-500">
-            Vinjournalen.se skickar ut sitt nyhetsbrev varje fredag, inför
-            storhelger ibland oftare. På så sätt får du tips direkt i din inbox
-            från Vinjournalen.se!
+          <div className="pb-5 text-xs md:text-sm  pl-3 text-slate-500">
+            Vinjournalen.se skickar ut sitt nyhetsbrev varje fredag, inför storhelger ibland oftare. På så sätt får du
+            tips direkt i din inbox från Vinjournalen.se!
           </div>
         </div>
       </div>
@@ -359,12 +345,12 @@ const Accordion = () => {
           onClick={() => toggleAccordion(7)}
           className="w-full flex justify-between items-center bg-[#F5F5F5] pl-3 text-slate-800"
         >
-          <h3 className="font-outfit text-left text-black text-sm font-medium">
+          <h3 className=" text-left text-black text-sm font-medium">
             <span>Skriver Vinjournalen.se något om Vinprovningar?</span>
           </h3>
           <span
             className={`text-slate-800 transition-transform duration-300 transform ${
-              openIndex === 7 ? "rotate-60" : "rotate-0"
+              openIndex === 7 ? 'rotate-60' : 'rotate-0'
             }`}
           >
             {openIndex === 7 ? (
@@ -398,13 +384,12 @@ const Accordion = () => {
         </button>
         <div
           className={`overflow-hidden transition-all duration-300 ease-in-out ${
-            openIndex === 7 ? "max-h-screen" : "max-h-0"
+            openIndex === 7 ? 'max-h-screen' : 'max-h-0'
           }`}
         >
-          <div className="pb-5 text-xs md:text-sm font-outfit pl-3 text-slate-500">
-            Vinjournalen.se skickar ut sitt nyhetsbrev varje fredag, inför
-            storhelger ibland oftare. På så sätt får du tips direkt i din inbox
-            från Vinjournalen.se!
+          <div className="pb-5 text-xs md:text-sm  pl-3 text-slate-500">
+            Vinjournalen.se skickar ut sitt nyhetsbrev varje fredag, inför storhelger ibland oftare. På så sätt får du
+            tips direkt i din inbox från Vinjournalen.se!
           </div>
         </div>
       </div>
@@ -414,12 +399,12 @@ const Accordion = () => {
           onClick={() => toggleAccordion(8)}
           className="w-full flex justify-between items-center bg-[#F5F5F5] pl-3 text-slate-800"
         >
-          <h3 className="font-outfit text-left text-black text-sm font-medium">
+          <h3 className=" text-left text-black text-sm font-medium">
             <span>Har ni någon guide om vinimportörer och vinproducenter?</span>
           </h3>
           <span
             className={`text-slate-800 transition-transform duration-300 transform ${
-              openIndex === 8 ? "rotate-60" : "rotate-0"
+              openIndex === 8 ? 'rotate-60' : 'rotate-0'
             }`}
           >
             {openIndex === 8 ? (
@@ -453,13 +438,12 @@ const Accordion = () => {
         </button>
         <div
           className={`overflow-hidden transition-all duration-300 ease-in-out ${
-            openIndex === 8 ? "max-h-screen" : "max-h-0"
+            openIndex === 8 ? 'max-h-screen' : 'max-h-0'
           }`}
         >
-          <div className="pb-5 text-xs md:text-sm font-outfit pl-3 text-slate-500">
-            Vinjournalen.se skickar ut sitt nyhetsbrev varje fredag, inför
-            storhelger ibland oftare. På så sätt får du tips direkt i din inbox
-            från Vinjournalen.se!
+          <div className="pb-5 text-xs md:text-sm  pl-3 text-slate-500">
+            Vinjournalen.se skickar ut sitt nyhetsbrev varje fredag, inför storhelger ibland oftare. På så sätt får du
+            tips direkt i din inbox från Vinjournalen.se!
           </div>
         </div>
       </div>

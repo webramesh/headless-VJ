@@ -1,16 +1,12 @@
-import Map from "../Components/Map";
-import Pagination from "../Components/Pagination";
-import ProducenterCard from "../Components/producenterCard/ProducenterCard";
+import Map from '../Components/Map';
+import Pagination from '../Components/Pagination';
+import ProducenterCard from '../Components/producenterCard/ProducenterCard';
 
 function page() {
   return (
     <>
-      <div className="font-outfit text-xs lg:text-sm flex gap-1 my-2">
-        Hem » Producenter
-      </div>
-      <h1 className="text-2xl lg:text-3xl font-outfit mb-4 font-bold uppercase ">
-        Producenter
-      </h1>
+      <div className=" text-xs lg:text-sm flex gap-1 my-2">Hem » Producenter</div>
+      <h1 className="text-2xl lg:text-3xl  mb-4 font-bold uppercase ">Producenter</h1>
       <div className="h-96">
         <Map />
       </div>

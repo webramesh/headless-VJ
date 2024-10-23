@@ -1,14 +1,14 @@
-import React from "react";
-import Image from "next/image";
-import Link from "next/link";
-import grape from "@/public/grape.png";
-import corkscrew from "@/public/corkscrew.png";
-import food1 from "@/public/food1.png";
-import CountryProduce from "../Components/CountryProduce";
-import CatAccordion from "../../../app/[category]/Components/CatAccordion";
-import SenasteNytt from "../../../app/Components/SenasteNytt";
-import WineTourism from "../../../app/Components/WineTourism";
-import AuthorHero from "../../author/Components/AuthorHero";
+import React from 'react';
+import Image from 'next/image';
+import Link from 'next/link';
+import grape from '@/public/grape.png';
+import corkscrew from '@/public/corkscrew.png';
+import food1 from '@/public/food1.png';
+import CountryProduce from '../Components/CountryProduce';
+import CatAccordion from '../../../app/[category]/Components/CatAccordion';
+import SenasteNytt from '../../../app/Components/SenasteNytt';
+import WineTourism from '../../../app/Components/WineTourism';
+import AuthorHero from '../../author/Components/AuthorHero';
 
 const AtlasContent = () => {
   return (
@@ -20,10 +20,8 @@ const AtlasContent = () => {
 
           <div className="w-full mt-8 bg-[#eb7272]">
             <div className="p-4 lg:p-6">
-              <h1 className="font-outfit text-white text-xl lg:text-2xl xl:text-4xl mb-4">
-                Vill du ha vårt nyhetsbrev?
-              </h1>
-              <h3 className="font-outfit text-white text-sm lg:text-base mb-6">
+              <h1 className=" text-white text-xl lg:text-2xl xl:text-4xl mb-4">Vill du ha vårt nyhetsbrev?</h1>
+              <h3 className=" text-white text-sm lg:text-base mb-6">
                 Få handplockat innehåll i vårt nyhetsbrev, det är gratis.
               </h3>
               <form className="space-y-4">
@@ -41,16 +39,13 @@ const AtlasContent = () => {
                 </div>
                 <div className="flex items-center">
                   <input type="checkbox" id="privacy" className="mr-4" />
-                  <label
-                    htmlFor="privacy"
-                    className="text-white text-xs lg:text-sm"
-                  >
+                  <label htmlFor="privacy" className="text-white text-xs lg:text-sm">
                     Jag godkänner integritetspolicy
                   </label>
                 </div>
                 <button
                   type="submit"
-                  className="rounded-full font-outfit text-sm py-2 px-6 bg-red-600 text-white hover:bg-red-700 transition-colors"
+                  className="rounded-full  text-sm py-2 px-6 bg-red-600 text-white hover:bg-red-700 transition-colors"
                 >
                   Ja, skicka till mig!
                 </button>
@@ -66,13 +61,7 @@ const AtlasContent = () => {
               <div className="space-y-8">
                 <div className="flex flex-col items-center gap-4">
                   <div className="w-12 h-12 flex-shrink-0">
-                    <Image
-                      src={grape}
-                      alt="Grape"
-                      width={64}
-                      height={64}
-                      className="object-cover w-full h-full"
-                    />
+                    <Image src={grape} alt="Grape" width={64} height={64} className="object-cover w-full h-full" />
                   </div>
                   <div className="text-center">
                     <div className="text-sm font-semibold">ETT VINORD</div>
@@ -99,27 +88,18 @@ const AtlasContent = () => {
             </div>
 
             <div className="my-8 grid gap-8 sm:grid-cols-2 lg:grid-cols-1">
-              {["/link1", "/link2", "/link3"].map((link, index) => (
+              {['/link1', '/link2', '/link3'].map((link, index) => (
                 <Link href={link} key={index}>
                   <div className="cursor-pointer hover:shadow-lg transition-shadow">
-                    <Image
-                      src={food1}
-                      alt={`Food ${index + 1}`}
-                      className="object-cover w-full h-48"
-                    />
+                    <Image src={food1} alt={`Food ${index + 1}`} className="object-cover w-full h-48" />
                     <div className="p-4 bg-[#f5f5f5]">
-                      <h3 className="font-outfit font-medium text-black text-lg">
+                      <h3 className=" font-medium text-black text-lg">
                         Ekologiskt och hållbart vin till mer grön mat?
                       </h3>
-                      <p className="mt-2 font-outfit text-gray-900 text-xs">
-                        8 augusti, 2024
-                      </p>
-                      <p className="text-[#694848] text-xs font-outfit mt-2">
-                        Jeanette Gardner
-                      </p>
-                      <p className="font-outfit text-xs text-gray-900 font-extralight mt-2 leading-relaxed">
-                        Är du alltid på jakt efter ekologiskt och hållbart vin
-                        och kanske vill ändra din mat till...
+                      <p className="mt-2  text-gray-900 text-xs">8 augusti, 2024</p>
+                      <p className="text-[#694848] text-xs  mt-2">Jeanette Gardner</p>
+                      <p className=" text-xs text-gray-900 font-extralight mt-2 leading-relaxed">
+                        Är du alltid på jakt efter ekologiskt och hållbart vin och kanske vill ändra din mat till...
                       </p>
                     </div>
                   </div>

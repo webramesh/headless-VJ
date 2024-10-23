@@ -1,5 +1,5 @@
-import Map from "../../Components/Map";
-import Content from "../Components/Content";
+import Map from '../../Components/Map';
+import Content from '../Components/Content';
 
 export default function page({ params }) {
   return (

@@ -11,44 +11,44 @@ const __dirname = path.dirname(__filename);
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-    webpack: config => {
-        config.resolve.alias['@'] = path.resolve(__dirname);
-        return config;
-    },
-    images: {
-        remotePatterns: [
-            {
-                protocol: 'https',
-                hostname: '**',
-            },
-        ],
-    },
-    async redirects() {
-        return [
-            // for vin producenter
-            {
-                source: '/producenter',
-                destination: '/vin-producenter',
-                permanent: true,
-            },
-            {
-                source: '/vin-producenter/page',
-                destination: '/vin-producenter',
-                permanent: true,
-            },
-            {
-                source: '/vin-producenter/page/1',
-                destination: '/vin-producenter',
-                permanent: true,
-            },
-            // for vin regioner
-            {
-                source: '/regioner',
-                destination: '/vin-regioner',
-                permanent: true,
-            },
-        ];
-    },
+  webpack: (config) => {
+    config.resolve.alias['@'] = path.resolve(__dirname);
+    return config;
+  },
+  images: {
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: '**',
+      },
+    ],
+  },
+  async redirects() {
+    return [
+      // for vin producenter
+      {
+        source: '/producenter',
+        destination: '/vin-producenter',
+        permanent: true,
+      },
+      {
+        source: '/vin-producenter/page',
+        destination: '/vin-producenter',
+        permanent: true,
+      },
+      {
+        source: '/vin-producenter/page/1',
+        destination: '/vin-producenter',
+        permanent: true,
+      },
+      // for vin regioner
+      {
+        source: '/regioner',
+        destination: '/vin-regioner',
+        permanent: true,
+      },
+    ];
+  },
 };
 
 export default nextConfig;

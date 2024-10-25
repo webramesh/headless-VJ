@@ -2,7 +2,7 @@
 
 import React from 'react';
 import Head from 'next/head';
-import OmOssContent from '../Components/omossContent';
+import OmOssContent from './Components/omossContent';
 
 export default function Home() {
   return (

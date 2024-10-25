@@ -2,7 +2,7 @@
 
 import React from 'react';
 import Head from 'next/head';
-import Content from '../Components/Content';
+import Content from './Components/Content';
 
 export default function Home() {
   return (

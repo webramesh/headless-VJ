@@ -82,3 +82,52 @@ export async function getMainMenu() {
     return null;
   }
 }
+
+export async function getFooterMenu() {
+  const query = gql`
+    query FetchFooterMenu {
+      menus(where: { location: FOOTER }) {
+        nodes {
+          menuItems {
+            nodes {
+              id
+              path
+              label
+            }
+          }
+        }
+      }
+    }
+  `;
+
+  try {
+    const response = await client.query({ query });
+
+    if (!response) {
+      throw new Error('No response received from the GraphQL endpoint');
+    }
+
+    if (!response.data) {
+      throw new Error('Response does not contain a data property');
+    }
+
+    if (!response.data.menus || !response.data.menus.nodes || response.data.menus.nodes.length === 0) {
+      throw new Error('No menu data found in the response');
+    }
+
+    return response.data.menus.nodes[0].menuItems.nodes;
+  } catch (error) {
+    console.error('Error fetching menu:', error);
+    console.error('Error details:', {
+      message: error.message,
+      networkError: error.networkError
+        ? {
+            message: error.networkError.message,
+            stack: error.networkError.stack,
+          }
+        : null,
+      graphQLErrors: error.graphQLErrors,
+    });
+    return null;
+  }
+}

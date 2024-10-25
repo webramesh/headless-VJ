@@ -5,6 +5,9 @@ import NyheterContent from '../Components/NyheterContent';
 import Footer from '../../../app/Components/Footer';
 import { getAllNyheter, getAllNyheterBySlug } from '../../../lib/api/newsApi';
 
+
+export const revalidate = 60; 
+
 // This is an async Server Component
 export default async function Page({ params }) {
   // Get the slug from the URL parameters

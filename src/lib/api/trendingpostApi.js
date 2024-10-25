@@ -17,6 +17,12 @@ export async function getAllTrendingPosts() {
             excerpt
             date
             slug
+              categories {
+              nodes {
+                name
+                slug
+              }
+            }
             featuredImage {
               node {
                 altText

@@ -1,11 +1,16 @@
+'use client'
 import React from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 
-const Trending = ({ title = '', subtitle = '', posts = [] }) => {
+const Trending = ({ title = '', subtitle = '', trendingPosts = [] }) => {
 
-  if (!Array.isArray(posts)) {
-    console.warn('Posts prop is not an array:', posts);
+  // console.log(posts[0]?.categories?.nodes[0]?.slug, 'trending posts')
+
+  // href={`/${posts[0].categories?.nodes[0]?.slug || 'uncategorized'}/${posts[0].slug}`}
+
+  if (!Array.isArray(trendingPosts)) {
+    console.warn('Posts prop is not an array:', trendingPosts);
     return (
       <div className="container mx-auto mt-10 p-2">
         <div className="font-outfit text-center font-extralight text-red-500">
@@ -51,9 +56,10 @@ const Trending = ({ title = '', subtitle = '', posts = [] }) => {
       </div>
       
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-14 mt-8">
-        {posts.map((post) => (
+        {trendingPosts.map((post) => (
           <Link
-            href={`/trending/${post?.slug || '#'}`}
+            // href={`/trending/${post?.slug || '#'}`}
+            href={`/${post?.categories?.nodes[0]?.slug || 'uncategorized'}/${trendingPosts[0].slug}`}
             key={post?.id || Math.random()}
             className="flex"
           >

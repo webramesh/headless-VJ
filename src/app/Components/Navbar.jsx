@@ -21,7 +21,10 @@ const CustomMenuItem = ({ href, children }) => {
   );
 };
 
-export default function Navbar() {
+export default function Navbar({ menuData }) {
+  // const menu = menuData?.menuItems?.edges;
+  const menu = menuData;
+
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const dropdownRef = useRef(null);
@@ -86,30 +89,46 @@ export default function Navbar() {
               <Searchbar />
             </div>
             <div className="mb-16"></div>
-            <Link href="/VinMat" onClick={closeMenu} className="mb-4 text-lg">
-              Vin & Mat
-            </Link>
-            <Link href="/Vinfakta" onClick={closeMenu} className="mb-4 text-lg">
-              Vinfakta
-            </Link>
-            <Link href="/Vintips" onClick={closeMenu} className="mb-4 text-lg">
-              Vintips
-            </Link>
-            <Link href="/Vinskola" onClick={closeMenu} className="mb-4 text-lg">
-              Vinskola
-            </Link>
-            <Link href="/Tester" onClick={closeMenu} className="mb-4 text-lg">
-              Tester
-            </Link>
-            <Link href="/ekologiskt" onClick={closeMenu} className="mb-4 text-lg">
-              Ekologiskt
-            </Link>
-            <Link href="/Vinpanatet" onClick={closeMenu} className="mb-4 text-lg">
-              Vin på nätet
-            </Link>
-            <Link href="/Vinguide" onClick={closeMenu} className="mb-4 text-lg">
-              Vinguide
-            </Link>
+
+            {menu?.menuItems?.edges?.reduce((acc, { node }) => {
+              // Check if this node is a child of any other node
+              const isSubmenuItem = menu?.menuItems?.edges?.some(
+                ({ node: parentNode }) =>
+                  parentNode.childItems &&
+                  parentNode.childItems.edges.some(({ node: childNode }) => childNode.id === node.id)
+              );
+
+              // Only render if it's not a submenu item of another menu
+              if (!isSubmenuItem) {
+                acc.push(
+                  <div key={node.id} className="relative group">
+                    <Link onClick={closeMenu} href={node.path || '#'} className="flex items-center justify-between">
+                      {node?.label}
+                      {node?.childItems && node?.childItems?.edges && node?.childItems?.edges?.length > 0 && (
+                        <ChevronDownIcon className="-mr-1 ml-2 h-5 w-5" aria-hidden="true" />
+                      )}
+                    </Link>
+
+                    {node.childItems && node.childItems.edges && node.childItems.edges.length > 0 && (
+                      <div className="absolute hidden  group-hover:block bottom-0 right-0 z-10 pt-2 w-56 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
+                        {node.childItems.edges.map(({ node: childNode }) => (
+                          <div key={childNode.id}>
+                            <Link
+                              href={childNode.path || '#'}
+                              onClick={closeMenu}
+                              className="block px-4 py-2 hover:bg-gray-200"
+                            >
+                              {childNode.label}
+                            </Link>
+                          </div>
+                        ))}
+                      </div>
+                    )}
+                  </div>
+                );
+              }
+              return acc;
+            }, [])}
           </div>
           <div className="flex justify-center w-full ">
             <hr className="w-[75%] border-t-1 mt-16 border-[#CCC]" />
@@ -126,50 +145,49 @@ export default function Navbar() {
 
         {/* Desktop View */}
         <div className="hidden  lg:text-sm xl:text-lg lg:flex lg:justify-center lg:items-center lg:space-x-2 xl:space-x-4">
-          <Link href="/VinMat" className="hover:text-gray-600">
-            Vin & Mat
-          </Link>
-          <Link href="/Vinfakta" className="hover:text-gray-600">
-            Vinfakta
-          </Link>
-          <Link href="/Vintips" className="hover:text-gray-600">
-            Vintips
-          </Link>
-          <Link href="/Vinskola" className="hover:text-gray-600">
-            Vinskola
-          </Link>
-          <Link href="/Tester" className="hover:text-gray-600">
-            Tester
-          </Link>
-          <Link href="/Ekologiskt" className="hover:text-gray-600">
-            Ekologiskt
-          </Link>
-          <Link href="/Vinpanatet" className="hover:text-gray-600">
-            Vin på nätet
-          </Link>
-          <div
-            className="relative"
-            onMouseEnter={() => setIsDropdownOpen(true)}
-            onMouseLeave={() => setIsDropdownOpen(false)}
-            ref={dropdownRef}
-          >
-            <button className="inline-flex w-full justify-center items-center hover:text-gray-600">
-              Vinguide
-              <ChevronDownIcon className="-mr-1 ml-2 h-5 w-5" aria-hidden="true" />
-            </button>
-            {isDropdownOpen && (
-              <div className="absolute right-0 z-10 mt-2 w-56 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
-                <div className="py-1">
-                  <CustomMenuItem href="/Vinguide/RottVin">Rott Vin</CustomMenuItem>
-                  <CustomMenuItem href="/Vinguide/VittVin">Vitt Vin</CustomMenuItem>
-                  <CustomMenuItem href="/Vinguide/RoseVin">Rose Vin</CustomMenuItem>
-                  <CustomMenuItem href="/Vinguide/DessertVin">Dessert Vin</CustomMenuItem>
-                  <CustomMenuItem href="/Vinguide/Mousserande">Mousserande Vin</CustomMenuItem>
-                  <CustomMenuItem href="/Vinguide/ovrigtvin">Ovrigt Vin</CustomMenuItem>
+          {/* <div className="flex justify-between items-center"> */}
+
+          {/* <div className="hidden  lg:text-sm xl:text-lg lg:flex lg:justify-center lg:items-center lg:space-x-2 xl:space-x-4"> */}
+          {menu?.menuItems?.edges?.reduce((acc, { node }) => {
+            // Check if this node is a child of any other node
+            const isSubmenuItem = menu?.menuItems?.edges.some(
+              ({ node: parentNode }) =>
+                parentNode?.childItems &&
+                parentNode?.childItems.edges.some(({ node: childNode }) => childNode?.id === node.id)
+            );
+
+            // Only render if it's not a submenu item of another menu
+            if (!isSubmenuItem) {
+              acc.push(
+                <div key={node.id} className="relative group">
+                  <Link onClick={closeMenu} href={node.path || '#'} className="flex items-center justify-between">
+                    {node?.label}
+                    {node?.childItems && node?.childItems?.edges && node?.childItems?.edges?.length > 0 && (
+                      <ChevronDownIcon className="-mr-1 ml-2 h-5 w-5" aria-hidden="true" />
+                    )}
+                  </Link>
+
+                  {node?.childItems && node?.childItems?.edges && node?.childItems?.edges?.length > 0 && (
+                    <div className="absolute hidden  group-hover:block right-0 z-10 pt-2 w-56 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
+                      {node.childItems.edges.map(({ node: childNode }) => (
+                        <div key={childNode.id}>
+                          <Link
+                            href={childNode.path || '#'}
+                            onClick={closeMenu}
+                            className="block px-4 py-2 hover:bg-gray-200"
+                          >
+                            {childNode.label}
+                          </Link>
+                        </div>
+                      ))}
+                    </div>
+                  )}
                 </div>
-              </div>
-            )}
-          </div>
+              );
+            }
+            return acc;
+          }, [])}
+          {/* ----------------------- */}
         </div>
 
         {/* Searchbar for Desktop */}

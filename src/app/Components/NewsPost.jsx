@@ -43,7 +43,7 @@ const NewsPost = ({ title = '', subtitle = '', posts = [] }) => {
   
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-14 mt-8">
           {posts.map((post) => (
-            <Link href={`/article/${post?.slug || '#'}`} key={post?.id || Math.random()} className="flex">
+            <Link href={`/nyheter/${post?.slug || '#'}`} key={post?.id || Math.random()} className="flex">
               <div className="flex flex-col cursor-pointer hover:shadow-lg transition-shadow w-full">
                 <div className="p-4 bg-[#f5f5f5] flex flex-col flex-grow">
                   <h3 className="font-outfit font-medium text-black text-lg">{post?.title || 'Untitled'}</h3>

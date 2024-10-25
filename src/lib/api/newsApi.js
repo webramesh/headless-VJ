@@ -44,13 +44,7 @@ export async function getAllNyheterBySlug(slug) {
             id
             title
             content
-            date
             slug
-            author {
-              node {
-                name
-              }
-            }
           }
         }
       `,

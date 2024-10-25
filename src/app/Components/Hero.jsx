@@ -5,7 +5,6 @@ import { format } from 'date-fns';
 import { formatEmbeddedContent } from '@/src/utils/utils';
 
 const Hero = ({ posts }) => {
-  console.log(posts);
   return (
     <div className="container mt-6 mx-auto p-2">
       <div className="flex flex-col lg:flex-row gap-8 lg:gap-12">

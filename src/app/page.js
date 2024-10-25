@@ -14,7 +14,6 @@ import TrendingPosts from './Components/posts/TrendingPosts';
 const HomePage = async () => {
   const [posts, popularPosts] = await Promise.all([getHomePagePosts(), getPopularPosts()]);
 
-
   return (
     <div>
       <Suspense fallback={<Loading />}>
@@ -22,7 +21,7 @@ const HomePage = async () => {
           <title>Home Page</title>
           <meta name="description" content="This is the home page of my Next.js app" />
         </Head>
-        <Navbar />
+        {/* <Navbar /> */}
 
         <Hero posts={posts} />
 

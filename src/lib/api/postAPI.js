@@ -1,6 +1,6 @@
 // post api
 import { ApolloClient, InMemoryCache, gql } from '@apollo/client';
-
+console.log(process.env.SITE_URL_ENDPOINT, 'from post')
 const client = new ApolloClient({
   uri: process.env.SITE_URL_ENDPOINT,
   cache: new InMemoryCache(),

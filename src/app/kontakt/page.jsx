@@ -1,5 +1,4 @@
 import React from 'react';
-import Navbar from '../Components/Navbar';
 import ContactForm from '../Components/contact/ContactForm.jsx';
 import ContactInfo from '../Components/contact/ContactInfo.jsx';
 import Map from '../Components/Map';
@@ -8,7 +7,6 @@ import Subscription from '../Components/Subscription';
 const page = () => {
   return (
     <div className="">
-      <Navbar />
       {/* <AuthorHero title={"KONTAKT"} /> */}
       <div className="container mx-auto max-w-6xl">
         <div className="mt-16">

@@ -1,6 +1,5 @@
 import SenasteNytt from '../../app/Components/SenasteNytt';
 import WineTourism from '../../app/Components/WineTourism';
-import Navbar from '../Components/Navbar';
 import Card from '../Components/Card';
 import AuthorHero from '../Components/AuthorHero';
 
@@ -12,7 +11,6 @@ export const metadata = {
 export default function newsletterSignup() {
   return (
     <div>
-      <Navbar />
       <AuthorHero title="Bekräftelse registrering" />
       <div className="container mx-auto flex flex-col w-full py-10 px-4 md:px-8 lg:px-12">
         <h2 className="mb-6 text-2xl">Registreringen lyckades!</h2>

@@ -1,7 +1,6 @@
 import SenasteNytt from '../../../app/Components/SenasteNytt';
 import WineTourism from '../../../app/Components/WineTourism';
 import Card from '../../Components/Card';
-import Navbar from '../../Components/Navbar';
 import Subscription from '../../Components/Subscription';
 import AuthorHero from '../../Components/AuthorHero';
 import CircleImage from '../Components/CircleImage';
@@ -9,7 +8,6 @@ import CircleImage from '../Components/CircleImage';
 export default function Author() {
   return (
     <div>
-      <Navbar />
       <AuthorHero title="Author" />
       <CircleImage />
       <Card title="FROM AUTHOR" subtitle="Read more articles from Jeanetter Gardner" />

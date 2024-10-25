@@ -1,6 +1,5 @@
 import React from 'react';
 import SubscriptionForm from '../Components/subscription/SubscriptionForm';
-import Navbar from '../Components/Navbar.jsx';
 import RegionalCardItem from '../Components/regionalCard/RegionalCardItem.jsx';
 import Map from '../Components/Map.jsx';
 import Sidebar from '../Components/Sidebar.jsx';
@@ -9,8 +8,6 @@ import CatAccordion from '../[category]/Components/CatAccordion.jsx';
 const page = () => {
   return (
     <div>
-      <Navbar />
-
       <div className="container mx-auto md:max-w-6xl mt-5">
         <h3 className="mb-5">Breadcrump</h3>
         <div className="block md:grid md:grid-cols-3   md:gap-8">

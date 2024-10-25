@@ -49,39 +49,7 @@ export async function getHomePagePosts() {
   }
 }
 
-export async function getPopularPosts() {
-  try {
-    const { data } = await client.query({
-      query: gql`
-        query PopularPosts {
-          popularPosts(first: 6) {
-            id
-            title
-            date
-            visitCount
-            slug
-            author {
-              node {
-                name
-              }
-            }
-            featuredImage {
-              node {
-                mediaItemUrl
-              }
-            }
-            excerpt
-          }
-        }
-      `,
-    });
 
-    return data.popularPosts;
-  } catch (error) {
-    console.error('Error fetching popular posts:', error);
-    return [];
-  }
-}
 
 export async function getPostBySlug(slug) {
   try {

@@ -13,7 +13,7 @@ const Hero = ({ posts }) => {
         {/* <Link href={`/article/${posts[0].slug}`} className="w-full lg:w-1/2 bg-[#f5f5f5] overflow-hidden"> */}
         <Link
           // href={`/${posts[0].categories.nodes[0].slug}/${posts[0].slug}`}
-          href={`/${posts[0].categories.nodes[0]?.slug || 'uncategorized'}/${posts[0].slug}`}
+          href={`/${posts[0].categories?.nodes[0]?.slug || 'uncategorized'}/${posts[0].slug}`}
           className="w-full lg:w-1/2 bg-[#f5f5f5] overflow-hidden"
         >
           <div className="relative w-full">
@@ -51,7 +51,7 @@ const Hero = ({ posts }) => {
                 {/* <Link href={`/article/${post.slug}`}> */}
                 <Link
                   // href={`/${post.categories.nodes[0].slug}/${post.slug}`}
-                  href={`/${post.categories.nodes[0]?.slug || 'uncategorized'}/${post.slug}`}
+                  href={`/${post?.categories?.nodes[0]?.slug || 'uncategorized'}/${post.slug}`}
                 >
                   <div className="flex flex-col sm:flex-row gap-4 bg-[#f5f5f5] overflow-hidden">
                     <div className="relative h-48 sm:h-auto sm:w-1/3">

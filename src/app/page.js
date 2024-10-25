@@ -13,6 +13,9 @@ import { getAllWineCategories } from '../lib/api/wineApi';
 import NewsPost from './Components/NewsPost';
 import { getHomePagePosts, getPopularPosts } from '../lib/api/postAPI';
 
+
+export const revalidate = 60; 
+
 export default async function Home() {
   const [nyheter, trendingPosts, wineCategories] = await Promise.all([
     getAllNyheter(),

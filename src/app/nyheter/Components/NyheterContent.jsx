@@ -4,6 +4,7 @@ import React from 'react';
 import Image from 'next/image';
 import CatAccordion from '../../[category]/Components/CatAccordion';
 
+export const revalidate = 60; 
 const NyheterContent = ({ nyhet }) => {
   if (!nyhet) {
     return <div className="container mx-auto p-4">Loading...</div>;

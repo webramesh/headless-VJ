@@ -1,6 +1,8 @@
 import React from 'react';
 import Link from 'next/link';
 
+
+export const revalidate = 60; 
 const NewsPost = ({ title = '', subtitle = '', nyheter = [] }) => {
   if (!Array.isArray(nyheter)) {
     console.warn('nyheter prop is not an array:', nyheter);

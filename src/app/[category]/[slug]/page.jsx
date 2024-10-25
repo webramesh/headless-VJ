@@ -5,7 +5,6 @@ import Head from 'next/head';
 import Navbar from '../../Components/Navbar';
 import CategoryHero from '../Components/CatagoryHero';
 import Title from '../Components/Title';
-import Footer from '../../Components/Footer';
 
 export default function Home() {
   return (
@@ -17,7 +16,6 @@ export default function Home() {
       <Navbar />
       <Title />
       <CategoryHero />
-      <Footer />
     </>
   );
 }

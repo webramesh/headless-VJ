@@ -1,7 +1,6 @@
-import React from 'react';
+'use client';
 import Image from 'next/image';
 import PieChart from './Piechart';
-import wine from '@/public/winevj.png';
 import message from '@/public/message.png';
 import fb from '@/public/fbblack.png';
 import twitter from '@/public/twitterblack.png';
@@ -10,37 +9,80 @@ import lamb from '@/public/lamb.png';
 import meat from '@/public/meat.png';
 import vegetables from '@/public/vegetables.png';
 import chicken from '@/public/chicken.png';
+import Link from 'next/link';
+import { useState } from 'react';
 
-export default function ProductSection() {
+export default function ProductSection({ product }) {
+  const [showReadMore, setShowReadMore] = useState(false);
+  const { title, featuredImage, fieldsProduct, produktslander, produktrekommendationer, smakar, aromer, fragers } =
+    product;
+  const {
+    productShortText,
+    extraReadMore1,
+    extraReadMore2,
+    extraReadMore3,
+    pice,
+    bottlePackageVolume,
+    productCode,
+    buyLink,
+    wineSortiment,
+    alcohol,
+    vintage,
+    allergener,
+    tasteClock1FyllighetSotma,
+    tasteClock2Fyllighetstravhet,
+    tasteClock3Fruktsyra,
+  } = fieldsProduct;
+  const recommendations = produktrekommendationer.nodes.filter((recommendation) => recommendation.name !== 'Vin');
+
+  const total = tasteClock1FyllighetSotma + tasteClock2Fyllighetstravhet + tasteClock3Fruktsyra;
   const pieChartData1 = [
-    { name: 'Filled', value: 5 },
-    { name: 'Empty', value: 7 },
+    { name: 'Filled', value: tasteClock1FyllighetSotma },
+    { name: 'Empty', value: total - tasteClock1FyllighetSotma },
   ];
 
   const pieChartData2 = [
-    { name: 'Filled', value: 6 },
-    { name: 'Empty', value: 6 },
+    { name: 'Filled', value: tasteClock2Fyllighetstravhet },
+    { name: 'Empty', value: total - tasteClock2Fyllighetstravhet },
   ];
 
   const pieChartData3 = [
-    { name: 'Filled', value: 9 },
-    { name: 'Empty', value: 3 },
+    { name: 'Filled', value: tasteClock3Fruktsyra },
+    { name: 'Empty', value: total - tasteClock3Fruktsyra },
   ];
 
   return (
     <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-      <div className="flex flex-col lg:flex-row gap-6 mt-4 py-8 lg:py-16">
+      <div className="flex flex-col md:flex-row gap-6 mt-4 py-8 lg:py-16">
         {/* Left section */}
-        <div className="w-full lg:w-1/3">
-          <div className="lg:sticky lg:top-4">
-            <div className=" text-xs text-black">
-              <span className="text-red-500">Hem </span>&gt;&gt; Produkter &gt;&gt; Moulins de Citran 2012
+        <div className="w-full md:w-1/3">
+          <div className=" text-xs text-black">
+            <Link href="/" className="text-red-500">
+              Hem
+            </Link>
+            &nbsp;&gt;&gt;&nbsp;
+            <Link href="/produkter">Produkter</Link>
+            &gt;&gt; {title}
+          </div>
+          <div className="md:sticky md:top-10 lg:top-28">
+            <div className="md:hidden">
+              <h1 className=" items-start text-black text-2xl w-full">
+                {title} | {bottlePackageVolume} ml
+              </h1>
+              <div className=" text-red-600 hover:text-red-500 mt-2 text-sm">
+                {recommendations.map((item, i) => (
+                  <span key={i}>{item.name} | </span>
+                ))}
+                {produktslander.nodes.map((region, i, arr) => (
+                  <span key={i}>{i < arr.length - 1 ? region.name + ' | ' : region.name}</span>
+                ))}
+              </div>
             </div>
             <div className="mt-4">
               <Image
-                src={wine}
-                alt="Citran Wine"
-                className="object-cover w-2/3 sm:w-1/2 md:w-2/3 lg:w-full h-auto mx-auto"
+                src={featuredImage?.node?.sourceUrl}
+                alt={title}
+                className="object-cover w-2/3 md:w-4/5 lg:w-[63%] h-auto mx-auto"
                 width={300}
                 height={500}
               />
@@ -48,35 +90,52 @@ export default function ProductSection() {
           </div>
         </div>
         {/* Right Section */}
-        <div className="flex flex-col w-full lg:w-2/3">
-          <h1 className=" items-start text-black text-2xl w-full">Moulins de Citran 2012 | 750 ml</h1>
-          <div className=" text-red-500 mt-2 text-sm">Rött Vin | Frankrike Bordeaux | Castillon Côtes de Bordeaux</div>
-          <div className=" text-sm text-gray-600 mt-2">
-            Moulins de Citran 2012 är ett elegant rött vin från Haut-Médoc i Bordeaux, Frankrike. Denna blend av 58%
-            Cabernet Sauvignon och 42% Merlot skapar en harmonisk smakprofil med mogen frukt, mjuka tanniner och en
-            aning kryddighet. Vinet bjuder på doftande toner av svarta vinbär, svarta körsbär och en subtil vaniljton
-            från ekfat. Med sin balanserade struktur och långvariga eftersmak är Moulins de Citran 2012 en utmärkt
-            följeslagare till rätter med nötkött eller lamm. En njutning för alla som uppskattar Bordeaux-viner av hög
-            kvalitet.
+        <div className="flex flex-col w-full md:w-2/3">
+          <div className="hidden md:block">
+            <h1 className="items-start text-black text-2xl w-full">
+              {title} | {bottlePackageVolume} ml
+            </h1>
+            <div className="text-red-600 hover:text-red-500 mt-2 text-sm">
+              {recommendations.map((item, i) => (
+                <span key={i}>{item.name} | </span>
+              ))}
+              {produktslander.nodes.map((region, i, arr) => (
+                <span key={i}>{i < arr.length - 1 ? region.name + ' | ' : region.name}</span>
+              ))}
+            </div>
           </div>
-          <div className=" font-sm text-pink-500">Läs mer</div>
+          <div className=" text-sm text-gray-600 mt-2">{productShortText}</div>
+          <span
+            className="inline font-sm text-pink-500 cursor-pointer decoration-dotted hover:underline underline-offset-4 w-1/3 md:w-3/12"
+            onClick={() => setShowReadMore(!showReadMore)}
+          >
+            Läs mer
+          </span>
+          <div
+            className={`${showReadMore ? 'max-h-96 opacity-100' : 'max-h-0 opacity-0'} transition-all duration-500 ease-in-out `}
+          >
+            <p className="text-sm text-gray-600 mt-2">{extraReadMore1}</p>
+            <p className="text-sm text-gray-600 mt-2">{extraReadMore2}</p>
+            <p className="text-sm text-gray-600 mt-2">{extraReadMore3}</p>
+          </div>
           <div className="bg-[#f9d7e1] mt-6 w-full">
             <div className="flex flex-col sm:flex-row w-full p-4 justify-between">
-              <div className=" text-xl mb-2 sm:mb-0">pris: 222 :-</div>
-              <div className=" text-xl text-gray-500">Artikel nr: 7661301</div>
+              <div className=" text-xl mb-2 sm:mb-0">pris: {pice} :-</div>
+              <div className=" text-xl text-gray-500">Artikel nr: {productCode}</div>
             </div>
             <div className="relative p-4">
-              <input type="file" id="pdf" className="opacity-0 absolute w-full h-full" required />
               <div className="w-full flex flex-col sm:flex-row justify-between gap-4 sm:gap-0">
                 <div className="w-full sm:w-1/3 p-2 border-2 border-[#eb7272] rounded-full flex justify-center items-center bg-white">
                   <span className="text-red-500">Skriv ut PDF</span>
                 </div>
-                <button
+                <Link
+                  href={buyLink}
+                  target="_blank"
                   type="submit"
-                  className="w-full sm:w-[65%] text-white border-red-600 border bg-red-600 rounded-full px-4 py-2"
+                  className="w-full sm:w-[65%] text-center text-white border-red-600 border bg-red-600 rounded-full px-4 py-2"
                 >
                   Köp på Systembolaget
-                </button>
+                </Link>
               </div>
             </div>
             <div className="text-gray-500 text-sm  p-4">
@@ -98,19 +157,19 @@ export default function ProductSection() {
             <div className="grid grid-cols-2 sm:grid-cols-3 gap-6 pl-8 mb-4 py-4">
               <div className="flex flex-col">
                 <div className=" text-black text-sm">SORTIMENT</div>
-                <div className="text-gray-500 text-xs">Beställning sortimentet</div>
+                <div className="text-gray-500 text-xs">{wineSortiment}</div>
               </div>
               <div className="flex flex-col">
                 <div className=" text-black text-sm">ALKOHOL</div>
-                <div className="text-gray-500 text-xs">13%</div>
+                <div className="text-gray-500 text-xs">{alcohol}%</div>
               </div>
               <div className="flex flex-col">
                 <div className=" text-black text-sm">ÅRGÅNG</div>
-                <div className="text-gray-500 text-xs">2012</div>
+                <div className="text-gray-500 text-xs">{vintage}</div>
               </div>
               <div className="flex flex-col">
                 <div className=" text-black text-sm">VOLYM</div>
-                <div className="text-gray-500 text-xs">750 ml</div>
+                <div className="text-gray-500 text-xs">{bottlePackageVolume} ml</div>
               </div>
               <div className="flex flex-col">
                 <div className=" text-black text-sm">DRUVOR</div>
@@ -120,15 +179,15 @@ export default function ProductSection() {
               </div>
               <div className="flex flex-col">
                 <div className=" text-black text-sm">ALLERGENER</div>
-                <div className="text-gray-500 text-xs">Innehåller: Sulfiter</div>
+                <div className="text-gray-500 text-xs">Innehåller: {allergener}</div>
               </div>
             </div>
           </div>
           <div className="mt-8">
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-8">
-              <PieChart data={pieChartData1} title="Smakintensitet" />
-              <PieChart data={pieChartData2} title="Fyllighet/Strävhet" />
-              <PieChart data={pieChartData3} title="Syra" />
+              <PieChart data={pieChartData1} title="Smakintensitet" total={total} />
+              <PieChart data={pieChartData2} title="Fyllighet/Strävhet" total={total} />
+              <PieChart data={pieChartData3} title="Syra" total={total} />
             </div>
           </div>
           <div className="mt-8">

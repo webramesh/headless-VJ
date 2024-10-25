@@ -1,220 +1,105 @@
-import React, { useState } from 'react';
+'use client';
+import { useState } from 'react';
+import RenderBox from './RenderBox';
+import AlcoholInfo from './AlcoholInfo';
 
-const InformationCards = () => {
-  const [selected, setSelected] = useState(null);
-
-  const renderInfoBox1 = () => (
-    <div className="flex flex-col items-center p-4 sm:p-8 justify-center bg-[#f4f1ed]">
-      <div className="">Kalorier (baserat på alkoholmängd)</div>
-      <hr className="w-[90%] border-t-2 m-4 border-gray-300" />
-      <div className="text-xs  text-center mt-2">
-        Per Standardglas (15 cl) <br /> 92
-      </div>
-      <div className="text-xs  text-center mt-2">
-        Per Liter <br /> 609
-      </div>
-      <div className="text-xs  text-center mt-2">
-        Per Förpackning <br />
-        183
+const ratingbox = () => (
+  <div className="w-full px-4 sm:px-0">
+    <div className="flex flex-col items-center mt-6 justify-center">
+      <div className=" text-xl text-center">Vad tycker du om Takasago Umeshu?</div>
+      <div className="flex items-center mt-4">
+        {[...Array(5)].map((_, index) => (
+          <svg
+            key={index}
+            className={`w-8 h-8 ms-3 ${index < 4 ? 'text-red-500' : 'text-gray-300 dark:text-gray-500'}`}
+            aria-hidden="true"
+            xmlns="http://www.w3.org/2000/svg"
+            fill="currentColor"
+            viewBox="0 0 22 20"
+          >
+            <path d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z" />
+          </svg>
+        ))}
       </div>
     </div>
-  );
+  </div>
+);
 
-  const renderInfoBox2 = () => (
-    <div className="flex flex-col items-center p-4 sm:p-8 justify-center bg-[#f4f1ed]">
-      <div className=" text-center">Kalorier (baserat på ungefärlig sockermängd)</div>
-      <hr className="w-[90%] border-t-2 m-4 border-gray-300" />
-      <div className="text-xs  text-center mt-2">
-        Per Standardglas (15 cl) <br /> 131.3
-      </div>
-      <div className="text-xs  text-center mt-2">
-        Per Liter <br /> 875
-      </div>
-      <div className="text-xs  text-center mt-2">
-        Per Förpackning <br />
-        263
-      </div>
-    </div>
-  );
-
-  const renderInfoBox3 = () => (
-    <div className="flex flex-col items-center p-4 sm:p-8 justify-center bg-[#f4f1ed]">
-      <div className="">Total mängd kalorier</div>
-      <hr className="w-[90%] border-t-2 m-4 border-gray-300" />
-      <div className="text-xs  text-center mt-2">
-        Per Standardglas (15 cl) <br /> 222.5
-      </div>
-      <div className="text-xs  text-center mt-2">
-        Per Liter <br /> 1484
-      </div>
-      <div className="text-xs  text-center mt-2">
-        Per Förpackning <br />
-        445
-      </div>
-    </div>
-  );
-
-  const renderInfoBox4 = () => (
-    <div className="flex flex-col items-center p-4 sm:p-8 justify-center bg-[#f4f1ed]">
-      <div className="">Sockerdetaljer</div>
-      <hr className="w-[90%] border-t-2 m-4 border-gray-300" />
-      <div className="text-xs  text-center mt-2">
-        Socker g/l <br /> 21.6
-      </div>
-      <div className="text-xs  text-center mb-9 mt-2">
-        Socker Per Liter <br /> 216
-      </div>
-    </div>
-  );
-
-  const renderInfoBox5 = () => (
-    <div className="flex flex-col items-center p-4 sm:p-8 justify-center bg-[#f4f1ed]">
-      <div className="">Förpackning</div>
-      <hr className="w-[90%] border-t-2 m-4 border-gray-300" />
-      <div className="text-xs  text-center mt-2">
-        Förslutning <br /> Skruvkapsyl
-      </div>
-      <div className="text-xs  text-center mt-2">
-        Förpackning <br /> Flaska
-      </div>
-    </div>
-  );
-
-  const renderInfoBox6 = () => (
-    <div className="flex flex-col items-center p-4 sm:p-8 justify-center bg-[#f4f1ed]">
-      <div className="">Alkhol</div>
-      <hr className="w-[90%] border-t-2 m-4 border-gray-300" />
-      <div className="text-xs  text-center mt-2">
-        APK (Alkhol per krona) <br /> 0.4 :-
-      </div>
-      <div className="text-xs  text-center text-gray-500 mt-2">
-        Alkohol per krona är ett mått som anger mängden alkohol som erhålls per <br />
-        nedlagd krona, vid köp av en alkoholhaltig dryck. APK stiger då dryckens pris <br />
-        sjunker eller alkoholhalten stiger.
-      </div>
-    </div>
-  );
-
-  const renderInfoBox7 = () => (
-    <div className="flex flex-col items-center p-4 sm:p-8 justify-center bg-[#f4f1ed]">
-      <div className="">Om Producenten</div>
-      <hr className="w-[90%] border-t-2 m-4 border-gray-300" />
-      <div className="text-xs  text-center mt-2">
-        Producent <br />
-        <div className="text-red-500 font-bold">Fuji Takasago Shuzo</div>
-      </div>
-      <div className="text-xs  text-center mt-2">
-        Land <br />
-        <div className="text-red-500 font-bold">Japan</div>
-      </div>
-    </div>
-  );
-
-  const renderInfoBox8 = () => (
-    <div className="flex flex-col items-center p-4 sm:p-8 justify-center bg-[#f4f1ed]">
-      <div className="">Om Importören</div>
-      <hr className="w-[90%] border-t-2 m-4 border-gray-300" />
-      <div className="text-xs  text-center mt-2">
-        Importör <br />
-        <div className="text-red-500 font-bold mb-9">Akebono Unlimited AB</div>
-      </div>
-    </div>
-  );
-
-  const ratingbox = () => (
-    <div className="w-full px-4 sm:px-0">
-      <div className="flex flex-col items-center mt-6 justify-center">
-        <div className=" text-xl text-center">Vad tycker du om Takasago Umeshu?</div>
-        <div className="flex items-center mt-4">
-          {[...Array(5)].map((_, index) => (
-            <svg
-              key={index}
-              className={`w-8 h-8 ms-3 ${index < 4 ? 'text-red-500' : 'text-gray-300 dark:text-gray-500'}`}
-              aria-hidden="true"
-              xmlns="http://www.w3.org/2000/svg"
-              fill="currentColor"
-              viewBox="0 0 22 20"
-            >
-              <path d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z" />
-            </svg>
-          ))}
+const formfield = () => (
+  <div className="w-full max-w-4xl mx-auto mb-16 px-4 sm:px-0">
+    <div className="flex flex-col md:flex-row gap-8 mt-8">
+      <div className="flex flex-col w-full md:w-1/2 gap-4">
+        <div>
+          <label htmlFor="name" className="sr-only">
+            Name
+          </label>
+          <input
+            type="text"
+            id="name"
+            className="p-2 pl-3 w-full bg-[#d9d9d9] rounded-2xl"
+            placeholder="Namn*"
+            required
+          />
+        </div>
+        <div>
+          <label htmlFor="email" className="sr-only">
+            Email
+          </label>
+          <input
+            type="email"
+            id="email"
+            className="p-2 pl-3 w-full bg-[#d9d9d9] rounded-2xl"
+            placeholder="E-Postadress*"
+            required
+          />
+        </div>
+        <div>
+          <label htmlFor="captcha" className="sr-only">
+            Captcha
+          </label>
+          <legend className=" text-sm mb-1">Are you human? Please solve:</legend>
+          <input
+            type="text"
+            id="captcha"
+            className="p-2 pl-3 w-full bg-[#d9d9d9] rounded-2xl"
+            placeholder=""
+            required
+          />
         </div>
       </div>
-    </div>
-  );
-
-  const formfield = () => (
-    <div className="w-full max-w-4xl mx-auto mb-16 px-4 sm:px-0">
-      <div className="flex flex-col md:flex-row gap-8 mt-8">
-        <div className="flex flex-col w-full md:w-1/2 gap-4">
-          <div>
-            <label htmlFor="name" className="sr-only">
-              Name
-            </label>
-            <input
-              type="text"
-              id="name"
-              className="p-2 pl-3 w-full bg-[#d9d9d9] rounded-2xl"
-              placeholder="Namn*"
-              required
-            />
-          </div>
-          <div>
-            <label htmlFor="email" className="sr-only">
-              Email
-            </label>
-            <input
-              type="email"
-              id="email"
-              className="p-2 pl-3 w-full bg-[#d9d9d9] rounded-2xl"
-              placeholder="E-Postadress*"
-              required
-            />
-          </div>
-          <div>
-            <label htmlFor="captcha" className="sr-only">
-              Captcha
-            </label>
-            <legend className=" text-sm mb-1">Are you human? Please solve:</legend>
-            <input
-              type="text"
-              id="captcha"
-              className="p-2 pl-3 w-full bg-[#d9d9d9] rounded-2xl"
-              placeholder=""
-              required
-            />
-          </div>
+      <div className="flex flex-col w-full md:w-1/2 gap-12">
+        <div className="flex flex-col flex-grow">
+          <label htmlFor="message" className="sr-only">
+            Message
+          </label>
+          <textarea
+            id="message"
+            className="p-2 bg-[#d9d9d9] rounded-xl flex-grow resize-none"
+            placeholder="Skriv ditt omdömme här!"
+            required
+          />
         </div>
-        <div className="flex flex-col w-full md:w-1/2 gap-12">
-          <div className="flex flex-col flex-grow">
-            <label htmlFor="message" className="sr-only">
-              Message
-            </label>
-            <textarea
-              id="message"
-              className="p-2 bg-[#d9d9d9] rounded-xl flex-grow resize-none"
-              placeholder="Skriv ditt omdömme här!"
-              required
-            />
-          </div>
-          <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4">
-            <button className="px-2 py-1 w-full sm:w-[40%] bg-[#e13768] text-white rounded-full">Sticka</button>
-            <div className="text-xs ">
-              Denna webbplats använder Akismet för att minska skräppost.
-              <span className="text-red-600 font-bold">Lär dig hur din kommentardata bearbetas.</span>
-            </div>
+        <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4">
+          <button className="px-2 py-1 w-full sm:w-[40%] bg-[#e13768] text-white rounded-full">Sticka</button>
+          <div className="text-xs ">
+            Denna webbplats använder Akismet för att minska skräppost.
+            <span className="text-red-600 font-bold">Lär dig hur din kommentardata bearbetas.</span>
           </div>
         </div>
       </div>
     </div>
-  );
+  </div>
+);
 
-  const QNA = () => (
-    <div className="w-full px-4 sm:px-20">
-      <div className="flex flex-col mt-4 text-center  text-lg font-medium">
-        Frågor och svar om Moulins de Citran 2012
+const QNA = () => (
+  <div className="w-full px-4 sm:px-20">
+    <div className="flex flex-col mt-4 text-center  text-lg font-medium">Frågor och svar om Moulins de Citran 2012</div>
+    <div className="flex flex-col">
+      <div className="bg-[#f5f5f5] pt-6 pl-2">
+        <div className=" text-sm font-medium">I vilket land proudceras Moulins de Citran 2012?</div>
       </div>
-      <div className="flex flex-col">
+      <div className="text-gray-600 text-sm  pl-2">Vinet produceras i Frankrike, Bordeaux, Haut-Médoc .</div>
+      <div className="mt-4">
         <div className="bg-[#f5f5f5] pt-6 pl-2">
           <div className=" text-sm font-medium">I vilket land proudceras Moulins de Citran 2012?</div>
         </div>
@@ -224,16 +109,30 @@ const InformationCards = () => {
             <div className=" text-sm font-medium">I vilket land proudceras Moulins de Citran 2012?</div>
           </div>
           <div className="text-gray-600 text-sm  pl-2">Vinet produceras i Frankrike, Bordeaux, Haut-Médoc .</div>
-          <div className="mt-4">
-            <div className="bg-[#f5f5f5] pt-6 pl-2">
-              <div className=" text-sm font-medium">I vilket land proudceras Moulins de Citran 2012?</div>
-            </div>
-            <div className="text-gray-600 text-sm  pl-2">Vinet produceras i Frankrike, Bordeaux, Haut-Médoc .</div>
-          </div>
         </div>
       </div>
     </div>
-  );
+  </div>
+);
+
+const InformationCards = ({ fieldsProduct }) => {
+  const {
+    caloriesInAlcPer15cl,
+    caloriesInAlcPerContainerVolume,
+    caloriesInAlcPerLitter,
+    caloriesInSugarPer15cl,
+    caloriesInSugarPerContainerVolume,
+    caloriesInSugarPerLitter,
+    totalCaloriesPer15Cl,
+    totalCaloriesPerContainerVolume,
+    totalCaloriesPerLitter,
+    sugerLevel,
+    sugarLevelIn1Litter,
+    containerType,
+    produktPackaging,
+  } = fieldsProduct;
+
+  const [selected, setSelected] = useState(null);
 
   const handleClick = (index) => {
     setSelected((prevSelected) => (prevSelected === index ? null : index));
@@ -242,7 +141,7 @@ const InformationCards = () => {
   return (
     <div className="mt-8 border-y-2">
       <div className="container mx-auto">
-        <div className="flex gap-4 sm:gap-8 px-4 sm:px-8 py-2  items-center justify-center overflow-x-scroll scroll-smooth lg:overflow-x-hidden ">
+        <div className="flex gap-2 md:gap-4 px-4 py-2 items-center overflow-x-auto scroll-smooth lg:justify-center ">
           {[
             'Hälsoinformation',
             'Övrig information',
@@ -253,8 +152,8 @@ const InformationCards = () => {
           ].map((item, index) => (
             <div
               key={index}
-              className={`px-2 py-2 w-full sm:w-auto text-center hover:bg-[#f4f1ed] hover:shadow-md cursor-pointer ${
-                selected === index + 1 ? 'border-b-2 border-pink-500' : ''
+              className={`px-2 py-2 w-auto text-center hover:bg-[#f4f1ed] hover:shadow-md cursor-pointer ${
+                selected === index + 1 && 'border-b-2 border-pink-500'
               }`}
               onClick={() => handleClick(index + 1)}
             >
@@ -266,19 +165,85 @@ const InformationCards = () => {
         <div className="container mx-auto">
           {selected === 1 && (
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 sm:gap-12 p-4 sm:p-8">
-              {renderInfoBox1()}
-              {renderInfoBox2()}
-              {renderInfoBox3()}
-              {renderInfoBox4()}
+              {/* RenderBox1 */}
+              <RenderBox title="Kalorier (baserat på alkoholmängd)">
+                <AlcoholInfo
+                  per15cl={caloriesInAlcPer15cl}
+                  perLitre={caloriesInAlcPerLitter}
+                  perVolume={caloriesInAlcPerContainerVolume}
+                />
+              </RenderBox>
+              {/* RenderBox2 */}
+              <RenderBox title="Kalorier (baserat på ungefärlig sockermängd)">
+                <AlcoholInfo
+                  per15cl={caloriesInSugarPer15cl}
+                  perLitre={caloriesInSugarPerLitter}
+                  perVolume={caloriesInSugarPerContainerVolume}
+                />
+              </RenderBox>
+              {/* RenderBox3 */}
+              <RenderBox title="Total mängd kalorier">
+                <AlcoholInfo
+                  per15cl={totalCaloriesPer15Cl}
+                  perLitre={totalCaloriesPerLitter}
+                  perVolume={totalCaloriesPerContainerVolume}
+                />
+              </RenderBox>
+              {/* RenderBox4 */}
+              <RenderBox title="Sockerdetaljer">
+                <div className="text-xs  text-center mt-2">
+                  Socker g/l <br /> {sugerLevel}
+                </div>
+                <div className="text-xs  text-center mb-9 mt-2">
+                  Socker Per Liter <br /> {sugarLevelIn1Litter}
+                </div>
+              </RenderBox>
             </div>
           )}
 
           {selected === 2 && (
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 sm:gap-12 p-4 sm:p-8">
-              {renderInfoBox5()}
-              {renderInfoBox6()}
-              {renderInfoBox7()}
-              {renderInfoBox8()}
+              {/* RenderBox5 */}
+              <RenderBox title="Förpackning">
+                <div className="text-xs  text-center mt-2">
+                  Förslutning <br /> {containerType}
+                </div>
+                <div className="text-xs  text-center mt-2">
+                  Förpackning <br /> {produktPackaging}
+                </div>
+              </RenderBox>
+
+              {/* RenderBox6 */}
+              <RenderBox title="Alkhol">
+                <div className="text-xs  text-center mt-2">
+                  APK (Alkhol per krona) <br /> 0.4 :-
+                </div>
+                <div className="text-xs  text-center text-gray-500 mt-2">
+                  Alkohol per krona är ett mått som anger mängden alkohol som erhålls per <br />
+                  nedlagd krona, vid köp av en alkoholhaltig dryck. APK stiger då dryckens pris <br />
+                  sjunker eller alkoholhalten stiger.
+                </div>
+              </RenderBox>
+
+              {/* RenderBox7 */}
+              <RenderBox title="Om Producenten">
+                <div className="text-xs  text-center mt-2">
+                  Producent <br />
+                  <div className="text-red-500 font-bold">Fuji Takasago Shuzo</div>
+                </div>
+                <div className="text-xs  text-center mt-2">
+                  Land <br />
+                  <div className="text-red-500 font-bold">Japan</div>
+                </div>
+              </RenderBox>
+
+              {/* RenderBox8 */}
+              <RenderBox title="Om Importören">
+                <div className="text-xs  text-center mt-2">
+                  Importör <br />
+                  <div className="text-red-500 font-bold mb-9">Akebono Unlimited AB</div>
+                </div>
+              </RenderBox>
             </div>
           )}
 

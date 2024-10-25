@@ -4,7 +4,6 @@ import React from 'react';
 import Head from 'next/head';
 import Navbar from '../../../app/Components/Navbar';
 import Content from '../Components/Content';
-import Footer from '../../../app/Components/Footer';
 
 export default function Home() {
   return (
@@ -15,7 +14,6 @@ export default function Home() {
       </Head>
       <Navbar />
       <Content />
-      <Footer />
     </>
   );
 }

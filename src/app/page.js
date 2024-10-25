@@ -1,11 +1,9 @@
 import Head from 'next/head';
 import Navbar from './Components/Navbar';
 import Hero from './Components/Hero';
-import Card from './Components/Card';
 import Trending from './Components/Trending';
 import Subscription from './Components/Subscription';
 import Info from './Components/Info';
-import Footer from './Components/Footer';
 import WineSlider from './Components/WineSlider';
 import { Suspense } from 'react';
 import Loading from './loading';
@@ -18,7 +16,7 @@ export default async function Home() {
   const [posts, trendingPosts, wineCategories] = await Promise.all([
     getAllNyheter(),
     getAllTrendingPosts(),
-    getAllWineCategories()
+    getAllWineCategories(),
   ]);
 
   return (
@@ -30,21 +28,16 @@ export default async function Home() {
         </Head>
         <Navbar />
         <Hero />
-        <Trending 
-          title="TRENDIGT" 
-          subtitle="Artiklar värda att läsa från våra redaktörer" 
-          posts={trendingPosts.slice(0, 6)} 
+        <Trending
+          title="TRENDIGT"
+          subtitle="Artiklar värda att läsa från våra redaktörer"
+          posts={trendingPosts.slice(0, 6)}
         />
         <Subscription />
         <WineSlider categories={wineCategories} />
-        <NewsPost 
-          title="NYHETER" 
-          subtitle="Den mest populära artikeln i dryckesvärlden" 
-          posts={posts.slice(0, 6)} 
-        />
+        <NewsPost title="NYHETER" subtitle="Den mest populära artikeln i dryckesvärlden" posts={posts.slice(0, 6)} />
         <Info />
       </Suspense>
-      <Footer />
     </div>
   );
 }

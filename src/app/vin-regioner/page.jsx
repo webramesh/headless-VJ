@@ -5,7 +5,7 @@ import RegionalCardItem from '../Components/regionalCard/RegionalCardItem.jsx';
 import Map from '../Components/Map.jsx';
 import Sidebar from '../Components/Sidebar.jsx';
 import CatAccordion from '../[category]/Components/CatAccordion.jsx';
-import Footer from '../Components/Footer.jsx';
+
 const page = () => {
   return (
     <div>
@@ -53,8 +53,6 @@ const page = () => {
           <Sidebar />
         </div>
       </div>
-
-      <Footer />
     </div>
   );
 };

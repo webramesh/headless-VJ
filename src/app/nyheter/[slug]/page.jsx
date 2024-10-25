@@ -2,7 +2,6 @@ import React from 'react';
 import Head from 'next/head';
 import Navbar from '../../../app/Components/Navbar';
 import NyheterContent from '../Components/NyheterContent';
-import Footer from '../../../app/Components/Footer';
 import { getAllNyheter, getAllNyheterBySlug } from '../../../lib/api/newsApi';
 
 // This is an async Server Component
@@ -21,7 +20,6 @@ export default async function Page({ params }) {
       </Head>
       <Navbar />
       <NyheterContent nyhet={nyhet} />
-      <Footer />
     </>
   );
 }

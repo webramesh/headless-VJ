@@ -1,11 +1,9 @@
 import Head from 'next/head';
 import Navbar from './Components/Navbar';
 import Hero from './Components/Hero';
-import Card from './Components/Card';
 import Trending from './Components/Trending';
 import Subscription from './Components/Subscription';
 import Info from './Components/Info';
-import Footer from './Components/Footer';
 import WineSlider from './Components/WineSlider';
 import { Suspense } from 'react';
 import Loading from './loading';
@@ -44,7 +42,6 @@ export default async function Home() {
         />
         <Info />
       </Suspense>
-      <Footer />
     </div>
   );
 }

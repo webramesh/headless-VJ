@@ -1,8 +1,6 @@
 import SenasteNytt from '../../../app/Components/SenasteNytt';
 import WineTourism from '../../../app/Components/WineTourism';
 import Card from '../../Components/Card';
-import Footer from '../../Components/Footer';
-import Info from '../../Components/Info';
 import Navbar from '../../Components/Navbar';
 import Subscription from '../../Components/Subscription';
 import AuthorHero from '../../Components/AuthorHero';
@@ -25,7 +23,6 @@ export default function Author() {
           <SenasteNytt />
         </div>
       </div>
-      <Footer />
     </div>
   );
 }

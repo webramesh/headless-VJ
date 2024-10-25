@@ -1,7 +1,14 @@
 import Link from 'next/link';
 import { getAllCategories, getPostsByCategory } from '@/src/lib/api/postAPI';
 
-// import { getAllCategories, getPostsByCategory } from '../api/api';
+import Head from 'next/head';
+import Navbar from '../Components/Navbar';
+import PostTypeContent from '../Components/PostTypeContent';
+import Sidebar from '../Components/Sidebar';
+import Card from '../Components/Card';
+import AccordionNew from '../Components/AccordionNew';
+import CatAccordion from '../[category]/Components/CatAccordion';
+import SubscriptionForm from '../Components/subscription/SubscriptionForm';
 
 export async function generateStaticParams() {
   const categories = await getAllCategories();

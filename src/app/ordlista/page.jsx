@@ -5,7 +5,6 @@ import Head from 'next/head';
 import Navbar from '../Components/Navbar';
 import PostTypeContent from '../Components/PostTypeContent';
 import Sidebar from '../Components/Sidebar';
-import Footer from '../Components/Footer';
 import ImageCardRow from '../Components/ImageCardRow';
 import AccordionNew from '../Components/AccordionNew';
 import CatAccordion from '../[category]/Components/CatAccordion';
@@ -44,8 +43,6 @@ export default function Ordlista() {
           </div>
         </div>
       </div>
-
-      <Footer />
     </>
   );
 }

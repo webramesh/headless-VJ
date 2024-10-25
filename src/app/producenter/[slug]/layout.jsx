@@ -1,4 +1,3 @@
-import Footer from '../../Components/Footer';
 import Navbar from '../../Components/Navbar';
 import CatAccordion from '../../[category]/Components/CatAccordion';
 import SenasteNytt from '../../Components/SenasteNytt';
@@ -18,7 +17,6 @@ export default function layout({ children }) {
         </div>
       </div>
       <CatAccordion />
-      <Footer />
     </>
   );
 }

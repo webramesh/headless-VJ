@@ -1,8 +1,5 @@
 import { ApolloClient, InMemoryCache, gql, HttpLink } from '@apollo/client';
 
-console.log('SITE_URL_ENDPOINT:', process.env.SITE_URL_ENDPOINT);
-console.log(process.env.SITE_URL_ENDPOINT)
-
 const httpLink = new HttpLink({
   uri: process.env.SITE_URL_ENDPOINT,
   fetch,
@@ -54,11 +51,8 @@ export async function getMainMenu() {
     }
   `;
 
-  // console.log('Sending GraphQL query to:', process.env.SITE_URL_ENDPOINT);
-
   try {
     const response = await client.query({ query });
-    console.log('GraphQL response:', JSON.stringify(response, null, 2));
 
     if (!response) {
       throw new Error('No response received from the GraphQL endpoint');

@@ -1,3 +1,4 @@
+'use client';
 import React from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -9,7 +10,12 @@ const Hero = ({ posts }) => {
     <div className="container mt-6 mx-auto p-2">
       <div className="flex flex-col lg:flex-row gap-8 lg:gap-12">
         {/* Main Article */}
-        <Link href={`/article/${posts[0].slug}`} className="w-full lg:w-1/2 bg-[#f5f5f5] overflow-hidden">
+        {/* <Link href={`/article/${posts[0].slug}`} className="w-full lg:w-1/2 bg-[#f5f5f5] overflow-hidden"> */}
+        <Link
+          // href={`/${posts[0].categories.nodes[0].slug}/${posts[0].slug}`}
+          href={`/${posts[0].categories.nodes[0]?.slug || 'uncategorized'}/${posts[0].slug}`}
+          className="w-full lg:w-1/2 bg-[#f5f5f5] overflow-hidden"
+        >
           <div className="relative w-full">
             <div className="relative w-full h-0 pb-[66.67%] sm:pb-[50%] lg:pb-[66.67%]">
               <div className="w-full h-full">
@@ -42,7 +48,11 @@ const Hero = ({ posts }) => {
             if (index === 0) return;
             return (
               <div key={post.id}>
-                <Link href={`/article/${post.slug}`}>
+                {/* <Link href={`/article/${post.slug}`}> */}
+                <Link
+                  // href={`/${post.categories.nodes[0].slug}/${post.slug}`}
+                  href={`/${post.categories.nodes[0]?.slug || 'uncategorized'}/${post.slug}`}
+                >
                   <div className="flex flex-col sm:flex-row gap-4 bg-[#f5f5f5] overflow-hidden">
                     <div className="relative h-48 sm:h-auto sm:w-1/3">
                       <Image

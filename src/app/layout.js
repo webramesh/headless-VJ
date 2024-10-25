@@ -16,10 +16,7 @@ export const metadata = {
 // export const revalidate = 0
 
 export default async function RootLayout({ children }) {
-  console.log(process.env.SITE_URL_ENDPOINT, 'page server');
-
   const menuData = await getMainMenu();
-  console.log(menuData, 'menu data.....');
 
   return (
     <html lang="en">

@@ -2,7 +2,6 @@
 
 import React from 'react';
 import Head from 'next/head';
-import Navbar from '../Components/Navbar';
 import PostTypeContent from '../Components/PostTypeContent';
 import Sidebar from '../Components/Sidebar';
 import Card from '../Components/Card';
@@ -17,8 +16,6 @@ export default function Online() {
         <title>Online Page</title>
         <meta name="Online Vin page" content="This is the Online vin page of Vinjournalen" />
       </Head>
-
-      <Navbar />
 
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex flex-col lg:flex-row lg:gap-10">

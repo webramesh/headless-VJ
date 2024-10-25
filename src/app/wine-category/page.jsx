@@ -1,4 +1,3 @@
-import Navbar from '../Components/Navbar';
 import WineCategoryItem from './components/WineCategoryItem';
 import WineItem from './components/WineItem';
 import CountryCategoryItem from './components/CountryCategoryItem';
@@ -6,8 +5,6 @@ import CountryCategoryItem from './components/CountryCategoryItem';
 const Page = () => {
   return (
     <div className=" bg-gray-50 min-h-screen">
-      <Navbar />
-
       <div className="container mx-auto max-w-6xl px-4  mt-10">
         <div className="">
           <div>

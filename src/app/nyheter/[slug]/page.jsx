@@ -1,11 +1,9 @@
 import React from 'react';
 import Head from 'next/head';
-import Navbar from '../../../app/Components/Navbar';
 import NyheterContent from '../Components/NyheterContent';
 import { getAllNyheter, getAllNyheterBySlug } from '../../../lib/api/newsApi';
 
-
-export const revalidate = 60; 
+export const revalidate = 60;
 
 // This is an async Server Component
 export default async function Page({ params }) {
@@ -21,7 +19,6 @@ export default async function Page({ params }) {
         <title>{nyhet?.title || 'Nyheter'} | Vinjournalen</title>
         <meta name="description" content={nyhet?.excerpt || 'This is the Nyheter page of Vinjournalen'} />
       </Head>
-      <Navbar />
       <NyheterContent nyhet={nyhet} />
     </>
   );

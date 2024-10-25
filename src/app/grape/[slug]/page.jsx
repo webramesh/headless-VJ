@@ -1,6 +1,5 @@
 import SenasteNytt from '../../../app/Components/SenasteNytt';
 import WineTourism from '../../../app/Components/WineTourism';
-import Navbar from '../../Components/Navbar';
 import Subscription from '../../Components/Subscription';
 import AuthorHero from '../../Components/AuthorHero';
 import ProductCard from '../../Components/ProductCard';
@@ -14,7 +13,6 @@ export const metadata = {
 export default function grape() {
   return (
     <div>
-      <Navbar />
       <AuthorHero title="Agiorgitiko" />
       <div className="container mx-auto flex flex-col w-full py-10">
         <h2 className=" items-start text-black text-2xl w-full">Viner gjorda på Agiorgitiko druvor</h2>

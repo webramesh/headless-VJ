@@ -1,7 +1,7 @@
 import { ApolloClient, InMemoryCache, gql } from '@apollo/client';
 
 const client = new ApolloClient({
-  uri: 'https://www.vin.handworknepal.com/graphql',
+  uri: process.env.SITE_URL_ENDPOINT,
   cache: new InMemoryCache(),
 });
 

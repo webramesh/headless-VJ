@@ -1,61 +1,26 @@
-import { getAllCategories, getPostsByCategory, getPostBySlug } from '@/src/lib/api/postAPI';
-import Navbar from '../../Components/Navbar';
-import ProductRecom from '../Components/ProductRecom';
-// import ProductRecom from '../Components/ProductRecom';
+import { getPostBySlug } from '@/src/lib/api/postAPI';
+import PostDetailsContent from '../Components/PostDetailsContent';
+import PostDetailsHero from '../Components/PostDetailsHero';
 
-// export const revalidate = 20;
-
-// export async function generateStaticParams() {
-//     const categories = await getAllCategories();
-//     const allPosts = await Promise.all(
-//         categories.map(async category => {
-//             const posts = await getPostsByCategory(category.slug);
-//             // Check if posts is an array, if not, return an empty array
-//             return Array.isArray(posts)
-//                 ? posts.map(post => ({
-//                       category: category.slug,
-//                       slug: post.slug,
-//                   }))
-//                 : [];
-//         })
-//     );
-
-//     return allPosts.flat();
-// }
-
-export default async function PostPage({ params }) {
+export default async function PostDetails({ params }) {
   const { category, slug } = params;
   const post = await getPostBySlug(slug);
-  console.log(post, 'post ');
-
+  console.log(post?.categories?.nodes[0]?.name);
   if (!post) {
     return <div className="container mx-auto px-4 py-8">Post not found</div>;
   }
 
   return (
-    <article className="container mx-auto px-4 py-8">
-      <h1 className="text-3xl font-bold mb-4">{post.title}</h1>
-      <p className="text-sm text-gray-500 mb-4">
-        Category: {category} | Published on: {new Date(post.date).toLocaleDateString()}
-      </p>
-      <div className="prose prose-lg max-w-none" dangerouslySetInnerHTML={{ __html: post.content }} />
-      {/* <ProductRecom /> */}
-      <ProductRecom />
-    </article>
+    <div className="">
+      <PostDetailsHero
+        title={post?.title}
+        featuredImage={post?.featuredImage?.node?.sourceUrl}
+        authorImage={post?.author?.node?.customAvatar}
+        authorName={post?.author?.node?.name}
+        date={post?.date}
+        categoryName={post?.categories?.nodes[0]?.name}
+      />
+      <PostDetailsContent content={post?.content} />
+    </div>
   );
 }
-
-// export async function generateMetadata({ params }) {
-//     const post = await getPostBySlug(params.slug);
-
-//     if (!post) {
-//         return {
-//             title: 'Post Not Found',
-//         };
-//     }
-
-//     return {
-//         title: post.title,
-//         description: post.excerpt,
-//     };
-// }

@@ -1,19 +1,22 @@
+'use client';
 import React from 'react';
 import Image from 'next/image';
 import food1 from '@/public/food1.png';
 import fb from '@/public/fb.png';
 import insta from '@/public/insta.png';
-import Accordion from '../../../app/Components/Accordion';
-import CatAccordion from '../Components/CatAccordion';
-import ProductRecom from '../Components/ProductRecom';
+import Accordion from '../../Components/Accordion';
+import CatAccordion from './CatAccordion';
+import ProductRecom from './ProductRecom';
 import Link from 'next/link';
 
-const CatagoryHero = () => {
+const PostDetailsContent = ({ content }) => {
   return (
     <div className="container mx-auto">
       <div className="flex flex-col lg:flex-row lg:gap-16 mx-4 lg:mx-52 lg:-mt-16 z-10">
         <div className="flex flex-col gap-2 bg-white w-full lg:w-auto">
           <div className="shadow-2xl p-4 lg:p-16">
+            <div className="prose prose-lg max-w-none" dangerouslySetInnerHTML={{ __html: content }} />
+            {/*
             <div className=" text-base lg:text-lg text-gray-600 font-semibold">
               Blanc de blancs är en term för mousserande viner. Men det är inte helt enkelt att reda ut, då mousserande
               viner generellt kans göras av vita druvor till och med röda.
@@ -121,7 +124,7 @@ const CatagoryHero = () => {
             <div className="text-base lg:text-lg  text-red-600">
               Brut Champagne <br />
               Rött mousserande vin <br /> Italienska mousserande viner
-            </div>
+            </div> */}
           </div>
 
           <ProductRecom />
@@ -231,4 +234,4 @@ const CatagoryHero = () => {
   );
 };
 
-export default CatagoryHero;
+export default PostDetailsContent;

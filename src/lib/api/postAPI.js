@@ -48,9 +48,6 @@ export async function getHomePagePosts() {
     return [];
   }
 }
-
-
-
 export async function getPostBySlug(slug) {
   try {
     const { data } = await client.query({
@@ -62,10 +59,20 @@ export async function getPostBySlug(slug) {
             content
             date
             slug
+            featuredImage {
+              node {
+                sourceUrl
+              }
+            }
             categories {
               nodes {
                 name
-                slug
+              }
+            }
+            author {
+              node {
+                name
+                customAvatar
               }
             }
           }
@@ -80,6 +87,47 @@ export async function getPostBySlug(slug) {
     return null;
   }
 }
+// export async function getPostBySlug(slug) {
+//   try {
+//     const { data } = await client.query({
+//       query: gql`
+//         query PostBySlug($slug: ID!) {
+//           post(id: $slug, idType: SLUG) {
+//             date
+//             id
+//             title
+//             featuredImage {
+//               node {
+//                 mediaItemUrl
+//               }
+//             }
+//             categories {
+//               nodes {
+//                 name
+//               }
+//             }
+//             author {
+//               node {
+//                 name
+//                 mediaItems {
+//                   nodes {
+//                     mediaItemUrl
+//                   }
+//                 }
+//               }
+//             }
+//           }
+//         }
+//       `,
+//       variables: { slug },
+//     });
+
+//     return data.post;
+//   } catch (error) {
+//     console.error('Error fetching post:', error);
+//     return null;
+//   }
+// }
 export async function getAllCategories() {
   try {
     const { data } = await client.query({
@@ -162,7 +210,6 @@ export async function getPostsByCategory(slug) {
   // Fetch the category name based on the slug
   const categoryData = await getCategoryBySlug(slug);
   const categoryName = categoryData ? categoryData.name : null;
-
 
   return { posts, categoryName };
 }

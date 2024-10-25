@@ -2,7 +2,6 @@
 
 import React from 'react';
 import Head from 'next/head';
-import Navbar from '../../../app/Components/Navbar';
 import Content from '../Components/Content';
 
 export default function Home() {
@@ -12,7 +11,6 @@ export default function Home() {
         <title>Annonsera Page</title>
         <meta name="description" content="This is the Annonsera page of Vinjournalen" />
       </Head>
-      <Navbar />
       <Content />
     </>
   );

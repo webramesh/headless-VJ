@@ -1,6 +1,5 @@
 import SenasteNytt from '../../app/Components/SenasteNytt';
 import WineTourism from '../../app/Components/WineTourism';
-import Footer from '../Components/Footer';
 import Navbar from '../Components/Navbar';
 import Card from '../Components/Card';
 import AuthorHero from '../Components/AuthorHero';
@@ -38,7 +37,6 @@ export default function newsletterSignup() {
           <SenasteNytt />
         </div>
       </div>
-      <Footer />
     </div>
   );
 }

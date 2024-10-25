@@ -2,7 +2,7 @@ import Navbar from '../Components/Navbar';
 import WineCategoryItem from './components/WineCategoryItem';
 import WineItem from './components/WineItem';
 import CountryCategoryItem from './components/CountryCategoryItem';
-import Footer from '../Components/Footer';
+
 const Page = () => {
   return (
     <div className=" bg-gray-50 min-h-screen">
@@ -59,8 +59,6 @@ const Page = () => {
           </div>
         </div>
       </div>
-
-      <Footer />
     </div>
   );
 };

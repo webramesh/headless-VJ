@@ -1,6 +1,5 @@
 import SenasteNytt from '../../app/Components/SenasteNytt';
 import WineTourism from '../../app/Components/WineTourism';
-import Footer from '../Components/Footer';
 import Navbar from '../Components/Navbar';
 import Subscription from '../Components/Subscription';
 import AuthorHero from '../Components/AuthorHero';
@@ -157,7 +156,6 @@ export default function integritetspolicy() {
           <SenasteNytt />
         </div>
       </div>
-      <Footer />
     </div>
   );
 }

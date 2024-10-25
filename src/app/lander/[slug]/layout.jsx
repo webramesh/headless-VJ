@@ -1,4 +1,3 @@
-import Footer from '../../Components/Footer';
 import Navbar from '../../Components/Navbar';
 import SubscriptionForm from '../../Components/subscription/SubscriptionForm';
 import CatAccordion from '../../[category]/Components/CatAccordion';
@@ -19,7 +18,6 @@ function layout({ children }) {
           </div>
         </div>
       </div>
-      <Footer />
     </>
   );
 }

@@ -1,6 +1,7 @@
 import { Inter, Outfit } from 'next/font/google';
 import './globals.css';
 import ScrollToTopButton from '../app/Components/ScrollToTopButton';
+import Footer from './Components/Footer';
 
 const inter = Inter({ subsets: ['latin'] });
 const outfit = Outfit({ subsets: ['latin'] });
@@ -19,6 +20,7 @@ export default function RootLayout({ children }) {
       <body className={`${outfit.className} ${inter.className}`}>
         {children}
         <ScrollToTopButton />
+        <Footer />
       </body>
     </html>
   );

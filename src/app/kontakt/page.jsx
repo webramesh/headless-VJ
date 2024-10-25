@@ -1,10 +1,8 @@
 import React from 'react';
-import AuthorHero from '../author/Components/AuthorHero';
 import Navbar from '../Components/Navbar';
 import ContactForm from '../Components/contact/ContactForm.jsx';
 import ContactInfo from '../Components/contact/ContactInfo.jsx';
 import Map from '../Components/Map';
-import Footer from '../Components/Footer';
 import Subscription from '../Components/Subscription';
 
 const page = () => {
@@ -42,10 +40,6 @@ const page = () => {
         <div className="block ">
           <Subscription />
         </div>
-      </div>
-
-      <div>
-        <Footer />
       </div>
     </div>
   );

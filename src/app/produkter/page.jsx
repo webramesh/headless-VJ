@@ -1,5 +1,4 @@
 import { getAllProducts } from '@/src/lib/api/productsAPI';
-import Footer from '../Components/Footer';
 import Navbar from '../Components/Navbar';
 import ProductCard from '../Components/ProductCard';
 import Sidebar from '../Components/Sidebar';
@@ -35,7 +34,6 @@ const page = async () => {
           <Sidebar />
         </div>
       </div>
-      <Footer />
     </>
   );
 };

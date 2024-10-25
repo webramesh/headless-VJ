@@ -1,9 +1,7 @@
-import Footer from '@/src/app/Components/Footer';
 import Navbar from '@/src/app/Components/Navbar';
 import Sidebar from '@/src/app/Components/Sidebar';
 import SubscriptionForm from '@/src/app/Components/subscription/SubscriptionForm';
 import CatAccordion from '@/src/app/[category]/Components/CatAccordion';
-import JoinTeamForm from '../Components/JoinTeamForm';
 import lugana from '@/public/Lugana.png';
 import Image from 'next/image';
 import CombineWineFoodForm from '../Components/CombineWineFoodForm';
@@ -36,8 +34,6 @@ function page() {
           <Sidebar />
         </div>
       </div>
-
-      <Footer />
     </>
   );
 }

@@ -9,7 +9,6 @@ import Wine from './Components/Wine.jsx';
 import SkeletonLoader from './Components/SkeletonLoading/SkeletonLoader.jsx';
 import { useState, useEffect } from 'react';
 import Info from './Components/Info.jsx';
-import Footer from './Components/Footer.jsx';
 
 export default function Home() {
   const [loading, setLoading] = useState(true);
@@ -38,7 +37,6 @@ export default function Home() {
           <Wine />
           <Card title="NYHETER" subtitle="Den mest populära artikeln i dryckesvärlden" />
           <Info />
-          <Footer />
 
           {/* post */}
           {/* trending */}

@@ -1,38 +1,34 @@
+import { getProducentBySlug } from '@/src/lib/api/producenterAPI';
 import Link from 'next/link';
 
-export default function Content({ params }) {
+export default async function Content({ params }) {
+  const producent = await getProducentBySlug(params.slug);
+  const { title, content } = producent;
   return (
     <div className="p-2 md:w-1/2 ">
-      <div className=" text-xs lg:text-sm text-red-500 uppercase">italien land</div>
+      <div className=" text-xs lg:text-sm text-red-500 uppercase">Address</div>
 
-      <h1 className="font-bold text-lg lg:text-4xl capitalize">{params.slug}</h1>
+      <h1 className="font-bold text-lg lg:text-4xl">{title}</h1>
 
       <div className="text-xs md:text-sm my-1 lg:my-4 flex gap-1">
-        Hem » Producenter » <p className="capitalize">{params.slug}</p>
+        <Link href="/">Hem</Link>
+        &nbsp;»&nbsp;
+        <Link href="/vin-producenter">Producenter</Link>» {title}
       </div>
-      <p className="text-sm lg:text-base mb-1 lg:mb-2 text-justify">
-        {/* import content */}
-        Nigab är en framstående vinproducent som är känd för sina högkvalitativa viner och passion för vinframställning.
-        Med en gedigen kunskap och erfarenhet inom vinodling och vinmakning har de skapat ett imponerande sortiment av
-        viner med en unik karaktär och stil. Nigab strävar efter att producera viner av högsta kvalitet genom att
-        noggrant välja druvor och använda moderna vinmakningstekniker. Deras viner är välbalanserade, smakrika och
-        uttrycksfulla och erbjuder en njutbar och minnesvärd vinupplevelse. Utforska deras sortiment av viner och
-        upptäck den unika smakprofilen och personligheten som Nigab har att erbjuda. Oavsett om du är en erfaren
-        vinprovare eller nybörjare kommer Nigabs viner att locka dina sinnen och ge en förstklassig vinupplevelse.
-      </p>
+      <p className="text-sm lg:text-base mb-1 lg:mb-2 text-justify">{content}</p>
       <ul className="text-sm lg:text-base">
         <li>
           <b>Adress:&nbsp;</b>
-          Italien, Piemonte, Barolo
+          Italien, Piemonte, Barolo (Remaining)
         </li>
         <li>
           <b>Producent:&nbsp;</b>
-          Nigab
+          {title}
         </li>
         <li>
           <b>Hemsida:&nbsp;</b>
           <Link className="text-[#eb7272]" href="http://www.fitapreta.com/" target="_blank">
-            http://www.fitapreta.com/
+            http://www.fitapreta.com/ (remaining)
           </Link>
         </li>
       </ul>

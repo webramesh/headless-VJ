@@ -6,7 +6,7 @@ export default function layout({ children }) {
   return (
     <>
       {children}
-      <div className="container mx-auto my-2 lg:my-10 p-2 md:flex gap-5">
+      <div className="container mx-auto my-2 lg:my-5 p-2 md:flex gap-5 items-center">
         <div className="md:w-2/3">
           <SubscriptionForm />
         </div>

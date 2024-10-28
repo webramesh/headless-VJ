@@ -87,47 +87,7 @@ export async function getPostBySlug(slug) {
     return null;
   }
 }
-// export async function getPostBySlug(slug) {
-//   try {
-//     const { data } = await client.query({
-//       query: gql`
-//         query PostBySlug($slug: ID!) {
-//           post(id: $slug, idType: SLUG) {
-//             date
-//             id
-//             title
-//             featuredImage {
-//               node {
-//                 mediaItemUrl
-//               }
-//             }
-//             categories {
-//               nodes {
-//                 name
-//               }
-//             }
-//             author {
-//               node {
-//                 name
-//                 mediaItems {
-//                   nodes {
-//                     mediaItemUrl
-//                   }
-//                 }
-//               }
-//             }
-//           }
-//         }
-//       `,
-//       variables: { slug },
-//     });
 
-//     return data.post;
-//   } catch (error) {
-//     console.error('Error fetching post:', error);
-//     return null;
-//   }
-// }
 export async function getAllCategories() {
   try {
     const { data } = await client.query({
@@ -158,6 +118,7 @@ async function getCategoryBySlug(slug) {
         query CategoryBySlug($slug: ID!) {
           category(id: $slug, idType: SLUG) {
             name
+            description
           }
         }
       `,
@@ -170,7 +131,6 @@ async function getCategoryBySlug(slug) {
     return null;
   }
 }
-
 async function getPostsByCategoryInternal(slug) {
   try {
     const { data } = await client.query({
@@ -183,9 +143,20 @@ async function getPostsByCategoryInternal(slug) {
               slug
               excerpt
               date
+              featuredImage {
+                node {
+                  sourceUrl
+                }
+              }
+              author {
+                node {
+                  name
+                }
+              }
               categories {
                 nodes {
                   name
+                  description
                   slug
                 }
               }
@@ -202,14 +173,14 @@ async function getPostsByCategoryInternal(slug) {
     return [];
   }
 }
-
 export async function getPostsByCategory(slug) {
   // Fetch posts for the category
   const posts = await getPostsByCategoryInternal(slug);
 
-  // Fetch the category name based on the slug
+  // Fetch the category name and description based on the slug
   const categoryData = await getCategoryBySlug(slug);
   const categoryName = categoryData ? categoryData.name : null;
+  const categoryDescription = categoryData ? categoryData.description : null;
 
-  return { posts, categoryName };
+  return { posts, categoryName, categoryDescription };
 }

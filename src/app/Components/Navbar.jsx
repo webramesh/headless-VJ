@@ -1,33 +1,24 @@
 'use client';
 
 import Link from 'next/link';
-import { useState, useRef, useEffect } from 'react';
+import { useState } from 'react';
 import Image from 'next/image';
 import logo from '@/public/vinjournalen-logo.png';
-import twitter from '@/public/twitter.png';
-import fb from '@/public/fb.png';
-import insta from '@/public/insta.png';
 import Searchbar from './Searchbar';
 import vinlogo from '@/public/vinlogo.png';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBars, faTimes } from '@fortawesome/free-solid-svg-icons';
 import { ChevronDownIcon } from '@heroicons/react/20/solid';
-
-const CustomMenuItem = ({ href, children }) => {
-  return (
-    <Link href={href} className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900">
-      {children}
-    </Link>
-  );
-};
+import { usePathname } from 'next/navigation';
+import { faFacebookF, faInstagram, faXTwitter } from '@fortawesome/free-brands-svg-icons';
 
 export default function Navbar({ menuData }) {
-  // const menu = menuData?.menuItems?.edges;
   const menu = menuData;
+  const pathname = usePathname();
+  const path = pathname + '/';
 
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
-  const dropdownRef = useRef(null);
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
@@ -35,21 +26,12 @@ export default function Navbar({ menuData }) {
 
   const closeMenu = () => {
     setIsMenuOpen(false);
+    setIsDropdownOpen(false);
   };
 
-  useEffect(() => {
-    const handleClickOutside = (event) => {
-      if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
-        setIsDropdownOpen(false);
-      }
-    };
-
-    document.addEventListener('mousedown', handleClickOutside);
-    return () => {
-      document.removeEventListener('mousedown', handleClickOutside);
-    };
-  }, []);
-
+  const toggleDropDown = () => {
+    setIsDropdownOpen(!isDropdownOpen);
+  };
   return (
     <nav className="bg-[#F5F5F5]">
       <div className="container mx-auto px-8 py-2 lg:py-4 flex flex-col lg:flex-row lg:items-center lg:justify-between gap-1">
@@ -74,6 +56,7 @@ export default function Navbar({ menuData }) {
           className={`fixed inset-0 bg-[#F5F5F5] z-50 transform transition-transform duration-300 ease-in-out ${
             isMenuOpen ? 'translate-x-0' : 'translate-x-full'
           } lg:hidden h-screen overflow-y-auto`}
+          onClick={isDropdownOpen ? toggleDropDown : undefined}
         >
           <div className="flex justify-end">
             <button onClick={closeMenu} className="p-2 focus:outline-none">
@@ -92,31 +75,35 @@ export default function Navbar({ menuData }) {
 
             {menu?.menuItems?.edges?.reduce((acc, { node }) => {
               // Check if this node is a child of any other node
-              const isSubmenuItem = menu?.menuItems?.edges?.some(
-                ({ node: parentNode }) =>
-                  parentNode.childItems &&
-                  parentNode.childItems.edges.some(({ node: childNode }) => childNode.id === node.id)
+              const isSubmenuItem = menu?.menuItems?.edges?.some(({ node: parentNode }) =>
+                parentNode?.childItems?.edges?.some(({ node: childNode }) => childNode.id === node.id)
               );
 
               // Only render if it's not a submenu item of another menu
               if (!isSubmenuItem) {
                 acc.push(
                   <div key={node.id} className="relative group">
-                    <Link onClick={closeMenu} href={node.path || '#'} className="flex items-center justify-between">
+                    <Link
+                      onClick={node.path ? closeMenu : toggleDropDown}
+                      href={node.path || '#'}
+                      className={`flex items-center justify-between ${path === node.path && 'text-[#c90022]'}`}
+                    >
                       {node?.label}
-                      {node?.childItems && node?.childItems?.edges && node?.childItems?.edges?.length > 0 && (
+                      {node?.childItems?.edges?.length > 0 && (
                         <ChevronDownIcon className="-mr-1 ml-2 h-5 w-5" aria-hidden="true" />
                       )}
                     </Link>
 
-                    {node.childItems && node.childItems.edges && node.childItems.edges.length > 0 && (
-                      <div className="absolute hidden  group-hover:block bottom-0 right-0 z-10 pt-2 w-56 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
-                        {node.childItems.edges.map(({ node: childNode }) => (
+                    {node?.childItems?.edges?.length > 0 && (
+                      <div
+                        className={`absolute ${isDropdownOpen ? 'block' : 'hidden'} bottom-8 left-0 z-10 pt-2 w-48 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none`}
+                      >
+                        {node?.childItems?.edges?.map(({ node: childNode }) => (
                           <div key={childNode.id}>
                             <Link
                               href={childNode.path || '#'}
                               onClick={closeMenu}
-                              className="block px-4 py-2 hover:bg-gray-200"
+                              className={`block px-4 py-2 hover:bg-gray-200 ${path === childNode.path && 'text-[#c90022]'}`}
                             >
                               {childNode.label}
                             </Link>
@@ -134,9 +121,16 @@ export default function Navbar({ menuData }) {
             <hr className="w-[75%] border-t-1 mt-16 border-[#CCC]" />
           </div>
           <div className="flex justify-center items-center mt-6 gap-6">
-            <Image src={twitter} alt="Twitter" className="object-cover" width={20} height={20} />
-            <Image src={fb} alt="Facebook" className="object-cover" width={20} height={20} />
-            <Image src={insta} alt="Instagram" className="object-cover" width={20} height={20} />
+            <Link href="https://twitter.com/hashtag/Vinjournalen" target="_blank">
+              <FontAwesomeIcon icon={faXTwitter} className="text-red-600" />
+            </Link>
+            <Link href="https://m.facebook.com/vinjournalen" target="_blank">
+              <FontAwesomeIcon icon={faFacebookF} className="text-red-600" />
+            </Link>
+
+            <Link href="https://www.instagram.com/vinjournalen.se/" target="_blank">
+              <FontAwesomeIcon icon={faInstagram} className="text-red-600" />
+            </Link>
           </div>
           <div className="flex justify-center w-full mt-6">
             <hr className="w-[75%] border-t-1 border-[#CCC]" />
@@ -145,9 +139,6 @@ export default function Navbar({ menuData }) {
 
         {/* Desktop View */}
         <div className="hidden  lg:text-sm xl:text-lg lg:flex lg:justify-center lg:items-center lg:space-x-2 xl:space-x-4">
-          {/* <div className="flex justify-between items-center"> */}
-
-          {/* <div className="hidden  lg:text-sm xl:text-lg lg:flex lg:justify-center lg:items-center lg:space-x-2 xl:space-x-4"> */}
           {menu?.menuItems?.edges?.reduce((acc, { node }) => {
             // Check if this node is a child of any other node
             const isSubmenuItem = menu?.menuItems?.edges.some(
@@ -160,21 +151,25 @@ export default function Navbar({ menuData }) {
             if (!isSubmenuItem) {
               acc.push(
                 <div key={node.id} className="relative group">
-                  <Link onClick={closeMenu} href={node.path || '#'} className="flex items-center justify-between">
+                  <Link
+                    onClick={closeMenu}
+                    href={node.path || '#'}
+                    className={`flex items-center justify-between ${path === node.path ? 'text-[#c90022]' : 'hover:text-[#e70826]'}`}
+                  >
                     {node?.label}
-                    {node?.childItems && node?.childItems?.edges && node?.childItems?.edges?.length > 0 && (
+                    {node?.childItems?.edges?.length > 0 && (
                       <ChevronDownIcon className="-mr-1 ml-2 h-5 w-5" aria-hidden="true" />
                     )}
                   </Link>
 
-                  {node?.childItems && node?.childItems?.edges && node?.childItems?.edges?.length > 0 && (
+                  {node?.childItems?.edges?.length > 0 && (
                     <div className="absolute hidden  group-hover:block right-0 z-10 pt-2 w-56 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
                       {node.childItems.edges.map(({ node: childNode }) => (
                         <div key={childNode.id}>
                           <Link
                             href={childNode.path || '#'}
                             onClick={closeMenu}
-                            className="block px-4 py-2 hover:bg-gray-200"
+                            className={`block px-4 py-2 hover:bg-gray-200  ${path === childNode.path ? 'text-[#c90022]' : 'hover:text-[#e70826]'}`}
                           >
                             {childNode.label}
                           </Link>
@@ -187,7 +182,6 @@ export default function Navbar({ menuData }) {
             }
             return acc;
           }, [])}
-          {/* ----------------------- */}
         </div>
 
         {/* Searchbar for Desktop */}

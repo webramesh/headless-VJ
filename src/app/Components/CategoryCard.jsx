@@ -22,7 +22,7 @@ const Card = ({ posts, title, subtitle }) => {
         {posts.map((post) => (
           <Link href={`/${post.categories?.nodes[0]?.slug || 'uncategorized'}/${post.slug}`} key={post.id}>
             <div className="flex flex-col cursor-pointer hover:shadow-lg transition-shadow h-full">
-              <div className="relative w-full h-48 md:h-56">
+              <div className="relative w-full h-40">
                 <Image
                   src={post.featuredImage?.node?.sourceUrl || '/placeholder.png'}
                   alt={post.title || 'Post image'}

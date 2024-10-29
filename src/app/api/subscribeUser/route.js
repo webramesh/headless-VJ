@@ -27,9 +27,12 @@ export async function POST(req) {
     });
 
     if (response.status >= 400) {
+      const errorMessage = await response.json();
+      // console.log('Error subscribing to newsletter:', await response.json());
       return new Response(
         JSON.stringify({
-          error: `There was an error subscribing to the newsletter. Please contact me at peter@peterlunch.com.`,
+          // error: `There was an error subscribing to the newsletter. Please contact me at peter@peterlunch.com.`,
+          error: errorMessage?.title || 'There was an error subscribing to the newsletter.',
         }),
         { status: 400 }
       );

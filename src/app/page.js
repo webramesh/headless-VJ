@@ -34,7 +34,7 @@ export default async function Home() {
           trendingPosts={trendingPosts.slice(0, 6)}
         />
         {/* <Subscription /> */}
-        <div className="container mx-auto grid grid-cols-6 items-center justify-between gap-14 px-2 my-10">
+        <div className="container mx-auto block md:grid grid-cols-6 items-center justify-between gap-14 px-2 my-10">
           <div className="col-span-4">
             <SubscriptionForm />
           </div>

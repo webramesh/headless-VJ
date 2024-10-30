@@ -25,14 +25,16 @@ const SubscriptionBox = ({ ordlista }) => {
   }, []);
 
   const TitleSection = ({ icon, label, title }) => (
-    <div className="flex md:flex-col items-center gap-12 md:gap-4">
+    <div className="flex md:flex-col items-center gap-6 md:gap-0">
       <div className="w-12 h-12 flex-shrink-0">
-        <Image src={icon} alt={label} width={64} height={64} className="object-cover w-full h-full" />
+        <Image src={icon} alt={label} width={64} height={64} className="w-10 h-10 md:w-8 md:h-8" />
+        {/* <Image src={icon} alt={label} width={54} height={54} className="object-cover w-full h-full" /> */}
       </div>
       <div className="text-center">
         <div className="text-sm font-semibold">{label}</div>
-        <p className="text-sm">
-          {title?.title && <Link href={`http://localhost:3000/${title?.uri}`}>{title?.title || ''}</Link>}
+        <p className="text-sm text-red-600">
+          {title?.title && <Link href={`${title?.uri}`}>{title?.title || ''}</Link>}
+          {/* {title?.title && <Link href={`http://localhost:3000/${title?.uri}`}>{title?.title || ''}</Link>} */}
         </p>
       </div>
     </div>

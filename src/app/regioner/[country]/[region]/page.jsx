@@ -2,26 +2,21 @@ import Map from '@/src/app/Components/Map';
 import Image from 'next/image';
 import Link from 'next/link';
 import lugana from '@/public/Lugana.png';
+import BreadCrumb from '@/src/app/Components/breadcrumb/BreadCrumb';
 
 function page({ params }) {
   const { country, region } = params;
   return (
     <div>
       <h1 className="text-2xl lg:text-3xl  font-semibold uppercase">{region}</h1>
-      <div className=" text-xs lg:text-sm my-2 lg:my-5 ">
-        Hem » &nbsp;
-        <Link href={`/vin-regioner`} className="capitalize">
-          Regioner
-        </Link>
-        &nbsp; »&nbsp;
-        <Link href={`/regioner/${country}`} className="capitalize">
-          {country}
-        </Link>
-        &nbsp;»&nbsp;
-        <Link href={`/regioner/${country}/${region}`} className="capitalize">
-          {region}
-        </Link>
-      </div>
+      <BreadCrumb
+        title1="Regioner"
+        link1="/vin-regioner"
+        title2={country}
+        link2={`/lander/${country}`}
+        title3={region}
+      />
+
       <div className="h-80">
         <Map />
       </div>

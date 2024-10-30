@@ -1,34 +1,31 @@
-import React from 'react';
 import SubscriptionForm from '../Components/subscription/SubscriptionForm';
 import RegionalCardItem from '../Components/regionalCard/RegionalCardItem.jsx';
 import Map from '../Components/Map.jsx';
 import Sidebar from '../Components/Sidebar.jsx';
 import CatAccordion from '../[category]/Components/CatAccordion.jsx';
+import BreadCrumb from '../Components/breadcrumb/BreadCrumb';
+import { getAllRegions } from '@/src/lib/api/regionerAPI';
 
-const page = () => {
+const page = async () => {
+  const regions = await getAllRegions();
   return (
-    <div>
-      <div className="container mx-auto md:max-w-6xl mt-5">
-        <h3 className="mb-5">Breadcrump</h3>
+    <>
+      <div className="container mx-auto mt-5">
+        <BreadCrumb title1="Regioner" />
         <div className="block md:grid md:grid-cols-3   md:gap-8">
           <div className=" w-full col-span-2">
+            <h1 className="text-2xl lg:text-3xl mb-4 font-bold uppercase">Regioner</h1>
             <div className="h-[50vh] mx-4 md:mx-auto">
               <Map />
             </div>
 
-            <div className="  w-full mx-4 md:mx-auto mt-5 block md:grid md:grid-cols-3  gap-4 ">
-              <RegionalCardItem />
-              <RegionalCardItem />
-              <RegionalCardItem />
-              <RegionalCardItem />
-              <RegionalCardItem />
-              <RegionalCardItem />
-              <RegionalCardItem />
-              <RegionalCardItem />
-              <RegionalCardItem />
-              <RegionalCardItem />
-              <RegionalCardItem />
-              <RegionalCardItem />
+            <div className="w-full mx-4 md:mx-auto mt-5 block md:grid md:grid-cols-2 lg:grid-cols-3  gap-4 ">
+              {regions.map((region) => (
+                <div key={region.id}>
+                  <RegionalCardItem region={region} />
+                </div>
+              ))}
+              pagination
             </div>
 
             <div className="mt-8 mx-4 md:mx-auto">
@@ -50,7 +47,7 @@ const page = () => {
           <Sidebar />
         </div>
       </div>
-    </div>
+    </>
   );
 };
 

@@ -1,5 +1,6 @@
 import { getProducentBySlug } from '@/src/lib/api/producenterAPI';
 import Link from 'next/link';
+import BreadCrumb from '../../Components/breadcrumb/BreadCrumb';
 
 export default async function Content({ params }) {
   const producent = await getProducentBySlug(params.slug);
@@ -10,11 +11,7 @@ export default async function Content({ params }) {
 
       <h1 className="font-bold text-lg lg:text-4xl">{title}</h1>
 
-      <div className="text-xs md:text-sm my-1 lg:my-4 flex gap-1">
-        <Link href="/">Hem</Link>
-        &nbsp;»&nbsp;
-        <Link href="/vin-producenter">Producenter</Link>» {title}
-      </div>
+      <BreadCrumb title1="Producenter" link1="/vin-producenter" title2={title} />
       <p className="text-sm lg:text-base mb-1 lg:mb-2 text-justify">{content}</p>
       <ul className="text-sm lg:text-base">
         <li>

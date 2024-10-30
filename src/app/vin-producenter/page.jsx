@@ -2,14 +2,14 @@ import { getAllProducenter } from '@/src/lib/api/producenterAPI';
 import Map from '../Components/Map';
 import Pagination from '../Components/Pagination';
 import ProducenterCard from '../Components/producenterCard/ProducenterCard';
-import Link from 'next/link';
+import BreadCrumb from '../Components/breadcrumb/BreadCrumb';
 
 export default async function page() {
   const allproducenters = await getAllProducenter();
   return (
     <>
       <div className=" text-xs lg:text-sm flex gap-1 my-2">
-        <Link href="/">Hem</Link> » Producenter
+        <BreadCrumb title1="Producenter" />
       </div>
       <h1 className="text-2xl lg:text-3xl  mb-4 font-bold uppercase ">Producenter</h1>
       <div className="h-96">

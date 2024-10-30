@@ -11,6 +11,7 @@ import vegetables from '@/public/vegetables.png';
 import chicken from '@/public/chicken.png';
 import Link from 'next/link';
 import { useState } from 'react';
+import BreadCrumb from '../../Components/breadcrumb/BreadCrumb';
 
 export default function ProductSection({ product }) {
   const [showReadMore, setShowReadMore] = useState(false);
@@ -56,14 +57,7 @@ export default function ProductSection({ product }) {
       <div className="flex flex-col md:flex-row gap-6 mt-4 py-8 lg:py-16">
         {/* Left section */}
         <div className="w-full md:w-1/3">
-          <div className=" text-xs text-black">
-            <Link href="/" className="text-red-500">
-              Hem
-            </Link>
-            &nbsp;&gt;&gt;&nbsp;
-            <Link href="/produkter">Produkter</Link>
-            &gt;&gt; {title}
-          </div>
+          <BreadCrumb title1="Produkter" link1="/produkter" title2={title} />
           <div className="md:sticky md:top-10 lg:top-28">
             <div className="md:hidden">
               <h1 className=" items-start text-black text-2xl w-full">

@@ -104,12 +104,18 @@ export async function getAllCategories() {
       `,
     });
 
+  
+
     return data.categories.nodes;
+    
+   
   } catch (error) {
     console.error('Error fetching categories:', error);
     return [];
   }
 }
+
+
 
 async function getCategoryBySlug(slug) {
   try {
@@ -126,10 +132,12 @@ async function getCategoryBySlug(slug) {
     });
 
     return data.category;
+   
   } catch (error) {
     console.error('Error fetching category:', error);
     return null;
   }
+
 }
 async function getPostsByCategoryInternal(slug) {
   try {

@@ -15,6 +15,7 @@ export async function getAllWineCategories() {
               categoryId
               count
               name
+              slug
               categoriesImagesAndOtherFields {
                 categoriesImage {
                   node {

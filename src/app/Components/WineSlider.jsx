@@ -1,47 +1,53 @@
 'use client';
 import React from 'react';
+import Link from 'next/link';
 import Slider from 'react-slick';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 
-const WineCard = ({ backgroundImage, title, category, articles, description, colorPicker }) => (
-  <div className="p-2">
-    <div
-      className="relative w-full h-64 bg-cover bg-center transition-all duration-300 ease-in-out group"
-      style={{ backgroundImage: `url('${backgroundImage}')` }}
-    >
-      <div
-        className="absolute inset-0 bg-black opacity-0 transition-opacity duration-300 ease-in-out group-hover:opacity-50"
-        aria-hidden="true"
-      ></div>
-      <div className="absolute inset-0 flex items-center justify-center text-center">
-        <h2 className="text-white text-3xl lg:text-4xl font-bold leading-snug group-hover:opacity-0 transition-opacity duration-300 ease-in-out">
-          {title.split('\n').map((line, index) => (
-            <React.Fragment key={index}>
-              {line}
-              {index < title.split('\n').length - 1 && <br />}
-            </React.Fragment>
-          ))}
-        </h2>
-        <div className="absolute inset-0 mt-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300 ease-in-out">
-          <div className="flex items-center justify-between px-4">
-            <div
-              className="flex flex-start m-4 w-fit px-3 text-white font-outfit text-sm font-thin rounded-lg"
-              style={{ backgroundColor: colorPicker || '#000000' }}
-            >
-              {category.name}
+
+const WineCard = ({ backgroundImage, title, category, articles, description, colorPicker, slug }) => {
+  return (
+    <Link href={`/${slug}`} className="block">
+      <div className="p-2">
+        <div
+          className="relative w-full h-64 bg-cover bg-center transition-all duration-300 ease-in-out group cursor-pointer"
+          style={{ backgroundImage: `url('${backgroundImage}')` }}
+        >
+          <div
+            className="absolute inset-0 bg-black opacity-0 transition-opacity duration-300 ease-in-out group-hover:opacity-50"
+            aria-hidden="true"
+          ></div>
+          <div className="absolute inset-0 flex items-center justify-center text-center">
+            <h2 className="text-white text-3xl lg:text-4xl font-bold leading-snug group-hover:opacity-0 transition-opacity duration-300 ease-in-out">
+              {title.split('\n').map((line, index) => (
+                <React.Fragment key={index}>
+                  {line}
+                  {index < title.split('\n').length - 1 && <br />}
+                </React.Fragment>
+              ))}
+            </h2>
+            <div className="absolute inset-0 mt-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300 ease-in-out">
+              <div className="flex items-center justify-between px-4">
+                <div
+                  className="flex flex-start m-4 w-fit px-3 text-white font-outfit text-sm font-thin rounded-lg"
+                  style={{ backgroundColor: colorPicker || '#000000' }}
+                >
+                  {category.name}
+                </div>
+                <div className="text-white text-sm font-outfit">{articles} ARTIKLAR</div>
+              </div>
+              <p className="font-outfit text-lg md:text-2xl flex items-center justify-center leading-snug p-7 text-white font-medium">
+                {description}
+              </p>
             </div>
-            <div className="text-white text-sm font-outfit">{articles} ARTIKLAR</div>
           </div>
-          <p className="font-outfit text-lg md:text-2xl flex items-center justify-center leading-snug p-7 text-white font-medium">
-            {description}
-          </p>
         </div>
       </div>
-    </div>
-  </div>
-);
+    </Link>
+  );
+};
 
 const CustomArrow = ({ direction, onClick }) => (
   <button
@@ -105,7 +111,9 @@ const WineSlider = ({ categories = [] }) => {
     articles: category.count || 0,
     description: category.categoriesImagesAndOtherFields?.shortDescription || 'No description available',
     colorPicker: category.categoriesImagesAndOtherFields?.categorycolorpicker || '#000000',
+    slug: category.slug || 'Undefined',
   }));
+  console.log( wineCards)
 
   return (
     <div className="container mx-auto p-1 relative">

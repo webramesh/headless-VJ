@@ -12,9 +12,9 @@ export default async function page() {
         <BreadCrumb title1="Producenter" />
       </div>
       <h1 className="text-2xl lg:text-3xl  mb-4 font-bold uppercase ">Producenter</h1>
-      <div className="h-96">
+      {/* <div className="h-96">
         <Map />
-      </div>
+      </div> */}
       <div className="mt-10 grid md:grid-cols-2 lg:grid-cols-3 gap-5">
         {allproducenters.map((producenter) => (
           <div key={producenter.id}>

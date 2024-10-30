@@ -19,7 +19,7 @@ function ProducenterCard({ producenter }) {
       <h2 className="text-xl lg:text-2xl">{title}</h2>
       <Link
         href={uri}
-        className="inline-flex items-center px-3 py-1 text-sm font-medium text-center text-white bg-[#FF0303]  rounded-lg hover:bg-[#ff8181] gap-2 w-1/2 mb-5 cursor-pointer"
+        className="inline-flex justify-center items-center px-3 py-1 text-sm font-medium text-center text-white bg-[#FF0303]  rounded-lg hover:bg-[#ff8181] gap-2 w-1/2 md:w-2/3 mb-5 cursor-pointer"
       >
         Mer Info
         <FontAwesomeIcon icon={faArrowRight} />

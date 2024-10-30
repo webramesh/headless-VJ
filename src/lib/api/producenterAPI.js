@@ -28,7 +28,7 @@ export async function getAllProducenter() {
 
     return data.producenter.nodes;
   } catch (error) {
-    console.error('Error fetching posts:', error);
+    console.error('Error fetching producents:', error);
     return [];
   }
 }
@@ -49,7 +49,7 @@ export async function getProducentBySlug(slug) {
 
     return data.producentBy;
   } catch (error) {
-    console.error('Error fetching post:', error);
+    console.error('Error fetching producent:', error);
     return null;
   }
 }

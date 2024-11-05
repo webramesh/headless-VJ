@@ -40,7 +40,8 @@ export default async function Home() {
             <SubscriptionForm />
           </div>
           <div className="w-full grid col-span-2">
-            <SubscriptionBox ordlista={ordlista} />
+            {/* <SubscriptionBox ordlista={ordlista} /> */}
+            <SubscriptionBox />
           </div>
         </div>
         <WineSlider categories={wineCategories} />

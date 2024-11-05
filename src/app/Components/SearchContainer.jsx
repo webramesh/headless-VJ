@@ -1,5 +1,6 @@
 'use client';
-import React, { useState, useCallback } from 'react';
+
+import React, { useState, useCallback, useRef, useEffect } from 'react';
 import Link from 'next/link';
 import { useDebounce } from 'use-debounce';
 
@@ -10,9 +11,10 @@ export default function SearchContainer({ onSearch }) {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const [searchResults, setSearchResults] = useState({ all: [], posts: [], products: [] });
+  const dropdownRef = useRef(null);
 
   // Close dropdown when clicking outside
-  React.useEffect(() => {
+  useEffect(() => {
     const handleClickOutside = (event) => {
       if (!event.target.closest('.search-container')) {
         setIsDropdownOpen(false);
@@ -24,7 +26,7 @@ export default function SearchContainer({ onSearch }) {
   }, []);
 
   const performSearch = useCallback(async () => {
-    if (debouncedSearchTerm.length >= 3) {
+    if (debouncedSearchTerm.length >= 1) {
       setLoading(true);
       setError(null);
       try {
@@ -43,7 +45,7 @@ export default function SearchContainer({ onSearch }) {
     }
   }, [debouncedSearchTerm, onSearch]);
 
-  React.useEffect(() => {
+  useEffect(() => {
     performSearch();
   }, [performSearch]);
 
@@ -77,13 +79,17 @@ export default function SearchContainer({ onSearch }) {
         </svg>
       </form>
       {isDropdownOpen && (
-        <div className="absolute z-10 w-full mt-1 bg-white border rounded shadow-lg">
-          {loading && <p className="p-2">Loading...</p>}
-          {error && <p className="p-2 text-red-500">Error: {error}</p>}
+        <div
+          ref={dropdownRef}
+          className="absolute z-10 w-full mt-1 bg-white border rounded shadow-lg overflow-y-auto"
+          style={{ maxHeight: '400px' }}
+        >
+          {loading && <p className="p-4 text-center">Loading...</p>}
+          {error && <p className="p-4 text-center text-red-500">Error: {error}</p>}
           {!loading && !error && searchResults.all.length === 0 && debouncedSearchTerm && (
-            <p className="p-2">No results found for "{debouncedSearchTerm}"</p>
+            <p className="p-4 text-center">No results found for "{debouncedSearchTerm}"</p>
           )}
-          {searchResults.all.map((item) => (
+          {searchResults.all.map((item, index) => (
             <Link
               key={item.id}
               href={`/${item.type}/${item.slug}`}
@@ -91,10 +97,10 @@ export default function SearchContainer({ onSearch }) {
                 setIsDropdownOpen(false);
                 setSearchTerm('');
               }}
-              className="block p-2 hover:bg-gray-100"
+              className="block py-3 px-4 hover:bg-gray-100 border-b last:border-b-0"
             >
-              <p className="font-bold">{item.title}</p>
-              <p className="text-sm text-gray-500">{item.type === 'post' ? 'Article' : 'Product'}</p>
+              <p className="font-bold text-sm">{item.title}</p>
+              <p className="text-xs mt-1 text-gray-500">{item.type === 'post' ? 'Article' : 'Product'}</p>
             </Link>
           ))}
         </div>

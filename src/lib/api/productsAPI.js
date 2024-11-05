@@ -43,7 +43,7 @@ export async function getAllProducts() {
 
     return data.produkter.nodes;
   } catch (error) {
-    console.error('Error fetching posts:', error);
+    console.error('Error fetching products:', error);
     return [];
   }
 }
@@ -129,7 +129,7 @@ export async function getProductBySlug(slug) {
 
     return data.produktBy;
   } catch (error) {
-    console.error('Error fetching post:', error);
+    console.error('Error fetching product:', error);
     return null;
   }
 }

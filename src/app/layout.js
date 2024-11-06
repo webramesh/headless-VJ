@@ -4,8 +4,8 @@ import Footer from './Components/Footer';
 import ScrollToTopButton from './Components/ScrollToTopButton';
 import Navbar from './Components/Navbar';
 import { getFooterMenu, getMainMenu } from '../lib/api/menuAPI';
-import { getAllOrdlista } from '../lib/api/ ordlistaAPI';
 import { OrdlistaProvider } from '../context/OrdlistaContext';
+import { getAllOrdlista } from '../lib/api/ordilistaAPI';
 
 const inter = Inter({ subsets: ['latin'] });
 const outfit = Outfit({ subsets: ['latin'] });

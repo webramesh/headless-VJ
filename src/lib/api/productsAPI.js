@@ -1,3 +1,4 @@
+'use server';
 import { ApolloClient, InMemoryCache, gql } from '@apollo/client';
 
 const client = new ApolloClient({
@@ -5,13 +6,16 @@ const client = new ApolloClient({
   cache: new InMemoryCache(),
 });
 
-export async function getAllProducts() {
+export async function getAllProducts(first = 15, last = 0, after = null, before = null) {
   try {
     const { data } = await client.query({
       query: gql`
-        query AllProducts {
-          produkter(first: 15) {
+        query AllProducts($first: Int, $last: Int, $after: String, $before: String) {
+          produkter(first: $first, last: $last, after: $after, before: $before) {
             nodes {
+              id
+              title
+              slug
               featuredImage {
                 node {
                   sourceUrl
@@ -27,24 +31,30 @@ export async function getAllProducts() {
                   slug
                 }
               }
-              slug
-              title
-              id
               produktslander {
                 nodes {
                   name
                 }
               }
             }
+            pageInfo {
+              endCursor
+              hasNextPage
+              startCursor
+              hasPreviousPage
+            }
           }
         }
       `,
+      variables: { first, last, after, before },
     });
-
-    return data.produkter.nodes;
+    return {
+      products: data?.produkter?.nodes || [],
+      pageInfo: data?.produkter?.pageInfo || {},
+    };
   } catch (error) {
     console.error('Error fetching products:', error);
-    return [];
+    return { products: [], pageInfo: {} };
   }
 }
 

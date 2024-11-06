@@ -27,16 +27,14 @@ export default async function RootLayout({ children }) {
   return (
     <html lang="en">
       <body className={`${outfit.className} ${inter.className}`}>
-
-        <OrdlistaProvider ordlista={ordlista}>
         <ApolloProvider>
-          <Navbar menuData={menuData} />
-          {children}
-          <ScrollToTopButton />
-          <Footer menuItems={footerMenu} />
-        </OrdlistaProvider>
+          <OrdlistaProvider ordlista={ordlista}>
+            <Navbar menuData={menuData} />
+            {children}
+            <ScrollToTopButton />
+            <Footer menuItems={footerMenu} />
+          </OrdlistaProvider>
         </ApolloProvider>
-
       </body>
     </html>
   );

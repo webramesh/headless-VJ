@@ -5,7 +5,7 @@ import ScrollToTopButton from './Components/ScrollToTopButton';
 import Navbar from './Components/Navbar';
 import { getFooterMenu, getMainMenu } from '../lib/api/menuAPI';
 import { OrdlistaProvider } from '../context/OrdlistaContext';
-import { getAllOrdlista } from '../lib/api/ordilistaAPI';
+import { getAllOrdlistaCategories } from '../lib/api/ordilistaAPI';
 
 const inter = Inter({ subsets: ['latin'] });
 const outfit = Outfit({ subsets: ['latin'] });
@@ -22,7 +22,7 @@ export default async function RootLayout({ children }) {
   const menuData = await getMainMenu();
   const footerMenu = await getFooterMenu();
 
-  const [ordlista] = await Promise.all([getAllOrdlista()]);
+  const [ordlista] = await Promise.all([getAllOrdlistaCategories()]);
   return (
     <html lang="en">
       <body className={`${outfit.className} ${inter.className}`}>

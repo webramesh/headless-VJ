@@ -39,3 +39,28 @@ export async function getAllRegions() {
     return [];
   }
 }
+
+export async function getRegionByURL(url) {
+  try {
+    const { data } = await client.query({
+      query: gql`
+        query RegionByURL($url: String!) {
+          regionBy(uri: $url) {
+            featuredImage {
+              node {
+                sourceUrl
+              }
+            }
+            content
+          }
+        }
+      `,
+      variables: { url },
+    });
+
+    return data.regionBy;
+  } catch (error) {
+    console.error('Error fetching region:', error);
+    return null;
+  }
+}

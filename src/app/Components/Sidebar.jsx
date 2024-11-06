@@ -5,7 +5,7 @@ import WineTourism from './WineTourism';
 
 function Sidebar() {
   return (
-    <div>
+    <>
       <SubscriptionBox />
       <SenasteNytt />
       <div className="space-y-8 mt-4">
@@ -16,7 +16,7 @@ function Sidebar() {
       <div className="my-10">
         <WineTourism />
       </div>
-    </div>
+    </>
   );
 }
 

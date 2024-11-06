@@ -6,7 +6,6 @@ import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 
-
 const WineCard = ({ backgroundImage, title, category, articles, description, colorPicker, slug }) => {
   return (
     <Link href={`/${slug}`} className="block">
@@ -113,7 +112,6 @@ const WineSlider = ({ categories = [] }) => {
     colorPicker: category.categoriesImagesAndOtherFields?.categorycolorpicker || '#000000',
     slug: category.slug || 'Undefined',
   }));
-  console.log( wineCards)
 
   return (
     <div className="container mx-auto p-1 relative">

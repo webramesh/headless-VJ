@@ -21,7 +21,7 @@ const RegionalCardItem = ({ region }) => {
         <h2 className="text-xl font-black">{title.length > 15 ? title.slice(0, 15) + '...' : title}</h2>
 
         <div className="my-3 font-light text-gray-500 text-md">
-          <p dangerouslySetInnerHTML={{ __html: `${excerpt.slice(0, 80)}...` }} />
+          <div dangerouslySetInnerHTML={{ __html: `${excerpt.slice(0, 80)}...` }} />
         </div>
 
         <Link

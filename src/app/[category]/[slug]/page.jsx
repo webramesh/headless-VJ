@@ -5,7 +5,6 @@ import PostDetailsHero from '../Components/PostDetailsHero';
 export default async function PostDetails({ params }) {
   const { category, slug } = params;
   const post = await getPostBySlug(slug);
-  console.log(post?.categories?.nodes[0]?.name);
   if (!post) {
     return <div className="container mx-auto px-4 py-8">Post not found</div>;
   }

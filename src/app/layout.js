@@ -1,5 +1,6 @@
 import { Inter, Outfit } from 'next/font/google';
 import './globals.css';
+import ApolloProvider from '../app/Components/ApolloProvider';
 import Footer from './Components/Footer';
 import ScrollToTopButton from './Components/ScrollToTopButton';
 import Navbar from './Components/Navbar';
@@ -26,12 +27,16 @@ export default async function RootLayout({ children }) {
   return (
     <html lang="en">
       <body className={`${outfit.className} ${inter.className}`}>
+
         <OrdlistaProvider ordlista={ordlista}>
+        <ApolloProvider>
           <Navbar menuData={menuData} />
           {children}
           <ScrollToTopButton />
           <Footer menuItems={footerMenu} />
         </OrdlistaProvider>
+        </ApolloProvider>
+
       </body>
     </html>
   );

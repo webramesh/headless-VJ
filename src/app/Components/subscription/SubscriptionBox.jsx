@@ -4,8 +4,11 @@ import Image from 'next/image';
 import Link from 'next/link';
 import grape from '@/public/grape.png';
 import corkscrew from '@/public/corkscrew.png';
+import { useOrdlista } from '@/src/context/OrdlistaContext';
 
-const SubscriptionBox = ({ ordlista }) => {
+const SubscriptionBox = () => {
+  const ordlista = useOrdlista();
+
   const [titles, setTitles] = useState({ druver: {}, ordlista: {} });
 
   const getRandomTitle = (items) => items[Math.floor(Math.random() * items.length)];

@@ -3,6 +3,8 @@ import ContactForm from '../Components/contact/ContactForm.jsx';
 import ContactInfo from '../Components/contact/ContactInfo.jsx';
 import Map from '../Components/Map';
 import Subscription from '../Components/Subscription';
+import SubscriptionBox from '../Components/subscription/SubscriptionBox.jsx';
+import SubscriptionForm from '../Components/subscription/SubscriptionForm.jsx';
 
 const page = () => {
   return (
@@ -35,8 +37,14 @@ const page = () => {
           <Map />
         </div>
 
-        <div className="block ">
-          <Subscription />
+        <div className="container mx-auto block md:grid grid-cols-6 items-center justify-between gap-14  my-10">
+          <div className="col-span-4">
+            <SubscriptionForm />
+          </div>
+          <div className="w-full grid col-span-2">
+            {/* <SubscriptionBox ordlista={ordlista} /> */}
+            <SubscriptionBox />
+          </div>
         </div>
       </div>
     </div>

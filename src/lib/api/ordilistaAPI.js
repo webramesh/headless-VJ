@@ -17,6 +17,7 @@ export async function getAllOrdlistaCategories() {
                 nodes {
                   title
                   uri
+                  slug
                 }
               }
             }
@@ -37,7 +38,7 @@ export async function getAllOrdlista() {
     const { data } = await client.query({
       query: gql`
         query AllOdilista {
-          ordlista(first: 400) {
+          ordlista(first: 12) {
             nodes {
               title
               uri
@@ -71,8 +72,9 @@ export async function getOrdlistaBySlug(slug) {
   try {
     const { data } = await client.query({
       query: gql`
-        query OrdlistaBySlug($slug: ID!) {
-          ordlistaItemBy(id: $slug, idType: SLUG) {
+        query OrdlistaBySlug($slug: String!) {
+          ordlistaItemBy(slug: $slug) {
+            date
             title
             content
           }
@@ -81,9 +83,9 @@ export async function getOrdlistaBySlug(slug) {
       variables: { slug },
     });
 
-    return data;
+    return data.ordlistaItemBy;
   } catch (error) {
-    console.error('Error fetching post:', error);
+    console.error('Error fetching ordlista by slug:', error);
     return null;
   }
 }

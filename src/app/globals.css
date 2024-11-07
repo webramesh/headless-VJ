@@ -62,3 +62,25 @@ body {
     --chart-5: 352 83% 91%;
   }
 }
+
+.ordlista-content-style {
+}
+
+.ordlista-content-style h1 {
+  font-size: 2rem;
+}
+
+.ordlista-content-style h3 {
+  font-size: 1.2rem;
+  font-weight: bold;
+  margin-top: 2rem;
+}
+.ordlista-content-style p {
+  font-size: 1rem;
+  line-height: 28px;
+}
+
+.ordlista-content-style li a {
+  color: #0047ab;
+  display: block;
+}

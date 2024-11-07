@@ -2,7 +2,6 @@
 import Image from 'next/image';
 import Link from 'next/link';
 const OrdilistaCard = ({ allOrdlista }) => {
-  console.log(allOrdlista);
   return (
     <div className="grid grid-cols-3 gap-6 items-center justify-between flex-wrap  rounded-md ">
       {allOrdlista?.map((ordlista) => {

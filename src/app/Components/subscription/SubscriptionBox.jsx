@@ -36,7 +36,8 @@ const SubscriptionBox = () => {
       <div className="text-center">
         <div className="text-sm font-semibold">{label}</div>
         <p className="text-sm text-red-600">
-          {title?.title && <Link href={`${title?.uri}`}>{title?.title || ''}</Link>}
+          {/* {title?.title && <Link href={`${title?.uri}`}>{title?.title || ''}</Link>} */}
+          {title?.title && <Link href={`/ordlista`}>{title?.title || ''}</Link>}
           {/* {title?.title && <Link href={`http://localhost:3000/${title?.uri}`}>{title?.title || ''}</Link>} */}
         </p>
       </div>

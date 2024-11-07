@@ -9,7 +9,7 @@ import { usePagination } from '@/src/context/PageContext';
 const PRODUCTS_PER_PAGE = 15;
 
 export default function ProdukterPage() {
-  const { state, dispatch } = usePagination();
+  const { state, dispatch, handleNextPage, handlePreviousPage } = usePagination();
   const { pageNumber, after, before, first, last } = state;
   const [products, setProducts] = useState([]);
   const [pageInfo, setPageInfo] = useState({});
@@ -34,14 +34,6 @@ export default function ProdukterPage() {
     if (isReset) fetchProducts();
   }, [after, before, isReset]);
 
-  const handleNextPage = () => {
-    dispatch({ type: 'HANDLE_NEXT', payload: { pageLimit: PRODUCTS_PER_PAGE, after: pageInfo.endCursor } });
-  };
-
-  const handlePreviousPage = () => {
-    dispatch({ type: 'HANDLE_PREV', payload: { pageLimit: PRODUCTS_PER_PAGE, before: pageInfo.startCursor } });
-  };
-
   return (
     <>
       <div className="grid grid-cols-1 md:grid-cols-3 gap-5 mt-10">
@@ -52,7 +44,12 @@ export default function ProdukterPage() {
         ))}
       </div>
       <hr className="my-10" />
-      <Pagination pageInfo={pageInfo} next={handleNextPage} previous={handlePreviousPage} page={pageNumber} />
+      <Pagination
+        pageInfo={pageInfo}
+        next={() => handleNextPage(PRODUCTS_PER_PAGE, pageInfo.endCursor)}
+        previous={() => handlePreviousPage(PRODUCTS_PER_PAGE, pageInfo.startCursor)}
+        page={pageNumber}
+      />
     </>
   );
 }

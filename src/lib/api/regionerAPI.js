@@ -1,16 +1,14 @@
-import { ApolloClient, InMemoryCache, gql } from '@apollo/client';
+'use server';
+import { gql } from '@apollo/client';
+import { getClient } from './apolloclient';
 
-const client = new ApolloClient({
-  uri: process.env.SITE_URL_ENDPOINT,
-  cache: new InMemoryCache(),
-});
-
-export async function getAllRegions() {
+const client = getClient();
+export async function getAllRegions(first, last, after, before) {
   try {
     const { data } = await client.query({
       query: gql`
-        query AllRegions {
-          regioner(first: 15) {
+        query AllRegions($first: Int, $last: Int, $after: String, $before: String) {
+          regioner(first: $first, last: $last, after: $after, before: $before) {
             nodes {
               excerpt
               title
@@ -28,12 +26,19 @@ export async function getAllRegions() {
                 }
               }
             }
+            pageInfo {
+              endCursor
+              hasNextPage
+              hasPreviousPage
+              startCursor
+            }
           }
         }
       `,
+      variables: { first, last, after, before },
     });
 
-    return data.regioner.nodes;
+    return { regions: data?.regioner?.nodes, pageInfo: data?.regioner?.pageInfo };
   } catch (error) {
     console.error('Error fetching regions:', error);
     return [];

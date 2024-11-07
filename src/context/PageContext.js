@@ -11,7 +11,7 @@ const initialState = {
 function reducer(state, action) {
   switch (action.type) {
     case 'RESET':
-      return { ...state, first: action.payload };
+      return { ...initialState, first: action.payload };
 
     case 'HANDLE_NEXT':
       return {

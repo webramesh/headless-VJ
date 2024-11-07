@@ -55,6 +55,12 @@ export async function getAuthorBySlug(slug) {
                 date
                 slug
                 excerpt
+                categories {
+                  nodes {
+                    name
+                    slug
+                  }
+                }
                 featuredImage {
                   node {
                     altText
@@ -73,7 +79,6 @@ export async function getAuthorBySlug(slug) {
       `,
       variables: { slug },
     });
-
     return data.user;
   } catch (error) {
     console.error('Error fetching author:', error);

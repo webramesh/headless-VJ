@@ -18,7 +18,7 @@ const PaginationButton = ({ disabled, children, onClick }) => (
 export default function Pagination({ pageInfo, next, previous, page }) {
   return (
     <nav className="flex justify-center items-center space-x-2 py-8" aria-label="Pagination">
-      <PaginationButton disabled={!pageInfo?.hasPreviousPage} onClick={previous}>
+      <PaginationButton disabled={!pageInfo?.hasPreviousPage || page === 1} onClick={previous}>
         <ChevronsLeft className="w-6 h-6" />
       </PaginationButton>
       {/* <PaginationButton href={`/${category}?page=${page - 1}`} disabled={page <= 1}>

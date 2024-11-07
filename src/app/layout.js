@@ -5,6 +5,7 @@ import Footer from './Components/Footer';
 import ScrollToTopButton from './Components/ScrollToTopButton';
 import Navbar from './Components/Navbar';
 import { getFooterMenu, getMainMenu } from '../lib/api/menuAPI';
+import { PageProvider } from '../context/PageContext';
 import { OrdlistaProvider } from '../context/OrdlistaContext';
 import { getAllOrdlistaCategories } from '../lib/api/ordilistaAPI';
 
@@ -28,12 +29,14 @@ export default async function RootLayout({ children }) {
     <html lang="en">
       <body className={`${outfit.className} ${inter.className}`}>
         <ApolloProvider>
-          <OrdlistaProvider ordlista={ordlista}>
-            <Navbar menuData={menuData} />
-            {children}
-            <ScrollToTopButton />
-            <Footer menuItems={footerMenu} />
-          </OrdlistaProvider>
+          <PageProvider>
+            <OrdlistaProvider ordlista={ordlista}>
+              <Navbar menuData={menuData} />
+              {children}
+              <ScrollToTopButton />
+              <Footer menuItems={footerMenu} />
+            </OrdlistaProvider>
+          </PageProvider>
         </ApolloProvider>
       </body>
     </html>

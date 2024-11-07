@@ -41,7 +41,20 @@ const PageContext = createContext();
 
 export const PageProvider = ({ children }) => {
   const [state, dispatch] = useReducer(reducer, initialState);
-  return <PageContext.Provider value={{ state, dispatch }}>{children}</PageContext.Provider>;
+
+  const handleNextPage = (pageLimit, endCursor) => {
+    dispatch({ type: 'HANDLE_NEXT', payload: { pageLimit: pageLimit, after: endCursor } });
+  };
+
+  const handlePreviousPage = (pageLimit, startCursor) => {
+    dispatch({ type: 'HANDLE_PREV', payload: { pageLimit: pageLimit, before: startCursor } });
+  };
+
+  return (
+    <PageContext.Provider value={{ state, dispatch, handleNextPage, handlePreviousPage }}>
+      {children}
+    </PageContext.Provider>
+  );
 };
 
 export const usePagination = () => useContext(PageContext);

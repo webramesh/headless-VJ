@@ -9,7 +9,7 @@ import { useEffect, useState } from 'react';
 const PRODUCENTER_PER_PAGE = 15;
 
 const ProducenterContainer = () => {
-  const { state, dispatch } = usePagination();
+  const { state, dispatch, handleNextPage, handlePreviousPage } = usePagination();
   const { pageNumber, after, before, first, last } = state;
   const [producenter, setProducenter] = useState([]);
   const [pageInfo, setPageInfo] = useState({});
@@ -27,20 +27,12 @@ const ProducenterContainer = () => {
         setProducenter(producenters);
         setPageInfo(pageInfo);
       } else {
-        console.warn('No products or page info returned from getAllProducts');
+        console.warn('No products or page info returned from getAllProducenters');
       }
     };
 
     if (isReset) fetchProducenters();
   }, [after, before, isReset]);
-
-  const handleNextPage = () => {
-    dispatch({ type: 'HANDLE_NEXT', payload: { pageLimit: PRODUCENTER_PER_PAGE, after: pageInfo.endCursor } });
-  };
-
-  const handlePreviousPage = () => {
-    dispatch({ type: 'HANDLE_PREV', payload: { pageLimit: PRODUCENTER_PER_PAGE, before: pageInfo.startCursor } });
-  };
 
   return (
     <>
@@ -55,7 +47,12 @@ const ProducenterContainer = () => {
         ))}
       </div>
       {/* pagination */}
-      <Pagination pageInfo={pageInfo} next={handleNextPage} previous={handlePreviousPage} page={pageNumber} />
+      <Pagination
+        pageInfo={pageInfo}
+        next={() => handleNextPage(PRODUCENTER_PER_PAGE, pageInfo.endCursor)}
+        previous={() => handlePreviousPage(PRODUCENTER_PER_PAGE, pageInfo.startCursor)}
+        page={pageNumber}
+      />
     </>
   );
 };

@@ -1,10 +1,9 @@
 'use server';
-import { ApolloClient, InMemoryCache, gql } from '@apollo/client';
 
-const client = new ApolloClient({
-  uri: process.env.SITE_URL_ENDPOINT,
-  cache: new InMemoryCache(),
-});
+import { gql } from '@apollo/client';
+import { getClient } from './apolloclient';
+
+const client = getClient();
 
 export async function getAllProducenter(first, last, after, before) {
   try {

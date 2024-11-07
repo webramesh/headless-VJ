@@ -5,6 +5,7 @@ import Footer from './Components/Footer';
 import ScrollToTopButton from './Components/ScrollToTopButton';
 import Navbar from './Components/Navbar';
 import { getFooterMenu, getMainMenu } from '../lib/api/menuAPI';
+import { PageProvider } from '../context/PageContext';
 
 const inter = Inter({ subsets: ['latin'] });
 const outfit = Outfit({ subsets: ['latin'] });
@@ -25,10 +26,12 @@ export default async function RootLayout({ children }) {
     <html lang="en">
       <body className={`${outfit.className} ${inter.className}`}>
         <ApolloProvider>
-          <Navbar menuData={menuData} />
-          {children}
-          <ScrollToTopButton />
-          <Footer menuItems={footerMenu} />
+          <PageProvider>
+            <Navbar menuData={menuData} />
+            {children}
+            <ScrollToTopButton />
+            <Footer menuItems={footerMenu} />
+          </PageProvider>
         </ApolloProvider>
       </body>
     </html>

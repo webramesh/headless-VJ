@@ -84,6 +84,12 @@ export async function getOrdlistaBySlug(slug) {
             date
             title
             content
+            ordlistaCategories {
+              nodes {
+                name
+                slug
+              }
+            }
           }
         }
       `,

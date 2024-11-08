@@ -24,7 +24,7 @@ export default async function RootLayout({ children }) {
   const menuData = await getMainMenu();
   const footerMenu = await getFooterMenu();
 
-  const [ordlista] = await Promise.all([getAllOrdlistaCategories()]);
+  const ordlista = await getAllOrdlistaCategories();
   return (
     <html lang="en">
       <body className={`${outfit.className} ${inter.className}`}>

@@ -7,18 +7,19 @@ const PaginationButton = ({ disabled, children, onClick }) => (
       disabled
         ? 'bg-gray-200 text-gray-400 cursor-not-allowed'
         : 'bg-red-500 text-white hover:bg-red-600 transition-colors duration-200 opacity-80'
-    }`}
+    }
+    `}
     aria-disabled={disabled}
-    onClick={!disabled ? onClick : undefined}
+    onClick={disabled ? undefined : onClick}
   >
     {children}
   </div>
 );
 
-export default function Pagination({ pageInfo, next, previous, page }) {
+export default function Pagination({ pageInfo, next, previous, page, loading }) {
   return (
     <nav className="flex justify-center items-center space-x-2 py-8" aria-label="Pagination">
-      <PaginationButton disabled={!pageInfo?.hasPreviousPage || page === 1} onClick={previous}>
+      <PaginationButton disabled={!pageInfo?.hasPreviousPage || page === 1 || loading} onClick={previous}>
         <ChevronsLeft className="w-6 h-6" />
       </PaginationButton>
       {/* <PaginationButton href={`/${category}?page=${page - 1}`} disabled={page <= 1}>
@@ -28,7 +29,7 @@ export default function Pagination({ pageInfo, next, previous, page }) {
       {/* <PaginationButton href={`/${category}?page=${page + 1}`} disabled={page >= totalPages}>
         <ChevronLast className="w-6 h-6" />
       </PaginationButton> */}
-      <PaginationButton disabled={!pageInfo?.hasNextPage} onClick={next}>
+      <PaginationButton disabled={!pageInfo?.hasNextPage || loading} onClick={next}>
         <ChevronsRight className="w-6 h-6" />
       </PaginationButton>
     </nav>

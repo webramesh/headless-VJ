@@ -14,6 +14,7 @@ export default function ProdukterPage() {
   const [products, setProducts] = useState([]);
   const [pageInfo, setPageInfo] = useState({});
   const [isReset, setIsReset] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     dispatch({ type: 'RESET', payload: PRODUCTS_PER_PAGE });
@@ -22,17 +23,19 @@ export default function ProdukterPage() {
 
   useEffect(() => {
     const fetchProducts = async () => {
+      setIsLoading(true);
       const { products, pageInfo } = await getAllProducts(first, last, after, before);
       if (products && pageInfo) {
         setProducts(products);
         setPageInfo(pageInfo);
+        setIsLoading(false);
       } else {
         console.warn('No products or page info returned from getAllProducts');
       }
     };
 
     if (isReset) fetchProducts();
-  }, [after, before, isReset]);
+  }, [after, before, first, isReset, last]);
 
   return (
     <>
@@ -49,6 +52,7 @@ export default function ProdukterPage() {
         next={() => handleNextPage(PRODUCTS_PER_PAGE, pageInfo.endCursor)}
         previous={() => handlePreviousPage(PRODUCTS_PER_PAGE, pageInfo.startCursor)}
         page={pageNumber}
+        loading={isLoading}
       />
     </>
   );

@@ -1,9 +1,8 @@
-import { ApolloClient, InMemoryCache, gql } from '@apollo/client';
+'use server';
+import { gql } from '@apollo/client';
+import { getClient } from './apolloclient';
 
-const client = new ApolloClient({
-  uri: process.env.SITE_URL_ENDPOINT,
-  cache: new InMemoryCache(),
-});
+const client = getClient();
 
 export async function getAllOrdlistaCategories() {
   try {
@@ -33,13 +32,14 @@ export async function getAllOrdlistaCategories() {
   }
 }
 
-export async function getAllOrdlista() {
+export async function getAllOrdlista(first, last, after, before) {
   try {
     const { data } = await client.query({
       query: gql`
-        query AllOdilista {
-          ordlista(first: 12) {
+        query AllOdilista($first: Int, $last: Int, $after: String, $before: String) {
+          ordlista(first: $first, last: $last, after: $after, before: $before) {
             nodes {
+              id
               title
               uri
               slug
@@ -56,12 +56,19 @@ export async function getAllOrdlista() {
                 }
               }
             }
+            pageInfo {
+              endCursor
+              hasNextPage
+              hasPreviousPage
+              startCursor
+            }
           }
         }
       `,
+      variables: { first, last, after, before },
     });
 
-    return data.ordlista.nodes;
+    return { allOrdlista: data.ordlista.nodes, pageInfo: data.ordlista.pageInfo };
   } catch (error) {
     console.error('Error fetching odilista:', error);
     return [];

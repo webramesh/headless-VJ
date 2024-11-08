@@ -1,6 +1,6 @@
 'use client';
 import { getAllProducenter } from '@/src/lib/api/producenterAPI';
-import Map from '../../Components/Map';
+// import Map from '../../Components/Map';
 import Pagination from '../../Components/pagination/Pagination';
 import ProducenterCard from '../../Components/producenterCard/ProducenterCard';
 import { usePagination } from '@/src/context/PageContext';
@@ -14,6 +14,7 @@ const ProducenterContainer = () => {
   const [producenter, setProducenter] = useState([]);
   const [pageInfo, setPageInfo] = useState({});
   const [isReset, setIsReset] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     dispatch({ type: 'RESET', payload: PRODUCENTER_PER_PAGE });
@@ -22,17 +23,19 @@ const ProducenterContainer = () => {
 
   useEffect(() => {
     const fetchProducenters = async () => {
+      setIsLoading(true);
       const { producenters, pageInfo } = await getAllProducenter(first, last, after, before);
-      if (producenter && pageInfo) {
+      if (producenters && pageInfo) {
         setProducenter(producenters);
         setPageInfo(pageInfo);
+        setIsLoading(false);
       } else {
         console.warn('No products or page info returned from getAllProducenters');
       }
     };
 
     if (isReset) fetchProducenters();
-  }, [after, before, isReset]);
+  }, [after, before, first, isReset, last]);
 
   return (
     <>
@@ -52,6 +55,7 @@ const ProducenterContainer = () => {
         next={() => handleNextPage(PRODUCENTER_PER_PAGE, pageInfo.endCursor)}
         previous={() => handlePreviousPage(PRODUCENTER_PER_PAGE, pageInfo.startCursor)}
         page={pageNumber}
+        loading={isLoading}
       />
     </>
   );

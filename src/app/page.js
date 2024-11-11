@@ -8,20 +8,20 @@ import { getAllNyheter } from '../lib/api/newsApi';
 import { getAllTrendingPosts } from '../lib/api/trendingpostApi';
 import { getAllWineCategories } from '../lib/api/wineApi';
 import NewsPost from './Components/NewsPost';
-import { getHomePagePosts, getPopularPosts } from '../lib/api/postAPI';
+import { getHomePagePosts } from '../lib/api/postAPI';
 import SubscriptionForm from './Components/subscription/SubscriptionForm';
 import SubscriptionBox from './Components/subscription/SubscriptionBox';
 
 export const revalidate = 60;
 
 export default async function Home() {
-  const [nyheter, trendingPosts, wineCategories] = await Promise.all([
+  const [nyheter, trendingPosts, wineCategories, posts] = await Promise.all([
     getAllNyheter(),
     getAllTrendingPosts(),
     getAllWineCategories(),
+    getHomePagePosts(),
   ]);
 
-  const [posts] = await Promise.all([getHomePagePosts()]);
   return (
     <div>
       <Suspense fallback={<Loading />}>

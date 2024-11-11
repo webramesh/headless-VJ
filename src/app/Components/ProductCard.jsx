@@ -16,6 +16,7 @@ function ProductCard({ product }) {
             className="object-contain h-full w-full"
             width={200}
             height={200}
+            priority
           />
           {/* //for product labels */}
         </Link>

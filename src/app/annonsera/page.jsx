@@ -1,17 +1,28 @@
-'use client';
+import { getPageBySlug } from '../../lib/api/pageApi';
+import PageContent from '../om-oss/components/PageContent';
 
-import React from 'react';
-import Head from 'next/head';
-import Content from './Components/Content';
+export async function generateMetadata() {
+  try {
+    const pageData = await getPageBySlug('annonsera');
+    return {
+      title: pageData.title,
+      description: pageData.excerpt || 'Advertise with Vinjournalen',
+    };
+  } catch (error) {
+    console.error('Error generating metadata:', error);
+    return {
+      title: 'Annonsera',
+      description: 'Advertise with Vinjournalen',
+    };
+  }
+}
 
-export default function Home() {
-  return (
-    <>
-      <Head>
-        <title>Annonsera Page</title>
-        <meta name="description" content="This is the Annonsera page of Vinjournalen" />
-      </Head>
-      <Content />
-    </>
-  );
+export default async function AnnonseraPage() {
+  try {
+    const pageData = await getPageBySlug('annonsera');
+    return <PageContent pageData={pageData} />;
+  } catch (error) {
+    console.error('Error fetching page:', error);
+    return <div>Page not found</div>;
+  }
 }

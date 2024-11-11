@@ -75,6 +75,69 @@ export async function getAllOrdlista(first, last, after, before) {
   }
 }
 
+export async function getOrdlistaCategoryBySlug(slug) {
+  try {
+    const { data } = await client.query({
+      query: gql`
+        query OrdlistaCategoryBySlug($slug: ID!) {
+          ordlistaCategory(id: $slug, idType: SLUG) {
+            name
+            description
+          }
+        }
+      `,
+      variables: { slug },
+    });
+
+    return data.ordlistaCategory;
+  } catch (error) {
+    console.error('Error fetching ordlista category by slug:', error);
+    return null;
+  }
+}
+export async function getOrdlistaByCategory(category, first, last, after, before) {
+  try {
+    const { data } = await client.query({
+      query: gql`
+        query OrdlistaCategoryBySlug($category: ID!, $first: Int, $last: Int, $after: String, $before: String) {
+          ordlistaCategory(id: $category, idType: SLUG) {
+            ordlista(first: $first, last: $last, after: $after, before: $before) {
+              nodes {
+                id
+                slug
+                title
+                featuredImage {
+                  node {
+                    sourceUrl
+                  }
+                }
+                ordlistaCategories {
+                  nodes {
+                    slug
+                    name
+                  }
+                }
+              }
+              pageInfo {
+                endCursor
+                hasNextPage
+                hasPreviousPage
+                startCursor
+              }
+            }
+          }
+        }
+      `,
+      variables: { category, first, last, after, before },
+    });
+
+    return { ordlista: data.ordlistaCategory.ordlista.nodes, pageInfo: data.ordlistaCategory.ordlista.pageInfo };
+  } catch (error) {
+    console.error('Error fetching ordlista itens by category:', error);
+    return null;
+  }
+}
+
 export async function getOrdlistaBySlug(slug) {
   try {
     const { data } = await client.query({

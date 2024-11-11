@@ -15,7 +15,7 @@ const Vinimportor = async () => {
         {/* Card  */}
         <div className="grid md:grid-cols-3 gap-6 items-center justify-between">
           {allVinimportorer.map((vinimportor) => {
-            return <VinimportorerCard key={vinimportor.id} data={vinimportor} />;
+            return <VinimportorerCard key={Math.random()} data={vinimportor} />;
           })}
         </div>
         {/* End Card  */}

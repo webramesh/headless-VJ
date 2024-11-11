@@ -12,6 +12,7 @@ export async function getAllVinimportorer() {
         query AllVinimportorer {
           vinimporterer {
             nodes {
+              id
               title
               uri
               slug

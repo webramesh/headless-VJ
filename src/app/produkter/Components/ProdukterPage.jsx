@@ -8,13 +8,14 @@ import { usePagination } from '@/src/context/PageContext';
 
 const PRODUCTS_PER_PAGE = 15;
 
-export default function ProdukterPage() {
-  const { state, dispatch, handleNextPage, handlePreviousPage } = usePagination();
-  const { pageNumber, after, before, first, last } = state;
+export default function ProdukterPage({ totalProducts }) {
+  const { state, dispatch } = usePagination();
+  const { after, before, first, last } = state;
   const [products, setProducts] = useState([]);
   const [pageInfo, setPageInfo] = useState({});
-  const [isReset, setIsReset] = useState(false);
-  const [isLoading, setIsLoading] = useState(true);
+  const [isReset, setIsReset] = useState(true);
+
+  const totalPages = Math.ceil(totalProducts / PRODUCTS_PER_PAGE);
 
   useEffect(() => {
     dispatch({ type: 'RESET', payload: PRODUCTS_PER_PAGE });
@@ -23,19 +24,19 @@ export default function ProdukterPage() {
 
   useEffect(() => {
     const fetchProducts = async () => {
-      setIsLoading(true);
+      dispatch({ type: 'CHANGE_LOADING', payload: true });
       const { products, pageInfo } = await getAllProducts(first, last, after, before);
       if (products && pageInfo) {
         setProducts(products);
         setPageInfo(pageInfo);
-        setIsLoading(false);
+        dispatch({ type: 'CHANGE_LOADING', payload: false });
       } else {
         console.warn('No products or page info returned from getAllProducts');
       }
     };
 
     if (isReset) fetchProducts();
-  }, [after, before, first, isReset, last]);
+  }, [first, last, after, before, isReset, dispatch]);
 
   return (
     <>
@@ -47,13 +48,7 @@ export default function ProdukterPage() {
         ))}
       </div>
       <hr className="my-10" />
-      <Pagination
-        pageInfo={pageInfo}
-        next={() => handleNextPage(PRODUCTS_PER_PAGE, pageInfo.endCursor)}
-        previous={() => handlePreviousPage(PRODUCTS_PER_PAGE, pageInfo.startCursor)}
-        page={pageNumber}
-        loading={isLoading}
-      />
+      <Pagination pageInfo={pageInfo} pageLimit={PRODUCTS_PER_PAGE} totalPages={totalPages} />
     </>
   );
 }

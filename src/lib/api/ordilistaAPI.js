@@ -4,6 +4,39 @@ import { getClient } from './apolloclient';
 
 const client = getClient();
 
+export async function countOrdlista(cursor = null, allOrdlista = []) {
+  try {
+    const { data } = await client.query({
+      query: gql`
+        query CountOrdlista($cursor: String) {
+          ordlista(first: 100, after: $cursor) {
+            nodes {
+              id
+            }
+            pageInfo {
+              hasNextPage
+              endCursor
+            }
+          }
+        }
+      `,
+      variables: { cursor },
+    });
+
+    const newOrdlista = data.ordlista.nodes;
+    const updatedOrdlista = [...allOrdlista, ...newOrdlista];
+
+    if (data.ordlista.pageInfo.hasNextPage) {
+      return countOrdlista(data.ordlista.pageInfo.endCursor, updatedOrdlista);
+    }
+
+    return updatedOrdlista.length;
+  } catch (error) {
+    console.error('Error fetching Ordlista', error);
+    return allOrdlista.length;
+  }
+}
+
 export async function getAllOrdlistaCategories() {
   try {
     const { data } = await client.query({
@@ -95,6 +128,42 @@ export async function getOrdlistaCategoryBySlug(slug) {
     return null;
   }
 }
+
+export async function countOrdlistaByCategory(category, cursor = null, allOrdlista = []) {
+  try {
+    const { data } = await client.query({
+      query: gql`
+        query CountOrdlistaByCategory($cursor: String, $category: ID!) {
+          ordlistaCategory(id: $category, idType: SLUG) {
+            ordlista(first: 100, after: $cursor) {
+              nodes {
+                id
+              }
+              pageInfo {
+                endCursor
+                hasNextPage
+              }
+            }
+          }
+        }
+      `,
+      variables: { category, cursor },
+    });
+
+    const newOrdlista = data.ordlistaCategory.ordlista.nodes;
+    const updatedOrdlista = [...allOrdlista, ...newOrdlista];
+
+    if (data.ordlistaCategory.ordlista.pageInfo.hasNextPage) {
+      return countOrdlistaByCategory(data.ordlistaCategory.ordlista.pageInfo.endCursor, updatedOrdlista);
+    }
+
+    return updatedOrdlista.length;
+  } catch (error) {
+    console.error('Error fetching regioners', error);
+    return allOrdlista.length;
+  }
+}
+
 export async function getOrdlistaByCategory(category, first, last, after, before) {
   try {
     const { data } = await client.query({

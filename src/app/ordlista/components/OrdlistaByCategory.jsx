@@ -7,13 +7,13 @@ import { getOrdlistaByCategory } from '@/src/lib/api/ordilistaAPI';
 
 const ORDLISTA_PER_PAGE = 15;
 
-export default function OrdlistaByCategory({ category }) {
-  const { state, dispatch, handleNextPage, handlePreviousPage } = usePagination();
-  const { pageNumber, after, before, first, last } = state;
+export default function OrdlistaByCategory({ category, totalOrdlista }) {
+  const { state, dispatch } = usePagination();
+  const { after, before, first, last } = state;
   const [allOrdlista, setAllOrdlista] = useState([]);
   const [pageInfo, setPageInfo] = useState({});
   const [isReset, setIsReset] = useState(false);
-  const [isLoading, setIsLoading] = useState(true);
+  const totalPages = Math.ceil(totalOrdlista / ORDLISTA_PER_PAGE);
 
   useEffect(() => {
     dispatch({ type: 'RESET', payload: ORDLISTA_PER_PAGE });
@@ -22,19 +22,19 @@ export default function OrdlistaByCategory({ category }) {
 
   useEffect(() => {
     const fetchOrdlista = async () => {
-      setIsLoading(true);
+      dispatch({ type: 'CHANGE_LOADING', payload: true });
       const { ordlista, pageInfo } = await getOrdlistaByCategory(category, first, last, after, before);
       if (ordlista && pageInfo) {
         setAllOrdlista(ordlista);
         setPageInfo(pageInfo);
-        setIsLoading(false);
+        dispatch({ type: 'CHANGE_LOADING', payload: false });
       } else {
         console.warn('No info returned from getOrdlistaByCategory');
       }
     };
 
     if (isReset) fetchOrdlista();
-  }, [after, before, first, isReset, last, category]);
+  }, [after, before, first, isReset, last, category, dispatch]);
 
   return (
     <>
@@ -45,13 +45,8 @@ export default function OrdlistaByCategory({ category }) {
           </div>
         ))}
       </div>
-      <Pagination
-        pageInfo={pageInfo}
-        next={() => handleNextPage(ORDLISTA_PER_PAGE, pageInfo.endCursor)}
-        previous={() => handlePreviousPage(ORDLISTA_PER_PAGE, pageInfo.startCursor)}
-        loading={isLoading}
-        page={pageNumber}
-      />
+
+      <Pagination pageInfo={pageInfo} pageLimit={ORDLISTA_PER_PAGE} totalPages={totalPages} />
     </>
   );
 }

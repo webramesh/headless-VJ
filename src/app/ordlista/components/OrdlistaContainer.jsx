@@ -7,13 +7,13 @@ import { useEffect, useState } from 'react';
 
 const ORDLISTA_PER_PAGE = 15;
 
-export default function OrdlistaContainer() {
-  const { state, dispatch, handleNextPage, handlePreviousPage } = usePagination();
-  const { pageNumber, after, before, first, last } = state;
+export default function OrdlistaContainer({ totalOrdlista }) {
+  const { state, dispatch } = usePagination();
+  const { after, before, first, last } = state;
   const [allOrdlista, setAllOrdlista] = useState([]);
   const [pageInfo, setPageInfo] = useState({});
   const [isReset, setIsReset] = useState(false);
-  const [isLoading, setIsLoading] = useState(true);
+  const totalPages = Math.ceil(totalOrdlista / ORDLISTA_PER_PAGE);
 
   useEffect(() => {
     dispatch({ type: 'RESET', payload: ORDLISTA_PER_PAGE });
@@ -22,19 +22,20 @@ export default function OrdlistaContainer() {
 
   useEffect(() => {
     const fetchOrdlista = async () => {
-      setIsLoading(true);
+      dispatch({ type: 'CHANGE_LOADING', payload: true });
+
       const { allOrdlista, pageInfo } = await getAllOrdlista(first, last, after, before);
       if (allOrdlista && pageInfo) {
         setAllOrdlista(allOrdlista);
         setPageInfo(pageInfo);
-        setIsLoading(false);
+        dispatch({ type: 'CHANGE_LOADING', payload: false });
       } else {
         console.warn('No products or page info returned from getAllOrdlista');
       }
     };
 
     if (isReset) fetchOrdlista();
-  }, [after, before, first, isReset, last]);
+  }, [after, before, first, isReset, last, dispatch]);
 
   return (
     <>
@@ -45,13 +46,8 @@ export default function OrdlistaContainer() {
           </div>
         ))}
       </div>
-      <Pagination
-        pageInfo={pageInfo}
-        next={() => handleNextPage(ORDLISTA_PER_PAGE, pageInfo.endCursor)}
-        previous={() => handlePreviousPage(ORDLISTA_PER_PAGE, pageInfo.startCursor)}
-        loading={isLoading}
-        page={pageNumber}
-      />
+
+      <Pagination pageInfo={pageInfo} pageLimit={ORDLISTA_PER_PAGE} totalPages={totalPages} />
     </>
   );
 }

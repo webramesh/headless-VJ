@@ -1,17 +1,28 @@
-'use client';
+import { getPageBySlug } from '../../lib/api/pageApi';
+import PageContent from './components/PageContent';
 
-import React from 'react';
-import Head from 'next/head';
-import OmOssContent from './Components/omossContent';
+export async function generateMetadata() {
+  try {
+    const pageData = await getPageBySlug('om-oss');
+    return {
+      title: pageData.title,
+      description: pageData.excerpt || 'Learn more about Vinjournalen',
+    };
+  } catch (error) {
+    console.error('Error generating metadata:', error);
+    return {
+      title: 'Om Oss',
+      description: 'Learn more about Vinjournalen',
+    };
+  }
+}
 
-export default function Home() {
-  return (
-    <>
-      <Head>
-        <title>Om-Oss Page</title>
-        <meta name="description" content="This is the Om-Oss page of Vinjournalen" />
-      </Head>
-      <OmOssContent />
-    </>
-  );
+export default async function OmOssPage() {
+  try {
+    const pageData = await getPageBySlug('om-oss');
+    return <PageContent pageData={pageData} />;
+  } catch (error) {
+    console.error('Error fetching page:', error);
+    return <div>Page not found</div>;
+  }
 }

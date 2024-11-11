@@ -15,8 +15,6 @@ export default function ProdukterPage({ totalProducts }) {
   const [pageInfo, setPageInfo] = useState({});
   const [isReset, setIsReset] = useState(true);
 
-  const totalPages = Math.ceil(totalProducts / PRODUCTS_PER_PAGE);
-
   useEffect(() => {
     dispatch({ type: 'RESET', payload: PRODUCTS_PER_PAGE });
     setIsReset(true);
@@ -48,7 +46,7 @@ export default function ProdukterPage({ totalProducts }) {
         ))}
       </div>
       <hr className="my-10" />
-      <Pagination pageInfo={pageInfo} pageLimit={PRODUCTS_PER_PAGE} totalPages={totalPages} />
+      <Pagination pageInfo={pageInfo} pageLimit={PRODUCTS_PER_PAGE} total={totalProducts} />
     </>
   );
 }

@@ -154,7 +154,7 @@ export async function countOrdlistaByCategory(category, cursor = null, allOrdlis
     const updatedOrdlista = [...allOrdlista, ...newOrdlista];
 
     if (data.ordlistaCategory.ordlista.pageInfo.hasNextPage) {
-      return countOrdlistaByCategory(data.ordlistaCategory.ordlista.pageInfo.endCursor, updatedOrdlista);
+      return countOrdlistaByCategory(category, data.ordlistaCategory.ordlista.pageInfo.endCursor, updatedOrdlista);
     }
 
     return updatedOrdlista.length;

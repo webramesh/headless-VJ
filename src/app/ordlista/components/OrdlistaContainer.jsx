@@ -13,7 +13,6 @@ export default function OrdlistaContainer({ totalOrdlista }) {
   const [allOrdlista, setAllOrdlista] = useState([]);
   const [pageInfo, setPageInfo] = useState({});
   const [isReset, setIsReset] = useState(false);
-  const totalPages = Math.ceil(totalOrdlista / ORDLISTA_PER_PAGE);
 
   useEffect(() => {
     dispatch({ type: 'RESET', payload: ORDLISTA_PER_PAGE });
@@ -47,7 +46,7 @@ export default function OrdlistaContainer({ totalOrdlista }) {
         ))}
       </div>
 
-      <Pagination pageInfo={pageInfo} pageLimit={ORDLISTA_PER_PAGE} totalPages={totalPages} />
+      <Pagination pageInfo={pageInfo} pageLimit={ORDLISTA_PER_PAGE} total={totalOrdlista} />
     </>
   );
 }

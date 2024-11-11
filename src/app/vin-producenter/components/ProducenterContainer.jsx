@@ -14,7 +14,6 @@ const ProducenterContainer = ({ totalProducenters }) => {
   const [producenter, setProducenter] = useState([]);
   const [pageInfo, setPageInfo] = useState({});
   const [isReset, setIsReset] = useState(false);
-  const totalPages = Math.ceil(totalProducenters / PRODUCENTER_PER_PAGE);
 
   useEffect(() => {
     dispatch({ type: 'RESET', payload: PRODUCENTER_PER_PAGE });
@@ -51,7 +50,7 @@ const ProducenterContainer = ({ totalProducenters }) => {
       </div>
       {/* pagination */}
 
-      <Pagination pageInfo={pageInfo} pageLimit={PRODUCENTER_PER_PAGE} totalPages={totalPages} />
+      <Pagination pageInfo={pageInfo} pageLimit={PRODUCENTER_PER_PAGE} total={totalProducenters} />
     </>
   );
 };

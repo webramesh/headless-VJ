@@ -15,7 +15,6 @@ const RegionerContainer = ({ totalRegioners }) => {
   const [regions, setRegions] = useState([]);
   const [pageInfo, setPageInfo] = useState({});
   const [isReset, setIsReset] = useState(false);
-  const totalPages = Math.ceil(totalRegioners / REGIONS_PER_PAGE);
 
   useEffect(() => {
     dispatch({ type: 'RESET', payload: REGIONS_PER_PAGE });
@@ -53,7 +52,7 @@ const RegionerContainer = ({ totalRegioners }) => {
         ))}
       </div>
       {/* pagination */}
-      <Pagination pageInfo={pageInfo} pageLimit={REGIONS_PER_PAGE} totalPages={totalPages} />
+      <Pagination pageInfo={pageInfo} pageLimit={REGIONS_PER_PAGE} total={totalRegioners} />
     </>
   );
 };

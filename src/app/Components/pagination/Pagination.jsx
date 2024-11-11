@@ -17,13 +17,13 @@ const PaginationButton = ({ disabled, children, onClick }) => (
   </div>
 );
 
-export default function Pagination({ pageInfo, totalPages, pageLimit }) {
-  const { state, dispatch, handleNextPage, handlePreviousPage, handleLastPage } = usePagination();
+export default function Pagination({ pageInfo, total, pageLimit }) {
+  const { state, handleNextPage, handlePreviousPage, handleFirstPage, handleLastPage } = usePagination();
   const { pageNumber: page, loading } = state;
+  const pages = Math.floor(total / pageLimit);
+  const totalPages = pages + 1;
+  const lastPageLimit = total - pages * pageLimit;
 
-  function handleFirstPage(pageLimit) {
-    dispatch({ type: 'RESET', payload: pageLimit });
-  }
   return (
     <nav className="flex justify-center items-center space-x-2 py-8" aria-label="Pagination">
       <PaginationButton disabled={page === 1 || loading} onClick={() => handleFirstPage(pageLimit)}>
@@ -44,7 +44,10 @@ export default function Pagination({ pageInfo, totalPages, pageLimit }) {
       >
         <ChevronsRight className="w-6 h-6" />
       </PaginationButton>
-      <PaginationButton onClick={() => handleLastPage(pageLimit, totalPages)} disabled={page === totalPages || loading}>
+      <PaginationButton
+        onClick={() => handleLastPage(lastPageLimit, totalPages)}
+        disabled={page === totalPages || loading}
+      >
         <ChevronLast className="w-6 h-6" />
       </PaginationButton>
     </nav>

@@ -15,6 +15,7 @@ export async function getAllVinimportorer() {
               title
               uri
               slug
+              content
             }
           }
         }

@@ -14,7 +14,7 @@ const page = async ({ params }) => {
   return (
     <>
       <div className="container mx-auto px-4 my-10  grid grid-cols-4 gap-12">
-        <div className="col-span-3">
+        <div className="col-span-4 lg:col-span-3">
           <h2 className="text-3xl font-bold text-gray-800">{ordlista?.title}</h2>
           <BreadCrumb
             title1="ordlista"
@@ -35,7 +35,7 @@ const page = async ({ params }) => {
           </div>
           <CatAccordion />
         </div>
-        <div className="col-span-1">
+        <div className="col-span-1 hidden lg:block sticky top-0 h-full">
           <Sidebar />
         </div>
       </div>

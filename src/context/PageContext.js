@@ -5,11 +5,14 @@ const initialState = {
   pageNumber: 1,
   after: null,
   before: null,
-  first: 10,
+  first: 0,
   last: 0,
+  loading: false,
 };
 function reducer(state, action) {
   switch (action.type) {
+    case 'CHANGE_LOADING':
+      return { ...state, loading: action.payload };
     case 'RESET':
       return { ...initialState, first: action.payload };
 
@@ -31,6 +34,12 @@ function reducer(state, action) {
         after: null,
         pageNumber: state.pageNumber - 1,
       };
+    case 'HANDLE_LAST':
+      return {
+        ...initialState,
+        last: action.payload.pageLimit,
+        pageNumber: action.payload.lastPage,
+      };
 
     default:
       return state;
@@ -50,8 +59,17 @@ export const PageProvider = ({ children }) => {
     dispatch({ type: 'HANDLE_PREV', payload: { pageLimit: pageLimit, before: startCursor } });
   };
 
+  const handleFirstPage = (pageLimit) => {
+    dispatch({ type: 'RESET', payload: pageLimit });
+  };
+
+  const handleLastPage = (pageLimit, lastPage) => {
+    dispatch({ type: 'HANDLE_LAST', payload: { pageLimit: pageLimit, lastPage: lastPage } });
+  };
   return (
-    <PageContext.Provider value={{ state, dispatch, handleNextPage, handlePreviousPage }}>
+    <PageContext.Provider
+      value={{ state, dispatch, handleNextPage, handlePreviousPage, handleFirstPage, handleLastPage }}
+    >
       {children}
     </PageContext.Provider>
   );

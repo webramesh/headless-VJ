@@ -6,7 +6,8 @@ function LinkElement({ title, link }) {
       <>
         &raquo;&nbsp;
         <Link href={link} className="capitalize">
-          {title}
+          <span className="md:hidden">{title.length > 18 ? title.slice(0, 18) + '...' : title}</span>
+          <span className="hidden md:block">{title}</span>
         </Link>
       </>
     );

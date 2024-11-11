@@ -1,5 +1,6 @@
 'use client';
-import { ChevronsLeft, ChevronsRight } from 'lucide-react';
+import { usePagination } from '@/src/context/PageContext';
+import { ChevronFirst, ChevronLast, ChevronsLeft, ChevronsRight } from 'lucide-react';
 
 const PaginationButton = ({ disabled, children, onClick }) => (
   <div
@@ -16,21 +17,38 @@ const PaginationButton = ({ disabled, children, onClick }) => (
   </div>
 );
 
-export default function Pagination({ pageInfo, next, previous, page, loading }) {
+export default function Pagination({ pageInfo, total, pageLimit }) {
+  const { state, handleNextPage, handlePreviousPage, handleFirstPage, handleLastPage } = usePagination();
+  const { pageNumber: page, loading } = state;
+  const pages = Math.floor(total / pageLimit);
+  const totalPages = pages + 1;
+  const lastPageLimit = total - pages * pageLimit;
+
   return (
     <nav className="flex justify-center items-center space-x-2 py-8" aria-label="Pagination">
-      <PaginationButton disabled={!pageInfo?.hasPreviousPage || page === 1 || loading} onClick={previous}>
+      <PaginationButton disabled={page === 1 || loading} onClick={() => handleFirstPage(pageLimit)}>
+        <ChevronFirst className="w-6 h-6" />
+      </PaginationButton>
+      <PaginationButton
+        disabled={!pageInfo?.hasPreviousPage || page === 1 || loading}
+        onClick={() => handlePreviousPage(pageLimit, pageInfo.startCursor)}
+      >
         <ChevronsLeft className="w-6 h-6" />
       </PaginationButton>
-      {/* <PaginationButton href={`/${category}?page=${page - 1}`} disabled={page <= 1}>
-        <ChevronFirst className="w-6 h-6" />
-      </PaginationButton> */}
-      <span className="px-4 py-2 rounded-md bg-gray-100 text-gray-700">Page {page}</span>
-      {/* <PaginationButton href={`/${category}?page=${page + 1}`} disabled={page >= totalPages}>
-        <ChevronLast className="w-6 h-6" />
-      </PaginationButton> */}
-      <PaginationButton disabled={!pageInfo?.hasNextPage || loading} onClick={next}>
+      <span className="px-4 py-2 rounded-md bg-gray-100 text-gray-700">
+        Page {page} of {totalPages}
+      </span>
+      <PaginationButton
+        disabled={!pageInfo?.hasNextPage || loading}
+        onClick={() => handleNextPage(pageLimit, pageInfo.endCursor)}
+      >
         <ChevronsRight className="w-6 h-6" />
+      </PaginationButton>
+      <PaginationButton
+        onClick={() => handleLastPage(lastPageLimit, totalPages)}
+        disabled={page === totalPages || loading}
+      >
+        <ChevronLast className="w-6 h-6" />
       </PaginationButton>
     </nav>
   );

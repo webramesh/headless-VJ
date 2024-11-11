@@ -4,6 +4,39 @@ import { getClient } from './apolloclient';
 
 const client = getClient();
 
+export async function countProducts(cursor = null, allProducts = []) {
+  try {
+    const { data } = await client.query({
+      query: gql`
+        query CountProducts($cursor: String) {
+          produkter(first: 100, after: $cursor) {
+            nodes {
+              id
+            }
+            pageInfo {
+              hasNextPage
+              endCursor
+            }
+          }
+        }
+      `,
+      variables: { cursor },
+    });
+
+    const newProducts = data.produkter.nodes;
+    const updatedProducts = [...allProducts, ...newProducts];
+
+    if (data.produkter.pageInfo.hasNextPage) {
+      return countProducts(data.produkter.pageInfo.endCursor, updatedProducts);
+    }
+
+    return updatedProducts.length;
+  } catch (error) {
+    console.error('Error fetching products', error);
+    return allProducts.length;
+  }
+}
+
 export async function getAllProducts(first = 15, last = 0, after = null, before = null) {
   try {
     const { data } = await client.query({

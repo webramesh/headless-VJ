@@ -4,8 +4,10 @@ import CatAccordion from '../[category]/Components/CatAccordion';
 import SubscriptionForm from '../Components/subscription/SubscriptionForm';
 import OrdlistaContainer from './components/OrdlistaContainer';
 import BreadCrumb from '../Components/breadcrumb/BreadCrumb';
+import { countOrdlista } from '@/src/lib/api/ordilistaAPI';
 
-export default function Ordlista() {
+export default async function Ordlista() {
+  const totalOrdlista = await countOrdlista();
   return (
     <>
       <div className=" bg-gray-50">
@@ -16,7 +18,7 @@ export default function Ordlista() {
                 <h3 className="text-3xl font-bold  mt-10 ">Ordlista</h3>
                 <BreadCrumb title1="Ordlista" />
               </div>
-              <OrdlistaContainer />
+              <OrdlistaContainer totalOrdlista={totalOrdlista} />
               <AccordionNew />
               <SubscriptionForm />
 

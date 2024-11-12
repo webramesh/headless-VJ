@@ -11,7 +11,7 @@ export default async function Content({ params }) {
 
       <h1 className="font-bold text-lg lg:text-4xl">{title}</h1>
 
-      <BreadCrumb title1="Producenter" link1="/vin-producenter" title2={title} />
+      <BreadCrumb title1="Producenter" link1="/producenter" title2={title} />
       <p className="text-sm lg:text-base mb-1 lg:mb-2 text-justify">{content}</p>
       <ul className="text-sm lg:text-base">
         <li>

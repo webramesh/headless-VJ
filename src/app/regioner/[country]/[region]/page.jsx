@@ -10,13 +10,7 @@ async function page({ params }) {
   return (
     <>
       <h1 className="text-2xl lg:text-3xl  font-semibold uppercase">{region}</h1>
-      <BreadCrumb
-        title1="Regioner"
-        link1="/vin-regioner"
-        title2={country}
-        link2={`/lander/${country}`}
-        title3={region}
-      />
+      <BreadCrumb title1="Regioner" link1="/regioner" title2={country} link2={`/lander/${country}`} title3={region} />
 
       <div className="h-80">
         <Map />

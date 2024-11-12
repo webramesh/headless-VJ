@@ -1,24 +1,17 @@
-import { getAllVinimportorer } from '@/src/lib/api/vinimportorAPI';
-import React from 'react';
-import VinimportorerCard from './components/VinimportorerCard';
+import { countImportors } from '@/src/lib/api/vinimportorAPI';
 import SubscriptionForm from '../Components/subscription/SubscriptionForm';
-import SubscriptionBox from '../Components/subscription/SubscriptionBox';
 import CatAccordion from '../[category]/Components/CatAccordion';
+import VinImportorContainer from './components/VinImportorContainer';
 
 const Vinimportor = async () => {
-  const [allVinimportorer] = await Promise.all([getAllVinimportorer()]);
+  const totalVinImportors = await countImportors();
+
   return (
     <div className="bg-gray-50">
       <div className="container mx-auto px-4 py-8 ">
         <h1 className="text-4xl font-bold my-8">Vinimportörer</h1>
 
-        {/* Card  */}
-        <div className="grid md:grid-cols-3 gap-6 items-center justify-between">
-          {allVinimportorer.map((vinimportor) => {
-            return <VinimportorerCard key={Math.random()} data={vinimportor} />;
-          })}
-        </div>
-        {/* End Card  */}
+        <VinImportorContainer totalVinImportors={totalVinImportors} />
 
         {/* Subscription  */}
         <div className="my-10">

@@ -4,7 +4,6 @@ import ProducenterContainer from './components/ProducenterContainer';
 
 export default async function page() {
   const totalProducenters = await countProducenters();
-  console.log(totalProducenters);
   return (
     <>
       <div className=" text-xs lg:text-sm flex gap-1 my-2">

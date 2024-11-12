@@ -6,7 +6,7 @@ import { faArrowRight } from '@fortawesome/free-solid-svg-icons';
 
 const VinimportorerCard = ({ data }) => {
   return (
-    <div className="shadow-gray-200 shadow-md p-6 rounded-sm bg-white">
+    <div className="shadow-gray-200 shadow-md p-6 rounded-sm bg-white h-full flex flex-col justify-evenly">
       <h3 className="text-xl font-medium my-4">{data.title}</h3>
       <p className="text-gray-600">
         {formatEmbeddedContent(data.content)}

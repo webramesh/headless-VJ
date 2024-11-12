@@ -104,6 +104,11 @@ export async function getPostProductRecommendationBySlug(slug) {
                 produkter {
                   nodes {
                     title
+                    featuredImage {
+                      node {
+                        sourceUrl
+                      }
+                    }
                     fieldsProduct {
                       wineSortiment
                       alcohol

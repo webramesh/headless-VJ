@@ -11,8 +11,6 @@ async function TaxonomyPage({ params }) {
       <div className="flex flex-col lg:flex-row lg:gap-10 mt-12">
         {/* Main Content Section (3/4) */}
         <div className="w-full lg:w-3/4 flex flex-col gap-6">
-          <h1 className="text-2xl lg:text-3xl mb-4 font-semibold">{params.slug}</h1>
-
           <ProductsByTaxonomy params={params} totalProducts={totalProducts} />
           <SubscriptionForm />
           <CatAccordion />

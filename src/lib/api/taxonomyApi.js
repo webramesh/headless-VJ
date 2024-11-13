@@ -93,12 +93,12 @@ export async function getTaxonomyBySlug(category, slug, first, last, after, befo
               productLabels
               pice
             }
-            produktrekommendationer {
-              nodes {
-                name
-                slug
+            produktTyper {
+                nodes {
+                  slug
+                  name
+                }
               }
-            }
             produktslander {
               nodes {
                 name

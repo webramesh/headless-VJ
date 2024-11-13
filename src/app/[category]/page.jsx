@@ -1,3 +1,4 @@
+import { redirect } from 'next/navigation';
 import { countTotalPostsByCategory, getAllCategories, getCategoryBySlug } from '../../lib/api/postAPI';
 import PostTypeContent from '../Components/PostTypeContent';
 import Sidebar from '../Components/Sidebar';
@@ -13,7 +14,12 @@ export async function generateStaticParams() {
 }
 
 export default async function Page({ params }) {
-  const category = await getCategoryBySlug(params.category || 'online');
+  const category = await getCategoryBySlug(params.category);
+
+  if (!category) {
+    redirect('/');
+  }
+
   const totalPostsByCategory = await countTotalPostsByCategory(params.category);
 
   return (

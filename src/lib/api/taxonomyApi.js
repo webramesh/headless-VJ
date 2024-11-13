@@ -37,39 +37,23 @@ export async function getAllTaxonomyTypes() {
   }
 }
 
-export async function countProductsByTaxonomy(category, slug, cursor = null, allProducts = []) {
+export async function countProductsByTaxonomy(category, slug) {
   const taxonomy = slugToTaxonomy[category];
   try {
     const { data } = await client.query({
       query: gql`
-        query GetTaxonomyBySlug($slug: ID!,$cursor:String) {
+        query GetTaxonomyBySlug($slug: ID!) {
           ${taxonomy}(id: $slug, idType: SLUG) {
-            produkter(first: 100, after: $cursor) {
-              nodes {
-                id
-              }
-              pageInfo {
-                endCursor
-                hasNextPage 
-              }
-            }
+            name
+            count
           }
         }
       `,
-      variables: { category, slug, cursor },
+      variables: { category, slug },
     });
-
-    const newProducts = data[taxonomy].produkter.nodes;
-    const updatedProducts = [...allProducts, ...newProducts];
-
-    if (data[taxonomy].produkter.pageInfo.hasNextPage) {
-      return countProductsByTaxonomy(category, slug, data[taxonomy].produkter.pageInfo.endCursor, updatedProducts);
-    }
-
-    return updatedProducts.length;
+    return { name: data[taxonomy].name, totalProducts: data[taxonomy].count };
   } catch (error) {
     console.error('Error fetching products', error);
-    return allProducts.length;
   }
 }
 
@@ -78,7 +62,6 @@ export async function getTaxonomyBySlug(category, slug, first, last, after, befo
   const query = gql`
     query GetTaxonomyBySlug($slug: ID!,$first: Int, $last: Int, $after: String, $before: String) {
       ${taxonomy}(id: $slug, idType: SLUG) {
-        name
         produkter(first: $first, last: $last, after: $after, before: $before) {
           nodes {
             id
@@ -128,7 +111,6 @@ export async function getTaxonomyBySlug(category, slug, first, last, after, befo
       },
     });
     return {
-      taxonomy: data[taxonomy],
       products: data[taxonomy]?.produkter?.nodes,
       pageInfo: data[taxonomy]?.produkter?.pageInfo,
     };

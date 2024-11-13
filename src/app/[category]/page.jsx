@@ -1,5 +1,5 @@
 import { redirect } from 'next/navigation';
-import { countTotalPostsByCategory, getAllCategories, getCategoryBySlug } from '../../lib/api/postAPI';
+import { getAllCategories, getCategoryBySlug } from '../../lib/api/postAPI';
 import PostTypeContent from '../Components/PostTypeContent';
 import Sidebar from '../Components/Sidebar';
 import SubscriptionForm from '../Components/subscription/SubscriptionForm';
@@ -15,12 +15,11 @@ export async function generateStaticParams() {
 
 export default async function Page({ params }) {
   const category = await getCategoryBySlug(params.category);
+  const totalPostsByCategory = category.count;
 
   if (!category) {
     redirect('/');
   }
-
-  const totalPostsByCategory = await countTotalPostsByCategory(params.category);
 
   return (
     <div className="container mx-auto px-4 sm:px-6 lg:px-8">

@@ -27,6 +27,7 @@ const FactBox = ({ recommendedProduct, smakar, aromer, fargers, matkombinationer
     { name: 'Filled', value: tasteClock3Fruktsyra },
     { name: 'Empty', value: total - tasteClock3Fruktsyra },
   ];
+
   return (
     <>
       <div className="text-center flex items-center justify-center gap-3">
@@ -35,17 +36,25 @@ const FactBox = ({ recommendedProduct, smakar, aromer, fargers, matkombinationer
       </div>
       <FactBoxDescription fieldsProduct={fieldsProduct} />
 
-      {total > 0 && (
-        <div className="grid grid-cols-3 gap-4 mt-4">
-          <CatPiechart data={pieChartData1} title="Smakintensitet" total={total} />
-          <CatPiechart data={pieChartData2} title="Fyllighet/Strävhet" total={total} />
-          <CatPiechart data={pieChartData3} title="Syra" total={total} />
-        </div>
-      )}
+      {/* <div className="flex justify-center items-center"> */}
+      <div className="">
+        {total > 0 && (
+          <div className="grid grid-cols-3 gap-4 mt-4">
+            <CatPiechart data={pieChartData1} title="Smakintensitet" total={total} />
+            <CatPiechart data={pieChartData2} title="Fyllighet/Strävhet" total={total} />
+            <CatPiechart data={pieChartData3} title="Syra" total={total} />
+          </div>
+        )}
+      </div>
+      {/* <div className="">
+          {matkombinationer?.length > 0 && <FactBoxMatCombinationer matkombinationer={matkombinationer} />}
+        </div> */}
+      {/* </div> */}
 
       {/* </div> */}
       {/* <FactBoxMoreInfo smakar={smakar} aromer={aromer} fragers={fargers} /> */}
-      {(smakar?.length > 0 || aromer?.length > 0 || fargers?.length > 0) && <FactBoxMoreInfo />}
+      {/* {(smakar.length > 0 || aromer.length > 0 || fargers.length > 0) && <FactBoxMoreInfo />} */}
+      <FactBoxMoreInfo smakar={smakar} aromer={aromer} fargers={fargers} />
       {matkombinationer?.length > 0 && <FactBoxMatCombinationer matkombinationer={matkombinationer} />}
     </>
   );

@@ -17,16 +17,16 @@ export default async function PostDetails({ params }) {
 
   return (
     <div className="">
-      <PostDetailsHero
+      {/* <PostDetailsHero
         title={post?.title}
         featuredImage={post?.featuredImage?.node?.sourceUrl}
         authorImage={post?.author?.node?.customAvatar}
         authorName={post?.author?.node?.name}
         date={post?.date}
         categoryName={post?.categories?.nodes[0]?.name}
-      />
-      <PostDetailsContent content={post?.content} />
-      {/* <ProductRecom /> */}
+      /> */}
+      {/* <PostDetailsContent content={post?.content} /> */}
+
       <ProductRecommendation
         postProductRecommendation={postProductRecommendation}
         // smakar={smakar}

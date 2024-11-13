@@ -110,6 +110,8 @@ export async function getPostProductRecommendationBySlug(slug) {
                       }
                     }
                     fieldsProduct {
+                      pice
+                      productCode
                       wineSortiment
                       alcohol
                       vintage

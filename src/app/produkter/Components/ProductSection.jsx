@@ -15,8 +15,7 @@ import BreadCrumb from '../../Components/breadcrumb/BreadCrumb';
 
 export default function ProductSection({ product }) {
   const [showReadMore, setShowReadMore] = useState(false);
-  const { title, featuredImage, fieldsProduct, produktslander, produktrekommendationer, smakar, aromer, fragers } =
-    product;
+  const { title, featuredImage, fieldsProduct, produktslander, produktTyper, smakar, aromer, fragers } = product;
   const {
     productShortText,
     extraReadMore1,
@@ -34,7 +33,7 @@ export default function ProductSection({ product }) {
     tasteClock2Fyllighetstravhet,
     tasteClock3Fruktsyra,
   } = fieldsProduct;
-  const recommendations = produktrekommendationer.nodes.filter((recommendation) => recommendation.name !== 'Vin');
+  const typer = produktTyper?.nodes?.filter((recommendation) => recommendation.name !== 'Vin');
 
   const total = tasteClock1FyllighetSotma + tasteClock2Fyllighetstravhet + tasteClock3Fruktsyra;
   const pieChartData1 = [
@@ -64,7 +63,7 @@ export default function ProductSection({ product }) {
                 {title} | {bottlePackageVolume} ml
               </h1>
               <div className=" text-red-600 hover:text-red-500 mt-2 text-sm">
-                {recommendations.map((item, i) => (
+                {typer?.map((item, i) => (
                   <span key={i}>{item.name} | </span>
                 ))}
                 {produktslander.nodes.map((region, i, arr) => (
@@ -90,7 +89,7 @@ export default function ProductSection({ product }) {
               {title} | {bottlePackageVolume} ml
             </h1>
             <div className="text-red-600 hover:text-red-500 mt-2 text-sm">
-              {recommendations.map((item, i) => (
+              {typer?.map((item, i) => (
                 <span key={i}>{item.name} | </span>
               ))}
               {produktslander.nodes.map((region, i, arr) => (

@@ -24,6 +24,9 @@ export default function Pagination({ pageInfo, total, pageLimit }) {
   const totalPages = pages + 1;
   const lastPageLimit = total - pages * pageLimit;
 
+  if (total <= pageLimit) {
+    return null;
+  }
   return (
     <nav className="flex justify-center items-center space-x-2 py-8" aria-label="Pagination">
       <PaginationButton disabled={page === 1 || loading} onClick={() => handleFirstPage(pageLimit)}>

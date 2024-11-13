@@ -56,10 +56,10 @@ export async function getAllProducts(first = 15, last = 0, after = null, before 
                 productLabels
                 pice
               }
-              produktrekommendationer {
+              produktTyper {
                 nodes {
-                  name
                   slug
+                  name
                 }
               }
               produktslander {
@@ -102,10 +102,10 @@ export async function getProductBySlug(slug) {
                 sourceUrl
               }
             }
-            produktrekommendationer {
+            produktTyper {
               nodes {
-                name
                 slug
+                name
               }
             }
             produktslander {

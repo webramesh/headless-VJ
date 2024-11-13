@@ -2,12 +2,12 @@ import BreadCrumb from '../../Components/breadcrumb/BreadCrumb';
 import Sidebar from '../../Components/Sidebar';
 import SubscriptionForm from '../../Components/subscription/SubscriptionForm';
 import CatAccordion from '../../[category]/Components/CatAccordion';
-import { countOrdlistaByCategory, getOrdlistaCategoryBySlug } from '@/src/lib/api/ordilistaAPI';
+import { getOrdlistaCategoryBySlug } from '@/src/lib/api/ordilistaAPI';
 import OrdlistaByCategory from '../components/OrdlistaByCategory';
 
 export default async function page({ params }) {
   const category = await getOrdlistaCategoryBySlug(params.category);
-  const totalOrdlista = await countOrdlistaByCategory(params.category);
+  const totalOrdlista = category.count;
   return (
     <>
       <div className="container mx-auto px-4 my-10  grid grid-cols-4 gap-12">

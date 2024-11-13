@@ -121,6 +121,7 @@ export async function getCategoryBySlug(slug) {
           category(id: $slug, idType: SLUG) {
             name
             description
+            count
           }
         }
       `,
@@ -131,39 +132,6 @@ export async function getCategoryBySlug(slug) {
   } catch (error) {
     console.error('Error fetching category:', error);
     return null;
-  }
-}
-
-export async function countTotalPostsByCategory(category, cursor = null, allPosts = []) {
-  try {
-    const { data } = await client.query({
-      query: gql`
-        query countTotalPostsByCategory($category: String, $cursor: String) {
-          posts(where: { categoryName: $category }, first: 100, after: $cursor) {
-            nodes {
-              id
-            }
-            pageInfo {
-              hasNextPage
-              endCursor
-            }
-          }
-        }
-      `,
-      variables: { category, cursor },
-    });
-
-    const newPosts = data.posts.nodes;
-    const updatedPosts = [...allPosts, ...newPosts];
-
-    if (data.posts.pageInfo.hasNextPage) {
-      return countTotalPostsByCategory(category, data.posts.pageInfo.endCursor, updatedPosts);
-    }
-
-    return updatedPosts.length;
-  } catch (error) {
-    console.error('Error fetching regioners', error);
-    return allPosts.length;
   }
 }
 

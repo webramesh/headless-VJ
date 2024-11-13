@@ -116,6 +116,7 @@ export async function getOrdlistaCategoryBySlug(slug) {
           ordlistaCategory(id: $slug, idType: SLUG) {
             name
             description
+            count
           }
         }
       `,
@@ -126,41 +127,6 @@ export async function getOrdlistaCategoryBySlug(slug) {
   } catch (error) {
     console.error('Error fetching ordlista category by slug:', error);
     return null;
-  }
-}
-
-export async function countOrdlistaByCategory(category, cursor = null, allOrdlista = []) {
-  try {
-    const { data } = await client.query({
-      query: gql`
-        query CountOrdlistaByCategory($cursor: String, $category: ID!) {
-          ordlistaCategory(id: $category, idType: SLUG) {
-            ordlista(first: 100, after: $cursor) {
-              nodes {
-                id
-              }
-              pageInfo {
-                endCursor
-                hasNextPage
-              }
-            }
-          }
-        }
-      `,
-      variables: { category, cursor },
-    });
-
-    const newOrdlista = data.ordlistaCategory.ordlista.nodes;
-    const updatedOrdlista = [...allOrdlista, ...newOrdlista];
-
-    if (data.ordlistaCategory.ordlista.pageInfo.hasNextPage) {
-      return countOrdlistaByCategory(category, data.ordlistaCategory.ordlista.pageInfo.endCursor, updatedOrdlista);
-    }
-
-    return updatedOrdlista.length;
-  } catch (error) {
-    console.error('Error fetching regioners', error);
-    return allOrdlista.length;
   }
 }
 

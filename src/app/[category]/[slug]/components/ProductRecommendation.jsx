@@ -1,0 +1,58 @@
+'use client';
+import Image from 'next/image';
+import React from 'react';
+import FactBox from './FactBox';
+
+export default function ProductRecommendation({ postProductRecommendation }) {
+  const products = postProductRecommendation?.produktrekommendationer?.nodes[0]?.produkter?.nodes || [];
+
+  // Filter out products with "no-image" in the featured image URL
+  const validProducts = products.filter((product) => !product?.featuredImage?.node?.sourceUrl.includes('no-image'));
+
+  // Select a random product from the filtered list
+  const randomIndex = Math.floor(Math.random() * validProducts.length);
+  const recommendedProduct = validProducts[randomIndex];
+
+  const productFeaturedImage = recommendedProduct?.featuredImage?.node?.sourceUrl;
+
+  const smakar = recommendedProduct?.smakar?.nodes;
+  const aromer = recommendedProduct?.aromer?.nodes;
+  const fargers = recommendedProduct?.fargers?.nodes;
+  const matkombinationer = recommendedProduct?.matkombinationer?.nodes;
+
+  return (
+    <>
+      {recommendedProduct && (
+        <div className="container mx-auto px-4 lg:px-0 mt-24">
+          <div className=" text-xl md:text-2xl mt-8 text-center font-semibold ">Vinjournalen.se Tips</div>
+
+          <div className="flex flex-col lg:flex-row mt-6 gap-6">
+            <div className="w-full lg:w-[30%] mb-6 lg:mb-0">
+              <div className="lg:sticky lg:top-4">
+                <Image
+                  src={productFeaturedImage}
+                  alt="Citran Wine"
+                  className="object-cover mx-auto mt-3"
+                  width={200}
+                  height={200}
+                />
+              </div>
+            </div>
+
+            <div className="w-full lg:w-[70%] ">
+              <div className="mt-4 bg-slate-50 shadow-md p-4 lg:scroll-p-8 pb-8">
+                <FactBox
+                  recommendedProduct={recommendedProduct}
+                  smakar={smakar}
+                  aromer={aromer}
+                  fargers={fargers}
+                  matkombinationer={matkombinationer}
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+    </>
+  );
+}

@@ -90,6 +90,104 @@ export async function getPostBySlug(slug) {
   }
 }
 
+export async function getPostProductRecommendationBySlug(slug) {
+  try {
+    const { data } = await client.query({
+      query: gql`
+        query GetPostProductRecommendationBySlug($slug: ID!) {
+          post(id: $slug, idType: SLUG) {
+            id
+            title
+
+            produktrekommendationer {
+              nodes {
+                name
+                slug
+                produkter {
+                  nodes {
+                    title
+                    featuredImage {
+                      node {
+                        sourceUrl
+                      }
+                    }
+                    fieldsProduct {
+                      pice
+                      productCode
+                      wineSortiment
+                      alcohol
+                      vintage
+                      composition
+                      bottlePackageVolume
+                      allergener
+                      tasteClock1FyllighetSotma
+                      tasteClock2Fyllighetstravhet
+                      tasteClock3Fruktsyra
+                      caloriesInAlcPer15cl
+                      caloriesInAlcPerContainerVolume
+                      caloriesInAlcPerLitter
+                      caloriesInSugarPer15cl
+                      caloriesInSugarPerContainerVolume
+                      caloriesInSugarPerLitter
+                      totalCaloriesPer15Cl
+                      totalCaloriesPerContainerVolume
+                      totalCaloriesPerLitter
+                      sugerLevel
+                      sugarLevelIn1Litter
+                      containerType
+                      produktPackaging
+                      productLabels
+                    }
+                    matkombinationer {
+                      nodes {
+                        name
+                        categoriesImagesAndOtherFields {
+                          categoriesImage {
+                            node {
+                              sourceUrl
+                            }
+                          }
+                        }
+                      }
+                    }
+                    aromer {
+                      nodes {
+                        id
+                        name
+                        slug
+                      }
+                    }
+                    smakar {
+                      nodes {
+                        id
+                        name
+                        slug
+                      }
+                    }
+                    fargers {
+                      nodes {
+                        id
+                        name
+                        slug
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      `,
+      variables: { slug },
+    });
+
+    return data.post;
+  } catch (error) {
+    console.error('Error fetching post:', error);
+    return null;
+  }
+}
+
 export async function getAllCategories() {
   try {
     const { data } = await client.query({
@@ -113,7 +211,9 @@ export async function getAllCategories() {
   }
 }
 
+
 export async function getCategoryBySlug(slug) {
+
   try {
     const { data } = await client.query({
       query: gql`

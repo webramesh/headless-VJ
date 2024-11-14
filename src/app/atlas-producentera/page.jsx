@@ -1,17 +1,25 @@
-'use client';
-
 import React from 'react';
-import Head from 'next/head';
 import AtlasContent from './Components/AtlasContent';
+import { getAllProducenter, getAllCountries } from '../../lib/api/countryApi';
 
-export default function Home() {
+export const revalidate = 60;
+
+// This is an async Server Component
+export default async function Page() {
+  // Fetched all producenter and countries data
+  const [producenter, countries] = await Promise.all([getAllProducenter(), getAllCountries()]);
+
   return (
     <>
-      <Head>
-        <title>Atlas Producentera Page</title>
-        <meta name="description" content="This is the Atlas Producentera page of Vinjournalen" />
-      </Head>
-      <AtlasContent />
+      <AtlasContent producenter={producenter} countries={countries} />
     </>
   );
+}
+
+export async function generateStaticParams() {
+  const producenter = await getAllProducenter();
+
+  return producenter.map((producent) => ({
+    id: producent.id,
+  }));
 }

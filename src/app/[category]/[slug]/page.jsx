@@ -1,7 +1,7 @@
 import { getAllCategories, getPostBySlug } from '@/src/lib/api/postAPI';
 import TaxonomyPage from '../Components/TaxonomyPage';
 
-import { getPostBySlug, getPostProductRecommendationBySlug } from '@/src/lib/api/postAPI';
+import { getPostProductRecommendationBySlug } from '@/src/lib/api/postAPI';
 import PostDetailsContent from '../Components/PostDetailsContent';
 import PostDetailsHero from '../Components/PostDetailsHero';
 import ProductRecommendation from './components/ProductRecommendation';

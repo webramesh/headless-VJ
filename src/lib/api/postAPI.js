@@ -1,4 +1,5 @@
 // post api
+'use server';
 import { ApolloClient, InMemoryCache, gql } from '@apollo/client';
 
 const client = new ApolloClient({
@@ -67,6 +68,7 @@ export async function getPostBySlug(slug) {
             categories {
               nodes {
                 name
+                slug
               }
             }
             author {
@@ -185,24 +187,7 @@ export async function getPostProductRecommendationBySlug(slug) {
     return null;
   }
 }
-// export async function getPostProductRecommendationBySlug(slug) {
-//   try {
-//     const { data } = await client.query({
-//       query: gql`
-//         query GetPostProductRecommendationBySlug($slug: String!) {
-//           postBy(slug: $slug) {
-//             date
-//           }
-//         `,
-//       variables: { slug },
-//     });
 
-//     return data.postBy;
-//   } catch (error) {
-//     console.error('Error fetching post product recommendations:', error);
-//     return null;
-//   }
-// }
 export async function getAllCategories() {
   try {
     const { data } = await client.query({
@@ -226,7 +211,9 @@ export async function getAllCategories() {
   }
 }
 
-async function getCategoryBySlug(slug) {
+
+export async function getCategoryBySlug(slug) {
+
   try {
     const { data } = await client.query({
       query: gql`
@@ -234,6 +221,7 @@ async function getCategoryBySlug(slug) {
           category(id: $slug, idType: SLUG) {
             name
             description
+            count
           }
         }
       `,
@@ -246,12 +234,13 @@ async function getCategoryBySlug(slug) {
     return null;
   }
 }
-async function getPostsByCategoryInternal(slug) {
+
+export async function getPostsByCategory(category, first, last, after, before) {
   try {
     const { data } = await client.query({
       query: gql`
-        query PostsByCategory($categorySlug: String!) {
-          posts(where: { categoryName: $categorySlug }, first: 100) {
+        query PostsByCategory($category: String!, $first: Int, $last: Int, $after: String, $before: String) {
+          posts(where: { categoryName: $category }, first: $first, last: $last, after: $after, before: $before) {
             nodes {
               id
               title
@@ -270,32 +259,25 @@ async function getPostsByCategoryInternal(slug) {
               }
               categories {
                 nodes {
-                  name
-                  description
                   slug
                 }
               }
             }
+            pageInfo {
+              hasNextPage
+              endCursor
+              hasPreviousPage
+              startCursor
+            }
           }
         }
       `,
-      variables: { categorySlug: slug },
+      variables: { category, first, last, after, before },
     });
 
-    return data.posts.nodes;
+    return { posts: data.posts.nodes, pageInfo: data.posts.pageInfo };
   } catch (error) {
     console.error('Error fetching posts by category:', error);
     return [];
   }
-}
-export async function getPostsByCategory(slug) {
-  // Fetch posts for the category
-  const posts = await getPostsByCategoryInternal(slug);
-
-  // Fetch the category name and description based on the slug
-  const categoryData = await getCategoryBySlug(slug);
-  const categoryName = categoryData ? categoryData.name : null;
-  const categoryDescription = categoryData ? categoryData.description : null;
-
-  return { posts, categoryName, categoryDescription };
 }

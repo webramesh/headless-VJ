@@ -4,6 +4,39 @@ import { getClient } from './apolloclient';
 
 const client = getClient();
 
+export async function countOrdlista(cursor = null, allOrdlista = []) {
+  try {
+    const { data } = await client.query({
+      query: gql`
+        query CountOrdlista($cursor: String) {
+          ordlista(first: 100, after: $cursor) {
+            nodes {
+              id
+            }
+            pageInfo {
+              hasNextPage
+              endCursor
+            }
+          }
+        }
+      `,
+      variables: { cursor },
+    });
+
+    const newOrdlista = data.ordlista.nodes;
+    const updatedOrdlista = [...allOrdlista, ...newOrdlista];
+
+    if (data.ordlista.pageInfo.hasNextPage) {
+      return countOrdlista(data.ordlista.pageInfo.endCursor, updatedOrdlista);
+    }
+
+    return updatedOrdlista.length;
+  } catch (error) {
+    console.error('Error fetching Ordlista', error);
+    return allOrdlista.length;
+  }
+}
+
 export async function getAllOrdlistaCategories() {
   try {
     const { data } = await client.query({
@@ -72,6 +105,71 @@ export async function getAllOrdlista(first, last, after, before) {
   } catch (error) {
     console.error('Error fetching odilista:', error);
     return [];
+  }
+}
+
+export async function getOrdlistaCategoryBySlug(slug) {
+  try {
+    const { data } = await client.query({
+      query: gql`
+        query OrdlistaCategoryBySlug($slug: ID!) {
+          ordlistaCategory(id: $slug, idType: SLUG) {
+            name
+            description
+            count
+          }
+        }
+      `,
+      variables: { slug },
+    });
+
+    return data.ordlistaCategory;
+  } catch (error) {
+    console.error('Error fetching ordlista category by slug:', error);
+    return null;
+  }
+}
+
+export async function getOrdlistaByCategory(category, first, last, after, before) {
+  try {
+    const { data } = await client.query({
+      query: gql`
+        query OrdlistaCategoryBySlug($category: ID!, $first: Int, $last: Int, $after: String, $before: String) {
+          ordlistaCategory(id: $category, idType: SLUG) {
+            ordlista(first: $first, last: $last, after: $after, before: $before) {
+              nodes {
+                id
+                slug
+                title
+                featuredImage {
+                  node {
+                    sourceUrl
+                  }
+                }
+                ordlistaCategories {
+                  nodes {
+                    slug
+                    name
+                  }
+                }
+              }
+              pageInfo {
+                endCursor
+                hasNextPage
+                hasPreviousPage
+                startCursor
+              }
+            }
+          }
+        }
+      `,
+      variables: { category, first, last, after, before },
+    });
+
+    return { ordlista: data.ordlistaCategory.ordlista.nodes, pageInfo: data.ordlistaCategory.ordlista.pageInfo };
+  } catch (error) {
+    console.error('Error fetching ordlista itens by category:', error);
+    return null;
   }
 }
 

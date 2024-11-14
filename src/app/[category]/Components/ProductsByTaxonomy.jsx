@@ -1,14 +1,14 @@
 'use client';
-
-import { useEffect, useState } from 'react';
+import { getTaxonomyBySlug } from '@/src/lib/api/taxonomyApi';
 import ProductCard from '../../Components/ProductCard';
 import Pagination from '../../Components/pagination/Pagination';
-import { getAllProducts } from '@/src/lib/api/productsAPI';
 import { usePagination } from '@/src/context/PageContext';
+import { useEffect, useState } from 'react';
 
 const PRODUCTS_PER_PAGE = 15;
 
-export default function ProdukterPage({ totalProducts }) {
+function ProductsByTaxonomy({ params, totalProducts }) {
+  const { category, slug } = params;
   const { state, dispatch } = usePagination();
   const { after, before, first, last } = state;
   const [products, setProducts] = useState([]);
@@ -23,7 +23,7 @@ export default function ProdukterPage({ totalProducts }) {
   useEffect(() => {
     const fetchProducts = async () => {
       dispatch({ type: 'CHANGE_LOADING', payload: true });
-      const { products, pageInfo } = await getAllProducts(first, last, after, before);
+      const { products, pageInfo } = await getTaxonomyBySlug(category, slug, first, last, after, before);
       if (products && pageInfo) {
         setProducts(products);
         setPageInfo(pageInfo);
@@ -34,7 +34,7 @@ export default function ProdukterPage({ totalProducts }) {
     };
 
     if (isReset) fetchProducts();
-  }, [first, last, after, before, isReset, dispatch]);
+  }, [first, last, after, before, isReset, dispatch, category, slug]);
 
   return (
     <>
@@ -50,3 +50,5 @@ export default function ProdukterPage({ totalProducts }) {
     </>
   );
 }
+
+export default ProductsByTaxonomy;

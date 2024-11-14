@@ -3,9 +3,8 @@ import Link from 'next/link';
 import wine1 from '@/public/wine1.png';
 
 function ProductCard({ product }) {
-  const { featuredImage, fieldsProduct, produktrekommendationer, slug, title, produktslander } = product;
+  const { featuredImage, fieldsProduct, produktTyper, slug, title, produktslander } = product;
   const { productLabels, pice } = fieldsProduct;
-  const recommendations = produktrekommendationer?.nodes;
   return (
     <div className="border-2 shadow-md hover:shadow-lg transition-shadow duration-300 p-6 h-[450px]">
       <div className="flex flex-col justify-between h-full items-start">
@@ -21,13 +20,11 @@ function ProductCard({ product }) {
           {/* //for product labels */}
         </Link>
         <div className=" text-red-600 mt-2">
-          {recommendations.length > 0
-            ? recommendations?.map((recommendation, i, arr) => (
-                <Link href="/" key={i} className="hover:text-red-500 mt-2 inline">
-                  {i < arr.length - 1 ? `${recommendation.name} | ` : recommendation.name}
-                </Link>
-              ))
-            : 'Vin'}
+          {produktTyper?.nodes?.map((recommendation, i, arr) => (
+            <Link href={`/produkt-typer/${recommendation.slug}`} key={i} className="hover:text-red-500 mt-2 inline">
+              {i < arr.length - 1 ? `${recommendation.name} | ` : recommendation.name}
+            </Link>
+          ))}
         </div>
         <div>
           <Link href={`/produkter/${slug}`} className="leading-6 text-lg">

@@ -5,6 +5,39 @@ import { getClient } from './apolloclient';
 
 const client = getClient();
 
+export async function countProducenters(cursor = null, allProducenters = []) {
+  try {
+    const { data } = await client.query({
+      query: gql`
+        query CountProducenters($cursor: String) {
+          producenter(first: 100, after: $cursor) {
+            nodes {
+              id
+            }
+            pageInfo {
+              hasNextPage
+              endCursor
+            }
+          }
+        }
+      `,
+      variables: { cursor },
+    });
+
+    const newProducenters = data.producenter.nodes;
+    const updatedProducenters = [...allProducenters, ...newProducenters];
+
+    if (data.producenter.pageInfo.hasNextPage) {
+      return countProducenters(data.producenter.pageInfo.endCursor, updatedProducenters);
+    }
+
+    return updatedProducenters.length;
+  } catch (error) {
+    console.error('Error fetching producenters', error);
+    return allProducenters.length;
+  }
+}
+
 export async function getAllProducenter(first, last, after, before) {
   try {
     const { data } = await client.query({

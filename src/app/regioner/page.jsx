@@ -3,8 +3,10 @@ import Sidebar from '../Components/Sidebar.jsx';
 import CatAccordion from '../[category]/Components/CatAccordion.jsx';
 import BreadCrumb from '../Components/breadcrumb/BreadCrumb';
 import RegionerContainer from './components/RegionerContainer';
+import { countRegioners } from '@/src/lib/api/regionerAPI';
 
-const page = () => {
+const page = async () => {
+  const totalRegioners = await countRegioners();
   return (
     <>
       <div className="container mx-auto mt-5">
@@ -12,7 +14,7 @@ const page = () => {
         <div className="block md:grid md:grid-cols-3   md:gap-8">
           <div className=" w-full col-span-2">
             <h1 className="text-2xl lg:text-3xl mb-4 font-bold uppercase">Regioner</h1>
-            <RegionerContainer />
+            <RegionerContainer totalRegioners={totalRegioners} />
 
             <div className="mt-8 mx-4 md:mx-auto">
               <SubscriptionForm />

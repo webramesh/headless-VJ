@@ -8,13 +8,12 @@ import { useEffect, useState } from 'react';
 
 const PRODUCENTER_PER_PAGE = 15;
 
-const ProducenterContainer = () => {
-  const { state, dispatch, handleNextPage, handlePreviousPage } = usePagination();
-  const { pageNumber, after, before, first, last } = state;
+const ProducenterContainer = ({ totalProducenters }) => {
+  const { state, dispatch } = usePagination();
+  const { after, before, first, last } = state;
   const [producenter, setProducenter] = useState([]);
   const [pageInfo, setPageInfo] = useState({});
   const [isReset, setIsReset] = useState(false);
-  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     dispatch({ type: 'RESET', payload: PRODUCENTER_PER_PAGE });
@@ -23,19 +22,19 @@ const ProducenterContainer = () => {
 
   useEffect(() => {
     const fetchProducenters = async () => {
-      setIsLoading(true);
+      dispatch({ type: 'CHANGE_LOADING', payload: true });
       const { producenters, pageInfo } = await getAllProducenter(first, last, after, before);
       if (producenters && pageInfo) {
         setProducenter(producenters);
         setPageInfo(pageInfo);
-        setIsLoading(false);
+        dispatch({ type: 'CHANGE_LOADING', payload: false });
       } else {
         console.warn('No products or page info returned from getAllProducenters');
       }
     };
 
     if (isReset) fetchProducenters();
-  }, [after, before, first, isReset, last]);
+  }, [after, before, first, isReset, last, dispatch]);
 
   return (
     <>
@@ -50,13 +49,8 @@ const ProducenterContainer = () => {
         ))}
       </div>
       {/* pagination */}
-      <Pagination
-        pageInfo={pageInfo}
-        next={() => handleNextPage(PRODUCENTER_PER_PAGE, pageInfo.endCursor)}
-        previous={() => handlePreviousPage(PRODUCENTER_PER_PAGE, pageInfo.startCursor)}
-        page={pageNumber}
-        loading={isLoading}
-      />
+
+      <Pagination pageInfo={pageInfo} pageLimit={PRODUCENTER_PER_PAGE} total={totalProducenters} />
     </>
   );
 };

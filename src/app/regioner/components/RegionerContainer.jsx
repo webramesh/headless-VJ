@@ -9,13 +9,12 @@ import Pagination from '../../Components/pagination/Pagination';
 
 const REGIONS_PER_PAGE = 15;
 
-const RegionerContainer = () => {
-  const { state, dispatch, handleNextPage, handlePreviousPage } = usePagination();
-  const { pageNumber, after, before, first, last } = state;
+const RegionerContainer = ({ totalRegioners }) => {
+  const { state, dispatch } = usePagination();
+  const { after, before, first, last } = state;
   const [regions, setRegions] = useState([]);
   const [pageInfo, setPageInfo] = useState({});
   const [isReset, setIsReset] = useState(false);
-  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     dispatch({ type: 'RESET', payload: REGIONS_PER_PAGE });
@@ -24,19 +23,20 @@ const RegionerContainer = () => {
 
   useEffect(() => {
     const fetchRegions = async () => {
-      setIsLoading(true);
+      dispatch({ type: 'CHANGE_LOADING', payload: true });
+
       const { regions, pageInfo } = await getAllRegions(first, last, after, before);
       if (regions && pageInfo) {
         setRegions(regions);
         setPageInfo(pageInfo);
-        setIsLoading(false);
+        dispatch({ type: 'CHANGE_LOADING', payload: false });
       } else {
         console.warn('No products or page info returned from getAllRegions');
       }
     };
 
     if (isReset) fetchRegions();
-  }, [after, before, first, isReset, last]);
+  }, [after, before, first, isReset, last, dispatch]);
 
   return (
     <>
@@ -52,13 +52,7 @@ const RegionerContainer = () => {
         ))}
       </div>
       {/* pagination */}
-      <Pagination
-        pageInfo={pageInfo}
-        next={() => handleNextPage(REGIONS_PER_PAGE, pageInfo.endCursor)}
-        previous={() => handlePreviousPage(REGIONS_PER_PAGE, pageInfo.startCursor)}
-        page={pageNumber}
-        loading={isLoading}
-      />
+      <Pagination pageInfo={pageInfo} pageLimit={REGIONS_PER_PAGE} total={totalRegioners} />
     </>
   );
 };

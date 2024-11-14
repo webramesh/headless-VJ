@@ -1,13 +1,13 @@
 'use client';
-import { getAllOrdlista } from '@/src/lib/api/ordilistaAPI';
-import OrdilistaCard from './OrdilistaCard';
-import Pagination from '../../Components/pagination/Pagination';
 import { usePagination } from '@/src/context/PageContext';
 import { useEffect, useState } from 'react';
+import OrdilistaCard from './OrdilistaCard';
+import Pagination from '../../Components/pagination/Pagination';
+import { getOrdlistaByCategory } from '@/src/lib/api/ordilistaAPI';
 
 const ORDLISTA_PER_PAGE = 15;
 
-export default function OrdlistaContainer({ totalOrdlista }) {
+export default function OrdlistaByCategory({ category, totalOrdlista }) {
   const { state, dispatch } = usePagination();
   const { after, before, first, last } = state;
   const [allOrdlista, setAllOrdlista] = useState([]);
@@ -22,26 +22,25 @@ export default function OrdlistaContainer({ totalOrdlista }) {
   useEffect(() => {
     const fetchOrdlista = async () => {
       dispatch({ type: 'CHANGE_LOADING', payload: true });
-
-      const { allOrdlista, pageInfo } = await getAllOrdlista(first, last, after, before);
-      if (allOrdlista && pageInfo) {
-        setAllOrdlista(allOrdlista);
+      const { ordlista, pageInfo } = await getOrdlistaByCategory(category, first, last, after, before);
+      if (ordlista && pageInfo) {
+        setAllOrdlista(ordlista);
         setPageInfo(pageInfo);
         dispatch({ type: 'CHANGE_LOADING', payload: false });
       } else {
-        console.warn('No products or page info returned from getAllOrdlista');
+        console.warn('No info returned from getOrdlistaByCategory');
       }
     };
 
     if (isReset) fetchOrdlista();
-  }, [after, before, first, isReset, last, dispatch]);
+  }, [after, before, first, isReset, last, category, dispatch]);
 
   return (
     <>
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6 items-center justify-between flex-wrap  rounded-md mb-10">
         {allOrdlista.map((ordlista) => (
           <div key={ordlista.id}>
-            <OrdilistaCard ordlista={ordlista} />
+            <OrdilistaCard ordlista={ordlista} showCategory={false} />
           </div>
         ))}
       </div>

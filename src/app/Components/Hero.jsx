@@ -56,7 +56,7 @@ const Hero = ({ posts }) => {
                   <div className="flex flex-col sm:flex-row gap-4 bg-[#f5f5f5] overflow-hidden">
                     <div className="relative h-48 sm:h-auto sm:w-1/3">
                       <Image
-                        src={post.featuredImage.node.mediaItemUrl}
+                        src={post?.featuredImage?.node?.mediaItemUrl}
                         alt={post.title}
                         fill
                         priority

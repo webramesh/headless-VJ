@@ -15,11 +15,11 @@ export async function generateStaticParams() {
 
 export default async function Page({ params }) {
   const category = await getCategoryBySlug(params.category);
-  const totalPostsByCategory = category.count;
-
+  
   if (!category) {
     redirect('/');
   }
+  const totalPostsByCategory = category?.count;
 
   return (
     <div className="container mx-auto px-4 sm:px-6 lg:px-8">

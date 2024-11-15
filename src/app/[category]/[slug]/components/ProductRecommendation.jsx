@@ -23,24 +23,24 @@ export default function ProductRecommendation({ postProductRecommendation }) {
   return (
     <>
       {recommendedProduct && (
-        <div className="container mx-auto px-4 lg:px-0 mt-24">
+        <div className="container mx-auto px-4 lg:px-0 mt-24 ">
           <div className=" text-xl md:text-2xl mt-8 text-center font-semibold ">Vinjournalen.se Tips</div>
 
-          <div className="flex flex-col lg:flex-row mt-6 gap-6">
-            <div className="w-full lg:w-[30%] mb-6 lg:mb-0">
-              <div className="lg:sticky lg:top-4">
+          <div className="flex flex-col lg:flex-row mt-6   items-center  bg-white shadow-md">
+            <div className="w-full lg:w-[20%] mb-6 lg:mb-0 ">
+              <div className="lg:sticky lg:top-4 ">
                 <Image
                   src={productFeaturedImage}
                   alt="Citran Wine"
-                  className="object-cover mx-auto mt-3"
+                  className=" mx-auto  lg:w-full lg:h-full "
                   width={200}
                   height={200}
                 />
               </div>
             </div>
 
-            <div className="w-full lg:w-[70%] ">
-              <div className="mt-4 bg-slate-50 shadow-md p-4 lg:scroll-p-8 pb-8">
+            <div className="w-full lg:w-[80%] ">
+              <div className=" bg-white  p-4 lg:scroll-p-8 pb-8">
                 <FactBox
                   recommendedProduct={recommendedProduct}
                   smakar={smakar}

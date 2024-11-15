@@ -25,17 +25,19 @@ export default async function PostDetails({ params }) {
 
     return (
       <>
-        <PostDetailsHero
-          title={post?.title}
-          featuredImage={post?.featuredImage?.node?.sourceUrl}
-          authorImage={post?.author?.node?.customAvatar}
-          authorName={post?.author?.node?.name}
-          date={post?.date}
-          categoryName={post?.categories?.nodes[0]?.name}
-        />
-        <PostDetailsContent content={post?.content} />
+        <div className="bg-slate-50 min-h-screen">
+          <PostDetailsHero
+            title={post?.title}
+            featuredImage={post?.featuredImage?.node?.sourceUrl}
+            authorImage={post?.author?.node?.customAvatar}
+            authorName={post?.author?.node?.name}
+            date={post?.date}
+            categoryName={post?.categories?.nodes[0]?.name}
+          />
+          <PostDetailsContent content={post?.content} />
 
-        <ProductRecommendation postProductRecommendation={postProductRecommendation} />
+          <ProductRecommendation postProductRecommendation={postProductRecommendation} />
+        </div>
       </>
     );
   }

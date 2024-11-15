@@ -6,7 +6,7 @@ const FactBoxMatCombinationer = ({ matkombinationer }) => {
   return (
     <>
       <>
-        <div className="grid grid-cols-3 justify-between items-center ml- mt-6 ">
+        <div className="grid grid-cols-3 justify-between items-center ml- mt-6   pb-8">
           {firstThreeMatKombinationer?.map((item, index) => (
             <div key={index} className="text-center  flex flex-col justify-center items-center">
               <Image

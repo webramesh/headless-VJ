@@ -56,8 +56,8 @@ const Hero = ({ posts }) => {
                   <div className="flex flex-col sm:flex-row gap-4 bg-[#f5f5f5] overflow-hidden">
                     <div className="relative h-48 sm:h-auto sm:w-1/3">
                       <Image
-                        src={post.featuredImage.node.mediaItemUrl}
-                        alt={post.title}
+                        src={post?.featuredImage?.node?.mediaItemUrl}
+                        alt={post?.title}
                         fill
                         priority
                         className="h-full w-full object-cover"
@@ -66,13 +66,13 @@ const Hero = ({ posts }) => {
                       />
                     </div>
                     <div className="p-4 sm:w-2/3">
-                      <h3 className=" font-medium text-black text-lg">{post.title}</h3>
-                      <p className="mt-2  text-gray-900 text-xs">{format(new Date(post.date), 'dd MMMM, yyyy')}</p>
+                      <h3 className=" font-medium text-black text-lg">{post?.title}</h3>
+                      <p className="mt-2  text-gray-900 text-xs">{format(new Date(post?.date), 'dd MMMM, yyyy')}</p>
                       <p className="text-[#694848] text-xs  mt-2">{post?.author?.node?.name}</p>
 
                       <p
                         className=" text-sm text-gray-900 font-extralight mt-4 leading-relaxed"
-                        dangerouslySetInnerHTML={{ __html: formatEmbeddedContent(post.excerpt) }}
+                        dangerouslySetInnerHTML={{ __html: formatEmbeddedContent(post?.excerpt) }}
                       ></p>
                     </div>
                   </div>

@@ -1,4 +1,3 @@
-'use client';
 
 import Image from 'next/image';
 import Link from 'next/link';
@@ -7,6 +6,7 @@ import { format } from 'date-fns';
 
 export default function RecentPostCard({ post }) {
   if (!post) {
+    console.log('hello')
     return null;
   }
 
@@ -21,7 +21,7 @@ export default function RecentPostCard({ post }) {
 
   return (
     <Link href={`/${categorySlug}/${postSlug}`} key={post.id || Math.random()} className="flex">
-      <div className="flex flex-col cursor-pointer hover:shadow-lg transition-shadow w-full my-10">
+      <div className="flex flex-col cursor-pointer hover:shadow-lg transition-shadow w-full my-6">
         <div className="relative w-full h-48">
           <Image
             src={featuredImage?.node?.sourceUrl || '/api/placeholder/400/300'}

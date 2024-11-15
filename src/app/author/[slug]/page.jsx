@@ -2,9 +2,10 @@ import React from 'react';
 import { getAuthorBySlug, getAllAuthors } from '../../../lib/api/authorApi';
 import AuthorCard from '../Components/AuthorCard';
 import AuthorHero from '../Components/AuthorHero';
-import Subscription from '../../Components/Subscription';
 import WineTourism from '../../Components/WineTourism';
 import SenasteNytt from '../../Components/SenasteNytt';
+import SubscriptionForm from '../../Components/subscription/SubscriptionForm';
+import SubscriptionBox from '../../Components/subscription/SubscriptionBox';
 
 export default async function AuthorPage({ params }) {
   const author = await getAuthorBySlug(params.slug);
@@ -43,7 +44,14 @@ export default async function AuthorPage({ params }) {
         subtitle={`Read more articles from ${author.name}`}
         posts={author.posts?.nodes || []}
       />
-      <Subscription />
+      <div className="flex px-12 mt-8">
+        <div className="w-[70%] pr-12">
+          <SubscriptionForm />
+        </div>
+        <div className="w-[30%]">
+          <SubscriptionBox />
+        </div>
+      </div>
       <div className="flex flex-col md:flex-row container mx-auto">
         <div className="flex items-center md:w-2/3 p-10">
           <WineTourism />

@@ -1,90 +1,77 @@
 import React from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
-import grape from '@/public/grape.png';
-import corkscrew from '@/public/corkscrew.png';
-import food1 from '@/public/food1.png';
-import SenasteNytt from '../../../app/Components/SenasteNytt';
-import WineTourism from '../../../app/Components/WineTourism';
-import Card from '../../../app/Components/Card';
+import { format } from 'date-fns';
+import Sidebar from '../../../app/Components/Sidebar';
 
-const ArticleContent = () => {
+const Card = ({ title, excerpt, date, author, category, imageUrl, slug }) => {
+  return (
+    <Link href={`/${category || 'uncategorized'}/${slug}`}>
+      <div className="flex flex-col cursor-pointer hover:shadow-lg transition-shadow h-full">
+        <div className="relative w-full pt-[56.25%]">
+          <Image
+            src={imageUrl || '/api/placeholder/400/300'}
+            alt={title || 'Article image'}
+            fill
+            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+            className="object-cover"
+            priority={false}
+          />
+        </div>
+        <div className="p-4 bg-[#f5f5f5] flex-grow">
+          <h3 className="font-outfit font-medium text-black text-lg">{title || 'Untitled Article'}</h3>
+          <p className="mt-2 font-outfit text-gray-900 text-xs">
+            {date ? format(new Date(date), 'dd MMMM, yyyy') : 'No date'}
+          </p>
+          <p className="text-[#694848] text-xs font-outfit mt-2">{author || 'Unknown Author'}</p>
+          <div
+            className="font-outfit text-sm text-gray-900 font-extralight mt-2 leading-relaxed line-clamp-3"
+            dangerouslySetInnerHTML={{ __html: excerpt || 'No excerpt available' }}
+          />
+          <p className="text-xs text-gray-500 mt-2">{category || 'Uncategorized'}</p>
+        </div>
+      </div>
+    </Link>
+  );
+};
+
+export default function ArticleContent({ posts }) {
   return (
     <div className="container mx-auto px-4 sm:px-6 lg:px-8">
       <div className="flex flex-col lg:flex-row lg:gap-10">
         <div className="w-full lg:w-[75%] mt-4 space-y-6">
-          <div className="text-sm ">
+          <div className="text-sm">
             <span className="text-red-500">Hem </span>» Artiklar om vin
           </div>
-          <div className="text-3xl sm:text-4xl  -mb-8 sm:-mb-16">
+          <div className="text-3xl sm:text-4xl mb-8">
             <h1>Artiklar om vin</h1>
           </div>
-          <Card />
-          <div className="-mt-6 sm:-mt-12">
-            <Card />
-          </div>
-          <div className="-mt-6 sm:-mt-12">
-            <Card />
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {posts && posts.length > 0 ? (
+              posts.map((post) => (
+                <Card
+                  key={post.id || Math.random().toString()}
+                  title={post.title}
+                  excerpt={post.excerpt}
+                  date={post.date}
+                  author={post.author?.node?.name || 'Unknown Author'}
+                  category={post.categories?.nodes?.[0]?.slug || 'uncategorized'}
+                  imageUrl={post.featuredImage?.node?.mediaItemUrl || '/api/placeholder/400/300'}
+                  slug={post.slug || '#'}
+                />
+              ))
+            ) : (
+              <p>No articles found.</p>
+            )}
           </div>
         </div>
         {/* Right Section */}
         <div className="w-full lg:w-[25%] mt-8 lg:mt-10">
           <div className="lg:sticky lg:top-8 space-y-8">
-            <div className="bg-[#f5f5f5] p-4 sm:p-6 lg:p-8">
-              <div className="space-y-8">
-                <div className="flex flex-col items-center gap-4">
-                  <div className="w-12 h-12 flex-shrink-0">
-                    <Image src={grape} alt="Grape" width={64} height={64} className="object-cover w-full h-full" />
-                  </div>
-                  <div className="text-center">
-                    <div className="text-sm font-semibold">ETT VINORD</div>
-                    <div className="text-sm">Druvbeskrivningar&gt;&gt;</div>
-                  </div>
-                </div>
-                <hr className="border-t border-gray-300" />
-                <div className="flex flex-col items-center gap-4">
-                  <div className="w-12 h-12 flex-shrink-0">
-                    <Image
-                      src={corkscrew}
-                      alt="Corkscrew"
-                      width={64}
-                      height={64}
-                      className="object-cover w-full h-full"
-                    />
-                  </div>
-                  <div className="text-sm font-semibold">VECKANS OMRÅDE</div>
-                </div>
-              </div>
-            </div>
-            <div className="my-8">
-              <SenasteNytt />
-            </div>
-
-            <div className="my-8 grid gap-8 sm:grid-cols-2 lg:grid-cols-1">
-              {['/link1', '/link2', '/link3'].map((link, index) => (
-                <Link href={link} key={index}>
-                  <div className="cursor-pointer hover:shadow-lg transition-shadow">
-                    <Image src={food1} alt={`Food ${index + 1}`} className="object-cover w-full h-48" />
-                    <div className="p-4 bg-[#f5f5f5]">
-                      <h3 className=" font-medium text-black text-lg">
-                        Ekologiskt och hållbart vin till mer grön mat?
-                      </h3>
-                      <p className="mt-2  text-gray-900 text-xs">8 augusti, 2024</p>
-                      <p className="text-[#694848] text-xs  mt-2">Jeanette Gardner</p>
-                      <p className=" text-xs text-gray-900 font-extralight mt-2 leading-relaxed">
-                        Är du alltid på jakt efter ekologiskt och hållbart vin och kanske vill ändra din mat till...
-                      </p>
-                    </div>
-                  </div>
-                </Link>
-              ))}
-            </div>
-            <WineTourism />
+            <Sidebar />
           </div>
         </div>
       </div>
     </div>
   );
-};
-
-export default ArticleContent;
+}

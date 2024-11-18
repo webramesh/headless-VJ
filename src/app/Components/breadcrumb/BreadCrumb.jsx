@@ -5,7 +5,7 @@ function LinkElement({ title, link }) {
     return (
       <>
         &raquo;&nbsp;
-        <Link href={link} className="capitalize">
+        <Link href={link} className="capitalize text-red-600">
           <span className="md:hidden">{title.length > 18 ? title.slice(0, 18) + '...' : title}</span>
           <span className="hidden md:block">{title}</span>
         </Link>

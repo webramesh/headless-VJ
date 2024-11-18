@@ -33,6 +33,7 @@ export default async function PostDetails({ params }) {
             authorName={post?.author?.node?.name}
             date={post?.date}
             categoryName={post?.categories?.nodes[0]?.name}
+            categories={post?.categories?.nodes[0]}
           />
           <PostDetailsContent content={post?.content} />
 

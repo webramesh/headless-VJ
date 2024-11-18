@@ -1,4 +1,3 @@
-'use client';
 import React from 'react';
 import Image from 'next/image';
 import { format } from 'date-fns';
@@ -13,7 +12,7 @@ const ProductDetailsHero = ({ featuredImage, title, authorImage, authorName, dat
           <div>
             <Image
               src={featuredImage}
-              alt=""
+              alt={title}
               className="object-cover w-full"
               layout="responsive"
               width={500}
@@ -30,10 +29,16 @@ const ProductDetailsHero = ({ featuredImage, title, authorImage, authorName, dat
           </div>
           <div className="flex gap-4 items-center">
             <div className="rounded-full overflow-hidden w-[40px] h-[40px] lg:w-[50px] lg:h-[50px] relative flex-shrink-0">
-              <Image src={authorImage} alt="Food 1" className="object-cover" layout="fill" />
+              <Image
+                src={authorImage || '/search.png'}
+                // src={'/search.png'}
+                alt={authorName || 'Vinjournalen'}
+                className="object-cover"
+                layout="fill"
+              />
             </div>
             <div className=" text-xs lg:text-sm text-gray-600">
-              <span>{authorName}</span> | <span>{format(new Date(date), 'dd MMMM, yyyy')}</span>
+              <span>{authorName || 'Vinjournalen'}</span> | <span>{format(new Date(date), 'dd MMMM, yyyy')}</span>
             </div>
           </div>
         </div>

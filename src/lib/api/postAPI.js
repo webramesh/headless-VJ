@@ -1,5 +1,3 @@
-// post api
-'use server';
 import { ApolloClient, InMemoryCache, gql } from '@apollo/client';
 
 const client = new ApolloClient({
@@ -49,6 +47,50 @@ export async function getHomePagePosts() {
     return [];
   }
 }
+
+export async function getAllArticles() {
+  try {
+    const { data } = await client.query({
+      query: gql`
+        query AllArticles {
+          posts(first: 1000) {
+            nodes {
+              author {
+                node {
+                  name
+                }
+              }
+              date
+              title
+              excerpt
+              modified
+              id
+              categories {
+                nodes {
+                  name
+                  slug
+                }
+              }
+              slug
+              visitCount
+              featuredImage {
+                node {
+                  mediaItemUrl
+                }
+              }
+            }
+          }
+        }
+      `,
+    });
+
+    return data.posts.nodes;
+  } catch (error) {
+    console.error('Error fetching all articles:', error);
+    return [];
+  }
+}
+
 export async function getPostBySlug(slug) {
   try {
     const { data } = await client.query({
@@ -211,9 +253,7 @@ export async function getAllCategories() {
   }
 }
 
-
 export async function getCategoryBySlug(slug) {
-
   try {
     const { data } = await client.query({
       query: gql`

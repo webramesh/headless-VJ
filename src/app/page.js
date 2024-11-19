@@ -8,7 +8,7 @@ import { getAllNyheter } from '../lib/api/newsApi';
 import { getAllTrendingPosts } from '../lib/api/trendingpostApi';
 import { getAllWineCategories } from '../lib/api/wineApi';
 import NewsPost from './Components/NewsPost';
-import { getAllCategories, getHomePagePosts, getPostsByCategory } from '../lib/api/postAPI';
+import { getHomePagePosts } from '../lib/api/postAPI';
 import SubscriptionForm from './Components/subscription/SubscriptionForm';
 import SubscriptionBox from './Components/subscription/SubscriptionBox';
 

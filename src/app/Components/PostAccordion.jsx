@@ -1,16 +1,31 @@
 'use client';
 import { useCategoryAndPosts } from '@/src/context/CategoriesAndPostsContext';
-
 import { useParams } from 'next/navigation';
 import React, { useState } from 'react';
+
+const normalizeString = (str) => {
+  return str
+    .toLowerCase() // Convert to lowercase
+    .normalize('NFD') // Decompose special characters
+    .replace(/[\u0300-\u036f]/g, '') // Remove diacritics (accents, etc.)
+    .replace(/[^a-z0-9\s-]/g, '') // Remove special characters except spaces and hyphens
+    .trim() // Remove leading and trailing spaces
+    .replace(/\s+/g, '-') // Replace spaces with hyphens
+    .replace(/-+/g, '-'); // Replace multiple hyphens with a single one
+};
 
 const PostAccordion = () => {
   const params = useParams();
 
   const categoryAndPosts = useCategoryAndPosts();
+  console.log('categoryAndPosts', categoryAndPosts);
 
-  // filter the category if the category slug is the same as the current category
-  const filteredCategories = categoryAndPosts.filter((item) => item.categorySlug !== params.category);
+  const normalizedSlug = normalizeString(params.slug);
+
+  const categoriesWithFilteredTitles = categoryAndPosts.map((category) => ({
+    ...category,
+    filteredPostTitles: category.postTitles.filter((title) => normalizeString(title) !== normalizedSlug),
+  }));
 
   const [openIndex, setOpenIndex] = useState(null);
 
@@ -20,14 +35,14 @@ const PostAccordion = () => {
 
   return (
     <div className="container mx-auto">
-      {filteredCategories.map((item, index) => (
-        <div key={item.id} className="border-b mb-2 border-slate-200">
+      {categoriesWithFilteredTitles.map((category, index) => (
+        <div key={category.id} className="border-b mb-2 border-slate-200">
           <button
             onClick={() => toggleAccordion(index)}
             className="w-full flex justify-between items-center bg-[#F5F5F5] pl-3 text-slate-800 py-2"
           >
             <h3 className="text-left font-semibold text-sm">
-              <span>{item.categoryName}</span>
+              <span>{category.categoryName}</span>
             </h3>
             <span
               className={`text-slate-800 transition-transform duration-300 transform ${
@@ -68,8 +83,8 @@ const PostAccordion = () => {
               openIndex === index ? 'max-h-screen' : 'max-h-0'
             }`}
           >
-            <div className="pb-5 bg-[#F5F5F5] grid grid-cols-2 text-sm pl-3 text-red-500">
-              {item.postTitles.map((title, titleIndex) => (
+            <div className="pb-5 bg-[#F5F5F5] block md:grid grid-cols-2 text-sm pl-3 text-red-500">
+              {category.filteredPostTitles.map((title, titleIndex) => (
                 <div key={titleIndex} className="mb-1 p-2">
                   {title}
                 </div>

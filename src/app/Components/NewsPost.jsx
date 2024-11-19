@@ -1,8 +1,8 @@
 import React from 'react';
 import Link from 'next/link';
 
+export const revalidate = 60;
 
-export const revalidate = 60; 
 const NewsPost = ({ title = '', subtitle = '', nyheter = [] }) => {
   if (!Array.isArray(nyheter)) {
     console.warn('nyheter prop is not an array:', nyheter);
@@ -37,7 +37,9 @@ const NewsPost = ({ title = '', subtitle = '', nyheter = [] }) => {
 
   return (
     <div className="container mx-auto mt-10 p-2">
-      <div className="font-outfit text-center font-extralight text-red-500">{title}</div>
+      <Link href="/nyheter">
+        <div className="font-outfit text-center font-extralight text-red-500">{title}</div>
+      </Link>
       <div className="text-center font-outfit text-xl md:text-2xl font-medium mt-4">{subtitle}</div>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-14 mt-8">
@@ -57,6 +59,14 @@ const NewsPost = ({ title = '', subtitle = '', nyheter = [] }) => {
             </div>
           </Link>
         ))}
+      </div>
+
+      <div className="mt-10 text-center">
+        <Link href="/nyheter">
+          <button className="px-6 py-2 bg-white text-red-500 border border-red-500 rounded-md font-outfit font-medium hover:bg-red-50 transition-colors">
+            Read More
+          </button>
+        </Link>
       </div>
     </div>
   );

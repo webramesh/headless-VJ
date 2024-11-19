@@ -1,10 +1,12 @@
 import { getAllCategories, getPostBySlug } from '@/src/lib/api/postAPI';
 import TaxonomyPage from '../Components/TaxonomyPage';
-
 import { getPostProductRecommendationBySlug } from '@/src/lib/api/postAPI';
 import PostDetailsContent from '../Components/PostDetailsContent';
 import PostDetailsHero from '../Components/PostDetailsHero';
 import ProductRecommendation from './components/ProductRecommendation';
+import SubscriptionForm from '../../Components/subscription/SubscriptionForm';
+import SubscriptionBox from '../../Components/subscription/SubscriptionBox';
+import PostAccordion from '../../Components/PostAccordion';
 
 export default async function PostDetails({ params }) {
   const { category, slug } = params;
@@ -25,7 +27,7 @@ export default async function PostDetails({ params }) {
 
     return (
       <>
-        <div className="bg-slate-50 min-h-screen">
+        <div className="bg-slate-50 min-h-full">
           <PostDetailsHero
             title={post?.title}
             featuredImage={post?.featuredImage?.node?.sourceUrl}
@@ -38,6 +40,21 @@ export default async function PostDetails({ params }) {
           <PostDetailsContent content={post?.content} />
 
           <ProductRecommendation postProductRecommendation={postProductRecommendation} />
+
+          <div className="container mx-auto py-8 px-4">
+            <div className=" block md:grid grid-cols-4">
+              <div className="col-span-3">
+                <SubscriptionForm />
+              </div>
+              <div>
+                <SubscriptionBox />
+              </div>
+            </div>
+          </div>
+
+          <div className="container mx-auto px-4">
+            <PostAccordion />
+          </div>
         </div>
       </>
     );

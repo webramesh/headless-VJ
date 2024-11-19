@@ -15,6 +15,12 @@ export async function getAllPages() {
               id
               title
               slug
+              faq {
+                faq {
+                  faqQuestion
+                  faqAnswer
+                }
+              }
             }
           }
         }
@@ -38,6 +44,12 @@ export async function getPageById(id) {
             title
             content
             slug
+            faq {
+              faq {
+                faqQuestion
+                faqAnswer
+              }
+            }
           }
         }
       `,

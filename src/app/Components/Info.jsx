@@ -1,6 +1,5 @@
-'use server';
 import React from 'react';
-import { getPageById } from '../../lib/api/pageApi';
+import { getPageById, getFaqByPageId } from '../../lib/api/pageApi';
 import Accordion from './Accordion';
 import WineTourism from './WineTourism';
 import SenasteNytt from './SenasteNytt';
@@ -26,7 +25,7 @@ const Info = async () => {
           <h2 className="mt-8 font-medium text-lg md:text-xl text-black tracking-normal">
             Frågor och Svar om Vinjournalen.se
           </h2>
-          <Accordion />
+          <Accordion faqItems={page?.faq?.faq || []} />
         </div>
         <div className="w-full md:w-[36%]">
           <WineTourism />

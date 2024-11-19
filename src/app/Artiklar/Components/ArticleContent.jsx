@@ -2,7 +2,7 @@ import React from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { format } from 'date-fns';
-import Sidebar from '../../../app/Components/Sidebar';
+import Sidebar from '../../Components/Sidebar';
 
 const Card = ({ title, excerpt, date, author, category, imageUrl, slug }) => {
   return (

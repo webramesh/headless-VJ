@@ -46,11 +46,11 @@ const FactBox = ({ recommendedProduct, smakar, aromer, fargers, matkombinationer
         </div>
       </div>
       <FactBoxDescription fieldsProduct={fieldsProduct} />
-      <hr />
 
       <div className="mb-3">
         <>
           {/* for medium to large screen */}
+          {total > 0 && <hr />}
           <div className="hidden   md:grid grid-cols-6 justify-between items-center">
             {total > 0 && (
               <>
@@ -69,7 +69,11 @@ const FactBox = ({ recommendedProduct, smakar, aromer, fargers, matkombinationer
             <div className="col-span-3 relative pl-4">
               {/* Custom Tailwind style for the partial left border */}
               <div className=" before:absolute before:top-1/2 before:left-0 before:h-[40%] before:w-[2px] before:-translate-y-1/2 before:bg-gray-300">
-                {matkombinationer?.length > 0 && <FactBoxMatCombinationer matkombinationer={matkombinationer} />}
+                {matkombinationer?.length > 0 && (
+                  <>
+                    <FactBoxMatCombinationer matkombinationer={matkombinationer} />
+                  </>
+                )}
               </div>
             </div>
           </div>
@@ -78,7 +82,7 @@ const FactBox = ({ recommendedProduct, smakar, aromer, fargers, matkombinationer
           {/* for small screen */}
           <div className=" sm:grid sm:grid-cols-2  md:hidden justify-between items-center">
             {total > 0 && (
-              <div className="grid grid-cols-3 justify-center items-center">
+              <div className="grid grid-cols-3 justify-center items-center mb-2">
                 <div className="col-span-1">
                   <CatPiechart data={pieChartData1} title="Smakintensitet" total={total} />
                 </div>
@@ -90,7 +94,7 @@ const FactBox = ({ recommendedProduct, smakar, aromer, fargers, matkombinationer
                 </div>
               </div>
             )}
-            <div className="col-span- relative pl-4">
+            <div className="relative pl-4  ">
               <div className="">
                 {matkombinationer?.length > 0 && <FactBoxMatCombinationer matkombinationer={matkombinationer} />}
               </div>
@@ -99,7 +103,7 @@ const FactBox = ({ recommendedProduct, smakar, aromer, fargers, matkombinationer
           {/* end of for small screen */}
         </>
       </div>
-      <hr />
+
       <FactBoxMoreInfo smakar={smakar} aromer={aromer} fargers={fargers} />
     </>
   );

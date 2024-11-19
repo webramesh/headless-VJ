@@ -8,6 +8,8 @@ import { getFooterMenu, getMainMenu } from '../lib/api/menuAPI';
 import { PageProvider } from '../context/PageContext';
 import { OrdlistaProvider } from '../context/OrdlistaContext';
 import { getAllOrdlistaCategories } from '../lib/api/ordilistaAPI';
+import { getAllCategories, getPostsByCategory } from '../lib/api/postAPI';
+import { CategoryAndPostsProvider } from '../context/CategoriesAndPostsContext';
 
 const inter = Inter({ subsets: ['latin'] });
 const outfit = Outfit({ subsets: ['latin'] });
@@ -25,17 +27,54 @@ export default async function RootLayout({ children }) {
   const footerMenu = await getFooterMenu();
 
   const ordlista = await getAllOrdlistaCategories();
+  const categoryPosts = [];
+  async function getCategoriesAndPosts() {
+    try {
+      const categories = await getAllCategories();
+
+      if (!categories.length) {
+        console.error('No categories found');
+        return [];
+      }
+
+      for (const category of categories) {
+        const { name: categoryName, slug: categorySlug, id: id } = category;
+
+        // Fetch posts for the current category
+        const { posts } = await getPostsByCategory(categorySlug);
+
+        const postTitles = posts.map((post) => post.title);
+
+        categoryPosts.push({
+          id,
+          categorySlug,
+          categoryName,
+          postTitles,
+        });
+      }
+
+      return categoryPosts;
+    } catch (error) {
+      console.error('Error fetching categories and posts:', error);
+      return [];
+    }
+  }
+
+  await getCategoriesAndPosts();
+
   return (
     <html lang="en">
       <body className={`${outfit.className} ${inter.className}`}>
         <ApolloProvider>
           <PageProvider>
-            <OrdlistaProvider ordlista={ordlista}>
-              <Navbar menuData={menuData} />
-              {children}
-              <ScrollToTopButton />
-              <Footer menuItems={footerMenu} />
-            </OrdlistaProvider>
+            <CategoryAndPostsProvider categoryPosts={categoryPosts}>
+              <OrdlistaProvider ordlista={ordlista}>
+                <Navbar menuData={menuData} />
+                {children}
+                <ScrollToTopButton />
+                <Footer menuItems={footerMenu} />
+              </OrdlistaProvider>
+            </CategoryAndPostsProvider>
           </PageProvider>
         </ApolloProvider>
       </body>

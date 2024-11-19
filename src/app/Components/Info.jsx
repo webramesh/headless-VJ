@@ -1,35 +1,29 @@
+'use server';
 import React from 'react';
+import { getPageById } from '../../lib/api/pageApi';
 import Accordion from './Accordion';
-import WineTourism from '../Components/WineTourism';
+import WineTourism from './WineTourism';
 import SenasteNytt from './SenasteNytt';
 
-const Info = () => {
+const Info = async () => {
+  const page = await getPageById('cG9zdDo1NTM=');
+
   return (
     <div className="container mx-auto mt-10 p-2">
       <div className="flex flex-col gap-4 md:flex-row md:gap-14">
         <div className="w-full md:w-[64%] flex flex-col">
-          <h1 className=" font-medium text-2xl text-black tracking-normal">
-            Ett vinmagasin om mat och vin samt andra drycker
-          </h1>
-          <p className="mt-4  text-sm text-gray-500 w-full leading-4">
-            Vi skriver om mat och vin samt andra drycker. Du kan även läsa om annat som händer i vinvärlden.
-            Vinjournalen.se har ständigt kunnat överträffa våra förväntningar och vi strävar efter att kontinuerligt öka
-            trafiken till vår webb och på sociala medier och fånga alltfler våra entusiastiska vinälskande läsare till
-            vår tidning och vårt populära nyhetsbrev om vin.
-          </p>
-          <h2 className="mt-4  font-medium text-xl text-black tracking-normal">
-            Vinjournalen.se Ditt magasin på nätet
-          </h2>
-          <p className="mt-4  text-sm text-gray-500 w-full leading-4">
-            Vinjournalen.se startade 2011 och är Sveriges ledande online tidning för vinentusiaster med allt som du
-            behöver veta om vin. Vi siktar mot att bli en portal om vin och andra alkoholhaltiga drycker så att du har
-            allt på samma ställe! Du hittar vin, mat, vin-skola, recensioner om vin från hela världen, intervjuer med
-            vinmakare, kockar och kända vinprofiler, producenter, regioner och vindruvor. Vi täcker in både den lokala
-            och internationella dryckesindustrins nyheter men även recept på maträtter, vinskola, vinturism, skriver om
-            breda vetenskapliga frågor om vin, samlar nyheter om vin och sprit - det du vill läsa om, helt enkelt, det
-            skriver vi om!
-          </p>
-          <h2 className="mt-4  font-medium text-lg md:text-xl text-black tracking-normal">
+          <h1 className="font-medium text-2xl text-black tracking-normal">{page?.title || 'No Title Found'}</h1>
+          <div
+            className="mt-4 text-sm text-gray-500 w-full leading-relaxed"
+            dangerouslySetInnerHTML={{
+              __html:
+                page?.content ||
+                `
+            No Content Found
+            `,
+            }}
+          />
+          <h2 className="mt-8 font-medium text-lg md:text-xl text-black tracking-normal">
             Frågor och Svar om Vinjournalen.se
           </h2>
           <Accordion />

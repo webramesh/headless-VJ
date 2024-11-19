@@ -64,7 +64,7 @@ const NewsPost = ({ title = '', subtitle = '', nyheter = [] }) => {
       <div className="mt-10 text-center">
         <Link href="/nyheter">
           <button className="px-6 py-2 bg-white text-red-500 border border-red-500 rounded-md font-outfit font-medium hover:bg-red-50 transition-colors">
-            Read More
+            Visa alla
           </button>
         </Link>
       </div>

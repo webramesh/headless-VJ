@@ -1,19 +1,58 @@
+
 import Image from 'next/image';
 import Link from 'next/link';
-import food1 from '@/public/food1.png';
+import { formatEmbeddedContent } from '@/src/utils/utils';
+import { format } from 'date-fns';
 
-export default function RecentPostCard({ link }) {
+export default function RecentPostCard({ post }) {
+  if (!post) {
+    console.log('hello')
+    return null;
+  }
+
+  const { title, excerpt, date, slug, featuredImage, author, categories } = post;
+
+  const formattedDate = date ? format(new Date(date), 'dd MMMM, yyyy') : 'Unknown date';
+
+  const formattedExcerpt = excerpt ? formatEmbeddedContent(excerpt) : '';
+
+  const categorySlug = categories?.nodes?.[0]?.slug || 'uncategorized';
+  const postSlug = slug || '';
+
   return (
-    <Link href={link}>
-      <div className="cursor-pointer hover:shadow-lg transition-shadow my-10">
-        <Image src={food1} alt={`Food `} className="object-cover w-full h-48" />
-        <div className="p-4 bg-[#f5f5f5]">
-          <h3 className=" font-medium text-black text-lg">Ekologiskt och hållbart vin till mer grön mat?</h3>
-          <p className="mt-2  text-gray-900 text-xs">8 augusti, 2024</p>
-          <p className="text-[#694848] text-xs  mt-2">Jeanette Gardner</p>
-          <p className=" text-xs text-gray-900 font-extralight mt-2 leading-relaxed">
-            Är du alltid på jakt efter ekologiskt och hållbart vin och kanske vill ändra din mat till...
-          </p>
+    <Link href={`/${categorySlug}/${postSlug}`} key={post.id || Math.random()} className="flex">
+      <div className="flex flex-col cursor-pointer hover:shadow-lg transition-shadow w-full my-6">
+        <div className="relative w-full h-48">
+          <Image
+            src={featuredImage?.node?.sourceUrl || '/api/placeholder/400/300'}
+            alt={featuredImage?.node?.altText || title || 'Featured image'}
+            fill
+            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+            className="object-cover"
+            priority={false}
+          />
+        </div>
+        <div className="p-4 bg-[#f5f5f5] flex flex-col flex-grow">
+          <h3 className="font-outfit font-medium text-black text-lg">{title || 'Untitled'}</h3>
+          <p className="mt-2 font-outfit text-gray-900 text-xs">{formattedDate}</p>
+          {author?.node?.name && <p className="text-[#694848] text-xs font-outfit mt-2">{author.node.name}</p>}
+          {formattedExcerpt && (
+            <p className="font-outfit text-sm text-gray-900 font-extralight mt-2 leading-relaxed flex-grow">
+              {formattedExcerpt}
+            </p>
+          )}
+          {categories?.nodes?.length > 0 && (
+            <div className="mt-2">
+              {categories.nodes.map((category) => (
+                <span
+                  key={category.slug || Math.random()}
+                  className="inline-block bg-gray-200 rounded-full px-3 py-1 text-xs font-semibold text-gray-700 mr-2 mb-2"
+                >
+                  {category.name || 'Uncategorized'}
+                </span>
+              ))}
+            </div>
+          )}
         </div>
       </div>
     </Link>

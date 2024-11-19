@@ -79,7 +79,7 @@ const Hero = ({ posts }) => {
             );
           })}
           <div className="mt-8">
-            <Link href="/target-page" passHref>
+            <Link href="/artiklar" passHref>
               <button className="w-full py-2  text-red-500 hover:bg-red-100 border rounded-full border-red-500 transition duration-300">
                 Se fler artiklar
               </button>

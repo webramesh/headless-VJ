@@ -11,7 +11,7 @@ const slugToTaxonomy = {
   smell: 'arom',
   color: 'farger',
   food: 'matkombination',
-  'produkt-typer': 'produktyp',
+  'produkt-typer': 'produktTyp',
   taste: 'smak',
   grape: 'vinstock',
 };

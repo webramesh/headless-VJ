@@ -1,6 +1,6 @@
 import React from 'react';
-import { getPageById, getFaqByPageId } from '../../lib/api/pageApi';
-import Accordion from './Accordion';
+import { getPageById } from '../../lib/api/pageApi';
+import AccordionNew from './AccordionNew';
 import WineTourism from './WineTourism';
 import SenasteNytt from './SenasteNytt';
 
@@ -25,7 +25,7 @@ const Info = async () => {
           <h2 className="mt-8 font-medium text-lg md:text-xl text-black tracking-normal">
             Frågor och Svar om Vinjournalen.se
           </h2>
-          <Accordion faqItems={page?.faq?.faq || []} />
+          <AccordionNew faqItems={page?.faq?.faq || []} />
         </div>
         <div className="w-full md:w-[36%]">
           <WineTourism />

@@ -5,6 +5,7 @@ import Sidebar from '../Components/Sidebar';
 import SubscriptionForm from '../Components/subscription/SubscriptionForm';
 import CategoryPage from './CategoryPage';
 import CatAccordion from './Components/CatAccordion';
+import AccordionNew from '../Components/AccordionNew';
 
 export async function generateStaticParams() {
   const categories = await getAllCategories();
@@ -12,14 +13,15 @@ export async function generateStaticParams() {
     category: category.slug,
   }));
 }
-
+export const revalidate = 60;
 export default async function Page({ params }) {
   const category = await getCategoryBySlug(params.category);
-  
+
   if (!category) {
     redirect('/');
   }
   const totalPostsByCategory = category?.count;
+  const faqItems = category?.faq?.faq || [];
 
   return (
     <div className="container mx-auto px-4 sm:px-6 lg:px-8">
@@ -32,6 +34,13 @@ export default async function Page({ params }) {
             fallbackText="Sedan 2007 är det lagligt att importera vin privat via nätet i Sverige. Om du funderar på att ta vara på det utökade utbudet och de ofta billigare priserna guidar vi dig genom processen. Vi förklara steg för steg hur du går till väga och listar annan viktig information."
           />
           <CategoryPage category={params.category} totalPosts={totalPostsByCategory} />
+
+          {faqItems.length > 0 && (
+            <div className="mt-10">
+              <h2 className="text-2xl pl-3 font-medium mb-4">Frågor och Svar</h2>
+              <AccordionNew faqItems={faqItems} />
+            </div>
+          )}
           <SubscriptionForm />
           <CatAccordion />
         </div>

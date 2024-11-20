@@ -1,6 +1,6 @@
 'use client';
+
 import { usePagination } from '@/src/context/PageContext';
-import AccordionNew from '../../app/Components/AccordionNew';
 import { useEffect, useState } from 'react';
 import { getPostsByCategory } from '@/src/lib/api/postAPI';
 import Pagination from '../Components/pagination/Pagination';
@@ -30,15 +30,16 @@ export default function CategoryPage({ category, totalPosts }) {
         setPageInfo(pageInfo);
         dispatch({ type: 'CHANGE_LOADING', payload: false });
       } else {
-        console.warn('No products or page info returned from getAllOrdlista');
+        console.warn('No posts or page info returned from getPostsByCategory');
       }
     };
 
     if (isReset) fetchPosts();
   }, [after, before, first, isReset, last, dispatch, category]);
+
   return (
     <div className="space-y-4">
-      <div className=" mt-10 p-2 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-14">
+      <div className="mt-10 p-2 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-14">
         {posts.map((post) => (
           <div key={post.id}>
             <CategoryCard post={post} />
@@ -47,8 +48,6 @@ export default function CategoryPage({ category, totalPosts }) {
       </div>
       {/* Pagination */}
       <Pagination pageInfo={pageInfo} pageLimit={POSTS_PER_PAGE} total={totalPosts} />
-
-      <AccordionNew />
     </div>
   );
 }

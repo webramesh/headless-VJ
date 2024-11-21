@@ -18,7 +18,6 @@ const PostAccordion = () => {
   const params = useParams();
 
   const categoryAndPosts = useCategoryAndPosts();
-  console.log('categoryAndPosts', categoryAndPosts);
 
   const normalizedSlug = normalizeString(params.slug);
 

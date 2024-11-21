@@ -4,18 +4,22 @@ import PieChart from './Piechart';
 import message from '@/public/message.png';
 import fb from '@/public/fbblack.png';
 import twitter from '@/public/twitterblack.png';
-import ellipse from '@/public/ellipse.png';
-import lamb from '@/public/lamb.png';
-import meat from '@/public/meat.png';
-import vegetables from '@/public/vegetables.png';
-import chicken from '@/public/chicken.png';
 import Link from 'next/link';
 import { useState } from 'react';
 import BreadCrumb from '../../Components/breadcrumb/BreadCrumb';
-
+import jsPDF from 'jspdf';
+import FactBoxMatCombinationer from '../../[category]/[slug]/components/FactBoxMatCombinationer';
+import FactBoxDescription from '../../[category]/[slug]/components/FactBoxDescription';
+import FactBoxMoreInfo from '../../[category]/[slug]/components/FactBoxMoreInfo';
 export default function ProductSection({ product }) {
+  const matkombinationer = product?.matkombinationer?.nodes;
+
+  const smakar = product?.smakar?.nodes;
+  const aromer = product?.aromer?.nodes;
+  const fargers = product?.fargers?.nodes;
+
   const [showReadMore, setShowReadMore] = useState(false);
-  const { title, featuredImage, fieldsProduct, produktslander, produktTyper, smakar, aromer, fragers } = product;
+  const { title, featuredImage, fieldsProduct, produktslander, produktTyper } = product;
   const {
     productShortText,
     extraReadMore1,
@@ -26,12 +30,18 @@ export default function ProductSection({ product }) {
     productCode,
     buyLink,
     wineSortiment,
-    alcohol,
     vintage,
-    allergener,
     tasteClock1FyllighetSotma,
     tasteClock2Fyllighetstravhet,
     tasteClock3Fruktsyra,
+
+    caloriesInAlcPer15cl,
+    caloriesInAlcPerContainerVolume,
+    totalCaloriesPer15Cl,
+    totalCaloriesPerLitter,
+    totalCaloriesPerContainerVolume,
+    allergener,
+    pricePerLitter,
   } = fieldsProduct;
   const typer = produktTyper?.nodes?.filter((recommendation) => recommendation.name !== 'Vin');
 
@@ -51,6 +61,117 @@ export default function ProductSection({ product }) {
     { name: 'Empty', value: total - tasteClock3Fruktsyra },
   ];
 
+  // const viwePdf = () => {
+  //   // Create a new PDF document
+  //   const doc = new jsPDF();
+
+  //   // Add the image
+  //   // if (featuredImage?.node?.sourceUrl) {
+  //   //   doc.addImage(featuredImage.node.sourceUrl, 'JPEG', 15, 20, 180, 100); // X, Y, Width, Height
+  //   // }
+
+  //   // Set font size
+  //   doc.setFontSize(12);
+
+  //   // Add product details
+  //   let yOffset = 130; // Initial Y position after the image
+
+  //   doc.text('Price: ' + pice, 10, yOffset);
+  //   yOffset += 10;
+  //   doc.text('Artikel nr: ' + productCode, 10, yOffset);
+  //   yOffset += 10;
+  //   doc.text('Sortiment: ' + wineSortiment, 10, yOffset);
+  //   yOffset += 10;
+  //   doc.text('Årgång: ' + vintage, 10, yOffset);
+  //   yOffset += 10;
+  //   doc.text('Volym: ' + bottlePackageVolume, 10, yOffset);
+  //   yOffset += 10;
+  //   doc.text('Allergener: ' + allergener, 10, yOffset);
+  //   yOffset += 10;
+
+  //   // Add calorie details
+  //   doc.text('Calories in Alcohol per 15cl: ' + caloriesInAlcPer15cl, 10, yOffset);
+  //   yOffset += 10;
+  //   doc.text('Calories in Alcohol per Container Volume: ' + caloriesInAlcPerContainerVolume, 10, yOffset);
+  //   yOffset += 10;
+  //   doc.text('Total Calories per 15cl: ' + totalCaloriesPer15Cl, 10, yOffset);
+  //   yOffset += 10;
+  //   doc.text('Total Calories per Liter: ' + totalCaloriesPerLitter, 10, yOffset);
+  //   yOffset += 10;
+  //   doc.text('Total Calories per Container Volume: ' + totalCaloriesPerContainerVolume, 10, yOffset);
+  //   yOffset += 10;
+
+  //   // Add price per liter
+  //   doc.text('Price per Liter: ' + pricePerLitter, 10, yOffset);
+
+  //   // Convert the PDF to a Blob
+  //   const blob = doc.output('blob');
+
+  //   // Create an object URL for the Blob
+  //   const url = URL.createObjectURL(blob);
+
+  //   // Open the PDF in a new window
+  //   window.open(url);
+  // };
+  const viwePdf = () => {
+    // Create a new PDF document
+    const doc = new jsPDF();
+
+    // Add the logo at the top center
+    const logoUrl =
+      'https://static.vecteezy.com/system/resources/previews/012/667/615/non_2x/go-to-web-icon-for-your-web-design-logo-infographic-ui-vector.jpg'; // Path to the image in the public folder
+    const pageWidth = doc.internal.pageSize.getWidth(); // Get the width of the page
+    const logoWidth = 50; // Width of the logo
+    const logoHeight = 20; // Height of the logo
+    const centerX = (pageWidth - logoWidth) / 2; // Calculate the X position to center the logo
+
+    if (logoUrl) {
+      doc.addImage(logoUrl, 'JPEG', centerX, 10, logoWidth, logoHeight); // Add the logo image
+    }
+
+    // Set font size for the content
+    doc.setFontSize(12);
+
+    // Add product details
+    let yOffset = 40; // Initial Y position after the logo
+
+    doc.text('Price: ' + pice, 10, yOffset);
+    yOffset += 10;
+    doc.text('Artikel nr: ' + productCode, 10, yOffset);
+    yOffset += 10;
+    doc.text('Sortiment: ' + wineSortiment, 10, yOffset);
+    yOffset += 10;
+    doc.text('Årgång: ' + vintage, 10, yOffset);
+    yOffset += 10;
+    doc.text('Volym: ' + bottlePackageVolume, 10, yOffset);
+    yOffset += 10;
+    doc.text('Allergener: ' + allergener, 10, yOffset);
+    yOffset += 10;
+
+    // Add calorie details
+    doc.text('Calories in Alcohol per 15cl: ' + caloriesInAlcPer15cl, 10, yOffset);
+    yOffset += 10;
+    doc.text('Calories in Alcohol per Container Volume: ' + caloriesInAlcPerContainerVolume, 10, yOffset);
+    yOffset += 10;
+    doc.text('Total Calories per 15cl: ' + totalCaloriesPer15Cl, 10, yOffset);
+    yOffset += 10;
+    doc.text('Total Calories per Liter: ' + totalCaloriesPerLitter, 10, yOffset);
+    yOffset += 10;
+    doc.text('Total Calories per Container Volume: ' + totalCaloriesPerContainerVolume, 10, yOffset);
+    yOffset += 10;
+
+    // Add price per liter
+    doc.text('Price per Liter: ' + pricePerLitter, 10, yOffset);
+
+    // Convert the PDF to a Blob
+    const blob = doc.output('blob');
+
+    // Create an object URL for the Blob
+    const url = URL.createObjectURL(blob);
+
+    // Open the PDF in a new window
+    window.open(url);
+  };
   return (
     <div className="container mx-auto px-4 sm:px-6 lg:px-8">
       <div className="flex flex-col md:flex-row gap-6 mt-4 py-8 lg:py-16">
@@ -119,7 +240,9 @@ export default function ProductSection({ product }) {
             <div className="relative p-4">
               <div className="w-full flex flex-col sm:flex-row justify-between gap-4 sm:gap-0">
                 <div className="w-full sm:w-1/3 p-2 border-2 border-[#eb7272] rounded-full flex justify-center items-center bg-white">
-                  <span className="text-red-500">Skriv ut PDF</span>
+                  <button className="text-red-500" onClick={viwePdf}>
+                    Skriv ut PDF
+                  </button>
                 </div>
                 <Link
                   href={buyLink}
@@ -142,88 +265,35 @@ export default function ProductSection({ product }) {
               <div className=" text-black text-sm">Berätta för en vän</div>
             </div>
           </div>
+          {/* <FactBoxDescription fieldsProduct={fieldsProduct} /> */}
           <div className="mt-4 bg-[#f4f1ed] w-full">
-            <div className="flex items-center p-8">
-              <Image src={ellipse} alt="Citran Wine" className="object-cover" />
-              <div className="flex-1 text-center  text-xl text-black font-medium">Faktaruta</div>
-            </div>
-            <div className="grid grid-cols-2 sm:grid-cols-3 gap-6 pl-8 mb-4 py-4">
-              <div className="flex flex-col">
-                <div className=" text-black text-sm">SORTIMENT</div>
-                <div className="text-gray-500 text-xs">{wineSortiment}</div>
-              </div>
-              <div className="flex flex-col">
-                <div className=" text-black text-sm">ALKOHOL</div>
-                <div className="text-gray-500 text-xs">{alcohol}%</div>
-              </div>
-              <div className="flex flex-col">
-                <div className=" text-black text-sm">ÅRGÅNG</div>
-                <div className="text-gray-500 text-xs">{vintage}</div>
-              </div>
-              <div className="flex flex-col">
-                <div className=" text-black text-sm">VOLYM</div>
-                <div className="text-gray-500 text-xs">{bottlePackageVolume} ml</div>
-              </div>
-              <div className="flex flex-col">
-                <div className=" text-black text-sm">DRUVOR</div>
-                <div className="text-gray-500 text-xs">
-                  58% Cabernet Sauvignon <br /> 42% Merlot
-                </div>
-              </div>
-              <div className="flex flex-col">
-                <div className=" text-black text-sm">ALLERGENER</div>
-                <div className="text-gray-500 text-xs">Innehåller: {allergener}</div>
-              </div>
-            </div>
+            <FactBoxDescription fieldsProduct={fieldsProduct} />
           </div>
-          <div className="mt-8">
-            <div className="grid grid-cols-1 sm:grid-cols-3 gap-8">
-              <PieChart data={pieChartData1} title="Smakintensitet" total={total} />
-              <PieChart data={pieChartData2} title="Fyllighet/Strävhet" total={total} />
-              <PieChart data={pieChartData3} title="Syra" total={total} />
-            </div>
-          </div>
-          <div className="mt-8">
-            <div className="grid grid-cols-1 sm:grid-cols-3 gap-8">
-              <div className="flex flex-col items-center p-6 bg-[#f4f1ed]">
-                <div className=" text-black text-lg">SMAK</div>
-                <div className="text-sm mt-4 text-gray-600 text-center">
-                  äpplen, fat, fruktig, <br /> mandel, plommon, söt, <br />
-                  röda vinbär
-                </div>
-              </div>
-              <div className="flex flex-col items-center p-6 bg-[#f4f1ed]">
-                <div className=" text-black text-lg">AROM</div>
-                <div className="text-sm mt-4 text-gray-600 text-center">
-                  äpplen, bär, fatkaraktär, <br />
-                  fruktigt, mandel, <br /> plommon
-                </div>
-              </div>
-              <div className="flex flex-col items-center p-6 bg-[#f4f1ed]">
-                <div className=" text-black text-lg">FÄRG</div>
-                <div className="text-sm mt-4 text-gray-600 text-center">orangerosa, oklar</div>
+          {/* pie chart */}
+          {total > 0 && (
+            <div className="bg-gray-50 mt-4 pb-6">
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-8">
+                <PieChart data={pieChartData1} title="Smakintensitet" total={total} />
+                <PieChart data={pieChartData2} title="Fyllighet/Strävhet" total={total} />
+                <PieChart data={pieChartData3} title="Syra" total={total} />
               </div>
             </div>
-          </div>
-          <div className="m-8 text-xl  flex items-center justify-center">MAT SOM PASSAR TILL VINET</div>
-          <div className="flex flex-wrap justify-between">
-            <div className="flex flex-col items-center w-1/2 sm:w-1/4 mb-8 sm:mb-0">
-              <Image src={lamb} alt="Lamb" className="object-cover w-20 h-20" />
-              <div className="text-sm mt-6 text-gray-600">grönsaker</div>
+          )}
+
+          {/* end of pie chart */}
+
+          {((smakar && smakar.length > 0) || (aromer && aromer.length > 0) || (fargers && fargers.length > 0)) && (
+            <div className=" bg-gray-50 mt-4 py-4">
+              <FactBoxMoreInfo smakar={smakar} aromer={aromer} fargers={fargers} />
             </div>
-            <div className="flex flex-col items-center w-1/2 sm:w-1/4 mb-8 sm:mb-0">
-              <Image src={meat} alt="Meat" className="object-cover w-20 h-20" />
-              <div className="text-sm mt-6 text-gray-600">lamm</div>
+          )}
+          {/* <div className="m-8 py-3  text-xl  flex items-center justify-center">MAT SOM PASSAR TILL VINET</div> */}
+          {matkombinationer.length > 0 && (
+            <div className="bg-[#f4f1ed] mt-4 py-4">
+              <h3 className="  text-xl  flex items-center justify-center">MAT SOM PASSAR TILL VINET</h3>
+              <FactBoxMatCombinationer matkombinationer={matkombinationer} />
             </div>
-            <div className="flex flex-col items-center w-1/2 sm:w-1/4">
-              <Image src={vegetables} alt="Vegetables" className="object-cover w-20 h-20" />
-              <div className="text-sm mt-6 text-gray-600">nöt</div>
-            </div>
-            <div className="flex flex-col items-center w-1/2 sm:w-1/4">
-              <Image src={chicken} alt="Chicken" className="object-cover w-20 h-20" />
-              <div className="text-sm mt-6 text-gray-600">vilt</div>
-            </div>
-          </div>
+          )}
         </div>
       </div>
     </div>

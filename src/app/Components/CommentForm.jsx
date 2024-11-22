@@ -4,7 +4,7 @@ import { useMutation } from '@apollo/client';
 import { ADD_COMMENT_MUTATION } from '@/src/lib/mutations/addComment';
 import { validateCommentForm } from '@/src/utils/utils';
 
-const CommentBox = ({ post }) => {
+const CommentForm = ({ post }) => {
   const postId = atob(post.id).split(':')[1]; // Decode postId
   const [authorName, setAuthorName] = useState('');
   const [authorEmail, setAuthorEmail] = useState('');
@@ -124,4 +124,4 @@ const CommentBox = ({ post }) => {
   );
 };
 
-export default CommentBox;
+export default CommentForm;

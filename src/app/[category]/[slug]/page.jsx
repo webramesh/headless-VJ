@@ -7,7 +7,7 @@ import ProductRecommendation from './components/ProductRecommendation';
 import SubscriptionForm from '../../Components/subscription/SubscriptionForm';
 import SubscriptionBox from '../../Components/subscription/SubscriptionBox';
 import PostAccordion from '../../Components/PostAccordion';
-import CommentBox from '../../Components/CommentBox';
+import CommentForm from '../../Components/CommentForm';
 
 export default async function PostDetails({ params }) {
   const { category, slug } = params;
@@ -41,7 +41,7 @@ export default async function PostDetails({ params }) {
           <PostDetailsContent content={post?.content} />
 
           <div className="container mx-auto mt-14">
-            <CommentBox post={post} />
+            <CommentForm post={post} />
           </div>
           <ProductRecommendation postProductRecommendation={postProductRecommendation} />
 

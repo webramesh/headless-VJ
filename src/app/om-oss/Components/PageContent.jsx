@@ -1,6 +1,7 @@
 import React from 'react';
 import Sidebar from '../../Components/Sidebar';
 import AuthorHero from '../../author/Components/AuthorHero';
+import Banner from '../../Components/Banner';
 import CatAccordion from '../../[category]/Components/CatAccordion';
 import SubscriptionForm from '../../Components/subscription/SubscriptionForm';
 
@@ -11,6 +12,7 @@ const PageContent = ({ pageData }) => {
 
   return (
     <div className="container mx-auto ">
+      <Banner />
       <AuthorHero title={pageData.title} />
       <div className="flex flex-col px-4 sm:px-6 lg:px-8 lg:flex-row gap-8 lg:gap-12 mt-8 lg:mt-12">
         <div className="w-full lg:w-[75%]">

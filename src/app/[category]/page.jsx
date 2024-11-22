@@ -1,6 +1,7 @@
 import { redirect } from 'next/navigation';
 import { getAllCategories, getCategoryBySlug } from '../../lib/api/postAPI';
 import PostTypeContent from '../Components/PostTypeContent';
+import Banner from "../Components/Banner"
 import Sidebar from '../Components/Sidebar';
 import SubscriptionForm from '../Components/subscription/SubscriptionForm';
 import CategoryPage from './CategoryPage';
@@ -24,7 +25,9 @@ export default async function Page({ params }) {
   const faqItems = category?.faq?.faq || [];
 
   return (
-    <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+              <Banner/>
       <div className="flex flex-col lg:flex-row lg:gap-10">
         {/* Main Content Section (3/4) */}
         <div className="w-full lg:w-3/4 flex flex-col gap-6">

@@ -14,6 +14,12 @@ export async function getAllBanners() {
             nodes {
               bannerFields {
                 bannerUrl
+                sidebarBannerImage {
+                  node {
+                    altText
+                    sourceUrl
+                  }
+                }
               }
               featuredImage {
                 node {

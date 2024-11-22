@@ -7,7 +7,7 @@ function getRandomItem(array) {
   return array[Math.floor(Math.random() * array.length)];
 }
 
-async function Banner() {
+async function Banner({ variant }) {
   const banners = await getAllBanners();
 
   if (!banners || banners.length === 0) {
@@ -17,23 +17,31 @@ async function Banner() {
   // Get a random banner from the array
   const randomBanner = getRandomItem(banners);
 
-  const imageUrl = randomBanner.featuredImage?.node?.sourceUrl;
-  const imageAlt = randomBanner.featuredImage?.node?.altText || 'Banner';
+  let imageUrl, imageAlt;
+
+  if (variant === 'sidebar') {
+    imageUrl = randomBanner.bannerFields?.sidebarBannerImage?.node?.sourceUrl;
+    imageAlt = randomBanner.bannerFields?.sidebarBannerImage?.node?.altText || 'Sidebar Banner';
+  } else {
+    imageUrl = randomBanner.featuredImage?.node?.sourceUrl;
+    imageAlt = randomBanner.featuredImage?.node?.altText || 'Banner';
+  }
+
   const bannerUrl = randomBanner.bannerFields?.bannerUrl || '/artiklar';
 
   // Add a key prop with current timestamp to force re-render
   const timestamp = new Date().getTime();
 
   return (
-    <div className="container mx-auto" key={timestamp}>
+    <div className={`container mx-auto ${variant === 'sidebar' ? 'mb-4' : ''}`} key={timestamp}>
       <div>
         <Link href={bannerUrl} target="_blank" rel="noopener noreferrer" className="block">
           {imageUrl ? (
             <Image
               src={imageUrl}
               alt={imageAlt}
-              width={1200}
-              height={400}
+              width={variant === 'sidebar' ? 300 : 1200}
+              height={variant === 'sidebar' ? 250 : 400}
               className="object-cover cursor-pointer w-full hover:opacity-90 transition-opacity"
               priority
             />
@@ -41,8 +49,8 @@ async function Banner() {
             <Image
               src="/banner.webp"
               alt="Default Banner"
-              width={1200}
-              height={400}
+              width={variant === 'sidebar' ? 300 : 1200}
+              height={variant === 'sidebar' ? 250 : 400}
               className="object-cover cursor-pointer w-full hover:opacity-90 transition-opacity"
               priority
             />

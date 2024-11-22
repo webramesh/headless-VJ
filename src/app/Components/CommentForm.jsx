@@ -60,7 +60,8 @@ const CommentForm = ({ post }) => {
 
   return (
     <div className=" shadow rounded-sm p-6 w-full  mx-auto">
-      <h2 className="text-xl font-semibold text-gray-800 mb-4">Leave a Comment</h2>
+      <h2 className="text-xl font-semibold text-gray-800 ">Lämna ett svar</h2>
+      <p className="mb-4 text-gray-500 font-light italic">Din e-postadress kommer inte publiceras. </p>
       {message && <p className="text-green-500 mb-4">{message}</p>}
       {error && <p className="text-red-500 mb-4">{error}</p>}
 

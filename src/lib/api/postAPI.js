@@ -125,6 +125,9 @@ export async function getPostBySlug(slug) {
                 date
                 id
                 content
+                author {
+                  name
+                }
                 commentedOn {
                   node {
                     ... on Post {
@@ -147,80 +150,6 @@ export async function getPostBySlug(slug) {
   }
 }
 
-function decodeGlobalId(globalId) {
-  // Decode the base64 global ID
-  const decodedString = atob(globalId);
-  // Extract the numeric ID (e.g., "post:30291" -> 30291)
-  const [, id] = decodedString.split(':');
-  return parseInt(id, 10); // Ensure it's an integer
-}
-
-export async function addComment({ postId, content, authorName, authorEmail }) {
-  try {
-    const { data } = await client.mutate({
-      mutation: gql`
-        mutation AddComment($input: CreateCommentInput!) {
-          createComment(input: $input) {
-            comment {
-              id
-              content
-              date
-              commentedOn {
-                node {
-                  ... on Post {
-                    id
-                  }
-                }
-              }
-            }
-          }
-        }
-      `,
-      variables: {
-        input: {
-          commentOn: postId, // Pass the string postId directly
-          content: content,
-          author: authorName || 'Anonymous',
-          authorEmail: authorEmail,
-        },
-      },
-    });
-
-    return data.createComment.comment;
-  } catch (error) {
-    console.error('Error adding comment:', error);
-    return null;
-  }
-}
-
-// export async function addComment(postId, content) {
-//   try {
-//     const { data } = await client.mutate({
-//       mutation: gql`
-//         mutation CreateComment($postId: ID!, $content: String!) {
-//           createComment(input: { postId: $postId, content: $content }) {
-//             comment {
-//               id
-//               date
-//               content
-//               commentedOn {
-//                 node {
-//                   id
-//                 }
-//               }
-//             }
-//           }
-//         }
-//       `,
-//       variables: { postId, content },
-//     });
-
-//     return data.createComment.comment;
-//   } catch (error) {
-//     console.error('Error adding comment:', error);
-//     return null;
-//   }
-// }
 export async function getPostProductRecommendationBySlug(slug) {
   try {
     const { data } = await client.query({

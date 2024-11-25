@@ -23,6 +23,7 @@ export const metadata = {
     title: 'Vinjournalen.se',
     description:
       'Vinjournalen är ett nätmagasin som fokuserar på ämnet vin. Vi skriver om vin och mat i kombination, men ger även vintips samt skriver om vinregioner.',
+    site_name: 'Vinjournalen.se', // Add the site name here
     images: [
       {
         url: 'https://www.vinjournalen.se/wp-content/uploads/2020/01/VinjournalenLogotype-scaled.jpg', // Path to the logo or relevant image

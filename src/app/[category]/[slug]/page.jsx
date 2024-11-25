@@ -24,6 +24,7 @@ export async function generateMetadata({ params }) {
         title: 'Post not found - Vinjournalen.se',
         description: 'The requested post was not found on Vinjournalen.se.',
         url: `https://www.vinjournalen.se/posts/${slug}`,
+        site_name: 'Vinjournalen.se', // Add the site name here
         images: [
           {
             url: 'https://www.vinjournalen.se/default-image.jpg', // Default image URL
@@ -41,6 +42,7 @@ export async function generateMetadata({ params }) {
       title: `${post?.title} - Vinjournalen.se`,
       description: post?.excerpt?.replace(/<\/?[^>]+(>|$)/g, ''), // Clean HTML tags
       url: `https://www.vinjournalen.se/${category}/${slug}`,
+      site_name: 'Vinjournalen.se', // Add the site name here
       images: [
         {
           url: post?.featuredImage?.node?.sourceUrl || 'https://www.vinjournalen.se/default-image.jpg',

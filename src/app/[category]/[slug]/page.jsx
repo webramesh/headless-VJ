@@ -10,6 +10,59 @@ import PostAccordion from '../../Components/PostAccordion';
 import CommentForm from '../../Components/CommentForm';
 import CommentBox from '../../Components/CommentBox';
 
+export async function generateMetadata({ params }) {
+  const { slug, category } = params;
+
+  // Fetch post data using the slug
+  const post = await getPostBySlug(slug);
+
+  if (!post) {
+    return {
+      title: 'Post not found - Vinjournalen.se',
+      description: 'The requested post was not found on Vinjournalen.se.',
+      openGraph: {
+        title: 'Post not found - Vinjournalen.se',
+        description: 'The requested post was not found on Vinjournalen.se.',
+        url: `https://www.vinjournalen.se/posts/${slug}`,
+        images: [
+          {
+            url: 'https://www.vinjournalen.se/default-image.jpg', // Default image URL
+            alt: 'Post not found',
+          },
+        ],
+      },
+    };
+  }
+
+  return {
+    title: `${post?.title} - Vinjournalen.se`,
+    description: post?.excerpt?.replace(/<\/?[^>]+(>|$)/g, ''), // Clean HTML tags from excerpt
+    openGraph: {
+      title: `${post?.title} - Vinjournalen.se`,
+      description: post?.excerpt?.replace(/<\/?[^>]+(>|$)/g, ''), // Clean HTML tags
+      url: `https://www.vinjournalen.se/${category}/${slug}`,
+      images: [
+        {
+          url: post?.featuredImage?.node?.sourceUrl || 'https://www.vinjournalen.se/default-image.jpg',
+          width: 1200,
+          height: 630,
+          alt: post?.title,
+        },
+      ],
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: `${post?.title} - Vinjournalen.se`,
+      description: post?.excerpt?.replace(/<\/?[^>]+(>|$)/g, ''), // Clean HTML tags
+      images: [
+        {
+          url: post?.featuredImage?.node?.sourceUrl || 'https://www.vinjournalen.se/default-image.jpg',
+          alt: post?.title,
+        },
+      ],
+    },
+  };
+}
 export default async function PostDetails({ params }) {
   const { category, slug } = params;
 

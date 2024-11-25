@@ -12,7 +12,7 @@ const PageContent = ({ pageData }) => {
 
   return (
     <div className="container mx-auto ">
-      <Banner />
+      <Banner variant="default" />
       <AuthorHero title={pageData.title} />
       <div className="flex flex-col px-4 sm:px-6 lg:px-8 lg:flex-row gap-8 lg:gap-12 mt-8 lg:mt-12">
         <div className="w-full lg:w-[75%]">

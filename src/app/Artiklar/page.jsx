@@ -1,6 +1,7 @@
 import React from 'react';
-import { getAllArticles } from '../../lib/api/postAPI';
+import { getAllArticles, countArticles } from '../../lib/api/articleApi';
 import ArticleContent from './Components/ArticleContent';
+import Sidebar from '../Components/Sidebar';
 
 export const metadata = {
   title: 'Artiklar om vin | Vinjournalen',
@@ -8,6 +9,8 @@ export const metadata = {
 };
 
 export default async function ArticlarPage() {
-  const posts = await getAllArticles();
-  return <ArticleContent posts={posts} />;
+  const { posts, pageInfo } = await getAllArticles();
+  const totalPosts = await countArticles();
+
+  return <ArticleContent totalPosts={totalPosts} sidebar={<Sidebar />} />;
 }

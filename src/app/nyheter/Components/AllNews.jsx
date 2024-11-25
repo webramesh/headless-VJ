@@ -1,7 +1,15 @@
-import React from 'react';
+'use client';
+import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { format } from 'date-fns';
-import Sidebar from '../../Components/Sidebar';
+import { usePagination } from '@/src/context/PageContext';
+import { getAllNyheterPaginated } from '../../../lib/api/newsApi';
+import Pagination from '../../Components/pagination/Pagination';
+import CatAccordion from '../../[category]/Components/CatAccordion';
+import SubscriptionForm from '../../Components/subscription/SubscriptionForm';
+import BreadCrumb from '../../Components/breadcrumb/BreadCrumb';
+
+const POSTS_PER_PAGE = 12;
 
 const Card = ({ title, excerpt, date, author, slug }) => {
   return (
@@ -23,14 +31,40 @@ const Card = ({ title, excerpt, date, author, slug }) => {
   );
 };
 
-export default function AllNews({ posts }) {
+const AllNews = ({ initialPosts, initialPageInfo, totalPosts, sidebar }) => {
+  const { state, dispatch } = usePagination();
+  const { after, before, first, last } = state;
+  const [posts, setPosts] = useState(initialPosts);
+  const [pageInfo, setPageInfo] = useState(initialPageInfo);
+  const [isReset, setIsReset] = useState(false);
+
+  useEffect(() => {
+    dispatch({ type: 'RESET', payload: POSTS_PER_PAGE });
+    setIsReset(true);
+  }, [dispatch]);
+
+  useEffect(() => {
+    const fetchPosts = async () => {
+      dispatch({ type: 'CHANGE_LOADING', payload: true });
+
+      const { nyheter, pageInfo } = await getAllNyheterPaginated(first, last, after, before);
+      if (nyheter && pageInfo) {
+        setPosts(nyheter);
+        setPageInfo(pageInfo);
+        dispatch({ type: 'CHANGE_LOADING', payload: false });
+      } else {
+        console.warn('No posts or page info returned from getAllNyheterPaginated');
+      }
+    };
+
+    if (isReset) fetchPosts();
+  }, [after, before, first, isReset, last, dispatch]);
+
   return (
     <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+      <BreadCrumb title1="Nyheter" />
       <div className="flex flex-col lg:flex-row lg:gap-10">
         <div className="w-full lg:w-[75%] mt-4 space-y-6">
-          <div className="text-sm">
-            <span className="text-red-500">Hem </span>» Nyheter
-          </div>
           <div className="text-3xl sm:text-4xl mb-8">
             <h1>Nyheter</h1>
           </div>
@@ -43,7 +77,6 @@ export default function AllNews({ posts }) {
                   excerpt={post.excerpt}
                   date={post.date}
                   author={post.author?.node?.name || 'Unknown Author'}
-                  category={post.categories?.nodes?.[0]?.slug || 'uncategorized'}
                   imageUrl={post.featuredImage?.node?.mediaItemUrl || '/api/placeholder/400/300'}
                   slug={post.slug || '#'}
                 />
@@ -52,14 +85,17 @@ export default function AllNews({ posts }) {
               <p>No news found.</p>
             )}
           </div>
+          <Pagination pageInfo={pageInfo} pageLimit={POSTS_PER_PAGE} total={totalPosts} />
+          <SubscriptionForm />
+          <CatAccordion />
         </div>
         {/* Right Section */}
         <div className="w-full lg:w-[25%] mt-8 lg:mt-10">
-          <div className="lg:sticky lg:top-8 space-y-8">
-            <Sidebar />
-          </div>
+          <div className="lg:sticky lg:top-8 space-y-8">{sidebar}</div>
         </div>
       </div>
     </div>
   );
-}
+};
+
+export default AllNews;

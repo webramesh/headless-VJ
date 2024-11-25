@@ -7,7 +7,7 @@ function getRandomItem(array) {
   return array[Math.floor(Math.random() * array.length)];
 }
 
-async function Banner({ variant }) {
+export default async function Banner({ variant }) {
   const banners = await getAllBanners();
 
   if (!banners || banners.length === 0) {
@@ -29,36 +29,18 @@ async function Banner({ variant }) {
 
   const bannerUrl = randomBanner.bannerFields?.bannerUrl || '/artiklar';
 
-  // Add a key prop with current timestamp to force re-render
-  const timestamp = new Date().getTime();
-
   return (
-    <div className={`container mx-auto ${variant === 'sidebar' ? 'mb-4' : ''}`} key={timestamp}>
-      <div>
-        <Link href={bannerUrl} target="_blank" rel="noopener noreferrer" className="block">
-          {imageUrl ? (
-            <Image
-              src={imageUrl}
-              alt={imageAlt}
-              width={variant === 'sidebar' ? 300 : 1200}
-              height={variant === 'sidebar' ? 250 : 400}
-              className="object-cover cursor-pointer w-full hover:opacity-90 transition-opacity"
-              priority
-            />
-          ) : (
-            <Image
-              src="/banner.webp"
-              alt="Default Banner"
-              width={variant === 'sidebar' ? 300 : 1200}
-              height={variant === 'sidebar' ? 250 : 400}
-              className="object-cover cursor-pointer w-full hover:opacity-90 transition-opacity"
-              priority
-            />
-          )}
-        </Link>
-      </div>
+    <div className={`container mx-auto ${variant === 'sidebar' ? 'mb-4' : ''}`}>
+      <Link href={bannerUrl} target="_blank" rel="noopener noreferrer" className="block">
+        <Image
+          src={imageUrl || '/banner.webp'}
+          alt={imageAlt}
+          width={variant === 'sidebar' ? 300 : 1200}
+          height={variant === 'sidebar' ? 250 : 400}
+          className="object-cover cursor-pointer w-full hover:opacity-90 transition-opacity"
+          priority
+        />
+      </Link>
     </div>
   );
 }
-
-export default Banner;

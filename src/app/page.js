@@ -26,7 +26,7 @@ export default async function Home() {
   return (
     <div>
       <Suspense fallback={<Loading />}>
-        <Banner />
+        <Banner variant="default"/>
         <Hero posts={posts} />
 
         <Trending

@@ -125,6 +125,24 @@ export async function getPostBySlug(slug) {
                 customAvatar
               }
             }
+
+            comments {
+              nodes {
+                date
+                id
+                content
+                author {
+                  name
+                }
+                commentedOn {
+                  node {
+                    ... on Post {
+                      id
+                    }
+                  }
+                }
+              }
+            }
           }
         }
       `,

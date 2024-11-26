@@ -115,10 +115,12 @@ export async function getProductBySlug(slug) {
               }
             }
             fieldsProduct {
+              composition
               productShortText
               extraReadMore1
               extraReadMore2
               pice
+              pricePerLitter
               productCode
               buyLink
               wineSortiment
@@ -143,6 +145,19 @@ export async function getProductBySlug(slug) {
               containerType
               produktPackaging
               productLabels
+            }
+
+            matkombinationer {
+              nodes {
+                name
+                categoriesImagesAndOtherFields {
+                  categoriesImage {
+                    node {
+                      sourceUrl
+                    }
+                  }
+                }
+              }
             }
             smakar {
               nodes {

@@ -8,6 +8,8 @@ import ProductRecommendation from './components/ProductRecommendation';
 import SubscriptionForm from '../../Components/subscription/SubscriptionForm';
 import SubscriptionBox from '../../Components/subscription/SubscriptionBox';
 import PostAccordion from '../../Components/PostAccordion';
+import CommentForm from '../../Components/CommentForm';
+import CommentBox from '../../Components/CommentBox';
 
 export default async function PostDetails({ params }) {
   const { category, slug } = params;
@@ -45,7 +47,7 @@ export default async function PostDetails({ params }) {
           </div>
           <ProductRecommendation postProductRecommendation={postProductRecommendation} />
 
-          <div className="container mx-auto py-8 px-4">
+          <div className="container mx-auto py-8 px-4 lg:px-0">
             <div className=" block md:grid grid-cols-4">
               <div className="col-span-3">
                 <SubscriptionForm />
@@ -56,7 +58,21 @@ export default async function PostDetails({ params }) {
             </div>
           </div>
 
-          <div className="container mx-auto px-4">
+          {/* all comments */}
+          <div className="container mx-auto px-4 my-8 flex flex-col gap-4 lg:px-0">
+            <>
+              <h3 className="font-bold text-xl mb-4">All Comments </h3>
+              {post?.comments?.nodes?.map((comment) => {
+                return <CommentBox key={comment.id} comment={comment} />;
+              })}
+            </>
+          </div>
+          {/* end of all comments */}
+
+          <div className="container bg-white mx-auto my-14 px-4 lg:px-0">
+            <CommentForm post={post} />
+          </div>
+          <div className="container mx-auto px-4 lg:px-0">
             <PostAccordion />
           </div>
         </div>

@@ -2,8 +2,8 @@ const FactBoxMoreInfo = ({ smakar, aromer, fargers }) => {
   return (
     <>
       {((smakar && smakar.length > 0) || (aromer && aromer.length > 0) || (fargers && fargers.length > 0)) && (
-        <div className="mt-8">
-          <hr />
+        <div className="">
+          {/* <hr /> */}
           <div className="md:grid grid-cols-3 gap-4 lg:gap-8">
             <div className="flex flex-col items-center p-2 ">
               <div className=" text-black text-md">SMAK</div>

@@ -15,108 +15,52 @@ export async function generateMetadata({ params }) {
 
   const post = await getPostBySlug(slug);
 
-  if (!post) {
+  const { seo } = post;
+  if (seo) {
     return {
-      title: 'Post not found - Vinjournalen.se',
-      description: 'The requested post was not found on Vinjournalen.se.',
+      title: seo?.title || `${post?.title} - Vinjournalen.se`,
+      description: seo?.description,
+      canonicalUrl: seo?.canonicalUrl || `https://www.vinjournalen.se/${category}/${slug}`,
       openGraph: {
-        title: 'Post not found - Vinjournalen.se',
-        description: 'The requested post was not found on Vinjournalen.se.',
-        url: `https://www.vinjournalen.se/posts/${slug}`,
-        site_name: 'Vinjournalen.se',
-        images: [
-          {
-            url: 'https://www.vinjournalen.se/default-image.jpg',
-            alt: 'Post not found',
-          },
-        ],
+        locale: seo?.openGraph?.locale,
+        type: seo?.openGraph?.type,
+        title: seo?.openGraph?.title,
+        description: seo?.openGraph?.description,
+        url: seo?.openGraph?.url || `https://www.vinjournalen.se/${category}/${slug}`,
+        siteName: seo?.openGraph?.siteName || 'Vinjournalen.se',
+        image: {
+          height: seo?.openGraph?.image?.height || 630,
+          secureUrl:
+            seo?.openGraph?.image?.secureUrl ||
+            post?.featuredImage?.node?.sourceUrl ||
+            'https://www.vinjournalen.se/default-image.jpg',
+          type: seo?.openGraph?.image?.type || 'image/jpeg',
+          url:
+            seo?.openGraph?.image?.url ||
+            post?.featuredImage?.node?.sourceUrl ||
+            'https://www.vinjournalen.se/default-image.jpg',
+          width: seo?.openGraph?.image?.width || 1200,
+        },
+        twitterMeta: {
+          card: seo?.openGraph?.twitterMeta?.card || 'summary_large_image',
+          description: seo?.openGraph?.twitterMeta?.description || post?.excerpt?.replace(/<\/?[^>]+(>|$)/g, ''),
+          image:
+            seo?.openGraph?.twitterMeta?.image ||
+            post?.featuredImage?.node?.sourceUrl ||
+            'https://www.vinjournalen.se/default-image.jpg',
+          creator: seo?.openGraph?.twitterMeta?.creator || '@Vinjournalen',
+          title: seo?.openGraph?.twitterMeta?.title || `${post?.title} - Vinjournalen.se`,
+          site: seo?.openGraph?.twitterMeta?.site || '@Vinjournalen',
+        },
+      },
+      robots: {
+        index: seo?.robots?.includes('index') || true,
+        follow: seo?.robots?.includes('follow') || true,
       },
     };
   }
-
-  const robotsValue = post?.seo?.robots || 'index, follow';
-
-  return {
-    title: `${post?.title} - Vinjournalen.se`,
-    description: post?.excerpt
-      ? post.excerpt.replace(/<\/?[^>]+(>|$)/g, '')
-      : 'Explore wine-related content on Vinjournalen.se.',
-    openGraph: {
-      title: `${post?.title} - Vinjournalen.se`,
-      description: post?.excerpt?.replace(/<\/?[^>]+(>|$)/g, '') || '',
-      url: `https://www.vinjournalen.se/${category}/${slug}`,
-      site_name: 'Vinjournalen.se',
-      images: [
-        {
-          url: post?.featuredImage?.node?.sourceUrl || 'https://www.vinjournalen.se/default-image.jpg',
-          width: 1200,
-          height: 630,
-          alt: post?.title,
-        },
-      ],
-      canonical: `https://www.vinjournalen.se/${category}/${slug}`,
-    },
-    robots: {
-      index: robotsValue.includes('index'),
-      follow: robotsValue.includes('follow'),
-    },
-  };
 }
-// export async function generateMetadata({ params }) {
-//   const { slug, category } = params;
-//
-//   // Fetch post data using the slug
-//   const post = await getPostBySlug(slug);
-//
-//   if (!post) {
-//     return {
-//       title: 'Post not found - Vinjournalen.se',
-//       description: 'The requested post was not found on Vinjournalen.se.',
-//       openGraph: {
-//         title: 'Post not found - Vinjournalen.se',
-//         description: 'The requested post was not found on Vinjournalen.se.',
-//         url: `https://www.vinjournalen.se/posts/${slug}`,
-//         site_name: 'Vinjournalen.se', // Add the site name here
-//         images: [
-//           {
-//             url: 'https://www.vinjournalen.se/default-image.jpg', // Default image URL
-//             alt: 'Post not found',
-//           },
-//         ],
-//       },
-//     };
-//   }
-//
-//   return {
-//     title: `${post?.title} - Vinjournalen.se`,
-//     description: post?.excerpt?.replace(/<\/?[^>]+(>|$)/g, ''), // Clean HTML tags from excerpt
-//     openGraph: {
-//       title: `${post?.title} - Vinjournalen.se`,
-//       description: post?.excerpt?.replace(/<\/?[^>]+(>|$)/g, ''), // Clean HTML tags
-//       url: `https://www.vinjournalen.se/${category}/${slug}`,
-//       site_name: 'Vinjournalen.se', // Add the site name here
-//       images: [
-//         {
-//           url: post?.featuredImage?.node?.sourceUrl || 'https://www.vinjournalen.se/default-image.jpg',
-//           width: 1200,
-//           height: 630,
-//           alt: post?.title,
-//         },
-//       ],
-//     },
-//     twitter: {
-//       card: 'summary_large_image',
-//       title: `${post?.title} - Vinjournalen.se`,
-//       description: post?.excerpt?.replace(/<\/?[^>]+(>|$)/g, ''), // Clean HTML tags
-//       images: [
-//         {
-//           url: post?.featuredImage?.node?.sourceUrl || 'https://www.vinjournalen.se/default-image.jpg',
-//           alt: post?.title,
-//         },
-//       ],
-//     },
-//   };
-// }
+
 export default async function PostDetails({ params }) {
   const { category, slug } = params;
 

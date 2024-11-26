@@ -1,6 +1,9 @@
 import React from 'react';
-import { getAllNyheter } from '../../lib/api/newsApi';
+import { getAllNyheterPaginated, countNyheter } from '../../lib/api/newsApi';
 import AllNews from './Components/AllNews';
+import Sidebar from '../Components/Sidebar';
+import { PageProvider } from '@/src/context/PageContext';
+import Banner from '../Components/Banner';
 
 export const metadata = {
   title: 'Nyheter | Vinjournalen',
@@ -8,6 +11,13 @@ export const metadata = {
 };
 
 export default async function NyheterPage() {
-  const posts = await getAllNyheter();
-  return <AllNews posts={posts} />;
+  const { nyheter, pageInfo } = await getAllNyheterPaginated(12, null, null, null);
+  const totalNyheter = await countNyheter();
+
+  return (
+    <PageProvider>
+      <Banner variant="default" />
+      <AllNews initialPosts={nyheter} initialPageInfo={pageInfo} totalPosts={totalNyheter} sidebar={<Sidebar />} />
+    </PageProvider>
+  );
 }

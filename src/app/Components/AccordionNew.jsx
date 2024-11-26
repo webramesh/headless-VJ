@@ -56,90 +56,41 @@ const AccordionItem = ({ index, openIndex, toggleAccordion, title, content }) =>
         role="region"
         aria-labelledby={`accordion-button-${index}`}
       >
-        <div className="pb-5 mt-2 mb-2 text-xs md:text-sm  pl-3 text-slate-500">{content}</div>
+        <div
+          className="pb-5 mt-2 mb-2 text-xs md:text-sm pl-3 text-slate-500"
+          dangerouslySetInnerHTML={{ __html: content }}
+        />
       </div>
     </div>
   );
 };
 
-const AccordionNew = () => {
+const Accordion = ({ faqItems = [] }) => {
   const [openIndex, setOpenIndex] = useState(null);
 
   const toggleAccordion = (index) => {
     setOpenIndex(openIndex === index ? null : index);
   };
 
+  // Only render if there are FAQ items
+  if (faqItems.length === 0) {
+    return null;
+  }
+
   return (
     <div>
-      {/* Heading */}
-      <h2 className="text-2xl font-semibold text-black mb-4">Frågor och Svar</h2>
-
-      {/* Accordion Items */}
-      <AccordionItem
-        index={1}
-        openIndex={openIndex}
-        toggleAccordion={toggleAccordion}
-        title="Hur ofta kommer Vinjournalen.se ’s populära nyhetsbrev ut?"
-        content="Vinjournalen.se skickar ut sitt nyhetsbrev varje fredag, inför storhelger ibland oftare. På så sätt får du tips direkt i din inbox från Vinjournalen.se!"
-      />
-
-      <AccordionItem
-        index={2}
-        openIndex={openIndex}
-        toggleAccordion={toggleAccordion}
-        title="Skriver Vinjournalen.se även om ekologiska och naturviner samt vegetrarisk/vegansk mat?"
-        content="Vinjournalen.se skickar ut sitt nyhetsbrev varje fredag, inför storhelger ibland oftare. På så sätt får du tips direkt i din inbox från Vinjournalen.se!"
-      />
-
-      <AccordionItem
-        index={3}
-        openIndex={openIndex}
-        toggleAccordion={toggleAccordion}
-        title="Skriver Vinjournalen.se även om Vinturism?"
-        content="Vinjournalen.se skickar ut sitt nyhetsbrev varje fredag, inför storhelger ibland oftare. På så sätt får du tips direkt i din inbox från Vinjournalen.se!"
-      />
-
-      <AccordionItem
-        index={4}
-        openIndex={openIndex}
-        toggleAccordion={toggleAccordion}
-        title="Hur ofta publicerar Vinjournalen.se nytt innehåll?"
-        content="Vinjournalen.se skickar ut sitt nyhetsbrev varje fredag, inför storhelger ibland oftare. På så sätt får du tips direkt i din inbox från Vinjournalen.se!"
-      />
-
-      <AccordionItem
-        index={5}
-        openIndex={openIndex}
-        toggleAccordion={toggleAccordion}
-        title="Är Vinjournalen.se ett passande magasin om jag vill lära mig om vin?"
-        content="Vinjournalen.se skickar ut sitt nyhetsbrev varje fredag, inför storhelger ibland oftare. På så sätt får du tips direkt i din inbox från Vinjournalen.se!"
-      />
-
-      <AccordionItem
-        index={6}
-        openIndex={openIndex}
-        toggleAccordion={toggleAccordion}
-        title="Vad skriver Vinjournalen.se om?"
-        content="Vinjournalen.se skickar ut sitt nyhetsbrev varje fredag, inför storhelger ibland oftare. På så sätt får du tips direkt i din inbox från Vinjournalen.se!"
-      />
-
-      <AccordionItem
-        index={7}
-        openIndex={openIndex}
-        toggleAccordion={toggleAccordion}
-        title="Skriver Vinjournalen.se något om Vinprovningar?"
-        content="Vinjournalen.se skickar ut sitt nyhetsbrev varje fredag, inför storhelger ibland oftare. På så sätt får du tips direkt i din inbox från Vinjournalen.se!"
-      />
-
-      <AccordionItem
-        index={8}
-        openIndex={openIndex}
-        toggleAccordion={toggleAccordion}
-        title="Har ni någon guide om vinimportörer och vinproducenter?"
-        content="Vinjournalen.se skickar ut sitt nyhetsbrev varje fredag, inför storhelger ibland oftare. På så sätt får du tips direkt i din inbox från Vinjournalen.se!"
-      />
+      {faqItems.map((item, index) => (
+        <AccordionItem
+          key={index}
+          index={index}
+          openIndex={openIndex}
+          toggleAccordion={toggleAccordion}
+          title={item.faqQuestion}
+          content={item.faqAnswer}
+        />
+      ))}
     </div>
   );
 };
 
-export default AccordionNew;
+export default Accordion;

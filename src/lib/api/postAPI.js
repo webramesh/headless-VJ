@@ -102,6 +102,12 @@ export async function getPostBySlug(slug) {
             content
             date
             slug
+            faq {
+              faq {
+                faqQuestion
+                faqAnswer
+              }
+            }
             featuredImage {
               node {
                 sourceUrl
@@ -258,6 +264,12 @@ export async function getAllCategories() {
               id
               name
               slug
+              faq {
+                faq {
+                  faqQuestion
+                  faqAnswer
+                }
+              }
             }
           }
         }
@@ -280,6 +292,12 @@ export async function getCategoryBySlug(slug) {
             name
             description
             count
+            faq {
+              faq {
+                faqQuestion
+                faqAnswer
+              }
+            }
           }
         }
       `,
@@ -305,6 +323,12 @@ export async function getPostsByCategory(category, first, last, after, before) {
               slug
               excerpt
               date
+              faq {
+                faq {
+                  faqQuestion
+                  faqAnswer
+                }
+              }
               featuredImage {
                 node {
                   sourceUrl

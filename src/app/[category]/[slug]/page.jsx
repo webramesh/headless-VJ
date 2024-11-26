@@ -3,6 +3,7 @@ import TaxonomyPage from '../Components/TaxonomyPage';
 import { getPostProductRecommendationBySlug } from '@/src/lib/api/postAPI';
 import PostDetailsContent from '../Components/PostDetailsContent';
 import PostDetailsHero from '../Components/PostDetailsHero';
+import AccordionNew from '../../Components/AccordionNew';
 import ProductRecommendation from './components/ProductRecommendation';
 import SubscriptionForm from '../../Components/subscription/SubscriptionForm';
 import SubscriptionBox from '../../Components/subscription/SubscriptionBox';
@@ -18,14 +19,14 @@ export default async function PostDetails({ params }) {
 
   if (categories.includes(category)) {
     const post = await getPostBySlug(slug);
-    const postProductRecommendation = await getPostProductRecommendationBySlug(
-      // 'twist-pa-ceasarsallad-ett-helt-nytt-bubbel'
-      slug
-    );
+    const postProductRecommendation = await getPostProductRecommendationBySlug(slug);
 
     if (!post) {
       return <div className="container mx-auto px-4 py-8">Post not found</div>;
     }
+
+    // Extract FAQ items from the post data
+    const faqItems = post.faq?.faq || [];
 
     return (
       <>
@@ -40,7 +41,10 @@ export default async function PostDetails({ params }) {
             categories={post?.categories?.nodes[0]}
           />
           <PostDetailsContent content={post?.content} />
-
+          <div className="mt-24 ml-56 pl-3 font-medium text-xl">Frågor och Svar</div>
+          <div className="mx-56 mt-4">
+            <AccordionNew faqItems={faqItems} />
+          </div>
           <ProductRecommendation postProductRecommendation={postProductRecommendation} />
 
           <div className="container mx-auto py-8 px-4 lg:px-0">

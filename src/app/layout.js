@@ -49,9 +49,6 @@ export const metadata = {
   },
 };
 
-// Added revalidation
-// export const revalidate = 0
-
 export default async function RootLayout({ children }) {
   const menuData = await getMainMenu();
   const footerMenu = await getFooterMenu();
@@ -111,3 +108,10 @@ export default async function RootLayout({ children }) {
     </html>
   );
 }
+
+export function generateStaticParams() {
+  return [];
+}
+
+export const dynamicParams = true;
+

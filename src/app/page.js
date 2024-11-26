@@ -11,6 +11,7 @@ import NewsPost from './Components/NewsPost';
 import { getHomePagePosts } from '../lib/api/postAPI';
 import SubscriptionForm from './Components/subscription/SubscriptionForm';
 import SubscriptionBox from './Components/subscription/SubscriptionBox';
+import Banner from './Components/Banner';
 
 export const revalidate = 60;
 
@@ -25,6 +26,7 @@ export default async function Home() {
   return (
     <div>
       <Suspense fallback={<Loading />}>
+        <Banner variant="default"/>
         <Hero posts={posts} />
 
         <Trending
@@ -32,22 +34,24 @@ export default async function Home() {
           subtitle="Artiklar värda att läsa från våra redaktörer"
           trendingPosts={trendingPosts.slice(0, 6)}
         />
-        {/* <Subscription /> */}
+
         <div className="container mx-auto block md:grid grid-cols-6 items-center justify-between gap-14 px-2 my-10">
           <div className="col-span-4">
             <SubscriptionForm />
           </div>
           <div className="w-full grid col-span-2">
-            {/* <SubscriptionBox ordlista={ordlista} /> */}
             <SubscriptionBox />
           </div>
         </div>
+
         <WineSlider categories={wineCategories} />
+
         <NewsPost
           title="NYHETER"
           subtitle="Den mest populära artikeln i dryckesvärlden"
           nyheter={nyheter.slice(0, 6)}
         />
+
         <Info />
       </Suspense>
     </div>

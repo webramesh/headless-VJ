@@ -1,8 +1,17 @@
-import React from 'react';
+'use client';
+
+import React, { useState, useEffect } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { format } from 'date-fns';
-import Sidebar from '../../Components/Sidebar';
+import { usePagination } from '@/src/context/PageContext';
+import { getAllArticles } from '../../../lib/api/articleApi';
+import Pagination from '../../Components/pagination/Pagination';
+import CatAccordion from '../../[category]/Components/CatAccordion';
+import BreadCrumb from '../../Components/breadcrumb/BreadCrumb';
+import SubscriptionForm from '../../Components/subscription/SubscriptionForm';
+
+const POSTS_PER_PAGE = 15;
 
 const Card = ({ title, excerpt, date, author, category, imageUrl, slug }) => {
   return (
@@ -35,14 +44,40 @@ const Card = ({ title, excerpt, date, author, category, imageUrl, slug }) => {
   );
 };
 
-export default function ArticleContent({ posts }) {
+const ArticleContent = ({ totalPosts, sidebar }) => {
+  const { state, dispatch } = usePagination();
+  const { after, before, first, last } = state;
+  const [posts, setPosts] = useState([]);
+  const [pageInfo, setPageInfo] = useState({});
+  const [isReset, setIsReset] = useState(false);
+
+  useEffect(() => {
+    dispatch({ type: 'RESET', payload: POSTS_PER_PAGE });
+    setIsReset(true);
+  }, [dispatch]);
+
+  useEffect(() => {
+    const fetchPosts = async () => {
+      dispatch({ type: 'CHANGE_LOADING', payload: true });
+
+      const { posts, pageInfo } = await getAllArticles(first, last, after, before);
+      if (posts && pageInfo) {
+        setPosts(posts);
+        setPageInfo(pageInfo);
+        dispatch({ type: 'CHANGE_LOADING', payload: false });
+      } else {
+        console.warn('No posts or page info returned from getAllArticles');
+      }
+    };
+
+    if (isReset) fetchPosts();
+  }, [after, before, first, isReset, last, dispatch]);
+
   return (
     <div className="container mx-auto px-4 sm:px-6 lg:px-8">
       <div className="flex flex-col lg:flex-row lg:gap-10">
         <div className="w-full lg:w-[75%] mt-4 space-y-6">
-          <div className="text-sm">
-            <span className="text-red-500">Hem </span>» Artiklar om vin
-          </div>
+          <BreadCrumb title1="Artiklar Om Vin" />
           <div className="text-3xl sm:text-4xl mb-8">
             <h1>Artiklar om vin</h1>
           </div>
@@ -64,14 +99,17 @@ export default function ArticleContent({ posts }) {
               <p>No articles found.</p>
             )}
           </div>
+          <Pagination pageInfo={pageInfo} pageLimit={POSTS_PER_PAGE} total={totalPosts} />
+          <SubscriptionForm />
+          <CatAccordion />
         </div>
         {/* Right Section */}
         <div className="w-full lg:w-[25%] mt-8 lg:mt-10">
-          <div className="lg:sticky lg:top-8 space-y-8">
-            <Sidebar />
-          </div>
+          <div className="lg:sticky lg:top-8 space-y-8">{sidebar}</div>
         </div>
       </div>
     </div>
   );
-}
+};
+
+export default ArticleContent;

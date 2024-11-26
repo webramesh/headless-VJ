@@ -351,12 +351,12 @@ export async function getCategoryBySlug(slug) {
                   title
                   site
                 }
-
+              }
+            }
             faq {
               faq {
                 faqQuestion
                 faqAnswer
-
               }
             }
           }

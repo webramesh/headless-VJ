@@ -8,7 +8,7 @@ function page() {
   return (
     <>
       <div className="container mx-auto flex  lg:flex-row gap-6 lg:gap-12 mt-4 lg:mt-10 bg-slate-50  p-4">
-        <div className="md:w-2/3 ">
+        <div className="md:w-3/4 ">
           <h1 className="text-2xl lg:text-3xl  font-semibold uppercase my-5">
             Vill du bli en del av Vinjournalen.se under 2024?
           </h1>
@@ -56,7 +56,7 @@ function page() {
           </div>
         </div>
 
-        <div className="w-1/3 hidden md:block sticky top-0 h-full">
+        <div className="w-1/4 hidden md:block sticky top-0 h-full">
           <Sidebar />
         </div>
       </div>

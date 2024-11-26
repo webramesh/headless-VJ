@@ -11,6 +11,57 @@ import PostAccordion from '../../Components/PostAccordion';
 import CommentForm from '../../Components/CommentForm';
 import CommentBox from '../../Components/CommentBox';
 
+export async function generateMetadata({ params }) {
+  const { slug, category } = params;
+
+  const post = await getPostBySlug(slug);
+
+  const { seo } = post;
+  if (seo) {
+    return {
+      title: seo?.title || `${post?.title} - Vinjournalen.se`,
+      description: seo?.description,
+      canonicalUrl: seo?.canonicalUrl || `https://www.vinjournalen.se/${category}/${slug}`,
+      openGraph: {
+        locale: seo?.openGraph?.locale,
+        type: seo?.openGraph?.type,
+        title: seo?.openGraph?.title,
+        description: seo?.openGraph?.description,
+        url: seo?.openGraph?.url || `https://www.vinjournalen.se/${category}/${slug}`,
+        siteName: seo?.openGraph?.siteName || 'Vinjournalen.se',
+        image: {
+          height: seo?.openGraph?.image?.height || 630,
+          secureUrl:
+            seo?.openGraph?.image?.secureUrl ||
+            post?.featuredImage?.node?.sourceUrl ||
+            'https://www.vinjournalen.se/default-image.jpg',
+          type: seo?.openGraph?.image?.type || 'image/jpeg',
+          url:
+            seo?.openGraph?.image?.url ||
+            post?.featuredImage?.node?.sourceUrl ||
+            'https://www.vinjournalen.se/default-image.jpg',
+          width: seo?.openGraph?.image?.width || 1200,
+        },
+        twitterMeta: {
+          card: seo?.openGraph?.twitterMeta?.card || 'summary_large_image',
+          description: seo?.openGraph?.twitterMeta?.description || post?.excerpt?.replace(/<\/?[^>]+(>|$)/g, ''),
+          image:
+            seo?.openGraph?.twitterMeta?.image ||
+            post?.featuredImage?.node?.sourceUrl ||
+            'https://www.vinjournalen.se/default-image.jpg',
+          creator: seo?.openGraph?.twitterMeta?.creator || '@Vinjournalen',
+          title: seo?.openGraph?.twitterMeta?.title || `${post?.title} - Vinjournalen.se`,
+          site: seo?.openGraph?.twitterMeta?.site || '@Vinjournalen',
+        },
+      },
+      robots: {
+        index: seo?.robots?.includes('index') || true,
+        follow: seo?.robots?.includes('follow') || true,
+      },
+    };
+  }
+}
+
 export default async function PostDetails({ params }) {
   const { category, slug } = params;
 

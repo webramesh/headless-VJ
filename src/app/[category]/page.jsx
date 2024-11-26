@@ -15,7 +15,7 @@ export async function generateStaticParams() {
 
 export default async function Page({ params }) {
   const category = await getCategoryBySlug(params.category);
-  
+
   if (!category) {
     redirect('/');
   }
@@ -46,8 +46,50 @@ export default async function Page({ params }) {
 }
 
 export async function generateMetadata({ params }) {
-  return {
-    title: `Category: ${params.category || 'Online'}`,
-    description: `Posts in the ${params.category || 'Online'} category`,
-  };
+  const { category } = params;
+
+  // Fetch category data for dynamic metadata
+  const categoryData = await getCategoryBySlug(category);
+
+  const seo = categoryData.seo;
+
+  // Convert robots array to string format
+  const robotsMeta = seo?.robots?.join(', ') || 'index, follow';
+
+  // Convert focus keywords array to comma-separated string
+  const keywords = seo?.focusKeywords?.join(', ') || '';
+
+  if (categoryData || categoryData?.seo) {
+    return {
+      title: seo?.title || `Category: ${category}`,
+      description: seo?.description || `Explore posts in the ${category} category.`,
+      robots: robotsMeta,
+      keywords,
+      openGraph: {
+        title: seo?.openGraph?.title || seo?.title || `Category: ${category}`,
+        description: seo?.openGraph?.description || seo?.description || '',
+        url: seo?.openGraph?.url || `https://www.vinjournalen.se/category/${category}`,
+        siteName: seo?.openGraph?.siteName || 'Vinjournalen.se',
+        images: [
+          {
+            url: seo?.openGraph?.image?.url || 'https://www.vinjournalen.se/default-category-image.jpg',
+            width: seo?.openGraph?.image?.width || 1200,
+            height: seo?.openGraph?.image?.height || 630,
+            alt: seo?.openGraph?.title || seo?.title || `Category: ${category}`,
+          },
+        ],
+        locale: seo?.openGraph?.locale || 'en_US',
+        type: seo?.openGraph?.type || 'website',
+      },
+      twitter: {
+        card: seo?.openGraph?.twitterMeta?.card || 'summary_large_image',
+        title: seo?.openGraph?.twitterMeta?.title || seo?.title,
+        description: seo?.openGraph?.twitterMeta?.description || seo?.description,
+        image: seo?.openGraph?.twitterMeta?.image || seo?.openGraph?.image?.url,
+        site: seo?.openGraph?.twitterMeta?.site || '@vinjournalense',
+        creator: seo?.openGraph?.twitterMeta?.creator || null,
+      },
+      canonical: seo?.canonicalUrl || `https://www.vinjournalen.se/category/${category}`,
+    };
+  }
 }

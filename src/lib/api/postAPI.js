@@ -1,3 +1,4 @@
+'use server';
 import { ApolloClient, InMemoryCache, gql } from '@apollo/client';
 
 const client = new ApolloClient({
@@ -283,6 +284,36 @@ export async function getCategoryBySlug(slug) {
             name
             description
             count
+            seo {
+              title
+              robots
+              description
+              focusKeywords
+              canonicalUrl
+              openGraph {
+                locale
+                type
+                title
+                description
+                url
+                siteName
+                image {
+                  height
+                  secureUrl
+                  type
+                  url
+                  width
+                }
+                twitterMeta {
+                  card
+                  description
+                  image
+                  creator
+                  title
+                  site
+                }
+              }
+            }
           }
         }
       `,

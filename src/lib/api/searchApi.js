@@ -8,6 +8,11 @@ const SEARCH_QUERY = gql`
         id
         title
         slug
+        categories {
+          nodes {
+            slug
+          }
+        }
       }
     }
     produkter(where: { search: $searchTerm }) {
@@ -36,7 +41,7 @@ export async function searchContent(searchTerm) {
         id: post.id,
         title: post.title,
         slug: post.slug,
-        type: 'post',
+        type: post.categories.nodes[0].slug,
       })),
       products: data.produkter.nodes.map((produkter) => ({
         id: produkter.id,
@@ -50,7 +55,7 @@ export async function searchContent(searchTerm) {
           id: post.id,
           title: post.title,
           slug: post.slug,
-          type: 'post',
+          type: post.categories.nodes[0].slug,
         })),
         ...data.produkter.nodes.map((produkter) => ({
           id: produkter.id,

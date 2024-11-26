@@ -18,7 +18,6 @@ const PostAccordion = () => {
   const params = useParams();
 
   const categoryAndPosts = useCategoryAndPosts();
-
   const normalizedSlug = normalizeString(params.slug);
 
   const categoriesWithFilteredTitles = categoryAndPosts.map((category) => ({
@@ -33,27 +32,46 @@ const PostAccordion = () => {
   };
 
   return (
-    <div className="container mx-auto">
+    <div className="container mx-auto px-4 sm:px-6 lg:px-32 py-4 sm:py-6 lg:py-8">
       {categoriesWithFilteredTitles.map((category, index) => (
         <div key={category.id} className="border-b mb-2 border-slate-200">
           <button
             onClick={() => toggleAccordion(index)}
-            className="w-full flex justify-between items-center bg-[#F5F5F5] pl-3 text-slate-800 py-2"
+            className="
+              w-full 
+              flex 
+              justify-between 
+              items-center 
+              bg-[#F5F5F5] 
+              px-2 sm:pl-3 
+              text-slate-800 
+              py-2
+            "
           >
-            <h3 className="text-left font-semibold text-sm">
+            <h3
+              className="
+              text-left 
+              font-semibold 
+              text-xs sm:text-sm
+            "
+            >
               <span>{category.categoryName}</span>
             </h3>
             <span
-              className={`text-slate-800 transition-transform duration-300 transform ${
-                openIndex === index ? 'rotate-60' : 'rotate-0'
-              }`}
+              className={`
+                text-slate-800 
+                transition-transform 
+                duration-300 
+                transform 
+                ${openIndex === index ? 'rotate-180' : 'rotate-0'}
+              `}
             >
               {openIndex === index ? (
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   viewBox="0 0 16 16"
                   fill="currentColor"
-                  className="w-8 h-8 text-red-600"
+                  className="w-6 h-6 sm:w-8 sm:h-8 text-red-600"
                 >
                   <path
                     fillRule="evenodd"
@@ -66,7 +84,7 @@ const PostAccordion = () => {
                   xmlns="http://www.w3.org/2000/svg"
                   viewBox="0 0 16 16"
                   fill="currentColor"
-                  className="w-8 h-8 text-red-600"
+                  className="w-6 h-6 sm:w-8 sm:h-8 text-red-600"
                 >
                   <path
                     fillRule="evenodd"
@@ -78,13 +96,30 @@ const PostAccordion = () => {
             </span>
           </button>
           <div
-            className={`overflow-hidden transition-all duration-300 ease-in-out ${
-              openIndex === index ? 'max-h-screen' : 'max-h-0'
-            }`}
+            className={`
+              overflow-hidden 
+              transition-all 
+              duration-300 
+              ease-in-out 
+              ${openIndex === index ? 'max-h-screen' : 'max-h-0'}
+            `}
           >
-            <div className="pb-5 bg-[#F5F5F5] block md:grid grid-cols-2 text-sm pl-3 text-red-500">
+            <div
+              className="
+              pb-5 
+              bg-[#F5F5F5] 
+              grid 
+              grid-cols-1 
+              sm:grid-cols-2 
+              text-xs 
+              sm:text-sm 
+              px-2 
+              sm:pl-3 
+              text-red-500
+            "
+            >
               {category.filteredPostTitles.map((title, titleIndex) => (
-                <div key={titleIndex} className="mb-1 p-2">
+                <div key={titleIndex} className="mb-1 p-1 sm:p-2">
                   {title}
                 </div>
               ))}

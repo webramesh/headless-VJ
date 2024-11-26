@@ -101,6 +101,9 @@ export async function getPostBySlug(slug) {
             title
             content
             date
+            seo {
+              robots
+            }
             slug
             featuredImage {
               node {

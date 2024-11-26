@@ -89,7 +89,7 @@ export default function SearchContainer({ onSearch }) {
           {!loading && !error && searchResults.all.length === 0 && debouncedSearchTerm && (
             <p className="p-4 text-center">No results found for "{debouncedSearchTerm}"</p>
           )}
-          {searchResults.all.map((item, index) => (
+          {searchResults.all.map((item) => (
             <Link
               key={item.id}
               href={`/${item.type}/${item.slug}`}
@@ -100,7 +100,7 @@ export default function SearchContainer({ onSearch }) {
               className="block py-3 px-4 hover:bg-gray-100 border-b last:border-b-0"
             >
               <p className="font-bold text-sm">{item.title}</p>
-              <p className="text-xs mt-1 text-gray-500">{item.type === 'post' ? 'Article' : 'Product'}</p>
+              <p className="text-xs mt-1 text-gray-500">{item.type === 'produkter' ? 'Product' : 'Article'}</p>
             </Link>
           ))}
         </div>

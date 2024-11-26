@@ -41,10 +41,47 @@ export default async function PostDetails({ params }) {
             categories={post?.categories?.nodes[0]}
           />
           <PostDetailsContent content={post?.content} />
-          <div className="mt-24 ml-56 pl-3 font-medium text-xl">Frågor och Svar</div>
-          <div className="mx-56 mt-4">
-            <AccordionNew faqItems={faqItems} />
-          </div>
+
+          {faqItems.length > 0 && (
+            <div className="container mx-auto px-4 lg:px-0">
+              <div
+                className="
+                mt-6 sm:mt-10 lg:mt-24 
+                mx-0 sm:mx-4 lg:mx-56 
+                px-2 sm:px-3
+              "
+              >
+                <h2
+                  className="
+                  font-medium 
+                  text-lg sm:text-xl lg:text-xl 
+                  mb-3 sm:mb-4
+                  pl-1 sm:pl-2
+                "
+                >
+                  Frågor och Svar
+                </h2>
+                <div
+                  className="
+                  w-full 
+                  max-w-full 
+                  mx-auto
+                "
+                >
+                  <AccordionNew
+                    faqItems={faqItems}
+                    className="
+                      space-y-2 sm:space-y-3
+                      w-full 
+                      px-1 sm:px-2 
+                      max-w-full
+                    "
+                  />
+                </div>
+              </div>
+            </div>
+          )}
+
           <ProductRecommendation postProductRecommendation={postProductRecommendation} />
 
           <div className="container mx-auto py-8 px-4 lg:px-0">
@@ -61,7 +98,7 @@ export default async function PostDetails({ params }) {
           {/* all comments */}
           <div className="container mx-auto px-4 my-8 flex flex-col gap-4 lg:px-0">
             <>
-              <h3 className="font-bold text-xl mb-4">All Comments </h3>
+              <h3 className="font-semibold text-2xl mb-2 text-center">All Comments </h3>
               {post?.comments?.nodes?.map((comment) => {
                 return <CommentBox key={comment.id} comment={comment} />;
               })}

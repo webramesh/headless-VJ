@@ -1,7 +1,3 @@
-'use client';
-
-import React, { useState, useEffect } from 'react';
-import Head from 'next/head';
 import Hero from '../Components/Hero';
 import Paragraph from '../Components/Paragraph';
 import Scrolltodown from '../../Components/Scrolltodown';
@@ -9,38 +5,20 @@ import FilterSection from '../Components/FilterSection';
 import CountrySection from '../Components/CountrySection';
 import Content from '../Components/Content';
 import Card from '../../Components/Card';
-import SkeletonLoader from '../Components/SkeletonLoading/SkeletonLoader';
+import { getProductsByType } from '@/src/lib/api/dryckerApi';
 
-export default function Home() {
-  const [isLoading, setIsLoading] = useState(true);
-
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      setIsLoading(false);
-    }, 2000);
-
-    return () => clearTimeout(timer);
-  }, []);
+export default async function Home({ params, searchParams }) {
+  const { name, products } = await getProductsByType(params.slug);
 
   return (
     <>
-      <Head>
-        <title>Product Page</title>
-        <meta name="description" content="This is the product page of Vinjournalen" />
-      </Head>
-      {isLoading ? (
-        <SkeletonLoader />
-      ) : (
-        <>
-          <Hero />
-          <Paragraph />
-          <Scrolltodown />
-          <FilterSection />
-          <CountrySection />
-          <Content />
-          <Card title="Artiklar relaterade till Röda Viner Frankrike" subtitle="Från vår redaktion" />
-        </>
-      )}
+      <Hero name={name} />
+      <Paragraph name={name} />
+      <Scrolltodown />
+      <FilterSection initialProducts={products} slug={params.slug} filters={searchParams} />
+      <CountrySection />
+      {/* <Content /> */}
+      <Card title="Artiklar relaterade till Röda Viner Frankrike" subtitle="Från vår redaktion" />
     </>
   );
 }

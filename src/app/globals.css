@@ -1,4 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@400;700&display=swap');
+@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css');
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -63,9 +64,6 @@ body {
   }
 }
 
-.ordlista-content-style {
-}
-
 .ordlista-content-style h1 {
   font-size: 2rem;
 }
@@ -83,4 +81,108 @@ body {
 .ordlista-content-style li a {
   color: #0047ab;
   display: block;
+}
+
+.content a {
+  color: red;
+}
+.content {
+  line-height: 1.75;
+}
+.content strong {
+  margin: 10px 0;
+  font-weight: 600;
+  font-size: larger;
+}
+
+.content h2.wp-block-heading {
+  font-size: x-large;
+  font-weight: 600;
+  margin: 20px 0;
+}
+
+.content h3 {
+  font-weight: 500;
+  font-size: large;
+  line-height: 1.5;
+}
+
+.content ul.wp-block-list li {
+  margin-bottom: 0.3rem;
+}
+
+.content ul.wp-block-list li:before {
+  font-family: 'Font Awesome 6 Free';
+  color: #3b3232;
+  content: '\f35a';
+  margin-right: 10px;
+}
+.content ul.wp-block-list {
+  margin: 15px 0;
+}
+
+.content figure.alignright {
+  float: right;
+  margin: 20px 0 20px 20px;
+}
+.content figure.aligncenter {
+  justify-items: center;
+  margin: 20px;
+}
+.content figure.alignleft {
+  float: left;
+  margin: 20px 20px 20px 0;
+}
+
+.kt-row-layout-inner,
+.kb-row-layout-wrap {
+  position: relative;
+  border: 0 solid rgba(0, 0, 0, 0);
+}
+
+.kt-row-layout-inner:before,
+.kb-row-layout-wrap:before {
+  clear: both;
+  display: table;
+}
+
+.kt-row-column-wrap {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: var(--global-row-gutter-md, 2rem) var(--global-row-gutter-md, 2rem);
+  grid-auto-rows: minmax(min-content, max-content);
+  z-index: 1;
+  position: relative;
+}
+
+.wp-block-kadence-column {
+  display: flex;
+  flex-direction: column;
+  z-index: 1;
+  min-width: 0;
+  min-height: 0;
+}
+
+.kt-inside-inner-col {
+  flex-direction: column;
+  border: 0 solid rgba(0, 0, 0, 0);
+  position: relative;
+  transition: all 0.3s ease;
+}
+
+ h1.wp-block-kadence-advancedheading  {
+  font-weight: 600;
+  color: black;
+  font-size:xx-large;
+}
+h2.wp-block-kadence-advancedheading {
+  font-weight: 500;
+  color: black;
+  font-size:x-large;
+  margin-top: 2rem;
+}
+p.wp-block-kadence-advancedheading {
+  color: black;
+  font-size: 1rem;
+  text-align: justify;
 }

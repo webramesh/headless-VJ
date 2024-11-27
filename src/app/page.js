@@ -18,7 +18,6 @@ export const revalidate = 60;
 export async function generateMetadata() {
   // Fetch SEO data for the given slug
   const seo = await getHomePageSEO('/home-page');
-  console.log(seo, ' new seo page');
 
   // Convert robots array to string format
   const robotsMeta = seo?.robots?.join(', ') || 'index, follow';

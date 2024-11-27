@@ -23,3 +23,30 @@ export const validateCommentForm = ({ authorName, authorEmail, content }) => {
 
   return errors;
 };
+
+export const extractFields = (products) => {
+  // Use a Set for efficient removal of duplicates
+  const containerTypes = new Set();
+  const sortiments = new Set();
+
+  // Iterate through products, adding unique containerTypes to the Set
+  products.forEach(({ fieldsProduct: { wineSortiment, containerType } }) => {
+    if (containerType !== null) {
+      containerTypes.add(containerType);
+    }
+
+    if (wineSortiment && wineSortiment.length > 0) {
+      wineSortiment.forEach((item) => {
+        if (item !== null) {
+          sortiments.add(item);
+        }
+      });
+    }
+  });
+
+  // Convert the Sets back to arrays
+  return {
+    containerTypes: Array.from(containerTypes),
+    sortiments: Array.from(sortiments),
+  };
+};

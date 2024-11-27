@@ -5,7 +5,54 @@ const client = new ApolloClient({
   uri: process.env.SITE_URL_ENDPOINT,
   cache: new InMemoryCache(),
 });
+export async function getHomePageSEO(uri) {
+  try {
+    const { data } = await client.query({
+      query: gql`
+        query HomePageSEO($uri: String!) {
+          pageBy(uri: $uri) {
+            seo {
+              title
+              robots
+              description
+              focusKeywords
+              canonicalUrl
+              openGraph {
+                locale
+                type
+                title
+                description
+                url
+                siteName
+                image {
+                  height
+                  secureUrl
+                  type
+                  url
+                  width
+                }
+                twitterMeta {
+                  card
+                  description
+                  image
+                  creator
+                  title
+                  site
+                }
+              }
+            }
+          }
+        }
+      `,
+      variables: { uri },
+    });
 
+    return data.pageBy.seo;
+  } catch (error) {
+    console.error('Error fetching SEO data:', error);
+    return null;
+  }
+}
 export async function getHomePagePosts() {
   try {
     const { data } = await client.query({

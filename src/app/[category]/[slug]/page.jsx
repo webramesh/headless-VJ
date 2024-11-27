@@ -17,11 +17,18 @@ export async function generateMetadata({ params }) {
   const post = await getPostBySlug(slug);
 
   const { seo } = post;
+  // Convert robots array to string format
+  const robotsMeta = seo?.robots?.join(', ') || 'index, follow';
+
+  // Convert focus keywords array to comma-separated string
+  const keywords = seo?.focusKeywords?.join(', ') || '';
   if (seo) {
     return {
       title: seo?.title || `${post?.title} - Vinjournalen.se`,
       description: seo?.description,
       canonicalUrl: seo?.canonicalUrl || `https://www.vinjournalen.se/${category}/${slug}`,
+      robots: robotsMeta,
+      keywords,
       openGraph: {
         locale: seo?.openGraph?.locale,
         type: seo?.openGraph?.type,
@@ -53,10 +60,6 @@ export async function generateMetadata({ params }) {
           title: seo?.openGraph?.twitterMeta?.title || `${post?.title} - Vinjournalen.se`,
           site: seo?.openGraph?.twitterMeta?.site || '@Vinjournalen',
         },
-      },
-      robots: {
-        index: seo?.robots?.includes('index') || true,
-        follow: seo?.robots?.includes('follow') || true,
       },
     };
   }

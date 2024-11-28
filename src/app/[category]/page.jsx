@@ -64,6 +64,7 @@ export async function generateMetadata({ params }) {
   const categoryData = await getCategoryBySlug(category);
 
   const seo = categoryData?.seo;
-
-  return generateSeoMetadata(seo);
+  if (seo) {
+    return generateSeoMetadata(seo);
+  }
 }

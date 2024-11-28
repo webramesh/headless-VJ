@@ -10,7 +10,9 @@ import { generateSeoMetadata } from '@/src/utils/utils';
 export async function generateMetadata() {
   const { seo } = await getContentTypeSEO('cG9zdF90eXBlOm55aGV0ZXI='); // id for nyheter
 
-  return generateSeoMetadata(seo);
+  if (seo) {
+    return generateSeoMetadata(seo);
+  }
 }
 
 export default async function NyheterPage() {

@@ -11,7 +11,6 @@ const Info = async () => {
     <div className="container mx-auto mt-10 p-2">
       <div className="flex flex-col gap-4 md:flex-row md:gap-14">
         <div className="w-full md:w-[64%] flex flex-col">
-          <h1 className="font-medium text-2xl text-black tracking-normal">{page?.title || 'No Title Found'}</h1>
           <div
             className="mt-4 text-sm text-gray-500 w-full leading-relaxed"
             dangerouslySetInnerHTML={{

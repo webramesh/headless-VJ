@@ -62,7 +62,7 @@ export async function generateMetadata({ params }) {
   // Fetch category data for dynamic metadata
   const categoryData = await getCategoryBySlug(category);
 
-  const seo = categoryData.seo;
+  const seo = categoryData?.seo;
 
   // Convert robots array to string format
   const robotsMeta = seo?.robots?.join(', ') || 'index, follow';

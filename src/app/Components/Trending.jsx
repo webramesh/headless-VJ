@@ -47,7 +47,7 @@ const Trending = ({ title = '', subtitle = '', trendingPosts = [] }) => {
                   {/* {formatDate(post?.date)} */}
                 </p>
                 <p className="text-[#694848] text-xs font-outfit mt-2">
-                  {post?.author?.node?.name || 'Unknown Author'}
+                  {post?.author?.node?.name || 'Vinjournalen.se'}
                 </p>
                 <p className="font-outfit text-sm text-gray-900 font-extralight mt-2 leading-relaxed flex-grow">
                   {/* {getExcerpt(post?.excerpt)} */}

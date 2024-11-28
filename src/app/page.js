@@ -2,8 +2,6 @@ import Hero from './Components/Hero';
 import Trending from './Components/Trending';
 import Info from './Components/Info';
 import WineSlider from './Components/WineSlider';
-import { Suspense } from 'react';
-import Loading from './loading';
 import { getAllNyheter } from '../lib/api/newsApi';
 import { getAllTrendingPosts } from '../lib/api/trendingpostApi';
 import { getAllWineCategories } from '../lib/api/wineApi';
@@ -70,35 +68,28 @@ export default async function Home() {
 
   return (
     <div>
-      <Suspense fallback={<Loading />}>
-        <Banner variant="default" />
-        <Hero posts={posts} />
+      <Banner variant="default" />
+      <Hero posts={posts} />
 
-        <Trending
-          title="TRENDIGT"
-          subtitle="Artiklar värda att läsa från våra redaktörer"
-          trendingPosts={trendingPosts.slice(0, 6)}
-        />
-
-        <div className="container mx-auto block md:grid grid-cols-6 items-center justify-between gap-14 px-2 my-10">
-          <div className="col-span-4">
-            <SubscriptionForm />
-          </div>
-          <div className="w-full grid col-span-2">
-            <SubscriptionBox />
-          </div>
+      <Trending
+        title="TRENDIGT"
+        subtitle="Artiklar värda att läsa från våra redaktörer"
+        trendingPosts={trendingPosts.slice(0, 6)}
+      />
+      <div className="container mx-auto block md:grid grid-cols-6 items-center justify-between gap-14 px-2 my-10">
+        <div className="col-span-4">
+          <SubscriptionForm />
         </div>
+        <div className="w-full grid col-span-2">
+          <SubscriptionBox />
+        </div>
+      </div>
 
-        <WineSlider categories={wineCategories} />
+      <WineSlider categories={wineCategories} />
 
-        <NewsPost
-          title="NYHETER"
-          subtitle="Den mest populära artikeln i dryckesvärlden"
-          nyheter={nyheter.slice(0, 6)}
-        />
+      <NewsPost title="NYHETER" subtitle="Den mest populära artikeln i dryckesvärlden" nyheter={nyheter.slice(0, 6)} />
 
-        <Info />
-      </Suspense>
+      <Info />
     </div>
   );
 }

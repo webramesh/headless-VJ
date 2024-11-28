@@ -15,7 +15,7 @@ const AccordionItem = ({ index, openIndex, toggleAccordion, title, content }) =>
         id={`accordion-button-${index}`}
         role="button"
       >
-        <h3 className=" text-left text-black text-sm font-medium">
+        <h3 className=" text-left text-black text-md font-medium">
           <span>{title}</span>
         </h3>
         <span
@@ -57,7 +57,7 @@ const AccordionItem = ({ index, openIndex, toggleAccordion, title, content }) =>
         aria-labelledby={`accordion-button-${index}`}
       >
         <div
-          className="pb-5 mt-2 mb-2 text-xs md:text-sm pl-3 text-slate-500"
+          className="pb-5 mt-2 mb-2 text-sm md:text-md pl-3 text-slate-600"
           dangerouslySetInnerHTML={{ __html: content }}
         />
       </div>

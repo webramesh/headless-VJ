@@ -31,7 +31,7 @@ const PostDetailsHero = ({ featuredImage, title, authorImage, authorName, date, 
           <div className="flex gap-4 items-center">
             <div className="rounded-full overflow-hidden w-[40px] h-[40px] lg:w-[50px] lg:h-[50px] relative flex-shrink-0">
               <Image
-                src={authorImage || '/search.png'}
+                src={authorImage || '/vinlogo.png'}
                 // src={'/search.png'}
                 alt={authorName || 'Vinjournalen'}
                 className="object-cover"

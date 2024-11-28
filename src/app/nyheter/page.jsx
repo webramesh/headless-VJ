@@ -4,11 +4,14 @@ import AllNews from './Components/AllNews';
 import Sidebar from '../Components/Sidebar';
 import { PageProvider } from '@/src/context/PageContext';
 import Banner from '../Components/Banner';
+import { getContentTypeSEO } from '@/src/lib/api/seoAPI';
+import { generateSeoMetadata } from '@/src/utils/utils';
 
-export const metadata = {
-  title: 'Nyheter | Vinjournalen',
-  description: 'Läs de senaste nyheterna om vin, vinproduktion och vinkultur på Vinjournalen.',
-};
+export async function generateMetadata() {
+  const { seo } = await getContentTypeSEO('cG9zdF90eXBlOm55aGV0ZXI='); // id for nyheter
+
+  return generateSeoMetadata(seo);
+}
 
 export default async function NyheterPage() {
   const { nyheter, pageInfo } = await getAllNyheterPaginated(12, null, null, null);

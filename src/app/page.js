@@ -32,6 +32,9 @@ export async function generateMetadata() {
       canonicalUrl: seo?.canonicalUrl,
       robots: robotsMeta,
       keywords,
+      icons: {
+        icon: '/favicon.png',
+      },
       openGraph: {
         locale: seo?.openGraph?.locale,
         type: seo?.openGraph?.type,

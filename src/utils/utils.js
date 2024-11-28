@@ -50,3 +50,50 @@ export const extractFields = (products) => {
     sortiments: Array.from(sortiments),
   };
 };
+
+// meta data for pages
+
+export function generateSeoMetadata(seo) {
+  if (!seo) return null;
+
+  // Convert robots array to string format
+  const robotsMeta = seo?.robots?.join(', ') || 'index, follow';
+
+  // Convert focus keywords array to comma-separated string
+  const keywords = seo?.focusKeywords?.join(', ') || '';
+
+  return {
+    title: seo?.title,
+    description: seo?.description,
+    robots: robotsMeta,
+    icons: {
+      icon: '/favicon.png',
+    },
+    keywords,
+    openGraph: {
+      title: seo?.openGraph?.title,
+      description: seo?.openGraph?.description,
+      url: seo?.openGraph?.url,
+      siteName: seo?.openGraph?.siteName,
+      images: [
+        {
+          url: seo?.openGraph?.image?.url,
+          width: seo?.openGraph?.image?.width,
+          height: seo?.openGraph?.image?.height,
+          alt: seo?.openGraph?.title,
+        },
+      ],
+      locale: seo?.openGraph?.locale,
+      type: seo?.openGraph?.type,
+    },
+    twitter: {
+      card: seo?.openGraph?.twitterMeta?.card,
+      title: seo?.openGraph?.twitterMeta?.title,
+      description: seo?.openGraph?.twitterMeta?.description,
+      image: seo?.openGraph?.twitterMeta?.image,
+      site: seo?.openGraph?.twitterMeta?.site,
+      creator: seo?.openGraph?.twitterMeta?.creator,
+    },
+    canonical: seo?.canonicalUrl,
+  };
+}

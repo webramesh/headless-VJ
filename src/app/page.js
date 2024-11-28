@@ -10,51 +10,15 @@ import { getHomePagePosts, getHomePageSEO } from '../lib/api/postAPI';
 import SubscriptionForm from './Components/subscription/SubscriptionForm';
 import SubscriptionBox from './Components/subscription/SubscriptionBox';
 import Banner from './Components/Banner';
+import { generateSeoMetadata } from '../utils/utils';
 
 export const revalidate = 60;
 
 export async function generateMetadata() {
   // Fetch SEO data for the given slug
   const seo = await getHomePageSEO('/home-page');
-  console.log(seo, ' new seo page');
-
-  // Convert robots array to string format
-  const robotsMeta = seo?.robots?.join(', ') || 'index, follow';
-
-  // Convert focus keywords array to comma-separated string
-  const keywords = seo?.focusKeywords?.join(', ') || '';
-
   if (seo) {
-    return {
-      title: seo?.title,
-      description: seo?.description,
-      canonicalUrl: seo?.canonicalUrl,
-      robots: robotsMeta,
-      keywords,
-      openGraph: {
-        locale: seo?.openGraph?.locale,
-        type: seo?.openGraph?.type,
-        title: seo?.openGraph?.title,
-        description: seo?.openGraph?.description,
-        url: seo?.openGraph?.url,
-        siteName: seo?.openGraph?.siteName,
-        image: {
-          height: seo?.openGraph?.image?.height,
-          secureUrl: seo?.openGraph?.image?.secureUrl,
-          type: seo?.openGraph?.image?.type,
-          url: seo?.openGraph?.image?.url,
-          width: seo?.openGraph?.image?.width,
-        },
-        twitterMeta: {
-          card: seo?.openGraph?.twitterMeta?.card,
-          description: seo?.openGraph?.twitterMeta?.description,
-          image: seo?.openGraph?.twitterMeta?.image,
-          creator: seo?.openGraph?.twitterMeta?.creator,
-          title: seo?.openGraph?.twitterMeta?.title,
-          site: seo?.openGraph?.twitterMeta?.site,
-        },
-      },
-    };
+    return generateSeoMetadata(seo);
   }
 }
 

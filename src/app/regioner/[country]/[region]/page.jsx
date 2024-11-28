@@ -4,58 +4,55 @@ import BreadCrumb from '@/src/app/Components/breadcrumb/BreadCrumb';
 import { getRegionByURL } from '@/src/lib/api/regionerAPI';
 
 export async function generateMetadata({ params }) {
-  const { country, region } = params;
-
-  // Fetch the region data
+  const { region } = params;
   const selectedRegion = await getRegionByURL(`/regioner/${region}`);
 
-  if (!selectedRegion) {
+  const { seo } = selectedRegion;
+
+  // Convert robots array to string format
+  const robotsMeta = seo?.robots?.join(', ') || 'index, follow';
+
+  // Convert focus keywords array to comma-separated string
+  const keywords = seo?.focusKeywords?.join(', ') || '';
+
+  if (seo) {
     return {
-      title: 'Region not found - Vinjournalen.se',
-      description: 'The requested region was not found on Vinjournalen.se.',
+      title: seo?.title,
+      description: seo?.description,
+      canonicalUrl: seo?.canonicalUrl,
+      robots: robotsMeta,
+      keywords,
+      openGraph: {
+        locale: seo?.openGraph?.locale,
+        type: seo?.openGraph?.type,
+        title: seo?.openGraph?.title,
+        description: seo?.openGraph?.description,
+        url: seo?.openGraph?.url,
+        siteName: seo?.openGraph?.siteName,
+        image: {
+          height: seo?.openGraph?.image?.height,
+          secureUrl: seo?.openGraph?.image?.secureUrl,
+          type: seo?.openGraph?.image?.type,
+          url: seo?.openGraph?.image?.url,
+          width: seo?.openGraph?.image?.width,
+        },
+        twitterMeta: {
+          card: seo?.openGraph?.twitterMeta?.card,
+          description: seo?.openGraph?.twitterMeta?.description,
+          image: seo?.openGraph?.twitterMeta?.image,
+          creator: seo?.openGraph?.twitterMeta?.creator,
+          title: seo?.openGraph?.twitterMeta?.title,
+          site: seo?.openGraph?.twitterMeta?.site,
+        },
+      },
     };
   }
-
-  const { featuredImage, content } = selectedRegion;
-
-  // Generate a short description (strip HTML tags from content)
-  const plainTextContent = content?.replace(/<\/?[^>]+(>|$)/g, '').slice(0, 150);
-
-  return {
-    title: `${region} - Vinregion in ${country} - Vinjournalen.se`,
-    description: plainTextContent,
-    openGraph: {
-      title: `${region} - Vinregion in ${country} - Vinjournalen.se`,
-      description: plainTextContent,
-      url: `https://www.vinjournalen.se/regioner/${country}/${region}`,
-      site_name: 'Vinjournalen.se', // Add the site name here
-      images: [
-        {
-          url: featuredImage?.node?.sourceUrl || 'https://www.vinjournalen.se/default-image.jpg',
-          width: 1200,
-          height: 630,
-          alt: `${region}`,
-        },
-      ],
-    },
-    twitter: {
-      card: 'summary_large_image',
-      title: `${region} - Vinregion in ${country} - Vinjournalen.se`,
-      description: plainTextContent,
-      images: [
-        {
-          url: featuredImage?.node?.sourceUrl || 'https://www.vinjournalen.se/default-image.jpg',
-          alt: `${region}`,
-        },
-      ],
-      site: '@vinjournalense', // Twitter handle for your site
-    },
-  };
 }
 
 async function page({ params }) {
   const { country, region } = params;
   const selectedRegion = await getRegionByURL(`/regioner/${region}`);
+
   const { featuredImage, content } = selectedRegion;
   return (
     <>

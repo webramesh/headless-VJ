@@ -32,11 +32,13 @@ export default async function AuthorPage({ params }) {
           </div>
         </div>
         <div className="container mx-auto p-5">
-          <h2 className="text-xl font-bold mt-4 md:mt-0">Om mig själv</h2>
+          <div className='content'>
+          {/* <h2 className="text-xl font-bold mt-4 md:mt-0">Om mig själv</h2> */}
           <div
             className="text-base mt-2 mr-4 md:mr-36"
             dangerouslySetInnerHTML={{ __html: author.authorDescriptionInfo.userDescriptionInfo }}
           />
+        </div>
         </div>
       </div>
       <AuthorCard

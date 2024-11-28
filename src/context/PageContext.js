@@ -11,6 +11,8 @@ const initialState = {
 };
 function reducer(state, action) {
   switch (action.type) {
+    case 'CHANGE_PAGE':
+      return { ...state, pageNumber: action.payload };
     case 'CHANGE_LOADING':
       return { ...state, loading: action.payload };
     case 'RESET':

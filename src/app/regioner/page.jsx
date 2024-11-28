@@ -4,9 +4,18 @@ import CatAccordion from '../[category]/Components/CatAccordion.jsx';
 import BreadCrumb from '../Components/breadcrumb/BreadCrumb';
 import RegionerContainer from './components/RegionerContainer';
 import { countRegioners } from '@/src/lib/api/regionerAPI';
+import { generateSeoMetadata } from '@/src/utils/utils';
+import { getContentTypeSEO } from '@/src/lib/api/seoAPI';
+
+export async function generateMetadata() {
+  const { seo } = await getContentTypeSEO('cG9zdF90eXBlOnJlZ2lvbmVy'); // id for regioner
+
+  return generateSeoMetadata(seo);
+}
 
 const Page = async () => {
   const totalRegioners = await countRegioners();
+
   return (
     <>
       <div className="container mx-auto mt-5">

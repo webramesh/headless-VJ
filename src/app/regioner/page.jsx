@@ -18,7 +18,7 @@ const Page = async () => {
 
   return (
     <>
-      <div className="container mx-auto mt-5">
+      <div className="container mx-auto mt-5 px-4 md:px-0">
         <BreadCrumb title1="Regioner" />
         <div className="block md:grid md:grid-cols-4 md:gap-8">
           <div className="md:col-span-3 w-full">

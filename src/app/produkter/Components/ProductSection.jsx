@@ -61,58 +61,6 @@ export default function ProductSection({ product }) {
     { name: 'Empty', value: total - tasteClock3Fruktsyra },
   ];
 
-  // const viwePdf = () => {
-  //   // Create a new PDF document
-  //   const doc = new jsPDF();
-
-  //   // Add the image
-  //   // if (featuredImage?.node?.sourceUrl) {
-  //   //   doc.addImage(featuredImage.node.sourceUrl, 'JPEG', 15, 20, 180, 100); // X, Y, Width, Height
-  //   // }
-
-  //   // Set font size
-  //   doc.setFontSize(12);
-
-  //   // Add product details
-  //   let yOffset = 130; // Initial Y position after the image
-
-  //   doc.text('Price: ' + pice, 10, yOffset);
-  //   yOffset += 10;
-  //   doc.text('Artikel nr: ' + productCode, 10, yOffset);
-  //   yOffset += 10;
-  //   doc.text('Sortiment: ' + wineSortiment, 10, yOffset);
-  //   yOffset += 10;
-  //   doc.text('Årgång: ' + vintage, 10, yOffset);
-  //   yOffset += 10;
-  //   doc.text('Volym: ' + bottlePackageVolume, 10, yOffset);
-  //   yOffset += 10;
-  //   doc.text('Allergener: ' + allergener, 10, yOffset);
-  //   yOffset += 10;
-
-  //   // Add calorie details
-  //   doc.text('Calories in Alcohol per 15cl: ' + caloriesInAlcPer15cl, 10, yOffset);
-  //   yOffset += 10;
-  //   doc.text('Calories in Alcohol per Container Volume: ' + caloriesInAlcPerContainerVolume, 10, yOffset);
-  //   yOffset += 10;
-  //   doc.text('Total Calories per 15cl: ' + totalCaloriesPer15Cl, 10, yOffset);
-  //   yOffset += 10;
-  //   doc.text('Total Calories per Liter: ' + totalCaloriesPerLitter, 10, yOffset);
-  //   yOffset += 10;
-  //   doc.text('Total Calories per Container Volume: ' + totalCaloriesPerContainerVolume, 10, yOffset);
-  //   yOffset += 10;
-
-  //   // Add price per liter
-  //   doc.text('Price per Liter: ' + pricePerLitter, 10, yOffset);
-
-  //   // Convert the PDF to a Blob
-  //   const blob = doc.output('blob');
-
-  //   // Create an object URL for the Blob
-  //   const url = URL.createObjectURL(blob);
-
-  //   // Open the PDF in a new window
-  //   window.open(url);
-  // };
   const viwePdf = () => {
     // Create a new PDF document
     const doc = new jsPDF();
@@ -193,6 +141,47 @@ export default function ProductSection({ product }) {
               </div>
             </div>
             <div className="mt-4">
+              <div className="absolute">
+                {fieldsProduct?.productLabels?.map((label) => {
+                  const productLabel = label.toLowerCase();
+                  return (
+                    <div key={Math.random()}>
+                      {productLabel === 'new' && (
+                        <Image src="/ekologisk.svg" width={50} height={50} className="my-1" alt="new" />
+                      )}
+                      {productLabel === 'available only online' && (
+                        <Image src="/ekologisk.svg" width={50} height={50} className="my-1" alt="ekologisk" />
+                      )}
+                      {productLabel === 'organic' && (
+                        <Image src="/vegan.svg" width={50} height={50} className="my-1" alt="vegan" />
+                      )}
+                      {productLabel === 'vegan' && (
+                        <Image src="/vegan.svg" width={50} height={50} className="my-1" alt="vegan" />
+                      )}
+                      {productLabel === 'best seller' && (
+                        <Image src="/best-seller.svg" width={50} height={50} className="my-1" alt="best-seller" />
+                      )}
+                      {productLabel === 'family winery' && (
+                        <Image src="/family.svg" width={50} height={50} className="my-1" alt="Family Winery" />
+                      )}
+                      {productLabel === 'verified by vjse' && (
+                        <Image src="/verified.svg" width={50} height={50} className="my-1" alt="Verified By VJSE" />
+                      )}
+
+                      {productLabel === 'featured' && (
+                        <Image src="/vegan.svg" width={50} height={50} className="my-1" alt="Featured" />
+                      )}
+                      {productLabel === 'on sale' && (
+                        <Image src="/vegan.svg" width={50} height={50} className="my-1" alt="On Sale" />
+                      )}
+
+                      {productLabel === 'show wt information' && (
+                        <Image src="/vegan.svg" width={50} height={50} className="my-1" alt="Show WT Information" />
+                      )}
+                    </div>
+                  );
+                })}
+              </div>
               <Image
                 src={featuredImage?.node?.sourceUrl}
                 alt={title}

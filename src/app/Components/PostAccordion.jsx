@@ -4,14 +4,16 @@ import { useParams } from 'next/navigation';
 import React, { useState } from 'react';
 
 const normalizeString = (str) => {
-  return str
-    .toLowerCase() // Convert to lowercase
-    .normalize('NFD') // Decompose special characters
-    .replace(/[\u0300-\u036f]/g, '') // Remove diacritics (accents, etc.)
-    .replace(/[^a-z0-9\s-]/g, '') // Remove special characters except spaces and hyphens
-    .trim() // Remove leading and trailing spaces
-    .replace(/\s+/g, '-') // Replace spaces with hyphens
-    .replace(/-+/g, '-'); // Replace multiple hyphens with a single one
+  if (str) {
+    return str
+      .toLowerCase() // Convert to lowercase
+      .normalize('NFD') // Decompose special characters
+      .replace(/[\u0300-\u036f]/g, '') // Remove diacritics (accents, etc.)
+      .replace(/[^a-z0-9\s-]/g, '') // Remove special characters except spaces and hyphens
+      .trim() // Remove leading and trailing spaces
+      .replace(/\s+/g, '-') // Replace spaces with hyphens
+      .replace(/-+/g, '-'); // Replace multiple hyphens with a single one
+  }
 };
 
 const PostAccordion = () => {
@@ -32,17 +34,17 @@ const PostAccordion = () => {
   };
 
   return (
-    <div className="container mx-auto px-4 sm:px-6 lg:px-32 py-4 sm:py-6 lg:py-8">
+    <div className="w-full    px-6 md:px-0 py-4 sm:py-6 ">
       {categoriesWithFilteredTitles.map((category, index) => (
         <div key={category.id} className="border-b mb-2 border-slate-200">
           <button
             onClick={() => toggleAccordion(index)}
             className="
-              w-full 
-              flex 
+            flex
+             w-full
               justify-between 
               items-center 
-              bg-[#F5F5F5] 
+             bg-[#F5F5F5] 
               px-2 sm:pl-3 
               text-slate-800 
               py-2

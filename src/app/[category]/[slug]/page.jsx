@@ -123,7 +123,7 @@ export default async function PostDetails({ params }) {
           <div className="container bg-white mx-auto my-14 px-4 lg:px-0">
             <CommentForm post={post} />
           </div>
-          <div className="container mx-auto px-4 lg:px-0">
+          <div className="container  mx-auto px-4 lg:px-0">
             <PostAccordion />
           </div>
         </div>

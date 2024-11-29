@@ -1,7 +1,7 @@
 import SenasteNytt from '../../app/Components/SenasteNytt';
 import WineTourism from '../../app/Components/WineTourism';
 import Subscription from '../Components/Subscription';
-import AuthorHero from '../Components/AuthorHero';
+import AuthorHero from '../author/Components/AuthorHero';
 
 export const metadata = {
   title: 'Collection of Product Information',

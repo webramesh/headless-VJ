@@ -4,10 +4,54 @@ import wine1 from '@/public/wine1.png';
 
 function ProductCard({ product }) {
   const { featuredImage, fieldsProduct, produktTyper, slug, title, produktslander } = product;
-  const { productLabels, pice } = fieldsProduct;
+  const { pice } = fieldsProduct;
+
   return (
     <div className="border-2 shadow-md hover:shadow-lg transition-shadow duration-300 p-6 h-[450px]">
       <div className="flex flex-col justify-between h-full items-start">
+        <div className="absolute">
+          {fieldsProduct?.productLabels?.map((label) => {
+            const productLabel = label.toLowerCase();
+
+            return (
+              <div key={Math.random()}>
+                {productLabel === 'new' && (
+                  <Image src="/ekologisk.svg" width={30} height={30} className="my-1" alt="new" />
+                )}
+                {productLabel === 'available only online' && (
+                  <Image src="/ekologisk.svg" width={30} height={30} className="my-1" alt="ekologisk" />
+                )}
+                {productLabel === 'organic' && (
+                  <Image src="/vegan.svg" width={30} height={30} className="my-1" alt="vegan" />
+                )}
+                {productLabel === 'vegan' && (
+                  <Image src="/vegan.svg" width={30} height={30} className="my-1" alt="vegan" />
+                )}
+                {productLabel === 'best seller' && (
+                  <Image src="/best-seller.svg" width={30} height={30} className="my-1" alt="best-seller" />
+                )}
+                {productLabel === 'family winery' && (
+                  <Image src="/family.svg" width={30} height={30} className="my-1" alt="Family Winery" />
+                )}
+                {productLabel === 'verified by vjse' && (
+                  <Image src="/vegan.svg" width={30} height={30} className="my-1" alt="Verified By VJSE" />
+                )}
+
+                {productLabel === 'featured' && (
+                  <Image src="/vegan.svg" width={30} height={30} className="my-1" alt="Featured" />
+                )}
+                {productLabel === 'on sale' && (
+                  <Image src="/vegan.svg" width={30} height={30} className="my-1" alt="On Sale" />
+                )}
+
+                {productLabel === 'show wt information' && (
+                  <Image src="/vegan.svg" width={30} height={30} className="my-1" alt="Show WT Information" />
+                )}
+              </div>
+            );
+          })}
+        </div>
+
         <Link href={`/produkter/${slug}`} className="flex justify-center w-full h-56">
           <Image
             src={featuredImage?.node?.sourceUrl || wine1}
@@ -17,6 +61,7 @@ function ProductCard({ product }) {
             height={200}
             priority
           />
+
           {/* //for product labels */}
         </Link>
         <div className=" text-red-600 mt-2">

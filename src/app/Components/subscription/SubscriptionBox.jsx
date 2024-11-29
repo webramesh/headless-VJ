@@ -33,7 +33,7 @@ const SubscriptionBox = () => {
         <Image src={icon} alt={label} width={64} height={64} className="w-10 h-10 md:w-8 md:h-8" />
         {/* <Image src={icon} alt={label} width={54} height={54} className="object-cover w-full h-full" /> */}
       </div>
-      <div className="text-center">
+      <div className="text-start md:text-center">
         <div className="text-sm font-semibold">{label}</div>
         <p className="text-sm text-red-600">
           {/* {title?.title && <Link href={`${title?.uri}`}>{title?.title || ''}</Link>} */}

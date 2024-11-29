@@ -13,7 +13,7 @@ import SubscriptionForm from '../../Components/subscription/SubscriptionForm';
 
 const POSTS_PER_PAGE = 15;
 
-const Card = ({ title, excerpt, date, author, category, imageUrl, slug }) => {
+const Card = ({ title, excerpt, date, author, category, imageUrl, slug, categoryColor }) => {
   return (
     <Link href={`/${category || 'uncategorized'}/${slug}`}>
       <div className="flex flex-col cursor-pointer hover:shadow-lg transition-shadow h-full">
@@ -27,17 +27,25 @@ const Card = ({ title, excerpt, date, author, category, imageUrl, slug }) => {
             priority={false}
           />
         </div>
-        <div className="p-4 bg-[#f5f5f5] flex-grow">
+        <div className="p-4 bg-[#f5f5f5] flex-grow flex flex-col">
           <h3 className="font-outfit font-medium text-black text-lg">{title || 'Untitled Article'}</h3>
           <p className="mt-2 font-outfit text-gray-900 text-xs">
             {date ? format(new Date(date), 'dd MMMM, yyyy') : 'No date'}
           </p>
           <p className="text-[#694848] text-xs font-outfit mt-2">{author || 'Unknown Author'}</p>
           <div
-            className="font-outfit text-sm text-gray-900 font-extralight mt-2 leading-relaxed line-clamp-3"
+            className="font-outfit text-sm text-gray-900 font-extralight mt-2 leading-relaxed line-clamp-3 flex-grow"
             dangerouslySetInnerHTML={{ __html: excerpt || 'No excerpt available' }}
           />
-          <p className="text-xs text-gray-500 mt-2">{category || 'Uncategorized'}</p>
+          <div
+            className="flex flex-start mt-2 w-fit px-3 py-1 text-white font-outfit text-xs font-thin rounded-full"
+            style={{
+              backgroundColor: categoryColor || '#000000',
+              color: '#ffffff',
+            }}
+          >
+            {category || 'Uncategorized'}
+          </div>
         </div>
       </div>
     </Link>
@@ -90,9 +98,12 @@ const ArticleContent = ({ totalPosts, sidebar }) => {
                   excerpt={post.excerpt}
                   date={post.date}
                   author={post.author?.node?.name || 'Unknown Author'}
-                  category={post.categories?.nodes?.[0]?.slug || 'uncategorized'}
+                  category={post.categories?.nodes?.[0]?.name || 'Uncategorized'}
                   imageUrl={post.featuredImage?.node?.mediaItemUrl || '/api/placeholder/400/300'}
                   slug={post.slug || '#'}
+                  categoryColor={
+                    post.categories?.nodes?.[0]?.categoriesImagesAndOtherFields?.categorycolorpicker || '#000000'
+                  }
                 />
               ))
             ) : (

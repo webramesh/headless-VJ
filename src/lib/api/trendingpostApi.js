@@ -17,10 +17,13 @@ export async function getAllTrendingPosts() {
             excerpt
             date
             slug
-              categories {
+            categories {
               nodes {
                 name
                 slug
+                categoriesImagesAndOtherFields {
+                  categorycolorpicker
+                }
               }
             }
             featuredImage {

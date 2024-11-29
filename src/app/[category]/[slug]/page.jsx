@@ -12,6 +12,7 @@ import CommentForm from '../../Components/CommentForm';
 import CommentBox from '../../Components/CommentBox';
 import { generateSeoMetadata } from '@/src/utils/utils';
 
+export const revalidate = 60;
 export async function generateMetadata({ params }) {
   const { slug, category } = params;
 

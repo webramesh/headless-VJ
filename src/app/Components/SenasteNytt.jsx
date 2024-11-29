@@ -9,7 +9,7 @@ const SenasteNytt = async () => {
   const nyheter = await getAllNyheter();
 
   return (
-    <div className="container mx-auto mt-8">
+    <div className="container mx-auto mt-8 p-3">
       <h1 className=" text-xl text-black">Senaste nytt</h1>
       <div className=" text-lg mt-4 text-gray-500 font-extralight w-full justify-normal leading-5">
         {nyheter.map((nyhet) => (

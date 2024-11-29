@@ -1,7 +1,7 @@
 'use client';
 
 import React from 'react';
-import CatAccordion from '../../[category]/Components/CatAccordion';
+import PostAccordion from '../../Components/PostAccordion';
 import SubscriptionForm from '../../Components/subscription/SubscriptionForm';
 
 export const revalidate = 60;
@@ -19,9 +19,9 @@ const NyheterContent = ({ nyhet }) => {
         <div className="text-sm sm:text-base md:text-lg">
           <span className="text-red-500">Hem</span> » Nyheter » {nyhet.title}
         </div>
-
-        <div className="text-base sm:text-lg" dangerouslySetInnerHTML={{ __html: nyhet.content }} />
-
+        <div className="content">
+          <div className="text-base sm:text-lg" dangerouslySetInnerHTML={{ __html: nyhet.content }} />
+        </div>
         {/* Comment Form */}
         <div className="text-xl lg:text-2xl mt-6">Lämna ett svar</div>
         <div className="text-xs lg:text-sm">
@@ -59,7 +59,7 @@ const NyheterContent = ({ nyhet }) => {
         {/* Newsletter Subscription */}
         <SubscriptionForm />
         <div className="mt-6">
-          <CatAccordion />
+        <PostAccordion />
         </div>
       </div>
     </div>

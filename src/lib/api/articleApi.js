@@ -58,6 +58,9 @@ export async function getAllArticles(first, last, after, before) {
                 nodes {
                   name
                   slug
+                  categoriesImagesAndOtherFields {
+                    categorycolorpicker
+                  }
                 }
               }
               slug

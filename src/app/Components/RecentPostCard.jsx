@@ -1,4 +1,3 @@
-
 import Image from 'next/image';
 import Link from 'next/link';
 import { formatEmbeddedContent } from '@/src/utils/utils';
@@ -6,7 +5,7 @@ import { format } from 'date-fns';
 
 export default function RecentPostCard({ post }) {
   if (!post) {
-    console.log('hello')
+    console.log('No post data available');
     return null;
   }
 
@@ -42,11 +41,14 @@ export default function RecentPostCard({ post }) {
             </p>
           )}
           {categories?.nodes?.length > 0 && (
-            <div className="mt-2">
+            <div className="mt-2 flex flex-wrap gap-2">
               {categories.nodes.map((category) => (
                 <span
                   key={category.slug || Math.random()}
-                  className="inline-block bg-gray-200 rounded-full px-3 py-1 text-xs font-semibold text-gray-700 mr-2 mb-2"
+                  className="flex flex-start mt-2 w-fit px-3 py-1 text-white font-outfit text-xs font-thin rounded-full"
+                  style={{
+                    backgroundColor: category.categoriesImagesAndOtherFields?.categorycolorpicker || '#000000'
+                  }}
                 >
                   {category.name || 'Uncategorized'}
                 </span>
@@ -58,3 +60,4 @@ export default function RecentPostCard({ post }) {
     </Link>
   );
 }
+

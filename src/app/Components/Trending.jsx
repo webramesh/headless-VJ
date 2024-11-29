@@ -44,16 +44,23 @@ const Trending = ({ title = '', subtitle = '', trendingPosts = [] }) => {
                 <h3 className="font-outfit font-medium text-black text-lg">{post?.title || 'Untitled'}</h3>
                 <p className="mt-2 font-outfit text-gray-900 text-xs">
                   {format(new Date(post?.date), 'dd MMMM, yyyy')}
-                  {/* {formatDate(post?.date)} */}
                 </p>
                 <p className="text-[#694848] text-xs font-outfit mt-2">
                   {post?.author?.node?.name || 'Vinjournalen.se'}
                 </p>
                 <p className="font-outfit text-sm text-gray-900 font-extralight mt-2 leading-relaxed flex-grow">
-                  {/* {getExcerpt(post?.excerpt)} */}
                   {formatEmbeddedContent(post?.excerpt)}
                 </p>
-                <p className="text-xs text-gray-500 mt-2">{post?.categories?.nodes[0]?.name}</p>
+                <div
+                  className="flex flex-start mt-2 w-fit px-3 py-1 text-white font-outfit text-xs font-thin rounded-full"
+                  style={{
+                    backgroundColor:
+                      post?.categories?.nodes[0]?.categoriesImagesAndOtherFields?.categorycolorpicker || '#000000',
+                    color: '#ffffff',
+                  }}
+                >
+                  {post?.categories?.nodes[0]?.name || 'Uncategorized'}
+                </div>
               </div>
             </div>
           </Link>

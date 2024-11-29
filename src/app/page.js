@@ -80,7 +80,7 @@ export default async function Home() {
         <div className="col-span-4">
           <SubscriptionForm />
         </div>
-        <div className="w-full grid col-span-2">
+        <div className="w-full grid col-span-2 mt-8 md:mt-0">
           <SubscriptionBox />
         </div>
       </div>

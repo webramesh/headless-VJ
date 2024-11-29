@@ -15,10 +15,10 @@ export default async function page({ params }) {
       <Price />
 
       <div className="px-8 container mx-auto block md:grid grid-cols-6 items-center justify-between gap-8 ">
-        <div className="col-span-4">
+        <div className="col-span-4 mb-8">
           <SubscriptionForm />
         </div>
-        <div className="w-full grid col-span-2">
+        <div className="w-full grid col-span-2 mb-8">
           {/* <SubscriptionBox ordlista={ordlista} /> */}
           <SubscriptionBox />
         </div>

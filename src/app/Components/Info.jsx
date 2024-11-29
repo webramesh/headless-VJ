@@ -12,7 +12,7 @@ const Info = async () => {
       <div className="flex flex-col gap-4 md:flex-row md:gap-14">
         <div className="w-full md:w-[64%] flex flex-col">
           <div
-            className="mt-4 text-sm text-gray-500 w-full leading-relaxed"
+            className="mt-4 text-sm p-3 text-gray-500 w-full leading-relaxed"
             dangerouslySetInnerHTML={{
               __html:
                 page?.content ||
@@ -21,7 +21,7 @@ const Info = async () => {
             `,
             }}
           />
-          <h2 className="mt-8 pl-3 mb-4 font-medium text-lg md:text-xl text-black tracking-normal">Frågor och Svar</h2>
+          <h2 className="mt-8 p-3 mb-4 font-medium text-lg md:text-xl text-black tracking-normal">Frågor och Svar</h2>
           <AccordionNew faqItems={page?.faq?.faq || []} />
         </div>
         <div className="w-full md:w-[36%]">

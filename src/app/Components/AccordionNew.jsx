@@ -9,13 +9,13 @@ const AccordionItem = ({ index, openIndex, toggleAccordion, title, content }) =>
     <div className="border-b mb-2 border-slate-200">
       <button
         onClick={() => toggleAccordion(index)}
-        className="w-full flex justify-between items-center bg-[#F5F5F5] pl-3 text-slate-800 hover:bg-[#e6e6e6] hover:text-slate-500 transition-colors duration-200"
+        className="w-full flex justify-between items-center bg-[#F5F5F5] pl-3 hover:bg-[#e6e6e6]  transition-colors duration-200"
         aria-expanded={isOpen}
         aria-controls={`accordion-content-${index}`}
         id={`accordion-button-${index}`}
         role="button"
       >
-        <h3 className=" text-left text-black text-md font-medium">
+        <h3 className=" text-left text-md">
           <span>{title}</span>
         </h3>
         <span
@@ -57,7 +57,7 @@ const AccordionItem = ({ index, openIndex, toggleAccordion, title, content }) =>
         aria-labelledby={`accordion-button-${index}`}
       >
         <div
-          className="pb-5 mt-2 mb-2 text-sm md:text-md pl-3 text-slate-600"
+          className="pb-5 mt-2 mb-2 text-sm md:text-md pl-3 text-slate-900"
           dangerouslySetInnerHTML={{ __html: content }}
         />
       </div>

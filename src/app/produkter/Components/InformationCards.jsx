@@ -2,6 +2,7 @@
 import { useState } from 'react';
 import RenderBox from './RenderBox';
 import AlcoholInfo from './AlcoholInfo';
+import { data } from 'autoprefixer';
 
 const ratingbox = () => (
   <div className="w-full px-4 sm:px-0">
@@ -91,31 +92,38 @@ const formfield = () => (
   </div>
 );
 
-const QNA = () => (
+const QNA = ({ productTitle, produktslander, wineSaleStartDate }) => (
   <div className="w-full px-4 sm:px-20">
-    <div className="flex flex-col mt-4 text-center  text-lg font-medium">Frågor och svar om Moulins de Citran 2012</div>
+    <div className="flex flex-col mt-4 text-center  text-lg font-medium">Frågor och svar om {productTitle}</div>
     <div className="flex flex-col">
       <div className="bg-[#f5f5f5] pt-6 pl-2">
-        <div className=" text-sm font-medium">I vilket land proudceras Moulins de Citran 2012?</div>
+        <div className=" text-sm font-medium">I vilket land proudceras {productTitle}?</div>
       </div>
-      <div className="text-gray-600 text-sm  pl-2">Vinet produceras i Frankrike, Bordeaux, Haut-Médoc .</div>
+      <div className="text-gray-600 text-sm  pl-2">
+        Vinet produceras i{' '}
+        {produktslander.nodes.map((region, i, arr) => (
+          <span key={i}>{i < arr.length - 1 ? region.name + ' | ' : region.name}</span>
+        ))}
+      </div>
       <div className="mt-4">
         <div className="bg-[#f5f5f5] pt-6 pl-2">
-          <div className=" text-sm font-medium">I vilket land proudceras Moulins de Citran 2012?</div>
+          <div className=" text-sm font-medium"> Vad är {productTitle} sockermängd?</div>
         </div>
-        <div className="text-gray-600 text-sm  pl-2">Vinet produceras i Frankrike, Bordeaux, Haut-Médoc .</div>
+        <div className="text-gray-600 text-sm  pl-2">{productTitle} har en sockermängd på cirka gram per liter.</div>
         <div className="mt-4">
           <div className="bg-[#f5f5f5] pt-6 pl-2">
-            <div className=" text-sm font-medium">I vilket land proudceras Moulins de Citran 2012?</div>
+            <div className=" text-sm font-medium">Hur länge har produkten {productTitle} sålts på systembolaget?</div>
           </div>
-          <div className="text-gray-600 text-sm  pl-2">Vinet produceras i Frankrike, Bordeaux, Haut-Médoc .</div>
+          <div className="text-gray-600 text-sm  pl-2">
+            {wineSaleStartDate ? new Date(wineSaleStartDate).toLocaleDateString('sv-SE') : 'Date not available'}
+          </div>
         </div>
       </div>
     </div>
   </div>
 );
 
-const InformationCards = ({ fieldsProduct }) => {
+const InformationCards = ({ fieldsProduct, productTitle, typer, produktslander }) => {
   const {
     caloriesInAlcPer15cl,
     caloriesInAlcPerContainerVolume,
@@ -130,6 +138,7 @@ const InformationCards = ({ fieldsProduct }) => {
     sugarLevelIn1Litter,
     containerType,
     produktPackaging,
+    wineSaleStartDate,
   } = fieldsProduct;
 
   const [selected, setSelected] = useState(null);
@@ -142,14 +151,7 @@ const InformationCards = ({ fieldsProduct }) => {
     <div className="mt-8 border-y-2">
       <div className="container mx-auto">
         <div className="flex gap-2 md:gap-4 px-4 py-2 items-center overflow-x-auto scroll-smooth lg:justify-center ">
-          {[
-            'Hälsoinformation',
-            'Övrig information',
-            'Kundomdömen',
-            'Utmärkelser och betyg',
-            'Försäljning systembolaget',
-            'Frågor och svar',
-          ].map((item, index) => (
+          {['Hälsoinformation', 'Övrig information', 'Kundomdömen', 'Frågor och svar'].map((item, index) => (
             <div
               key={index}
               className={`px-2 py-2 w-auto text-center hover:bg-[#f4f1ed] hover:shadow-md cursor-pointer ${
@@ -165,7 +167,6 @@ const InformationCards = ({ fieldsProduct }) => {
         <div className="container mx-auto">
           {selected === 1 && (
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 sm:gap-12 p-4 sm:p-8">
-              {/* RenderBox1 */}
               <RenderBox title="Kalorier (baserat på alkoholmängd)">
                 <AlcoholInfo
                   per15cl={caloriesInAlcPer15cl}
@@ -173,7 +174,6 @@ const InformationCards = ({ fieldsProduct }) => {
                   perVolume={caloriesInAlcPerContainerVolume}
                 />
               </RenderBox>
-              {/* RenderBox2 */}
               <RenderBox title="Kalorier (baserat på ungefärlig sockermängd)">
                 <AlcoholInfo
                   per15cl={caloriesInSugarPer15cl}
@@ -181,7 +181,6 @@ const InformationCards = ({ fieldsProduct }) => {
                   perVolume={caloriesInSugarPerContainerVolume}
                 />
               </RenderBox>
-              {/* RenderBox3 */}
               <RenderBox title="Total mängd kalorier">
                 <AlcoholInfo
                   per15cl={totalCaloriesPer15Cl}
@@ -189,7 +188,6 @@ const InformationCards = ({ fieldsProduct }) => {
                   perVolume={totalCaloriesPerContainerVolume}
                 />
               </RenderBox>
-              {/* RenderBox4 */}
               <RenderBox title="Sockerdetaljer">
                 <div className="text-xs  text-center mt-2">
                   Socker g/l <br /> {sugerLevel}
@@ -203,7 +201,6 @@ const InformationCards = ({ fieldsProduct }) => {
 
           {selected === 2 && (
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 sm:gap-12 p-4 sm:p-8">
-              {/* RenderBox5 */}
               <RenderBox title="Förpackning">
                 <div className="text-xs  text-center mt-2">
                   Förslutning <br /> {containerType}
@@ -213,7 +210,6 @@ const InformationCards = ({ fieldsProduct }) => {
                 </div>
               </RenderBox>
 
-              {/* RenderBox6 */}
               <RenderBox title="Alkhol">
                 <div className="text-xs  text-center mt-2">
                   APK (Alkhol per krona) <br /> 0.4 :-
@@ -225,7 +221,6 @@ const InformationCards = ({ fieldsProduct }) => {
                 </div>
               </RenderBox>
 
-              {/* RenderBox7 */}
               <RenderBox title="Om Producenten">
                 <div className="text-xs  text-center mt-2">
                   Producent <br />
@@ -237,7 +232,6 @@ const InformationCards = ({ fieldsProduct }) => {
                 </div>
               </RenderBox>
 
-              {/* RenderBox8 */}
               <RenderBox title="Om Importören">
                 <div className="text-xs  text-center mt-2">
                   Importör <br />
@@ -254,7 +248,16 @@ const InformationCards = ({ fieldsProduct }) => {
             </div>
           )}
 
-          {selected === 4 && <div className="flex flex-col items-center mt-6 justify-center">{QNA()}</div>}
+          {selected === 4 && (
+            <div className="flex flex-col items-center mt-6 justify-center">
+              <QNA
+                productTitle={productTitle}
+                typer={typer}
+                produktslander={produktslander}
+                wineSaleStartDate={wineSaleStartDate}
+              />
+            </div>
+          )}
         </div>
       </div>
     </div>

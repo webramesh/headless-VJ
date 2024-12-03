@@ -5,9 +5,9 @@ import Banner from '../Components/Banner';
 import Sidebar from '../Components/Sidebar';
 import SubscriptionForm from '../Components/subscription/SubscriptionForm';
 import CategoryPage from './CategoryPage';
-import CatAccordion from './Components/CatAccordion';
 import AccordionNew from '../Components/AccordionNew';
 import { generateSeoMetadata } from '@/src/utils/utils';
+import PostAccordion from '../Components/PostAccordion';
 
 export async function generateStaticParams() {
   const categories = await getAllCategories();
@@ -45,7 +45,9 @@ export default async function Page({ params }) {
             </div>
           )}
           <SubscriptionForm />
-          <CatAccordion />
+          {/* <CatAccordion /> */}
+
+          <PostAccordion />
         </div>
 
         {/* Sidebar Section (1/4) */}

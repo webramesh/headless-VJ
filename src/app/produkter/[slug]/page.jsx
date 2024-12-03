@@ -6,6 +6,7 @@ import SubscriptionForm from '../../Components/subscription/SubscriptionForm';
 import SubscriptionBox from '../../Components/subscription/SubscriptionBox';
 
 export default async function Page({ params }) {
+export const revalidate = 0;
   const product = await getProductBySlug(params.slug);
   return (
     <>

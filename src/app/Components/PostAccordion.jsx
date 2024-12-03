@@ -1,29 +1,27 @@
 'use client';
 import { useCategoryAndPosts } from '@/src/context/CategoriesAndPostsContext';
+import Link from 'next/link';
 import { useParams } from 'next/navigation';
 import React, { useState } from 'react';
-
-const normalizeString = (str) => {
-  return str
-    .toLowerCase() // Convert to lowercase
-    .normalize('NFD') // Decompose special characters
-    .replace(/[\u0300-\u036f]/g, '') // Remove diacritics (accents, etc.)
-    .replace(/[^a-z0-9\s-]/g, '') // Remove special characters except spaces and hyphens
-    .trim() // Remove leading and trailing spaces
-    .replace(/\s+/g, '-') // Replace spaces with hyphens
-    .replace(/-+/g, '-'); // Replace multiple hyphens with a single one
-};
 
 const PostAccordion = () => {
   const params = useParams();
 
   const categoryAndPosts = useCategoryAndPosts();
-  const normalizedSlug = normalizeString(params.slug);
 
-  const categoriesWithFilteredTitles = categoryAndPosts.map((category) => ({
-    ...category,
-    filteredPostTitles: category.postTitles.filter((title) => normalizeString(title) !== normalizedSlug),
-  }));
+  // Filter categories and posts
+  const categoriesWithFilteredDetails = categoryAndPosts
+    .map((category) => {
+      // Filter posts based on the normalized slug
+      const filteredPostDetails = category.postDetails.filter((post) => post.slug !== params?.slug);
+
+      // Return the updated category with filtered posts
+      return {
+        ...category,
+        filteredPostDetails,
+      };
+    })
+    .filter((category) => category.filteredPostDetails.length > 0); // Exclude categories with no posts
 
   const [openIndex, setOpenIndex] = useState(null);
 
@@ -32,37 +30,37 @@ const PostAccordion = () => {
   };
 
   return (
-    <div className="container mx-auto px-4 sm:px-6 lg:px-32 py-4 sm:py-6 lg:py-8">
-      {categoriesWithFilteredTitles.map((category, index) => (
-        <div key={category.id} className="border-b mb-2 border-slate-200">
+    <div className="w-full  md:px-0 py-4 sm:py-6">
+      {categoriesWithFilteredDetails.map((category, index) => (
+        <div key={category.categorySlug} className="border-b mb-2 border-slate-200">
           <button
             onClick={() => toggleAccordion(index)}
             className="
-              w-full 
-              flex 
-              justify-between 
-              items-center 
-              bg-[#F5F5F5] 
-              px-2 sm:pl-3 
-              text-slate-800 
+              flex
+              w-full
+              justify-between
+              items-center
+              bg-[#F5F5F5]
+              px-2 sm:pl-3
+              text-slate-800
               py-2
             "
           >
             <h3
               className="
-              text-left 
-              font-semibold 
-              text-xs sm:text-sm
-            "
+                text-left
+                font-semibold
+                text-xs sm:text-sm
+              "
             >
-              <span>{category.categoryName}</span>
+              <span>{category?.categoryName}</span>
             </h3>
             <span
               className={`
-                text-slate-800 
-                transition-transform 
-                duration-300 
-                transform 
+                text-slate-800
+                transition-transform
+                duration-300
+                transform
                 ${openIndex === index ? 'rotate-180' : 'rotate-0'}
               `}
             >
@@ -97,10 +95,10 @@ const PostAccordion = () => {
           </button>
           <div
             className={`
-              overflow-hidden 
-              transition-all 
-              duration-300 
-              ease-in-out 
+              overflow-hidden
+              transition-all
+              duration-300
+              ease-in-out
               ${openIndex === index ? 'max-h-screen' : 'max-h-0'}
             `}
           >
@@ -116,12 +114,17 @@ const PostAccordion = () => {
               px-2 
               sm:pl-3 
               text-red-500
-            "
+              "
             >
-              {category.filteredPostTitles.map((title, titleIndex) => (
-                <div key={titleIndex} className="mb-1 p-1 sm:p-2">
-                  {title}
-                </div>
+              {/* Render post titles as links */}
+              {category.filteredPostDetails.map((post) => (
+                <Link
+                  key={post.slug}
+                  href={`/${category.categorySlug}/${post.slug}`}
+                  className="block mb-2 hover:underline "
+                >
+                  {post.title}
+                </Link>
               ))}
             </div>
           </div>

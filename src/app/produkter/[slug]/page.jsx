@@ -5,8 +5,8 @@ import { getProductBySlug } from '@/src/lib/api/productsAPI';
 import SubscriptionForm from '../../Components/subscription/SubscriptionForm';
 import SubscriptionBox from '../../Components/subscription/SubscriptionBox';
 
+export const revalidate = 60;
 export default async function Page({ params }) {
-export const revalidate = 0;
   const product = await getProductBySlug(params.slug);
   return (
     <>

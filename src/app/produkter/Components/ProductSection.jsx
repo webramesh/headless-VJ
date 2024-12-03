@@ -11,7 +11,7 @@ import jsPDF from 'jspdf';
 import FactBoxMatCombinationer from '../../[category]/[slug]/components/FactBoxMatCombinationer';
 import FactBoxDescription from '../../[category]/[slug]/components/FactBoxDescription';
 import FactBoxMoreInfo from '../../[category]/[slug]/components/FactBoxMoreInfo';
-
+import ellipse from '@/public/ellipse.png';
 export const revalidate = 0;
 
 export default function ProductSection({ product }) {
@@ -281,6 +281,16 @@ export default function ProductSection({ product }) {
           </div>
           {/* <FactBoxDescription fieldsProduct={fieldsProduct} /> */}
           <div className="mt-4 bg-[#f4f1ed] w-full">
+            {/* <div className="mt-3 mb--3">
+              <Image src={ellipse} alt="Citran Wine" className="object-cover mx-4 mt-8" />
+              <h3 className="text-2xl  text-center ">Faktaruta</h3>
+            </div> */}
+
+            <div className="flex items-center justify-between mt-4 mb-4 px-6">
+              <Image src={ellipse} alt="Citran Wine" className="object-cover " />
+              <h3 className="text-2xl  text-center ">Faktaruta</h3>
+             <span></span>
+            </div>
             <FactBoxDescription fieldsProduct={fieldsProduct} />
           </div>
           {/* pie chart */}

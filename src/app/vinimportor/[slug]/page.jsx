@@ -1,7 +1,7 @@
 import React from 'react';
 import VinimportorHero from '../../Components/VinimportorHero.jsx';
 import Image from 'next/image.js';
-import ProductInfo from '../../Produkter/Components/ProductInfo.jsx';
+import ProductInfo from '../../produkter/Components/ProductInfo.jsx';
 import Price from '../../drycker/Components/Price.jsx';
 import Subscription from '../../Components/Subscription.jsx';
 

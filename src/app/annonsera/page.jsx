@@ -1,5 +1,5 @@
 import { getPageBySlug } from '../../lib/api/pageApi';
-import PageContent from '../om-oss/components/PageContent';
+import PageContent from '../om-oss/Components/PageContent';
 
 export async function generateMetadata() {
   try {

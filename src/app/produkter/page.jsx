@@ -1,8 +1,8 @@
 import { countProducts } from '@/src/lib/api/productsAPI';
 import Sidebar from '../Components/Sidebar';
 import SubscriptionForm from '../Components/subscription/SubscriptionForm';
-import CatAccordion from '../[category]/Components/CatAccordion';
 import ProdukterPage from './Components/ProdukterPage';
+import PostAccordion from '../Components/PostAccordion';
 
 const page = async () => {
   const totalProducts = await countProducts();
@@ -13,7 +13,7 @@ const page = async () => {
         <ProdukterPage totalProducts={totalProducts} />
         <div className="space-y-10 my-10">
           <SubscriptionForm />
-          <CatAccordion />
+          <PostAccordion />
         </div>
       </div>
       <div className="w-1/4 hidden lg:block sticky top-0 h-full">

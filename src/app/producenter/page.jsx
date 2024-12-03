@@ -2,8 +2,18 @@ import { countProducenters } from '@/src/lib/api/producenterAPI';
 import BreadCrumb from '../Components/breadcrumb/BreadCrumb';
 import ProducenterContainer from './components/ProducenterContainer';
 import SubscriptionForm from '../Components/subscription/SubscriptionForm';
-import CatAccordion from '../[category]/Components/CatAccordion';
 import Sidebar from '../Components/Sidebar';
+import PostAccordion from '../Components/PostAccordion';
+import { generateSeoMetadata } from '@/src/utils/utils';
+import { getContentTypeSEO } from '@/src/lib/api/seoAPI';
+
+export async function generateMetadata() {
+  const { seo } = await getContentTypeSEO('cG9zdF90eXBlOnByb2R1Y2VudGVy'); // id for producenter
+
+  if (seo) {
+    return generateSeoMetadata(seo);
+  }
+}
 
 export default async function page() {
   const totalProducenters = await countProducenters();
@@ -18,7 +28,9 @@ export default async function page() {
           <ProducenterContainer totalProducenters={totalProducenters} />
           <div className="space-y-10 my-10">
             <SubscriptionForm />
-            <CatAccordion />
+            {/* <CatAccordion /> */}
+
+            <PostAccordion />
           </div>
         </div>
 

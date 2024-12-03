@@ -147,7 +147,7 @@ export default function ProductSection({ product }) {
                   return (
                     <div key={Math.random()}>
                       {productLabel === 'new' && (
-                        <Image src="/ekologisk.svg" width={50} height={50} className="my-1" alt="new" />
+                        <Image src="/new.svg" width={50} height={50} className="my-1" alt="new" />
                       )}
                       {productLabel === 'available only online' && (
                         <Image src="/ekologisk.svg" width={50} height={50} className="my-1" alt="ekologisk" />

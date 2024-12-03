@@ -35,12 +35,14 @@ export default function NotFound() {
           <span className="inline-block">4</span>
         </h1>
 
-        <p className="text-xl text-red-700 mb-6 font-serif">Oops! The page you're looking for doesn't exist.</p>
+        <p className="text-xl text-red-700 mb-6 font-serif">
+          Oops! The page you&apos;re looking for doesn&apos;t exist.
+        </p>
         <div className="bg-white/80 backdrop-blur-sm p-6 rounded-lg shadow-lg mb-8">
           <p className="text-red-500 italic">
-            "In wine, there's truth - in our pages, there's delight.
+            &quot;In wine, there&apos;s truth - in our pages, there&apos;s delight.
             <br />
-            Let's find you a page that's just right!"
+            Let&apos;s find you a page that&apos;s just right!&quot;
           </p>
         </div>
 

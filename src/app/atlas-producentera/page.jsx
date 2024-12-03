@@ -7,11 +7,11 @@ export const revalidate = 60;
 // This is an async Server Component
 export default async function Page() {
   // Fetched all producenter and countries data
-  const [producenter, countries] = await Promise.all([getAllProducenter(), getAllCountries()]);
+  const countries = await getAllCountries();
 
   return (
     <>
-      <AtlasContent producenter={producenter} countries={countries} />
+      <AtlasContent countries={countries} />
     </>
   );
 }

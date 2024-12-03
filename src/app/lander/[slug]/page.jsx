@@ -26,7 +26,9 @@ async function page({ params }) {
 
               <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-3 mt-5 lg:mt-10">
                 {regioner.nodes.map((region) => (
-                  <RegionalCardItem region={region} />
+                  <div key={region.id}>
+                    <RegionalCardItem region={region} />
+                  </div>
                 ))}
               </div>
             </div>

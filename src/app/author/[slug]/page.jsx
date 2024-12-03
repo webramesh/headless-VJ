@@ -1,4 +1,3 @@
-import React from 'react';
 import { getAuthorBySlug, getAllAuthors } from '../../../lib/api/authorApi';
 import AuthorCard from '../Components/AuthorCard';
 import AuthorHero from '../Components/AuthorHero';
@@ -6,6 +5,7 @@ import WineTourism from '../../Components/WineTourism';
 import SenasteNytt from '../../Components/SenasteNytt';
 import SubscriptionForm from '../../Components/subscription/SubscriptionForm';
 import SubscriptionBox from '../../Components/subscription/SubscriptionBox';
+import Image from 'next/image';
 
 export default async function AuthorPage({ params }) {
   const author = await getAuthorBySlug(params.slug);
@@ -20,7 +20,7 @@ export default async function AuthorPage({ params }) {
       <div className="container mx-auto">
         <div className="flex flex-col md:flex-row items-center">
           <div className="flex justify-center md:w-1/3">
-            <img
+            <Image
               src={author.customAvatar || '/placeholder.svg?height=384&width=384'}
               alt={`${author.name} Avatar`}
               className="w-48 h-48 md:w-96 md:h-96 max-w-full rounded-full object-cover p-10"
@@ -32,13 +32,13 @@ export default async function AuthorPage({ params }) {
           </div>
         </div>
         <div className="container mx-auto p-5">
-          <div className='content'>
-          {/* <h2 className="text-xl font-bold mt-4 md:mt-0">Om mig själv</h2> */}
-          <div
-            className="text-base mt-2 mr-4 md:mr-36"
-            dangerouslySetInnerHTML={{ __html: author.authorDescriptionInfo.userDescriptionInfo }}
-          />
-        </div>
+          <div className="content">
+            {/* <h2 className="text-xl font-bold mt-4 md:mt-0">Om mig själv</h2> */}
+            <div
+              className="text-base mt-2 mr-4 md:mr-36"
+              dangerouslySetInnerHTML={{ __html: author.authorDescriptionInfo.userDescriptionInfo }}
+            />
+          </div>
         </div>
       </div>
       <AuthorCard

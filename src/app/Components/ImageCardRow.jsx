@@ -1,5 +1,6 @@
 'use client';
 import React from 'react';
+import Image from 'next/image';
 
 const data = [
   {
@@ -27,7 +28,7 @@ const ImageCard = ({ imgSrc, category, title }) => {
   return (
     <div className="flex flex-col items-center">
       <div className="relative">
-        <img
+        <Image
           src={imgSrc}
           alt={title}
           className="rounded-full w-[100px] h-[100px] object-cover mb-4 border-2 border-gray-200 transition-transform transform hover:scale-105 hover:shadow-lg duration-300 ease-in-out" // Added subtle border and hover effects

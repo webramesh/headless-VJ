@@ -87,7 +87,7 @@ export default function SearchContainer({ onSearch }) {
           {loading && <p className="p-4 text-center">Loading...</p>}
           {error && <p className="p-4 text-center text-red-500">Error: {error}</p>}
           {!loading && !error && searchResults.all.length === 0 && debouncedSearchTerm && (
-            <p className="p-4 text-center">No results found for "{debouncedSearchTerm}"</p>
+            <p className="p-4 text-center">No results found for &quot;{debouncedSearchTerm}&quot;</p>
           )}
           {searchResults.all.map((item) => (
             <Link

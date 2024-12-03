@@ -2,7 +2,6 @@ import React from 'react';
 import ContactForm from '../Components/contact/ContactForm.jsx';
 import ContactInfo from '../Components/contact/ContactInfo.jsx';
 import Map from '../Components/Map';
-import Subscription from '../Components/Subscription';
 import SubscriptionBox from '../Components/subscription/SubscriptionBox.jsx';
 import SubscriptionForm from '../Components/subscription/SubscriptionForm.jsx';
 

@@ -14,7 +14,7 @@ import { generateSeoMetadata } from '@/src/utils/utils';
 
 export const revalidate = 60;
 export async function generateMetadata({ params }) {
-  const { slug, category } = params;
+  const { slug } = params;
 
   const post = await getPostBySlug(slug);
 

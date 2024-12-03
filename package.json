@@ -9,8 +9,7 @@
     "lint": "next lint",
     "lint:fix": "next lint --fix",
     "format": "prettier --write .",
-    "check": "npm run lint && npm run format",
-    "local": "next dev -H 192.168.1.77"
+    "check": "npm run lint && npm run format"
   },
   "dependencies": {
     "@apollo/client": "^3.11.8",

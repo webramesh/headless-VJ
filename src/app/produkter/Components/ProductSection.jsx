@@ -11,6 +11,9 @@ import jsPDF from 'jspdf';
 import FactBoxMatCombinationer from '../../[category]/[slug]/components/FactBoxMatCombinationer';
 import FactBoxDescription from '../../[category]/[slug]/components/FactBoxDescription';
 import FactBoxMoreInfo from '../../[category]/[slug]/components/FactBoxMoreInfo';
+import ellipse from '@/public/ellipse.png';
+export const revalidate = 0;
+
 export default function ProductSection({ product }) {
   const matkombinationer = product?.matkombinationer?.nodes;
 
@@ -140,7 +143,9 @@ export default function ProductSection({ product }) {
                 ))}
               </div>
             </div>
-            <div className="mt-4">
+            <div className="mt-4 relative">
+              {' '}
+              {/* Make the container relatively positioned */}
               <div className="absolute">
                 {fieldsProduct?.productLabels?.map((label) => {
                   const productLabel = label.toLowerCase();
@@ -167,14 +172,12 @@ export default function ProductSection({ product }) {
                       {productLabel === 'verified by vjse' && (
                         <Image src="/verified.svg" width={50} height={50} className="my-1" alt="Verified By VJSE" />
                       )}
-
                       {productLabel === 'featured' && (
                         <Image src="/vegan.svg" width={50} height={50} className="my-1" alt="Featured" />
                       )}
                       {productLabel === 'on sale' && (
                         <Image src="/vegan.svg" width={50} height={50} className="my-1" alt="On Sale" />
                       )}
-
                       {productLabel === 'show wt information' && (
                         <Image src="/vegan.svg" width={50} height={50} className="my-1" alt="Show WT Information" />
                       )}
@@ -182,13 +185,35 @@ export default function ProductSection({ product }) {
                   );
                 })}
               </div>
-              <Image
-                src={featuredImage?.node?.sourceUrl}
-                alt={title}
-                className="object-cover w-2/3 md:w-4/5 lg:w-[63%] h-auto mx-auto"
-                width={300}
-                height={500}
-              />
+              <div className="relative">
+                {/* Featured Image */}
+                <Image
+                  src={featuredImage?.node?.sourceUrl}
+                  alt={title}
+                  className="object-cover w-2/3 md:w-4/5 lg:w-[63%] h-auto mx-auto"
+                  width={300}
+                  height={500}
+                />
+
+                {/* Add image to the bottom right of the featured image */}
+                <div className="absolute bottom-0 right-0">
+                  {wineSortiment[0] === 'Beställning sortimentet' && (
+                    <Image src="/bestalling.svg" width={100} height={100} className="my-1" alt="Beställning" />
+                  )}
+
+                  {wineSortiment[0] === 'Fasta Sortimentet' && (
+                    <Image src="/fasta.svg" width={100} height={100} className="my-1" alt="Fasta Sortimentet" />
+                  )}
+
+                  {wineSortiment[0] === 'Exklusiva sortimentet' && (
+                    <Image src="/fasta.svg" width={100} height={100} className="my-1" alt="Exklusiva sortimentet" />
+                  )}
+
+                  {wineSortiment[0] === 'Tillfälliga sortimentet' && (
+                    <Image src="/fasta.svg" width={100} height={100} className="my-1" alt="Tillfälliga sortimentet" />
+                  )}
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -256,6 +281,16 @@ export default function ProductSection({ product }) {
           </div>
           {/* <FactBoxDescription fieldsProduct={fieldsProduct} /> */}
           <div className="mt-4 bg-[#f4f1ed] w-full">
+            {/* <div className="mt-3 mb--3">
+              <Image src={ellipse} alt="Citran Wine" className="object-cover mx-4 mt-8" />
+              <h3 className="text-2xl  text-center ">Faktaruta</h3>
+            </div> */}
+
+            <div className="flex items-center justify-between mt-4 mb-4 px-6">
+              <Image src={ellipse} alt="Citran Wine" className="object-cover " />
+              <h3 className="text-2xl  text-center ">Faktaruta</h3>
+             <span></span>
+            </div>
             <FactBoxDescription fieldsProduct={fieldsProduct} />
           </div>
           {/* pie chart */}

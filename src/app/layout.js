@@ -20,31 +20,50 @@ export default async function RootLayout({ children }) {
   const footerMenu = await getFooterMenu();
 
   const ordlista = await getAllOrdlistaCategories();
+
   const categoryPosts = [];
+
   async function getCategoriesAndPosts() {
     try {
       const categories = await getAllCategories();
 
-      if (!categories.length) {
+      if (!categories || !categories.length) {
         console.error('No categories found');
         return [];
       }
 
-      for (const category of categories) {
-        const { name: categoryName, slug: categorySlug, id: id } = category;
+      // Fetch posts for all categories in parallel
+      const categoryPromises = categories.map(async (category) => {
+        const { name: categoryName, slug: categorySlug, id } = category;
 
-        // Fetch posts for the current category
-        const { posts } = await getPostsByCategory(categorySlug);
+        try {
+          const { posts } = await getPostsByCategory(categorySlug);
 
-        const postTitles = posts.map((post) => post.title);
+          if (!posts || !posts.length) {
+            console.warn(`No posts found for category: ${categoryName}`);
+            return null;
+          }
 
-        categoryPosts.push({
-          id,
-          categorySlug,
-          categoryName,
-          postTitles,
-        });
-      }
+          return {
+            id,
+            categorySlug,
+            categoryName,
+            postTitles: posts.map((post) => post.title),
+            postDetails: posts.map((post) => ({
+              title: post.title,
+              slug: post.slug,
+            })),
+          };
+        } catch (error) {
+          console.error(`Error fetching posts for category: ${categoryName}`, error);
+          return null;
+        }
+      });
+
+      // Await all category promises and filter out null results
+      const resolvedCategoryPosts = (await Promise.all(categoryPromises)).filter(Boolean);
+
+      categoryPosts.push(...resolvedCategoryPosts);
 
       return categoryPosts;
     } catch (error) {
@@ -64,6 +83,7 @@ export default async function RootLayout({ children }) {
               <CategoryAndPostsProvider categoryPosts={categoryPosts}>
                 <OrdlistaProvider ordlista={ordlista}>
                   <Navbar menuData={menuData} />
+
                   {children}
                   <ScrollToTopButton />
                   <Footer menuItems={footerMenu} />

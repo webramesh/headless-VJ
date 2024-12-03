@@ -1,5 +1,4 @@
 import React from 'react';
-import Head from 'next/head';
 import NyheterContent from '../Components/NyheterContent';
 import { getAllNyheter, getAllNyheterBySlug } from '../../../lib/api/newsApi';
 

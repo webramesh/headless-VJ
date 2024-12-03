@@ -1,60 +1,63 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import flag from '@/public/flag.png';
 
 const Allcountry = () => {
-  const allCountries = [
-    'Slovakia',
-    'Ukraina',
-    'Sverige',
-    'Slovenien',
-    'Schweiz',
-    'Serbian',
-    'Rumanien',
-    'Peru',
-    'Israel',
-    'Luxemburg',
-    'EU',
-    'Marocko',
-    'Cypern',
-    'Kosovo',
-    'Uruguay',
-    'Mexiko',
-    'Portugal',
-    'Australien',
-    'Italien',
-    'USA',
-    'Argentina',
-    'Austria',
-    'Belgium',
-    'Brazil',
-    'Canada',
-    'Chile',
-    'China',
-    'Colombia',
-    'CzechRepublic',
-    'Denmark',
-    'Dominican',
-    'Ecuador',
-    'Estonia',
-    'Finland',
-    'France',
-    'Germany',
-    'Greece',
-    'Hungary',
-    'India',
-    'Indonesia',
-    'Ireland',
-    'Japan',
-    'Kenya',
-    'Latvia',
-    'Lithuania',
-    'Malaysia',
-    'Malta',
-  ];
+  const allCountries = useMemo(
+    () => [
+      'Slovakia',
+      'Ukraina',
+      'Sverige',
+      'Slovenien',
+      'Schweiz',
+      'Serbian',
+      'Rumanien',
+      'Peru',
+      'Israel',
+      'Luxemburg',
+      'EU',
+      'Marocko',
+      'Cypern',
+      'Kosovo',
+      'Uruguay',
+      'Mexiko',
+      'Portugal',
+      'Australien',
+      'Italien',
+      'USA',
+      'Argentina',
+      'Austria',
+      'Belgium',
+      'Brazil',
+      'Canada',
+      'Chile',
+      'China',
+      'Colombia',
+      'CzechRepublic',
+      'Denmark',
+      'Dominican',
+      'Ecuador',
+      'Estonia',
+      'Finland',
+      'France',
+      'Germany',
+      'Greece',
+      'Hungary',
+      'India',
+      'Indonesia',
+      'Ireland',
+      'Japan',
+      'Kenya',
+      'Latvia',
+      'Lithuania',
+      'Malaysia',
+      'Malta',
+    ],
+    []
+  );
 
   const [displayCountries, setDisplayCountries] = useState(allCountries);
   const [isMobile, setIsMobile] = useState(false);
@@ -76,7 +79,7 @@ const Allcountry = () => {
     } else {
       setDisplayCountries(allCountries);
     }
-  }, [isMobile]);
+  }, [isMobile, allCountries]);
 
   const loadMore = () => {
     setDisplayCountries((prevCountries) => allCountries.slice(0, prevCountries.length + 10));

@@ -14,7 +14,7 @@ export default function newsletterSignup() {
       <AuthorHero title="Bekräftelse registrering" />
       <div className="container mx-auto flex flex-col w-full py-10 px-4 md:px-8 lg:px-12">
         <h2 className="mb-6 text-2xl">Registreringen lyckades!</h2>
-        <p mb-6>
+        <p className="mb-6">
           Tack för att du anmält dig till vårt nyhetsbrev på Vinjournalen.se! Som prenumerant kommer du att få
           regelbundna uppdateringar om allt som händer i vinvärlden, från de senaste trenderna inom vinproduktion till
           expertråd om vin och matparningar samt detaljerade recensioner. Vår blogg, med fokus på Sverige, Norge och

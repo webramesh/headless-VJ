@@ -1,6 +1,6 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React from 'react';
-import { faUser, faEnvelope, faPhone, faMapLocation, faSkype } from '@fortawesome/free-solid-svg-icons';
+import { faUser, faEnvelope, faPhone, faMapLocation } from '@fortawesome/free-solid-svg-icons';
 import Image from 'next/image';
 const ContactInfo = () => {
   return (

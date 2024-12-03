@@ -1,5 +1,4 @@
-import React from 'react';
-import { getAllArticles, countArticles } from '../../lib/api/articleApi';
+import { countArticles } from '../../lib/api/articleApi';
 import ArticleContent from './Components/ArticleContent';
 import Sidebar from '../Components/Sidebar';
 
@@ -9,7 +8,6 @@ export const metadata = {
 };
 
 export default async function ArticlarPage() {
-  const { posts, pageInfo } = await getAllArticles();
   const totalPosts = await countArticles();
 
   return <ArticleContent totalPosts={totalPosts} sidebar={<Sidebar />} />;

@@ -1,5 +1,4 @@
 'use client';
-import { useEffect } from 'react';
 import Slider from './Slider';
 import { useFilters } from '@/src/context/FilterContext';
 import Dropdown from './Dropdown';

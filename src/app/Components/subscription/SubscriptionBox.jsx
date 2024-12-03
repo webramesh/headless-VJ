@@ -25,7 +25,7 @@ const SubscriptionBox = () => {
       druver: druverCategory.length > 0 ? getRandomTitle(druverCategory) : {},
       ordlista: ordlistaCategory.length > 0 ? getRandomTitle(ordlistaCategory) : {},
     });
-  }, []);
+  }, [ordlista]);
 
   const TitleSection = ({ icon, label, title }) => (
     <div className="flex md:flex-col items-center gap-6 md:gap-0">

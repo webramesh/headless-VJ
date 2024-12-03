@@ -1,11 +1,10 @@
-import React from 'react';
 import CountryProduce from './CountryProduce';
 import CatAccordion from '../../[category]/Components/CatAccordion';
 import AuthorHero from '../../author/Components/AuthorHero';
 import SubscriptionForm from '../../Components/subscription/SubscriptionForm';
 import Sidebar from '../../Components/Sidebar';
 
-const AtlasContent = ({ producenter, countries }) => {
+const AtlasContent = ({ countries }) => {
   return (
     <div className="container mx-auto px-4 sm:px-6 lg:px-8">
       <AuthorHero title="Atlas Producentera" />

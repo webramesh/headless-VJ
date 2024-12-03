@@ -1,6 +1,4 @@
-import React from 'react';
-
-const CardSkeleton = ({ title, subtitle }) => {
+const CardSkeleton = () => {
   return (
     <div className="container mx-auto mt-10 p-2">
       <div className="h-4 bg-gray-300 rounded w-1/4 mx-auto animate-pulse"></div>

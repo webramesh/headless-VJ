@@ -18,7 +18,7 @@ const EmailTemplate = ({ name, email, message }) => {
       <p>{message}</p>
 
       <hr />
-      <p>This email was sent from your website's contact form.</p>
+      <p>This email was sent from your website&apos;s contact form.</p>
     </div>
   );
 };

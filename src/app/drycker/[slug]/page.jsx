@@ -3,7 +3,6 @@ import Paragraph from '../Components/Paragraph';
 import Scrolltodown from '../../Components/Scrolltodown';
 import FilterSection from '../Components/FilterSection';
 import CountrySection from '../Components/CountrySection';
-import Content from '../Components/Content';
 import Card from '../../Components/Card';
 import { getProductsByType } from '@/src/lib/api/dryckerApi';
 

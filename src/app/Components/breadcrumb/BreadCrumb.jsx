@@ -20,7 +20,7 @@ function LinkElement({ title, link }) {
 
 function BreadCrumb({ title1, link1, title2, link2, title3 }) {
   return (
-    <div className="text-xs md:text-sm my-1 lg:my-4 flex gap-1">
+    <div className=" text-[0.5rem] sm:text-xs md:text-sm my-1 lg:my-4 flex gap-1">
       <Link href="/" className='text-red-600 '>Hem</Link>
       <LinkElement title={title1} link={link1} />
       <LinkElement title={title2} link={link2} />

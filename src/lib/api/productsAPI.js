@@ -145,6 +145,7 @@ export async function getProductBySlug(slug) {
               containerType
               produktPackaging
               productLabels
+              wineSaleStartDate
             }
 
             matkombinationer {

@@ -1,10 +1,16 @@
 'use client';
+import { useFilters } from '@/src/context/FilterContext';
 import React, { useEffect, useRef } from 'react';
 
-const Slider = ({ title, range, setRange, maxValue }) => {
+const Slider = ({ title, range, maxValue, rangeKey }) => {
+  const { dispatch } = useFilters();
   const sliderRef = useRef(null);
   const minThumbRef = useRef(null);
   const maxThumbRef = useRef(null);
+
+  function handleRangeChange(index, value, maxValue) {
+    dispatch({ type: 'UPDATE_RANGE', payload: { rangeKey, index, value, maxValue } });
+  }
 
   useEffect(() => {
     const slider = sliderRef.current;
@@ -29,11 +35,7 @@ const Slider = ({ title, range, setRange, maxValue }) => {
     const rect = slider.getBoundingClientRect();
     const percent = (clientX - rect.left) / rect.width;
     const value = Math.round(0 + percent * (maxValue - 0));
-    setRange((prev) => {
-      const newRange = [...prev];
-      newRange[index] = Math.max(0, Math.min(maxValue, value));
-      return newRange.sort((a, b) => a - b);
-    });
+    handleRangeChange(index, value, maxValue);
   };
 
   const handleMouseDown = (index) => (e) => {
@@ -52,11 +54,7 @@ const Slider = ({ title, range, setRange, maxValue }) => {
   const handleInputChange = (index) => (e) => {
     const value = parseInt(e.target.value);
     if (!isNaN(value) && value >= 0 && value <= maxValue) {
-      setRange((prev) => {
-        const newRange = [...prev];
-        newRange[index] = value;
-        return newRange.sort((a, b) => a - b);
-      });
+      handleRangeChange(index, value, maxValue);
     }
   };
 

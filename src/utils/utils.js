@@ -25,30 +25,95 @@ export const validateCommentForm = ({ authorName, authorEmail, content }) => {
 };
 
 export const extractFields = (products) => {
-  // Use a Set for efficient removal of duplicates
-  const containerTypes = new Set();
-  const sortiments = new Set();
+  const containerTypes = new Map();
+  const sortiments = new Map();
+  let organicCount = 0;
+  let sustainableCount = 0;
+  let maxPrice = 0,
+    minPrice = Infinity;
+  let maxVolume = 0,
+    minVolume = Infinity;
 
-  // Iterate through products, adding unique containerTypes to the Set
-  products.forEach(({ fieldsProduct: { wineSortiment, containerType } }) => {
-    if (containerType !== null) {
-      containerTypes.add(containerType);
+  products.forEach((product) => {
+    const { fieldsProduct } = product;
+    if (!fieldsProduct) return; // Guard clause if fieldsProduct is not defined
+
+    const { wineSortiment, containerType, productLabels, sustainable, pice, bottlePackageVolume } = fieldsProduct;
+
+    if (pice != null) {
+      // Ensure pice is not undefined or null
+      maxPrice = Math.max(maxPrice, pice);
+      minPrice = Math.min(minPrice, pice);
     }
 
-    if (wineSortiment && wineSortiment.length > 0) {
-      wineSortiment.forEach((item) => {
-        if (item !== null) {
-          sortiments.add(item);
-        }
-      });
+    // Calculate max and min volumes
+    if (bottlePackageVolume != null) {
+      // Ensure volume is not undefined or null
+      maxVolume = Math.max(maxVolume, bottlePackageVolume);
+      minVolume = Math.min(minVolume, bottlePackageVolume);
+    }
+    if (containerType) {
+      containerTypes.set(containerType, (containerTypes.get(containerType) || 0) + 1);
+    }
+
+    wineSortiment?.forEach((item) => {
+      if (item) {
+        sortiments.set(item, (sortiments.get(item) || 0) + 1);
+      }
+    });
+
+    if (productLabels?.includes('Organic')) {
+      organicCount++;
+    }
+    if (sustainable?.includes('Yes')) {
+      sustainableCount++;
     }
   });
 
-  // Convert the Sets back to arrays
   return {
-    containerTypes: Array.from(containerTypes),
-    sortiments: Array.from(sortiments),
+    containerTypes: [...containerTypes.entries()],
+    sortiments: [...sortiments.entries()],
+    organicCount,
+    sustainableCount,
+    priceRange: { maxPrice, minPrice },
+    volumeRange: { maxVolume, minVolume },
   };
+};
+
+export const filterProducts = (products, filters) => {
+  const { storlek, pris, typ, sortiment, ekologisk, hallbar } = filters;
+  const [minVolume, maxVolume] = storlek;
+  const [minPrice, maxPrice] = pris;
+  const filteredProducts = products.filter((product) => {
+    const {
+      bottlePackageVolume: volume,
+      pice: price,
+      containerType,
+      wineSortiment,
+      sustainable,
+      productLabels,
+    } = product.fieldsProduct;
+
+    const lowerSortiments = wineSortiment?.map((sortiment) => sortiment.toLowerCase());
+
+    // Check each condition only if the filter is provided
+    const priceCondition = pris ? minPrice <= price && price <= maxPrice : true;
+    const volumeCondition = storlek ? minVolume <= volume && volume <= maxVolume : true;
+    const typeCondition = typ ? containerType?.toLowerCase() === typ : true;
+    const sortimentCondition = sortiment ? lowerSortiments?.includes(sortiment) : true;
+    const sustainabilityCondition = hallbar ? sustainable?.includes('Yes') : true;
+    const organicCondition = ekologisk ? productLabels?.includes('Organic') : true;
+
+    return (
+      priceCondition &&
+      volumeCondition &&
+      typeCondition &&
+      sortimentCondition &&
+      sustainabilityCondition &&
+      organicCondition
+    );
+  });
+  return filteredProducts;
 };
 
 // meta data for pages

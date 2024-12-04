@@ -5,9 +5,12 @@ import FilterSection from '../Components/FilterSection';
 import CountrySection from '../Components/CountrySection';
 import Card from '../../Components/Card';
 import { getProductsByType } from '@/src/lib/api/dryckerApi';
+import Content from '../Components/Content';
+import { getPageBySlug } from '@/src/lib/api/pageApi';
 
 export default async function Home({ params, searchParams }) {
   const { name, products } = await getProductsByType(params.slug);
+  const pageData = await getPageBySlug(`drycker/${params.slug}`);
 
   return (
     <>
@@ -16,7 +19,7 @@ export default async function Home({ params, searchParams }) {
       <Scrolltodown />
       <FilterSection initialProducts={products} slug={params.slug} filters={searchParams} />
       <CountrySection />
-      {/* <Content /> */}
+      <Content pageData={pageData} />
       <Card title="Artiklar relaterade till Röda Viner Frankrike" subtitle="Från vår redaktion" />
     </>
   );

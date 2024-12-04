@@ -10,7 +10,7 @@ const SenasteNytt = async () => {
 
   return (
     <div className="container mx-auto mt-8 p-3">
-      <h1 className=" text-xl text-black">Senaste nytt</h1>
+      <h2 className=" text-xl text-black">Senaste nytt</h2>
       <div className=" text-lg mt-4 text-gray-500 font-extralight w-full justify-normal leading-5">
         {nyheter.map((nyhet) => (
           <Link

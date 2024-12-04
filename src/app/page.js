@@ -11,6 +11,7 @@ import SubscriptionForm from './Components/subscription/SubscriptionForm';
 import SubscriptionBox from './Components/subscription/SubscriptionBox';
 import Banner from './Components/Banner';
 import { generateSeoMetadata } from '../utils/utils';
+import HomeContent from './Components/HomeContent';
 
 export const revalidate = 60;
 
@@ -33,6 +34,7 @@ export default async function Home() {
   return (
     <div>
       <Banner variant="default" />
+      <HomeContent/>
       <Hero posts={posts} />
 
       <Trending

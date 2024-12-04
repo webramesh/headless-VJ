@@ -2,7 +2,6 @@
 import { useState } from 'react';
 import RenderBox from './RenderBox';
 import AlcoholInfo from './AlcoholInfo';
-import { data } from 'autoprefixer';
 
 const ratingbox = () => (
   <div className="w-full px-4 sm:px-0">
@@ -115,7 +114,7 @@ const QNA = ({ productTitle, produktslander, wineSaleStartDate }) => (
             <div className=" text-sm font-medium">Hur länge har produkten {productTitle} sålts på systembolaget?</div>
           </div>
           <div className="text-gray-600 text-sm  pl-2">
-            {wineSaleStartDate ? new Date(wineSaleStartDate).toLocaleDateString('sv-SE') : 'Date not available'}
+            {wineSaleStartDate ? new Date(wineSaleStartDate).toLocaleDateString('sv-SE') :'Datum ej tillgängligt'}
           </div>
         </div>
       </div>
@@ -155,7 +154,7 @@ const InformationCards = ({ fieldsProduct, productTitle, typer, produktslander }
             <div
               key={index}
               className={`px-2 py-2 w-auto text-center hover:bg-[#f4f1ed] hover:shadow-md cursor-pointer ${
-                selected === index + 1 && 'border-b-2 border-pink-500'
+                selected === index + 1 && 'border-b-2 border-red-500'
               }`}
               onClick={() => handleClick(index + 1)}
             >

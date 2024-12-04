@@ -89,11 +89,11 @@ export async function getAllProducts(first = 15, last = 0, after = null, before 
   }
 }
 
-export async function getProductBySlug(slug) {
+export async function getProductBySlug(identifier) {
   try {
     const { data } = await client.query({
       query: gql`
-        query ProductBySlug($slug: String!) {
+        query ProductBySlug($slug: String, $id: ID) {
           produktBy(slug: $slug) {
             title
             slug
@@ -147,7 +147,6 @@ export async function getProductBySlug(slug) {
               productLabels
               wineSaleStartDate
             }
-
             matkombinationer {
               nodes {
                 name
@@ -179,14 +178,45 @@ export async function getProductBySlug(slug) {
               }
             }
           }
+          similarProducts: produkter(first: 4, where: { notIn: [$id] }) {
+            nodes {
+              id
+              title
+              slug
+              featuredImage {
+                node {
+                  sourceUrl
+                }
+              }
+              fieldsProduct {
+                pice
+              }
+              produktTyper {
+                nodes {
+                  name
+                }
+              }
+              produktslander {
+                nodes {
+                  name
+                }
+              }
+            }
+          }
         }
       `,
-      variables: { slug },
+      variables: {
+        slug: identifier ? identifier : null,
+        id: identifier ? identifier : null,
+      },
     });
 
-    return data.produktBy;
+    return {
+      product: data.produktBy,
+      similarProducts: data.similarProducts.nodes,
+    };
   } catch (error) {
     console.error('Error fetching product:', error);
-    return null;
+    return { product: null, similarProducts: [] };
   }
 }

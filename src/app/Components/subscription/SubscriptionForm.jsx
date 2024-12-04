@@ -71,7 +71,7 @@ const SubscriptionForm = () => {
       {showToast && <CustomToast message={toastMessage} className={toastClass} />}
       <div className="w-full bg-[#eb7272] text-white">
         <div className="p-6 sm:p-8">
-          <h1 className="text-white text-2xl font-medium sm:text-3xl lg:text-4xl mb-4">Vill du ha vårt nyhetsbrev?</h1>
+          <h2 className="text-white text-2xl font-medium sm:text-3xl lg:text-4xl mb-4">Vill du ha vårt nyhetsbrev?</h2>
           <h3 className="text-sm sm:text-base mb-6">Få handplockat innehåll i vårt nyhetsbrev, det är gratis.</h3>
           <form className="space-y-4" onSubmit={subscribeUser}>
             <div>

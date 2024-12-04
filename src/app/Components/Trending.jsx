@@ -11,7 +11,7 @@ const Trending = ({ title = '', subtitle = '', trendingPosts = [] }) => {
     return (
       <div className="container mx-auto mt-10 p-2">
         <div className="font-outfit text-center font-extralight text-red-500">{title}</div>
-        <div className="text-center font-outfit text-xl md:text-2xl font-medium mt-4">{subtitle}</div>
+        <h2 className="text-center font-outfit text-xl md:text-2xl font-medium mt-4">{subtitle}</h2>
         <div className="text-center text-gray-500 mt-8">No trending posts available</div>
       </div>
     );

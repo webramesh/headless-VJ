@@ -9,7 +9,7 @@ const NewsPost = ({ title = '', subtitle = '', nyheter = [] }) => {
     return (
       <div className="container mx-auto mt-10 p-2">
         <div className="font-outfit text-center font-extralight text-red-500">{title}</div>
-        <div className="text-center font-outfit text-xl md:text-2xl font-medium mt-4">{subtitle}</div>
+        <h2 className="text-center font-outfit text-xl md:text-2xl font-medium mt-4">{subtitle}</h2>
         <div className="text-center text-gray-500 mt-8">No posts available</div>
       </div>
     );
@@ -40,7 +40,7 @@ const NewsPost = ({ title = '', subtitle = '', nyheter = [] }) => {
       <Link href="/nyheter">
         <div className="font-outfit text-center font-extralight text-red-500">{title}</div>
       </Link>
-      <div className="text-center font-outfit text-xl md:text-2xl font-medium mt-4">{subtitle}</div>
+      <h2 className="text-center font-outfit text-xl md:text-2xl font-medium mt-4">{subtitle}</h2>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-14 mt-8">
         {nyheter.map((news) => (

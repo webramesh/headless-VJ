@@ -64,7 +64,7 @@ const Hero = ({ posts }) => {
                       />
                     </div>
                     <div className="p-4 sm:w-2/3">
-                      <h3 className=" font-medium text-black text-lg">{post?.title}</h3>
+                      <h2 className=" font-medium text-black text-lg">{post?.title}</h2>
                       <p className="mt-2  text-gray-900 text-xs">{format(new Date(post?.date), 'dd MMMM, yyyy')}</p>
                       <p className="text-[#694848] text-xs  mt-2">{post?.author?.node?.name}</p>
 

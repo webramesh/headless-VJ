@@ -1,59 +1,40 @@
 import React from 'react';
 import Image from 'next/image';
-import wine1 from '@/public/wine1.png';
-import wine2 from '@/public/wine2.png';
 import ellipse from '@/public/ellipse.png';
+import Link from 'next/link';
 
-const wines = [
-  {
-    image: wine1,
-    type: 'Rött Vin | Vin',
-    name: 'Château Ducluzeau Les Grands Chais de France 2017',
-    origin: 'Frankrike | Bordeaux | Castillon Côtes ...',
-    price: '434:-',
-  },
-  {
-    image: wine2,
-    type: 'Rött Vin | Vin',
-    name: 'Château Ducluzeau Les Grands Chais de France 2017',
-    origin: 'Frankrike | Bordeaux | Castillon Côtes ...',
-    price: '434:-',
-  },
-  {
-    image: wine1,
-    type: 'Rött Vin | Vin',
-    name: 'Château Ducluzeau Les Grands Chais de France 2017',
-    origin: 'Frankrike | Bordeaux | Castillon Côtes ...',
-    price: '434:-',
-  },
-  {
-    image: wine1,
-    type: 'Rött Vin | Vin',
-    name: 'Château Ducluzeau Les Grands Chais de France 2017',
-    origin: 'Frankrike | Bordeaux | Castillon Côtes ...',
-    price: '434:-',
-  },
-];
+export default function Price({ similarProducts }) {
+  if (!similarProducts || similarProducts.length === 0) {
+    return null;
+  }
 
-export default function Price() {
   return (
     <div className="container mx-auto p-8">
-      <h2 className="text-center  text-xl mb-8">SE ANDRA LIKNANDE VINER</h2>
+      <h2 className="text-center text-xl mb-8">SE ANDRA LIKNANDE VINER</h2>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-        {wines.map((wine, index) => (
-          <div key={index} className="border-2 shadow-md hover:shadow-lg transition-shadow duration-300 p-6">
-            <div className="flex flex-col gap-2 items-start">
-              <div className="flex justify-center w-full mb-4">
-                <Image src={wine.image} alt={`Wine ${index + 1}`} className="object-cover" />
+        {similarProducts.map((product) => (
+          <div key={product.id} className="bg-white shadow-lg rounded-lg overflow-hidden">
+            <Link href={`/produkter/${product.slug}`}>
+              <div className="relative h-48">
+                <Image
+                  src={product.featuredImage?.node?.sourceUrl || '/placeholder.svg?height=192&width=192'}
+                  alt={product.featuredImage?.node?.altText || product.title}
+                  fill
+                  style={{ objectFit: 'cover' }}
+                />
               </div>
-              <div className=" text-red-500 mt-2 text-sm">{wine.type}</div>
-              <div className=" leading-6 text-lg font-thin">{wine.name}</div>
-              <div className="flex gap-2 mt-4 items-center">
-                <Image src={ellipse} alt="Citran Wine" className="object-cover" width={15} height={15} />
-                <div className="text-xs ">{wine.origin}</div>
+              <div className="p-4">
+                <div className="text-red-500 text-sm mb-2">{product.produktTyper?.nodes?.[0]?.name || 'Vin'}</div>
+                <h3 className="leading-6 text-lg font-thin mb-2">{product.title}</h3>
+                <div className="flex gap-2 items-center mb-2">
+                  <Image src={ellipse} alt="Citran Wine" className="object-cover" width={15} height={15} />
+                  <div className="text-xs text-gray-500">
+                    {product.produktslander?.nodes?.[0]?.name || 'Unknown Origin'}
+                  </div>
+                </div>
+                <div className="text-lg font-semibold">{product.fieldsProduct?.pice || 'Price not available'}</div>
               </div>
-              <div className="text-lg  mt-2">{wine.price}</div>
-            </div>
+            </Link>
           </div>
         ))}
       </div>

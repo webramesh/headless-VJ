@@ -58,11 +58,21 @@ export async function getProductsByType(slug) {
               nodes {
                 slug
                 name
+                parent {
+                  node {
+                    name
+                  }
+                }
               }
             }
             produktslander {
               nodes {
                 name
+                parent {
+                  node {
+                    name
+                  }
+                }
               }
             }
           }
@@ -149,11 +159,21 @@ export async function getAllProductsByType(slug, cursor = null, AllProducts = []
               nodes {
                 slug
                 name
+                parent {
+                  node {
+                    name
+                  }
+                }
               }
             }
             produktslander {
               nodes {
                 name
+                parent {
+                  node {
+                    name
+                  }
+                }
               }
             }
           }

@@ -80,11 +80,21 @@ export async function getTaxonomyBySlug(category, slug, first, last, after, befo
                 nodes {
                   slug
                   name
+                  parent {
+                    node {
+                      name
+                    }
+                  }
                 }
               }
             produktslander {
               nodes {
                 name
+                parent {
+                  node {
+                    name
+                  }
+                }
               }
             }
           }

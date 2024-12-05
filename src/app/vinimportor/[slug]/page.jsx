@@ -2,7 +2,7 @@ import React from 'react';
 import VinimportorHero from '../../Components/VinimportorHero.jsx';
 import Image from 'next/image.js';
 import ProductInfo from '../../produkter/Components/ProductInfo.jsx';
-import Price from '../../drycker/Components/Price.jsx';
+// import Price from '../../drycker/Components/Price.jsx';
 import Subscription from '../../Components/Subscription.jsx';
 
 const page = () => {
@@ -19,7 +19,7 @@ const page = () => {
         />
       </div>
       <div className="max-w-6xl container mx-auto">
-        <Price />
+        {/* <Price /> */}
         <Subscription />
         <ProductInfo />
       </div>

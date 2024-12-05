@@ -90,11 +90,21 @@ export async function getAllProducts(first = 15, last = 0, after = null, before 
                 nodes {
                   slug
                   name
+                  parent {
+                    node {
+                      name
+                    }
+                  }
                 }
               }
               produktslander {
                 nodes {
                   name
+                  parent {
+                    node {
+                      name
+                    }
+                  }
                 }
               }
             }
@@ -167,12 +177,22 @@ export async function getProductBySlug(identifier) {
               nodes {
                 slug
                 name
+                parent {
+                  node {
+                    name
+                  }
+                }
               }
             }
             produktslander {
               nodes {
                 name
                 slug
+                parent {
+                  node {
+                    name
+                  }
+                }
               }
             }
             fieldsProduct {
@@ -255,11 +275,23 @@ export async function getProductBySlug(identifier) {
               produktTyper {
                 nodes {
                   name
+                  slug
+                  parent {
+                    node {
+                      name
+                    }
+                  }
                 }
               }
               produktslander {
                 nodes {
                   name
+                  slug
+                  parent {
+                    node {
+                      name
+                    }
+                  }
                 }
               }
             }

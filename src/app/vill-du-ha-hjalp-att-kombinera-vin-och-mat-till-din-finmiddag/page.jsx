@@ -1,9 +1,9 @@
 import Sidebar from '@/src/app/Components/Sidebar';
 import SubscriptionForm from '@/src/app/Components/subscription/SubscriptionForm';
-import CatAccordion from '@/src/app/[category]/Components/CatAccordion';
 import lugana from '@/public/Lugana.png';
 import Image from 'next/image';
 import CombineWineFoodForm from '../Components/CombineWineFoodForm';
+import PostAccordion from '../Components/PostAccordion';
 
 function page() {
   return (
@@ -23,7 +23,7 @@ function page() {
           <CombineWineFoodForm />
           <div className="space-y-10 my-10">
             <SubscriptionForm />
-            <CatAccordion />
+            <PostAccordion />
           </div>
         </div>
 

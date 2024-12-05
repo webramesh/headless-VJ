@@ -1,10 +1,26 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import wine1 from '@/public/wine1.png';
+import { findDepth } from '@/src/utils/utils';
 
 function ProductCard({ product }) {
   const { featuredImage, fieldsProduct, produktTyper, slug, title, produktslander } = product;
   const { pice } = fieldsProduct;
+
+  const sortedTypers = [...produktTyper.nodes]
+    .filter((typer) => typer.name !== 'Vin') //remove Vin
+    .sort((a, b) => {
+      const aHasParent = a.parent ? 1 : 0;
+      const bHasParent = b.parent ? 1 : 0;
+      return bHasParent - aHasParent; //sort items which have parent first then with no parent
+    });
+  const displayedTypers = [{ name: 'Vin', slug: 'vin' }, ...sortedTypers];
+
+  const sortedLanders = [...produktslander.nodes].sort((a, b) => {
+    const depthB = findDepth(b, produktslander.nodes);
+    const depthA = findDepth(a, produktslander.nodes);
+    return depthA - depthB;
+  });
 
   return (
     <div className="border-2 shadow-md hover:shadow-lg transition-shadow duration-300 p-6 h-[450px]">
@@ -15,9 +31,7 @@ function ProductCard({ product }) {
 
             return (
               <div key={Math.random()}>
-                {productLabel === 'new' && (
-                  <Image src="/new.svg" width={30} height={30} className="my-1" alt="new" />
-                )}
+                {productLabel === 'new' && <Image src="/new.svg" width={30} height={30} className="my-1" alt="new" />}
                 {productLabel === 'available only online' && (
                   <Image src="/ekologisk.svg" width={30} height={30} className="my-1" alt="ekologisk" />
                 )}
@@ -65,9 +79,9 @@ function ProductCard({ product }) {
           {/* //for product labels */}
         </Link>
         <div className=" text-red-600 mt-2">
-          {produktTyper?.nodes?.map((recommendation, i, arr) => (
-            <Link href={`/produkt-typer/${recommendation.slug}`} key={i} className="hover:text-red-500 mt-2 inline">
-              {i < arr.length - 1 ? `${recommendation.name} | ` : recommendation.name}
+          {displayedTypers?.map((type, i, arr) => (
+            <Link href={`/produkt-typer/${type.slug}`} key={i} className="hover:text-red-500 mt-2 inline">
+              {i < arr.length - 1 ? `${type.name} | ` : type.name}
             </Link>
           ))}
         </div>
@@ -84,7 +98,7 @@ function ProductCard({ product }) {
                           height={15}
                           /> */}
           <div className="text-sm mt-2">
-            {produktslander?.nodes?.map((region, i, arr) => (
+            {sortedLanders?.map((region, i, arr) => (
               <span key={i}>{i < arr.length - 1 ? region.name + ' | ' : region.name}</span>
             ))}
           </div>

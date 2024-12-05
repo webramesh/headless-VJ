@@ -1,8 +1,8 @@
 import CountryProduce from './CountryProduce';
-import CatAccordion from '../../[category]/Components/CatAccordion';
 import AuthorHero from '../../author/Components/AuthorHero';
 import SubscriptionForm from '../../Components/subscription/SubscriptionForm';
 import Sidebar from '../../Components/Sidebar';
+import PostAccordion from '../../Components/PostAccordion';
 
 const AtlasContent = ({ countries }) => {
   return (
@@ -15,7 +15,7 @@ const AtlasContent = ({ countries }) => {
           <div className="w-full mt-8">
             <SubscriptionForm />
           </div>
-          <CatAccordion />
+          <PostAccordion />
         </div>
         {/* Right Section */}
         <div className="w-full lg:w-[25%] mt-8 lg:mt-6">

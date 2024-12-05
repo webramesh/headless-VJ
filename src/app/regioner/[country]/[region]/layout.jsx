@@ -1,6 +1,6 @@
+import PostAccordion from '@/src/app/Components/PostAccordion';
 import Sidebar from '@/src/app/Components/Sidebar';
 import SubscriptionForm from '@/src/app/Components/subscription/SubscriptionForm';
-import CatAccordion from '@/src/app/[category]/Components/CatAccordion';
 
 function layout({ children }) {
   return (
@@ -11,7 +11,7 @@ function layout({ children }) {
           {children}
           <div className="space-y-10 my-10">
             <SubscriptionForm />
-            <CatAccordion />
+            <PostAccordion />
           </div>
         </div>
 

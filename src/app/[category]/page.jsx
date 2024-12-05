@@ -46,8 +46,6 @@ export default async function Page({ params }) {
             </div>
           )}
           <SubscriptionForm />
-          {/* <CatAccordion /> */}
-
           <PostAccordion />
         </div>
 

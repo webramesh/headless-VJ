@@ -162,3 +162,14 @@ export function generateSeoMetadata(seo) {
     canonical: seo?.canonicalUrl,
   };
 }
+
+export function findDepth(node, allNodes) {
+  let depth = 0;
+  let currentNode = node;
+  while (currentNode?.parent) {
+    depth += 1;
+    const parentName = currentNode.parent.node.name;
+    currentNode = allNodes?.find((n) => n.name === parentName);
+  }
+  return depth;
+}

@@ -17,11 +17,11 @@ export async function generateMetadata({ params }) {
   const { slug } = params;
 
   const post = await getPostBySlug(slug);
-
-  const { seo } = post;
-
-  if (seo) {
-    return generateSeoMetadata(seo);
+  if (post) {
+    const { seo } = post;
+    if (seo) {
+      return generateSeoMetadata(seo);
+    }
   }
 }
 

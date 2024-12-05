@@ -11,6 +11,7 @@ import { getAllOrdlistaCategories } from '../lib/api/ordilistaAPI';
 import { getAllCategories, getPostsByCategory } from '../lib/api/postAPI';
 import { CategoryAndPostsProvider } from '../context/CategoriesAndPostsContext';
 import { FilterProvider } from '../context/FilterContext';
+import { SpeedInsights } from '@vercel/speed-insights/next';
 
 const inter = Inter({ subsets: ['latin'] });
 const outfit = Outfit({ subsets: ['latin'] });
@@ -85,6 +86,7 @@ export default async function RootLayout({ children }) {
                   <Navbar menuData={menuData} />
 
                   {children}
+                  <SpeedInsights />
                   <ScrollToTopButton />
                   <Footer menuItems={footerMenu} />
                 </OrdlistaProvider>

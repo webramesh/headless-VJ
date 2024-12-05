@@ -101,7 +101,7 @@ const QNA = ({ productTitle, produktslander, wineSaleStartDate }) => (
       <div className="text-gray-600 text-sm  pl-2">
         Vinet produceras i{' '}
         {produktslander.nodes.map((region, i, arr) => (
-          <span key={i}>{i < arr.length - 1 ? region.name + ' | ' : region.name}</span>
+          <span key={i}>{i < arr.length - 1 ? region.name + ', ' : region.name}</span>
         ))}
       </div>
       <div className="mt-4">

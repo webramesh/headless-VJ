@@ -3,6 +3,16 @@ import Sidebar from '../Components/Sidebar';
 import SubscriptionForm from '../Components/subscription/SubscriptionForm';
 import ProdukterPage from './Components/ProdukterPage';
 import PostAccordion from '../Components/PostAccordion';
+import { generateSeoMetadata } from '@/src/utils/utils';
+import { getContentTypeSEO } from '@/src/lib/api/seoAPI';
+
+export async function generateMetadata() {
+  const { seo } = await getContentTypeSEO('cG9zdF90eXBlOnByb2R1a3Rlcg=='); // id for produkter
+
+  if (seo) {
+    return generateSeoMetadata(seo);
+  }
+}
 
 const page = async () => {
   const totalProducts = await countProducts();

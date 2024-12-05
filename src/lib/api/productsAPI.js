@@ -47,6 +47,36 @@ export async function getAllProducts(first = 15, last = 0, after = null, before 
               id
               title
               slug
+              seo {
+                title
+                robots
+                description
+                focusKeywords
+                canonicalUrl
+                openGraph {
+                  locale
+                  type
+                  title
+                  description
+                  url
+                  siteName
+                  image {
+                    height
+                    secureUrl
+                    type
+                    url
+                    width
+                  }
+                  twitterMeta {
+                    card
+                    description
+                    image
+                    creator
+                    title
+                    site
+                  }
+                }
+              }
               featuredImage {
                 node {
                   sourceUrl
@@ -97,6 +127,37 @@ export async function getProductBySlug(identifier) {
           produktBy(slug: $slug) {
             title
             slug
+
+            seo {
+              title
+              robots
+              description
+              focusKeywords
+              canonicalUrl
+              openGraph {
+                locale
+                type
+                title
+                description
+                url
+                siteName
+                image {
+                  height
+                  secureUrl
+                  type
+                  url
+                  width
+                }
+                twitterMeta {
+                  card
+                  description
+                  image
+                  creator
+                  title
+                  site
+                }
+              }
+            }
             featuredImage {
               node {
                 sourceUrl

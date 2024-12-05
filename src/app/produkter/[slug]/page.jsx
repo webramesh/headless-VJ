@@ -4,7 +4,18 @@ import Price from '../Components/Price';
 import { getProductBySlug } from '@/src/lib/api/productsAPI';
 import SubscriptionForm from '../../Components/subscription/SubscriptionForm';
 import SubscriptionBox from '../../Components/subscription/SubscriptionBox';
+import { generateSeoMetadata } from '@/src/utils/utils';
 export const revalidate = 60;
+
+export async function generateMetadata({ params }) {
+  const { product } = await getProductBySlug(params.slug);
+
+  const seo = product?.seo;
+
+  if (seo) {
+    return generateSeoMetadata(seo);
+  }
+}
 
 export default async function Page({ params }) {
   const { product, similarProducts } = await getProductBySlug(params.slug);

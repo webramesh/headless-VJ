@@ -1,13 +1,14 @@
 import SenasteNyttSkeleton from './SenasteNyttSkeleton';
-import SubscriptionBoxSkeleton from './SubscriptionBoxSkeleton';
+import { SubscriptionBoxSkeleton } from './SubscriptionSkeleton';
 
 const SidebarSkeleton = () => {
-    return (
-        <>
-            <SubscriptionBoxSkeleton />
-            <SenasteNyttSkeleton />
-        </>
-    );
+  return (
+    <>
+      <SubscriptionBoxSkeleton />
+
+      <SenasteNyttSkeleton />
+    </>
+  );
 };
 
 export default SidebarSkeleton;

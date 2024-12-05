@@ -1,9 +1,9 @@
 import BreadCrumb from '../../Components/breadcrumb/BreadCrumb';
 import Sidebar from '../../Components/Sidebar';
 import SubscriptionForm from '../../Components/subscription/SubscriptionForm';
-import CatAccordion from '../../[category]/Components/CatAccordion';
 import { getOrdlistaCategoryBySlug } from '@/src/lib/api/ordilistaAPI';
 import OrdlistaByCategory from '../components/OrdlistaByCategory';
+import PostAccordion from '../../Components/PostAccordion';
 
 export default async function page({ params }) {
   const category = await getOrdlistaCategoryBySlug(params.category);
@@ -21,7 +21,7 @@ export default async function page({ params }) {
           <div className="my-8">
             <SubscriptionForm />
           </div>
-          <CatAccordion />
+          <PostAccordion />
         </div>
         <div className="col-span-1 hidden lg:block sticky top-0 h-full">
           <Sidebar />

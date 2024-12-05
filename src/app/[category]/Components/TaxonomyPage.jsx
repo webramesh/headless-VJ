@@ -1,8 +1,8 @@
 import { countProductsByTaxonomy } from '@/src/lib/api/taxonomyApi';
 import Sidebar from '../../Components/Sidebar';
 import SubscriptionForm from '../../Components/subscription/SubscriptionForm';
-import CatAccordion from './CatAccordion';
 import ProductsByTaxonomy from './ProductsByTaxonomy';
+import PostAccordion from '../../Components/PostAccordion';
 
 async function TaxonomyPage({ params }) {
   const { name, totalProducts } = await countProductsByTaxonomy(params.category, params.slug);
@@ -15,7 +15,7 @@ async function TaxonomyPage({ params }) {
 
           <ProductsByTaxonomy params={params} totalProducts={totalProducts} />
           <SubscriptionForm />
-          <CatAccordion />
+          <PostAccordion />
         </div>
 
         {/* Sidebar Section (1/4) */}

@@ -2,8 +2,8 @@ import React from 'react';
 import Sidebar from '../../Components/Sidebar';
 import AuthorHero from '../../author/Components/AuthorHero';
 import Banner from '../../Components/Banner';
-import CatAccordion from '../../[category]/Components/CatAccordion';
 import SubscriptionForm from '../../Components/subscription/SubscriptionForm';
+import PostAccordion from '../../Components/PostAccordion';
 
 const PageContent = ({ pageData }) => {
   if (!pageData) {
@@ -21,7 +21,7 @@ const PageContent = ({ pageData }) => {
               <div dangerouslySetInnerHTML={{ __html: pageData.content }} className="text-base lg:text-lg" />
               <SubscriptionForm />
               <div className="mt-8 lg:mt-12">
-                <CatAccordion />
+                <PostAccordion />
               </div>
             </div>
           </div>

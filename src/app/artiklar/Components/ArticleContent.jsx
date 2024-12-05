@@ -7,9 +7,9 @@ import { format } from 'date-fns';
 import { usePagination } from '@/src/context/PageContext';
 import { getAllArticles } from '../../../lib/api/articleApi';
 import Pagination from '../../Components/pagination/Pagination';
-import CatAccordion from '../../[category]/Components/CatAccordion';
 import BreadCrumb from '../../Components/breadcrumb/BreadCrumb';
 import SubscriptionForm from '../../Components/subscription/SubscriptionForm';
+import PostAccordion from '../../Components/PostAccordion';
 
 const POSTS_PER_PAGE = 15;
 
@@ -112,7 +112,7 @@ const ArticleContent = ({ totalPosts, sidebar }) => {
           </div>
           <Pagination pageInfo={pageInfo} pageLimit={POSTS_PER_PAGE} total={totalPosts} />
           <SubscriptionForm />
-          <CatAccordion />
+          <PostAccordion />
         </div>
         {/* Right Section */}
         <div className="w-full lg:w-[25%] mt-8 lg:mt-10">

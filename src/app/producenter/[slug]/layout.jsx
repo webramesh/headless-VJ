@@ -1,4 +1,4 @@
-import CatAccordion from '../../[category]/Components/CatAccordion';
+import PostAccordion from '../../Components/PostAccordion';
 import SenasteNytt from '../../Components/SenasteNytt';
 import SubscriptionForm from '../../Components/subscription/SubscriptionForm';
 
@@ -14,7 +14,9 @@ export default function layout({ children }) {
           <SenasteNytt />
         </div>
       </div>
-      <CatAccordion />
+      <div className="container mx-auto max-w-4xl">
+        <PostAccordion />
+      </div>
     </>
   );
 }

@@ -1,7 +1,7 @@
 import { countImportors } from '@/src/lib/api/vinimportorAPI';
 import SubscriptionForm from '../Components/subscription/SubscriptionForm';
-import CatAccordion from '../[category]/Components/CatAccordion';
 import VinImportorContainer from './components/VinImportorContainer';
+import PostAccordion from '../Components/PostAccordion';
 
 const Vinimportor = async () => {
   const totalVinImportors = await countImportors();
@@ -19,7 +19,7 @@ const Vinimportor = async () => {
         </div>
         {/* End Subscription  */}
 
-        <CatAccordion />
+        <PostAccordion />
       </div>
     </div>
   );

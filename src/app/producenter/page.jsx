@@ -28,8 +28,6 @@ export default async function page() {
           <ProducenterContainer totalProducenters={totalProducenters} />
           <div className="space-y-10 my-10">
             <SubscriptionForm />
-            {/* <CatAccordion /> */}
-
             <PostAccordion />
           </div>
         </div>

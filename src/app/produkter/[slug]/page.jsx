@@ -19,6 +19,7 @@ export async function generateMetadata({ params }) {
 
 export default async function Page({ params }) {
   const { product, similarProducts } = await getProductBySlug(params.slug);
+
   return (
     <>
       <ProductSection product={product} />

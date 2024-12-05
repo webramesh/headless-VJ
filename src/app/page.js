@@ -23,7 +23,11 @@ export async function generateMetadata() {
   }
 }
 
+function delay(ms) {
+  return new Promise((resolve) => setTimeout(resolve, ms));
+}
 export default async function Home() {
+  await delay(3000); // 3000ms = 3 seconds
   const [nyheter, trendingPosts, wineCategories, posts] = await Promise.all([
     getAllNyheter(),
     getAllTrendingPosts(),

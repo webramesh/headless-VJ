@@ -16,6 +16,7 @@ export async function generateStaticParams() {
   }));
 }
 export const revalidate = 60;
+
 export default async function Page({ params }) {
   const category = await getCategoryBySlug(params.category);
 

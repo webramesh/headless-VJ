@@ -1,8 +1,8 @@
 import { getOrdlistaBySlug } from '@/src/lib/api/ordilistaAPI';
 import Sidebar from '@/src/app/Components/Sidebar';
 import SubscriptionForm from '@/src/app/Components/subscription/SubscriptionForm';
-import CatAccordion from '@/src/app/Components/Accordion';
 import BreadCrumb from '@/src/app/Components/breadcrumb/BreadCrumb';
+import PostAccordion from '@/src/app/Components/PostAccordion';
 
 const page = async ({ params }) => {
   const { slug } = params;
@@ -33,7 +33,7 @@ const page = async ({ params }) => {
           <div className="my-8">
             <SubscriptionForm />
           </div>
-          <CatAccordion />
+          <PostAccordion />
         </div>
         <div className="col-span-1 hidden lg:block sticky top-0 h-full">
           <Sidebar />

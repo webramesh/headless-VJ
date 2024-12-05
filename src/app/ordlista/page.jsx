@@ -1,10 +1,10 @@
 import Sidebar from '../Components/Sidebar';
 import AccordionNew from '../Components/AccordionNew';
-import CatAccordion from '../[category]/Components/CatAccordion';
 import SubscriptionForm from '../Components/subscription/SubscriptionForm';
 import OrdlistaContainer from './components/OrdlistaContainer';
 import BreadCrumb from '../Components/breadcrumb/BreadCrumb';
 import { countOrdlista } from '@/src/lib/api/ordilistaAPI';
+import PostAccordion from '../Components/PostAccordion';
 
 export default async function Ordlista() {
   const totalOrdlista = await countOrdlista();
@@ -22,7 +22,7 @@ export default async function Ordlista() {
               <AccordionNew />
               <SubscriptionForm />
 
-              <CatAccordion />
+              <PostAccordion />
             </div>
 
             {/* Sidebar Section (1/4) */}

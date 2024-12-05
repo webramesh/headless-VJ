@@ -1,5 +1,5 @@
+import PostAccordion from '../../Components/PostAccordion';
 import SubscriptionForm from '../../Components/subscription/SubscriptionForm';
-import CatAccordion from '../../[category]/Components/CatAccordion';
 
 function layout({ children }) {
   return (
@@ -11,7 +11,7 @@ function layout({ children }) {
           <div className="mx-4 lg:mx-52 lg:-mt-16 z-10">
             <div className="flex flex-col gap-10 bg-white w-full lg:w-auto">
               <SubscriptionForm />
-              <CatAccordion />
+              <PostAccordion />
             </div>
           </div>
         </div>

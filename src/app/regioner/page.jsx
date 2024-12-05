@@ -1,11 +1,11 @@
 import SubscriptionForm from '../Components/subscription/SubscriptionForm';
 import Sidebar from '../Components/Sidebar.jsx';
-import CatAccordion from '../[category]/Components/CatAccordion.jsx';
 import BreadCrumb from '../Components/breadcrumb/BreadCrumb';
 import RegionerContainer from './components/RegionerContainer';
 import { countRegioners } from '@/src/lib/api/regionerAPI';
 import { generateSeoMetadata } from '@/src/utils/utils';
 import { getContentTypeSEO } from '@/src/lib/api/seoAPI';
+import PostAccordion from '../Components/PostAccordion';
 
 export async function generateMetadata() {
   const { seo } = await getContentTypeSEO('cG9zdF90eXBlOnJlZ2lvbmVy'); // id for regioner
@@ -30,7 +30,7 @@ const Page = async () => {
             </div>
 
             <div className="mt-8 mx-4 md:mx-0">
-              <CatAccordion />
+              <PostAccordion />
             </div>
           </div>
           <div className="md:col-span-1 w-full">

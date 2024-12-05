@@ -1,8 +1,8 @@
 import Sidebar from '@/src/app/Components/Sidebar';
 import SubscriptionForm from '@/src/app/Components/subscription/SubscriptionForm';
-import CatAccordion from '@/src/app/[category]/Components/CatAccordion';
 import JoinTeamForm from '../Components/JoinTeamForm';
 import Link from 'next/link';
+import PostAccordion from '../Components/PostAccordion';
 
 function page() {
   return (
@@ -52,7 +52,7 @@ function page() {
           </ul>
           <div className="space-y-10 my-10">
             <SubscriptionForm />
-            <CatAccordion />
+            <PostAccordion />
           </div>
         </div>
 

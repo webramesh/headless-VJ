@@ -233,12 +233,16 @@ export default function ProductSection({ product }) {
             </div>
           </div>
           <div className=" text-sm text-gray-600 mt-2">{productShortText}</div>
-          <span
-            className="inline font-sm text-pink-500 cursor-pointer decoration-dotted hover:underline underline-offset-4 w-1/3 md:w-3/12"
-            onClick={() => setShowReadMore(!showReadMore)}
-          >
-            Läs mer
-          </span>
+          {extraReadMore1 ||
+            extraReadMore2 ||
+            (extraReadMore3 && (
+              <span
+                className="inline font-sm text-pink-500 cursor-pointer decoration-dotted hover:underline underline-offset-4 w-1/3 md:w-3/12"
+                onClick={() => setShowReadMore(!showReadMore)}
+              >
+                Läs mer
+              </span>
+            ))}
           <div
             className={`${showReadMore ? 'max-h-96 opacity-100' : 'max-h-0 opacity-0'} transition-all duration-500 ease-in-out `}
           >
@@ -289,7 +293,7 @@ export default function ProductSection({ product }) {
             <div className="flex items-center justify-between mt-4 mb-4 px-6">
               <Image src={ellipse} alt="Citran Wine" className="object-cover " />
               <h3 className="text-2xl  text-center ">Faktaruta</h3>
-             <span></span>
+              <span></span>
             </div>
             <FactBoxDescription fieldsProduct={fieldsProduct} />
           </div>

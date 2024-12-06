@@ -4,6 +4,18 @@ import ContactInfo from '../Components/contact/ContactInfo.jsx';
 import Map from '../Components/Map';
 import SubscriptionBox from '../Components/subscription/SubscriptionBox.jsx';
 import SubscriptionForm from '../Components/subscription/SubscriptionForm.jsx';
+import { generateSeoMetadata } from '@/src/utils/utils.js';
+import { getPageBySlug } from '@/src/lib/api/pageApi.js';
+
+export async function generateMetadata() {
+  const data = await getPageBySlug(`kontakt`);
+
+  const seo = data?.seo;
+
+  if (seo) {
+    return generateSeoMetadata(seo);
+  }
+}
 
 const page = () => {
   return (

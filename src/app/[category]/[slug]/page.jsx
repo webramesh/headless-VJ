@@ -11,14 +11,22 @@ import PostAccordion from '../../Components/PostAccordion';
 import CommentForm from '../../Components/CommentForm';
 import CommentBox from '../../Components/CommentBox';
 import { generateSeoMetadata } from '@/src/utils/utils';
+import { getTaxonomySEO } from '@/src/lib/api/taxonomyApi';
 
 export const revalidate = 60;
 export async function generateMetadata({ params }) {
-  const { slug } = params;
+  const { category, slug } = params;
 
   const post = await getPostBySlug(slug);
   if (post) {
     const { seo } = post;
+    if (seo) {
+      return generateSeoMetadata(seo);
+    }
+  } else {
+    const taxonomySeo = await getTaxonomySEO(category, slug);
+
+    const { seo } = taxonomySeo;
     if (seo) {
       return generateSeoMetadata(seo);
     }

@@ -6,6 +6,17 @@ import SenasteNytt from '../../Components/SenasteNytt';
 import SubscriptionForm from '../../Components/subscription/SubscriptionForm';
 import SubscriptionBox from '../../Components/subscription/SubscriptionBox';
 import Image from 'next/image';
+import { generateSeoMetadata } from '@/src/utils/utils';
+
+export async function generateMetadata({ params }) {
+  const data = await getAuthorBySlug(params?.slug);
+
+  const seo = data?.seo;
+
+  if (seo) {
+    return generateSeoMetadata(seo);
+  }
+}
 
 export default async function AuthorPage({ params }) {
   const author = await getAuthorBySlug(params.slug);
@@ -21,6 +32,8 @@ export default async function AuthorPage({ params }) {
         <div className="flex flex-col md:flex-row items-center">
           <div className="flex justify-center md:w-1/3">
             <Image
+              width={300}
+              height={300}
               src={author.customAvatar || '/placeholder.svg?height=384&width=384'}
               alt={`${author.name} Avatar`}
               className="w-48 h-48 md:w-96 md:h-96 max-w-full rounded-full object-cover p-10"

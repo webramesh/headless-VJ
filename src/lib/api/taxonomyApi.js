@@ -129,3 +129,61 @@ export async function getTaxonomyBySlug(category, slug, first, last, after, befo
     return null;
   }
 }
+export async function getTaxonomySEO(category, slug) {
+  const taxonomy = slugToTaxonomy[category];
+
+  const query = gql`
+    query GetTaxonomyBySlug($slug: ID!) {
+      ${taxonomy}(id: $slug, idType: SLUG) {
+        seo {
+          title
+          robots
+          description
+          focusKeywords
+          canonicalUrl
+          openGraph {
+            locale
+            type
+            title
+            description
+            url
+            siteName
+            image {
+              height
+              secureUrl
+              type
+              url
+              width
+            }
+            twitterMeta {
+              card
+              description
+              image
+              creator
+              title
+              site
+            }
+          }
+        }
+      }
+    }
+  `;
+
+  try {
+    const { data } = await client.query({
+      query,
+      variables: {
+        category,
+        slug,
+      },
+    });
+
+    return {
+      // products: data[taxonomy]?.produkter?.nodes,
+      seo: data[taxonomy]?.seo,
+    };
+  } catch (error) {
+    console.error(`Error fetching ${category}:`, error);
+    return null;
+  }
+}

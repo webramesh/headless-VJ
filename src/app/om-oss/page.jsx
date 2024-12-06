@@ -1,19 +1,14 @@
+import { generateSeoMetadata } from '@/src/utils/utils';
 import { getPageBySlug } from '../../lib/api/pageApi';
 import PageContent from './Components/PageContent';
 
 export async function generateMetadata() {
-  try {
-    const pageData = await getPageBySlug('om-oss');
-    return {
-      title: pageData.title,
-      description: pageData.excerpt || 'Learn more about Vinjournalen',
-    };
-  } catch (error) {
-    console.error('Error generating metadata:', error);
-    return {
-      title: 'Om Oss',
-      description: 'Learn more about Vinjournalen',
-    };
+  const data = await getPageBySlug(`om-oss`);
+
+  const seo = data?.seo;
+
+  if (seo) {
+    return generateSeoMetadata(seo);
   }
 }
 

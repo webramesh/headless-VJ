@@ -3,6 +3,18 @@ import Sidebar from '@/src/app/Components/Sidebar';
 import SubscriptionForm from '@/src/app/Components/subscription/SubscriptionForm';
 import BreadCrumb from '@/src/app/Components/breadcrumb/BreadCrumb';
 import PostAccordion from '@/src/app/Components/PostAccordion';
+import { getPageBySlug } from '@/src/lib/api/pageApi';
+import { generateSeoMetadata } from '@/src/utils/utils';
+
+export async function generateMetadata({ params }) {
+  const data = await getPageBySlug(`ordlista/${params.slug}`);
+
+  const seo = data?.seo;
+
+  if (seo) {
+    return generateSeoMetadata(seo);
+  }
+}
 
 const page = async ({ params }) => {
   const { slug } = params;

@@ -1,21 +1,20 @@
+import { generateSeoMetadata } from '@/src/utils/utils';
 import { getPageBySlug } from '../../lib/api/pageApi';
 import PageContent from '../om-oss/Components/PageContent';
 
 export async function generateMetadata() {
-  try {
-    const pageData = await getPageBySlug('anvandarvilkor');
-    return {
-      title: pageData.title,
-      description: pageData.excerpt || 'Användarvillkor för Vinjournalen',
-    };
-  } catch (error) {
-    console.error('Error generating metadata:', error);
-    return {
-      title: 'Användarvillkor',
-      description: 'Användarvillkor för Vinjournalen',
-    };
+  const data = await getPageBySlug('anvandarvilkor');
+
+  const seo = data?.seo;
+
+  if (seo) {
+    return generateSeoMetadata(seo);
   }
 }
+
+
+
+// anvandarvilkor
 
 export default async function AnvandarvilkorPage() {
   try {

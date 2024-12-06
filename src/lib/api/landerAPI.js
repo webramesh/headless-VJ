@@ -14,6 +14,36 @@ export async function getLandBySlug(slug) {
             name
             slug
             description
+            seo {
+              title
+              robots
+              description
+              focusKeywords
+              canonicalUrl
+              openGraph {
+                locale
+                type
+                title
+                description
+                url
+                siteName
+                image {
+                  height
+                  secureUrl
+                  type
+                  url
+                  width
+                }
+                twitterMeta {
+                  card
+                  description
+                  image
+                  creator
+                  title
+                  site
+                }
+              }
+            }
             regioner {
               nodes {
                 excerpt

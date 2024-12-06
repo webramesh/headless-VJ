@@ -2,6 +2,7 @@ import Map from '@/src/app/Components/Map';
 import Image from 'next/image';
 import BreadCrumb from '@/src/app/Components/breadcrumb/BreadCrumb';
 import { getRegionByURL } from '@/src/lib/api/regionerAPI';
+import { generateSeoMetadata } from '@/src/utils/utils';
 
 export async function generateMetadata({ params }) {
   const { region } = params;
@@ -9,43 +10,8 @@ export async function generateMetadata({ params }) {
 
   const { seo } = selectedRegion;
 
-  // Convert robots array to string format
-  const robotsMeta = seo?.robots?.join(', ') || 'index, follow';
-
-  // Convert focus keywords array to comma-separated string
-  const keywords = seo?.focusKeywords?.join(', ') || '';
-
   if (seo) {
-    return {
-      title: seo?.title,
-      description: seo?.description,
-      canonicalUrl: seo?.canonicalUrl,
-      robots: robotsMeta,
-      keywords,
-      openGraph: {
-        locale: seo?.openGraph?.locale,
-        type: seo?.openGraph?.type,
-        title: seo?.openGraph?.title,
-        description: seo?.openGraph?.description,
-        url: seo?.openGraph?.url,
-        siteName: seo?.openGraph?.siteName,
-        image: {
-          height: seo?.openGraph?.image?.height,
-          secureUrl: seo?.openGraph?.image?.secureUrl,
-          type: seo?.openGraph?.image?.type,
-          url: seo?.openGraph?.image?.url,
-          width: seo?.openGraph?.image?.width,
-        },
-        twitterMeta: {
-          card: seo?.openGraph?.twitterMeta?.card,
-          description: seo?.openGraph?.twitterMeta?.description,
-          image: seo?.openGraph?.twitterMeta?.image,
-          creator: seo?.openGraph?.twitterMeta?.creator,
-          title: seo?.openGraph?.twitterMeta?.title,
-          site: seo?.openGraph?.twitterMeta?.site,
-        },
-      },
-    };
+    return generateSeoMetadata(seo);
   }
 }
 

@@ -1,19 +1,14 @@
+import { generateSeoMetadata } from '@/src/utils/utils';
 import { getPageBySlug } from '../../lib/api/pageApi';
 import PageContent from '../om-oss/Components/PageContent';
 
 export async function generateMetadata() {
-  try {
-    const pageData = await getPageBySlug('integritetspolicy');
-    return {
-      title: pageData.title,
-      description: pageData.excerpt || 'Advertise with Vinjournalen',
-    };
-  } catch (error) {
-    console.error('Error generating metadata:', error);
-    return {
-      title: 'Integritetspolicy',
-      description: 'Advertise with Vinjournalen',
-    };
+  const data = await getPageBySlug(`integritetspolicy`);
+
+  const seo = data?.seo;
+
+  if (seo) {
+    return generateSeoMetadata(seo);
   }
 }
 

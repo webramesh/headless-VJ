@@ -2,6 +2,17 @@ import { getLandBySlug } from '@/src/lib/api/landerAPI';
 import BreadCrumb from '../../Components/breadcrumb/BreadCrumb';
 import Map from '../../Components/Map';
 import RegionalCardItem from '../../Components/regionalCard/RegionalCardItem';
+import { generateSeoMetadata } from '@/src/utils/utils';
+
+export async function generateMetadata({ params }) {
+  const data = await getLandBySlug(params.slug);
+
+  const seo = data?.seo;
+
+  if (seo) {
+    return generateSeoMetadata(seo);
+  }
+}
 
 async function page({ params }) {
   const landerDetails = await getLandBySlug(params.slug);

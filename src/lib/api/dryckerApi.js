@@ -9,6 +9,37 @@ export async function getProductsByType(slug) {
       produktTyp(id: $slug, idType: SLUG) {
         name
         count
+        seo {
+          title
+          robots
+          description
+          focusKeywords
+          canonicalUrl
+          openGraph {
+            locale
+            type
+            title
+            description
+            url
+            siteName
+            image {
+              height
+              secureUrl
+              type
+              url
+              width
+            }
+            twitterMeta {
+              card
+              description
+              image
+              creator
+              title
+              site
+            }
+          }
+        }
+
         produkter(first: 15) {
           nodes {
             id
@@ -80,6 +111,37 @@ export async function getAllProductsByType(slug, cursor = null, AllProducts = []
             id
             title
             slug
+            seo {
+              title
+              robots
+              description
+              focusKeywords
+              canonicalUrl
+              openGraph {
+                locale
+                type
+                title
+                description
+                url
+                siteName
+                image {
+                  height
+                  secureUrl
+                  type
+                  url
+                  width
+                }
+                twitterMeta {
+                  card
+                  description
+                  image
+                  creator
+                  title
+                  site
+                }
+              }
+            }
+
             featuredImage {
               node {
                 sourceUrl

@@ -5,7 +5,6 @@ import ProductCardSkeleton from '../Components/SkeletonLoading/ProductCardSkelet
 function Loading() {
   return (
     <>
-      <NavbarSkeleton />
       <div className="container mx-auto flex  lg:flex-row gap-6 lg:gap-12 mt-4 lg:mt-10 bg-slate-50  p-4">
         <div className="w-full lg:w-3/4 ">
           <h1 className="text-2xl lg:text-3xl mb-4 font-semibold">Produkter</h1>

@@ -7,6 +7,17 @@ import Card from '../../Components/Card';
 import { getProductsByType } from '@/src/lib/api/dryckerApi';
 import Content from '../Components/Content';
 import { getPageBySlug } from '@/src/lib/api/pageApi';
+import { generateSeoMetadata } from '@/src/utils/utils';
+
+export async function generateMetadata({ params }) {
+  const data = await getPageBySlug(`drycker/${params.slug}`);
+
+  const seo = data?.seo;
+
+  if (seo) {
+    return generateSeoMetadata(seo);
+  }
+}
 
 export default async function Home({ params, searchParams }) {
   const { name, products } = await getProductsByType(params.slug);

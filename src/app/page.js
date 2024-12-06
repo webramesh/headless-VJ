@@ -34,7 +34,7 @@ export default async function Home() {
   return (
     <div>
       <Banner variant="default" />
-      <HomeContent/>
+      <HomeContent />
       <Hero posts={posts} />
 
       <Trending

@@ -1,4 +1,3 @@
-import ellipse from '@/public/ellipse.png';
 import Image from 'next/image';
 import FactBoxDescription from './FactBoxDescription';
 import CatPiechart from '../../Components/CatPiechart';
@@ -32,7 +31,13 @@ const FactBox = ({ recommendedProduct, smakar, aromer, fargers, matkombinationer
     <>
       <div className="block  md:grid grid-cols-2  justify-items-stretch items-center pt-4  ">
         <div className="text-center mb-4  md:mb-0 md:text-left flex items-center  gap-3 container mx-auto px-4">
-          <Image src={ellipse} alt="Citran Wine" className="object-cover" />
+          <Image
+            src={recommendedProduct?.produktslander?.nodes[0]?.flag?.flagImage?.node?.sourceUrl}
+            alt={recommendedProduct?.produktslander?.nodes[0]?.name}
+            width={30}
+            height={30}
+            className="object-cover lg:ml-3"
+          />
           <h3 className="text-sm  lg:text-lg  text-black font-medium ">
             {/* {recommendedProduct.title}
            Faktarutaaaa */}

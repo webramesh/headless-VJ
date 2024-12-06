@@ -250,6 +250,20 @@ export async function getPostProductRecommendationBySlug(slug) {
                 produkter {
                   nodes {
                     title
+                    produktslander {
+                      nodes {
+                        name
+                      }
+                      nodes {
+                        flag {
+                          flagImage {
+                            node {
+                              sourceUrl
+                            }
+                          }
+                        }
+                      }
+                    }
                     featuredImage {
                       node {
                         sourceUrl

@@ -19,7 +19,7 @@ async function fetchAllItems(queryName, query) {
           }
         `,
         variables: {
-          first: 100,
+          first: 1000,
           after: endCursor,
         },
       });
@@ -174,6 +174,25 @@ export async function getAllVinimporterer() {
     'vinimporterer',
     `
     vinimporterer(first: $first, after: $after) {
+      nodes {
+        id
+        title
+        slug
+      }
+      pageInfo {
+        hasNextPage
+        endCursor
+      }
+    }
+  `
+  );
+}
+
+export async function getAllProdukter() {
+  return fetchAllItems(
+    'produkter',
+    `
+    produkter(first: $first, after: $after) {
       nodes {
         id
         title

@@ -7,13 +7,14 @@ import {
   getAllRegioner,
   getAllVinguide,
   getAllVinimporterer,
+  getAllProdukter,
 } from '../../../lib/api/sitemapApi';
 import Link from 'next/link';
 
 export const metadata = {
   title: 'Site Content | Vinjournalen.se',
   description:
-    'Explore all content on our site including pages, ordlista, news, posts, producers, regions, wine guides, and wine importers.',
+    'Explore all content on our site including pages, ordlista, news, posts, producers, regions, wine guides, wine importers, and products.',
 };
 
 function ContentSection({ title, items, baseUrl }) {
@@ -48,17 +49,19 @@ export default async function SiteContent() {
   const regioner = await getAllRegioner();
   const vinguide = await getAllVinguide();
   const vinimporterer = await getAllVinimporterer();
+  const produkter = await getAllProdukter();
 
   return (
     <div className="w-full px-2 sm:px-4 lg:px-6">
       <ContentSection title="Pages" items={pages} baseUrl="" />
       <ContentSection title="Ordlista" items={ordlistaPages} baseUrl="/ordlista" />
       <ContentSection title="Nyheter" items={nyheterPages} baseUrl="/nyheter" />
-      <ContentSection title="Posts" items={posts} baseUrl="/post" />
-      <ContentSection title="Producenter" items={producenter} baseUrl="/producent" />
-      <ContentSection title="Regioner" items={regioner} baseUrl="/region" />
+      <ContentSection title="Posts" items={posts} baseUrl="" />
+      <ContentSection title="Producenter" items={producenter} baseUrl="/producenter" />
+      <ContentSection title="Regioner" items={regioner} baseUrl="/regioner" />
       <ContentSection title="Vinguide" items={vinguide} baseUrl="/vinguide" />
       <ContentSection title="Vinimportörer" items={vinimporterer} baseUrl="/vinimportorer" />
+      <ContentSection title="Produkter" items={produkter} baseUrl="/produkter" />
     </div>
   );
 }

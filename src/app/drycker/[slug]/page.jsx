@@ -9,15 +9,15 @@ import Content from '../Components/Content';
 import { getPageBySlug } from '@/src/lib/api/pageApi';
 import { generateSeoMetadata } from '@/src/utils/utils';
 
-// export async function generateMetadata({ params }) {
-//   const { products } = await getProductsByType(params.slug);
+export async function generateMetadata({ params }) {
+  const data = await getPageBySlug(`drycker/${params.slug}`);
 
-//   const seo = products?.seo;
+  const seo = data?.seo;
 
-//   if (seo) {
-//     return generateSeoMetadata(seo);
-//   }
-// }
+  if (seo) {
+    return generateSeoMetadata(seo);
+  }
+}
 
 export default async function Home({ params, searchParams }) {
   const { name, products } = await getProductsByType(params.slug);

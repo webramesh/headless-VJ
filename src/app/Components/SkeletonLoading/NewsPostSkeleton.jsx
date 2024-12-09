@@ -1,6 +1,4 @@
-import React from 'react';
-
-const NewsPostSkeleton = ({ title = '', subtitle = '' }) => {
+const NewsPostSkeleton = () => {
   return (
     <div className="container mx-auto mt-10 p-2 animate-pulse">
       <div className="font-outfit text-center font-extralight text-red-500">

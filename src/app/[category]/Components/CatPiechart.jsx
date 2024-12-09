@@ -3,9 +3,7 @@ import { PieChart as RechartsPieChart, Pie, Cell, ResponsiveContainer, Tooltip, 
 
 const COLORS = ['#e51136', '#f199a8'];
 
-export default function PieChart({ data, title }) {
-  const totalValue = 12;
-
+export default function PieChart({ data, title, total }) {
   return (
     <div className="flex flex-col items-center justify-center w-full">
       <ResponsiveContainer width="100%" height={100}>
@@ -24,6 +22,7 @@ export default function PieChart({ data, title }) {
             {data.map((entry, index) => (
               <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
             ))}
+
             <Label
               content={({ viewBox }) => {
                 const { cx, cy } = viewBox;
@@ -36,7 +35,7 @@ export default function PieChart({ data, title }) {
                     dominantBaseline="central"
                     className="text-xs font-medium"
                   >
-                    {`${data[0].value}/${totalValue}`}
+                    {`${data[0].value}/${total}`}
                   </text>
                 );
               }}

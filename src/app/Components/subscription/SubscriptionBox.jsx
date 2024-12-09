@@ -27,22 +27,24 @@ const SubscriptionBox = () => {
     });
   }, [ordlista]);
 
-  const TitleSection = ({ icon, label, title }) => (
-    <div className="flex md:flex-col items-center gap-6 md:gap-0">
-      <div className="w-12 h-12 flex-shrink-0">
-        <Image src={icon} alt={label} width={64} height={64} className="w-10 h-10 md:w-8 md:h-8" />
-        {/* <Image src={icon} alt={label} width={54} height={54} className="object-cover w-full h-full" /> */}
+  const TitleSection = ({ icon, label, title }) => {
+    return (
+      <div className="flex md:flex-col items-center gap-6 md:gap-0">
+        <div className="w-12 h-12 flex-shrink-0">
+          <Image src={icon} alt={label} width={64} height={64} className="w-10 h-10 md:w-8 md:h-8" />
+          {/* <Image src={icon} alt={label} width={54} height={54} className="object-cover w-full h-full" /> */}
+        </div>
+        <div className="text-start md:text-center">
+          <div className="text-sm font-semibold">{label}</div>
+          <p className="text-sm text-red-600">
+            {/* {title?.title && <Link href={`${title?.uri}`}>{title?.title || ''}</Link>} */}
+            {title?.title && <Link href={`/ordlista/druvor/${title?.slug}`}>{title?.title || ''}</Link>}
+            {/* {title?.title && <Link href={`http://localhost:3000/${title?.uri}`}>{title?.title || ''}</Link>} */}
+          </p>
+        </div>
       </div>
-      <div className="text-start md:text-center">
-        <div className="text-sm font-semibold">{label}</div>
-        <p className="text-sm text-red-600">
-          {/* {title?.title && <Link href={`${title?.uri}`}>{title?.title || ''}</Link>} */}
-          {title?.title && <Link href={`/ordlista`}>{title?.title || ''}</Link>}
-          {/* {title?.title && <Link href={`http://localhost:3000/${title?.uri}`}>{title?.title || ''}</Link>} */}
-        </p>
-      </div>
-    </div>
-  );
+    );
+  };
 
   return (
     <div className="w-full bg-[#f5f5f5] p-6 sm:p-8">

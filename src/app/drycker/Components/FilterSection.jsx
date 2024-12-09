@@ -1,5 +1,5 @@
 'use client';
-import { useEffect, useMemo, useReducer, useState } from 'react';
+import { useCallback, useEffect, useMemo, useReducer, useState } from 'react';
 import ProductCard from '../../Components/ProductCard';
 import Pagination from '../../Components/pagination/Pagination';
 import { usePagination } from '@/src/context/PageContext';
@@ -7,6 +7,8 @@ import FilterFields from './FilterFields';
 import { getAllProductsByType } from '@/src/lib/api/dryckerApi';
 import { extractFields, filterProducts } from '@/src/utils/utils';
 import { useFilters } from '@/src/context/FilterContext';
+import SelectedFilter from './SelectedFilter';
+import { useRouter } from 'next/navigation';
 
 const PRODUCTS_PER_PAGE = 15;
 
@@ -35,19 +37,6 @@ function extractOptionsAndCounts(products, dispatch) {
   });
 }
 
-const fetchProducts = async (slug, dispatch, setAllProducts, extractOptionsAndCounts, dispatchForExtract) => {
-  dispatch({ type: 'CHANGE_LOADING', payload: true });
-  try {
-    const products = await getAllProductsByType(slug);
-    setAllProducts(products);
-    extractOptionsAndCounts(products, dispatchForExtract);
-  } catch (error) {
-    console.error('Error fetching products:', error);
-  } finally {
-    dispatch({ type: 'CHANGE_LOADING', payload: false });
-  }
-};
-
 const FilterSection = ({ initialProducts, slug, filters }) => {
   const initialState = useMemo(
     () => ({
@@ -55,8 +44,8 @@ const FilterSection = ({ initialProducts, slug, filters }) => {
       sortimentOptions: [],
       organicCount: 0,
       sustainableCount: 0,
-      priceRange: { minPrice: 0, maxPrice: Infinity },
-      volumeRange: { minVolume: 0, maxVolume: Infinity },
+      priceRange: { minPrice: 0, maxPrice: 85000 },
+      volumeRange: { minVolume: 0, maxVolume: 18000 },
     }),
     []
   );
@@ -68,7 +57,7 @@ const FilterSection = ({ initialProducts, slug, filters }) => {
   const { pageNumber, loading } = pageState;
   const startIndex = (pageNumber - 1) * PRODUCTS_PER_PAGE;
   const endIndex = startIndex + PRODUCTS_PER_PAGE;
-  const { state: filterState } = useFilters();
+  const { state: filterState, dispatch: filterDispatch } = useFilters();
 
   const [allProducts, setAllProducts] = useState([]);
   const [products, setProducts] = useState([]);
@@ -78,19 +67,62 @@ const FilterSection = ({ initialProducts, slug, filters }) => {
   useEffect(() => {
     pageDispatch({ type: 'RESET', payload: PRODUCTS_PER_PAGE });
     setReset(true);
-  }, [pageDispatch, filters]);
+  }, [pageDispatch]);
+
+  const fetchProducts = useCallback(async () => {
+    pageDispatch({ type: 'CHANGE_LOADING', payload: true });
+    try {
+      const products = await getAllProductsByType(slug);
+      setAllProducts(products);
+      extractOptionsAndCounts(products, dispatch);
+    } catch (error) {
+      console.error('Error fetching products:', error);
+    } finally {
+      pageDispatch({ type: 'CHANGE_LOADING', payload: false });
+    }
+  }, [pageDispatch, slug]);
 
   useEffect(() => {
-    if (reset) fetchProducts(slug, pageDispatch, setAllProducts, extractOptionsAndCounts, dispatch);
-  }, [slug, reset, pageDispatch]);
+    if (reset) fetchProducts();
+  }, [reset, fetchProducts]);
 
   useEffect(() => {
     setProducts(filteredProducts.slice(startIndex, endIndex));
   }, [startIndex, endIndex, filteredProducts]);
 
   useEffect(() => {
-    setFilteredProducts(filterProducts(allProducts, filterState));
+    const handleFilterChange = () => {
+      const newFilteredProducts = filterProducts(allProducts, filterState);
+      setFilteredProducts(newFilteredProducts);
+    };
+
+    handleFilterChange();
   }, [allProducts, filterState]);
+
+  const router = useRouter();
+  const clearAllFilters = useCallback(() => {
+    router.push(window.location.pathname, undefined, { shallow: true, scroll: false });
+    filterDispatch({ type: 'RESET', payload: { volumeRange, priceRange } });
+  }, [router, filterDispatch, volumeRange, priceRange]);
+
+  const clearSpecificFilters = useCallback(
+    (key) => {
+      const url = new URL(window.location);
+      url.searchParams.delete(key);
+      router.push(url.pathname + url.search, undefined, { shallow: true, scroll: false });
+      filterDispatch({ type: 'RESET_ONE', payload: key });
+    },
+    [router, filterDispatch]
+  );
+
+  const selectedFilters = useMemo(() => {
+    return Object.entries(filters).map(([key, value]) => ({ key, value }));
+  }, [filters]);
+
+  const displayProducts = useMemo(() => {
+    if (loading) return initialProducts;
+    return products;
+  }, [loading, initialProducts, products]);
 
   return (
     <div className="container mx-auto">
@@ -111,9 +143,19 @@ const FilterSection = ({ initialProducts, slug, filters }) => {
           {/* Rightside */}
           <div className="w-full lg:w-[80%] flex flex-col">
             <div className="text-2xl md:text-3xl  text-center pl-3 mb-4 md:mb-6">Alla roséviner</div>
+            <div className="flex gap-2 items-center flex-wrap">
+              {selectedFilters.length > 0 && (
+                <SelectedFilter filter={'Reset all'} onClick={clearAllFilters} borderColor={'#cc8181'} noCross />
+              )}
+              {selectedFilters?.map((filter, index) => (
+                <div key={index}>
+                  <SelectedFilter onClick={clearSpecificFilters} filter={filter} />
+                </div>
+              ))}
+            </div>
             <div className="container mx-auto p-8">
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                {(loading ? initialProducts : products).map((product) => (
+                {displayProducts.map((product) => (
                   <div key={product.id} className="col-span-1">
                     <ProductCard product={product} />
                   </div>

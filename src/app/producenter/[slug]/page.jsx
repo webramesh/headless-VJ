@@ -1,5 +1,17 @@
+import { getPageBySlug } from '@/src/lib/api/pageApi';
 import Map from '../../Components/Map';
 import Content from '../components/Content';
+import { generateSeoMetadata } from '@/src/utils/utils';
+
+export async function generateMetadata({ params }) {
+  const data = await getPageBySlug(`producenter/${params.slug}`);
+
+  const seo = data?.seo;
+
+  if (seo) {
+    return generateSeoMetadata(seo);
+  }
+}
 
 export default function page({ params }) {
   return (

@@ -73,6 +73,12 @@ export async function getPageBySlug(slug) {
             title
             content
             slug
+            faq {
+              faq {
+                faqQuestion
+                faqAnswer
+              }
+            }
             seo {
               title
               robots

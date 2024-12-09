@@ -33,7 +33,7 @@ const FactBox = ({ recommendedProduct, smakar, aromer, fargers, matkombinationer
       <div className="block  md:grid grid-cols-2  justify-items-stretch items-center pt-4  ">
         <div className="text-center mb-4  md:mb-0 md:text-left flex items-center  gap-3 container mx-auto px-4">
           <Image src={ellipse} alt="Citran Wine" className="object-cover" />
-          <h3 className="text-sm  lg:text-lg  text-black font-medium ">
+          <h3 className="text-sm  lg:text-md  text-black font-medium ">
             {/* {recommendedProduct.title}
            Faktarutaaaa */}
             {recommendedProduct?.title}
@@ -51,7 +51,7 @@ const FactBox = ({ recommendedProduct, smakar, aromer, fargers, matkombinationer
         <>
           {/* for medium to large screen */}
           {total > 0 && <hr />}
-          <div className="hidden   md:grid grid-cols-6 justify-between items-center">
+          <div className="hidden md:grid grid-cols-6 justify-between items-center">
             {total > 0 && (
               <>
                 <div className="col-span-1">

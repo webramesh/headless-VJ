@@ -13,11 +13,6 @@ function FilterFields({ typs, sortiments, organicCount, sustainableCount, priceR
   const { storlek, pris, ekologisk, hallbar, typ, sortiment } = state;
   const router = useRouter();
 
-  const resetFilter = useCallback(() => {
-    router.push(window.location.pathname, undefined, { shallow: true });
-    dispatch({ type: 'RESET', payload: { volumeRange, priceRange } });
-  }, [router, dispatch, volumeRange, priceRange]);
-
   useEffect(() => {
     if (priceRange) {
       dispatch({ type: 'SET_PRIS', payload: { minPrice: priceRange.minPrice, maxPrice: priceRange.maxPrice } });
@@ -51,13 +46,13 @@ function FilterFields({ typs, sortiments, organicCount, sustainableCount, priceR
 
   useEffect(() => {
     const params = updateURLSearchParams();
-    router.push(`${window.location.pathname}?${params}`, undefined, { shallow: true });
+    router.push(`${window.location.pathname}?${params}`, undefined, { shallow: true, scroll: false });
   }, [router, updateURLSearchParams]);
 
   return (
     <div className="lg:sticky lg:top-6 lg:max-h-screen  flex flex-col">
       <div className="text-2xl lg:text-3xl  items-start lg:pl-3 px-4 lg:px-0">Filter</div>
-      <button onClick={resetFilter}>Reset</button>
+
       <div className="mt-2 lg:mt-4 px-4 lg:px-0">
         <Slider title={'Storlek'} range={storlek} maxValue={volumeRange?.maxVolume} rangeKey={'storlek'} />
         <Slider title={'Pris'} range={pris} maxValue={priceRange?.maxPrice} rangeKey={'pris'} />

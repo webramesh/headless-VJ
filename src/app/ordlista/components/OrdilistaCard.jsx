@@ -1,11 +1,8 @@
 'use client';
-import Image from 'next/image';
 import Link from 'next/link';
-import wine1 from '@/public/wine1.png';
 
 const OrdilistaCard = ({ ordlista, showCategory = true }) => {
   const ordlistaCategory = ordlista?.ordlistaCategories?.nodes[0];
-  const imageUrl = ordlista?.featuredImage?.node?.sourceUrl;
   return (
     <div className="flex flex-col items-center shadow-sm py-8 mt-6 px-4 bg-white">
       <Link href={`/ordlista/${ordlistaCategory?.slug}/${ordlista?.slug}`}>

@@ -51,13 +51,6 @@ const Slider = ({ title, range, maxValue, rangeKey }) => {
     document.addEventListener('mouseup', handleMouseUp);
   };
 
-  const handleInputChange = (index) => (e) => {
-    const value = parseInt(e.target.value);
-    if (!isNaN(value) && value >= 0 && value <= maxValue) {
-      handleRangeChange(index, value, maxValue);
-    }
-  };
-
   return (
     <>
       <h3 className=" text-left text-lg  pl-3 py-1">
@@ -67,18 +60,8 @@ const Slider = ({ title, range, maxValue, rangeKey }) => {
         <div className="pb-5 flex flex-col sm:flex-row sm:justify-start sm:gap-18 text-sm pl-3">
           <div className="w-full max-w-md mx-auto mt-2">
             <div className="flex justify-between mb-4">
-              <input
-                type="number"
-                value={range[0]}
-                onChange={handleInputChange(0)}
-                className="w-20 px-2 py-1 border rounded"
-              />
-              <input
-                type="number"
-                value={range[1]}
-                onChange={handleInputChange(1)}
-                className="w-20 px-2 py-1 border rounded"
-              />
+              <span className="w-20 px-2 py-1 ">{range[0]}</span>
+              <span className="w-20 px-2 py-1 ">{range[1]}</span>
             </div>
             <div className="relative h-1 bg-gray-200 rounded-full">
               <div ref={sliderRef} className="absolute top-0 left-0 right-0 bottom-0 rounded-full"></div>

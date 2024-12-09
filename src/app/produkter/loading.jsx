@@ -1,4 +1,3 @@
-import NavbarSkeleton from '../Components/SkeletonLoading/NavbarSkeleton';
 import SidebarSkeleton from '../Components/SkeletonLoading/SidebarSkeleton';
 import ProductCardSkeleton from '../Components/SkeletonLoading/ProductCardSkeleton';
 

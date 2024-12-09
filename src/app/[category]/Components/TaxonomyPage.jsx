@@ -3,9 +3,14 @@ import Sidebar from '../../Components/Sidebar';
 import SubscriptionForm from '../../Components/subscription/SubscriptionForm';
 import ProductsByTaxonomy from './ProductsByTaxonomy';
 import PostAccordion from '../../Components/PostAccordion';
+import { redirect } from 'next/navigation';
 
 async function TaxonomyPage({ params }) {
-  const { name, totalProducts } = await countProductsByTaxonomy(params.category, params.slug);
+  const taxonomyData = await countProductsByTaxonomy(params.category, params.slug);
+  if (!taxonomyData) {
+    redirect('/not-found');
+  }
+  const { name, totalProducts } = taxonomyData;
   return (
     <div className="container mx-auto px-4 sm:px-6 lg:px-8">
       <div className="flex flex-col lg:flex-row lg:gap-10 mt-12">

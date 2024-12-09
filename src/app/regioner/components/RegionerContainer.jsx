@@ -1,7 +1,7 @@
 'use client';
 
 import { getAllRegions } from '@/src/lib/api/regionerAPI';
-import Map from '../../Components/Map';
+// import Map from '../../Components/Map';
 import RegionalCardItem from '../../Components/regionalCard/RegionalCardItem';
 import { usePagination } from '@/src/context/PageContext';
 import { useEffect, useState } from 'react';
@@ -40,9 +40,9 @@ const RegionerContainer = ({ totalRegioners }) => {
 
   return (
     <>
-      <div className="h-[50vh] px-2 md:px-4">
+      {/* <div className="h-[50vh] px-2 md:px-4">
         <Map />
-      </div>
+      </div> */}
 
       <div className=" w-full grid container mx-auto justify-between gap-6  grid-cols-1 md:grid-cols-2 lg:grid-cols-4   mt-6">
         {/* <div className="w-full mx-4 md:mx-auto mt-5 block md:grid md:grid-cols-2 lg:grid-cols-3  gap-4 "> */}

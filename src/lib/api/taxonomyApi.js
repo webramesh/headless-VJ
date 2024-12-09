@@ -12,6 +12,7 @@ const slugToTaxonomy = {
   color: 'farger',
   food: 'matkombination',
   'produkt-typer': 'produktTyp',
+  'produkt-land': 'produktLand',
   taste: 'smak',
   grape: 'vinstock',
 };

@@ -1,6 +1,6 @@
 import { getLandBySlug } from '@/src/lib/api/landerAPI';
 import BreadCrumb from '../../Components/breadcrumb/BreadCrumb';
-import Map from '../../Components/Map';
+// import Map from '../../Components/Map';
 import RegionalCardItem from '../../Components/regionalCard/RegionalCardItem';
 import { generateSeoMetadata } from '@/src/utils/utils';
 
@@ -23,9 +23,9 @@ async function page({ params }) {
         <div className="w-full  flex flex-col gap-2">
           <BreadCrumb title1="Lander" link1="/vin-atlas" title2={name} />
 
-          <div className="h-96 w-full">
+          {/* <div className="h-96 w-full">
             <Map />
-          </div>
+          </div> */}
         </div>
       </div>
       <div className="container mx-auto">

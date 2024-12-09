@@ -1,7 +1,7 @@
 import React from 'react';
 import ContactForm from '../Components/contact/ContactForm.jsx';
 import ContactInfo from '../Components/contact/ContactInfo.jsx';
-import Map from '../Components/Map';
+// import Map from '../Components/Map';
 import SubscriptionBox from '../Components/subscription/SubscriptionBox.jsx';
 import SubscriptionForm from '../Components/subscription/SubscriptionForm.jsx';
 import { generateSeoMetadata } from '@/src/utils/utils.js';
@@ -44,9 +44,9 @@ const page = () => {
       </div>
 
       <div className="container md:mx-auto max-w-6xl mt-16 ">
-        <div className="h-[50vh] w-full mx-4 md:mx-auto">
+        {/* <div className="h-[50vh] w-full mx-4 md:mx-auto">
           <Map />
-        </div>
+        </div> */}
 
         <div className="container mx-auto block md:grid grid-cols-6 items-center justify-between gap-14  my-10">
           <div className="col-span-4">

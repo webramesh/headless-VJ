@@ -62,13 +62,8 @@ const CommentForm = ({ post }) => {
     <div
       className="
       shadow 
+      p-3
       rounded-sm 
-      px-4 
-      sm:px-8 
-      lg:px-32 
-      py-6 
-      sm:py-7 
-      lg:py-8 
       w-full 
       mx-auto
     "
@@ -77,7 +72,6 @@ const CommentForm = ({ post }) => {
         className="
         text-lg 
         sm:text-xl 
-        lg:text-xl 
         font-semibold 
         text-gray-800 
         mb-2 
@@ -93,8 +87,8 @@ const CommentForm = ({ post }) => {
         text-gray-500 
         font-light 
         italic 
-        text-xs 
-        sm:text-sm
+        text-sm 
+        sm:text-md
       "
       >
         Din e-postadress kommer inte publiceras.
@@ -110,15 +104,15 @@ const CommentForm = ({ post }) => {
             <label
               className="
               block 
-              text-xs 
-              sm:text-sm 
+              text-sm 
+              sm:text-md 
               font-medium 
               text-gray-700 
               mb-1 
               sm:mb-2
             "
             >
-              Name
+              Namn
             </label>
             <input
               type="text"
@@ -130,8 +124,8 @@ const CommentForm = ({ post }) => {
                 border 
                 border-gray-300 
                 text-gray-900 
-                text-xs 
-                sm:text-sm 
+                text-sm 
+                sm:text-md 
                 rounded-lg 
                 focus:ring-red-500 
                 focus:border-red-500 
@@ -148,15 +142,15 @@ const CommentForm = ({ post }) => {
             <label
               className="
               block 
-              text-xs 
-              sm:text-sm 
+              text-sm
+              sm:text-md 
               font-medium 
               text-gray-700 
               mb-1 
               sm:mb-2
             "
             >
-              Email
+              E-post
             </label>
             <input
               type="email"
@@ -168,8 +162,8 @@ const CommentForm = ({ post }) => {
                 border 
                 border-gray-300 
                 text-gray-900 
-                text-xs 
-                sm:text-sm 
+                text-sm
+                sm:text-md 
                 rounded-lg 
                 focus:ring-red-500 
                 focus:border-red-500 
@@ -189,27 +183,27 @@ const CommentForm = ({ post }) => {
           <label
             className="
             block 
-            text-xs 
-            sm:text-sm 
+            text-sm 
+            sm:text-md 
             font-medium 
             text-gray-700 
             mb-1 
             sm:mb-2
           "
           >
-            Comment
+            Kommentar
           </label>
           <textarea
             value={content}
             onChange={(e) => setContent(e.target.value)}
-            placeholder="Write your comment here..."
+            placeholder="Skriv din kommentar här..."
             className="
               bg-gray-50 
               border 
               border-gray-300 
               text-gray-900 
-              text-xs 
-              sm:text-sm 
+              text-sm 
+              sm:text-md 
               rounded-lg 
               focus:ring-red-500 
               focus:border-red-500 
@@ -240,14 +234,14 @@ const CommentForm = ({ post }) => {
               border-transparent 
               rounded-md 
               shadow-sm 
-              text-xs 
-              sm:text-sm 
+              text-sm 
+              sm:text-md 
               font-medium 
               text-white 
               ${loading ? 'bg-gray-400 cursor-not-allowed' : 'bg-red-500 hover:bg-red-600'}
             `}
           >
-            {loading ? 'Submitting...' : 'Submit'}
+            {loading ? 'Inlämnande...' : 'Skicka in'}
           </button>
         </div>
       </form>

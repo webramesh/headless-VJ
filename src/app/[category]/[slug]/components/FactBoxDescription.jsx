@@ -11,23 +11,34 @@ const FactBoxDescription = ({ fieldsProduct }) => {
           </div>
           <div className="flex flex-col pl-4 lg:pl-14">
             <div className=" text-black text-xs">ALKOHOL</div>
-            <div className="text-gray-500 text-xs">{fieldsProduct?.alcohol} %</div>
+            <div className="text-gray-500 text-xs">
+              {fieldsProduct?.alcohol ? <p>{fieldsProduct?.alcohol} % </p> : <p>N/A</p>}
+            </div>
           </div>
           <div className="flex flex-col pl-4 lg:pl-8">
             <div className=" text-black text-xs">ÅRGÅNG</div>
-            <div className="text-gray-500 text-xs">{fieldsProduct?.vintage}</div>
+            <div className="text-gray-500 text-xs">
+              {fieldsProduct?.vintage ? <p>{fieldsProduct?.vintage} </p> : <p>N/A</p>}
+            </div>
           </div>
           <div className="flex flex-col pl-4 lg:pl-8">
             <div className=" text-black text-xs">VOLYM</div>
-            <div className="text-gray-500 text-xs">{fieldsProduct?.bottlePackageVolume} ml</div>
+            <div className="text-gray-500 text-xs">
+              {fieldsProduct?.volume ? <p>{fieldsProduct?.volume} ml </p> : <p>N/A</p>}
+            </div>
           </div>
           <div className="flex flex-col pl-4 lg:pl-14">
             <div className=" text-black text-xs">DRUVOR</div>
-            <div className="text-gray-500 text-xs">{fieldsProduct?.composition}</div>
+            <div className="text-gray-500 text-xs">
+              {fieldsProduct?.composition ? <p>{fieldsProduct?.composition} </p> : <p>N/A</p>}
+            </div>
           </div>
           <div className="flex flex-col pl-4 lg:pl-8">
             <div className=" text-black text-xs">ALLERGENER</div>
-            <div className="text-gray-500 text-xs">{fieldsProduct?.allergener}</div>
+            <div className="text-gray-500 text-xs">
+              {/* {fieldsProduct?.allergener} */}
+              {fieldsProduct?.allergener ? <p>{fieldsProduct?.allergener} </p> : <p>N/A</p>}
+            </div>
           </div>
         </div>
       </div>

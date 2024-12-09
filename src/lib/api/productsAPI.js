@@ -137,6 +137,20 @@ export async function getProductBySlug(identifier) {
           produktBy(slug: $slug) {
             title
             slug
+            produktslander {
+              nodes {
+                name
+              }
+              nodes {
+                flag {
+                  flagImage {
+                    node {
+                      sourceUrl
+                    }
+                  }
+                }
+              }
+            }
 
             seo {
               title

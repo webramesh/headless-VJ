@@ -22,6 +22,7 @@ export default function PieChart({ data, title, total }) {
             {data.map((entry, index) => (
               <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
             ))}
+
             <Label
               content={({ viewBox }) => {
                 const { cx, cy } = viewBox;

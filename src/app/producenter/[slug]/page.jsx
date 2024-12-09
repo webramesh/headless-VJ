@@ -1,5 +1,5 @@
 import { getPageBySlug } from '@/src/lib/api/pageApi';
-import Map from '../../Components/Map';
+// import Map from '../../Components/Map';
 import Content from '../components/Content';
 import { generateSeoMetadata } from '@/src/utils/utils';
 
@@ -18,9 +18,9 @@ export default function page({ params }) {
     <div className="container mx-auto lg:mt-10 p-2">
       <div className="md:flex gap-2">
         <Content params={params} />
-        <div className="w-1/2">
+        {/* <div className="w-1/2">
           <Map />
-        </div>
+        </div> */}
       </div>
     </div>
   );

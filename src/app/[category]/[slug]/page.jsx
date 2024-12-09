@@ -18,18 +18,19 @@ export async function generateMetadata({ params }) {
   const { category, slug } = params;
 
   const post = await getPostBySlug(slug);
+  const taxonomy = await getTaxonomySEO(category, slug);
   if (post) {
     const { seo } = post;
     if (seo) {
       return generateSeoMetadata(seo);
     }
-  } else {
-    const taxonomySeo = await getTaxonomySEO(category, slug);
-
-    const { seo } = taxonomySeo;
+  } else if (taxonomy) {
+    const { seo } = taxonomy;
     if (seo) {
       return generateSeoMetadata(seo);
     }
+  } else {
+    return null;
   }
 }
 

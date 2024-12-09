@@ -62,7 +62,8 @@ const CommentForm = ({ post }) => {
     <div
       className="
       shadow 
-      p-3
+      bg-white
+      p-12
       rounded-sm 
       w-full 
       mx-auto

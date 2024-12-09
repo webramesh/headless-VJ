@@ -14,6 +14,7 @@ import { generateSeoMetadata } from '@/src/utils/utils';
 import { getTaxonomySEO } from '@/src/lib/api/taxonomyApi';
 
 export const revalidate = 60;
+
 export async function generateMetadata({ params }) {
   const { category, slug } = params;
 

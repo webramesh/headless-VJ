@@ -24,6 +24,7 @@ export default function ProdukterPage({ totalProducts }) {
     const fetchProducts = async () => {
       dispatch({ type: 'CHANGE_LOADING', payload: true });
       const { products, pageInfo } = await getAllProducts(first, last, after, before);
+
       if (products && pageInfo) {
         setProducts(products);
         setPageInfo(pageInfo);

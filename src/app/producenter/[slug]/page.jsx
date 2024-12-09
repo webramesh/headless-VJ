@@ -4,7 +4,6 @@ import Content from '../components/Content';
 import { generateSeoMetadata } from '@/src/utils/utils';
 
 export async function generateMetadata({ params }) {
-  console.log(params);
   const data = await getPageBySlug(`producenter/${params.slug}`);
 
   const seo = data?.seo;
@@ -13,8 +12,6 @@ export async function generateMetadata({ params }) {
     return generateSeoMetadata(seo);
   }
 }
-
-
 
 export default function page({ params }) {
   return (

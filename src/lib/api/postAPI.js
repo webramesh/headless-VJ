@@ -270,6 +270,7 @@ export async function getPostProductRecommendationBySlug(slug) {
                       }
                     }
                     fieldsProduct {
+                      buyLink
                       pice
                       productCode
                       wineSortiment

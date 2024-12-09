@@ -11,8 +11,7 @@ import jsPDF from 'jspdf';
 import FactBoxMatCombinationer from '../../[category]/[slug]/components/FactBoxMatCombinationer';
 import FactBoxDescription from '../../[category]/[slug]/components/FactBoxDescription';
 import FactBoxMoreInfo from '../../[category]/[slug]/components/FactBoxMoreInfo';
-
-export const revalidate = 0;
+import ProductLabelsWithTooltips from './ProductLabelsWithTooltip';
 
 export default function ProductSection({ product }) {
   const matkombinationer = product?.matkombinationer?.nodes;
@@ -48,7 +47,8 @@ export default function ProductSection({ product }) {
   } = fieldsProduct;
   const typer = produktTyper?.nodes?.filter((recommendation) => recommendation.name !== 'Vin');
 
-  const total = tasteClock1FyllighetSotma + tasteClock2Fyllighetstravhet + tasteClock3Fruktsyra;
+  // const total = tasteClock1FyllighetSotma + tasteClock2Fyllighetstravhet + tasteClock3Fruktsyra;
+  const total = 12;
   const pieChartData1 = [
     { name: 'Filled', value: tasteClock1FyllighetSotma },
     { name: 'Empty', value: total - tasteClock1FyllighetSotma },
@@ -123,6 +123,7 @@ export default function ProductSection({ product }) {
     // Open the PDF in a new window
     window.open(url);
   };
+
   return (
     <div className="container mx-auto px-4 sm:px-6 lg:px-8">
       <div className="flex flex-col md:flex-row gap-6 mt-4 py-8 lg:py-16">
@@ -143,56 +144,19 @@ export default function ProductSection({ product }) {
                 ))}
               </div>
             </div>
-            <div className="mt-4 relative">
-              {' '}
-              {/* Make the container relatively positioned */}
-              <div className="absolute">
-                {fieldsProduct?.productLabels?.map((label) => {
-                  const productLabel = label.toLowerCase();
-                  return (
-                    <div key={Math.random()}>
-                      {productLabel === 'new' && (
-                        <Image src="/new.svg" width={50} height={50} className="my-1" alt="new" />
-                      )}
-                      {productLabel === 'available only online' && (
-                        <Image src="/ekologisk.svg" width={50} height={50} className="my-1" alt="ekologisk" />
-                      )}
-                      {productLabel === 'organic' && (
-                        <Image src="/vegan.svg" width={50} height={50} className="my-1" alt="vegan" />
-                      )}
-                      {productLabel === 'vegan' && (
-                        <Image src="/vegan.svg" width={50} height={50} className="my-1" alt="vegan" />
-                      )}
-                      {productLabel === 'best seller' && (
-                        <Image src="/best-seller.svg" width={50} height={50} className="my-1" alt="best-seller" />
-                      )}
-                      {productLabel === 'family winery' && (
-                        <Image src="/family.svg" width={50} height={50} className="my-1" alt="Family Winery" />
-                      )}
-                      {productLabel === 'verified by vjse' && (
-                        <Image src="/verified.svg" width={50} height={50} className="my-1" alt="Verified By VJSE" />
-                      )}
-                      {productLabel === 'featured' && (
-                        <Image src="/vegan.svg" width={50} height={50} className="my-1" alt="Featured" />
-                      )}
-                      {productLabel === 'on sale' && (
-                        <Image src="/vegan.svg" width={50} height={50} className="my-1" alt="On Sale" />
-                      )}
-                      {productLabel === 'show wt information' && (
-                        <Image src="/vegan.svg" width={50} height={50} className="my-1" alt="Show WT Information" />
-                      )}
-                    </div>
-                  );
-                })}
+            <div className="mt-4 relative flex  gap-6">
+              <div className="w-[10%]">
+                {/* The container with absolute positioning */} {/* Add any necessary positioning like top/left */}
+                <ProductLabelsWithTooltips fieldsProduct={fieldsProduct} />
               </div>
-              <div className="relative">
+              <div className="object-cover ">
                 {/* Featured Image */}
                 <Image
                   src={featuredImage?.node?.sourceUrl}
                   alt={title}
-                  className="object-cover w-2/3 md:w-4/5 lg:w-[63%] h-auto mx-auto"
-                  width={300}
-                  height={500}
+                  className="mx-auto h-[500px]  "
+                  width={300} // Specify the width you want
+                  height={500} // Specify the height you want
                 />
 
                 {/* Add image to the bottom right of the featured image */}
@@ -262,14 +226,20 @@ export default function ProductSection({ product }) {
                     Skriv ut PDF
                   </button>
                 </div>
-                <Link
-                  href={buyLink}
-                  target="_blank"
-                  type="submit"
-                  className="w-full sm:w-[65%] text-center text-white border-red-600 border bg-red-600 rounded-full px-4 py-2"
-                >
-                  Köp på Systembolaget
-                </Link>
+
+                {buyLink ? (
+                  <Link
+                    href={buyLink}
+                    target="_blank"
+                    className="w-full sm:w-[65%] text-center border rounded-full px-4 py-2 bg-red-600 text-white block "
+                  >
+                    Köp på Systembolaget
+                  </Link>
+                ) : (
+                  <div className="w-full sm:w-[65%] text-center border rounded-full px-4 py-2 bg-red-200 text-gray-600  cursor-not-allowed">
+                    Produkten har utgått
+                  </div>
+                )}
               </div>
             </div>
             <div className="text-gray-500 text-sm  p-4">
@@ -305,15 +275,31 @@ export default function ProductSection({ product }) {
             <FactBoxDescription fieldsProduct={fieldsProduct} />
           </div>
           {/* pie chart */}
-          {total > 0 && (
+          {/* {tasteClock1FyllighetSotma || tasteClock2Fyllighetstravhet || tasteClock3Fruktsyra ? (
             <div className="bg-gray-50 mt-4 pb-6">
               <div className="grid grid-cols-1 sm:grid-cols-3 gap-8">
-                <PieChart data={pieChartData1} title="Smakintensitet" total={total} />
-                <PieChart data={pieChartData2} title="Fyllighet/Strävhet" total={total} />
-                <PieChart data={pieChartData3} title="Syra" total={total} />
+                {tasteClock1FyllighetSotma && <PieChart data={pieChartData1} title="Smakintensitet" total={total} />}
+                {tasteClock2Fyllighetstravhet && (
+                  <PieChart data={pieChartData2} title="Fyllighet/Strävhet" total={total} />
+                )}
+                {tasteClock3Fruktsyra && <PieChart data={pieChartData3} title="Syra" total={total} />}
+               
               </div>
             </div>
-          )}
+          ) : null} */}
+
+          {[tasteClock1FyllighetSotma, tasteClock2Fyllighetstravhet, tasteClock3Fruktsyra].filter(Boolean).length >=
+          2 ? (
+            <div className="bg-gray-50 mt-4 pb-6">
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-8">
+                {tasteClock1FyllighetSotma && <PieChart data={pieChartData1} title="Smakintensitet" total={total} />}
+                {tasteClock2Fyllighetstravhet && (
+                  <PieChart data={pieChartData2} title="Fyllighet/Strävhet" total={total} />
+                )}
+                {tasteClock3Fruktsyra && <PieChart data={pieChartData3} title="Syra" total={total} />}
+              </div>
+            </div>
+          ) : null}
 
           {/* end of pie chart */}
 

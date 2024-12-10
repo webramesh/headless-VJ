@@ -7,7 +7,7 @@ import { usePagination } from '@/src/context/PageContext';
 import { useEffect, useState } from 'react';
 import Pagination from '../../Components/pagination/Pagination';
 
-const REGIONS_PER_PAGE = 15;
+const REGIONS_PER_PAGE = 12;
 
 const RegionerContainer = ({ totalRegioners }) => {
   const { state, dispatch } = usePagination();

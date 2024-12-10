@@ -1,6 +1,7 @@
-'use client';
+import { useFilters } from '@/src/context/FilterContext';
 import { Cross2Icon } from '@radix-ui/react-icons';
-import React from 'react';
+import { useRouter } from 'next/navigation';
+import React, { useCallback } from 'react';
 
 function paramsToText(key, value) {
   const mappings = {
@@ -17,7 +18,7 @@ function paramsToText(key, value) {
   return mappings[key] || 'Reset All';
 }
 
-function SelectedFilter({ onClick, filter, noCross }) {
+function FilterBox({ onClick, filter, noCross }) {
   if (filter) {
     const { key, value } = filter;
     const displayText = paramsToText(key, value);
@@ -33,6 +34,39 @@ function SelectedFilter({ onClick, filter, noCross }) {
       </span>
     );
   }
+}
+
+function SelectedFilter({ selectedFilters, volumeRange, priceRange }) {
+  const { dispatch } = useFilters();
+  const router = useRouter();
+
+  const clearAllFilters = useCallback(() => {
+    router.push(window.location.pathname, undefined, { shallow: true, scroll: false });
+    dispatch({ type: 'RESET', payload: { volumeRange, priceRange } });
+  }, [router, dispatch, volumeRange, priceRange]);
+
+  const clearSpecificFilters = useCallback(
+    (key) => {
+      const url = new URL(window.location);
+      url.searchParams.delete(key);
+      router.push(url.pathname + url.search, undefined, { shallow: true, scroll: false });
+      dispatch({ type: 'RESET_ONE', payload: key });
+    },
+    [router, dispatch]
+  );
+
+  return (
+    <div className="flex gap-2 items-center flex-wrap">
+      {selectedFilters.length > 0 && (
+        <FilterBox filter={'Reset all'} onClick={clearAllFilters} borderColor={'#cc8181'} noCross />
+      )}
+      {selectedFilters?.map((filter, index) => (
+        <div key={index}>
+          <FilterBox onClick={clearSpecificFilters} filter={filter} />
+        </div>
+      ))}
+    </div>
+  );
 }
 
 export default React.memo(SelectedFilter);

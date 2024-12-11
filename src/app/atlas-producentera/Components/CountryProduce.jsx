@@ -36,10 +36,7 @@ function CountryItem({ country }) {
           </div>
         )}
       </div>
-      <Link
-        href={`/produktion-land/${country.name.toLowerCase().replace(/\s+/g, '-')}`}
-        className="flex items-center gap-2"
-      >
+      <Link href={`/produktion-land/${country.slug}`} className="flex items-center gap-2">
         <span
           className="text-base sm:text-md text-red-500 hover:text-red-600 cursor-pointer max-w-[120px] truncate"
           title={country.name}

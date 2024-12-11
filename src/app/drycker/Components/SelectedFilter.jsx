@@ -56,7 +56,7 @@ function SelectedFilter({ selectedFilters, volumeRange, priceRange }) {
   );
 
   return (
-    <div className="flex gap-2 items-center flex-wrap">
+    <div className="flex gap-2 items-center flex-wrap p-2 justify-center md:justify-start">
       {selectedFilters.length > 0 && (
         <FilterBox filter={'Reset all'} onClick={clearAllFilters} borderColor={'#cc8181'} noCross />
       )}

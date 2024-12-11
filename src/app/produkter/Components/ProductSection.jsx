@@ -12,6 +12,7 @@ import FactBoxMatCombinationer from '../../[category]/[slug]/components/FactBoxM
 import FactBoxDescription from '../../[category]/[slug]/components/FactBoxDescription';
 import FactBoxMoreInfo from '../../[category]/[slug]/components/FactBoxMoreInfo';
 import ProductLabelsWithTooltips from './ProductLabelsWithTooltip';
+import { generatePdf } from '@/src/utils/generatePDF';
 
 export default function ProductSection({ product }) {
   const matkombinationer = product?.matkombinationer?.nodes;
@@ -64,66 +65,69 @@ export default function ProductSection({ product }) {
     { name: 'Empty', value: total - tasteClock3Fruktsyra },
   ];
 
+  // const viwePdf = () => {
+  //   // Create a new PDF document
+  //   const doc = new jsPDF();
+
+  //   // Add the logo at the top center
+  //   const logoUrl =
+  //     'https://static.vecteezy.com/system/resources/previews/012/667/615/non_2x/go-to-web-icon-for-your-web-design-logo-infographic-ui-vector.jpg'; // Path to the image in the public folder
+  //   const pageWidth = doc.internal.pageSize.getWidth(); // Get the width of the page
+  //   const logoWidth = 50; // Width of the logo
+  //   const logoHeight = 20; // Height of the logo
+  //   const centerX = (pageWidth - logoWidth) / 2; // Calculate the X position to center the logo
+
+  //   if (logoUrl) {
+  //     doc.addImage(logoUrl, 'JPEG', centerX, 10, logoWidth, logoHeight); // Add the logo image
+  //   }
+
+  //   // Set font size for the content
+  //   doc.setFontSize(12);
+
+  //   // Add product details
+  //   let yOffset = 40; // Initial Y position after the logo
+
+  //   doc.text('Price: ' + pice, 10, yOffset);
+  //   yOffset += 10;
+  //   doc.text('Artikel nr: ' + productCode, 10, yOffset);
+  //   yOffset += 10;
+  //   doc.text('Sortiment: ' + wineSortiment, 10, yOffset);
+  //   yOffset += 10;
+  //   doc.text('Årgång: ' + vintage, 10, yOffset);
+  //   yOffset += 10;
+  //   doc.text('Volym: ' + bottlePackageVolume, 10, yOffset);
+  //   yOffset += 10;
+  //   doc.text('Allergener: ' + allergener, 10, yOffset);
+  //   yOffset += 10;
+
+  //   // Add calorie details
+  //   doc.text('Calories in Alcohol per 15cl: ' + caloriesInAlcPer15cl, 10, yOffset);
+  //   yOffset += 10;
+  //   doc.text('Calories in Alcohol per Container Volume: ' + caloriesInAlcPerContainerVolume, 10, yOffset);
+  //   yOffset += 10;
+  //   doc.text('Total Calories per 15cl: ' + totalCaloriesPer15Cl, 10, yOffset);
+  //   yOffset += 10;
+  //   doc.text('Total Calories per Liter: ' + totalCaloriesPerLitter, 10, yOffset);
+  //   yOffset += 10;
+  //   doc.text('Total Calories per Container Volume: ' + totalCaloriesPerContainerVolume, 10, yOffset);
+  //   yOffset += 10;
+
+  //   // Add price per liter
+  //   doc.text('Price per Liter: ' + pricePerLitter, 10, yOffset);
+
+  //   // Convert the PDF to a Blob
+  //   const blob = doc.output('blob');
+
+  //   // Create an object URL for the Blob
+  //   const url = URL.createObjectURL(blob);
+
+  //   // Open the PDF in a new window
+  //   window.open(url);
+  // };
+
   const viwePdf = () => {
-    // Create a new PDF document
-    const doc = new jsPDF();
-
-    // Add the logo at the top center
-    const logoUrl =
-      'https://static.vecteezy.com/system/resources/previews/012/667/615/non_2x/go-to-web-icon-for-your-web-design-logo-infographic-ui-vector.jpg'; // Path to the image in the public folder
-    const pageWidth = doc.internal.pageSize.getWidth(); // Get the width of the page
-    const logoWidth = 50; // Width of the logo
-    const logoHeight = 20; // Height of the logo
-    const centerX = (pageWidth - logoWidth) / 2; // Calculate the X position to center the logo
-
-    if (logoUrl) {
-      doc.addImage(logoUrl, 'JPEG', centerX, 10, logoWidth, logoHeight); // Add the logo image
-    }
-
-    // Set font size for the content
-    doc.setFontSize(12);
-
-    // Add product details
-    let yOffset = 40; // Initial Y position after the logo
-
-    doc.text('Price: ' + pice, 10, yOffset);
-    yOffset += 10;
-    doc.text('Artikel nr: ' + productCode, 10, yOffset);
-    yOffset += 10;
-    doc.text('Sortiment: ' + wineSortiment, 10, yOffset);
-    yOffset += 10;
-    doc.text('Årgång: ' + vintage, 10, yOffset);
-    yOffset += 10;
-    doc.text('Volym: ' + bottlePackageVolume, 10, yOffset);
-    yOffset += 10;
-    doc.text('Allergener: ' + allergener, 10, yOffset);
-    yOffset += 10;
-
-    // Add calorie details
-    doc.text('Calories in Alcohol per 15cl: ' + caloriesInAlcPer15cl, 10, yOffset);
-    yOffset += 10;
-    doc.text('Calories in Alcohol per Container Volume: ' + caloriesInAlcPerContainerVolume, 10, yOffset);
-    yOffset += 10;
-    doc.text('Total Calories per 15cl: ' + totalCaloriesPer15Cl, 10, yOffset);
-    yOffset += 10;
-    doc.text('Total Calories per Liter: ' + totalCaloriesPerLitter, 10, yOffset);
-    yOffset += 10;
-    doc.text('Total Calories per Container Volume: ' + totalCaloriesPerContainerVolume, 10, yOffset);
-    yOffset += 10;
-
-    // Add price per liter
-    doc.text('Price per Liter: ' + pricePerLitter, 10, yOffset);
-
-    // Convert the PDF to a Blob
-    const blob = doc.output('blob');
-
-    // Create an object URL for the Blob
-    const url = URL.createObjectURL(blob);
-
-    // Open the PDF in a new window
-    window.open(url);
+    generatePdf(fieldsProduct, product);
   };
-
   return (
     <div className="container mx-auto px-4 sm:px-6 lg:px-8">
       <div className="flex flex-col md:flex-row gap-6 mt-4 py-8 lg:py-16">
@@ -151,6 +155,7 @@ export default function ProductSection({ product }) {
               </div>
               <div className="object-cover ">
                 {/* Featured Image */}
+
                 <Image
                   src={featuredImage?.node?.sourceUrl}
                   alt={title}
@@ -161,20 +166,30 @@ export default function ProductSection({ product }) {
 
                 {/* Add image to the bottom right of the featured image */}
                 <div className="absolute bottom-0 right-0">
-                  {wineSortiment[0] === 'Beställning sortimentet' && (
-                    <Image src="/bestalling.svg" width={100} height={100} className="my-1" alt="Beställning" />
-                  )}
+                  {wineSortiment && (
+                    <div>
+                      {wineSortiment[0] === 'Beställning sortimentet' && (
+                        <Image src="/bestalling.svg" width={100} height={100} className="my-1" alt="Beställning" />
+                      )}
 
-                  {wineSortiment[0] === 'Fasta Sortimentet' && (
-                    <Image src="/fasta.svg" width={100} height={100} className="my-1" alt="Fasta Sortimentet" />
-                  )}
+                      {wineSortiment[0] === 'Fasta Sortimentet' && (
+                        <Image src="/fasta.svg" width={100} height={100} className="my-1" alt="Fasta Sortimentet" />
+                      )}
 
-                  {wineSortiment[0] === 'Exklusiva sortimentet' && (
-                    <Image src="/fasta.svg" width={100} height={100} className="my-1" alt="Exklusiva sortimentet" />
-                  )}
+                      {wineSortiment[0] === 'Exklusiva sortimentet' && (
+                        <Image src="/fasta.svg" width={100} height={100} className="my-1" alt="Exklusiva sortimentet" />
+                      )}
 
-                  {wineSortiment[0] === 'Tillfälliga sortimentet' && (
-                    <Image src="/fasta.svg" width={100} height={100} className="my-1" alt="Tillfälliga sortimentet" />
+                      {wineSortiment[0] === 'Tillfälliga sortimentet' && (
+                        <Image
+                          src="/tillfalliga.svg"
+                          width={100}
+                          height={100}
+                          className="my-1"
+                          alt="Tillfälliga sortimentet"
+                        />
+                      )}
+                    </div>
                   )}
                 </div>
               </div>

@@ -250,6 +250,7 @@ export async function getPostProductRecommendationBySlug(slug) {
                 produkter {
                   nodes {
                     title
+                    slug
                     produktslander {
                       nodes {
                         name

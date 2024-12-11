@@ -18,6 +18,7 @@ export async function generateMetadata({ params }) {
   const { category, slug } = params;
 
   const post = await getPostBySlug(slug);
+
   if (post) {
     const { seo } = post;
     if (seo) {
@@ -79,7 +80,7 @@ export default async function PostDetails({ params }) {
                   <CommentsSection comments={post?.comments?.nodes || []} />
 
                   <div className="mt-12">
-                    <CommentForm post={post} />
+                    <CommentForm data={post} />
                   </div>
                   <div className="mt-12">
                     <PostAccordion />

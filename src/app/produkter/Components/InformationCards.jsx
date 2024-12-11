@@ -114,7 +114,7 @@ const QNA = ({ productTitle, produktslander, wineSaleStartDate }) => (
             <div className=" text-sm font-medium">Hur länge har produkten {productTitle} sålts på systembolaget?</div>
           </div>
           <div className="text-gray-600 text-sm  pl-2">
-            {wineSaleStartDate ? new Date(wineSaleStartDate).toLocaleDateString('sv-SE') :'Datum ej tillgängligt'}
+            {wineSaleStartDate ? new Date(wineSaleStartDate).toLocaleDateString('sv-SE') : 'Datum ej tillgängligt'}
           </div>
         </div>
       </div>
@@ -122,7 +122,7 @@ const QNA = ({ productTitle, produktslander, wineSaleStartDate }) => (
   </div>
 );
 
-const InformationCards = ({ fieldsProduct, productTitle, typer, produktslander }) => {
+const InformationCards = ({ fieldsProduct, productTitle, typer, produktslander, data }) => {
   const {
     caloriesInAlcPer15cl,
     caloriesInAlcPerContainerVolume,
@@ -138,7 +138,11 @@ const InformationCards = ({ fieldsProduct, productTitle, typer, produktslander }
     containerType,
     produktPackaging,
     wineSaleStartDate,
+    sugarBites,
+    alcoholPerSek,
   } = fieldsProduct;
+
+  const productsLander = data?.produktslander?.nodes;
 
   const [selected, setSelected] = useState(null);
 
@@ -189,10 +193,12 @@ const InformationCards = ({ fieldsProduct, productTitle, typer, produktslander }
               </RenderBox>
               <RenderBox title="Sockerdetaljer">
                 <div className="text-xs  text-center mt-2">
-                  Socker g/l <br /> {sugerLevel}
+                  Socker g/l <br /> {sugarLevelIn1Litter ? <p> {sugarLevelIn1Litter}</p> : <p>N/A</p>}
                 </div>
                 <div className="text-xs  text-center mb-9 mt-2">
-                  Socker Per Liter <br /> {sugarLevelIn1Litter}
+                  Socker Per Liter <br />
+                  {sugarBites ? <p> {sugarBites}</p> : <p>N/A</p>}
+                  {/* {sugarBites} */}
                 </div>
               </RenderBox>
             </div>
@@ -211,7 +217,8 @@ const InformationCards = ({ fieldsProduct, productTitle, typer, produktslander }
 
               <RenderBox title="Alkhol">
                 <div className="text-xs  text-center mt-2">
-                  APK (Alkhol per krona) <br /> 0.4 :-
+                  APK (Alkhol per krona) <br />
+                  {alcoholPerSek ? <p> {alcoholPerSek} :-</p> : <p>N/A</p>}
                 </div>
                 <div className="text-xs  text-center text-gray-500 mt-2">
                   Alkohol per krona är ett mått som anger mängden alkohol som erhålls per <br />
@@ -227,7 +234,7 @@ const InformationCards = ({ fieldsProduct, productTitle, typer, produktslander }
                 </div>
                 <div className="text-xs  text-center mt-2">
                   Land <br />
-                  <div className="text-red-500 font-bold">Japan</div>
+                  <div className="text-red-500 font-bold">{productsLander[0]?.name}</div>
                 </div>
               </RenderBox>
 
@@ -241,10 +248,12 @@ const InformationCards = ({ fieldsProduct, productTitle, typer, produktslander }
           )}
 
           {selected === 3 && (
-            <div className="flex flex-col items-center mt-6 justify-center">
-              {ratingbox()}
-              {formfield()}
-            </div>
+            <>
+              <div className="flex flex-col items-center mt-6 justify-center">
+                {ratingbox()}
+                {formfield()}
+              </div>
+            </>
           )}
 
           {selected === 4 && (

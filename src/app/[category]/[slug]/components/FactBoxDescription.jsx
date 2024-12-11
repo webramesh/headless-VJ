@@ -5,9 +5,16 @@ const FactBoxDescription = ({ fieldsProduct }) => {
         <div className="grid grid-cols-2 lg:grid-cols-3 gap-4  ">
           <div className="pl-4 lg:pl-8">
             <div className="text-black text-xs">SORTIMENT</div>
-            {fieldsProduct?.wineSortiment && (
-              <div className="text-gray-500 text-xs">{fieldsProduct?.wineSortiment[0]}</div>
-            )}
+            <div className="text-gray-500 text-xs">
+
+            {fieldsProduct?.wineSortiment ? (<p>{fieldsProduct?.wineSortiment[0]}</p>): (<p>N/A</p>)}
+            </div>
+            {/* {fieldsProduct?.wineSortiment && (
+              // <div className="text-gray-500 text-xs">
+
+              //   {fieldsProduct?.wineSortiment[0]}
+              //   </div>
+            )} */}
           </div>
           <div className="flex flex-col pl-4 lg:pl-14">
             <div className=" text-black text-xs">ALKOHOL</div>

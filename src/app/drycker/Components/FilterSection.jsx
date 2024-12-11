@@ -52,7 +52,12 @@ function extractOptionsAgain(products, dispatch) {
     payload: { containerTypes, sortiments, organicCount, sustainableCount },
   });
 }
-const FilterSection = ({ initialProducts, slug, filters }) => {
+
+const FilterSection = ({ initialProducts, slug, filters, page }) => {
+  const fetchFunction = page === 'mainPage' ? getAllProductsByType : null;
+
+  // const fetchFunction = getAllProductsByType;
+
   const initialState = useMemo(
     () => ({
       containerTypes: [],
@@ -91,7 +96,7 @@ const FilterSection = ({ initialProducts, slug, filters }) => {
   const fetchProducts = useCallback(async () => {
     pageDispatch({ type: 'CHANGE_LOADING', payload: true });
     try {
-      const products = await getAllProductsByType(slug);
+      const products = await fetchFunction(slug);
       setAllProducts(products);
       extractOptionsAndCounts(products, dispatch);
     } catch (error) {
@@ -99,7 +104,7 @@ const FilterSection = ({ initialProducts, slug, filters }) => {
     } finally {
       pageDispatch({ type: 'CHANGE_LOADING', payload: false });
     }
-  }, [pageDispatch, slug]);
+  }, [pageDispatch, slug, fetchFunction]);
 
   useEffect(() => {
     pageDispatch({ type: 'RESET', payload: PRODUCTS_PER_PAGE });
@@ -111,7 +116,7 @@ const FilterSection = ({ initialProducts, slug, filters }) => {
   }, [reset, fetchProducts]);
 
   useEffect(() => {
-    setProducts(filteredProducts.slice(startIndex, endIndex));
+    setProducts(filteredProducts?.slice(startIndex, endIndex));
   }, [startIndex, endIndex, filteredProducts]);
 
   useEffect(() => {
@@ -145,19 +150,22 @@ const FilterSection = ({ initialProducts, slug, filters }) => {
           </div>
           {/* Rightside */}
           <div className="w-full lg:w-[80%]">
-            <div className="text-2xl md:text-3xl  text-center pl-3 mb-4 md:mb-6">Alla roséviner</div>
-            <SelectedFilter selectedFilters={selectedFilters} volumeRange={volumeRange} priceRange={priceRange} />
-            <div className="container mx-auto p-8">
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                {displayProducts.map((product) => (
-                  <div key={product.id} className="col-span-1">
-                    <ProductCard product={product} />
+            <div className="text-2xl md:text-3xl text-center pl-3 mb-4 md:mb-6">Alla roséviner</div>
+            <div className="flex flex-col-reverse md:flex-col">
+              <SelectedFilter selectedFilters={selectedFilters} volumeRange={volumeRange} priceRange={priceRange} />
+              <div>
+                <div className="container mx-auto p-8">
+                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    {displayProducts?.map((product) => (
+                      <div key={product.id} className="col-span-1">
+                        <ProductCard product={product} />
+                      </div>
+                    ))}
                   </div>
-                ))}
+                </div>
+                <Pagination pageLimit={PRODUCTS_PER_PAGE} total={filteredProducts?.length} />
               </div>
             </div>
-
-            <Pagination pageLimit={PRODUCTS_PER_PAGE} total={filteredProducts?.length} />
           </div>
         </div>
       </div>

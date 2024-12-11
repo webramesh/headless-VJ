@@ -16,6 +16,13 @@ export async function getAllVinguidePosts(name) {
               title
               slug
               landingId
+              content
+              faq {
+                faq {
+                  faqAnswer
+                  faqQuestion
+                }
+              }
               vinguidePosts {
                 vinguidePosts {
                   nodes {

@@ -86,7 +86,7 @@ export const extractFieldsForFilteredProducts = (products) => {
   let organicCount = 0;
   let sustainableCount = 0;
 
-  products.forEach((product) => {
+  products?.forEach((product) => {
     const { fieldsProduct } = product;
     if (!fieldsProduct) return; // Guard clause if fieldsProduct is not defined
 
@@ -122,7 +122,7 @@ export const filterProducts = (products, filters) => {
   const { storlek, pris, typ, sortiment, ekologisk, hallbar } = filters;
   const [minVolume, maxVolume] = storlek;
   const [minPrice, maxPrice] = pris;
-  const filteredProducts = products.filter((product) => {
+  const filteredProducts = products?.filter((product) => {
     const {
       bottlePackageVolume: volume,
       pice: price,

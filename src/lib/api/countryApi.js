@@ -15,6 +15,7 @@ export async function getAllCountries() {
               count
               name
               id
+              slug
               categoriesImagesAndOtherFields {
                 categoriesImage {
                   node {

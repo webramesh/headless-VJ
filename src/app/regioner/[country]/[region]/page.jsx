@@ -38,7 +38,7 @@ async function page({ params }) {
         />
       )}
       <div className="text-sm lg:text-base mb-1 lg:mb-2">
-        <div dangerouslySetInnerHTML={{ __html: content }} />
+        <div dangerouslySetInnerHTML={{ __html: content }} className="content" />
       </div>
     </>
   );

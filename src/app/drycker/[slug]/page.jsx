@@ -5,6 +5,7 @@ import { getAllVinguidePosts } from '@/src/lib/api/vinguideApi';
 import { getAllCountries } from '@/src/lib/api/countryApi';
 import DryckerPage from '../Components/DryckerPage';
 
+export const revalidate = 60;
 export async function generateMetadata({ params }) {
   const data = await getPageBySlug(`drycker/${params.slug}`);
 

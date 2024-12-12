@@ -19,6 +19,7 @@ export async function generateMetadata({ params }) {
 
   const post = await getPostBySlug(slug);
   const taxonomy = await getTaxonomySEO(category, slug);
+
   if (post) {
     const { seo } = post;
     if (seo) {
@@ -65,30 +66,36 @@ export default async function PostDetails({ params }) {
           />
           <PostDetailsContent content={post?.content} />
 
-          {faqItems.length > 0 && (
-            <div className="container mx-auto px-4 lg:px-0">
-              <div className="mt-6 sm:mt-10 lg:mt-24 mx-0 sm:mx-4 lg:mx-56 px-2 sm:px-3">
+          <div className="container mx-auto px-4 lg:px-0">
+            <div className="mt-6 sm:mt-10 lg:mt-24 mx-0 sm:mx-4 lg:mx-56 px-2 sm:px-3">
+              {faqItems.length > 0 && (
                 <h2 className="font-medium text-lg sm:text-xl lg:text-xl mb-3 sm:mb-4 pl-1 sm:pl-2">Frågor och Svar</h2>
-                <div className="w-full max-w-full mx-auto">
+              )}
+
+              <div className="w-full max-w-full mx-auto">
+                {faqItems.length > 0 && (
                   <AccordionNew faqItems={faqItems} className="space-y-2 sm:space-y-3 w-full px-1 sm:px-2 max-w-full" />
-                  <ProductRecommendation postProductRecommendation={postProductRecommendation} />
-                  <div className="mt-12">
-                    <SubscriptionForm />
-                  </div>
+                )}
 
-                  {/* Comments Section */}
-                  <CommentsSection comments={post?.comments?.nodes || []} />
+                <ProductRecommendation postProductRecommendation={postProductRecommendation} />
 
-                  <div className="mt-12">
-                    <CommentForm post={post} />
-                  </div>
-                  <div className="mt-12">
-                    <PostAccordion />
-                  </div>
+                <div className="mt-12">
+                  <SubscriptionForm />
+                </div>
+
+                {/* Comments Section */}
+                <CommentsSection comments={post?.comments?.nodes || []} />
+
+                <div className="mt-12">
+                  <CommentForm post={post} />
+                </div>
+
+                <div className="mt-12">
+                  <PostAccordion />
                 </div>
               </div>
             </div>
-          )}
+          </div>
         </div>
       </>
     );

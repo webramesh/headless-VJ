@@ -91,7 +91,7 @@ const formfield = () => (
   </div>
 );
 
-const QNA = ({ productTitle, produktslander, wineSaleStartDate }) => (
+const QNA = ({ productTitle, produktslander, wineSaleStartDate, sugarBites }) => (
   <div className="w-full px-4 sm:px-20">
     <div className="flex flex-col mt-4 text-center  text-lg font-medium">Frågor och svar om {productTitle}</div>
     <div className="flex flex-col">
@@ -108,7 +108,9 @@ const QNA = ({ productTitle, produktslander, wineSaleStartDate }) => (
         <div className="bg-[#f5f5f5] pt-6 pl-2">
           <div className=" text-sm font-medium"> Vad är {productTitle} sockermängd?</div>
         </div>
-        <div className="text-gray-600 text-sm  pl-2">{productTitle} har en sockermängd på cirka gram per liter.</div>
+        <div className="text-gray-600 text-sm  pl-2">
+          {productTitle} har en sockermängd på cirka {sugarBites ? `${sugarBites}`: 'N/A'} gram per liter.
+        </div>
         <div className="mt-4">
           <div className="bg-[#f5f5f5] pt-6 pl-2">
             <div className=" text-sm font-medium">Hur länge har produkten {productTitle} sålts på systembolaget?</div>
@@ -121,6 +123,156 @@ const QNA = ({ productTitle, produktslander, wineSaleStartDate }) => (
     </div>
   </div>
 );
+
+// const InformationCards = ({ fieldsProduct, productTitle, typer, produktslander, data }) => {
+//   const {
+//     caloriesInAlcPer15cl,
+//     caloriesInAlcPerContainerVolume,
+//     caloriesInAlcPerLitter,
+//     caloriesInSugarPer15cl,
+//     caloriesInSugarPerContainerVolume,
+//     caloriesInSugarPerLitter,
+//     totalCaloriesPer15Cl,
+//     totalCaloriesPerContainerVolume,
+//     totalCaloriesPerLitter,
+//     sugerLevel,
+//     sugarLevelIn1Litter,
+//     containerType,
+//     produktPackaging,
+//     wineSaleStartDate,
+//     sugarBites,
+//     alcoholPerSek,
+//   } = fieldsProduct;
+
+//   const productsLander = data?.produktslander?.nodes;
+
+//   const [selected, setSelected] = useState(null);
+
+//   const handleClick = (index) => {
+//     setSelected((prevSelected) => (prevSelected === index ? null : index));
+//   };
+
+//   return (
+//     <div className="mt-8 border-y-2">
+//       <div className="container mx-auto">
+//         <div className="flex gap-2 md:gap-4 px-4 py-2 items-center overflow-x-auto scroll-smooth lg:justify-center ">
+//           {['Hälsoinformation', 'Övrig information', 'Kundomdömen', 'Frågor och svar'].map((item, index) => (
+//             <div
+//               key={index}
+//               className={`px-2 py-2 w-auto text-center hover:bg-[#f4f1ed] hover:shadow-md cursor-pointer ${
+//                 selected === index + 1 && 'border-b-2 border-red-500'
+//               }`}
+//               onClick={() => handleClick(index + 1)}
+//             >
+//               {item}
+//             </div>
+//           ))}
+//         </div>
+
+//         <div className="container mx-auto">
+//           {selected === 1 && (
+//             <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 sm:gap-12 p-4 sm:p-8">
+//               <RenderBox title="Kalorier (baserat på alkoholmängd)">
+//                 <AlcoholInfo
+//                   per15cl={caloriesInAlcPer15cl}
+//                   perLitre={caloriesInAlcPerLitter}
+//                   perVolume={caloriesInAlcPerContainerVolume}
+//                 />
+//               </RenderBox>
+//               <RenderBox title="Kalorier (baserat på ungefärlig sockermängd)">
+//                 <AlcoholInfo
+//                   per15cl={caloriesInSugarPer15cl}
+//                   perLitre={caloriesInSugarPerLitter}
+//                   perVolume={caloriesInSugarPerContainerVolume}
+//                 />
+//               </RenderBox>
+//               <RenderBox title="Total mängd kalorier">
+//                 <AlcoholInfo
+//                   per15cl={totalCaloriesPer15Cl}
+//                   perLitre={totalCaloriesPerLitter}
+//                   perVolume={totalCaloriesPerContainerVolume}
+//                 />
+//               </RenderBox>
+//               <RenderBox title="Sockerdetaljer">
+//                 <div className="text-xs  text-center mt-2">
+//                   Socker g/l <br /> {sugarLevelIn1Litter ? <p> {sugarLevelIn1Litter}</p> : <p>N/A</p>}
+//                 </div>
+//                 <div className="text-xs  text-center mb-9 mt-2">
+//                   Socker Per Liter <br />
+//                   {sugarBites ? <p> {sugarBites}</p> : <p>N/A</p>}
+//                   {/* {sugarBites} */}
+//                 </div>
+//               </RenderBox>
+//             </div>
+//           )}
+
+//           {selected === 2 && (
+//             <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 sm:gap-12 p-4 sm:p-8">
+//               <RenderBox title="Förpackning">
+//                 <div className="text-xs  text-center mt-2">
+//                   Förslutning <br /> {containerType}
+//                 </div>
+//                 <div className="text-xs  text-center mt-2">
+//                   Förpackning <br /> {produktPackaging ? <p>{produktPackaging}</p> : <p>N/A</p>}
+//                 </div>
+//               </RenderBox>
+
+//               <RenderBox title="Alkhol">
+//                 <div className="text-xs  text-center mt-2">
+//                   APK (Alkhol per krona) <br />
+//                   {alcoholPerSek ? <p> {alcoholPerSek} :-</p> : <p>N/A</p>}
+//                 </div>
+//                 <div className="text-xs  text-center text-gray-500 mt-2">
+//                   Alkohol per krona är ett mått som anger mängden alkohol som erhålls per <br />
+//                   nedlagd krona, vid köp av en alkoholhaltig dryck. APK stiger då dryckens pris <br />
+//                   sjunker eller alkoholhalten stiger.
+//                 </div>
+//               </RenderBox>
+
+//               <RenderBox title="Om Producenten">
+//                 <div className="text-xs  text-center mt-2">
+//                   Producent <br />
+//                   <div className="text-red-500 font-bold">Fuji Takasago Shuzo</div>
+//                 </div>
+//                 <div className="text-xs  text-center mt-2">
+//                   Land <br />
+//                   <div className="text-red-500 font-bold">{productsLander[0]?.name}</div>
+//                 </div>
+//               </RenderBox>
+
+//               <RenderBox title="Om Importören">
+//                 <div className="text-xs  text-center mt-2">
+//                   Importör <br />
+//                   <div className="text-red-500 font-bold mb-9">Akebono Unlimited AB</div>
+//                 </div>
+//               </RenderBox>
+//             </div>
+//           )}
+
+//           {selected === 3 && (
+//             <>
+//               <div className="flex flex-col items-center mt-6 justify-center">
+//                 {ratingbox()}
+//                 {formfield()}
+//               </div>
+//             </>
+//           )}
+
+//           {selected === 4 && (
+//             <div className="flex flex-col items-center mt-6 justify-center">
+//               <QNA
+//                 productTitle={productTitle}
+//                 typer={typer}
+//                 produktslander={produktslander}
+//                 wineSaleStartDate={wineSaleStartDate}
+//               />
+//             </div>
+//           )}
+//         </div>
+//       </div>
+//     </div>
+//   );
+// };
 
 const InformationCards = ({ fieldsProduct, productTitle, typer, produktslander, data }) => {
   const {
@@ -144,7 +296,8 @@ const InformationCards = ({ fieldsProduct, productTitle, typer, produktslander, 
 
   const productsLander = data?.produktslander?.nodes;
 
-  const [selected, setSelected] = useState(null);
+  // Set default state to '4' to open "Frågor och svar"
+  const [selected, setSelected] = useState(4);
 
   const handleClick = (index) => {
     setSelected((prevSelected) => (prevSelected === index ? null : index));
@@ -198,7 +351,6 @@ const InformationCards = ({ fieldsProduct, productTitle, typer, produktslander, 
                 <div className="text-xs  text-center mb-9 mt-2">
                   Socker Per Liter <br />
                   {sugarBites ? <p> {sugarBites}</p> : <p>N/A</p>}
-                  {/* {sugarBites} */}
                 </div>
               </RenderBox>
             </div>
@@ -211,7 +363,7 @@ const InformationCards = ({ fieldsProduct, productTitle, typer, produktslander, 
                   Förslutning <br /> {containerType}
                 </div>
                 <div className="text-xs  text-center mt-2">
-                  Förpackning <br /> {produktPackaging}
+                  Förpackning <br /> {produktPackaging ? <p>{produktPackaging}</p> : <p>N/A</p>}
                 </div>
               </RenderBox>
 
@@ -263,6 +415,7 @@ const InformationCards = ({ fieldsProduct, productTitle, typer, produktslander, 
                 typer={typer}
                 produktslander={produktslander}
                 wineSaleStartDate={wineSaleStartDate}
+                sugarBites={sugarBites}
               />
             </div>
           )}
@@ -271,5 +424,7 @@ const InformationCards = ({ fieldsProduct, productTitle, typer, produktslander, 
     </div>
   );
 };
+
+// export default InformationCards;
 
 export default InformationCards;

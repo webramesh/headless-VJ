@@ -4,7 +4,13 @@ import React from 'react';
 import FactBox from './FactBox';
 
 export default function ProductRecommendation({ postProductRecommendation }) {
-  const products = postProductRecommendation?.produktrekommendationer?.nodes[0]?.produkter?.nodes || [];
+  const productLength = postProductRecommendation?.produktrekommendationer?.nodes.length;
+
+  // generate random index  till 0 till productLength
+  const randomProduct = Math.floor(Math.random() * productLength);
+
+  // console.log(randomProduct, ' random')
+  const products = postProductRecommendation?.produktrekommendationer?.nodes[randomProduct]?.produkter?.nodes || [];
 
   // Filter out products with "no-image" in the featured image URL
   const validProducts = products.filter((product) => !product?.featuredImage?.node?.sourceUrl.includes('no-image'));

@@ -32,7 +32,7 @@ const addSectionWithItems = (doc, x, y, width, title, items, titleFontSize = 14,
   if (items && items.length > 0) {
     items.forEach((item, index) => {
       const itemText = typeof item === 'object' && item.name ? item.name : String(item);
-      doc.text('• ' + itemText, x + 5, y + 25 + index * 10);
+      doc.text('• ' + itemText, x + 5, y + 25 + index * 5);
     });
   } else {
     doc.text('• N/A', x + 5, y + 25);
@@ -143,7 +143,7 @@ export const generatePdf = (productDetails, product) => {
   const wineImageX = detailsX + detailsWidth + 20;
   const wineImageY = 40;
   const wineImageHeight = 150;
-  doc.addImage('/winevj.png', 'JPEG', wineImageX, wineImageY, wineImageWidth, wineImageHeight);
+  // doc.addImage('/winevj.png', 'JPEG', wineImageX, wineImageY, wineImageWidth, wineImageHeight);
 
   // Sections at the bottom (in a row)
   const sectionsY = wineImageY + wineImageHeight + 40;

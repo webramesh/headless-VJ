@@ -61,7 +61,7 @@ export default function SearchContainer({ onSearch }) {
           value={searchTerm}
           onChange={handleInputChange}
           className="bg-white text-gray-600 text-sm py-2 pl-2 pr-10 rounded-md border-2 border-gray-200 shadow-lg focus:outline-none focus:border-gray-500 w-full"
-          placeholder="Search..."
+          placeholder="Sök…"
         />
         <svg
           className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5"
@@ -100,7 +100,7 @@ export default function SearchContainer({ onSearch }) {
               className="block py-3 px-4 hover:bg-gray-100 border-b last:border-b-0"
             >
               <p className="font-bold text-sm">{item.title}</p>
-              <p className="text-xs mt-1 text-gray-500">{item.type === 'produkter' ? 'Product' : 'Article'}</p>
+              <p className="text-xs mt-1 text-gray-500">{item.type === 'produkter' ? 'Produkt' : 'Artikel'}</p>
             </Link>
           ))}
         </div>

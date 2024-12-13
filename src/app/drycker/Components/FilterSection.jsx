@@ -4,7 +4,7 @@ import ProductCard from '../../Components/ProductCard';
 import Pagination from '../../Components/pagination/Pagination';
 import { usePagination } from '@/src/context/PageContext';
 import FilterFields from './FilterFields';
-import { getAllProductsByType } from '@/src/lib/api/dryckerApi';
+import { getAllProductsByType, getProductByCountry } from '@/src/lib/api/dryckerApi';
 import { extractFields, extractFieldsForFilteredProducts, filterProducts } from '@/src/utils/utils';
 import { useFilters } from '@/src/context/FilterContext';
 import SelectedFilter from './SelectedFilter';
@@ -53,11 +53,17 @@ function extractOptionsAgain(products, dispatch) {
   });
 }
 
-const FilterSection = ({ initialProducts, slug, filters, page }) => {
-  const fetchFunction = page === 'mainPage' ? getAllProductsByType : null;
+const FilterSection = ({ initialProducts, params, filters, page }) => {
+  const { type, country } = params;
+  const fetchFunction = useMemo(() => {
+    if (page === 'mainPage') {
+      return () => getAllProductsByType(type);
+    } else {
+      return () => getProductByCountry(country, type);
+    }
+  }, [page, type, country]);
 
   // const fetchFunction = getAllProductsByType;
-
   const initialState = useMemo(
     () => ({
       containerTypes: [],
@@ -96,7 +102,7 @@ const FilterSection = ({ initialProducts, slug, filters, page }) => {
   const fetchProducts = useCallback(async () => {
     pageDispatch({ type: 'CHANGE_LOADING', payload: true });
     try {
-      const products = await fetchFunction(slug);
+      const products = await fetchFunction();
       setAllProducts(products);
       extractOptionsAndCounts(products, dispatch);
     } catch (error) {
@@ -104,7 +110,7 @@ const FilterSection = ({ initialProducts, slug, filters, page }) => {
     } finally {
       pageDispatch({ type: 'CHANGE_LOADING', payload: false });
     }
-  }, [pageDispatch, slug, fetchFunction]);
+  }, [pageDispatch, fetchFunction]);
 
   useEffect(() => {
     pageDispatch({ type: 'RESET', payload: PRODUCTS_PER_PAGE });
@@ -156,11 +162,13 @@ const FilterSection = ({ initialProducts, slug, filters, page }) => {
               <div>
                 <div className="container mx-auto p-8">
                   <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                    {displayProducts?.map((product) => (
-                      <div key={product.id} className="col-span-1">
-                        <ProductCard product={product} />
-                      </div>
-                    ))}
+                    {displayProducts?.length > 0
+                      ? displayProducts?.map((product) => (
+                          <div key={product.id} className="col-span-1">
+                            <ProductCard product={product} />
+                          </div>
+                        ))
+                      : 'No products found'}
                   </div>
                 </div>
                 <Pagination pageLimit={PRODUCTS_PER_PAGE} total={filteredProducts?.length} />

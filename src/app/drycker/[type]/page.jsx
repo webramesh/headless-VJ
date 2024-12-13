@@ -16,7 +16,7 @@ export async function generateMetadata({ params }) {
 }
 
 export default async function Home({ params, searchParams }) {
-  const { name, products } = await getProductsByType(params.slug);
+  const { name, products } = await getProductsByType(params.type);
   const vinguideData = await getAllVinguidePosts(name);
   const cardTitle = `Artiklar relaterade till ${name}`;
 

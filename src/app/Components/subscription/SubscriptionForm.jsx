@@ -84,7 +84,7 @@ const SubscriptionForm = () => {
                 name="email"
                 ref={inputRef}
                 className="w-full text-black lg:w-2/3 p-2 border-2 focus:border-2 focus:border-gray-500 placeholder-gray-400 rounded-md outline-none"
-                placeholder="Your Email"
+                placeholder="Din Email"
                 required
               />
             </div>

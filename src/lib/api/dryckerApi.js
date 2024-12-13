@@ -143,3 +143,108 @@ export async function getAllProductsByType(slug, cursor = null, AllProducts = []
     return null;
   }
 }
+
+export async function getProductByCountry(slug, type, cursor = null, AllProducts = []) {
+  const query = gql`
+    query GetProductByCountry($slug: ID!, $cursor: String) {
+      produktLand(id: $slug, idType: SLUG) {
+        produkter(first: 1000, after: $cursor) {
+          nodes {
+            id
+            title
+            slug
+            featuredImage {
+              node {
+                sourceUrl
+              }
+            }
+            fieldsProduct {
+              productLabels
+              pice
+              bottlePackageVolume
+              containerType
+              wineSortiment
+              sustainable
+            }
+            produktTyper {
+              nodes {
+                slug
+                name
+                parent {
+                  node {
+                    name
+                  }
+                }
+              }
+            }
+            produktslander {
+              nodes {
+                name
+                parent {
+                  node {
+                    name
+                  }
+                }
+              }
+            }
+          }
+          pageInfo {
+            hasNextPage
+            endCursor
+          }
+        }
+      }
+    }
+  `;
+  try {
+    const { data } = await client.query({
+      query,
+      variables: {
+        slug,
+        cursor,
+      },
+    });
+    // return data.produktLand.produkter.nodes;
+    const newProducts = data?.produktLand?.produkter?.nodes;
+    const updatedProducts = [...AllProducts, ...newProducts];
+    if (data?.produktLand?.produkter?.pageInfo?.hasNextPage) {
+      return getProductByCountry(slug, data?.produktLand?.produkter?.pageInfo?.endCursor, updatedProducts);
+    }
+
+    const filteredProducts = updatedProducts.filter((product) =>
+      product.produktTyper.nodes.some((node) => node.slug === type)
+    );
+    return filteredProducts;
+  } catch (error) {
+    console.error(`Error fetching product`, error);
+    return null;
+  }
+}
+
+export const getRegionsByCountry = async (slug) => {
+  const query = gql`
+    query GetProductByCountry($slug: ID!) {
+      land(id: $slug, idType: SLUG) {
+        name
+        regioner(first: 1000) {
+          nodes {
+            slug
+            title
+          }
+        }
+      }
+    }
+  `;
+  try {
+    const { data } = await client.query({
+      query,
+      variables: {
+        slug,
+      },
+    });
+    return { regions: data?.land?.regioner?.nodes, name: data?.land?.name };
+  } catch (error) {
+    console.error(`Error fetching product`, error);
+    return null;
+  }
+};

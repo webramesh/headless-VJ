@@ -5,6 +5,7 @@ import { getAllVinguidePosts } from '@/src/lib/api/vinguideApi';
 import { getAllCountries } from '@/src/lib/api/countryApi';
 import DryckerPage from '../Components/DryckerPage';
 
+export const revalidate = 0;
 export async function generateMetadata({ params }) {
   const data = await getPageBySlug(`drycker/${params.slug}`);
 
@@ -15,7 +16,7 @@ export async function generateMetadata({ params }) {
 }
 
 export default async function Home({ params, searchParams }) {
-  const { name, products } = await getProductsByType(params.slug);
+  const { name, products } = await getProductsByType(params.type);
   const vinguideData = await getAllVinguidePosts(name);
   const cardTitle = `Artiklar relaterade till ${name}`;
 

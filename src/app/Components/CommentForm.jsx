@@ -157,7 +157,7 @@ const CommentForm = ({ post }) => {
               type="email"
               value={authorEmail}
               onChange={(e) => setAuthorEmail(e.target.value)}
-              placeholder="your.email@example.com"
+              placeholder="din.email@example.com"
               className="
                 bg-gray-50 
                 border 
@@ -242,7 +242,7 @@ const CommentForm = ({ post }) => {
               ${loading ? 'bg-gray-400 cursor-not-allowed' : 'bg-red-500 hover:bg-red-600'}
             `}
           >
-            {loading ? 'Inlämnande...' : 'Skicka in'}
+            {loading ? 'Inlämnande...' : 'Skicka'}
           </button>
         </div>
       </form>

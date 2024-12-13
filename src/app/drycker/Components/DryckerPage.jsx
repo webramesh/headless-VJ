@@ -16,16 +16,17 @@ export default function DryckerPage({
   params,
   page,
 }) {
-  const vinguidePosts = vinguideData[0]?.vinguidePosts?.vinguidePosts?.nodes || [];
+  const vinguidePosts = vinguideData?.vinguidePosts?.vinguidePosts?.nodes || [];
 
   return (
     <>
       <Hero name={name} />
       <Paragraph name={name} />
       <Scrolltodown />
-      <FilterSection initialProducts={products} slug={params.slug} filters={searchParams} page={page} />
-      <Allcountry countries={countries} type={params.slug} />
-      <Content pageData={vinguideData[0]} />
+      <FilterSection initialProducts={products} params={params} filters={searchParams} page={page} />
+
+      <Allcountry countries={countries} type={params.type} name={name} />
+      <Content pageData={vinguideData} />
       <Card title={cardTitle} subtitle="Från vår redaktion" posts={vinguidePosts.slice(0, 6)} />
     </>
   );

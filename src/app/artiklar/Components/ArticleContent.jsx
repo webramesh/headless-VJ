@@ -15,7 +15,7 @@ const POSTS_PER_PAGE = 15;
 
 const Card = ({ title, excerpt, date, author, category, imageUrl, slug, categoryColor }) => {
   return (
-    <Link href={`/${category || 'uncategorized'}/${slug}`}>
+    <Link href={`/${category.slug || 'uncategorized'}/${slug}`}>
       <div className="flex flex-col cursor-pointer hover:shadow-lg transition-shadow h-full">
         <div className="relative w-full pt-[56.25%]">
           <Image
@@ -44,7 +44,7 @@ const Card = ({ title, excerpt, date, author, category, imageUrl, slug, category
               color: '#ffffff',
             }}
           >
-            {category || 'Uncategorized'}
+            {category.name || 'Uncategorized'}
           </div>
         </div>
       </div>
@@ -98,7 +98,7 @@ const ArticleContent = ({ totalPosts, sidebar }) => {
                   excerpt={post.excerpt}
                   date={post.date}
                   author={post.author?.node?.name || 'Unknown Author'}
-                  category={post.categories?.nodes?.[0]?.name || 'Uncategorized'}
+                  category={post.categories?.nodes?.[0] || 'Uncategorized'}
                   imageUrl={post.featuredImage?.node?.mediaItemUrl || '/api/placeholder/400/300'}
                   slug={post.slug || '#'}
                   categoryColor={

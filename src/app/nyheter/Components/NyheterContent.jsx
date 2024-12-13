@@ -2,6 +2,7 @@
 
 import React from 'react';
 import PostAccordion from '../../Components/PostAccordion';
+import Breadcrumb from '../../Components/breadcrumb/BreadCrumb';
 import SubscriptionForm from '../../Components/subscription/SubscriptionForm';
 
 export const revalidate = 60;
@@ -13,11 +14,9 @@ const NyheterContent = ({ nyhet }) => {
   return (
     <div className="container mx-auto">
       <div className="flex flex-col mt-12 gap-4 mx-4 sm:mx-8 md:mx-16 lg:mx-52 p-4 sm:p-6 shadow-2xl">
+        <Breadcrumb title1="nyheter" link1="/nyheter" title2={nyhet.title} />
         <div className="text-2xl sm:text-3xl md:text-4xl">
           <h1>{nyhet.title}</h1>
-        </div>
-        <div className="text-sm sm:text-base md:text-lg">
-          <span className="text-red-500">Hem</span> » Nyheter » {nyhet.title}
         </div>
         <div className="content">
           <div className="text-base sm:text-lg" dangerouslySetInnerHTML={{ __html: nyhet.content }} />
@@ -59,7 +58,7 @@ const NyheterContent = ({ nyhet }) => {
         {/* Newsletter Subscription */}
         <SubscriptionForm />
         <div className="mt-6">
-        <PostAccordion />
+          <PostAccordion />
         </div>
       </div>
     </div>

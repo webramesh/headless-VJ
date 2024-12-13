@@ -4,10 +4,10 @@ import { ChevronFirst, ChevronLast, ChevronsLeft, ChevronsRight } from 'lucide-r
 
 const PaginationButton = ({ disabled, children, onClick }) => (
   <div
-    className={`flex items-center justify-center w-10 h-10 rounded-full ${
+    className={`flex items-center justify-center w-10 h-10 rounded-full  ${
       disabled
         ? 'bg-gray-200 text-gray-400 cursor-not-allowed'
-        : 'bg-red-500 text-white hover:bg-red-600 transition-colors duration-200 opacity-80'
+        : 'bg-red-500 text-white hover:bg-red-600 transition-colors duration-200 opacity-80 cursor-pointer'
     }
     `}
     aria-disabled={disabled}

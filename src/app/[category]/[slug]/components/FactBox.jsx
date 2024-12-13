@@ -33,6 +33,12 @@ const FactBox = ({ recommendedProduct, smakar, aromer, fargers, matkombinationer
             height={30}
             className="object-cover lg:ml-3"
           />
+
+          {/* {recommendedProduct?.produktslander?.nodes?.map((node, index) =>
+            node?.parent === null && node?.flag?.flagImage?.node?.sourceUrl ? (
+              <Image key={index} src={node.flag.flagImage.node.sourceUrl} width={40} height={40} alt={node.name} />
+            ) : null
+          )} */}
           <div>
             <h3 className="text-sm  lg:text-lg  text-black font-medium ">
               {/* {recommendedProduct.title}

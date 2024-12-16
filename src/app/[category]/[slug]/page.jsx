@@ -59,6 +59,7 @@ export default async function PostDetails({ params }) {
             featuredImage={post?.featuredImage?.node?.sourceUrl}
             authorImage={post?.author?.node?.customAvatar}
             authorName={post?.author?.node?.name}
+            authorSlug={post?.author?.node?.slug}
             date={post?.date}
             categoryName={post?.categories?.nodes[0]?.name}
             categories={post?.categories?.nodes[0]}

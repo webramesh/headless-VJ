@@ -8,12 +8,10 @@ import Link from 'next/link';
 const FactBox = ({ recommendedProduct, smakar, aromer, fargers, matkombinationer }) => {
   const fieldsProduct = recommendedProduct?.fieldsProduct;
 
-  // const { tasteClock3Fruktsyra, tasteClock2Fyllighetstravhet, tasteClock1FyllighetSotma } = fieldsProduct;
   const tasteClock1FyllighetSotma = fieldsProduct?.tasteClock1FyllighetSotma;
   const tasteClock2Fyllighetstravhet = fieldsProduct?.tasteClock2Fyllighetstravhet;
   const tasteClock3Fruktsyra = fieldsProduct?.tasteClock3Fruktsyra;
 
-  // const total = tasteClock1FyllighetSotma + tasteClock2Fyllighetstravhet + tasteClock3Fruktsyra;
   const total = 12;
 
   const pieChartData1 = [{ value: tasteClock1FyllighetSotma }, { value: total - tasteClock1FyllighetSotma }];
@@ -26,19 +24,12 @@ const FactBox = ({ recommendedProduct, smakar, aromer, fargers, matkombinationer
     <>
       <div className="block  md:grid grid-cols-2  justify-items-stretch items-center pt-4  ">
         <div className="text-center mb-4  md:mb-0 md:text-left flex items-center  gap-3 container mx-auto px-4">
-          <Image
-            src={recommendedProduct?.produktslander?.nodes[0]?.flag?.flagImage?.node?.sourceUrl}
-            alt={recommendedProduct?.produktslander?.nodes[0]?.name}
-            width={30}
-            height={30}
-            className="object-cover lg:ml-3"
-          />
-
-          {/* {recommendedProduct?.produktslander?.nodes?.map((node, index) =>
+          {recommendedProduct?.produktslander?.nodes?.map((node, index) =>
             node?.parent === null && node?.flag?.flagImage?.node?.sourceUrl ? (
               <Image key={index} src={node.flag.flagImage.node.sourceUrl} width={40} height={40} alt={node.name} />
             ) : null
-          )} */}
+          )}
+
           <div>
             <h3 className="text-sm  lg:text-lg  text-black font-medium ">
               {/* {recommendedProduct.title}
@@ -51,15 +42,6 @@ const FactBox = ({ recommendedProduct, smakar, aromer, fargers, matkombinationer
 
         <div className="block text-center mt-3 md:mt-0  md:text-left md:flex justify-between items-center text-gray-600 text-sm">
           <h2 className=""> Artikel nr: {fieldsProduct?.productCode} </h2>
-
-          {/* <Link
-            // href="/"
-            href={'buyLink'}
-            target="_blank"
-            className="bg-[#ED0927]  block  mt-3 md:mt-0 px-4 py-2 text-white rounded-md text-center hover:bg-[#fe4c5e] transition-colors"
-          >
-            Köp på Systembolaget{' '}
-          </Link> */}
 
           {fieldsProduct?.buyLink ? (
             <Link

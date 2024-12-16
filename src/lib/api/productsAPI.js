@@ -245,6 +245,22 @@ export async function getProductBySlug(identifier) {
               productLabels
               wineSaleStartDate
               alcoholPerSek
+              vinimporter {
+                nodes {
+                  ... on Vinimporter {
+                    id
+                    title
+                  }
+                }
+              }
+              produkterproducer {
+                nodes {
+                  ... on Producent {
+                    id
+                    title
+                  }
+                }
+              }
             }
             matkombinationer {
               nodes {

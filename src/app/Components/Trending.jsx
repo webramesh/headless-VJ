@@ -3,7 +3,6 @@ import React from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { formatEmbeddedContent } from '@/src/utils/utils';
-import { format } from 'date-fns';
 
 const Trending = ({ title = '', subtitle = '', trendingPosts = [] }) => {
   if (!Array.isArray(trendingPosts)) {
@@ -42,8 +41,13 @@ const Trending = ({ title = '', subtitle = '', trendingPosts = [] }) => {
               </div>
               <div className="p-4 bg-[#f5f5f5] flex flex-col flex-grow">
                 <h3 className="font-outfit font-medium text-black text-lg">{post?.title || 'Untitled'}</h3>
-                <p className="mt-2 font-outfit text-gray-900 text-xs">
-                  {format(new Date(post?.date), 'dd MMMM, yyyy')}
+
+                <p className="mt-4 font-outfit text-gray-900 text-xs capitalize">
+                  {new Date(post?.date).toLocaleDateString('sv-SE', {
+                    day: '2-digit',
+                    month: 'long',
+                    year: 'numeric',
+                  })}
                 </p>
                 <p className="text-[#694848] text-xs font-outfit mt-2">
                   {post?.author?.node?.name || 'Vinjournalen.se'}

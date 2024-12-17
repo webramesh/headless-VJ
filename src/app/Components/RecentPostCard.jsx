@@ -23,7 +23,7 @@ export default function RecentPostCard({ post }) {
       <div className="flex flex-col cursor-pointer hover:shadow-lg transition-shadow w-full my-6">
         <div className="relative w-full h-48">
           <Image
-            src={featuredImage?.node?.sourceUrl || '/api/placeholder/400/300'}
+            src={featuredImage?.node?.sourceUrl || '/food3.png'}
             alt={featuredImage?.node?.altText || title || 'Featured image'}
             fill
             sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"

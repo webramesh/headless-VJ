@@ -29,6 +29,6 @@ export default async function Sidebar() {
     );
   } catch (error) {
     console.error('Error in Sidebar:', error);
-    return <div className="text-red-500">Error loading sidebar content</div>;
+    return <div className="text-red-500">Det gick inte att läsa in sidofältets innehåll</div>;
   }
 }

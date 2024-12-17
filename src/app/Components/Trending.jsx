@@ -11,7 +11,7 @@ const Trending = ({ title = '', subtitle = '', trendingPosts = [] }) => {
       <div className="container mx-auto mt-10 p-2">
         <div className="font-outfit text-center font-extralight text-red-500">{title}</div>
         <h2 className="text-center font-outfit text-xl md:text-2xl font-medium mt-4">{subtitle}</h2>
-        <div className="text-center text-gray-500 mt-8">No trending posts available</div>
+        <div className="text-center text-gray-500 mt-8">Inga trendiga inlägg tillgängliga</div>
       </div>
     );
   }
@@ -31,7 +31,7 @@ const Trending = ({ title = '', subtitle = '', trendingPosts = [] }) => {
             <div className="flex flex-col cursor-pointer hover:shadow-lg transition-shadow w-full">
               <div className="relative w-full h-48">
                 <Image
-                  src={post?.featuredImage?.node?.sourceUrl || '/api/placeholder/400/300'}
+                  src={post?.featuredImage?.node?.sourceUrl || '/food3.png'}
                   alt={post?.featuredImage?.node?.altText || post?.title || 'Trending article image'}
                   fill
                   sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"

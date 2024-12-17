@@ -20,17 +20,16 @@ async function Page({ params }) {
   const { country, region } = params;
   const selectedRegion = await getRegionByURL(`/regioner/${region}`);
 
-  const { featuredImage, content, faq } = selectedRegion;
+  const {  content, faq } = selectedRegion;
   const faqItems = faq?.faq || [];
 
   return (
     <>
       <h1 className="text-2xl lg:text-3xl font-semibold uppercase">{region}</h1>
       <BreadCrumb title1="Regioner" link1="/regioner" title2={country} link2={`/lander/${country}`} title3={region} />
-
-      {featuredImage?.node?.sourceUrl && (
+      {selectedRegion?.featuredImage?.node?.sourceUrl && (
         <Image
-          src={featuredImage.node.sourceUrl}
+          src={selectedRegion?.featuredImage.node.sourceUrl}
           alt={region}
           className="w-full my-4 lg:my-10 object-contain"
           width={250}

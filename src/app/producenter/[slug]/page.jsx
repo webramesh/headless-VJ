@@ -2,7 +2,7 @@ import React from 'react';
 import { getPageBySlug } from '@/src/lib/api/pageApi';
 import { getProducentBySlug } from '../../../lib/api/producenterAPI';
 import Content from '../components/Content';
-import ProductCard from '../../components/ProductCard';
+import ProductCard from '../../Components/ProductCard';
 import { generateSeoMetadata } from '@/src/utils/utils';
 
 export async function generateMetadata({ params }) {

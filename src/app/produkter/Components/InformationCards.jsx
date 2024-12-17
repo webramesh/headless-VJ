@@ -147,7 +147,7 @@ const InformationCards = ({ fieldsProduct, productTitle, typer, produktslander, 
   const productsLander = data?.produktslander?.nodes;
 
   const vinimporterTitles = data?.fieldsProduct?.vinimporter?.nodes.map((node) => node.title).join(', ');
-  const producenterTitles = data?.fieldsProduct?.produkterproducer?.nodes.map((node) => node.title).join(', ');
+  // const producenterTitles = data?.fieldsProduct?.produkterproducer?.nodes.map((node) => node.title).join(', ');
 
   // Set default state to '4' to open "Frågor och svar"
   const [selected, setSelected] = useState(4);
@@ -238,7 +238,7 @@ const InformationCards = ({ fieldsProduct, productTitle, typer, produktslander, 
                   <div className="text-red-500 font-bold">
                     {/* Fuji Takasago Shuzo */}
 
-                    {producenterTitles ? <p>{producenterTitles}</p> : <p>N/A</p>}
+                    {/* {producenterTitles ? <p>{producenterTitles}</p> : <p>N/A</p>} */}
                   </div>
                 </div>
                 <div className="text-xs  text-center mt-2">

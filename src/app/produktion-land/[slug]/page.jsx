@@ -1,6 +1,6 @@
 import Map from '@/src/app/Components/Map';
-import ProducenterCard from '@/src/app/Components/producenterCard/ProducenterCard';
-import ProductCard from '../../Components/ProductCard';
+// import ProducenterCard from '@/src/app/Components/producenterCard/ProducenterCard';
+// import ProductCard from '../../Components/ProductCard';
 
 function page({ params }) {
   return (
@@ -16,17 +16,15 @@ function page({ params }) {
         <Map />
       </div>
       <div className="mt-10 grid md:grid-cols-2 lg:grid-cols-3 gap-5">
-        {Array.from({ length: 15 }, (_, i) => (
+        {/* {Array.from({ length: 15 }, (_, i) => (
           <div key={i}>
             <ProducenterCard />
           </div>
-        ))}
+        ))} */}
       </div>
       {/* pagination */}
       {/* <Pagination pageNumber={params.slug} /> */}
-      <div className="md:grid-cols-2 lg:grid-cols-3 grid my-10">
-        <ProductCard />
-      </div>
+      <div className="md:grid-cols-2 lg:grid-cols-3 grid my-10">{/* <ProductCard /> */}</div>
     </>
   );
 }

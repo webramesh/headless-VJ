@@ -30,7 +30,8 @@ const PostAccordion = () => {
   };
 
   return (
-    <div className="w-full  md:px-0 py-4 sm:py-6">
+    <div className="w-full">
+      <h2 className="ml-3 text-xl font-semibold md:px-0 py-4 sm:py-6">Fler artiklar</h2>
       {categoriesWithFilteredDetails.map((category, index) => (
         <div key={category.categorySlug} className="border-b mb-2 border-slate-200">
           <button

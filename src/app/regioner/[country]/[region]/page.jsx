@@ -1,4 +1,4 @@
-import Map from '@/src/app/Components/Map';
+// import Map from '@/src/app/Components/Map';
 import Image from 'next/image';
 import BreadCrumb from '@/src/app/Components/breadcrumb/BreadCrumb';
 import { getRegionByURL } from '@/src/lib/api/regionerAPI';
@@ -25,9 +25,9 @@ async function page({ params }) {
       <h1 className="text-2xl lg:text-3xl  font-semibold uppercase">{region}</h1>
       <BreadCrumb title1="Regioner" link1="/regioner" title2={country} link2={`/lander/${country}`} title3={region} />
 
-      <div className="h-80">
+      {/* <div className="h-80">
         <Map />
-      </div>
+      </div> */}
       {featuredImage?.node?.sourceUrl && (
         <Image
           src={featuredImage?.node?.sourceUrl}
@@ -38,7 +38,7 @@ async function page({ params }) {
         />
       )}
       <div className="text-sm lg:text-base mb-1 lg:mb-2">
-        <div dangerouslySetInnerHTML={{ __html: content }} />
+        <div dangerouslySetInnerHTML={{ __html: content }} className="content" />
       </div>
     </>
   );

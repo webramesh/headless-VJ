@@ -5,7 +5,7 @@ const client = new ApolloClient({
   cache: new InMemoryCache(),
 });
 
-export async function getAllVinguidePosts(name) {
+export async function getAllVinguidePosts(name, uri) {
   try {
     const { data } = await client.query({
       query: gql`
@@ -16,6 +16,14 @@ export async function getAllVinguidePosts(name) {
               title
               slug
               landingId
+              content
+              uri
+              faq {
+                faq {
+                  faqAnswer
+                  faqQuestion
+                }
+              }
               vinguidePosts {
                 vinguidePosts {
                   nodes {
@@ -59,71 +67,16 @@ export async function getAllVinguidePosts(name) {
       `,
       variables: { name },
     });
-
-    return data.vinguide.nodes || [];
+    if (uri) {
+      const filteredData = data.vinguide.nodes.filter((item) => {
+        return item.uri === uri;
+      });
+      return filteredData[0];
+    } else {
+      return data.vinguide.nodes[0] || [];
+    }
   } catch (error) {
     console.error('Error fetching vinguide posts:', error);
     return [];
-  }
-}
-
-export async function getVinguidePostBySlug(slug) {
-  try {
-    const { data } = await client.query({
-      query: gql`
-        query VinguidePostBySlug($slug: ID!) {
-          vinguide(id: $slug, idType: SLUG) {
-            id
-            title
-            slug
-            landingId
-            vinguidePosts {
-              vinguidePosts {
-                nodes {
-                  contentTypeName
-                  date
-                  id
-                  slug
-                  ... on Post {
-                    id
-                    excerpt
-                    content
-                    featuredImage {
-                      node {
-                        altText
-                        sourceUrl
-                      }
-                    }
-                    author {
-                      node {
-                        name
-                        id
-                      }
-                    }
-                    date
-                    categories {
-                      nodes {
-                        name
-                        slug
-                        categoriesImagesAndOtherFields {
-                          categorycolorpicker
-                        }
-                      }
-                    }
-                    title
-                  }
-                }
-              }
-            }
-          }
-        }
-      `,
-      variables: { slug },
-    });
-
-    return data.vinguide;
-  } catch (error) {
-    console.error('Error fetching vinguide post:', error);
-    return null;
   }
 }

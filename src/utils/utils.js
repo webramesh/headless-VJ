@@ -80,11 +80,49 @@ export const extractFields = (products) => {
   };
 };
 
+export const extractFieldsForFilteredProducts = (products) => {
+  const containerTypes = new Map();
+  const sortiments = new Map();
+  let organicCount = 0;
+  let sustainableCount = 0;
+
+  products?.forEach((product) => {
+    const { fieldsProduct } = product;
+    if (!fieldsProduct) return; // Guard clause if fieldsProduct is not defined
+
+    const { wineSortiment, containerType, productLabels, sustainable } = fieldsProduct;
+
+    if (containerType) {
+      containerTypes.set(containerType, (containerTypes.get(containerType) || 0) + 1);
+    }
+
+    wineSortiment?.forEach((item) => {
+      if (item) {
+        sortiments.set(item, (sortiments.get(item) || 0) + 1);
+      }
+    });
+
+    if (productLabels?.includes('Organic')) {
+      organicCount++;
+    }
+    if (sustainable?.includes('Yes')) {
+      sustainableCount++;
+    }
+  });
+
+  return {
+    containerTypes: [...containerTypes.entries()],
+    sortiments: [...sortiments.entries()],
+    organicCount,
+    sustainableCount,
+  };
+};
+
 export const filterProducts = (products, filters) => {
   const { storlek, pris, typ, sortiment, ekologisk, hallbar } = filters;
   const [minVolume, maxVolume] = storlek;
   const [minPrice, maxPrice] = pris;
-  const filteredProducts = products.filter((product) => {
+  const filteredProducts = products?.filter((product) => {
     const {
       bottlePackageVolume: volume,
       pice: price,

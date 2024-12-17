@@ -31,7 +31,7 @@ const FactBox = ({ recommendedProduct, smakar, aromer, fargers, matkombinationer
           )}
 
           <div>
-            <h3 className="text-sm  lg:text-lg  text-black font-medium ">
+            <h3 className="text-sm  lg:text-md  text-black font-medium ">
               {/* {recommendedProduct.title}
            Faktarutaaaa */}
               {recommendedProduct?.title}

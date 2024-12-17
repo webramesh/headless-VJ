@@ -63,7 +63,8 @@ const CommentForm = ({ data }) => {
     <div
       className="
       shadow 
-      p-3
+      bg-white
+      p-12
       rounded-sm 
       w-full 
       mx-auto
@@ -157,7 +158,7 @@ const CommentForm = ({ data }) => {
               type="email"
               value={authorEmail}
               onChange={(e) => setAuthorEmail(e.target.value)}
-              placeholder="your.email@example.com"
+              placeholder="din.email@example.com"
               className="
                 bg-gray-50 
                 border 
@@ -242,7 +243,7 @@ const CommentForm = ({ data }) => {
               ${loading ? 'bg-gray-400 cursor-not-allowed' : 'bg-red-500 hover:bg-red-600'}
             `}
           >
-            {loading ? 'Inlämnande...' : 'Skicka in'}
+            {loading ? 'Inlämnande...' : 'Skicka'}
           </button>
         </div>
       </form>

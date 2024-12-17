@@ -8,6 +8,7 @@ import SubscriptionBox from '../../Components/subscription/SubscriptionBox';
 import Image from 'next/image';
 import { generateSeoMetadata } from '@/src/utils/utils';
 
+export const revalidate= 0;
 export async function generateMetadata({ params }) {
   const data = await getAuthorBySlug(params?.slug);
 

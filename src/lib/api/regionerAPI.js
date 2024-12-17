@@ -85,6 +85,12 @@ export async function getRegionByURL(url) {
       query: gql`
         query RegionByURL($url: String!) {
           regionBy(uri: $url) {
+            faq {
+              faq {
+                faqQuestion
+                faqAnswer
+              }
+            }
             featuredImage {
               node {
                 sourceUrl

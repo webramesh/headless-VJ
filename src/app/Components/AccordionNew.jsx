@@ -1,21 +1,21 @@
 'use client';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 // AccordionItem Component for better reusability
-const AccordionItem = ({ index, openIndex, toggleAccordion, title, content }) => {
-  const isOpen = openIndex === index;
+const AccordionItem = ({ index, openIndexes, toggleAccordion, title, content }) => {
+  const isOpen = openIndexes.includes(index);
 
   return (
     <div className="border-b mb-2 border-slate-200">
       <button
         onClick={() => toggleAccordion(index)}
-        className="w-full flex justify-between items-center bg-[#F5F5F5] pl-3 hover:bg-[#e6e6e6]  transition-colors duration-200"
+        className="w-full flex justify-between items-center bg-[#F5F5F5] pl-3 hover:bg-[#e6e6e6] transition-colors duration-200"
         aria-expanded={isOpen}
         aria-controls={`accordion-content-${index}`}
         id={`accordion-button-${index}`}
         role="button"
       >
-        <h3 className=" text-left text-md">
+        <h3 className="text-left text-md">
           <span>{title}</span>
         </h3>
         <span
@@ -66,10 +66,30 @@ const AccordionItem = ({ index, openIndex, toggleAccordion, title, content }) =>
 };
 
 const Accordion = ({ faqItems = [] }) => {
-  const [openIndex, setOpenIndex] = useState(null);
+  const [openIndexes, setOpenIndexes] = useState([]);
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const checkIfMobile = () => {
+      setIsMobile(window.innerWidth < 768); // Adjust this breakpoint as needed
+    };
+
+    checkIfMobile();
+    window.addEventListener('resize', checkIfMobile);
+
+    return () => {
+      window.removeEventListener('resize', checkIfMobile);
+    };
+  }, []);
 
   const toggleAccordion = (index) => {
-    setOpenIndex(openIndex === index ? null : index);
+    if (isMobile) {
+      setOpenIndexes(openIndexes.includes(index) ? [] : [index]);
+    } else {
+      setOpenIndexes((prevIndexes) =>
+        prevIndexes.includes(index) ? prevIndexes.filter((i) => i !== index) : [...prevIndexes, index]
+      );
+    }
   };
 
   // Only render if there are FAQ items
@@ -83,10 +103,11 @@ const Accordion = ({ faqItems = [] }) => {
         <AccordionItem
           key={index}
           index={index}
-          openIndex={openIndex}
+          openIndexes={openIndexes}
           toggleAccordion={toggleAccordion}
           title={item.faqQuestion}
           content={item.faqAnswer}
+          isMobile={isMobile}
         />
       ))}
     </div>

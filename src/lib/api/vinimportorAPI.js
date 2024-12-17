@@ -68,3 +68,57 @@ export async function getAllVinimportorer(first, last, after, before) {
     return [];
   }
 }
+export async function getVinimporterBySlug(slug) {
+  try {
+    const { data } = await client.query({
+      query: gql`
+        query VinimporterBySlug($slug: String!) {
+          vinimporterBy(slug: $slug) {
+            date
+            title
+            importerFields {
+              productsVinimporter {
+                nodes {
+                  ... on Produkt {
+                    id
+                    title
+                    slug
+                    featuredImage {
+                      node {
+                        sourceUrl
+                        altText
+                      }
+                    }
+                    fieldsProduct {
+                      pice
+                      productLabels
+                    }
+                    produktTyper {
+                      nodes {
+                        name
+                      }
+                    }
+                    produktslander {
+                      nodes {
+                        name
+                      }
+                    }
+                  }
+                }
+                pageInfo {
+                  endCursor
+                  hasNextPage
+                }
+              }
+            }
+          }
+        }
+      `,
+      variables: { slug },
+    });
+    return data.vinimporterBy;
+  } catch (error) {
+    console.error('Error fetching vinimporter:', error);
+    return null;
+  }
+}

@@ -1,7 +1,7 @@
 import SubscriptionForm from '../Components/subscription/SubscriptionForm';
 import Sidebar from '../Components/Sidebar.jsx';
 import BreadCrumb from '../Components/breadcrumb/BreadCrumb';
-import LanderContainer from './components/LanderContainer';
+import LanderContainer from './Components/LanderContainer';
 import { countLanders } from '@/src/lib/api/landerAPI';
 import PostAccordion from '../Components/PostAccordion';
 
@@ -41,4 +41,3 @@ const Page = async () => {
 };
 
 export default Page;
-

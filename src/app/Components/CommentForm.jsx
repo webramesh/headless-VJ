@@ -4,8 +4,9 @@ import { useMutation } from '@apollo/client';
 import { ADD_COMMENT_MUTATION } from '@/src/lib/mutations/addComment';
 import { validateCommentForm } from '@/src/utils/utils';
 
-const CommentForm = ({ post }) => {
-  const postId = atob(post.id).split(':')[1]; // Decode postId
+const CommentForm = ({ data }) => {
+  const dataId = atob(data.id).split(':')[1]; // Decode postId
+
   const [authorName, setAuthorName] = useState('');
   const [authorEmail, setAuthorEmail] = useState('');
   const [content, setContent] = useState('');
@@ -33,7 +34,7 @@ const CommentForm = ({ post }) => {
       const { data } = await addComment({
         variables: {
           input: {
-            commentOn: parseInt(postId, 10), // Convert postId to integer
+            commentOn: parseInt(dataId, 10), // Convert postId to integer
             content,
             author: authorName,
             authorEmail,
@@ -157,7 +158,7 @@ const CommentForm = ({ post }) => {
               type="email"
               value={authorEmail}
               onChange={(e) => setAuthorEmail(e.target.value)}
-              placeholder="your.email@example.com"
+              placeholder="din.email@example.com"
               className="
                 bg-gray-50 
                 border 
@@ -242,7 +243,7 @@ const CommentForm = ({ post }) => {
               ${loading ? 'bg-gray-400 cursor-not-allowed' : 'bg-red-500 hover:bg-red-600'}
             `}
           >
-            {loading ? 'Inlämnande...' : 'Skicka in'}
+            {loading ? 'Inlämnande...' : 'Skicka'}
           </button>
         </div>
       </form>

@@ -28,6 +28,7 @@ export default async function Page({ params }) {
         productTitle={product?.title}
         produktslander={product?.produktslander}
         typer={product?.produktTyper?.nodes?.filter((recommendation) => recommendation.name !== 'Vin')}
+        data={product}
       />
       {similarProducts && similarProducts.length > 0 && <Price similarProducts={similarProducts} />}
 

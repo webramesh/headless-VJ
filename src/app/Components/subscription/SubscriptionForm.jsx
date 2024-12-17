@@ -9,15 +9,30 @@ const SubscriptionForm = () => {
   const [toastClass, setToastClass] = useState('');
   const [agreeToPrivacy, setAgreeToPrivacy] = useState(false);
 
+  const isValidEmail = (email) => {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/; // Basic email validation regex
+    return emailRegex.test(email);
+  };
+
   const subscribeUser = async (e) => {
     e.preventDefault();
 
-    // Check if the email input is empty or the privacy checkbox is not checked
-    if (!inputRef.current.value.trim()) {
+    const email = inputRef.current.value.trim();
+
+    // Check if the email input is empty
+    if (!email) {
       setToastMessage('Please enter an email address.');
       setToastClass('bg-red-600'); // Error style
       setShowToast(true);
-    } else if (!agreeToPrivacy) {
+    }
+    // Check if the email is invalid
+    else if (!isValidEmail(email)) {
+      setToastMessage('Please enter a valid email address.');
+      setToastClass('bg-red-600'); // Error style
+      setShowToast(true);
+    }
+    // Check if the privacy policy checkbox is not checked
+    else if (!agreeToPrivacy) {
       setToastMessage('You must agree to the privacy policy.');
       setToastClass('bg-red-600'); // Error style
       setShowToast(true);
@@ -25,7 +40,7 @@ const SubscriptionForm = () => {
       try {
         const res = await fetch('/api/subscribeUser', {
           body: JSON.stringify({
-            email: inputRef.current.value,
+            email,
           }),
           headers: {
             'Content-Type': 'application/json',
@@ -43,11 +58,14 @@ const SubscriptionForm = () => {
         } else {
           const errorData = await res.json();
           console.log(errorData);
-          setToastMessage(
-            errorData.error === 'Member Exists'
-              ? 'You are already subscribed to the newsletter.'
-              : 'There was an error subscribing to the newsletter.'
-          );
+
+          // Check for the specific backend response for "already subscribed"
+          if (errorData.error === 'This email is already subscribed.') {
+            setToastMessage('You are already subscribed to the newsletter.');
+          } else {
+            setToastMessage('There was an error subscribing to the newsletter. Please try again.');
+          }
+
           setToastClass('bg-red-600'); // Error style
           setShowToast(true);
 
@@ -84,7 +102,7 @@ const SubscriptionForm = () => {
                 name="email"
                 ref={inputRef}
                 className="w-full text-black lg:w-2/3 p-2 border-2 focus:border-2 focus:border-gray-500 placeholder-gray-400 rounded-md outline-none"
-                placeholder="Your Email"
+                placeholder="Din Email"
                 required
               />
             </div>

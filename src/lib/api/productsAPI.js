@@ -135,6 +135,7 @@ export async function getProductBySlug(identifier) {
       query: gql`
         query ProductBySlug($slug: String, $id: ID) {
           produktBy(slug: $slug) {
+            id
             title
             slug
             produktslander {
@@ -210,6 +211,7 @@ export async function getProductBySlug(identifier) {
               }
             }
             fieldsProduct {
+              sustainable
               composition
               productShortText
               extraReadMore1
@@ -237,10 +239,28 @@ export async function getProductBySlug(identifier) {
               totalCaloriesPerLitter
               sugerLevel
               sugarLevelIn1Litter
+              sugarBites
               containerType
               produktPackaging
               productLabels
               wineSaleStartDate
+              alcoholPerSek
+              vinimporter {
+                nodes {
+                  ... on Vinimporter {
+                    id
+                    title
+                  }
+                }
+              }
+              produkterproducer {
+                nodes {
+                  ... on Producent {
+                    id
+                    title
+                  }
+                }
+              }
             }
             matkombinationer {
               nodes {

@@ -8,6 +8,7 @@ export const ADD_COMMENT_MUTATION = gql`
         content
         date
         commentedOn {
+          __typename
           node {
             ... on Post {
               id

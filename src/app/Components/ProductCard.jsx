@@ -30,8 +30,8 @@ function ProductCard({ product }) {
             const productLabel = label.toLowerCase();
 
             return (
-              <div key={Math.random()}>
-                {productLabel === 'new' && <Image src="/new.svg" width={30} height={30} className="my-1" alt="new" />}
+              <div key={productLabel} className='my-0.5'>
+                {/* {productLabel === 'new' && <Image src="/new.svg" width={30} height={30} className="my-1" alt="new" />}
                 {productLabel === 'available only online' && (
                   <Image src="/ekologisk.svg" width={30} height={30} className="my-1" alt="ekologisk" />
                 )}
@@ -60,7 +60,27 @@ function ProductCard({ product }) {
 
                 {productLabel === 'show wt information' && (
                   <Image src="/vegan.svg" width={30} height={30} className="my-1" alt="Show WT Information" />
+                )} */}
+
+                {productLabel === 'new' && <Image src="/new.svg" width={30} height={30} alt="Nyhet" />}
+
+                {productLabel === 'organic' && <Image src="/ekologisk.svg" width={30} height={30} alt="Ekologisk" />}
+                {productLabel === 'vegan' && <Image src="/vegan.svg" width={30} height={30} alt="Veganskt" />}
+                {productLabel === 'best seller' && (
+                  <Image src="/best-seller.svg" width={30} height={30} alt="best-seller" />
                 )}
+                {productLabel === 'family winery' && (
+                  <Image src="/family.svg" width={30} height={30} alt="Family Winery" />
+                )}
+                {productLabel === 'verified by vjse' && (
+                  <Image src="/verified.svg" width={30} height={30} alt="Verified By VJSE" />
+                )}
+                {productLabel === 'sustainable' && (
+                  <Image src="/verified.svg" width={30} height={30} alt="Verified By VJSE" />
+                )}
+                {/* do same for sustainable */}
+
+                {productLabel === 'on sale' && <p className="bg-red-600 text-white px-1 text-center text-[10px] py-2 rounded-full">Sale</p>}
               </div>
             );
           })}

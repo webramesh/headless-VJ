@@ -43,9 +43,9 @@ const PostDetailsHero = ({ featuredImage, title, authorImage, authorName, author
             <div className=" text-xs lg:text-sm text-gray-600">
               {/* <span>{authorName || 'Vinjournalen'}</span> | <span>{format(new Date(date), 'dd MMMM, yyyy')}</span> */}
               <Link href={`/author/${authorSlug}`}>
-                <span>{authorName || 'Vinjournalen'}</span>
+                <span>{authorName || 'Vinjournalen'} | </span>
               </Link>
-              |
+               
               <span className="capitalize">
                 {new Date(date).toLocaleDateString('sv-SE', {
                   day: '2-digit',

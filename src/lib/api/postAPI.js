@@ -201,6 +201,7 @@ export async function getPostBySlug(slug) {
               node {
                 name
                 customAvatar
+                slug
               }
             }
 
@@ -250,9 +251,15 @@ export async function getPostProductRecommendationBySlug(slug) {
                 produkter {
                   nodes {
                     title
+                    slug
                     produktslander {
                       nodes {
                         name
+                        parent {
+                          node {
+                            name
+                          }
+                        }
                       }
                       nodes {
                         flag {
@@ -264,6 +271,7 @@ export async function getPostProductRecommendationBySlug(slug) {
                         }
                       }
                     }
+
                     featuredImage {
                       node {
                         sourceUrl

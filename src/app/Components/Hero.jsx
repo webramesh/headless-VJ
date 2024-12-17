@@ -1,6 +1,5 @@
 import Image from 'next/image';
 import Link from 'next/link';
-import { format } from 'date-fns';
 import { formatEmbeddedContent } from '@/src/utils/utils';
 
 const Hero = ({ posts }) => {
@@ -8,9 +7,8 @@ const Hero = ({ posts }) => {
     <div className="container mt-6 mx-auto p-2">
       <div className="flex flex-col lg:flex-row gap-8 lg:gap-12">
         {/* Main Article */}
-        {/* <Link href={`/article/${posts[0].slug}`} className="w-full lg:w-1/2 bg-[#f5f5f5] overflow-hidden"> */}
+
         <Link
-          // href={`/${posts[0].categories.nodes[0].slug}/${posts[0].slug}`}
           href={`/${posts[0].categories?.nodes[0]?.slug || 'uncategorized'}/${posts[0].slug}`}
           className="w-full lg:w-1/2 bg-[#f5f5f5] overflow-hidden"
         >
@@ -31,7 +29,16 @@ const Hero = ({ posts }) => {
           </div>
           <div className="p-4">
             <h2 className=" font-medium text-black text-lg mt-4 sm:mt-8">{posts[0]?.title}</h2>
-            <p className="mt-4  text-gray-900 text-xs">{format(new Date(posts[0]?.date), 'dd MMMM, yyyy')}</p>
+            {/* <p className="mt-4  text-gray-900 text-xs">{format(new Date(posts[0]?.date), 'dd MMMM, yyyy')}</p> */}
+            <p className="mt-4  text-gray-900 text-xs capitalize">
+              {' '}
+              {new Date(posts[0]?.date).toLocaleDateString('sv-SE', {
+                day: '2-digit',
+                month: 'long',
+                year: 'numeric',
+              })}
+            </p>
+
             <p className="text-[#694848] text-xs  mt-2">{posts[0]?.author?.node?.name}</p>
             <p
               className=" text-sm text-gray-900 font-extralight mt-4 leading-relaxed"
@@ -65,7 +72,14 @@ const Hero = ({ posts }) => {
                     </div>
                     <div className="p-4 sm:w-2/3">
                       <h2 className=" font-medium text-black text-lg">{post?.title}</h2>
-                      <p className="mt-2  text-gray-900 text-xs">{format(new Date(post?.date), 'dd MMMM, yyyy')}</p>
+                      {/* <p className="mt-2  text-gray-900 text-xs">{format(new Date(post?.date), 'dd MMMM, yyyy')}</p> */}
+                      <p className="mt-4  text-gray-900 text-xs capitalize">
+                        {new Date(post?.date).toLocaleDateString('sv-SE', {
+                          day: '2-digit',
+                          month: 'long',
+                          year: 'numeric',
+                        })}
+                      </p>
                       <p className="text-[#694848] text-xs  mt-2">{post?.author?.node?.name}</p>
 
                       <p

@@ -18,6 +18,7 @@ export async function generateMetadata({ params }) {
   const { category, slug } = params;
 
   const post = await getPostBySlug(slug);
+
   if (post) {
     const { seo } = post;
     if (seo) {
@@ -60,6 +61,7 @@ export default async function PostDetails({ params }) {
             featuredImage={post?.featuredImage?.node?.sourceUrl}
             authorImage={post?.author?.node?.customAvatar}
             authorName={post?.author?.node?.name}
+            authorSlug={post?.author?.node?.slug}
             date={post?.date}
             categoryName={post?.categories?.nodes[0]?.name}
             categories={post?.categories?.nodes[0]}
@@ -87,7 +89,7 @@ export default async function PostDetails({ params }) {
                 <CommentsSection comments={post?.comments?.nodes || []} />
 
                 <div className="mt-12">
-                  <CommentForm post={post} />
+                  <CommentForm data={post} />
                 </div>
 
                 <div className="mt-12">

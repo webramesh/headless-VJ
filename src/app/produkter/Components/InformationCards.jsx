@@ -2,6 +2,7 @@
 import { useState } from 'react';
 import RenderBox from './RenderBox';
 import AlcoholInfo from './AlcoholInfo';
+import CommentForm from '../../Components/CommentForm';
 
 const ratingbox = () => (
   <div className="w-full px-4 sm:px-0">
@@ -91,7 +92,7 @@ const formfield = () => (
   </div>
 );
 
-const QNA = ({ productTitle, produktslander, wineSaleStartDate }) => (
+const QNA = ({ productTitle, produktslander, wineSaleStartDate, sugarBites }) => (
   <div className="w-full px-4 sm:px-20">
     <div className="flex flex-col mt-4 text-center  text-lg font-medium">Frågor och svar om {productTitle}</div>
     <div className="flex flex-col">
@@ -108,13 +109,15 @@ const QNA = ({ productTitle, produktslander, wineSaleStartDate }) => (
         <div className="bg-[#f5f5f5] pt-6 pl-2">
           <div className=" text-sm font-medium"> Vad är {productTitle} sockermängd?</div>
         </div>
-        <div className="text-gray-600 text-sm  pl-2">{productTitle} har en sockermängd på cirka gram per liter.</div>
+        <div className="text-gray-600 text-sm  pl-2">
+          {productTitle} har en sockermängd på cirka {sugarBites ? `${sugarBites}` : 'N/A'} gram per liter.
+        </div>
         <div className="mt-4">
           <div className="bg-[#f5f5f5] pt-6 pl-2">
             <div className=" text-sm font-medium">Hur länge har produkten {productTitle} sålts på systembolaget?</div>
           </div>
           <div className="text-gray-600 text-sm  pl-2">
-            {wineSaleStartDate ? new Date(wineSaleStartDate).toLocaleDateString('sv-SE') :'Datum ej tillgängligt'}
+            {wineSaleStartDate ? new Date(wineSaleStartDate).toLocaleDateString('sv-SE') : 'Datum ej tillgängligt'}
           </div>
         </div>
       </div>
@@ -122,7 +125,7 @@ const QNA = ({ productTitle, produktslander, wineSaleStartDate }) => (
   </div>
 );
 
-const InformationCards = ({ fieldsProduct, productTitle, typer, produktslander }) => {
+const InformationCards = ({ fieldsProduct, productTitle, typer, produktslander, data }) => {
   const {
     caloriesInAlcPer15cl,
     caloriesInAlcPerContainerVolume,
@@ -138,9 +141,17 @@ const InformationCards = ({ fieldsProduct, productTitle, typer, produktslander }
     containerType,
     produktPackaging,
     wineSaleStartDate,
+    sugarBites,
+    alcoholPerSek,
   } = fieldsProduct;
 
-  const [selected, setSelected] = useState(null);
+  const productsLander = data?.produktslander?.nodes;
+
+  const vinimporterTitles = data?.fieldsProduct?.vinimporter?.nodes.map((node) => node.title).join(', ');
+  const producenterTitles = data?.fieldsProduct?.produkterproducer?.nodes.map((node) => node.title).join(', ');
+
+  // Set default state to '4' to open "Frågor och svar"
+  const [selected, setSelected] = useState(4);
 
   const handleClick = (index) => {
     setSelected((prevSelected) => (prevSelected === index ? null : index));
@@ -189,10 +200,11 @@ const InformationCards = ({ fieldsProduct, productTitle, typer, produktslander }
               </RenderBox>
               <RenderBox title="Sockerdetaljer">
                 <div className="text-xs  text-center mt-2">
-                  Socker g/l <br /> {sugerLevel}
+                  Socker g/l <br /> {sugarLevelIn1Litter ? <p> {sugarLevelIn1Litter}</p> : <p>N/A</p>}
                 </div>
                 <div className="text-xs  text-center mb-9 mt-2">
-                  Socker Per Liter <br /> {sugarLevelIn1Litter}
+                  Socker Per Liter <br />
+                  {sugarBites ? <p> {sugarBites}</p> : <p>N/A</p>}
                 </div>
               </RenderBox>
             </div>
@@ -205,13 +217,14 @@ const InformationCards = ({ fieldsProduct, productTitle, typer, produktslander }
                   Förslutning <br /> {containerType}
                 </div>
                 <div className="text-xs  text-center mt-2">
-                  Förpackning <br /> {produktPackaging}
+                  Förpackning <br /> {produktPackaging ? <p>{produktPackaging}</p> : <p>N/A</p>}
                 </div>
               </RenderBox>
 
               <RenderBox title="Alkhol">
                 <div className="text-xs  text-center mt-2">
-                  APK (Alkhol per krona) <br /> 0.4 :-
+                  APK (Alkhol per krona) <br />
+                  {alcoholPerSek ? <p> {alcoholPerSek} :-</p> : <p>N/A</p>}
                 </div>
                 <div className="text-xs  text-center text-gray-500 mt-2">
                   Alkohol per krona är ett mått som anger mängden alkohol som erhålls per <br />
@@ -223,28 +236,38 @@ const InformationCards = ({ fieldsProduct, productTitle, typer, produktslander }
               <RenderBox title="Om Producenten">
                 <div className="text-xs  text-center mt-2">
                   Producent <br />
-                  <div className="text-red-500 font-bold">Fuji Takasago Shuzo</div>
+                  <div className="text-red-500 font-bold">
+                    {/* Fuji Takasago Shuzo */}
+
+                    {producenterTitles ? <p>{producenterTitles}</p> : <p>N/A</p>}
+                  </div>
                 </div>
                 <div className="text-xs  text-center mt-2">
                   Land <br />
-                  <div className="text-red-500 font-bold">Japan</div>
+                  <div className="text-red-500 font-bold">{productsLander[0]?.name}</div>
                 </div>
               </RenderBox>
 
               <RenderBox title="Om Importören">
                 <div className="text-xs  text-center mt-2">
                   Importör <br />
-                  <div className="text-red-500 font-bold mb-9">Akebono Unlimited AB</div>
+                  <div className="text-red-500 font-bold mb-9">
+                    {/* Akebono Unlimited AB */}
+                    {vinimporterTitles ? <p>{vinimporterTitles}</p> : <p>N/A</p>}
+                  </div>
                 </div>
               </RenderBox>
             </div>
           )}
 
           {selected === 3 && (
-            <div className="flex flex-col items-center mt-6 justify-center">
-              {ratingbox()}
-              {formfield()}
-            </div>
+            <>
+              <div className="flex flex-col items-center mt-6 justify-center">
+                {ratingbox()}
+                {/* {formfield()} */}
+                <CommentForm data={data} />
+              </div>
+            </>
           )}
 
           {selected === 4 && (
@@ -254,6 +277,7 @@ const InformationCards = ({ fieldsProduct, productTitle, typer, produktslander }
                 typer={typer}
                 produktslander={produktslander}
                 wineSaleStartDate={wineSaleStartDate}
+                sugarBites={sugarBites}
               />
             </div>
           )}
@@ -262,5 +286,7 @@ const InformationCards = ({ fieldsProduct, productTitle, typer, produktslander }
     </div>
   );
 };
+
+// export default InformationCards;
 
 export default InformationCards;

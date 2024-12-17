@@ -65,8 +65,7 @@ export const generatePdf = (productDetails, product) => {
   const doc = new jsPDF();
   const pageWidth = doc.internal.pageSize.getWidth();
   // const pageHeight = doc.internal.pageSize.getHeight();
-  const detailsWidth = pageWidth * 0.3;
-  const wineImageWidth = pageWidth * 0.4;
+  // const detailsWidth = pageWidth * 0.3;
 
   // Elegant Header
   doc.setFillColor(240, 240, 240); // Light gray background
@@ -140,7 +139,6 @@ export const generatePdf = (productDetails, product) => {
   });
 
   // Wine image placement
-  const wineImageX = detailsX + detailsWidth + 20;
   const wineImageY = 40;
   const wineImageHeight = 150;
   // doc.addImage('/winevj.png', 'JPEG', wineImageX, wineImageY, wineImageWidth, wineImageHeight);

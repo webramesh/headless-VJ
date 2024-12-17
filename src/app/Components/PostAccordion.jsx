@@ -2,11 +2,10 @@
 import { useCategoryAndPosts } from '@/src/context/CategoriesAndPostsContext';
 import Link from 'next/link';
 import { useParams } from 'next/navigation';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 const PostAccordion = () => {
   const params = useParams();
-
   const categoryAndPosts = useCategoryAndPosts();
 
   // Filter categories and posts
@@ -23,10 +22,30 @@ const PostAccordion = () => {
     })
     .filter((category) => category.filteredPostDetails.length > 0); // Exclude categories with no posts
 
-  const [openIndex, setOpenIndex] = useState(null);
+  const [openIndexes, setOpenIndexes] = useState([]);
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const checkIfMobile = () => {
+      setIsMobile(window.innerWidth < 768); // Adjust this breakpoint as needed
+    };
+
+    checkIfMobile();
+    window.addEventListener('resize', checkIfMobile);
+
+    return () => {
+      window.removeEventListener('resize', checkIfMobile);
+    };
+  }, []);
 
   const toggleAccordion = (index) => {
-    setOpenIndex(openIndex === index ? null : index);
+    if (isMobile) {
+      setOpenIndexes(openIndexes.includes(index) ? [] : [index]);
+    } else {
+      setOpenIndexes((prevIndexes) =>
+        prevIndexes.includes(index) ? prevIndexes.filter((i) => i !== index) : [...prevIndexes, index]
+      );
+    }
   };
 
   return (
@@ -62,10 +81,10 @@ const PostAccordion = () => {
                 transition-transform
                 duration-300
                 transform
-                ${openIndex === index ? 'rotate-180' : 'rotate-0'}
+                ${openIndexes.includes(index) ? 'rotate-180' : 'rotate-0'}
               `}
             >
-              {openIndex === index ? (
+              {openIndexes.includes(index) ? (
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   viewBox="0 0 16 16"
@@ -100,7 +119,7 @@ const PostAccordion = () => {
               transition-all
               duration-300
               ease-in-out
-              ${openIndex === index ? 'max-h-screen' : 'max-h-0'}
+              ${openIndexes.includes(index) ? 'max-h-screen' : 'max-h-0'}
             `}
           >
             <div

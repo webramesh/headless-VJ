@@ -26,71 +26,71 @@ const ratingbox = () => (
   </div>
 );
 
-const formfield = () => (
-  <div className="w-full max-w-4xl mx-auto mb-16 px-4 sm:px-0">
-    <div className="flex flex-col md:flex-row gap-8 mt-8">
-      <div className="flex flex-col w-full md:w-1/2 gap-4">
-        <div>
-          <label htmlFor="name" className="sr-only">
-            Name
-          </label>
-          <input
-            type="text"
-            id="name"
-            className="p-2 pl-3 w-full bg-[#d9d9d9] rounded-2xl"
-            placeholder="Namn*"
-            required
-          />
-        </div>
-        <div>
-          <label htmlFor="email" className="sr-only">
-            Email
-          </label>
-          <input
-            type="email"
-            id="email"
-            className="p-2 pl-3 w-full bg-[#d9d9d9] rounded-2xl"
-            placeholder="E-Postadress*"
-            required
-          />
-        </div>
-        <div>
-          <label htmlFor="captcha" className="sr-only">
-            Captcha
-          </label>
-          <legend className=" text-sm mb-1">Are you human? Please solve:</legend>
-          <input
-            type="text"
-            id="captcha"
-            className="p-2 pl-3 w-full bg-[#d9d9d9] rounded-2xl"
-            placeholder=""
-            required
-          />
-        </div>
-      </div>
-      <div className="flex flex-col w-full md:w-1/2 gap-12">
-        <div className="flex flex-col flex-grow">
-          <label htmlFor="message" className="sr-only">
-            Message
-          </label>
-          <textarea
-            id="message"
-            className="p-2 bg-[#d9d9d9] rounded-xl flex-grow resize-none"
-            placeholder="Skriv ditt omdömme här!"
-            required
-          />
-        </div>
-        <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4">
-          <button className="px-2 py-1 w-full sm:w-[40%] bg-[#e13768] text-white rounded-full">Sticka</button>
-          <div className="text-xs ">
-            Denna webbplats använder Akismet för att minska skräppost.
-            <span className="text-red-600 font-bold">Lär dig hur din kommentardata bearbetas.</span>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-);
+// const formfield = () => (
+//   <div className="w-full max-w-4xl mx-auto mb-16 px-4 sm:px-0">
+//     <div className="flex flex-col md:flex-row gap-8 mt-8">
+//       <div className="flex flex-col w-full md:w-1/2 gap-4">
+//         <div>
+//           <label htmlFor="name" className="sr-only">
+//             Name
+//           </label>
+//           <input
+//             type="text"
+//             id="name"
+//             className="p-2 pl-3 w-full bg-[#d9d9d9] rounded-2xl"
+//             placeholder="Namn*"
+//             required
+//           />
+//         </div>
+//         <div>
+//           <label htmlFor="email" className="sr-only">
+//             Email
+//           </label>
+//           <input
+//             type="email"
+//             id="email"
+//             className="p-2 pl-3 w-full bg-[#d9d9d9] rounded-2xl"
+//             placeholder="E-Postadress*"
+//             required
+//           />
+//         </div>
+//         <div>
+//           <label htmlFor="captcha" className="sr-only">
+//             Captcha
+//           </label>
+//           <legend className=" text-sm mb-1">Are you human? Please solve:</legend>
+//           <input
+//             type="text"
+//             id="captcha"
+//             className="p-2 pl-3 w-full bg-[#d9d9d9] rounded-2xl"
+//             placeholder=""
+//             required
+//           />
+//         </div>
+//       </div>
+//       <div className="flex flex-col w-full md:w-1/2 gap-12">
+//         <div className="flex flex-col flex-grow">
+//           <label htmlFor="message" className="sr-only">
+//             Message
+//           </label>
+//           <textarea
+//             id="message"
+//             className="p-2 bg-[#d9d9d9] rounded-xl flex-grow resize-none"
+//             placeholder="Skriv ditt omdömme här!"
+//             required
+//           />
+//         </div>
+//         <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4">
+//           <button className="px-2 py-1 w-full sm:w-[40%] bg-[#e13768] text-white rounded-full">Sticka</button>
+//           <div className="text-xs ">
+//             Denna webbplats använder Akismet för att minska skräppost.
+//             <span className="text-red-600 font-bold">Lär dig hur din kommentardata bearbetas.</span>
+//           </div>
+//         </div>
+//       </div>
+//     </div>
+//   </div>
+// );
 
 const QNA = ({ productTitle, produktslander, wineSaleStartDate, sugarBites }) => (
   <div className="w-full px-4 sm:px-20">
@@ -136,7 +136,6 @@ const InformationCards = ({ fieldsProduct, productTitle, typer, produktslander, 
     totalCaloriesPer15Cl,
     totalCaloriesPerContainerVolume,
     totalCaloriesPerLitter,
-    sugerLevel,
     sugarLevelIn1Litter,
     containerType,
     produktPackaging,

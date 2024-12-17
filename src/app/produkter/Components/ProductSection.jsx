@@ -7,7 +7,6 @@ import twitter from '@/public/twitterblack.png';
 import Link from 'next/link';
 import { useState } from 'react';
 import BreadCrumb from '../../Components/breadcrumb/BreadCrumb';
-import jsPDF from 'jspdf';
 import FactBoxMatCombinationer from '../../[category]/[slug]/components/FactBoxMatCombinationer';
 import FactBoxDescription from '../../[category]/[slug]/components/FactBoxDescription';
 import FactBoxMoreInfo from '../../[category]/[slug]/components/FactBoxMoreInfo';
@@ -33,18 +32,9 @@ export default function ProductSection({ product }) {
     productCode,
     buyLink,
     wineSortiment,
-    vintage,
     tasteClock1FyllighetSotma,
     tasteClock2Fyllighetstravhet,
     tasteClock3Fruktsyra,
-
-    caloriesInAlcPer15cl,
-    caloriesInAlcPerContainerVolume,
-    totalCaloriesPer15Cl,
-    totalCaloriesPerLitter,
-    totalCaloriesPerContainerVolume,
-    allergener,
-    pricePerLitter,
   } = fieldsProduct;
   const typer = produktTyper?.nodes?.filter((recommendation) => recommendation.name !== 'Vin');
 

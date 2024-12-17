@@ -206,32 +206,88 @@ h2.wp-block-kadence-advancedheading {
   margin: 20px 0;
 }
 
-.wp-block-gallery.has-nested-images.columns-default {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 10px;
-  width: 100%;
-}
-
-.wp-block-gallery.has-nested-images figure.wp-block-image {
-  width: 100%;
-  height: 100%;
+/* Reset Gutenberg gallery defaults */
+.content .wp-block-gallery {
+  display: block !important;
+  overflow: hidden;
+  padding: 0;
   margin: 0;
 }
 
-.wp-block-gallery.has-nested-images figure.wp-block-image img {
+/* Remove default figure margins and create masonry base */
+.content .wp-block-gallery figure {
+  margin: 0;
+  padding: 0;
+  break-inside: avoid;
+}
+
+/* Create masonry layout */
+@media screen and (min-width: 768px) {
+  .content .wp-block-gallery {
+    column-count: 3;
+    column-gap: 1rem;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .content .wp-block-gallery {
+    column-count: 2;
+    column-gap: 1rem;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .content .wp-block-gallery {
+    column-count: 1;
+  }
+}
+
+/* Handle images within the gallery */
+.content .wp-block-gallery figure img {
   width: 100%;
-  height: 100%;
-  object-fit: cover;
+  height: auto;
+  object-fit: contain;
+  margin-bottom: 0.5rem;
+  padding: 0 10px;
+  transition: transform 0.3s ease;
 }
 
-/* Target the last image when it's alone in its row */
-.wp-block-gallery.has-nested-images figure.wp-block-image:last-child:nth-child(3n-2) {
-  grid-column: 1 / -1;
+/* Optional hover effect */
+.content .wp-block-gallery figure img:hover {
+  transform: scale(1.02);
 }
 
-/* Adjust the width of the last two images when there are only two in the last row */
-.wp-block-gallery.has-nested-images figure.wp-block-image:last-child:nth-child(3n-1),
-.wp-block-gallery.has-nested-images figure.wp-block-image:nth-last-child(2):nth-child(3n-2) {
-  grid-column: span 3;
+/* Remove unnecessary spacing and styles */
+.content .wp-block-gallery.has-nested-images figure.wp-block-image:not(#individual-image) {
+  width: 100%;
+  margin: 0 0 1rem 0;
+}
+
+/* Reset WordPress default spacing */
+.content .wp-block-gallery.has-nested-images {
+  padding: 0;
+  gap: 0;
+}
+
+/* Ensure proper spacing between items */
+.content .wp-block-gallery figure.wp-block-image {
+  margin-bottom: 1rem;
+}
+
+/* Style for the figure and image container */
+.content .wp-block-gallery figure.wp-block-image {
+  position: relative;
+  margin-bottom: 1rem;
+}
+
+/* Style for the caption */
+.content .wp-block-gallery figcaption.wp-element-caption {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  color: white;
+  padding: 0.5rem;
+  font-size: 0.9rem;
+  text-align: center;
 }

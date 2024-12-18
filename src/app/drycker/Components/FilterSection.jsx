@@ -53,15 +53,19 @@ function extractOptionsAgain(products, dispatch) {
   });
 }
 
-const FilterSection = ({ initialProducts, params, filters, page }) => {
-  const { type, country } = params;
+const FilterSection = ({ initialProducts, params, filters, page, allProductTitle }) => {
+  const { type, country, region, subRegion } = params;
   const fetchFunction = useMemo(() => {
     if (page === 'mainPage') {
       return () => getAllProductsByType(type);
-    } else {
+    } else if (page === 'CountryPage') {
       return () => getProductByCountry(country, type);
+    } else if (page === 'RegionPage') {
+      return () => getProductByCountry(region, type);
+    } else {
+      return () => getProductByCountry(subRegion, type);
     }
-  }, [page, type, country]);
+  }, [page, type, country, region, subRegion]);
 
   // const fetchFunction = getAllProductsByType;
   const initialState = useMemo(
@@ -156,7 +160,7 @@ const FilterSection = ({ initialProducts, params, filters, page }) => {
           </div>
           {/* Rightside */}
           <div className="w-full lg:w-[80%]">
-            <div className="text-2xl md:text-3xl text-center pl-3 mb-4 md:mb-6">Alla roséviner</div>
+            <div className="text-2xl md:text-3xl text-center pl-3 mb-4 md:mb-6">{allProductTitle}</div>
             <div className="flex flex-col-reverse md:flex-col">
               <SelectedFilter selectedFilters={selectedFilters} volumeRange={volumeRange} priceRange={priceRange} />
               <div>

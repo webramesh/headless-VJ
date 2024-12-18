@@ -33,7 +33,7 @@ const PostDetailsHero = ({ featuredImage, title, authorImage, authorName, author
               {authorSlug ? (
                 <Link href={`/author/${authorSlug}`}>
                   <Image
-                    src={authorImage || '/vinlogo.png'}
+                    src={authorImage || '/vinlogo.svg'}
                     // src={'/search.png'}
                     alt={authorName || 'Vinjournalen'}
                     className="object-cover"
@@ -42,7 +42,7 @@ const PostDetailsHero = ({ featuredImage, title, authorImage, authorName, author
                 </Link>
               ) : (
                 <Image
-                  src={authorImage || '/vinlogo.png'}
+                  src={authorImage || '/vinlogo.svg'}
                   // src={'/search.png'}
                   alt={authorName || 'Vinjournalen'}
                   className="object-cover"

@@ -3,7 +3,7 @@
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
-import vinlogo from '@/public/vinlogo.png';
+import vinlogo from '@/public/vinlogo.svg';
 
 export default function NotFound() {
   const [rotate, setRotate] = useState(0);

@@ -72,13 +72,13 @@ export const generatePdf = (productDetails, product) => {
   doc.rect(0, 0, pageWidth, 25, 'F');
 
   // Logo
-  const logoUrl = '/vinjournalen-logo.png';
+  const logoUrl = '/vinjournalen-logo.svg';
   const logoWidth = 70;
 
   const logoHeight = 13;
   const logoX = (pageWidth - logoWidth) / 2;
   const logoY = 6;
-  doc.addImage(logoUrl, 'PNG', logoX, logoY, logoWidth, logoHeight);
+  doc.addImage(logoUrl, 'JPEG', logoX, logoY, logoWidth, logoHeight);
 
   // Product Details on the Left
   const detailsX = 10;

@@ -1,7 +1,6 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import { formatEmbeddedContent } from '@/src/utils/utils';
-import { format } from 'date-fns';
 
 export default function RecentPostCard({ post }) {
   if (!post) {

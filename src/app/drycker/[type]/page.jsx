@@ -1,5 +1,4 @@
 import { getProductsByType } from '@/src/lib/api/dryckerApi';
-import { getPageBySlug } from '@/src/lib/api/pageApi';
 import { generateSeoMetadata } from '@/src/utils/utils';
 import { getAllVinguidePosts } from '@/src/lib/api/vinguideApi';
 import { getAllCountries } from '@/src/lib/api/countryApi';
@@ -7,9 +6,12 @@ import DryckerPage from '../Components/DryckerPage';
 
 export const revalidate = 60;
 export async function generateMetadata({ params }) {
-  const data = await getPageBySlug(`drycker/${params.slug}`);
+  // const data = await getPageBySlug(`drycker/${params.slug}`);
+  const { name } = await getProductsByType(params.type);
+  const vinguideData = await getAllVinguidePosts(name);
 
-  const seo = data?.seo;
+  const seo = vinguideData?.seo;
+
   if (seo) {
     return generateSeoMetadata(seo);
   }
@@ -24,7 +26,6 @@ export default async function Home({ params, searchParams }) {
 
   return (
     <DryckerPage
-      name={name}
       products={products}
       countries={countries}
       vinguideData={vinguideData}

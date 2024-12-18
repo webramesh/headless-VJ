@@ -31,7 +31,7 @@ const FactBoxDescription = ({ fieldsProduct }) => {
           <div className="flex flex-col pl-4 lg:pl-8">
             <div className=" text-black text-xs">VOLYM</div>
             <div className="text-gray-500 text-xs">
-              {fieldsProduct?.volume ? <p>{fieldsProduct?.volume} ml </p> : <p>N/A</p>}
+              {fieldsProduct?.bottlePackageVolume ? <p>{fieldsProduct?.bottlePackageVolume} ml </p> : <p>N/A</p>}
             </div>
           </div>
           <div className="flex flex-col pl-4 lg:pl-14">

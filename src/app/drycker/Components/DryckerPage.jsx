@@ -6,26 +6,24 @@ import FilterSection from './FilterSection';
 import Hero from './Hero';
 import Paragraph from './Paragraph';
 
-export default function DryckerPage({
-  name,
-  products,
-  countries,
-  vinguideData,
-  cardTitle,
-  searchParams,
-  params,
-  page,
-}) {
+export default function DryckerPage({ products, countries, vinguideData, cardTitle, searchParams, params, page }) {
   const vinguidePosts = vinguideData?.vinguidePosts?.vinguidePosts?.nodes || [];
+  const vinguideDetails = vinguideData?.vinguidePosts || {};
+  const { shortTitle, shortDescription, pageTitle, pageSubtitle, allProductTitle } = vinguideDetails;
 
   return (
     <>
-      <Hero name={name} />
-      <Paragraph name={name} />
+      <Hero params={params} pageTitle={pageTitle} pageSubtitle={pageSubtitle} />
+      <Paragraph shortTitle={shortTitle} shortDescription={shortDescription} />
       <Scrolltodown />
-      <FilterSection initialProducts={products} params={params} filters={searchParams} page={page} />
-
-      <Allcountry countries={countries} type={params.type} name={name} />
+      <FilterSection
+        initialProducts={products}
+        params={params}
+        filters={searchParams}
+        page={page}
+        allProductTitle={allProductTitle}
+      />
+      <Allcountry countries={countries} params={params} />
       <Content pageData={vinguideData} />
       <Card title={cardTitle} subtitle="Från vår redaktion" posts={vinguidePosts.slice(0, 6)} />
     </>

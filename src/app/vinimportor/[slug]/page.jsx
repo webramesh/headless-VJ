@@ -5,7 +5,33 @@ import VinimportorHero from '../../Components/VinimportorHero';
 import ProductCard from '../../Components/ProductCard';
 import SubscriptionForm from '../../Components/subscription/SubscriptionForm';
 import PostAccordion from '../../Components/PostAccordion';
+import { generateSeoMetadata } from '@/src/utils/utils';
 
+export const revalidate = 60;
+
+export async function generateMetadata({ params }) {
+  const { slug } = params;
+
+  const vinimporter = await getVinimporterBySlug(slug);
+
+  if (vinimporter) {
+    const { seo } = vinimporter;
+    if (seo) {
+      return generateSeoMetadata(seo);
+    }
+  }
+  //  else {
+  //   const taxonomy = await getTaxonomySEO(category, slug);
+
+  //   if (taxonomy) {
+  //     const { seo } = taxonomy;
+  //     if (seo) {
+  //       return generateSeoMetadata(seo);
+  //     }
+  //   }
+  //   return null;
+  // }
+}
 export default async function Page({ params }) {
   const { slug } = params;
   const vinimporterData = await getVinimporterBySlug(slug);
@@ -19,7 +45,7 @@ export default async function Page({ params }) {
 
   return (
     <div>
-      <VinimportorHero />
+      <VinimportorHero vinimporterData={vinimporterData} />
       {vinimporterData.featuredImage && (
         <div className="flex justify-center mb-8 p-6">
           <Image

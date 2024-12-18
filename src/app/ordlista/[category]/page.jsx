@@ -4,6 +4,19 @@ import SubscriptionForm from '../../Components/subscription/SubscriptionForm';
 import { getOrdlistaCategoryBySlug } from '@/src/lib/api/ordilistaAPI';
 import OrdlistaByCategory from '../components/OrdlistaByCategory';
 import PostAccordion from '../../Components/PostAccordion';
+import { generateSeoMetadata } from '@/src/utils/utils';
+
+export async function generateMetadata({ params }) {
+  // Fetch SEO data for the given slug
+  // const seo = await getHomePageSEO('/home-page');
+  const category = await getOrdlistaCategoryBySlug(params.category);
+
+  const seo = category?.seo;
+
+  if (seo) {
+    return generateSeoMetadata(seo);
+  }
+}
 
 export default async function page({ params }) {
   const category = await getOrdlistaCategoryBySlug(params.category);

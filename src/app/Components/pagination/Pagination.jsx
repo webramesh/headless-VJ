@@ -41,7 +41,7 @@ export default function Pagination({ pageInfo, total, pageLimit }) {
           <ChevronsLeft className="w-6 h-6" />
         </PaginationButton>
         <span className="px-4 py-2 rounded-md bg-gray-100 text-gray-700">
-          Page {page} of {totalPages}
+          Sida {page} av {totalPages}
         </span>
         <PaginationButton
           disabled={!pageInfo?.hasNextPage || loading}
@@ -70,7 +70,7 @@ export default function Pagination({ pageInfo, total, pageLimit }) {
         <ChevronsLeft className="w-6 h-6" />
       </PaginationButton>
       <span className="px-4 py-2 rounded-md bg-gray-100 text-gray-700">
-        Page {page} of {totalPages}
+        Sida {page} av {totalPages}
       </span>
       <PaginationButton
         disabled={page === totalPages || loading}

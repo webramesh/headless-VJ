@@ -25,6 +25,12 @@ export async function getAllVinguidePosts(name, uri) {
                 }
               }
               vinguidePosts {
+                shortTitle
+                shortDescription
+                pageTitle
+                pageSubtitle
+                fieldGroupName
+                allProductTitle
                 vinguidePosts {
                   nodes {
                     contentTypeName

@@ -5,7 +5,7 @@ import Sidebar from '../../Components/Sidebar';
 const Content = ({ pageData }) => {
   const faqItems = pageData?.faq?.faq;
 
-  if (pageData.content)
+  if (pageData?.content)
     return (
       <div className="container mx-auto px-4" id="arrow">
         <div className="mt-4 sm:mt-8">

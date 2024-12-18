@@ -1,6 +1,6 @@
 'use client';
 import Image from 'next/image';
-import logo from '@/public/vinjournalen-logo.png';
+import logo from '@/public/vinjournalen-logo.svg';
 import Copyright from './Copyright';
 import Link from 'next/link';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -17,7 +17,7 @@ const Footer = ({ menuItems }) => {
       <div className="container mx-auto ">
         <div className="p-3 flex flex-col gap-2 md:gap-4 lg:flex-row justify-between items-center">
           <Link href="/" className="flex items-center mb-4 md:mb-0 md:ml-8">
-            <Image src={logo} alt="Logo" className="object-cover" width="auto" height="auto" priority />
+            <Image src={logo} alt="Logo" className="object-cover" width="180" height="90" priority />
           </Link>
           <div className="flex flex-col md:flex-row  text-sm gap-2 md:gap-4 text-center md:text-left mb-4 md:mb-0">
             {menuItems.map((menu) => (

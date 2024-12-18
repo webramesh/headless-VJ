@@ -3,9 +3,9 @@
 import Link from 'next/link';
 import { useState } from 'react';
 import Image from 'next/image';
-import logo from '@/public/vinjournalen-logo.png';
+import logo from '@/public/vinjournalen-logo.svg';
 import Searchbar from './Searchbar';
-import vinlogo from '@/public/vinlogo.png';
+import vinlogo from '@/public/vinlogo.svg';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBars, faTimes } from '@fortawesome/free-solid-svg-icons';
 import { ChevronDownIcon } from '@heroicons/react/20/solid';

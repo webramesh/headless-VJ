@@ -204,11 +204,10 @@ export async function getProductByCountry(slug, type, cursor = null, AllProducts
         cursor,
       },
     });
-    // return data.produktLand.produkter.nodes;
     const newProducts = data?.produktLand?.produkter?.nodes;
     const updatedProducts = [...AllProducts, ...newProducts];
     if (data?.produktLand?.produkter?.pageInfo?.hasNextPage) {
-      return getProductByCountry(slug, data?.produktLand?.produkter?.pageInfo?.endCursor, updatedProducts);
+      return getProductByCountry(slug, type, data?.produktLand?.produkter?.pageInfo?.endCursor, updatedProducts);
     }
 
     const filteredProducts = updatedProducts.filter((product) =>
@@ -221,17 +220,37 @@ export async function getProductByCountry(slug, type, cursor = null, AllProducts
   }
 }
 
-export const getRegionsByCountry = async (slug) => {
+export const getRegionsByCountry = async (id) => {
   const query = gql`
-    query GetProductByCountry($slug: ID!) {
-      land(id: $slug, idType: SLUG) {
-        name
-        regioner(first: 1000) {
-          nodes {
-            slug
-            title
-          }
+    query GetProductByCountry($id: Int!) {
+      produktslander(first: 1000, where: { parent: $id }) {
+        nodes {
+          name
+          slug
         }
+      }
+    }
+  `;
+  try {
+    const { data } = await client.query({
+      query,
+      variables: {
+        id,
+      },
+    });
+    return data?.produktslander?.nodes;
+  } catch (error) {
+    console.error(`Error fetching regions`, error);
+    return null;
+  }
+};
+
+export const getNameAndIdBySlug = async (slug) => {
+  const query = gql`
+    query GetNameBySlug($slug: ID!) {
+      produktLand(id: $slug, idType: SLUG) {
+        termTaxonomyId
+        name
       }
     }
   `;
@@ -242,9 +261,9 @@ export const getRegionsByCountry = async (slug) => {
         slug,
       },
     });
-    return { regions: data?.land?.regioner?.nodes, name: data?.land?.name };
+    return { name: data?.produktLand?.name, id: data?.produktLand?.termTaxonomyId };
   } catch (error) {
-    console.error(`Error fetching product`, error);
+    console.error(`Error fetching name and id`, error);
     return null;
   }
 };

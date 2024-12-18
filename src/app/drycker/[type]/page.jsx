@@ -24,7 +24,6 @@ export default async function Home({ params, searchParams }) {
 
   return (
     <DryckerPage
-      name={name}
       products={products}
       countries={countries}
       vinguideData={vinguideData}

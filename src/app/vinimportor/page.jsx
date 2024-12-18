@@ -14,10 +14,14 @@ const Vinimportor = async () => {
         <VinImportorContainer totalVinImportors={totalVinImportors} />
 
         {/* Subscription  */}
-        <div className="my-10">
+        {/* <div className="my-10">
+          <SubscriptionForm />
+        </div> */}
+        {/* End Subscription  */}
+
+        <div className="container mx-auto block  my-10">
           <SubscriptionForm />
         </div>
-        {/* End Subscription  */}
 
         <PostAccordion />
       </div>

@@ -76,7 +76,41 @@ export async function getVinimporterBySlug(slug) {
           vinimporterBy(slug: $slug) {
             date
             title
+            content
+            seo {
+              title
+              robots
+              description
+              focusKeywords
+              canonicalUrl
+              openGraph {
+                locale
+                type
+                title
+                description
+                url
+                siteName
+                image {
+                  height
+                  secureUrl
+                  type
+                  url
+                  width
+                }
+                twitterMeta {
+                  card
+                  description
+                  image
+                  creator
+                  title
+                  site
+                }
+              }
+            }
             importerFields {
+              vineImporterEmail
+              importerWebsite
+
               productsVinimporter {
                 nodes {
                   ... on Produkt {

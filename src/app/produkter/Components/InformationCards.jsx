@@ -3,6 +3,7 @@ import { useState } from 'react';
 import RenderBox from './RenderBox';
 import AlcoholInfo from './AlcoholInfo';
 import CommentForm from '../../Components/CommentForm';
+import Link from 'next/link';
 
 const ratingbox = () => (
   <div className="w-full px-4 sm:px-0">
@@ -92,38 +93,49 @@ const ratingbox = () => (
 //   </div>
 // );
 
-const QNA = ({ productTitle, produktslander, wineSaleStartDate, sugarBites }) => (
-  <div className="w-full px-4 sm:px-20">
-    <div className="flex flex-col mt-4 text-center  text-lg font-medium">Frågor och svar om {productTitle}</div>
-    <div className="flex flex-col">
-      <div className="bg-[#f5f5f5] pt-6 pl-2">
-        <div className=" text-sm font-medium">I vilket land proudceras {productTitle}?</div>
-      </div>
-      <div className="text-gray-600 text-sm  pl-2">
-        Vinet produceras i{' '}
-        {produktslander.nodes.map((region, i, arr) => (
-          <span key={i}>{i < arr.length - 1 ? region.name + ', ' : region.name}</span>
-        ))}
-      </div>
-      <div className="mt-4">
+const QNA = ({ productTitle, produktslander, wineSaleStartDate, sugarBites }) => {
+  return (
+    <div className="w-full px-4 sm:px-20">
+      <div className="flex flex-col mt-4 text-center  text-lg font-medium">Frågor och svar om {productTitle}</div>
+      <div className="flex flex-col">
         <div className="bg-[#f5f5f5] pt-6 pl-2">
-          <div className=" text-sm font-medium"> Vad är {productTitle} sockermängd?</div>
+          <div className=" text-sm font-medium">I vilket land proudceras {productTitle}?</div>
         </div>
         <div className="text-gray-600 text-sm  pl-2">
-          {productTitle} har en sockermängd på cirka {sugarBites ? `${sugarBites}` : 'N/A'} gram per liter.
+          Vinet produceras i{' '}
+          {produktslander.nodes.map((region, i, arr) => (
+            <span key={i}>{i < arr.length - 1 ? region.name + ', ' : region.name}</span>
+          ))}
         </div>
         <div className="mt-4">
-          <div className="bg-[#f5f5f5] pt-6 pl-2">
-            <div className=" text-sm font-medium">Hur länge har produkten {productTitle} sålts på systembolaget?</div>
-          </div>
-          <div className="text-gray-600 text-sm  pl-2">
-            {wineSaleStartDate ? new Date(wineSaleStartDate).toLocaleDateString('sv-SE') : 'Datum ej tillgängligt'}
-          </div>
+          {productTitle && sugarBites && (
+            <div>
+              <div className="bg-[#f5f5f5] pt-6 pl-2">
+                <div className=" text-sm font-medium"> Vad är {productTitle} sockermängd?</div>
+              </div>
+              <div className="text-gray-600 text-sm  pl-2">
+                {productTitle} har en sockermängd på cirka {sugarBites ? `${sugarBites}` : 'N/A'} gram per liter.
+              </div>
+            </div>
+          )}
+
+          {wineSaleStartDate && (
+            <div className="mt-4">
+              <div className="bg-[#f5f5f5] pt-6 pl-2">
+                <div className=" text-sm font-medium">
+                  Hur länge har produkten {productTitle} sålts på systembolaget?
+                </div>
+              </div>
+              <div className="text-gray-600 text-sm  pl-2">
+                {wineSaleStartDate ? new Date(wineSaleStartDate).toLocaleDateString('sv-SE') : 'Datum ej tillgängligt'}
+              </div>
+            </div>
+          )}
         </div>
       </div>
     </div>
-  </div>
-);
+  );
+};
 
 const InformationCards = ({ fieldsProduct, productTitle, typer, produktslander, data }) => {
   const {
@@ -137,20 +149,21 @@ const InformationCards = ({ fieldsProduct, productTitle, typer, produktslander, 
     totalCaloriesPerContainerVolume,
     totalCaloriesPerLitter,
     sugarLevelIn1Litter,
-    containerType,
+
     produktPackaging,
     wineSaleStartDate,
     sugarBites,
     alcoholPerSek,
+    closure,
   } = fieldsProduct;
 
   const productsLander = data?.produktslander?.nodes;
 
-  const vinimporterTitles = data?.fieldsProduct?.vinimporter?.nodes.map((node) => node.title).join(', ');
-  // const producenterTitles = data?.fieldsProduct?.produkterproducer?.nodes.map((node) => node.title).join(', ');
-
   // Set default state to '4' to open "Frågor och svar"
   const [selected, setSelected] = useState(4);
+
+  const vinimporterData = data?.fieldsProduct?.vinimporter?.nodes;
+  const producenterData = data?.fieldsProduct?.produkterproducer?.node;
 
   const handleClick = (index) => {
     setSelected((prevSelected) => (prevSelected === index ? null : index));
@@ -181,6 +194,7 @@ const InformationCards = ({ fieldsProduct, productTitle, typer, produktslander, 
                   per15cl={caloriesInAlcPer15cl}
                   perLitre={caloriesInAlcPerLitter}
                   perVolume={caloriesInAlcPerContainerVolume}
+                  closure={closure}
                 />
               </RenderBox>
               <RenderBox title="Kalorier (baserat på ungefärlig sockermängd)">
@@ -188,6 +202,7 @@ const InformationCards = ({ fieldsProduct, productTitle, typer, produktslander, 
                   per15cl={caloriesInSugarPer15cl}
                   perLitre={caloriesInSugarPerLitter}
                   perVolume={caloriesInSugarPerContainerVolume}
+                  closure={closure}
                 />
               </RenderBox>
               <RenderBox title="Total mängd kalorier">
@@ -195,6 +210,7 @@ const InformationCards = ({ fieldsProduct, productTitle, typer, produktslander, 
                   per15cl={totalCaloriesPer15Cl}
                   perLitre={totalCaloriesPerLitter}
                   perVolume={totalCaloriesPerContainerVolume}
+                  closure={closure}
                 />
               </RenderBox>
               <RenderBox title="Sockerdetaljer">
@@ -213,7 +229,7 @@ const InformationCards = ({ fieldsProduct, productTitle, typer, produktslander, 
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 sm:gap-12 p-4 sm:p-8">
               <RenderBox title="Förpackning">
                 <div className="text-xs  text-center mt-2">
-                  Förslutning <br /> {containerType}
+                  Förslutning <br /> {closure ? <p>{closure}</p> : <p>N/A</p>}
                 </div>
                 <div className="text-xs  text-center mt-2">
                   Förpackning <br /> {produktPackaging ? <p>{produktPackaging}</p> : <p>N/A</p>}
@@ -239,11 +255,27 @@ const InformationCards = ({ fieldsProduct, productTitle, typer, produktslander, 
                     {/* Fuji Takasago Shuzo */}
 
                     {/* {producenterTitles ? <p>{producenterTitles}</p> : <p>N/A</p>} */}
+
+                    {producenterData?.title && producenterData?.slug ? (
+                      <Link href={`/producenter/${producenterData.slug}`}>{producenterData?.title}</Link>
+                    ) : (
+                      <p> N/A </p>
+                    )}
                   </div>
                 </div>
                 <div className="text-xs  text-center mt-2">
                   Land <br />
-                  <div className="text-red-500 font-bold">{productsLander[0]?.name}</div>
+                  {/* <div className="text-red-500 font-bold">{productsLander[0]?.name}</div> */}
+                  <div className="text-red-500 font-bold">
+                    {productsLander
+                      ?.filter((land) => land.parent === null)
+                      .map((land, i) => {
+                        const { name, slug } = land;
+
+                        // Check if both name and slug exist
+                        return <p key={i}>{name && slug ? <Link href={`/lander/${slug}`}>{name}</Link> : 'N/A'}</p>;
+                      })}
+                  </div>
                 </div>
               </RenderBox>
 
@@ -252,7 +284,22 @@ const InformationCards = ({ fieldsProduct, productTitle, typer, produktslander, 
                   Importör <br />
                   <div className="text-red-500 font-bold mb-9">
                     {/* Akebono Unlimited AB */}
-                    {vinimporterTitles ? <p>{vinimporterTitles}</p> : <p>N/A</p>}
+                    {/* {vinimporterTitles ? <p>{vinimporterTitles}</p> : <p>N/A</p>} */}
+
+                    {vinimporterData ? (
+                      vinimporterData?.map((vinimportor, i) =>
+                        // Only show if both title and slug exist
+                        vinimportor?.title && vinimportor?.slug ? (
+                          <p key={i}>
+                            <Link href={`/vinimportor/${vinimportor.slug}`}>{vinimportor?.title}</Link>
+                          </p>
+                        ) : (
+                          <p key={i}>N/A</p>
+                        )
+                      )
+                    ) : (
+                      <p>N/A</p>
+                    )}
                   </div>
                 </div>
               </RenderBox>

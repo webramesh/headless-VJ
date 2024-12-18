@@ -22,7 +22,7 @@ const NyheterContent = ({ nyhet }) => {
           <div className="text-base sm:text-lg" dangerouslySetInnerHTML={{ __html: nyhet.content }} />
         </div>
         {/* Comment Form */}
-        <div className="text-xl lg:text-2xl mt-6">Lämna ett svar</div>
+        {/* <div className="text-xl lg:text-2xl mt-6">Lämna ett svar</div>
         <div className="text-xs lg:text-sm">
           <i>Din e-postadress kommer inte publiceras. Obligatoriska fält är märkta *</i>
         </div>
@@ -53,7 +53,7 @@ const NyheterContent = ({ nyhet }) => {
           >
             Publicera Kommentar
           </button>
-        </form>
+        </form> */}
 
         {/* Newsletter Subscription */}
         <SubscriptionForm />

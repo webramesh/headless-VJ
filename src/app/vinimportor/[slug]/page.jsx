@@ -4,8 +4,36 @@ import VinimportorHero from '../../Components/VinimportorHero';
 import Image from 'next/image';
 import ProductInfo from '../../produkter/Components/ProductInfo';
 import ProductCard from '../../Components/ProductCard';
-import Subscription from '../../Components/Subscription';
+import { generateSeoMetadata } from '@/src/utils/utils';
+import SubscriptionForm from '../../Components/subscription/SubscriptionForm';
+import SubscriptionBox from '../../Components/subscription/SubscriptionBox';
+// import { getTaxonomySEO } from '@/src/lib/api/taxonomyApi';
 
+export const revalidate = 60;
+
+export async function generateMetadata({ params }) {
+  const { slug } = params;
+
+  const vinimporter = await getVinimporterBySlug(slug);
+
+  if (vinimporter) {
+    const { seo } = vinimporter;
+    if (seo) {
+      return generateSeoMetadata(seo);
+    }
+  }
+  //  else {
+  //   const taxonomy = await getTaxonomySEO(category, slug);
+
+  //   if (taxonomy) {
+  //     const { seo } = taxonomy;
+  //     if (seo) {
+  //       return generateSeoMetadata(seo);
+  //     }
+  //   }
+  //   return null;
+  // }
+}
 export default async function Page({ params }) {
   const { slug } = params;
   const vinimporterData = await getVinimporterBySlug(slug);
@@ -19,7 +47,7 @@ export default async function Page({ params }) {
 
   return (
     <div>
-      <VinimportorHero />
+      <VinimportorHero vinimporterData={vinimporterData} />
       <div className="text-center flex w-full items-center justify-center my-8">
         <Image
           className="text-center block"
@@ -38,7 +66,17 @@ export default async function Page({ params }) {
             </div>
           ))}
         </div>
-        <Subscription />
+        {/* <Subscription /> */}
+
+        <div className="container mx-auto block md:grid grid-cols-6 items-center justify-between gap-14  my-10">
+          <div className="col-span-4">
+            <SubscriptionForm />
+          </div>
+          <div className="w-full grid col-span-2 mt-8 md:mt-0">
+            <SubscriptionBox />
+          </div>
+        </div>
+
         <ProductInfo />
       </div>
     </div>

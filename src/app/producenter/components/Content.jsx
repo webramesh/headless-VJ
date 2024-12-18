@@ -6,7 +6,7 @@ export default async function Content({ params }) {
   const producent = await getProducentBySlug(params.slug);
   const { title, content } = producent;
   return (
-    <div className="p-2 md:w-1/2 ">
+    <div className="p-2">
       <h1 className="font-bold text-lg lg:text-4xl">{title}</h1>
 
       <BreadCrumb title1="Producenter" link1="/producenter" title2={title} />

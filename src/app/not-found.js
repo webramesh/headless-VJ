@@ -3,7 +3,7 @@
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
-import vinlogo from '@/public/vinlogo.png';
+import vinlogo from '@/public/vinlogo.svg';
 
 export default function NotFound() {
   const [rotate, setRotate] = useState(0);
@@ -35,9 +35,7 @@ export default function NotFound() {
           <span className="inline-block">4</span>
         </h1>
 
-        <p className="text-xl text-red-700 mb-6 font-serif">
-        Oops! Sidan du letar efter finns inte.
-        </p>
+        <p className="text-xl text-red-700 mb-6 font-serif">Oops! Sidan du letar efter finns inte.</p>
         <div className="bg-white/80 backdrop-blur-sm p-6 rounded-lg shadow-lg mb-8">
           <p className="text-red-500 italic">
             &quot;In wine, there&apos;s truth - in our pages, there&apos;s delight.
@@ -51,7 +49,7 @@ export default function NotFound() {
           href="/"
           className="inline-block px-8 py-3 bg-red-500 text-white rounded-full font-medium hover:bg-red-600 transition-colors duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-0.5"
         >
-         Tillbaka till startsidan
+          Tillbaka till startsidan
         </Link>
       </div>
 

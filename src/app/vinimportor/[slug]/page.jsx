@@ -16,7 +16,6 @@ export default async function Page({ params }) {
 
   const products = vinimporterData.importerFields?.productsVinimporter?.nodes || [];
   const formattedProducts = products.map((product) => ({ product }));
-
   return (
     <div>
       <VinimportorHero />
@@ -30,14 +29,18 @@ export default async function Page({ params }) {
         />
       </div>
       <div className="max-w-6xl container mx-auto px-4">
-        <h1 className="text-3xl font-bold mb-6">{vinimporterData.title}</h1>
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
-          {formattedProducts.map((productWrapper, index) => (
-            <div key={productWrapper.product.id || index} className="w-full">
-              <ProductCard {...productWrapper} />
+        {formattedProducts.length > 0 && (
+          <>
+            <h2 className="text-3xl font-bold mb-6">{vinimporterData.title}</h2>
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
+              {formattedProducts.map((productWrapper, index) => (
+                <div key={productWrapper.product.id || index} className="w-full">
+                  <ProductCard {...productWrapper} />
+                </div>
+              ))}
             </div>
-          ))}
-        </div>
+          </>
+        )}
         <Subscription />
         <ProductInfo />
       </div>

@@ -181,6 +181,7 @@ export async function getProductBySlug(identifier) {
               }
             }
             fieldsProduct {
+              closure
               sustainable
               composition
               productShortText
@@ -220,6 +221,7 @@ export async function getProductBySlug(identifier) {
                   ... on Vinimporter {
                     id
                     title
+                    slug
                   }
                 }
               }
@@ -228,6 +230,7 @@ export async function getProductBySlug(identifier) {
                   ... on Producent {
                     id
                     title
+                    slug
                   }
                 }
               }

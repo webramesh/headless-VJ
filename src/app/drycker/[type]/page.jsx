@@ -1,5 +1,4 @@
 import { getProductsByType } from '@/src/lib/api/dryckerApi';
-import { getPageBySlug } from '@/src/lib/api/pageApi';
 import { generateSeoMetadata } from '@/src/utils/utils';
 import { getAllVinguidePosts } from '@/src/lib/api/vinguideApi';
 import { getAllCountries } from '@/src/lib/api/countryApi';

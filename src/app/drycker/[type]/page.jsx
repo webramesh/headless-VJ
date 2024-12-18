@@ -7,9 +7,12 @@ import DryckerPage from '../Components/DryckerPage';
 
 export const revalidate = 60;
 export async function generateMetadata({ params }) {
-  const data = await getPageBySlug(`drycker/${params.slug}`);
+  // const data = await getPageBySlug(`drycker/${params.slug}`);
+  const { name } = await getProductsByType(params.type);
+  const vinguideData = await getAllVinguidePosts(name);
 
-  const seo = data?.seo;
+  const seo = vinguideData?.seo;
+
   if (seo) {
     return generateSeoMetadata(seo);
   }

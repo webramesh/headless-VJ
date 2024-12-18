@@ -14,12 +14,13 @@ const Vinimportor = async () => {
         <VinImportorContainer totalVinImportors={totalVinImportors} />
 
         {/* Subscription  */}
-        <div className="my-10">
+        <div className="my-10 max-w-4xl mx-auto">
           <SubscriptionForm />
         </div>
         {/* End Subscription  */}
-
-        <PostAccordion />
+        <div className="max-w-4xl mx-auto">
+          <PostAccordion />
+        </div>
       </div>
     </div>
   );

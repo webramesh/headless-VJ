@@ -1,4 +1,5 @@
 import React from 'react';
+import Image from 'next/image';
 import { getPageBySlug } from '@/src/lib/api/pageApi';
 import { getProducentBySlug } from '../../../lib/api/producenterAPI';
 import Content from '../components/Content';
@@ -28,12 +29,24 @@ export default async function Page({ params }) {
 
   return (
     <div className="container mx-auto lg:mt-10 p-2">
+      {producentData.featuredImage && (
+        <div className="mb-8 p-6">
+          <Image
+            src={producentData.featuredImage.node.sourceUrl}
+            alt={producentData.featuredImage.node.altText || producentData.title}
+            width={30}
+            height={20}
+            layout="responsive"
+            objectFit="cover"
+          />
+        </div>
+      )}
       <div className="md:flex gap-2">
         <div className="md:w-1/2">
           <Content params={params} />
         </div>
       </div>
-      <div className="md:w-1/2">
+      <div className="my-8">
         <h2 className="text-2xl font-bold mb-4">Produkter från {producentData.title}</h2>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
           {formattedProducts.map((productWrapper, index) => (

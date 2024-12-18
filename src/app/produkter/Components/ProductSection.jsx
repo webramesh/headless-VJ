@@ -12,6 +12,7 @@ import FactBoxDescription from '../../[category]/[slug]/components/FactBoxDescri
 import FactBoxMoreInfo from '../../[category]/[slug]/components/FactBoxMoreInfo';
 import ProductLabelsWithTooltips from './ProductLabelsWithTooltip';
 import { generatePdf } from '@/src/utils/generatePDF';
+import { EmailShareButton, FacebookShareButton, TwitterShareButton } from 'react-share';
 
 export default function ProductSection({ product }) {
   const matkombinationer = product?.matkombinationer?.nodes;
@@ -191,11 +192,17 @@ export default function ProductSection({ product }) {
               Vinjournalen.se har ingen egen försäljning utan hela köpet genomförs på systembolaget.se. Vinjournalen.se
               har heller ingen koppling till eller kommersiellt samarbete med Systembolaget.
             </div>
-            <div className="flex p-4 gap-6">
-              <Image src={message} alt="Messagebox" className="object-cover" />
-              <Image src={fb} alt="Facebook icon" className="object-cover" />
-              <Image src={twitter} alt="Twitter" className="object-cover" />
-              <div className=" text-black text-sm">Berätta för en vän</div>
+            <div className="flex p-4 gap-6 items-center">
+              <EmailShareButton url={typeof window !== 'undefined' ? window.location.href : ''} title={title}>
+                <Image src={message} alt="Messagebox" className="object-cover" />
+              </EmailShareButton>
+              <FacebookShareButton url={typeof window !== 'undefined' ? window.location.href : ''} title={title}>
+                <Image src={fb} alt="Facebook icon" className="object-cover cursor-pointer" />
+              </FacebookShareButton>
+              <TwitterShareButton url={typeof window !== 'undefined' ? window.location.href : ''} title={title}>
+                <Image src={twitter} alt="Twitter" className="object-cover cursor-pointer" />
+              </TwitterShareButton>
+              <div className="text-black text-sm">Berätta för en vän</div>
             </div>
           </div>
           {/* <FactBoxDescription fieldsProduct={fieldsProduct} /> */}

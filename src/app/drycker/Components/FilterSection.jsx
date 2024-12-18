@@ -168,7 +168,7 @@ const FilterSection = ({ initialProducts, params, filters, page }) => {
                             <ProductCard product={product} />
                           </div>
                         ))
-                      : 'No products found'}
+                      : 'Produkten hittades inte'}
                   </div>
                 </div>
                 <Pagination pageLimit={PRODUCTS_PER_PAGE} total={filteredProducts?.length} />

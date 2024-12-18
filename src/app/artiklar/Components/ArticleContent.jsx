@@ -97,9 +97,9 @@ const ArticleContent = ({ totalPosts, sidebar }) => {
                   title={post.title}
                   excerpt={post.excerpt}
                   date={post.date}
-                  author={post.author?.node?.name || 'Unknown Author'}
+                  author={post.author?.node?.name || 'Vinjournalen.se'}
                   category={post.categories?.nodes?.[0] || 'Uncategorized'}
-                  imageUrl={post.featuredImage?.node?.mediaItemUrl || '/api/placeholder/400/300'}
+                  imageUrl={post.featuredImage?.node?.mediaItemUrl || '/postplaceholder.jpg'}
                   slug={post.slug || '#'}
                   categoryColor={
                     post.categories?.nodes?.[0]?.categoriesImagesAndOtherFields?.categorycolorpicker || '#000000'

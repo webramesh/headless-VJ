@@ -10,7 +10,7 @@ function ProducenterCard({ producenter }) {
     <div className="w-full max-w-[280px] sm:max-w-[320px] md:max-w-[350px] lg:max-w-[380px] mx-auto transform transition-all duration-300 hover:scale-[1.02] hover:shadow-md bg-white rounded-xl overflow-hidden shadow-sm border border-gray-100">
       <div className="relative w-full aspect-video h-[180px] sm:h-[200px] md:h-[220px]">
         <Image
-          src={featuredImage?.node?.sourceUrl || '/api/placeholder/400/300'}
+          src={featuredImage?.node?.sourceUrl || '/producenter.jpg'}
           alt={title || 'Producent Image'}
           fill
           className="object-cover transition-transform duration-300 group-hover:scale-105"

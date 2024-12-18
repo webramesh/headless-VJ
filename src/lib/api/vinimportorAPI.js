@@ -76,6 +76,12 @@ export async function getVinimporterBySlug(slug) {
           vinimporterBy(slug: $slug) {
             date
             title
+            featuredImage {
+              node {
+                altText
+                sourceUrl
+              }
+            }
             importerFields {
               productsVinimporter {
                 nodes {

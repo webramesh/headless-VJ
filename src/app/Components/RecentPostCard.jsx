@@ -1,7 +1,6 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import { formatEmbeddedContent } from '@/src/utils/utils';
-import { format } from 'date-fns';
 
 export default function RecentPostCard({ post }) {
   if (!post) {
@@ -11,7 +10,7 @@ export default function RecentPostCard({ post }) {
 
   const { title, excerpt, date, slug, featuredImage, author, categories } = post;
 
-  const formattedDate = date ? format(new Date(date), 'dd MMMM, yyyy') : 'Unknown date';
+  // const formattedDate = date ? format(new Date(date), 'dd MMMM, yyyy') : 'Unknown date';
 
   const formattedExcerpt = excerpt ? formatEmbeddedContent(excerpt) : '';
 
@@ -23,7 +22,7 @@ export default function RecentPostCard({ post }) {
       <div className="flex flex-col cursor-pointer hover:shadow-lg transition-shadow w-full my-6">
         <div className="relative w-full h-48">
           <Image
-            src={featuredImage?.node?.sourceUrl || '/food3.png'}
+            src={featuredImage?.node?.sourceUrl || '/postplaceholder.jpg'}
             alt={featuredImage?.node?.altText || title || 'Featured image'}
             fill
             sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
@@ -33,7 +32,16 @@ export default function RecentPostCard({ post }) {
         </div>
         <div className="p-4 bg-[#f5f5f5] flex flex-col flex-grow">
           <h3 className="font-outfit font-medium text-black text-lg">{title || 'Untitled'}</h3>
-          <p className="mt-2 font-outfit text-gray-900 text-xs">{formattedDate}</p>
+          {/* <p className="mt-2 font-outfit text-gray-900 text-xs">{formattedDate}</p> */}
+          <p className="mt-2 font-outfit text-gray-900 text-xs">
+          <span className="capitalize">
+                {new Date(date).toLocaleDateString('sv-SE', {
+                  day: '2-digit',
+                  month: 'long',
+                  year: 'numeric',
+                })}
+              </span>
+          </p>
           {author?.node?.name && <p className="text-[#694848] text-xs font-outfit mt-2">{author.node.name}</p>}
           {formattedExcerpt && (
             <p className="font-outfit text-sm text-gray-900 font-extralight mt-2 leading-relaxed flex-grow">

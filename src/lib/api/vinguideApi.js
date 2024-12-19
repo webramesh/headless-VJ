@@ -18,6 +18,36 @@ export async function getAllVinguidePosts(name, uri) {
               landingId
               content
               uri
+              seo {
+                title
+                robots
+                description
+                focusKeywords
+                canonicalUrl
+                openGraph {
+                  locale
+                  type
+                  title
+                  description
+                  url
+                  siteName
+                  image {
+                    height
+                    secureUrl
+                    type
+                    url
+                    width
+                  }
+                  twitterMeta {
+                    card
+                    description
+                    image
+                    creator
+                    title
+                    site
+                  }
+                }
+              }
               faq {
                 faq {
                   faqAnswer

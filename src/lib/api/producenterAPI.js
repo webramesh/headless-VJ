@@ -85,6 +85,12 @@ export async function getProducentBySlug(slug) {
             slug
             title
             content
+            featuredImage {
+              node {
+                altText
+                sourceUrl
+              }
+            }
             producenterFields {
               products {
                 nodes {

@@ -6,6 +6,41 @@ import BreadCrumb from '../Components/breadcrumb/BreadCrumb';
 import { countOrdlista } from '@/src/lib/api/ordilistaAPI';
 import PostAccordion from '../Components/PostAccordion';
 
+export async function generateMetadata() {
+  return {
+    title: 'Ordlista arkiv - Vinjournalen.se',
+    description: 'ORDLISTA DRUVOR, ORDLISTA SMAKDEFINITIONER, ORDLISTA FACKTERMER',
+    robots: 'index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1',
+    googleSiteVerification: 'Rzshqb5By5Mx-OhTKEO4yA0-m_ey6ckD6U0bEyuvUDY',
+    viewport: 'width=device-width, initial-scale=1, minimum-scale=1',
+    icons: {
+      icon: '/favicon.png',
+    },
+    canonical: 'https://www.vinjournalen.se/ordlista/',
+    openGraph: {
+      locale: 'sv_SE',
+      type: 'website',
+      title: 'Ordlista arkiv - Vinjournalen.se',
+      description: 'ORDLISTA DRUVOR, ORDLISTA SMAKDEFINITIONER, ORDLISTA FACKTERMER',
+      url: 'https://www.vinjournalen.se/ordlista/',
+      siteName: 'Vinjournalen.se',
+      image: {
+        url: 'https://www.vinjournalen.se/wp-content/uploads/2020/01/VinjournalenLogotype-scaled.jpg',
+        width: 2048,
+        height: 495,
+        type: 'image/jpeg',
+      },
+    },
+    twitter: {
+      card: 'summary_large_image',
+      site: '@vinjournalense',
+      title: 'Ordlista arkiv - Vinjournalen.se',
+      description: 'ORDLISTA DRUVOR, ORDLISTA SMAKDEFINITIONER, ORDLISTA FACKTERMER',
+      image: 'https://www.vinjournalen.se/wp-content/uploads/2020/01/VinjournalenLogotype-scaled.jpg',
+    },
+  };
+}
+
 export default async function Ordlista() {
   const totalOrdlista = await countOrdlista();
   return (

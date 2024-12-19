@@ -12,7 +12,7 @@ const PostDetailsHero = ({ featuredImage, title, authorImage, authorName, author
           <BreadCrumb title1={categories?.name} link1={`/${categories?.slug}`} title2={title} />
           <div>
             <Image
-              src={featuredImage || '/food3.png'}
+              src={featuredImage || '/postplaceholder.jpg'}
               alt={title}
               className="object-cover w-full"
               layout="responsive"

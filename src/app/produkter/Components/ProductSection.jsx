@@ -162,7 +162,7 @@ export default function ProductSection({ product }) {
           </div>
           <div className="bg-[#f9d7e1] mt-6 w-full">
             <div className="flex flex-col sm:flex-row w-full p-4 justify-between">
-              <div className=" text-xl mb-2 sm:mb-0">pris: {pice} :-</div>
+              <div className=" text-xl mb-2 sm:mb-0">Pris: {pice} :-</div>
               <div className=" text-xl text-gray-500">Artikel nr: {productCode}</div>
             </div>
             <div className="relative p-4">

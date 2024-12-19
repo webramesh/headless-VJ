@@ -18,6 +18,6 @@ export default async function OmOssPage() {
     return <PageContent pageData={pageData} />;
   } catch (error) {
     console.error('Error fetching page:', error);
-    return <div>Page not found</div>;
+    return <div>Sidan hittades inte</div>;
   }
 }

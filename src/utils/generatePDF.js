@@ -45,6 +45,7 @@ export const generatePdf = (productDetails, product) => {
   const fargers = product?.fargers?.nodes || [];
   const productTitle = product?.title;
 
+
   const {
     pice,
     productCode,
@@ -72,13 +73,14 @@ export const generatePdf = (productDetails, product) => {
   doc.rect(0, 0, pageWidth, 25, 'F');
 
   // Logo
-  const logoUrl = '/vinjournalen-logo.svg';
+  const logoUrl = '/vinjournalen-logo.png';
+  // const logoUrl = '/vinjournalen-logo.svg';
   const logoWidth = 70;
 
   const logoHeight = 13;
   const logoX = (pageWidth - logoWidth) / 2;
   const logoY = 6;
-  doc.addImage(logoUrl, 'JPEG', logoX, logoY, logoWidth, logoHeight);
+  doc.addImage(logoUrl, 'PNG', logoX, logoY, logoWidth, logoHeight);
 
   // Product Details on the Left
   const detailsX = 10;
@@ -140,7 +142,11 @@ export const generatePdf = (productDetails, product) => {
 
   // Wine image placement
   const wineImageY = 40;
+  const wineImageWidth = 150;
+  const wineImageX = pageWidth - 160;
+
   const wineImageHeight = 150;
+  doc.addImage(product?.featuredImage?.node?.sourceUrl, 'JPEG', wineImageX, wineImageY, wineImageWidth, wineImageHeight);
   // doc.addImage('/winevj.png', 'JPEG', wineImageX, wineImageY, wineImageWidth, wineImageHeight);
 
   // Sections at the bottom (in a row)

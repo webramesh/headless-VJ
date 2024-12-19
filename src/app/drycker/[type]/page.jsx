@@ -3,6 +3,7 @@ import { generateSeoMetadata } from '@/src/utils/utils';
 import { getAllVinguidePosts } from '@/src/lib/api/vinguideApi';
 import { getAllCountries } from '@/src/lib/api/countryApi';
 import DryckerPage from '../Components/DryckerPage';
+import { redirect } from 'next/navigation';
 
 export const revalidate = 60;
 export async function generateMetadata({ params }) {
@@ -18,10 +19,11 @@ export async function generateMetadata({ params }) {
 }
 
 export default async function Home({ params, searchParams }) {
-  const { name, products } = await getProductsByType(params.type);
+  const data = await getProductsByType(params.type);
+  if (!data) redirect('/not-found');
+  const { name, products } = data;
   const vinguideData = await getAllVinguidePosts(name);
   const cardTitle = `Artiklar relaterade till ${name}`;
-
   const countries = await getAllCountries();
 
   return (

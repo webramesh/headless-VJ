@@ -19,7 +19,7 @@ const Card = ({ post }) => {
       <div className="flex flex-col cursor-pointer hover:shadow-lg transition-shadow h-full">
         <div className="relative w-full h-40">
           <Image
-            src={post.featuredImage?.node?.sourceUrl || '/placeholder.png'}
+            src={post.featuredImage?.node?.sourceUrl || '/postplaceholder.jpg'}
             alt={post.title || 'Post image'}
             layout="fill"
             objectFit="cover"

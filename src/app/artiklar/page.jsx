@@ -1,6 +1,7 @@
 import { countArticles } from '../../lib/api/articleApi';
 import ArticleContent from './Components/ArticleContent';
 import Sidebar from '../Components/Sidebar';
+import Banner from '../Components/Banner';
 
 export async function generateMetadata() {
   return {
@@ -50,5 +51,9 @@ export async function generateMetadata() {
 export default async function ArticlarPage() {
   const totalPosts = await countArticles();
 
-  return <ArticleContent totalPosts={totalPosts} sidebar={<Sidebar />} />;
+  return (
+    <>
+      <Banner variant="default" /> <ArticleContent totalPosts={totalPosts} sidebar={<Sidebar />} />
+    </>
+  );
 }

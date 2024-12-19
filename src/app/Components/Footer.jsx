@@ -14,7 +14,7 @@ const Footer = ({ menuItems }) => {
   const path = pathname + '/';
   return (
     <div className="bg-[#F5F5F5]">
-      <div className="container mx-auto ">
+      <div className="container mx-auto mt-8">
         <div className="p-3 flex flex-col gap-2 md:gap-4 lg:flex-row justify-between items-center">
           <Link href="/" className="flex items-center mb-4 md:mb-0 md:ml-8">
             <Image src={logo} alt="Logo" className="object-cover" width="180" height="90" priority />

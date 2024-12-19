@@ -51,7 +51,7 @@ const SubscriptionBox = () => {
       <div className="space-y-8">
         <TitleSection icon={grape} label="ETT VINORD" title={titles.druver} />
         <hr className="border-t border-gray-300" />
-        <TitleSection icon={corkscrew} label="VECKANS OMRÅDE" title={titles.ordlista} />
+        <TitleSection icon={corkscrew} label="Veckans Vinbegrepp/region" title={titles.ordlista} />
       </div>
     </div>
   );

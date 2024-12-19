@@ -5,7 +5,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 
 function sortCountriesWithFlagsFirst(countries) {
-  return countries.sort((a, b) => {
+  return countries?.sort((a, b) => {
     // Check if a flag image exists for each country
     const aHasFlag = a.categoriesImagesAndOtherFields?.categoriesImage?.node?.sourceUrl ? 1 : 0;
     const bHasFlag = b.categoriesImagesAndOtherFields?.categoriesImage?.node?.sourceUrl ? 1 : 0;
@@ -60,7 +60,7 @@ const Allcountry = ({ countries, params }) => {
 
   const displayText = subRegion || region || country || 'länder';
 
-  if (displayCountries.length > 0)
+  if (displayCountries?.length > 0)
     return (
       <div className="container mx-auto">
         <h2 className="font-semibold text-xl text-center">

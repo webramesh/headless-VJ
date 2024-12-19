@@ -22,7 +22,7 @@ const Content = ({ pageData }) => {
               )}
             </div>
             {/* Right Section */}
-            <div className="w-full lg:w-1/4 mt-8 lg:mt-0">
+            <div className="w-full lg:w-1/4 mt-8 lg:mt-0 sticky top-0 h-full">
               <Sidebar />
             </div>
           </div>

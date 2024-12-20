@@ -6,11 +6,11 @@ import FilterSection from './FilterSection';
 import Hero from './Hero';
 import Paragraph from './Paragraph';
 
-export default function DryckerPage({ products, countries, vinguideData, cardTitle, searchParams, params, page }) {
+export default function DryckerPage({ products, vinguideData, cardTitle, searchParams, params, page }) {
   const vinguidePosts = vinguideData?.vinguidePosts?.vinguidePosts?.nodes || [];
   const vinguideDetails = vinguideData?.vinguidePosts || {};
   const { shortTitle, shortDescription, pageTitle, pageSubtitle, allProductTitle } = vinguideDetails;
-
+  const countries = vinguideData?.children?.nodes || [];
   return (
     <>
       <Hero params={params} pageTitle={pageTitle} pageSubtitle={pageSubtitle} />

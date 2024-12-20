@@ -15,6 +15,15 @@ function sortCountriesWithFlagsFirst(countries) {
   });
 }
 
+const slugToName = {
+  'rott-vin': 'Rött Vin',
+  'vitt-vin': 'Vitt Vin',
+  'rose-vin': 'Rosé Vin',
+  'dessert-vin': 'Dessert Vin',
+  'mousserande-vin': 'Mousserande Vin',
+  'ovrigt-vin': 'Övrigt Vin',
+};
+
 const Allcountry = ({ countries, params }) => {
   const sortedCountries = sortCountriesWithFlagsFirst(countries);
   const [displayCountries, setDisplayCountries] = useState(sortedCountries?.slice(0, 10));
@@ -34,8 +43,8 @@ const Allcountry = ({ countries, params }) => {
   const renderCountryLink = useCallback(
     (country) => {
       const url = `${basePath}/${country.slug}`;
-      const imageUrl = country?.categoriesImagesAndOtherFields?.categoriesImage?.node?.sourceUrl;
-      const imageAlt = country?.categoriesImagesAndOtherFields?.categoriesImage?.node?.altText || 'Flag';
+      const imageUrl = country?.produktslander?.nodes[0]?.flag?.flagImage?.node?.sourceUrl;
+      const imageAlt = country?.produktslander?.nodes[0]?.flag?.flagImage?.node?.altText || 'Flag';
       return (
         <Link key={country.slug} href={url} passHref>
           <button className="w-full flex py-1 px-2 justify-center items-center gap-2 text-sm sm:text-base hover:bg-red-100 border rounded-lg border-red-500 transition duration-300">
@@ -64,7 +73,7 @@ const Allcountry = ({ countries, params }) => {
     return (
       <div className="container mx-auto">
         <h2 className="font-semibold text-xl text-center">
-          Vintips {type} från olika {`${!country ? 'länder' : `regioner i ${displayText}`}`}
+          Vintips {slugToName[type]} från olika {`${!country ? 'länder' : `regioner i ${displayText}`}`}
         </h2>
 
         <div className="flex flex-wrap p-6 items-center justify-center gap-4">

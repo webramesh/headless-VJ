@@ -12,7 +12,7 @@ export async function generateMetadata() {
     description: 'ORDLISTA DRUVOR, ORDLISTA SMAKDEFINITIONER, ORDLISTA FACKTERMER',
     robots: 'index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1',
     googleSiteVerification: 'Rzshqb5By5Mx-OhTKEO4yA0-m_ey6ckD6U0bEyuvUDY',
-    viewport: 'width=device-width, initial-scale=1, minimum-scale=1',
+    // viewport: 'width=device-width, initial-scale=1, minimum-scale=1',
     icons: {
       icon: '/favicon.png',
     },

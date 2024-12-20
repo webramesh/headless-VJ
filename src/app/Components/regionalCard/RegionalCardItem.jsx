@@ -6,10 +6,10 @@ import { faArrowRight } from '@fortawesome/free-solid-svg-icons';
 const RegionalCardItem = ({ region }) => {
   const { title, excerpt, slug, lander, featuredImage } = region;
   return (
-    <div className="max-w-[90vw] md:max-w-[250px] bg-white rounded-lg shadow-2xl h-96">
+    <div className="bg-white rounded-lg shadow-2xl h-auto">
       <div className="h-[165px] w-full overflow-hidden">
         <Image
-          src={featuredImage?.node?.sourceUrl}
+          src={featuredImage?.node?.sourceUrl || '/producenter.jpg'}
           alt={title}
           width={250}
           height={165}

@@ -15,7 +15,7 @@ const AccordionItem = ({ index, openIndexes, toggleAccordion, title, content }) 
         id={`accordion-button-${index}`}
         role="button"
       >
-        <h3 className="text-left text-md">
+        <h3 className="text-left text-sm md:text-md">
           <span>{title}</span>
         </h3>
         <span

@@ -31,7 +31,7 @@ async function page({ params }) {
         <div className="flex flex-col lg:flex-row mx-4 lg:mx-52 z-10">
           <div className="flex flex-col gap-2 bg-white w-full lg:w-auto">
             <div className="shadow-2xl p-4 lg:p-12">
-              <BreadCrumb title1="Lander" link1="/vin-atlas" title2={name} />
+              <BreadCrumb title1="Lander" link1="/lander" title2={name} />
               <h1 className="text-2xl lg:text-3xl  mb-4 font-bold uppercase ">{name}</h1>
               <div dangerouslySetInnerHTML={{ __html: description }} className="content" />
 

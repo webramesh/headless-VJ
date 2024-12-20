@@ -11,7 +11,7 @@ export async function generateMetadata() {
     description:
       'I varje vinland så produceras viner inom olika områden. Varje område har sin egen karaktär som skiljer sig från grannliggande område.',
     robots: 'index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1',
-    viewport: 'width=device-width, initial-scale=1, minimum-scale=1',
+    // viewport: 'width=device-width, initial-scale=1, minimum-scale=1',
     icons: {
       icon: '/favicon.png',
     },

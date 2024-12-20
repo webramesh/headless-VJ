@@ -14,7 +14,7 @@ const page = async ({ params, searchParams }) => {
     redirect('/not-found');
   }
   const regions = await getRegionsByCountry(id);
-  const vinguideData = await getAllVinguidePosts(name, `/drycker/${type}/${country}/${region}`);
+  const vinguideData = await getAllVinguidePosts(`/drycker/${type}/${country}/${region}`);
   return (
     <DryckerPage
       products={[]}

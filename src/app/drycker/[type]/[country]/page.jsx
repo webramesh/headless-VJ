@@ -14,7 +14,7 @@ export default async function page({ params, searchParams }) {
   }
 
   const regions = await getRegionsByCountry(id);
-  const vinguideData = await getAllVinguidePosts(name, `/drycker/${type}/${country}/`);
+  const vinguideData = await getAllVinguidePosts(`/drycker/${type}/${country}/`);
   return (
     <DryckerPage
       products={[]}

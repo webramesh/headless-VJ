@@ -5,95 +5,114 @@ const client = new ApolloClient({
   cache: new InMemoryCache(),
 });
 
-export async function getAllVinguidePosts(name, uri) {
+export async function getAllVinguidePosts(uri) {
   try {
     const { data } = await client.query({
       query: gql`
-        query AllVinguidePosts($name: String!) {
-          vinguide(where: { title: $name }) {
-            nodes {
-              id
-              title
-              slug
-              landingId
-              content
-              uri
-              seo {
-                title
-                robots
-                description
-                focusKeywords
-                canonicalUrl
-                openGraph {
-                  locale
-                  type
+        query AllVinguidePosts($uri: ID!) {
+          landing(id: $uri, idType: URI) {
+            id
+            title
+            slug
+            landingId
+            content
+            uri
+            children(first: 100) {
+              nodes {
+                ... on Landing {
+                  id
+                  slug
                   title
-                  description
-                  url
-                  siteName
-                  image {
-                    height
-                    secureUrl
-                    type
-                    url
-                    width
-                  }
-                  twitterMeta {
-                    card
-                    description
-                    image
-                    creator
-                    title
-                    site
-                  }
-                }
-              }
-              faq {
-                faq {
-                  faqAnswer
-                  faqQuestion
-                }
-              }
-              vinguidePosts {
-                shortTitle
-                shortDescription
-                pageTitle
-                pageSubtitle
-                fieldGroupName
-                allProductTitle
-                vinguidePosts {
-                  nodes {
-                    contentTypeName
-                    date
-                    id
-                    slug
-                    ... on Post {
-                      id
-                      excerpt
-                      featuredImage {
-                        node {
-                          altText
-                          sourceUrl
-                        }
-                      }
-                      author {
-                        node {
-                          name
-                          id
-                        }
-                      }
-                      date
-                      categories {
-                        nodes {
-                          name
-                          slug
-                          categoriesImagesAndOtherFields {
-                            categorycolorpicker
+                  produktslander {
+                    nodes {
+                      flag {
+                        flagImage {
+                          node {
+                            altText
+                            sourceUrl
                           }
                         }
                       }
-                      title
                     }
+                  }
+                }
+              }
+            }
+            seo {
+              title
+              robots
+              description
+              focusKeywords
+              canonicalUrl
+              openGraph {
+                locale
+                type
+                title
+                description
+                url
+                siteName
+                image {
+                  height
+                  secureUrl
+                  type
+                  url
+                  width
+                }
+                twitterMeta {
+                  card
+                  description
+                  image
+                  creator
+                  title
+                  site
+                }
+              }
+            }
+            faq {
+              faq {
+                faqAnswer
+                faqQuestion
+              }
+            }
+            vinguidePosts {
+              shortTitle
+              shortDescription
+              pageTitle
+              pageSubtitle
+              fieldGroupName
+              allProductTitle
+              vinguidePosts {
+                nodes {
+                  contentTypeName
+                  date
+                  id
+                  slug
+                  ... on Post {
+                    id
+                    excerpt
+                    featuredImage {
+                      node {
+                        altText
+                        sourceUrl
+                      }
+                    }
+                    author {
+                      node {
+                        name
+                        id
+                      }
+                    }
+                    date
+                    categories {
+                      nodes {
+                        name
+                        slug
+                        categoriesImagesAndOtherFields {
+                          categorycolorpicker
+                        }
+                      }
+                    }
+                    title
                   }
                 }
               }
@@ -101,16 +120,10 @@ export async function getAllVinguidePosts(name, uri) {
           }
         }
       `,
-      variables: { name },
+      variables: { uri },
     });
-    if (uri) {
-      const filteredData = data.vinguide.nodes.filter((item) => {
-        return item.uri === uri;
-      });
-      return filteredData[0];
-    } else {
-      return data.vinguide.nodes[0] || [];
-    }
+
+    return data?.landing || [];
   } catch (error) {
     console.error('Error fetching vinguide posts:', error);
     return [];

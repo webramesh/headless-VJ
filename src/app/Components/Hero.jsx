@@ -16,7 +16,7 @@ const Hero = ({ posts }) => {
             <div className="relative w-full h-0 pb-[66.67%] sm:pb-[50%] lg:pb-[66.67%]">
               <div className="w-full h-full">
                 <Image
-                  src={posts[0]?.featuredImage?.node?.mediaItemUrl}
+                  src={posts[0]?.featuredImage?.node?.mediaItemUrl || '/postplaceholder.jpg'}
                   alt={posts[0]?.title}
                   fill
                   priority
@@ -61,7 +61,7 @@ const Hero = ({ posts }) => {
                   <div className="flex flex-col sm:flex-row gap-4 bg-[#f5f5f5] overflow-hidden">
                     <div className="relative h-48 sm:h-auto sm:w-1/3">
                       <Image
-                        src={post?.featuredImage?.node?.mediaItemUrl}
+                        src={post?.featuredImage?.node?.mediaItemUrl || '/postplaceholder.jpg'}
                         alt={post?.title}
                         fill
                         priority

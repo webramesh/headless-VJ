@@ -7,6 +7,7 @@ export const generatePdf = (productDetails, product) => {
 
   const doc = new jsPDF();
   const pageWidth = doc.internal.pageSize.getWidth();
+  const pageHeight = doc.internal.pageSize.getHeight();
 
   // Elegant Header
   doc.setFillColor(240, 240, 240);
@@ -14,21 +15,22 @@ export const generatePdf = (productDetails, product) => {
 
   // Logo
   const logoUrl = '/vinjournalen-logo.png';
+  // const logoUrl = '/logo.png';
   const logoWidth = 70;
-  const logoHeight = 13;
+  const logoHeight = 16;
   const logoX = (pageWidth - logoWidth) / 2;
   const logoY = 6;
   doc.addImage(logoUrl, 'PNG', logoX, logoY, logoWidth, logoHeight);
 
   // Product Title
-  const detailsX = 10;
+  const detailsX = 15;
   const detailsY = 40;
   doc.setFontSize(16);
   doc.setFont('helvetica', 'bold');
   doc.text(productTitle, detailsX, detailsY);
 
   // Table Configuration
-  const labels = ['Price', 'Artikel nr', 'Sortiment', 'Årgång', 'Volym'];
+  const labels = ['Pris', 'Artikel nr', 'Sortiment', 'Årgång', 'Volym'];
   const values = [
     getValueOrNA(pice),
     getValueOrNA(productCode),
@@ -39,7 +41,7 @@ export const generatePdf = (productDetails, product) => {
 
   // Table Settings
   const tableStartY = detailsY + 20;
-  const tableWidth = pageWidth - 2 * detailsX - 120; // Leave space for image
+  const tableWidth = pageWidth - 2 * detailsX - 110; // Leave space for image
   const rowHeight = 14;
   const cellPadding = 5;
   const groupHeight = rowHeight * 1.5; // Combined height for label and value
@@ -101,6 +103,16 @@ export const generatePdf = (productDetails, product) => {
     wineImageWidth,
     wineImageHeight
   );
+
+  // Footer
+  const footerText = 'PDF från Vinjournalen.se';
+  const footerFontSize = 10;
+  doc.setFontSize(footerFontSize);
+  doc.setFont('helvetica', 'italic');
+  const footerTextWidth = doc.getTextWidth(footerText);
+  const footerX = (pageWidth - footerTextWidth) / 2; // Center the footer text
+  const footerY = pageHeight - 10; // Position above the bottom of the page
+  doc.text(footerText, footerX, footerY);
 
   // Output PDF
   const blob = doc.output('blob');

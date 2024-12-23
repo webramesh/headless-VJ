@@ -47,7 +47,7 @@ export default async function PostDetails({ params }) {
     const postProductRecommendation = await getPostProductRecommendationBySlug(slug);
 
     if (!post) {
-      return <div className="container mx-auto px-4 py-8">Post not found</div>;
+      return <div className="container mx-auto px-4 py-8">Inlägget hittades inte</div>;
     }
 
     // Extract FAQ items from the post data

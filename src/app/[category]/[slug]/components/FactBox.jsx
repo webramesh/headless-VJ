@@ -23,7 +23,7 @@ const FactBox = ({ recommendedProduct, smakar, aromer, fargers, matkombinationer
   return (
     <>
       <div className="block  md:grid grid-cols-2  justify-items-stretch items-center pt-4  ">
-        <div className="text-center mb-4  md:mb-0 md:text-left flex items-center  gap-3 container mx-auto px-4">
+        <div className="mb-4  md:mb-0 text-left flex items-center  gap-3 container mx-auto px-4">
           {recommendedProduct?.produktslander?.nodes?.map((node, index) =>
             node?.parent === null && node?.flag?.flagImage?.node?.sourceUrl ? (
               <Image key={index} src={node.flag.flagImage.node.sourceUrl} width={40} height={40} alt={node.name} />

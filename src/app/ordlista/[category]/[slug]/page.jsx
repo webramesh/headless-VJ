@@ -38,7 +38,7 @@ const page = async ({ params }) => {
 
           {/* ordlista content */}
           <div
-            className="ordlista-content-style prose prose-lg max-w-none"
+            className="ordlista-content-style prose prose-lg max-w-none content"
             dangerouslySetInnerHTML={{ __html: ordlista?.content }}
           />
 

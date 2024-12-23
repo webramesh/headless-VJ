@@ -120,6 +120,7 @@ function CombineWineFoodForm() {
 
       <button
         type="button"
+        aria-label="Skicka formulär"
         className="focus:outline-none text-white w-full bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg px-5 py-2.5 me-2 mb-2 text-sm"
       >
         Skicka

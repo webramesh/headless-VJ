@@ -7,7 +7,7 @@ import Link from 'next/link';
 export default function ProductRecommendation({ postProductRecommendation }) {
   const productLength = postProductRecommendation?.produktrekommendationer?.nodes.length;
 
-  // generate random index  till 0 till productLength
+  // generate random index till 0 till productLength
   const randomProduct = Math.floor(Math.random() * productLength);
 
   const products = postProductRecommendation?.produktrekommendationer?.nodes[randomProduct]?.produkter?.nodes || [];
@@ -31,26 +31,25 @@ export default function ProductRecommendation({ postProductRecommendation }) {
   return (
     <>
       {recommendedProduct && (
-        <div className="container mx-auto px-4 lg:px-0 mt-24 ">
+        <div className="container mx-auto px-4 xl:px-0 mt-24 ">
           <div className=" text-xl md:text-2xl mt-8 text-center font-semibold ">Vinjournalen.se Tips</div>
 
           <Link href={recommendedProduct?.fieldsProduct?.buyLink}>
-            {/* <Link href={`/produkter/${recommendedProduct?.slug}`}> */}
-            <div className="flex flex-col lg:flex-row mt-6   items-center  bg-white shadow-md">
-              <div className="w-full lg:w-[20%] mb-6 lg:mb-0 ">
-                <div className="lg:sticky lg:top-4 ">
+            <div className="flex flex-col xl:flex-row mt-6 items-center bg-white shadow-md">
+              <div className="w-full xl:w-[20%] mb-6 xl:mb-0 ">
+                <div className="xl:sticky xl:top-4 ">
                   <Image
                     src={productFeaturedImage}
                     alt={recommendedProduct?.title}
-                    className=" mx-auto  lg:w-full lg:h-full "
+                    className="mx-auto xl:w-full xl:h-full"
                     width={200}
                     height={200}
                   />
                 </div>
               </div>
 
-              <div className="w-full lg:w-[80%] ">
-                <div className=" bg-white  p-4 lg:scroll-p-8 pb-8">
+              <div className="w-full xl:w-[80%] ">
+                <div className="bg-white p-4 xl:scroll-p-8 pb-8">
                   <FactBox
                     recommendedProduct={recommendedProduct}
                     smakar={smakar}

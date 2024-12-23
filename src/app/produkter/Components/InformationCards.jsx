@@ -4,94 +4,7 @@ import RenderBox from './RenderBox';
 import AlcoholInfo from './AlcoholInfo';
 import CommentForm from '../../Components/CommentForm';
 import Link from 'next/link';
-
-// const ratingbox = () => (
-//   <div className="w-full px-4 sm:px-0">
-//     <div className="flex flex-col items-center mt-6 justify-center">
-//       <div className=" text-xl text-center">Vad tycker du om Takasago Umeshu?</div>
-//       <div className="flex items-center mt-4">
-//         {[...Array(5)].map((_, index) => (
-//           <svg
-//             key={index}
-//             className={`w-8 h-8 ms-3 ${index < 4 ? 'text-red-500' : 'text-gray-300 dark:text-gray-500'}`}
-//             aria-hidden="true"
-//             xmlns="http://www.w3.org/2000/svg"
-//             fill="currentColor"
-//             viewBox="0 0 22 20"
-//           >
-//             <path d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z" />
-//           </svg>
-//         ))}
-//       </div>
-//     </div>
-//   </div>
-// );
-
-// const formfield = () => (
-//   <div className="w-full max-w-4xl mx-auto mb-16 px-4 sm:px-0">
-//     <div className="flex flex-col md:flex-row gap-8 mt-8">
-//       <div className="flex flex-col w-full md:w-1/2 gap-4">
-//         <div>
-//           <label htmlFor="name" className="sr-only">
-//             Name
-//           </label>
-//           <input
-//             type="text"
-//             id="name"
-//             className="p-2 pl-3 w-full bg-[#d9d9d9] rounded-2xl"
-//             placeholder="Namn*"
-//             required
-//           />
-//         </div>
-//         <div>
-//           <label htmlFor="email" className="sr-only">
-//             Email
-//           </label>
-//           <input
-//             type="email"
-//             id="email"
-//             className="p-2 pl-3 w-full bg-[#d9d9d9] rounded-2xl"
-//             placeholder="E-Postadress*"
-//             required
-//           />
-//         </div>
-//         <div>
-//           <label htmlFor="captcha" className="sr-only">
-//             Captcha
-//           </label>
-//           <legend className=" text-sm mb-1">Are you human? Please solve:</legend>
-//           <input
-//             type="text"
-//             id="captcha"
-//             className="p-2 pl-3 w-full bg-[#d9d9d9] rounded-2xl"
-//             placeholder=""
-//             required
-//           />
-//         </div>
-//       </div>
-//       <div className="flex flex-col w-full md:w-1/2 gap-12">
-//         <div className="flex flex-col flex-grow">
-//           <label htmlFor="message" className="sr-only">
-//             Message
-//           </label>
-//           <textarea
-//             id="message"
-//             className="p-2 bg-[#d9d9d9] rounded-xl flex-grow resize-none"
-//             placeholder="Skriv ditt omdömme här!"
-//             required
-//           />
-//         </div>
-//         <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4">
-//           <button className="px-2 py-1 w-full sm:w-[40%] bg-[#e13768] text-white rounded-full">Sticka</button>
-//           <div className="text-xs ">
-//             Denna webbplats använder Akismet för att minska skräppost.
-//             <span className="text-red-600 font-bold">Lär dig hur din kommentardata bearbetas.</span>
-//           </div>
-//         </div>
-//       </div>
-//     </div>
-//   </div>
-// );
+import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
 
 const QNA = ({ productTitle, produktslander, wineSaleStartDate, sugarBites }) => {
   return (
@@ -149,7 +62,6 @@ const InformationCards = ({ fieldsProduct, productTitle, typer, produktslander, 
     totalCaloriesPerContainerVolume,
     totalCaloriesPerLitter,
     sugarLevelIn1Litter,
-
     produktPackaging,
     wineSaleStartDate,
     sugarBites,
@@ -157,9 +69,24 @@ const InformationCards = ({ fieldsProduct, productTitle, typer, produktslander, 
     closure,
   } = fieldsProduct;
 
+  // Static price history data
+  const priceHistoryData = [
+    { date: 'Sep 2023', price: 45 },
+    { date: 'Oct 2023', price: 45 },
+    { date: 'Nov 2023', price: 45 },
+    { date: 'Dec 2023', price: 45 },
+    { date: 'Jan 2024', price: 44 },
+    { date: 'Feb 2024', price: 44 },
+    { date: 'Mar 2024', price: 44 },
+    { date: 'Apr 2024', price: 44 },
+    { date: 'May 2024', price: 43 },
+    { date: 'Jun 2024', price: 43 },
+    { date: 'Jul 2024', price: 43 },
+    { date: 'Aug 2024', price: 43 },
+  ];
+
   const productsLander = data?.produktslander?.nodes;
 
-  // Set default state to '4' to open "Frågor och svar"
   const [selected, setSelected] = useState(4);
 
   const vinimporterData = data?.fieldsProduct?.vinimporter?.nodes;
@@ -173,7 +100,7 @@ const InformationCards = ({ fieldsProduct, productTitle, typer, produktslander, 
     <div className="mt-8 border-y-2">
       <div className="container mx-auto">
         <div className="flex gap-2 md:gap-4 px-4 py-2 items-center overflow-x-auto scroll-smooth lg:justify-center ">
-          {['Hälsa ', 'Övrigt', 'Omdömen', 'Frågor & Svar'].map((item, index) => (
+          {['Hälsa ', 'Övrigt', 'Omdömen', 'Frågor & Svar', 'Prishistorik'].map((item, index) => (
             <div
               key={index}
               className={`px-2 py-2 w-auto text-center hover:bg-[#f4f1ed] hover:shadow-md cursor-pointer ${
@@ -252,10 +179,6 @@ const InformationCards = ({ fieldsProduct, productTitle, typer, produktslander, 
                 <div className="text-xs  text-center mt-2">
                   Producent <br />
                   <div className="text-red-500 font-bold">
-                    {/* Fuji Takasago Shuzo */}
-
-                    {/* {producenterTitles ? <p>{producenterTitles}</p> : <p>N/A</p>} */}
-
                     {producenterData?.title && producenterData?.slug ? (
                       <Link href={`/producenter/${producenterData.slug}`}>{producenterData?.title}</Link>
                     ) : (
@@ -265,14 +188,11 @@ const InformationCards = ({ fieldsProduct, productTitle, typer, produktslander, 
                 </div>
                 <div className="text-xs  text-center mt-2">
                   Land <br />
-                  {/* <div className="text-red-500 font-bold">{productsLander[0]?.name}</div> */}
                   <div className="text-red-500 font-bold">
                     {productsLander
                       ?.filter((land) => land.parent === null)
                       .map((land, i) => {
                         const { name, slug } = land;
-
-                        // Check if both name and slug exist
                         return <p key={i}>{name && slug ? <Link href={`/lander/${slug}`}>{name}</Link> : 'N/A'}</p>;
                       })}
                   </div>
@@ -283,12 +203,8 @@ const InformationCards = ({ fieldsProduct, productTitle, typer, produktslander, 
                 <div className="text-xs  text-center mt-2">
                   Importör <br />
                   <div className="text-red-500 font-bold mb-9">
-                    {/* Akebono Unlimited AB */}
-                    {/* {vinimporterTitles ? <p>{vinimporterTitles}</p> : <p>N/A</p>} */}
-
                     {vinimporterData ? (
                       vinimporterData?.map((vinimportor, i) =>
-                        // Only show if both title and slug exist
                         vinimportor?.title && vinimportor?.slug ? (
                           <p key={i}>
                             <Link href={`/vinimportor/${vinimportor.slug}`}>{vinimportor?.title}</Link>
@@ -309,8 +225,6 @@ const InformationCards = ({ fieldsProduct, productTitle, typer, produktslander, 
           {selected === 3 && (
             <>
               <div className="flex flex-col items-center mt-6 justify-center">
-                {/* {ratingbox()} */}
-                {/* {formfield()} */}
                 <div className="container mx-auto px-4 sm:px-6 lg:px-8">
                   <CommentForm data={data} />
                 </div>
@@ -329,12 +243,47 @@ const InformationCards = ({ fieldsProduct, productTitle, typer, produktslander, 
               />
             </div>
           )}
+
+          {selected === 5 && (
+            <div className="w-full max-w-4xl mx-auto p-4">
+              <h2 className="text-xl font-semibold mb-4 text-center">Prishistorik</h2>
+              <div className="w-full h-[200px] sm:h-[300px] md:h-[400px]">
+                <ResponsiveContainer width="100%" height="100%">
+                  <LineChart data={priceHistoryData} margin={{ top: 5, right: 10, left: 0, bottom: 5 }}>
+                    <CartesianGrid strokeDasharray="3 3" stroke="#eee" />
+                    <XAxis
+                      dataKey="date"
+                      tick={{ fontSize: 10, fill: '#666' }}
+                      tickMargin={10}
+                      interval="preserveStartEnd"
+                    />
+                    <YAxis domain={[-10, 100]} tick={{ fontSize: 10, fill: '#666' }} tickMargin={10} />
+                    <Tooltip
+                      contentStyle={{
+                        backgroundColor: 'white',
+                        border: '1px solid #ccc',
+                        borderRadius: '4px',
+                        padding: '8px',
+                        fontSize: '12px',
+                      }}
+                    />
+                    <Line
+                      type="monotone"
+                      dataKey="price"
+                      stroke="#22c55e"
+                      strokeWidth={2}
+                      dot={{ fill: '#22c55e', strokeWidth: 2, r: 4 }}
+                      activeDot={{ r: 6 }}
+                    />
+                  </LineChart>
+                </ResponsiveContainer>
+              </div>
+            </div>
+          )}
         </div>
       </div>
     </div>
   );
 };
-
-// export default InformationCards;
 
 export default InformationCards;

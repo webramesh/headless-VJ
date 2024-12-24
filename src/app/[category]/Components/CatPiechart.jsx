@@ -55,7 +55,7 @@ export default function PieChart({ data, title, total }) {
           />
         </RechartsPieChart>
       </ResponsiveContainer>
-      <div className="mt-2 text-center  text-xs md:text-sm lg:text-xs">{title}</div>
+      <div className="mt-2 text-center text-xs md:text-sm xl:text-xs">{title}</div>
     </div>
   );
 }

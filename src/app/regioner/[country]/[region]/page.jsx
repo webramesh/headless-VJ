@@ -20,7 +20,7 @@ async function Page({ params }) {
   const { country, region } = params;
   const selectedRegion = await getRegionByURL(`/regioner/${region}`);
 
-  const {  content, faq } = selectedRegion;
+  const { content, faq } = selectedRegion;
   const faqItems = faq?.faq || [];
 
   return (

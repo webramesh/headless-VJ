@@ -205,6 +205,29 @@ export async function getPostBySlug(slug) {
               }
             }
 
+            realatedPosts {
+              relatedPosts {
+                nodes {
+                  id
+                  slug
+                  ... on Post {
+                    id
+                    title
+                    featuredImage {
+                      node {
+                        sourceUrl
+                      }
+                    }
+                    categories {
+                      nodes {
+                        slug
+                      }
+                    }
+                  }
+                }
+              }
+            }
+
             comments {
               nodes {
                 date

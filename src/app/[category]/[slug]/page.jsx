@@ -11,6 +11,7 @@ import CommentForm from '../../Components/CommentForm';
 import CommentsSection from '../../Components/CommentSection';
 import { generateSeoMetadata } from '@/src/utils/utils';
 import { getTaxonomySEO } from '@/src/lib/api/taxonomyApi';
+import RelatedPosts from './components/RelatedPosts';
 
 export const revalidate = 60;
 
@@ -44,6 +45,8 @@ export default async function PostDetails({ params }) {
 
   if (categories.includes(category)) {
     const post = await getPostBySlug(slug);
+    const relatedPosts = post?.realatedPosts?.relatedPosts?.nodes;
+
     const postProductRecommendation = await getPostProductRecommendationBySlug(slug);
 
     if (!post) {
@@ -79,6 +82,9 @@ export default async function PostDetails({ params }) {
                   <AccordionNew faqItems={faqItems} className="space-y-2 sm:space-y-3 w-full px-1 sm:px-2 max-w-full" />
                 )}
 
+                <div className="my-16">
+                  <RelatedPosts relatedPosts={relatedPosts} />
+                </div>
                 <ProductRecommendation postProductRecommendation={postProductRecommendation} />
 
                 <div className="mt-12">

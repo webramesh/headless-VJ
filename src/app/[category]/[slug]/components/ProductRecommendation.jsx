@@ -34,7 +34,7 @@ export default function ProductRecommendation({ postProductRecommendation }) {
         <div className="container mx-auto px-4 xl:px-0 mt-24 ">
           <div className=" text-xl md:text-2xl mt-8 text-center font-semibold ">Vinjournalen.se Tips</div>
 
-          <Link href={recommendedProduct?.fieldsProduct?.buyLink}>
+          <Link href={recommendedProduct?.fieldsProduct?.buyLink} passHref>
             <div className="flex flex-col xl:flex-row mt-6 items-center bg-white shadow-md">
               <div className="w-full xl:w-[20%] mb-6 xl:mb-0 ">
                 <div className="xl:sticky xl:top-4 ">

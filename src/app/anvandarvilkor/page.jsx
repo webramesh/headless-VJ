@@ -12,8 +12,6 @@ export async function generateMetadata() {
   }
 }
 
-
-
 // anvandarvilkor
 
 export default async function AnvandarvilkorPage() {

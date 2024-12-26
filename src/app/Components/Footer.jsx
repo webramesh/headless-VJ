@@ -17,7 +17,14 @@ const Footer = ({ menuItems }) => {
       <div className="container mx-auto mt-8">
         <div className="p-3 flex flex-col gap-2 md:gap-4 lg:flex-row justify-between items-center">
           <Link href="/" className="flex items-center mb-4 md:mb-0 md:ml-8">
-            <Image src={logo} alt="Vinjournalen Logo" className="object-cover" width="180" height="90" priority />
+            <Image
+              src={logo}
+              alt="Vinjournalen Logo"
+              className="object-cover w-52"
+              width="auto"
+              height="auto"
+              priority
+            />
           </Link>
 
           <nav className="flex flex-col md:flex-row text-sm gap-2 md:gap-4 text-center md:text-left mb-4 md:mb-0">

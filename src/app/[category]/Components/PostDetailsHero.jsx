@@ -15,9 +15,9 @@ const PostDetailsHero = ({ featuredImage, title, authorImage, authorName, author
               src={featuredImage || '/postplaceholder.jpg'}
               alt={title}
               className="object-cover w-full"
-              layout="responsive"
               width={500}
               height={300}
+              priority
             />
           </div>
         </div>
@@ -37,16 +37,17 @@ const PostDetailsHero = ({ featuredImage, title, authorImage, authorName, author
                     // src={'/search.png'}
                     alt={authorName || 'Vinjournalen'}
                     className="object-cover"
-                    layout="fill"
+                    width={100}
+                    height={100}
                   />
                 </Link>
               ) : (
                 <Image
                   src={authorImage || '/vinlogo.svg'}
-                  // src={'/search.png'}
                   alt={authorName || 'Vinjournalen'}
                   className="object-cover"
-                  layout="fill"
+                  width={100}
+                  height={100}
                 />
               )}
             </div>

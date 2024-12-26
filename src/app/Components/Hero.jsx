@@ -14,7 +14,7 @@ const Hero = ({ posts }) => {
         >
           <div className="relative w-full">
             <div className="relative w-full h-0 pb-[66.67%] sm:pb-[50%] lg:pb-[66.67%]">
-              <div className="w-full h-full">
+              <div className="absolute w-full h-full">
                 <Image
                   src={posts[0]?.featuredImage?.node?.mediaItemUrl || '/postplaceholder.jpg'}
                   alt={posts[0]?.title}
@@ -23,15 +23,14 @@ const Hero = ({ posts }) => {
                   className="h-full w-full object-cover"
                   placeholder="blur"
                   blurDataURL="/search.png"
+                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 25vw"
                 />
               </div>
             </div>
           </div>
           <div className="p-4">
             <h2 className=" font-medium text-black text-lg mt-4 sm:mt-8">{posts[0]?.title}</h2>
-            {/* <p className="mt-4  text-gray-900 text-xs">{format(new Date(posts[0]?.date), 'dd MMMM, yyyy')}</p> */}
             <p className="mt-4  text-gray-900 text-xs capitalize">
-              {' '}
               {new Date(posts[0]?.date).toLocaleDateString('sv-SE', {
                 day: '2-digit',
                 month: 'long',
@@ -53,26 +52,22 @@ const Hero = ({ posts }) => {
             if (index === 0) return;
             return (
               <div key={post.id}>
-                {/* <Link href={`/article/${post.slug}`}> */}
-                <Link
-                  // href={`/${post.categories.nodes[0].slug}/${post.slug}`}
-                  href={`/${post?.categories?.nodes[0]?.slug || 'uncategorized'}/${post.slug}`}
-                >
-                  <div className="flex flex-col sm:flex-row gap-4 bg-[#f5f5f5] overflow-hidden">
+                <Link href={`/${post?.categories?.nodes[0]?.slug || 'uncategorized'}/${post.slug}`}>
+                  <div className="flex flex-col sm:flex-row gap-4 bg-[#f5f5f5] overflow-hidden lg:gap-0 xl:gap-4">
                     <div className="relative h-48 sm:h-auto sm:w-1/3">
                       <Image
                         src={post?.featuredImage?.node?.mediaItemUrl || '/postplaceholder.jpg'}
                         alt={post?.title}
                         fill
                         priority
-                        className="h-full w-full object-cover"
+                        className="object-cover"
                         placeholder="blur"
                         blurDataURL="/search.png"
+                        sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 25vw"
                       />
                     </div>
                     <div className="p-4 sm:w-2/3">
                       <h2 className=" font-medium text-black text-lg">{post?.title}</h2>
-                      {/* <p className="mt-2  text-gray-900 text-xs">{format(new Date(post?.date), 'dd MMMM, yyyy')}</p> */}
                       <p className="mt-4  text-gray-900 text-xs capitalize">
                         {new Date(post?.date).toLocaleDateString('sv-SE', {
                           day: '2-digit',

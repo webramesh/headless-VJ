@@ -82,9 +82,11 @@ export default async function PostDetails({ params }) {
                   <AccordionNew faqItems={faqItems} className="space-y-2 sm:space-y-3 w-full px-1 sm:px-2 max-w-full" />
                 )}
 
-                <div className="my-16">
-                  <RelatedPosts relatedPosts={relatedPosts} />
-                </div>
+                {relatedPosts && relatedPosts.length > 0 && (
+                  <div className="my-16">
+                    <RelatedPosts relatedPosts={relatedPosts} />
+                  </div>
+                )}
                 <ProductRecommendation postProductRecommendation={postProductRecommendation} />
 
                 <div className="mt-12">

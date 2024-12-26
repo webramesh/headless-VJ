@@ -20,6 +20,8 @@ export default function Navbar({ menuData }) {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [activeDropdown, setActiveDropdown] = useState(null);
   const [focusedItemIndex, setFocusedItemIndex] = useState(-1);
+  const [isScrolled, setIsScrolled] = useState(false);
+
   const dropdownRefs = useRef({});
   const itemRefs = useRef({});
 
@@ -83,8 +85,24 @@ export default function Navbar({ menuData }) {
     };
   }, [activeDropdown]);
 
+  useEffect(() => {
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 50); // Adjust the value as needed
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, []);
   return (
-    <nav className="bg-[#F5F5F5]" aria-label="Main Navigation">
+    // <nav className="bg-[#F5F5F5]" aria-label="Main Navigation">
+    <nav
+      className={`bg-[#F5F5F5] transition-all duration-300 ${
+        isScrolled ? 'fixed top-0 w-full shadow-md z-50' : 'relative'
+      }`}
+      aria-label="Main Navigation"
+    >
       <div className="container mx-auto px-8 py-2 lg:py-4 flex flex-col lg:flex-row lg:items-center lg:justify-between gap-1">
         {/* Logo and Hamburger Icon */}
         <div className={`w-full lg:w-auto flex justify-between items-center`}>

@@ -39,7 +39,7 @@ export default function CategoryPage({ category, totalPosts }) {
 
   return (
     <div className="space-y-4">
-      <div className="mt-10 p-2 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-14">
+      <div className="mt-10 p-2 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
         {posts.map((post) => (
           <div key={post.id}>
             <CategoryCard post={post} />

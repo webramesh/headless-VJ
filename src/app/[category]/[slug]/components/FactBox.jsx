@@ -3,7 +3,6 @@ import FactBoxDescription from './FactBoxDescription';
 import CatPiechart from '../../Components/CatPiechart';
 import FactBoxMoreInfo from './FactBoxMoreInfo';
 import FactBoxMatCombinationer from './FactBoxMatCombinationer';
-import Link from 'next/link';
 
 const FactBox = ({ recommendedProduct, smakar, aromer, fargers, matkombinationer }) => {
   const fieldsProduct = recommendedProduct?.fieldsProduct;
@@ -38,13 +37,9 @@ const FactBox = ({ recommendedProduct, smakar, aromer, fargers, matkombinationer
           <h2 className=""> Artikel nr: {fieldsProduct?.productCode} </h2>
 
           {fieldsProduct?.buyLink ? (
-            <Link
-              href={fieldsProduct?.buyLink}
-              target="_blank"
-              className="bg-[#ED0927] block mt-3 xl:mt-0 px-4 py-2 text-white rounded-md text-center hover:bg-[#fe4c5e] transition-colors"
-            >
+            <div className="bg-[#ED0927] block mt-3 xl:mt-0 px-4 py-2 text-white rounded-md text-center hover:bg-[#fe4c5e] transition-colors">
               Köp på Systembolaget
-            </Link>
+            </div>
           ) : (
             <div className="w-full sm:w-[65%] text-center border rounded-md px-4 py-2 bg-red-200 text-gray-600 cursor-not-allowed">
               Produkten har utgått

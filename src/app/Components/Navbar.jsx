@@ -108,15 +108,16 @@ export default function Navbar({ menuData }) {
         <div className={`w-full lg:w-auto flex justify-between items-center`}>
           <Link href="/" className="flex items-center">
             {/* Mobile Logo */}
-            <Image src={vinlogo} alt="VinLogo" className="object-cover md:hidden" width={60} height={30} />
+            <Image src={vinlogo} alt="VinLogo" className="object-cover md:hidden w-14" width="auto" height="auto" />
 
             {/* Tablet and Desktop Logo */}
             <Image
               src={logo}
               alt="Vinjournalen Logo"
-              className="object-cover hidden md:block"
-              width={180}
-              height={90}
+              className="object-cover hidden md:block w-44 xl:w-52"
+              width="auto"
+              height="auto"
+              priority
             />
           </Link>
           <div className="lg:hidden">
@@ -145,7 +146,7 @@ export default function Navbar({ menuData }) {
           </div>
           <div className="flex flex-col items-center space-y-8">
             <Link href="/" className="mb-4">
-              <Image src={logo} alt="Vinjournalen Logo" className="object-cover" width={200} height={100} />
+              <Image src={logo} alt="Vinjornalen Logo" className="object-cover w-52" width="auto" height="auto" />
             </Link>
 
             <div className="mb-4 w-4/5 flex justify-center items-center">

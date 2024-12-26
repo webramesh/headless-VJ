@@ -21,8 +21,9 @@ const Card = ({ post }) => {
           <Image
             src={post.featuredImage?.node?.sourceUrl || '/postplaceholder.jpg'}
             alt={post.title || 'Post image'}
-            layout="fill"
-            objectFit="cover"
+            fill
+            className="object-cover"
+            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 25vw"
           />
         </div>
         <div className="p-4 bg-[#f5f5f5] flex flex-col flex-grow">

@@ -4,7 +4,7 @@ import RelatedPostItem from './RelatedPostItem';
 
 const RelatedPosts = ({ relatedPosts }) => {
   // Limit posts to a maximum of 6
-  const displayedPosts = relatedPosts.slice(0, 6);
+  const displayedPosts = relatedPosts?.slice(0, 6);
 
   return (
     <div>

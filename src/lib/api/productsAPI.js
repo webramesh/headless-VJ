@@ -226,7 +226,7 @@ export async function getProductBySlug(identifier) {
                 }
               }
               produkterproducer {
-                node {
+                nodes {
                   ... on Producent {
                     id
                     title

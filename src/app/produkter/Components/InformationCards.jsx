@@ -90,7 +90,7 @@ const InformationCards = ({ fieldsProduct, productTitle, typer, produktslander, 
   const [selected, setSelected] = useState(4);
 
   const vinimporterData = data?.fieldsProduct?.vinimporter?.nodes;
-  const producenterData = data?.fieldsProduct?.produkterproducer?.node;
+  const producenterData = data?.fieldsProduct?.produkterproducer?.nodes;
 
   const handleClick = (index) => {
     setSelected((prevSelected) => (prevSelected === index ? null : index));
@@ -179,10 +179,23 @@ const InformationCards = ({ fieldsProduct, productTitle, typer, produktslander, 
                 <div className="text-xs  text-center mt-2">
                   Producent <br />
                   <div className="text-red-500 font-bold">
-                    {producenterData?.title && producenterData?.slug ? (
+                    {/* {producenterData?.title && producenterData?.slug ? (
                       <Link href={`/producenter/${producenterData.slug}`}>{producenterData?.title}</Link>
                     ) : (
                       <p> N/A </p>
+                    )} */}
+                    {producenterData ? (
+                      producenterData?.map((producent, i) =>
+                        producent?.title && producent?.slug ? (
+                          <p key={i}>
+                            <Link href={`/producenter/${producent.slug}`}>{producent?.title}</Link>
+                          </p>
+                        ) : (
+                          <p key={i}>N/A</p>
+                        )
+                      )
+                    ) : (
+                      <p>N/A</p>
                     )}
                   </div>
                 </div>

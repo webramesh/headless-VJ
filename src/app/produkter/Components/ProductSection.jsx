@@ -168,7 +168,7 @@ export default function ProductSection({ product }) {
             <div className="relative p-4">
               <div className="w-full flex flex-col sm:flex-row justify-between gap-4 sm:gap-0">
                 <div className="w-full sm:w-1/3 p-2 border-2 border-[#eb7272] rounded-full flex justify-center items-center bg-white">
-                  <button className="text-red-500" onClick={viwePdf}>
+                  <button className="text-red-500 w-full" onClick={viwePdf}>
                     Skriv ut PDF
                   </button>
                 </div>

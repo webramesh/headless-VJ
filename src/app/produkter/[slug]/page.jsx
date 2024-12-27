@@ -5,7 +5,10 @@ import { getProductBySlug } from '@/src/lib/api/productsAPI';
 import SubscriptionForm from '../../Components/subscription/SubscriptionForm';
 import SubscriptionBox from '../../Components/subscription/SubscriptionBox';
 import { generateSeoMetadata } from '@/src/utils/utils';
+import ProductByProducent from '../../Components/ProductByProducent';
+import { getProducentBySlug } from '@/src/lib/api/producenterAPI';
 export const revalidate = 60;
+// export const revalidate = 0;
 
 export async function generateMetadata({ params }) {
   const { product } = await getProductBySlug(params.slug);
@@ -20,6 +23,10 @@ export async function generateMetadata({ params }) {
 export default async function Page({ params }) {
   const { product, similarProducts } = await getProductBySlug(params.slug);
 
+  const productByProducent = await getProducentBySlug(product?.fieldsProduct?.produkterproducer?.nodes[0]?.slug);
+
+  const producentProducts = productByProducent?.producenterFields?.products?.nodes || [];
+
   return (
     <>
       <ProductSection product={product} />
@@ -31,6 +38,17 @@ export default async function Page({ params }) {
         data={product}
       />
       {similarProducts && similarProducts.length > 0 && <Price similarProducts={similarProducts} />}
+
+      <div className="">
+        {producentProducts.length > 2 && (
+          <ProductByProducent
+            productByProducent={{
+              ...productByProducent,
+              producenterFields: { products: { nodes: producentProducts.slice(0, 4) } },
+            }}
+          />
+        )}
+      </div>
 
       <div className="px-8 container mx-auto block md:grid grid-cols-6 items-center justify-between gap-8 ">
         <div className="col-span-4 mb-8">

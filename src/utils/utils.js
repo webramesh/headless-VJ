@@ -30,27 +30,34 @@ export const extractFields = (products) => {
   let organicCount = 0;
   let sustainableCount = 0;
   let maxPrice = 0,
-    minPrice = Infinity;
+    minPrice = 0;
   let maxVolume = 0,
-    minVolume = Infinity;
-
+    minVolume = 0;
+  if (!products)
+    return {
+      containerTypes: [],
+      sortiments: [],
+      organicCount,
+      sustainableCount,
+      priceRange: { maxPrice, minPrice },
+      volumeRange: { maxVolume, minVolume },
+    };
   products.forEach((product) => {
     const { fieldsProduct } = product;
     if (!fieldsProduct) return; // Guard clause if fieldsProduct is not defined
 
-    const { wineSortiment, containerType, productLabels, sustainable, pice, bottlePackageVolume } = fieldsProduct;
+    const { wineSortiment, containerType, productLabels, pice, bottlePackageVolume } = fieldsProduct;
+    const { organicWine, sustainable } = productLabels;
 
     if (pice != null) {
       // Ensure pice is not undefined or null
       maxPrice = Math.max(maxPrice, pice);
-      minPrice = Math.min(minPrice, pice);
     }
 
     // Calculate max and min volumes
     if (bottlePackageVolume != null) {
       // Ensure volume is not undefined or null
       maxVolume = Math.max(maxVolume, bottlePackageVolume);
-      minVolume = Math.min(minVolume, bottlePackageVolume);
     }
     if (containerType) {
       containerTypes.set(containerType, (containerTypes.get(containerType) || 0) + 1);
@@ -62,10 +69,10 @@ export const extractFields = (products) => {
       }
     });
 
-    if (productLabels?.includes('Organic')) {
+    if (organicWine) {
       organicCount++;
     }
-    if (sustainable?.includes('Yes')) {
+    if (sustainable) {
       sustainableCount++;
     }
   });
@@ -90,8 +97,8 @@ export const extractFieldsForFilteredProducts = (products) => {
     const { fieldsProduct } = product;
     if (!fieldsProduct) return; // Guard clause if fieldsProduct is not defined
 
-    const { wineSortiment, containerType, productLabels, sustainable } = fieldsProduct;
-
+    const { wineSortiment, containerType, productLabels } = fieldsProduct;
+    const { sustainable, organicWine } = productLabels;
     if (containerType) {
       containerTypes.set(containerType, (containerTypes.get(containerType) || 0) + 1);
     }
@@ -102,10 +109,10 @@ export const extractFieldsForFilteredProducts = (products) => {
       }
     });
 
-    if (productLabels?.includes('Organic')) {
+    if (organicWine) {
       organicCount++;
     }
-    if (sustainable?.includes('Yes')) {
+    if (sustainable) {
       sustainableCount++;
     }
   });
@@ -128,9 +135,9 @@ export const filterProducts = (products, filters) => {
       pice: price,
       containerType,
       wineSortiment,
-      sustainable,
       productLabels,
     } = product.fieldsProduct;
+    const { organicWine, sustainable } = productLabels;
 
     const lowerSortiments = wineSortiment?.map((sortiment) => sortiment.toLowerCase());
 
@@ -139,8 +146,8 @@ export const filterProducts = (products, filters) => {
     const volumeCondition = storlek ? minVolume <= volume && volume <= maxVolume : true;
     const typeCondition = typ ? containerType?.toLowerCase() === typ : true;
     const sortimentCondition = sortiment ? lowerSortiments?.includes(sortiment) : true;
-    const sustainabilityCondition = hallbar ? sustainable?.includes('Yes') : true;
-    const organicCondition = ekologisk ? productLabels?.includes('Organic') : true;
+    const sustainabilityCondition = hallbar ? sustainable : true;
+    const organicCondition = ekologisk ? organicWine : true;
 
     return (
       priceCondition &&

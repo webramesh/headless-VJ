@@ -1,3 +1,4 @@
+'use server';
 import { ApolloClient, InMemoryCache, gql } from '@apollo/client';
 
 const client = new ApolloClient({
@@ -74,6 +75,70 @@ export async function getAllVinguidePosts(uri) {
                 faqQuestion
               }
             }
+            vinguideProducts {
+              vinguideproduct(first: 1000) {
+                nodes {
+                  ... on Produkt {
+                    id
+                    title
+                    slug
+                    featuredImage {
+                      node {
+                        sourceUrl
+                      }
+                    }
+                    fieldsProduct {
+                      productLabels {
+                        bestSeller
+                        familyWinery
+                        featuredWine
+                        newWine
+                        onlineWine
+                        organicWine
+                        sustainable
+                        veganWine
+                        verifiedByVjse
+                        visitWinery
+                      }
+                      pice
+                      bottlePackageVolume
+                      containerType
+                      wineSortiment
+                    }
+                    produktTyper {
+                      nodes {
+                        slug
+                        name
+                        parent {
+                          node {
+                            name
+                          }
+                        }
+                      }
+                    }
+                    produktslander {
+                      nodes {
+                        name
+                        slug
+                        flag {
+                          flagImage {
+                            node {
+                              altText
+                              sourceUrl
+                            }
+                          }
+                        }
+                        parent {
+                          node {
+                            name
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
             vinguidePosts {
               shortTitle
               shortDescription
@@ -127,5 +192,103 @@ export async function getAllVinguidePosts(uri) {
   } catch (error) {
     console.error('Error fetching vinguide posts:', error);
     return [];
+  }
+}
+
+export async function getProductByLander(slug, type) {
+  const query = gql`
+    query GetProductByCountry($slug: ID!, $cursor: String) {
+      produktLand(id: $slug, idType: SLUG) {
+        produkter(first: 1000, after: $cursor) {
+          nodes {
+            id
+            title
+            slug
+            featuredImage {
+              node {
+                sourceUrl
+              }
+            }
+            fieldsProduct {
+              productLabels {
+                bestSeller
+                familyWinery
+                featuredWine
+                newWine
+                onlineWine
+                organicWine
+                sustainable
+                veganWine
+                verifiedByVjse
+                visitWinery
+              }
+              pice
+              bottlePackageVolume
+              containerType
+              wineSortiment
+            }
+            produktTyper {
+              nodes {
+                slug
+                name
+                parent {
+                  node {
+                    name
+                  }
+                }
+              }
+            }
+            produktslander {
+              nodes {
+                name
+                flag {
+                  flagImage {
+                    node {
+                      altText
+                      sourceUrl
+                    }
+                  }
+                }
+                parent {
+                  node {
+                    name
+                  }
+                }
+              }
+            }
+          }
+          pageInfo {
+            hasNextPage
+            endCursor
+          }
+        }
+      }
+    }
+  `;
+  try {
+    let cursor = null;
+    let allProducts = [];
+    let nextPage = true;
+
+    while (nextPage) {
+      const { data } = await client.query({
+        query,
+        variables: {
+          slug,
+          cursor,
+        },
+      });
+      const { nodes, pageInfo } = data.produktLand.produkter;
+      allProducts.push(...nodes);
+      cursor = pageInfo?.endCursor;
+      nextPage = pageInfo?.hasNextPage;
+    }
+    const filteredProducts = allProducts.filter((product) =>
+      product.produktTyper.nodes.some((node) => node.slug === type)
+    );
+    return filteredProducts;
+  } catch (error) {
+    console.error(`Error fetching product`, error);
+    return { error, data: null };
   }
 }

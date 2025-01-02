@@ -30,7 +30,7 @@ function ProductCard({ product }) {
             const productLabel = label.toLowerCase();
 
             return (
-              <div key={productLabel} className='my-0.5'>
+              <div key={productLabel} className="my-0.5">
                 {/* {productLabel === 'new' && <Image src="/new.svg" width={30} height={30} className="my-1" alt="new" />}
                 {productLabel === 'available only online' && (
                   <Image src="/ekologisk.svg" width={30} height={30} className="my-1" alt="ekologisk" />
@@ -80,7 +80,9 @@ function ProductCard({ product }) {
                 )}
                 {/* do same for sustainable */}
 
-                {productLabel === 'on sale' && <p className="bg-red-600 text-white px-1 text-center text-[10px] py-2 rounded-full">Sale</p>}
+                {productLabel === 'on sale' && (
+                  <p className="bg-red-600 text-white px-1 text-center text-[10px] py-2 rounded-full">Sale</p>
+                )}
               </div>
             );
           })}
@@ -109,21 +111,21 @@ function ProductCard({ product }) {
           <Link href={`/produkter/${slug}`} className="leading-6 text-lg">
             {title}
           </Link>
-          {/* <div className="flex gap-2 mt-4 items-center"> */}
-          {/* <Image
-                          src={ellipse}
-                          alt="Citran Wine"
-                          className="object-cover"
-                          width={15}
-                          height={15}
-                          /> */}
-          <div className="text-sm mt-2">
-            {sortedLanders?.map((region, i, arr) => (
-              <span key={i}>{i < arr.length - 1 ? region.name + ' | ' : region.name}</span>
-            ))}
+          <div className="flex gap-2 mt-4 items-center">
+            <Image
+              src={sortedLanders[0]?.flag?.flagImage?.node?.sourceUrl}
+              alt={sortedLanders[0]?.flag?.flagImage?.node?.altText}
+              className="object-cover rounded-full"
+              width={20}
+              height={20}
+            />
+            <div className="text-sm">
+              {sortedLanders?.map((region, i, arr) => (
+                <span key={i}>{i < arr.length - 1 ? region.name + ' | ' : region.name}</span>
+              ))}
+            </div>
           </div>
         </div>
-        {/* </div> */}
         <div className="text-lg  mt-2">{pice}:-</div>
       </div>
     </div>

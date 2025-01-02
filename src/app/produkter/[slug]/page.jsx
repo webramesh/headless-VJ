@@ -10,8 +10,8 @@ import ProductByProducent from '../../Components/ProductByProducent';
 import { getProducentBySlug } from '@/src/lib/api/producenterAPI';
 import ProductsByVinimportor from '../../Components/ProductsByVinimportor';
 import { getVinimporterBySlug } from '@/src/lib/api/vinimportorAPI';
-// export const revalidate = 60;
-export const revalidate = 0;
+export const revalidate = 60;
+// export const revalidate = 0;
 
 export async function generateMetadata({ params }) {
   const { product } = await getProductBySlug(params.slug);

@@ -80,7 +80,15 @@ function ProductCard({ product }) {
           </div>
         </div>
         {/* </div> */}
-        <div className="text-lg  mt-2">{pice}:-</div>
+        {/* <div className="text-lg  mt-2">{pice}:-</div> */}
+        <div className="text-lg mt-2">
+          {pice}:-
+          {fieldsProduct.salePrice && (
+            <span className="text-red-600" style={{ textDecoration: 'line-through', marginLeft: '12px' }}>
+              {fieldsProduct.salePrice}:-
+            </span>
+          )}
+        </div>
       </div>
     </div>
   );

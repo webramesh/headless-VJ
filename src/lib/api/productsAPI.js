@@ -54,6 +54,7 @@ export async function getAllProducts(first = 15, last = 0, after = null, before 
               }
               fieldsProduct {
                 pice
+                salePrice
                 productLabels {
                   bestSeller
                   familyWinery
@@ -224,6 +225,7 @@ export async function getProductBySlug(identifier) {
               produktPackaging
               wineSaleStartDate
               alcoholPerSek
+              salePrice
               productLabels {
                 bestSeller
                 familyWinery

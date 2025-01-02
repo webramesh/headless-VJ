@@ -11,6 +11,7 @@ import { getAllOrdlistaCategories } from '../lib/api/ordilistaAPI';
 import { getAllCategories, getPostsByCategory } from '../lib/api/postAPI';
 import { CategoryAndPostsProvider } from '../context/CategoriesAndPostsContext';
 import { FilterProvider } from '../context/FilterContext';
+import { getAllCategoriesWithSuggestedPosts } from '../lib/api/postaccordion';
 
 const inter = Inter({ subsets: ['latin'] });
 const outfit = Outfit({ subsets: ['latin'] });
@@ -18,8 +19,8 @@ const outfit = Outfit({ subsets: ['latin'] });
 export default async function RootLayout({ children }) {
   const menuData = await getMainMenu();
   const footerMenu = await getFooterMenu();
-
   const ordlista = await getAllOrdlistaCategories();
+  const categoriesWithSuggestedPosts = await getAllCategoriesWithSuggestedPosts();
 
   const categoryPosts = [];
 
@@ -80,7 +81,10 @@ export default async function RootLayout({ children }) {
         <ApolloProvider>
           <FilterProvider>
             <PageProvider>
-              <CategoryAndPostsProvider categoryPosts={categoryPosts}>
+              <CategoryAndPostsProvider
+                categoryPosts={categoryPosts}
+                categoriesWithSuggestedPosts={categoriesWithSuggestedPosts}
+              >
                 <OrdlistaProvider ordlista={ordlista}>
                   <Navbar menuData={menuData} />
 

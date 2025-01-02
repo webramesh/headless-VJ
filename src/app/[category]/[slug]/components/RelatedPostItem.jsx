@@ -15,7 +15,7 @@ const RelatedPostItem = ({ post }) => {
             alt={post.title}
             width={100}
             height={100}
-            className="w-[100px] h-[100px] object-cover rounded-md"
+            className="w-[100px] h-[100px] object-cover rounded-sm"
           />
           <p className=" px-4 py-2 text-[#EB7273] transition-colors duration-300">{post.title}</p>
         </Link>

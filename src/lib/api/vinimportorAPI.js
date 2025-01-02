@@ -131,7 +131,18 @@ export async function getVinimporterBySlug(slug) {
                     }
                     fieldsProduct {
                       pice
-                      productLabels
+                      productLabels {
+                        bestSeller
+                        familyWinery
+                        featuredWine
+                        newWine
+                        onlineWine
+                        organicWine
+                        veganWine
+                        verifiedByVjse
+                        visitWinery
+                        sustainable
+                      }
                     }
                     produktTyper {
                       nodes {

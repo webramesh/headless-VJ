@@ -326,7 +326,18 @@ export async function getPostProductRecommendationBySlug(slug) {
                       sugarLevelIn1Litter
                       containerType
                       produktPackaging
-                      productLabels
+                      productLabels {
+                        bestSeller
+                        familyWinery
+                        featuredWine
+                        newWine
+                        onlineWine
+                        organicWine
+                        veganWine
+                        verifiedByVjse
+                        visitWinery
+                        sustainable
+                      }
                     }
                     matkombinationer {
                       nodes {

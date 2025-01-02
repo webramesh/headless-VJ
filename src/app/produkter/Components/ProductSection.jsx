@@ -205,7 +205,7 @@ export default function ProductSection({ product }) {
               <div className="text-black text-sm">Berätta för en vän</div>
             </div>
           </div>
-          {/* <FactBoxDescription fieldsProduct={fieldsProduct} /> */}
+
           <div className="mt-4 bg-[#f4f1ed] w-full">
             <div className="flex items-center justify-between mt-4 mb-4 px-6">
               {product?.produktslander?.nodes?.map((node, index) =>
@@ -219,7 +219,6 @@ export default function ProductSection({ product }) {
             </div>
             <FactBoxDescription fieldsProduct={fieldsProduct} />
           </div>
-          {/* pie chart */}
 
           {[tasteClock1FyllighetSotma, tasteClock2Fyllighetstravhet, tasteClock3Fruktsyra].filter(Boolean).length >=
           2 ? (
@@ -234,14 +233,12 @@ export default function ProductSection({ product }) {
             </div>
           ) : null}
 
-          {/* end of pie chart */}
-
           {((smakar && smakar.length > 0) || (aromer && aromer.length > 0) || (fargers && fargers.length > 0)) && (
             <div className=" bg-gray-50 mt-4 py-4">
               <FactBoxMoreInfo smakar={smakar} aromer={aromer} fargers={fargers} />
             </div>
           )}
-          {/* <div className="m-8 py-3  text-xl  flex items-center justify-center">MAT SOM PASSAR TILL VINET</div> */}
+
           {matkombinationer.length > 0 && (
             <div className="bg-[#f4f1ed] mt-4 py-4">
               <h3 className="  text-xl  flex items-center justify-center">MAT SOM PASSAR TILL VINET</h3>

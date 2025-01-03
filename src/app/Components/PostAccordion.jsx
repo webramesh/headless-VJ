@@ -8,6 +8,7 @@ import { useCategoriesWithSuggestedPosts } from '../../context/CategoriesAndPost
 const PostAccordion = () => {
   const params = useParams();
   const categories = useCategoriesWithSuggestedPosts();
+  console.log(categories, 'c');
 
   // Filter categories and posts
   const categoriesWithFilteredDetails = categories
@@ -24,7 +25,7 @@ const PostAccordion = () => {
       };
     })
     .filter((category) => category?.filteredPostDetails?.length > 0); // Exclude categories with no posts
-
+  console.log(categoriesWithFilteredDetails, 'categories');
   const [openIndexes, setOpenIndexes] = useState([]);
   const [isMobile, setIsMobile] = useState(false);
 
@@ -145,7 +146,7 @@ const PostAccordion = () => {
             >
               {/* Render post titles as links */}
               {category.filteredPostDetails.map((post) => (
-                <Link key={post.id} href={`/${category.slug}/${post.id}`} className="block mb-2 hover:underline ">
+                <Link key={post.id} href={`/${category.slug}/${post.slug}`} className="block mb-2 hover:underline ">
                   {post.title}
                 </Link>
               ))}

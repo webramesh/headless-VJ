@@ -18,7 +18,7 @@ const PageContent = ({ pageData }) => {
         <div className="w-full lg:w-[75%]">
           <div className="lg:sticky lg:top-8">
             <div className="flex flex-col gap-4 lg:gap-6 lg:pr-4">
-              <div dangerouslySetInnerHTML={{ __html: pageData.content }} className="text-base lg:text-lg" />
+              <div dangerouslySetInnerHTML={{ __html: pageData.content }} className="text-base lg:text-lg content" />
               <SubscriptionForm />
               <div className="mt-8 lg:mt-12">
                 <PostAccordion />

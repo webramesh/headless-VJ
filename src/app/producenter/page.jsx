@@ -19,7 +19,7 @@ export default async function page() {
   const totalProducenters = await countProducenters();
   return (
     <>
-      <div className="container mx-auto flex  lg:flex-row gap-6 lg:gap-12 mt-4 lg:mt-10 bg-slate-50  p-4">
+      <div className="container mx-auto flex  lg:flex-row gap-6 lg:gap-12 mt-4 lg:mt-10 p-4">
         <div className="md:w-3/4 ">
           <div className=" text-xs lg:text-sm flex gap-1 my-2">
             <BreadCrumb title1="Producenter" />

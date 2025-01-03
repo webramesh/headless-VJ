@@ -14,6 +14,7 @@ export async function getAllCategoriesWithSuggestedPosts() {
             nodes {
               id
               name
+              slug
               categorySuggestedPosts {
                 selectSuggestedPosts {
                   edges {
@@ -22,6 +23,7 @@ export async function getAllCategoriesWithSuggestedPosts() {
                       ... on Post {
                         id
                         title
+                        slug
                       }
                     }
                   }

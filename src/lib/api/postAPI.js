@@ -205,6 +205,29 @@ export async function getPostBySlug(slug) {
               }
             }
 
+            realatedPosts {
+              relatedPosts {
+                nodes {
+                  id
+                  slug
+                  ... on Post {
+                    id
+                    title
+                    featuredImage {
+                      node {
+                        sourceUrl
+                      }
+                    }
+                    categories {
+                      nodes {
+                        slug
+                      }
+                    }
+                  }
+                }
+              }
+            }
+
             comments {
               nodes {
                 date
@@ -303,7 +326,18 @@ export async function getPostProductRecommendationBySlug(slug) {
                       sugarLevelIn1Litter
                       containerType
                       produktPackaging
-                      productLabels
+                      productLabels {
+                        bestSeller
+                        familyWinery
+                        featuredWine
+                        newWine
+                        onlineWine
+                        organicWine
+                        veganWine
+                        verifiedByVjse
+                        visitWinery
+                        sustainable
+                      }
                     }
                     matkombinationer {
                       nodes {

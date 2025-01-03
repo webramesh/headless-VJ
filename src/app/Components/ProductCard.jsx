@@ -21,71 +21,32 @@ function ProductCard({ product }) {
     const depthA = findDepth(a, produktslander.nodes);
     return depthA - depthB;
   });
+  const imageMap = {
+    bestSeller: '/best-seller.svg',
+    organicWine: '/ekologisk.svg',
+    familyWinery: '/family.svg',
+    newWine: '/new.svg',
+    sustainable: '/sustainable.svg',
+    veganWine: '/vegan.svg',
+    verifiedByVjse: '/verified.svg',
+  };
 
   return (
     <div className="border-2 shadow-md hover:shadow-lg transition-shadow duration-300 p-6 h-[450px]">
       <div className="flex flex-col justify-between h-full items-start">
         <div className="absolute">
-          {fieldsProduct?.productLabels?.map((label) => {
-            const productLabel = label.toLowerCase();
-
-            return (
-              <div key={productLabel} className="my-0.5">
-                {/* {productLabel === 'new' && <Image src="/new.svg" width={30} height={30} className="my-1" alt="new" />}
-                {productLabel === 'available only online' && (
-                  <Image src="/ekologisk.svg" width={30} height={30} className="my-1" alt="ekologisk" />
-                )}
-                {productLabel === 'organic' && (
-                  <Image src="/vegan.svg" width={30} height={30} className="my-1" alt="vegan" />
-                )}
-                {productLabel === 'vegan' && (
-                  <Image src="/vegan.svg" width={30} height={30} className="my-1" alt="vegan" />
-                )}
-                {productLabel === 'best seller' && (
-                  <Image src="/best-seller.svg" width={30} height={30} className="my-1" alt="best-seller" />
-                )}
-                {productLabel === 'family winery' && (
-                  <Image src="/family.svg" width={30} height={30} className="my-1" alt="Family Winery" />
-                )}
-                {productLabel === 'verified by vjse' && (
-                  <Image src="/vegan.svg" width={30} height={30} className="my-1" alt="Verified By VJSE" />
-                )}
-
-                {productLabel === 'featured' && (
-                  <Image src="/vegan.svg" width={30} height={30} className="my-1" alt="Featured" />
-                )}
-                {productLabel === 'on sale' && (
-                  <Image src="/vegan.svg" width={30} height={30} className="my-1" alt="On Sale" />
-                )}
-
-                {productLabel === 'show wt information' && (
-                  <Image src="/vegan.svg" width={30} height={30} className="my-1" alt="Show WT Information" />
-                )} */}
-
-                {productLabel === 'new' && <Image src="/new.svg" width={30} height={30} alt="Nyhet" />}
-
-                {productLabel === 'organic' && <Image src="/ekologisk.svg" width={30} height={30} alt="Ekologisk" />}
-                {productLabel === 'vegan' && <Image src="/vegan.svg" width={30} height={30} alt="Veganskt" />}
-                {productLabel === 'best seller' && (
-                  <Image src="/best-seller.svg" width={30} height={30} alt="best-seller" />
-                )}
-                {productLabel === 'family winery' && (
-                  <Image src="/family.svg" width={30} height={30} alt="Family Winery" />
-                )}
-                {productLabel === 'verified by vjse' && (
-                  <Image src="/verified.svg" width={30} height={30} alt="Verified By VJSE" />
-                )}
-                {productLabel === 'sustainable' && (
-                  <Image src="/verified.svg" width={30} height={30} alt="Verified By VJSE" />
-                )}
-                {/* do same for sustainable */}
-
-                {productLabel === 'on sale' && (
-                  <p className="bg-red-600 text-white px-1 text-center text-[10px] py-2 rounded-full">Sale</p>
-                )}
-              </div>
-            );
-          })}
+          {fieldsProduct?.productLabels &&
+            Object.entries(fieldsProduct.productLabels)
+              .filter(([key, value]) => value && key !== '__typename') // Exclude __typename and filter labels with true values
+              .map(([key]) => {
+                return (
+                  <div key={key} className="relative block">
+                    <div className="my-1  ">
+                      <Image src={imageMap[key]} width={30} height={30} alt={key} className={`cursor-pointer `} />
+                    </div>
+                  </div>
+                );
+              })}
         </div>
 
         <Link href={`/produkter/${slug}`} className="flex justify-center w-full h-56">

@@ -89,8 +89,8 @@ const InformationCards = ({ fieldsProduct, productTitle, typer, produktslander, 
 
   const [selected, setSelected] = useState(4);
 
-  const vinimporterData = data?.fieldsProduct?.vinimporter?.nodes;
-  const producenterData = data?.fieldsProduct?.produkterproducer?.node;
+  const vinimporterData = data?.fieldsProduct?.vinimporter?.nodes[0];
+  const producenterData = data?.fieldsProduct?.produkterproducer?.nodes[0];
 
   const handleClick = (index) => {
     setSelected((prevSelected) => (prevSelected === index ? null : index));
@@ -184,6 +184,19 @@ const InformationCards = ({ fieldsProduct, productTitle, typer, produktslander, 
                     ) : (
                       <p> N/A </p>
                     )}
+                    {/* {producenterData ? (
+                      producenterData?.map((producent, i) =>
+                        producent?.title && producent?.slug ? (
+                          <p key={i}>
+                            <Link href={`/producenter/${producent.slug}`}>{producent?.title}</Link>
+                          </p>
+                        ) : (
+                          <p key={i}>N/A</p>
+                        )
+                      )
+                    ) : (
+                      <p>N/A</p>
+                    )} */}
                   </div>
                 </div>
                 <div className="text-xs  text-center mt-2">
@@ -203,7 +216,13 @@ const InformationCards = ({ fieldsProduct, productTitle, typer, produktslander, 
                 <div className="text-xs  text-center mt-2">
                   Importör <br />
                   <div className="text-red-500 font-bold mb-9">
-                    {vinimporterData ? (
+                    {' '}
+                    {vinimporterData?.title && vinimporterData?.slug ? (
+                      <Link href={`/vinimportor/${vinimporterData.slug}`}>{vinimporterData?.title}</Link>
+                    ) : (
+                      <p> N/A </p>
+                    )}
+                    {/* {vinimporterData ? (
                       vinimporterData?.map((vinimportor, i) =>
                         vinimportor?.title && vinimportor?.slug ? (
                           <p key={i}>
@@ -215,7 +234,7 @@ const InformationCards = ({ fieldsProduct, productTitle, typer, produktslander, 
                       )
                     ) : (
                       <p>N/A</p>
-                    )}
+                    )} */}
                   </div>
                 </div>
               </RenderBox>

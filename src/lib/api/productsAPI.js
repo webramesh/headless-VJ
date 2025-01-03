@@ -53,8 +53,18 @@ export async function getAllProducts(first = 15, last = 0, after = null, before 
                 }
               }
               fieldsProduct {
-                productLabels
                 pice
+                productLabels {
+                  bestSeller
+                  familyWinery
+                  featuredWine
+                  newWine
+                  onlineWine
+                  organicWine
+                  veganWine
+                  verifiedByVjse
+                  visitWinery
+                }
               }
               produktTyper {
                 nodes {
@@ -182,7 +192,6 @@ export async function getProductBySlug(identifier) {
             }
             fieldsProduct {
               closure
-              sustainable
               composition
               productShortText
               extraReadMore1
@@ -213,9 +222,21 @@ export async function getProductBySlug(identifier) {
               sugarBites
               containerType
               produktPackaging
-              productLabels
               wineSaleStartDate
               alcoholPerSek
+              productLabels {
+                bestSeller
+                familyWinery
+                featuredWine
+                newWine
+                onlineWine
+                organicWine
+                veganWine
+                verifiedByVjse
+                visitWinery
+                sustainable
+              }
+
               vinimporter {
                 nodes {
                   ... on Vinimporter {
@@ -226,7 +247,7 @@ export async function getProductBySlug(identifier) {
                 }
               }
               produkterproducer {
-                node {
+                nodes {
                   ... on Producent {
                     id
                     title

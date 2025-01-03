@@ -20,6 +20,9 @@ export default function Navbar({ menuData }) {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [activeDropdown, setActiveDropdown] = useState(null);
   const [focusedItemIndex, setFocusedItemIndex] = useState(-1);
+  const [isScrolled, setIsScrolled] = useState(false);
+  const [mobileDropdowns, setMobileDropdowns] = useState({});
+
   const dropdownRefs = useRef({});
   const itemRefs = useRef({});
 
@@ -31,11 +34,19 @@ export default function Navbar({ menuData }) {
     setIsMenuOpen(false);
     setActiveDropdown(null);
     setFocusedItemIndex(-1);
+    setMobileDropdowns({});
   };
 
   const toggleDropDown = (id) => {
     setActiveDropdown((prevState) => (prevState === id ? null : id));
     setFocusedItemIndex(-1);
+  };
+
+  const toggleMobileDropdown = (id) => {
+    setMobileDropdowns((prev) => ({
+      ...prev,
+      [id]: !prev[id],
+    }));
   };
 
   const handleKeyDown = (e, id, items, path) => {
@@ -83,15 +94,30 @@ export default function Navbar({ menuData }) {
     };
   }, [activeDropdown]);
 
+  useEffect(() => {
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 50);
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, []);
+
   return (
-    <nav className="bg-[#F5F5F5]" aria-label="Main Navigation">
+    <nav
+      className={`bg-[#F5F5F5] transition-all duration-300 ${
+        isScrolled ? 'fixed top-0 w-full shadow-md z-50' : 'relative'
+      }`}
+      aria-label="Main Navigation"
+    >
       <div className="container mx-auto px-8 py-2 lg:py-4 flex flex-col lg:flex-row lg:items-center lg:justify-between gap-1">
-        {/* Logo and Hamburger Icon */}
+          {/* Logo and Hamburger Icon */}
         <div className={`w-full lg:w-auto flex justify-between items-center`}>
           <Link href="/" className="flex items-center">
             {/* Mobile Logo */}
             <Image src={vinlogo} alt="VinLogo" className="object-cover md:hidden w-14" width="auto" height="auto" />
-
             {/* Tablet and Desktop Logo */}
             <Image
               src={logo}
@@ -113,7 +139,6 @@ export default function Navbar({ menuData }) {
             </button>
           </div>
         </div>
-
         {/* Hamburger Menu for Mobile */}
         <div
           className={`fixed inset-0 bg-[#F5F5F5] z-50 transform transition-transform duration-300 ease-in-out ${
@@ -145,26 +170,29 @@ export default function Navbar({ menuData }) {
                 acc.push(
                   <div key={node.id} className="relative group" ref={(el) => (dropdownRefs.current[node.id] = el)}>
                     <button
-                      onClick={() => (node.path ? (window.location.href = node.path) : toggleDropDown(node.id))}
+                      onClick={() => (node.path ? (window.location.href = node.path) : toggleMobileDropdown(node.id))}
                       onKeyDown={(e) => handleKeyDown(e, node.id, node?.childItems?.edges || [], node.path)}
                       className={`flex items-center justify-between ${path === node.path && 'text-[#c90022]'}`}
-                      aria-expanded={activeDropdown === node.id}
+                      aria-expanded={mobileDropdowns[node.id]}
                       aria-haspopup={node?.childItems?.edges?.length > 0 ? 'true' : 'false'}
                     >
                       {node?.label}
                       {node?.childItems?.edges?.length > 0 && (
-                        <ChevronDownIcon className="-mr-1 ml-2 h-5 w-5" aria-hidden="true" />
+                        <ChevronDownIcon
+                          className={`-mr-1 ml-2 h-5 w-5 transform transition-transform ${mobileDropdowns[node.id] ? 'rotate-180' : ''}`}
+                          aria-hidden="true"
+                        />
                       )}
                     </button>
 
-                    {node?.childItems?.edges?.length > 0 && (
+                    {node?.childItems?.edges?.length > 0 && mobileDropdowns[node.id] && (
                       <div
-                        className={`absolute ${activeDropdown === node.id ? 'block' : 'hidden'} bottom-8 left-0 z-10 pt-2 w-48 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none`}
+                        className="absolute bottom-8 left-0 z-10 pt-2 w-48 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none"
                         role="menu"
                         aria-orientation="vertical"
                         aria-labelledby={`dropdown-button-${node.id}`}
                       >
-                        {node?.childItems?.edges?.map(({ node: childNode }, index) => (
+                        {node.childItems.edges.map(({ node: childNode }, index) => (
                           <div key={childNode.id}>
                             <Link
                               href={childNode.path || '#'}
@@ -177,7 +205,7 @@ export default function Navbar({ menuData }) {
                                 }
                                 itemRefs.current[node.id][index] = el;
                               }}
-                              tabIndex={activeDropdown === node.id ? 0 : -1}
+                              tabIndex={mobileDropdowns[node.id] ? 0 : -1}
                             >
                               {childNode.label}
                             </Link>
@@ -209,7 +237,6 @@ export default function Navbar({ menuData }) {
             <hr className="w-[75%] border-t-1 border-[#CCC]" />
           </div>
         </div>
-
         {/* Desktop View */}
         <div className="hidden lg:text-sm xl:text-lg lg:flex lg:justify-center lg:items-center lg:space-x-2 xl:space-x-4">
           {menu?.menuItems?.edges?.reduce((acc, { node }) => {
@@ -270,7 +297,6 @@ export default function Navbar({ menuData }) {
             return acc;
           }, [])}
         </div>
-
         {/* Searchbar for Desktop */}
         <div className="hidden lg:block">
           <Searchbar />

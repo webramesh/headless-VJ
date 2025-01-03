@@ -1,7 +1,12 @@
-export const formatEmbeddedContent = (html) => {
+export const formatEmbeddedContent = (html, wordLimit = 20) => {
   const strippedHtml = html?.replace(/<[^>]+>/g, ''); // Strip HTML tags
   const words = strippedHtml?.split(/\s+/); // Split by spaces
-  return words?.slice(0, 20).join(' ') + '...'; // Join the first 50 words
+
+  if (wordLimit === 'all') {
+    return strippedHtml; // Return all words if "all" is specified
+  }
+
+  return words?.slice(0, wordLimit).join(' ') + (words?.length > wordLimit ? '...' : ''); // Return limited words with ellipsis if truncated
 };
 
 export const validateCommentForm = ({ authorName, authorEmail, content }) => {

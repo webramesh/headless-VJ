@@ -1,18 +1,21 @@
 'use client';
-import { useCategoryAndPosts } from '@/src/context/CategoriesAndPostsContext';
+
 import Link from 'next/link';
 import { useParams } from 'next/navigation';
 import React, { useState, useEffect } from 'react';
+import { useCategoriesWithSuggestedPosts } from '../../context/CategoriesAndPostsContext';
 
 const PostAccordion = () => {
   const params = useParams();
-  const categoryAndPosts = useCategoryAndPosts();
+  const categories = useCategoriesWithSuggestedPosts();
 
   // Filter categories and posts
-  const categoriesWithFilteredDetails = categoryAndPosts
+  const categoriesWithFilteredDetails = categories
     .map((category) => {
       // Filter posts based on the normalized slug
-      const filteredPostDetails = category.postDetails.filter((post) => post.slug !== params?.slug);
+      const filteredPostDetails = category?.categorySuggestedPosts?.selectSuggestedPosts?.edges
+        .map((edge) => edge.node)
+        .filter((post) => post.id !== params?.slug);
 
       // Return the updated category with filtered posts
       return {
@@ -20,7 +23,7 @@ const PostAccordion = () => {
         filteredPostDetails,
       };
     })
-    .filter((category) => category.filteredPostDetails.length > 0); // Exclude categories with no posts
+    .filter((category) => category?.filteredPostDetails?.length > 0); // Exclude categories with no posts
 
   const [openIndexes, setOpenIndexes] = useState([]);
   const [isMobile, setIsMobile] = useState(false);
@@ -48,11 +51,15 @@ const PostAccordion = () => {
     }
   };
 
+  if (categoriesWithFilteredDetails.length === 0) {
+    return null;
+  }
+
   return (
     <div className="w-full">
       <h2 className="ml-3 text-xl font-semibold md:px-0 py-4 sm:py-6">Fler artiklar</h2>
       {categoriesWithFilteredDetails.map((category, index) => (
-        <div key={category.categorySlug} className="border-b mb-2 border-slate-200">
+        <div key={category.id} className="border-b mb-2 border-slate-200">
           <button
             onClick={() => toggleAccordion(index)}
             className="
@@ -73,7 +80,7 @@ const PostAccordion = () => {
                 text-xs sm:text-sm
               "
             >
-              <span>{category?.categoryName}</span>
+              <span>{category.name}</span>
             </h3>
             <span
               className={`
@@ -138,11 +145,7 @@ const PostAccordion = () => {
             >
               {/* Render post titles as links */}
               {category.filteredPostDetails.map((post) => (
-                <Link
-                  key={post.slug}
-                  href={`/${category.categorySlug}/${post.slug}`}
-                  className="block mb-2 hover:underline "
-                >
+                <Link key={post.id} href={`/${category.slug}/${post.id}`} className="block mb-2 hover:underline ">
                   {post.title}
                 </Link>
               ))}

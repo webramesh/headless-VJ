@@ -127,21 +127,6 @@ export async function getProductBySlug(identifier) {
             id
             title
             slug
-            produktslander {
-              nodes {
-                name
-              }
-              nodes {
-                flag {
-                  flagImage {
-                    node {
-                      sourceUrl
-                    }
-                  }
-                }
-              }
-            }
-
             seo {
               title
               robots
@@ -188,6 +173,7 @@ export async function getProductBySlug(identifier) {
                 }
               }
             }
+
             produktslander {
               nodes {
                 name
@@ -195,6 +181,13 @@ export async function getProductBySlug(identifier) {
                 parent {
                   node {
                     name
+                  }
+                }
+                flag {
+                  flagImage {
+                    node {
+                      sourceUrl
+                    }
                   }
                 }
               }

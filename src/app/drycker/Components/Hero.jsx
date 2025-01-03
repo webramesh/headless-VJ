@@ -14,9 +14,9 @@ const Hero = ({ params, pageTitle, pageSubtitle }) => {
             title1={type}
             link1={`/drycker/${type}`}
             title2={country}
-            link2={`/drycker/${country}`}
+            link2={`/drycker/${type}/${country}`}
             title3={region}
-            link3={`/drycker/${region}`}
+            link3={`/drycker/${type}/${country}/${region}`}
             title4={subRegion}
             noRed
           />

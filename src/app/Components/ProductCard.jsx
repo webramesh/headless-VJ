@@ -72,14 +72,23 @@ function ProductCard({ product }) {
           <Link href={`/produkter/${slug}`} className="leading-6 text-lg">
             {title}
           </Link>
-
-          <div className="text-sm mt-2">
-            {sortedLanders?.map((region, i, arr) => (
-              <span key={i}>{i < arr.length - 1 ? region.name + ' | ' : region.name}</span>
-            ))}
+          <div className="flex gap-2 mt-4 items-center">
+            {sortedLanders[0]?.flag?.flagImage?.node?.sourceUrl && (
+              <Image
+                src={sortedLanders[0]?.flag?.flagImage?.node?.sourceUrl}
+                alt={sortedLanders[0]?.flag?.flagImage?.node?.altText}
+                className="object-cover rounded-full"
+                width={20}
+                height={20}
+              />
+            )}
+            <div className="text-sm">
+              {sortedLanders?.map((region, i, arr) => (
+                <span key={i}>{i < arr.length - 1 ? region.name + ' | ' : region.name}</span>
+              ))}
+            </div>
           </div>
         </div>
-        {/* </div> */}
         <div className="text-lg  mt-2">{pice}:-</div>
       </div>
     </div>

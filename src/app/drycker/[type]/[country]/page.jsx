@@ -1,28 +1,39 @@
 import { getAllVinguidePosts } from '@/src/lib/api/vinguideApi';
 import DryckerPage from '../../Components/DryckerPage';
-import { getNameAndIdBySlug, getRegionsByCountry } from '@/src/lib/api/dryckerApi';
 import { redirect } from 'next/navigation';
+import { generateSeoMetadata } from '@/src/utils/utils';
+
+export const revalidate = 60;
+export async function generateMetadata({ params }) {
+  const vinguideData = await getAllVinguidePosts(`/drycker/${params.type}/${params.country}`);
+
+  const seo = vinguideData?.seo;
+
+  if (seo) {
+    return generateSeoMetadata(seo);
+  }
+}
 
 export default async function page({ params, searchParams }) {
   const { type, country } = params;
+  const vinguideData = await getAllVinguidePosts(`/drycker/${type}/${country}`);
+  if (!vinguideData) redirect('/not-found');
+  const typeVinguideData = await getAllVinguidePosts(`/drycker/${type}`);
+  const allProducts = typeVinguideData?.vinguideProducts?.vinguideproduct?.nodes || [];
 
-  const data = await getNameAndIdBySlug(country);
-  if (!data) redirect('/not-found');
-  const { name, id } = data;
-  if (!name || !id) {
-    redirect('/not-found');
-  }
+  const products = allProducts.filter((product) => {
+    return product.produktslander.nodes.some((node) => node.slug === country);
+  });
+  const cardTitle = `Artiklar relaterade till ${vinguideData.title}`;
 
-  const regions = await getRegionsByCountry(id);
-  const vinguideData = await getAllVinguidePosts(`/drycker/${type}/${country}/`);
   return (
     <DryckerPage
-      products={[]}
+      initialProducts={products}
       searchParams={searchParams}
       params={params}
       page="CountryPage"
+      cardTitle={cardTitle}
       vinguideData={vinguideData}
-      countries={regions}
     />
   );
 }

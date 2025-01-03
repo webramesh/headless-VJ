@@ -1,10 +1,9 @@
 'use client';
-import { useCallback, useEffect, useMemo, useReducer, useState } from 'react';
+import { useEffect, useMemo, useReducer, useState } from 'react';
 import ProductCard from '../../Components/ProductCard';
 import Pagination from '../../Components/pagination/Pagination';
 import { usePagination } from '@/src/context/PageContext';
 import FilterFields from './FilterFields';
-import { getAllProductsByType, getProductByCountry } from '@/src/lib/api/dryckerApi';
 import { extractFields, extractFieldsForFilteredProducts, filterProducts } from '@/src/utils/utils';
 import { useFilters } from '@/src/context/FilterContext';
 import SelectedFilter from './SelectedFilter';
@@ -53,29 +52,15 @@ function extractOptionsAgain(products, dispatch) {
   });
 }
 
-const FilterSection = ({ initialProducts, params, filters, page, allProductTitle }) => {
-  const { type, country, region, subRegion } = params;
-  const fetchFunction = useMemo(() => {
-    if (page === 'mainPage') {
-      return () => getAllProductsByType(type);
-    } else if (page === 'CountryPage') {
-      return () => getProductByCountry(country, type);
-    } else if (page === 'RegionPage') {
-      return () => getProductByCountry(region, type);
-    } else {
-      return () => getProductByCountry(subRegion, type);
-    }
-  }, [page, type, country, region, subRegion]);
-
-  // const fetchFunction = getAllProductsByType;
+const FilterSection = ({ products, filters, allProductTitle }) => {
   const initialState = useMemo(
     () => ({
       containerTypes: [],
       sortimentOptions: [],
       organicCount: 0,
       sustainableCount: 0,
-      priceRange: { minPrice: 0, maxPrice: 85000 },
-      volumeRange: { minVolume: 0, maxVolume: 18000 },
+      priceRange: { minPrice: 0, maxPrice: 0 },
+      volumeRange: { minVolume: 0, maxVolume: 0 },
     }),
     []
   );
@@ -84,13 +69,12 @@ const FilterSection = ({ initialProducts, params, filters, page, allProductTitle
   const { containerTypes, sortimentOptions, organicCount, sustainableCount, priceRange, volumeRange } = state;
 
   const { state: pageState, dispatch: pageDispatch } = usePagination();
-  const { pageNumber, loading } = pageState;
+  const { pageNumber } = pageState;
   const startIndex = (pageNumber - 1) * PRODUCTS_PER_PAGE;
   const endIndex = startIndex + PRODUCTS_PER_PAGE;
   const { state: filterState } = useFilters();
 
-  const [allProducts, setAllProducts] = useState([]);
-  const [products, setProducts] = useState([]);
+  const [displayProducts, setDisplayProducts] = useState([]);
   const [reset, setReset] = useState(false);
   const [filteredProducts, setFilteredProducts] = useState([]);
 
@@ -98,45 +82,27 @@ const FilterSection = ({ initialProducts, params, filters, page, allProductTitle
     return Object.entries(filters).map(([key, value]) => ({ key, value }));
   }, [filters]);
 
-  const displayProducts = useMemo(() => {
-    if (loading) return initialProducts;
-    return products;
-  }, [loading, initialProducts, products]);
-
-  const fetchProducts = useCallback(async () => {
-    pageDispatch({ type: 'CHANGE_LOADING', payload: true });
-    try {
-      const products = await fetchFunction();
-      setAllProducts(products);
-      extractOptionsAndCounts(products, dispatch);
-    } catch (error) {
-      console.error('Error fetching products:', error);
-    } finally {
-      pageDispatch({ type: 'CHANGE_LOADING', payload: false });
-    }
-  }, [pageDispatch, fetchFunction]);
-
   useEffect(() => {
     pageDispatch({ type: 'RESET', payload: PRODUCTS_PER_PAGE });
     setReset(true);
   }, [pageDispatch]);
 
   useEffect(() => {
-    if (reset) fetchProducts();
-  }, [reset, fetchProducts]);
-
-  useEffect(() => {
-    setProducts(filteredProducts?.slice(startIndex, endIndex));
+    setDisplayProducts(filteredProducts?.slice(startIndex, endIndex));
   }, [startIndex, endIndex, filteredProducts]);
 
   useEffect(() => {
     const handleFilterChange = () => {
-      const newFilteredProducts = filterProducts(allProducts, filterState);
+      const newFilteredProducts = filterProducts(products, filterState);
       setFilteredProducts(newFilteredProducts);
     };
 
-    handleFilterChange();
-  }, [allProducts, filterState]);
+    if (reset) handleFilterChange();
+  }, [reset, products, filterState]);
+
+  useEffect(() => {
+    extractOptionsAndCounts(products, dispatch);
+  }, [products]);
 
   useEffect(() => {
     extractOptionsAgain(filteredProducts, dispatch);

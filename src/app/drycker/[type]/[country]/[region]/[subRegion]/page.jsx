@@ -1,29 +1,39 @@
 import DryckerPage from '@/src/app/drycker/Components/DryckerPage';
-import { getNameAndIdBySlug, getRegionsByCountry } from '@/src/lib/api/dryckerApi';
-import { getAllVinguidePosts } from '@/src/lib/api/vinguideApi';
+import { getAllVinguidePosts, getProductByLander } from '@/src/lib/api/vinguideApi';
+import { generateSeoMetadata } from '@/src/utils/utils';
 import { redirect } from 'next/navigation';
 import React from 'react';
 
+export const revalidate = 60;
+export async function generateMetadata({ params }) {
+  const { type, country, region, subRegion } = params;
+
+  const vinguideData = await getAllVinguidePosts(`/drycker/${type}/${country}/${region}/${subRegion}`);
+
+  const seo = vinguideData?.seo;
+
+  if (seo) {
+    return generateSeoMetadata(seo);
+  }
+}
+
 const page = async ({ params, searchParams }) => {
   const { type, country, region, subRegion } = params;
-  const data = await getNameAndIdBySlug(subRegion);
-  if (!data) {
-    redirect('/not-found');
-  }
-  const { name, id } = data;
-  if (!name || !id) {
-    redirect('/not-found');
-  }
-  const regions = await getRegionsByCountry(id);
+
   const vinguideData = await getAllVinguidePosts(`/drycker/${type}/${country}/${region}/${subRegion}`);
+  if (!vinguideData) {
+    redirect('/not-found');
+  }
+  const cardTitle = `Artiklar relaterade till ${vinguideData.title}`;
+  const products = await getProductByLander(subRegion, type);
   return (
     <DryckerPage
-      products={[]}
+      initialProducts={products}
       searchParams={searchParams}
       params={params}
       page="SubRegionPage"
+      cardTitle={cardTitle}
       vinguideData={vinguideData}
-      countries={regions}
     />
   );
 };

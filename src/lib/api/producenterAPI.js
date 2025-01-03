@@ -79,8 +79,8 @@ export async function getProducentBySlug(slug) {
   try {
     const { data } = await client.query({
       query: gql`
-        query ProducentBySlug($slug: String!) {
-          producentBy(slug: $slug) {
+        query ProducentBySlug($slug: ID!) {
+          producent(id: $slug, idType: SLUG) {
             id
             slug
             title
@@ -92,6 +92,8 @@ export async function getProducentBySlug(slug) {
               }
             }
             producenterFields {
+              producenterWebsite
+              producenterAddress
               products {
                 nodes {
                   ... on Produkt {
@@ -127,6 +129,20 @@ export async function getProducentBySlug(slug) {
                     produktslander {
                       nodes {
                         name
+                        slug
+                        flag {
+                          flagImage {
+                            node {
+                              altText
+                              sourceUrl
+                            }
+                          }
+                        }
+                        parent {
+                          node {
+                            name
+                          }
+                        }
                       }
                     }
                   }
@@ -143,7 +159,7 @@ export async function getProducentBySlug(slug) {
       variables: { slug },
     });
 
-    return data.producentBy;
+    return data.producent;
   } catch (error) {
     console.error('Error fetching producent:', error);
     return null;

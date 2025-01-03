@@ -3,7 +3,7 @@ import { getAllVinguidePosts } from '@/src/lib/api/vinguideApi';
 import DryckerPage from '../Components/DryckerPage';
 import { redirect } from 'next/navigation';
 
-export const revalidate = 0;
+export const revalidate = 60;
 export async function generateMetadata({ params }) {
   const vinguideData = await getAllVinguidePosts(`/drycker/${params.type}`);
 

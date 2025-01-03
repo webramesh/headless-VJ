@@ -93,7 +93,7 @@ export async function getProducentBySlug(slug) {
             }
             producenterFields {
               producenterWebsite
-              producenterAddress
+              producerAddress
               products {
                 nodes {
                   ... on Produkt {

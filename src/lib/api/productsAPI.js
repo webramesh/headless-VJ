@@ -245,6 +245,7 @@ export async function getProductBySlug(identifier) {
                     id
                     title
                     slug
+                    content
                   }
                 }
               }
@@ -254,6 +255,7 @@ export async function getProductBySlug(identifier) {
                     id
                     title
                     slug
+                    content
                   }
                 }
               }

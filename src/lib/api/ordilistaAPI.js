@@ -212,6 +212,12 @@ export async function getOrdlistaBySlug(slug) {
             date
             title
             content
+            faq {
+              faq {
+                faqAnswer
+                faqQuestion
+              }
+            }
             ordlistaCategories {
               nodes {
                 name

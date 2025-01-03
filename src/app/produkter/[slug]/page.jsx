@@ -5,11 +5,6 @@ import { getProductBySlug } from '@/src/lib/api/productsAPI';
 import SubscriptionForm from '../../Components/subscription/SubscriptionForm';
 import SubscriptionBox from '../../Components/subscription/SubscriptionBox';
 import { generateSeoMetadata } from '@/src/utils/utils';
-// import ProductByProducent from '../../Components/ProductByProducent';
-// import ProductByProducent from '../../Components/ProductByProducent';
-// import { getProducentBySlug } from '@/src/lib/api/producenterAPI';
-// import ProductsByVinimportor from '../../Components/ProductsByVinimportor';
-// import { getVinimporterBySlug } from '@/src/lib/api/vinimportorAPI';
 import MoreOnProduct from '../../Components/MoreOnProduct';
 export const revalidate = 60;
 // export const revalidate = 0;
@@ -46,28 +41,8 @@ export default async function Page({ params }) {
         <hr />
         <hr />
         {(producentDetails?.title || vinimportorDetails?.title) && (
-          <MoreOnProduct
-            vinimportorDetails={vinimportorDetails}
-            producentDetails={producentDetails}
-            // productByProducent={{
-
-            //   ...productByProducent,
-            //   // producenterFields: { products: { nodes: producentProducts.slice(0, 4) } },
-            // }}
-            // productsByVinimportor={{
-            //   ...productsByVinimportor,
-            //   // importerFields: { productsVinimporter: { nodes: vinimportorProducts?.slice(0, 4) } },
-            // }}
-          />
+          <MoreOnProduct vinimportorDetails={vinimportorDetails} producentDetails={producentDetails} />
         )}
-        {/* {producentProducts.length > 0 && (
-          <ProductByProducent
-            productByProducent={{
-              ...productByProducent,
-              producenterFields: { products: { nodes: producentProducts.slice(0, 4) } },
-            }}
-          />
-        )} */}
         <hr />
         <hr />
       </div>

@@ -6,10 +6,10 @@ import React from 'react';
 const MoreOnProduct = ({ producentDetails, vinimportorDetails }) => {
   return (
     <div className="container mx-auto p-8">
-      <div className="grid grid-cols-4 gap-6 items-center">
+      <div className="md:grid md:grid-cols-4 gap-8 items-center">
         <div className="col-span-1">
-          <h2 className="text-xl mb-8 font-semibold">More On Product</h2>
-          <div>
+          <h2 className="text-xl mb-8 font-semibold">Fler detaljer</h2>
+          <div id="more-on-producent">
             {producentDetails?.title && (
               <>
                 {' '}
@@ -21,7 +21,7 @@ const MoreOnProduct = ({ producentDetails, vinimportorDetails }) => {
             )}
           </div>
 
-          <div className="my-6">
+          <div className="my-6" id="more-on-vinimportor">
             {vinimportorDetails?.title && (
               <>
                 <p className="font-thin">Vinimportor</p>
@@ -32,14 +32,12 @@ const MoreOnProduct = ({ producentDetails, vinimportorDetails }) => {
             )}
           </div>
         </div>
-
         {/* Vertical Line */}
-
-        <div className="col-span-3">
+        <div className="col-span-3 md:border-l md:border-gray-200 md:pl-8">
           {producentDetails?.content && (
             <div className="my-6 ">
               <p>Mer information om {producentDetails?.title}</p>
-              <p className="font-thin my-4">
+              <p className="font-thin my-4 text-justify">
                 {formatEmbeddedContent(producentDetails?.content, 'all')}
                 <br />
               </p>
@@ -48,7 +46,7 @@ const MoreOnProduct = ({ producentDetails, vinimportorDetails }) => {
           {vinimportorDetails?.content && (
             <div className="my-6">
               <p>Mer information om {vinimportorDetails?.title}</p>
-              <p className="font-thin my-4">{formatEmbeddedContent(vinimportorDetails?.content, 'all')}</p>
+              <p className="font-thin my-4 text-justify">{formatEmbeddedContent(vinimportorDetails?.content, 'all')}</p>
             </div>
           )}
         </div>

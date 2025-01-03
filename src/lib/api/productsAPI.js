@@ -305,6 +305,19 @@ export async function getProductBySlug(identifier) {
               }
               fieldsProduct {
                 pice
+
+                productLabels {
+                  bestSeller
+                  familyWinery
+                  featuredWine
+                  newWine
+                  onlineWine
+                  organicWine
+                  veganWine
+                  verifiedByVjse
+                  visitWinery
+                  sustainable
+                }
               }
               produktTyper {
                 nodes {

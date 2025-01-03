@@ -1,28 +1,39 @@
-import { getNameAndIdBySlug, getRegionsByCountry } from '@/src/lib/api/dryckerApi';
 import DryckerPage from '../../../Components/DryckerPage';
-import { getAllVinguidePosts } from '@/src/lib/api/vinguideApi';
+import { getAllVinguidePosts, getProductByLander } from '@/src/lib/api/vinguideApi';
 import { redirect } from 'next/navigation';
+import { generateSeoMetadata } from '@/src/utils/utils';
+
+export const revalidate = 60;
+export async function generateMetadata({ params }) {
+  const { type, country, region } = params;
+
+  const vinguideData = await getAllVinguidePosts(`/drycker/${type}/${country}/${region}`);
+
+  const seo = vinguideData?.seo;
+
+  if (seo) {
+    return generateSeoMetadata(seo);
+  }
+}
 
 const page = async ({ params, searchParams }) => {
   const { type, country, region } = params;
-  const data = await getNameAndIdBySlug(region);
-  if (!data) {
-    redirect('/not-found');
-  }
-  const { name, id } = data;
-  if (!name || !id) {
-    redirect('/not-found');
-  }
-  const regions = await getRegionsByCountry(id);
+
   const vinguideData = await getAllVinguidePosts(`/drycker/${type}/${country}/${region}`);
+  if (!vinguideData) {
+    redirect('/not-found');
+  }
+  const products = await getProductByLander(region, type);
+  const cardTitle = `Artiklar relaterade till ${vinguideData.title}`;
+
   return (
     <DryckerPage
-      products={[]}
+      initialProducts={products}
       searchParams={searchParams}
       params={params}
       page="RegionPage"
       vinguideData={vinguideData}
-      countries={regions}
+      cardTitle={cardTitle}
     />
   );
 };

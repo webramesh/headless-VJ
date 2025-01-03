@@ -74,7 +74,18 @@ export async function getTaxonomyBySlug(category, slug, first, last, after, befo
               }
             }
             fieldsProduct {
-              productLabels
+              productLabels{
+                bestSeller
+                familyWinery
+                featuredWine
+                newWine
+                onlineWine
+                organicWine
+                sustainable
+                veganWine
+                verifiedByVjse
+                visitWinery
+              }
               pice
             }
             produktTyper {
@@ -91,6 +102,14 @@ export async function getTaxonomyBySlug(category, slug, first, last, after, befo
             produktslander {
               nodes {
                 name
+                flag {
+                  flagImage {
+                    node {
+                      altText
+                      sourceUrl
+                    }
+                  }
+                }
                 parent {
                   node {
                     name

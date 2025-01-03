@@ -13,6 +13,7 @@ import FactBoxMoreInfo from '../../[category]/[slug]/components/FactBoxMoreInfo'
 import ProductLabelsWithTooltips from './ProductLabelsWithTooltip';
 import { generatePdf } from '@/src/utils/generatePDF';
 import { EmailShareButton, FacebookShareButton, TwitterShareButton } from 'react-share';
+import { findDepth } from '@/src/utils/utils';
 
 export default function ProductSection({ product }) {
   const matkombinationer = product?.matkombinationer?.nodes;
@@ -37,9 +38,24 @@ export default function ProductSection({ product }) {
     tasteClock2Fyllighetstravhet,
     tasteClock3Fruktsyra,
   } = fieldsProduct;
-  const typer = produktTyper?.nodes?.filter((recommendation) => recommendation.name !== 'Vin');
 
-  // const total = tasteClock1FyllighetSotma + tasteClock2Fyllighetstravhet + tasteClock3Fruktsyra;
+  const typer = produktTyper?.nodes?.filter((type) => type.parent !== null);
+  const sortedLanders = [...produktslander.nodes].sort((a, b) => {
+    const depthB = findDepth(b, produktslander.nodes);
+    const depthA = findDepth(a, produktslander.nodes);
+    return depthA - depthB;
+  });
+  const links = [...typer, ...sortedLanders];
+  const updatedLinks = links.reduce((acc, current, index) => {
+    if (index === 0) {
+      acc.push(current);
+    } else {
+      const newSlug = `${acc[index - 1].slug}/${current.slug}`;
+      acc.push({ ...current, slug: newSlug });
+    }
+    return acc;
+  }, []);
+
   const total = 12;
   const pieChartData1 = [
     { name: 'Filled', value: tasteClock1FyllighetSotma },
@@ -71,11 +87,10 @@ export default function ProductSection({ product }) {
                 {title} | {bottlePackageVolume} ml
               </h1>
               <div className=" text-red-600 hover:text-red-500 mt-2 text-sm">
-                {typer?.map((item, i) => (
-                  <span key={i}>{item.name} | </span>
-                ))}
-                {produktslander.nodes.map((region, i, arr) => (
-                  <span key={i}>{i < arr.length - 1 ? region.name + ' | ' : region.name}</span>
+                {updatedLinks.map((item, i, arr) => (
+                  <Link key={i} href={`/drycker/${item.slug}`}>
+                    {i < arr.length - 1 ? item.name + ' | ' : item.name}
+                  </Link>
                 ))}
               </div>
             </div>
@@ -134,11 +149,10 @@ export default function ProductSection({ product }) {
               {title} | {bottlePackageVolume} ml
             </h1>
             <div className="text-red-600 hover:text-red-500 mt-2 text-sm">
-              {typer?.map((item, i) => (
-                <span key={i}>{item.name} | </span>
-              ))}
-              {produktslander.nodes.map((region, i, arr) => (
-                <span key={i}>{i < arr.length - 1 ? region.name + ' | ' : region.name}</span>
+              {updatedLinks.map((item, i, arr) => (
+                <Link key={i} href={`/drycker/${item.slug}`}>
+                  {i < arr.length - 1 ? item.name + ' | ' : item.name}
+                </Link>
               ))}
             </div>
           </div>

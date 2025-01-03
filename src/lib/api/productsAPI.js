@@ -81,6 +81,15 @@ export async function getAllProducts(first = 15, last = 0, after = null, before 
               produktslander {
                 nodes {
                   name
+                  slug
+                  flag {
+                    flagImage {
+                      node {
+                        altText
+                        sourceUrl
+                      }
+                    }
+                  }
                   parent {
                     node {
                       name
@@ -119,21 +128,6 @@ export async function getProductBySlug(identifier) {
             id
             title
             slug
-            produktslander {
-              nodes {
-                name
-              }
-              nodes {
-                flag {
-                  flagImage {
-                    node {
-                      sourceUrl
-                    }
-                  }
-                }
-              }
-            }
-
             seo {
               title
               robots
@@ -180,6 +174,7 @@ export async function getProductBySlug(identifier) {
                 }
               }
             }
+
             produktslander {
               nodes {
                 name
@@ -187,6 +182,13 @@ export async function getProductBySlug(identifier) {
                 parent {
                   node {
                     name
+                  }
+                }
+                flag {
+                  flagImage {
+                    node {
+                      sourceUrl
+                    }
                   }
                 }
               }
@@ -319,6 +321,14 @@ export async function getProductBySlug(identifier) {
                 nodes {
                   name
                   slug
+                  flag {
+                    flagImage {
+                      node {
+                        altText
+                        sourceUrl
+                      }
+                    }
+                  }
                   parent {
                     node {
                       name

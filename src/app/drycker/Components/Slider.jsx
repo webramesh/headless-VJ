@@ -38,26 +38,30 @@ const Slider = ({ title, range, maxValue, rangeKey }) => {
     handleRangeChange(index, value, maxValue);
   };
 
-  const handleMouseDown = (index) => (e) => {
-    e.preventDefault();
-    const handleMouseMove = (moveEvent) => {
-      handleThumbMove(index, moveEvent.clientX);
+  const handleInteractionStart = (index) => {
+    const handleMove = (moveEvent) => {
+      const positionX = moveEvent.touches ? moveEvent.touches[0].clientX : moveEvent.clientX;
+      handleThumbMove(index, positionX);
     };
-    const handleMouseUp = () => {
-      document.removeEventListener('mousemove', handleMouseMove);
-      document.removeEventListener('mouseup', handleMouseUp);
+    const handleEnd = () => {
+      document.removeEventListener('mousemove', handleMove);
+      document.removeEventListener('touchmove', handleMove);
+      document.removeEventListener('mouseup', handleEnd);
+      document.removeEventListener('touchend', handleEnd);
     };
-    document.addEventListener('mousemove', handleMouseMove);
-    document.addEventListener('mouseup', handleMouseUp);
+    document.addEventListener('mousemove', handleMove);
+    document.addEventListener('touchmove', handleMove);
+    document.addEventListener('mouseup', handleEnd);
+    document.addEventListener('touchend', handleEnd);
   };
 
   return (
     <>
-      <h3 className=" text-left text-lg  pl-3 py-1">
+      <h3 className=" text-left text-lg pl-3 py-1">
         <span>{title}</span>
       </h3>
       <div className="max-h-screen">
-        <div className="pb-5 flex flex-col sm:flex-row sm:justify-start sm:gap-18 text-sm pl-3">
+        <div className="pb-5 flex flex-col sm:flex-row sm:justify-start sm:gap-18 text-sm lg:pl-3">
           <div className="w-full max-w-md mx-auto mt-2">
             <div className="flex justify-between mb-4">
               <span className="w-20 px-2 py-1 ">{range[0]}</span>
@@ -67,13 +71,15 @@ const Slider = ({ title, range, maxValue, rangeKey }) => {
               <div ref={sliderRef} className="absolute top-0 left-0 right-0 bottom-0 rounded-full"></div>
               <div
                 ref={minThumbRef}
-                className="absolute top-1/2 w-3 h-3 -mt-1.5 -ml-1.5 bg-white border-2 border-red-500 rounded-full cursor-pointer"
-                onMouseDown={handleMouseDown(0)}
+                className="absolute top-1/2 md:size-3 size-4 -mt-2 md:-mt-1.5 -ml-1.5 bg-white border-2 border-red-500 rounded-full cursor-pointer"
+                onMouseDown={() => handleInteractionStart(0)}
+                onTouchStart={() => handleInteractionStart(0)}
               ></div>
               <div
                 ref={maxThumbRef}
-                className="absolute top-1/2 w-3 h-3 -mt-1.5 -ml-1.5 bg-white border-2 border-red-500 rounded-full cursor-pointer"
-                onMouseDown={handleMouseDown(1)}
+                className="absolute top-1/2 md:size-3 size-4 -mt-2 md:-mt-1.5 -ml-1.5 bg-white border-2 border-red-500 rounded-full cursor-pointer"
+                onMouseDown={() => handleInteractionStart(1)}
+                onTouchStart={() => handleInteractionStart(1)}
               ></div>
             </div>
           </div>

@@ -6,8 +6,8 @@ const FilterContext = createContext();
 export const FilterProvider = ({ children }) => {
   const initialState = useMemo(
     () => ({
-      storlek: [0, 18000],
-      pris: [0, 85000],
+      storlek: [0, 0],
+      pris: [0, 0],
       typ: null,
       sortiment: null,
       ekologisk: false,

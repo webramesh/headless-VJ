@@ -1,12 +1,25 @@
 'use client';
 import { useFilters } from '@/src/context/FilterContext';
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 
 const Slider = ({ title, range, maxValue, rangeKey }) => {
   const { dispatch } = useFilters();
   const sliderRef = useRef(null);
   const minThumbRef = useRef(null);
   const maxThumbRef = useRef(null);
+  const timeoutRef = useRef(null);
+  const [localRange, setLocalRange] = useState([]);
+
+  useEffect(() => {
+    setLocalRange(range);
+  }, [range]);
+
+  const updateVisualPosition = (index, clientX) => {
+    const rect = sliderRef.current.getBoundingClientRect();
+    const percent = ((clientX - rect.left) / rect.width) * 100;
+    const thumb = index === 0 ? minThumbRef.current : maxThumbRef.current;
+    thumb.style.left = `${percent}%`;
+  };
 
   function handleRangeChange(index, value, maxValue) {
     dispatch({ type: 'UPDATE_RANGE', payload: { rangeKey, index, value, maxValue } });
@@ -18,8 +31,8 @@ const Slider = ({ title, range, maxValue, rangeKey }) => {
     const maxThumb = maxThumbRef.current;
 
     const updateSlider = () => {
-      const min = range[0];
-      const max = range[1];
+      const min = localRange[0];
+      const max = localRange[1];
       const percent1 = ((min - 0) / (maxValue - 0)) * 100;
       const percent2 = ((max - 0) / (maxValue - 0)) * 100;
       slider.style.background = `linear-gradient(to right, #e5e7eb ${percent1}%, #ef4444 ${percent1}%, #ef4444 ${percent2}%, #e5e7eb ${percent2}%)`;
@@ -28,14 +41,18 @@ const Slider = ({ title, range, maxValue, rangeKey }) => {
     };
 
     updateSlider();
-  }, [range, maxValue]);
+  }, [localRange, maxValue]);
 
   const handleThumbMove = (index, clientX) => {
+    updateVisualPosition(index, clientX);
     const slider = sliderRef.current;
     const rect = slider.getBoundingClientRect();
     const percent = (clientX - rect.left) / rect.width;
     const value = Math.round(0 + percent * (maxValue - 0));
-    handleRangeChange(index, value, maxValue);
+    setLocalRange((prev) => (index === 0 ? [value, prev[1]] : [prev[0], value]));
+
+    if (timeoutRef.current) clearTimeout(timeoutRef.current);
+    timeoutRef.current = setTimeout(() => handleRangeChange(index, value, maxValue), 300);
   };
 
   const handleInteractionStart = (index) => {
@@ -64,8 +81,8 @@ const Slider = ({ title, range, maxValue, rangeKey }) => {
         <div className="pb-5 flex flex-col sm:flex-row sm:justify-start sm:gap-18 text-sm lg:pl-3">
           <div className="w-full max-w-md mx-auto mt-2">
             <div className="flex justify-between mb-4">
-              <span className="w-20 px-2 py-1 ">{range[0]}</span>
-              <span className="w-20 px-2 py-1 ">{range[1]}</span>
+              <span className="w-20 px-2 py-1 ">{localRange[0]}</span>
+              <span className="w-20 px-2 py-1 ">{localRange[1]}</span>
             </div>
             <div className="relative h-1 bg-gray-200 rounded-full">
               <div ref={sliderRef} className="absolute top-0 left-0 right-0 bottom-0 rounded-full"></div>

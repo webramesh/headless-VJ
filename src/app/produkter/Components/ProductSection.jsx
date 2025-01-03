@@ -228,7 +228,7 @@ export default function ProductSection({ product }) {
                 ) : null
               )}
 
-              <h3 className="text-2xl  text-center ">Faktaruta</h3>
+              <h2 className="text-2xl  text-center ">Faktaruta</h2>
               <span></span>
             </div>
             <FactBoxDescription fieldsProduct={fieldsProduct} />

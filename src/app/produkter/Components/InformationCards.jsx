@@ -180,23 +180,11 @@ const InformationCards = ({ fieldsProduct, productTitle, typer, produktslander, 
                   Producent <br />
                   <div className="text-red-500 font-bold">
                     {producenterData?.title && producenterData?.slug ? (
-                      <Link href={`/producenter/${producenterData.slug}`}>{producenterData?.title}</Link>
+                      <Link href={`#more-on-producent`}>{producenterData?.title}</Link>
                     ) : (
+                      // <Link href={`/producenter/${producenterData.slug}`}>{producenterData?.title}</Link>
                       <p> N/A </p>
                     )}
-                    {/* {producenterData ? (
-                      producenterData?.map((producent, i) =>
-                        producent?.title && producent?.slug ? (
-                          <p key={i}>
-                            <Link href={`/producenter/${producent.slug}`}>{producent?.title}</Link>
-                          </p>
-                        ) : (
-                          <p key={i}>N/A</p>
-                        )
-                      )
-                    ) : (
-                      <p>N/A</p>
-                    )} */}
                   </div>
                 </div>
                 <div className="text-xs  text-center mt-2">
@@ -218,7 +206,7 @@ const InformationCards = ({ fieldsProduct, productTitle, typer, produktslander, 
                   <div className="text-red-500 font-bold mb-9">
                     {' '}
                     {vinimporterData?.title && vinimporterData?.slug ? (
-                      <Link href={`/vinimportor/${vinimporterData.slug}`}>{vinimporterData?.title}</Link>
+                      <Link href={`#more-on-vinimportor`}>{vinimporterData?.title}</Link>
                     ) : (
                       <p> N/A </p>
                     )}

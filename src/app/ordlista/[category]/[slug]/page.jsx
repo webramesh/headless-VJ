@@ -3,6 +3,7 @@ import Sidebar from '@/src/app/Components/Sidebar';
 import SubscriptionForm from '@/src/app/Components/subscription/SubscriptionForm';
 import BreadCrumb from '@/src/app/Components/breadcrumb/BreadCrumb';
 import PostAccordion from '@/src/app/Components/PostAccordion';
+import AccordionNew from '../../../Components/AccordionNew';
 import { getPageBySlug } from '@/src/lib/api/pageApi';
 import { generateSeoMetadata } from '@/src/utils/utils';
 
@@ -15,11 +16,13 @@ export async function generateMetadata({ params }) {
     return generateSeoMetadata(seo);
   }
 }
+export const revalidate = 60;
 
 const page = async ({ params }) => {
   const { slug } = params;
   const ordlista = await getOrdlistaBySlug(slug);
   const category = ordlista?.ordlistaCategories?.nodes[0];
+  const faqItems = ordlista?.faq?.faq || [];
 
   // if (!ordlista)
 
@@ -38,6 +41,13 @@ const page = async ({ params }) => {
 
           {/* ordlista content */}
           <div className="content" dangerouslySetInnerHTML={{ __html: ordlista?.content }} />
+
+          {faqItems.length > 0 && (
+            <div className="mt-10">
+              <h2 className="text-2xl pl-3 font-medium mb-4">Frågor och Svar</h2>
+              <AccordionNew faqItems={faqItems} />
+            </div>
+          )}
 
           <div className="my-8">
             <SubscriptionForm />

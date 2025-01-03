@@ -8,7 +8,6 @@ import { useCategoriesWithSuggestedPosts } from '../../context/CategoriesAndPost
 const PostAccordion = () => {
   const params = useParams();
   const categories = useCategoriesWithSuggestedPosts();
-  console.log(categories, 'c');
 
   // Filter categories and posts
   const categoriesWithFilteredDetails = categories
@@ -25,7 +24,6 @@ const PostAccordion = () => {
       };
     })
     .filter((category) => category?.filteredPostDetails?.length > 0); // Exclude categories with no posts
-  console.log(categoriesWithFilteredDetails, 'categories');
   const [openIndexes, setOpenIndexes] = useState([]);
   const [isMobile, setIsMobile] = useState(false);
 

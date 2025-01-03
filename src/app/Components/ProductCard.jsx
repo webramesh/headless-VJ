@@ -73,13 +73,15 @@ function ProductCard({ product }) {
             {title}
           </Link>
           <div className="flex gap-2 mt-4 items-center">
-            <Image
-              src={sortedLanders[0]?.flag?.flagImage?.node?.sourceUrl}
-              alt={sortedLanders[0]?.flag?.flagImage?.node?.altText}
-              className="object-cover rounded-full"
-              width={20}
-              height={20}
-            />
+            {sortedLanders[0]?.flag?.flagImage?.node?.sourceUrl && (
+              <Image
+                src={sortedLanders[0]?.flag?.flagImage?.node?.sourceUrl}
+                alt={sortedLanders[0]?.flag?.flagImage?.node?.altText}
+                className="object-cover rounded-full"
+                width={20}
+                height={20}
+              />
+            )}
             <div className="text-sm">
               {sortedLanders?.map((region, i, arr) => (
                 <span key={i}>{i < arr.length - 1 ? region.name + ' | ' : region.name}</span>

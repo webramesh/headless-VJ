@@ -80,6 +80,15 @@ export async function getAllProducts(first = 15, last = 0, after = null, before 
               produktslander {
                 nodes {
                   name
+                  slug
+                  flag {
+                    flagImage {
+                      node {
+                        altText
+                        sourceUrl
+                      }
+                    }
+                  }
                   parent {
                     node {
                       name
@@ -315,6 +324,14 @@ export async function getProductBySlug(identifier) {
                 nodes {
                   name
                   slug
+                  flag {
+                    flagImage {
+                      node {
+                        altText
+                        sourceUrl
+                      }
+                    }
+                  }
                   parent {
                     node {
                       name

@@ -152,6 +152,20 @@ export async function getVinimporterBySlug(slug) {
                     produktslander {
                       nodes {
                         name
+                        slug
+                        flag {
+                          flagImage {
+                            node {
+                              altText
+                              sourceUrl
+                            }
+                          }
+                        }
+                        parent {
+                          node {
+                            name
+                          }
+                        }
                       }
                     }
                   }

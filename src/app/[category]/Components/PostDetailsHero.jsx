@@ -2,14 +2,15 @@ import React from 'react';
 import Image from 'next/image';
 import BreadCrumb from '../../Components/breadcrumb/BreadCrumb';
 import Link from 'next/link';
-
 const PostDetailsHero = ({ featuredImage, title, authorImage, authorName, authorSlug, date, categories }) => {
   return (
     <div className="container mx-auto px-4 lg:px-0 ">
-      <div className="flex flex-col lg:flex-row gap-6 lg:gap-12 lg:pt-8 bg-slate-50 p-4">
+      <div className="p-4 ">
+        <BreadCrumb title1={categories?.name} link1={`/${categories?.slug}`} title2={title} />
+      </div>
+      <div className="flex flex-col lg:flex-row gap-6 lg:gap-12 lg:pt-4 bg-slate-50 p-4">
         <div className="w-full lg:w-[50%] flex flex-col gap-2">
           {/* <BreadCrumb title1={category?.name} link1={`/${category?.slug}`} title2={title} /> */}
-          <BreadCrumb title1={categories?.name} link1={`/${categories?.slug}`} title2={title} />
           <div>
             <Image
               src={featuredImage || '/postplaceholder.jpg'}
@@ -21,7 +22,6 @@ const PostDetailsHero = ({ featuredImage, title, authorImage, authorName, author
             />
           </div>
         </div>
-
         {/* Right Section */}
         <div className="w-full lg:w-[50%] flex flex-col justify-center items-start gap-3 mt-4 lg:mt-0">
           {/* <div className=" text-sm text-red-500">{category?.name}</div> */}
@@ -74,5 +74,4 @@ const PostDetailsHero = ({ featuredImage, title, authorImage, authorName, author
     </div>
   );
 };
-
 export default PostDetailsHero;

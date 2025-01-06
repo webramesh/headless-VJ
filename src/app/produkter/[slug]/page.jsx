@@ -1,7 +1,7 @@
 import ProductSection from '../Components/ProductSection';
 import InformationCards from '../Components/InformationCards';
 import Price from '../Components/Price';
-import { getProductBySlug } from '@/src/lib/api/productsAPI';
+import { getProductBySlug, getSimilarProducts } from '@/src/lib/api/productsAPI';
 import SubscriptionForm from '../../Components/subscription/SubscriptionForm';
 import SubscriptionBox from '../../Components/subscription/SubscriptionBox';
 import { generateSeoMetadata } from '@/src/utils/utils';
@@ -20,10 +20,15 @@ export async function generateMetadata({ params }) {
 }
 
 export default async function Page({ params }) {
-  const { product, similarProducts } = await getProductBySlug(params.slug);
-
+  const { product } = await getProductBySlug(params.slug);
   const producentDetails = product?.fieldsProduct?.produkterproducer?.nodes[0];
   const vinimportorDetails = product?.fieldsProduct?.vinimporter?.nodes[0];
+
+  const typer = product?.produktTyper?.nodes?.filter((type) => type.parent !== null);
+  const typerProduct = await getSimilarProducts(`/drycker/${typer[0]?.slug}`);
+
+  const similarProducts = typerProduct?.vinguideProducts?.vinguideproduct?.nodes;
+  const filteredSimilarProducts = similarProducts?.filter((product) => product.slug !== params.slug).slice(0, 4);
 
   return (
     <>
@@ -35,7 +40,9 @@ export default async function Page({ params }) {
         typer={product?.produktTyper?.nodes?.filter((recommendation) => recommendation.name !== 'Vin')}
         data={product}
       />
-      {similarProducts && similarProducts.length > 0 && <Price similarProducts={similarProducts} />}
+      {filteredSimilarProducts && filteredSimilarProducts.length > 0 && (
+        <Price similarProducts={filteredSimilarProducts} product={product} />
+      )}
 
       <div className="" id="more-on-product">
         <div className="py-8">

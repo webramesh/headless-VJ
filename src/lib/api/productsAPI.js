@@ -123,7 +123,7 @@ export async function getProductBySlug(identifier) {
   try {
     const { data } = await client.query({
       query: gql`
-        query ProductBySlug($slug: String, $id: ID) {
+        query ProductBySlug($slug: String) {
           produktBy(slug: $slug) {
             id
             title
@@ -165,8 +165,8 @@ export async function getProductBySlug(identifier) {
             }
             produktTyper {
               nodes {
-                slug
                 name
+                slug
                 parent {
                   node {
                     name
@@ -293,58 +293,89 @@ export async function getProductBySlug(identifier) {
               }
             }
           }
-          similarProducts: produkter(first: 4, where: { notIn: [$id] }) {
-            nodes {
-              id
-              title
-              slug
-              featuredImage {
-                node {
-                  sourceUrl
-                }
-              }
-              fieldsProduct {
-                pice
+        }
+      `,
+      variables: {
+        slug: identifier ? identifier : null,
+      },
+    });
 
-                productLabels {
-                  bestSeller
-                  familyWinery
-                  featuredWine
-                  newWine
-                  onlineWine
-                  organicWine
-                  veganWine
-                  verifiedByVjse
-                  visitWinery
-                  sustainable
-                }
-              }
-              produktTyper {
+    return {
+      product: data.produktBy,
+    };
+  } catch (error) {
+    console.error('Error fetching product:', error);
+    return {
+      product: null,
+    };
+  }
+}
+
+export async function getSimilarProducts(uri) {
+  try {
+    const { data } = await client.query({
+      query: gql`
+        query AllVinguidePosts($uri: ID!) {
+          landing(id: $uri, idType: URI) {
+            vinguideProducts {
+              vinguideproduct(first: 6) {
                 nodes {
-                  name
-                  slug
-                  parent {
-                    node {
-                      name
-                    }
-                  }
-                }
-              }
-              produktslander {
-                nodes {
-                  name
-                  slug
-                  flag {
-                    flagImage {
+                  ... on Produkt {
+                    id
+                    title
+                    slug
+                    featuredImage {
                       node {
-                        altText
                         sourceUrl
                       }
                     }
-                  }
-                  parent {
-                    node {
-                      name
+                    fieldsProduct {
+                      productLabels {
+                        bestSeller
+                        familyWinery
+                        featuredWine
+                        newWine
+                        onlineWine
+                        organicWine
+                        sustainable
+                        veganWine
+                        verifiedByVjse
+                        visitWinery
+                      }
+                      pice
+                      bottlePackageVolume
+                      containerType
+                      wineSortiment
+                    }
+                    produktslander {
+                      nodes {
+                        name
+                        slug
+                        flag {
+                          flagImage {
+                            node {
+                              altText
+                              sourceUrl
+                            }
+                          }
+                        }
+                        parent {
+                          node {
+                            name
+                          }
+                        }
+                      }
+                    }
+                    produktTyper {
+                      nodes {
+                        slug
+                        name
+                        parent {
+                          node {
+                            name
+                          }
+                        }
+                      }
                     }
                   }
                 }
@@ -353,18 +384,12 @@ export async function getProductBySlug(identifier) {
           }
         }
       `,
-      variables: {
-        slug: identifier ? identifier : null,
-        id: identifier ? identifier : null,
-      },
+      variables: { uri },
     });
 
-    return {
-      product: data.produktBy,
-      similarProducts: data.similarProducts.nodes,
-    };
+    return data?.landing || [];
   } catch (error) {
-    console.error('Error fetching product:', error);
-    return { product: null, similarProducts: [] };
+    console.error('Error fetching vinguide posts:', error);
+    return [];
   }
 }

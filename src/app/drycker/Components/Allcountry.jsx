@@ -4,15 +4,26 @@ import React, { useState, useCallback, useEffect } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 
-function sortCountriesWithFlagsFirst(countries) {
-  return countries?.sort((a, b) => {
+function sortCountriesByProductCount(countries, countryCounts) {
+  // Create a map from the countryCounts array for quick lookup
+  const countMap = new Map(countryCounts.map((item) => [item.slug, item.count]));
+
+  // Sort the countries array based on the counts in countMap
+  const sorted = countries.sort((a, b) => {
+    const countA = countMap.get(a.slug) || 0; // Default to 0 if not found
+    const countB = countMap.get(b.slug) || 0; // Default to 0 if not found
+    return countB - countA; // Sort in descending order
+  });
+  const sortedCountries = sorted?.sort((a, b) => {
     // Check if a flag image exists for each country
-    const aHasFlag = a.categoriesImagesAndOtherFields?.categoriesImage?.node?.sourceUrl ? 1 : 0;
-    const bHasFlag = b.categoriesImagesAndOtherFields?.categoriesImage?.node?.sourceUrl ? 1 : 0;
+    const aHasFlag = a.produktslander?.nodes[0]?.flag?.flagImage?.node?.sourceUrl ? 1 : 0;
+    const bHasFlag = b.produktslander?.nodes[0]?.flag?.flagImage?.node?.sourceUrl ? 1 : 0;
 
     // Sort such that countries with flags appear first
     return bHasFlag - aHasFlag;
   });
+
+  return sortedCountries;
 }
 
 const slugToName = {
@@ -24,8 +35,8 @@ const slugToName = {
   'ovrigt-vin': 'Övrigt Vin',
 };
 
-const Allcountry = ({ countries, params }) => {
-  const sortedCountries = sortCountriesWithFlagsFirst(countries);
+const Allcountry = ({ countries, params, countryCounts }) => {
+  const sortedCountries = sortCountriesByProductCount(countries, countryCounts);
   const [displayCountries, setDisplayCountries] = useState(sortedCountries?.slice(0, 10));
   const { type, country, region, subRegion } = params;
   const [basePath, setBasePath] = useState('');

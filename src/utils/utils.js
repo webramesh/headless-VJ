@@ -223,3 +223,23 @@ export function findDepth(node, allNodes) {
   }
   return depth;
 }
+
+export function countProductsByCountry(products) {
+  const countryCounts = new Map();
+
+  products.forEach((product) => {
+    const primaryCountries = product.produktslander.nodes.filter((node) => node.parent === null);
+
+    primaryCountries.forEach((country) => {
+      const currentCount = countryCounts.get(country.slug) || 0;
+      countryCounts.set(country.slug, currentCount + 1);
+    });
+  });
+
+  // Optional: Convert to array if needed, or you can work directly with the Map.
+  const countryCountArray = Array.from(countryCounts)
+    .map(([slug, count]) => ({ slug, count }))
+    .sort((a, b) => b.count - a.count);
+
+  return countryCountArray; // or return countryCounts for Map format
+}

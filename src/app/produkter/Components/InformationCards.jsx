@@ -9,7 +9,7 @@ import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContai
 const QNA = ({ productTitle, produktslander, wineSaleStartDate, sugarBites }) => {
   return (
     <div className="w-full px-4 sm:px-20">
-      <div className="flex flex-col mt-4 text-center  text-lg font-medium">Frågor och svar om {productTitle}</div>
+      <div className="flex flex-col my-4 text-center  text-lg font-medium">Frågor och svar om {productTitle}</div>
       <div className="flex flex-col">
         {/* <div className="bg-[#f5f5f5] pt-6 pl-2">
           <div className=" text-sm font-medium">I vilket land proudceras {productTitle}?</div>
@@ -42,12 +42,12 @@ const QNA = ({ productTitle, produktslander, wineSaleStartDate, sugarBites }) =>
 
           {wineSaleStartDate && (
             <div className="mt-4">
-              <div className="bg-[#f5f5f5] pt-6 pl-2">
+              <div className="bg-[#f5f5f5] py-4 pl-2">
                 <div className=" text-sm font-medium">
                   Hur länge har produkten {productTitle} sålts på systembolaget?
                 </div>
               </div>
-              <div className="text-gray-600 text-sm  pl-2">
+              <div className="text-gray-600 text-sm  pl-2 my-1">
                 {wineSaleStartDate ? new Date(wineSaleStartDate).toLocaleDateString('sv-SE') : 'Datum ej tillgängligt'}
               </div>
             </div>

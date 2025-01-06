@@ -46,13 +46,13 @@ function SelectedFilter({ selectedFilters, volumeRange, priceRange }) {
   }, [router, dispatch, volumeRange, priceRange]);
 
   const clearSpecificFilters = useCallback(
-    (key) => {
+    (filter) => {
       const url = new URL(window.location);
-      url.searchParams.delete(key);
+      url.searchParams.delete(filter);
       router.push(url.pathname + url.search, undefined, { shallow: true, scroll: false });
-      dispatch({ type: 'RESET_ONE', payload: key });
+      dispatch({ type: 'RESET_ONE', payload: { filter, volumeRange, priceRange } });
     },
-    [router, dispatch]
+    [router, dispatch, volumeRange, priceRange]
   );
 
   return (

@@ -79,8 +79,20 @@ const FilterSection = ({ products, filters, allProductTitle }) => {
   const [filteredProducts, setFilteredProducts] = useState([]);
 
   const selectedFilters = useMemo(() => {
-    return Object.entries(filters).map(([key, value]) => ({ key, value }));
-  }, [filters]);
+    const { ekologisk, hallbar, storlek, pris, typ, sortiment } = filterState;
+    const filters = [];
+
+    if (ekologisk) filters.push({ key: 'wine-organic', value: '1' });
+    if (hallbar) filters.push({ key: 'sustainable', value: '1' });
+    if (storlek[0] !== volumeRange.minVolume) filters.push({ key: 'min_container-volume', value: storlek[0] });
+    if (storlek[1] !== volumeRange.maxVolume) filters.push({ key: 'max_container-volume', value: storlek[1] });
+    if (pris[0] !== priceRange.minPrice) filters.push({ key: 'min_price', value: pris[0] });
+    if (pris[1] !== priceRange.maxPrice) filters.push({ key: 'max_price', value: pris[1] });
+    if (typ) filters.push({ key: 'container-type', value: typ });
+    if (sortiment) filters.push({ key: 'sortiment', value: sortiment });
+
+    return filters;
+  }, [filterState, volumeRange, priceRange]);
 
   useEffect(() => {
     pageDispatch({ type: 'RESET', payload: PRODUCTS_PER_PAGE });

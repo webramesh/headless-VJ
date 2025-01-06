@@ -184,7 +184,7 @@ export function generateSeoMetadata(seo) {
     icons: {
       icon: '/favicon.png',
     },
-    keywords,
+    keywords: [keywords],
     openGraph: {
       title: seo?.openGraph?.title,
       description: seo?.openGraph?.description,
@@ -209,7 +209,9 @@ export function generateSeoMetadata(seo) {
       site: seo?.openGraph?.twitterMeta?.site,
       creator: seo?.openGraph?.twitterMeta?.creator,
     },
-    canonical: seo?.canonicalUrl,
+    alternates: {
+      canonical: seo?.canonicalUrl,
+    },
   };
 }
 

@@ -12,7 +12,7 @@ const Card = ({ title, subtitle, posts }) => {
       <div className="text-center  text-xl md:text-2xl font-medium mt-4">{subtitle}</div>
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-14 mt-8">
         {posts?.map((post) => (
-          <Link href={`/vinguide/${post.slug}`} key={post.id}>
+          <Link href={`/${post.categories.nodes[0].slug}/${post.slug}`} key={post.id}>
             <div className="flex flex-col cursor-pointer hover:shadow-lg transition-shadow">
               <Image
                 src={post.featuredImage?.node?.sourceUrl || '/placeholder.svg'}

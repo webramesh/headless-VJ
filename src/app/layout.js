@@ -76,7 +76,7 @@ export default async function RootLayout({ children }) {
   await getCategoriesAndPosts();
 
   return (
-    <html lang="en">
+    <html lang="sv-SE">
       <body className={`${outfit.className} ${inter.className}`}>
         <ApolloProvider>
           <FilterProvider>

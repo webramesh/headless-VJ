@@ -1,3 +1,4 @@
+import { countProductsByCountry } from '@/src/utils/utils';
 import Card from '../../Components/Card';
 import Scrolltodown from '../../Components/Scrolltodown';
 import Allcountry from './Allcountry';
@@ -12,6 +13,7 @@ export default function DryckerPage({ initialProducts, vinguideData, cardTitle, 
   const { shortTitle, shortDescription, pageTitle, pageSubtitle, allProductTitle } = vinguideDetails;
   const countries = vinguideData?.children?.nodes || [];
   const products = vinguideData?.vinguideProducts?.vinguideproduct?.nodes || [];
+  const countryCounts = countProductsByCountry(products);
   return (
     <>
       <Hero params={params} pageTitle={pageTitle} pageSubtitle={pageSubtitle} />
@@ -24,7 +26,7 @@ export default function DryckerPage({ initialProducts, vinguideData, cardTitle, 
         page={page}
         allProductTitle={allProductTitle}
       />
-      <Allcountry countries={countries} params={params} />
+      <Allcountry countries={countries} params={params} countryCounts={countryCounts} />
       <Content pageData={vinguideData} />
       <Card title={cardTitle} subtitle="Från vår redaktion" posts={vinguidePosts.slice(0, 6)} />
     </>

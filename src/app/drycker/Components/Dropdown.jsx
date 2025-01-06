@@ -5,7 +5,7 @@ const Dropdown = ({ title, options, openIndex, setOpenIndex, action }) => {
   const { dispatch } = useFilters();
 
   function handleChange(e) {
-    dispatch({ type: action, payload: e.target.value });
+    dispatch({ type: action, payload: e.target.value.toLowerCase() });
   }
   return (
     <>

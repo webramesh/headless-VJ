@@ -1,10 +1,8 @@
-'use server'
-import { ApolloClient, InMemoryCache, gql } from '@apollo/client';
+'use server';
+import { gql } from '@apollo/client';
+import { getClient } from './apolloclient';
 
-const client = new ApolloClient({
-  uri: process.env.SITE_URL_ENDPOINT,
-  cache: new InMemoryCache(),
-});
+const client = getClient();
 
 export async function countLanders(cursor = null, allLanders = []) {
   try {
@@ -63,7 +61,7 @@ export async function getAllLanders(first, last, after, before) {
       `,
       variables: { first, last, after, before },
     });
-  
+
     return { landers: data?.lander?.nodes, pageInfo: data?.lander?.pageInfo };
   } catch (error) {
     console.error('Error fetching landers:', error);

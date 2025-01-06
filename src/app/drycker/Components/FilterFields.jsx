@@ -4,14 +4,12 @@ import Slider from './Slider';
 import Dropdown from './Dropdown';
 import Checkbox from './Checkbox';
 import { useFilters } from '@/src/context/FilterContext';
-import { useRouter } from 'next/navigation';
 
 function FilterFields({ typs, sortiments, organicCount, sustainableCount, priceRange, volumeRange, filters }) {
   const [openIndex, setOpenIndex] = useState(false);
 
   const { state, dispatch } = useFilters();
   const { storlek, pris, ekologisk, hallbar, typ, sortiment } = state;
-  const router = useRouter();
 
   useEffect(() => {
     if (priceRange) {
@@ -32,6 +30,7 @@ function FilterFields({ typs, sortiments, organicCount, sustainableCount, priceR
     const searchParams = new URLSearchParams();
     const { minVolume, maxVolume } = volumeRange;
     const { minPrice, maxPrice } = priceRange;
+
     if (ekologisk) searchParams.set('wine-organic', '1');
     if (hallbar) searchParams.set('sustainable', '1');
     if (storlek[0] !== minVolume) searchParams.set('min_container-volume', storlek[0]);
@@ -41,13 +40,14 @@ function FilterFields({ typs, sortiments, organicCount, sustainableCount, priceR
     [typ, sortiment].forEach((item, index) => {
       if (item) searchParams.set(['container-type', 'sortiment'][index], item.toLowerCase());
     });
-    return searchParams.toString();
+
+    const newUrl = `${window.location.pathname}?${searchParams.toString()}`;
+    window.history.pushState({ path: newUrl }, '', newUrl);
   }, [ekologisk, hallbar, storlek, volumeRange, pris, priceRange, typ, sortiment]);
 
   useEffect(() => {
-    const params = updateURLSearchParams();
-    router.push(`${window.location.pathname}?${params}`, undefined, { shallow: true, scroll: false });
-  }, [router, updateURLSearchParams]);
+    updateURLSearchParams();
+  }, [updateURLSearchParams]);
 
   return (
     <div className="lg:sticky lg:top-6 lg:max-h-screen  flex flex-col">

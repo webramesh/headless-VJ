@@ -1,10 +1,9 @@
 'use server';
-import { ApolloClient, InMemoryCache, gql } from '@apollo/client';
+import { gql } from '@apollo/client';
+import { getClient } from './apolloclient';
 
-const client = new ApolloClient({
-  uri: process.env.SITE_URL_ENDPOINT,
-  cache: new InMemoryCache(),
-});
+const client = getClient();
+
 export async function getHomePageSEO(uri) {
   try {
     const { data } = await client.query({

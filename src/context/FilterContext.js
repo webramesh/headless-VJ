@@ -78,11 +78,39 @@ export const FilterProvider = ({ children }) => {
         };
       }
       case 'RESET_ONE': {
-        const key = inputToKey(action.payload);
-        return { ...state, [key]: initialState[key] };
+        const { filter, volumeRange, priceRange } = action.payload;
+        const { minVolume, maxVolume } = volumeRange;
+        const { minPrice, maxPrice } = priceRange;
+        const { key, index } = parseKeyAndIndex(filter);
+
+        const newValue = key === 'storlek' ? (index === 0 ? minVolume : maxVolume) : index === 0 ? minPrice : maxPrice;
+
+        if (key === 'storlek' || key === 'pris') {
+          const updatedRange = [...state[key]];
+          updatedRange[index] = newValue;
+          return { ...state, [key]: updatedRange };
+        } else {
+          return { ...state, [key]: initialState[key] };
+        }
       }
       default:
         return state;
+    }
+  }
+
+  function parseKeyAndIndex(input) {
+    switch (input) {
+      case 'min_container-volume':
+        return { key: 'storlek', index: 0 };
+      case 'max_container-volume':
+        return { key: 'storlek', index: 1 };
+      case 'min_price':
+        return { key: 'pris', index: 0 };
+      case 'max_price':
+        return { key: 'pris', index: 1 };
+      default:
+        // Handles other types that don't have indices
+        return { key: inputToKey(input), index: null };
     }
   }
 

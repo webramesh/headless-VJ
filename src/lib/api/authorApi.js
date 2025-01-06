@@ -1,9 +1,8 @@
-import { ApolloClient, InMemoryCache, gql } from '@apollo/client';
+'use server';
+import { gql } from '@apollo/client';
+import { getClient } from './apolloclient';
 
-const client = new ApolloClient({
-  uri: process.env.SITE_URL_ENDPOINT,
-  cache: new InMemoryCache(),
-});
+const client = getClient();
 
 export async function getAllAuthors() {
   try {

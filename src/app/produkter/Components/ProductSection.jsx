@@ -101,15 +101,14 @@ export default function ProductSection({ product }) {
               </div>
               <div className="object-cover ">
                 {/* Featured Image */}
-
                 <Image
                   src={featuredImage?.node?.sourceUrl}
                   alt={title}
                   className="mx-auto h-[500px]  "
                   width={300} // Specify the width you want
                   height={500} // Specify the height you want
+                  priority={true}
                 />
-
                 {/* Add image to the bottom right of the featured image */}
                 <div className="absolute bottom-0 right-0">
                   {wineSortiment && (
@@ -174,7 +173,7 @@ export default function ProductSection({ product }) {
             <p className="text-sm text-gray-600 mt-2">{extraReadMore2}</p>
             <p className="text-sm text-gray-600 mt-2">{extraReadMore3}</p>
           </div>
-          <div className="bg-[#f9d7e1] mt-6 w-full">
+          <div className="bg-[#f9d7e1] mt-6 w-full py-8 px-4 rounded-md">
             <div className="flex flex-col sm:flex-row w-full p-4 justify-between">
               <div className=" text-xl mb-2 sm:mb-0">Pris: {pice} :-</div>
               <div className=" text-xl text-gray-500">Artikel nr: {productCode}</div>
@@ -220,20 +219,26 @@ export default function ProductSection({ product }) {
             </div>
           </div>
 
-          <div className="mt-4 bg-[#f4f1ed] w-full">
+          <div className="mt-4 bg-[#f4f1ed] w-full py-8 px-4 rounded-md">
             <div className="flex items-center justify-between mt-4 mb-4 px-6">
               {product?.produktslander?.nodes?.map((node, index) =>
                 node?.parent === null && node?.flag?.flagImage?.node?.sourceUrl ? (
-                  <Image key={index} src={node.flag.flagImage.node.sourceUrl} width={40} height={40} alt={node.name} />
+                  <Link key={index} href={`/lander/${node?.slug}`}>
+                    <Image src={node.flag.flagImage.node.sourceUrl} width={40} height={40} alt={node.name} />
+                  </Link>
                 ) : null
               )}
-
               <h2 className="text-2xl  text-center ">Faktaruta</h2>
               <span></span>
             </div>
             <FactBoxDescription fieldsProduct={fieldsProduct} />
           </div>
 
+          {((smakar && smakar.length > 0) || (aromer && aromer.length > 0) || (fargers && fargers.length > 0)) && (
+            <div className=" bg-gray-50 mt-4 py-4">
+              <FactBoxMoreInfo smakar={smakar} aromer={aromer} fargers={fargers} />
+            </div>
+          )}
           {[tasteClock1FyllighetSotma, tasteClock2Fyllighetstravhet, tasteClock3Fruktsyra].filter(Boolean).length >=
           2 ? (
             <div className="bg-gray-50 mt-4 pb-6">
@@ -246,12 +251,6 @@ export default function ProductSection({ product }) {
               </div>
             </div>
           ) : null}
-
-          {((smakar && smakar.length > 0) || (aromer && aromer.length > 0) || (fargers && fargers.length > 0)) && (
-            <div className=" bg-gray-50 mt-4 py-4">
-              <FactBoxMoreInfo smakar={smakar} aromer={aromer} fargers={fargers} />
-            </div>
-          )}
 
           {matkombinationer.length > 0 && (
             <div className="bg-[#f4f1ed] mt-4 py-4">

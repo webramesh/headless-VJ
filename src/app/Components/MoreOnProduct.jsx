@@ -1,5 +1,4 @@
 'use client';
-import { formatEmbeddedContent } from '@/src/utils/utils';
 import Link from 'next/link';
 import React from 'react';
 
@@ -9,7 +8,7 @@ const MoreOnProduct = ({ producentDetails, vinimportorDetails }) => {
       <div className="md:grid md:grid-cols-4 gap-8 items-center">
         <div className="col-span-1">
           <h2 className="text-xl mb-8 font-semibold">Fler detaljer</h2>
-          <div id="more-on-producent">
+          <div>
             {producentDetails?.title && (
               <>
                 {' '}
@@ -21,7 +20,7 @@ const MoreOnProduct = ({ producentDetails, vinimportorDetails }) => {
             )}
           </div>
 
-          <div className="my-6" id="more-on-vinimportor">
+          <div className="my-6">
             {vinimportorDetails?.title && (
               <>
                 <p className="font-thin">Vinimportor</p>
@@ -37,16 +36,24 @@ const MoreOnProduct = ({ producentDetails, vinimportorDetails }) => {
           {producentDetails?.content && (
             <div className="my-6 ">
               <p>Mer information om {producentDetails?.title}</p>
-              <p className="font-thin my-4 text-justify">
-                {formatEmbeddedContent(producentDetails?.content, 'all')}
-                <br />
-              </p>
+              <div
+                className="font-thin my-4 text-justify"
+                dangerouslySetInnerHTML={{ __html: producentDetails?.content }}
+              />
+              {/* {formatEmbeddedContent(producentDetails?.content, 'all')} */}
+
+              {/* </div> */}
             </div>
           )}
           {vinimportorDetails?.content && (
             <div className="my-6">
               <p>Mer information om {vinimportorDetails?.title}</p>
-              <p className="font-thin my-4 text-justify">{formatEmbeddedContent(vinimportorDetails?.content, 'all')}</p>
+              <div
+                className="font-thin my-4 text-justify"
+                dangerouslySetInnerHTML={{ __html: vinimportorDetails?.content }}
+              />
+              {/* {formatEmbeddedContent(vinimportorDetails?.content, 'all')} */}
+              {/* </div> */}
             </div>
           )}
         </div>

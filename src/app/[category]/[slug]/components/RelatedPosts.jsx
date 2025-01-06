@@ -9,7 +9,7 @@ const RelatedPosts = ({ relatedPosts }) => {
   return (
     <div>
       <p className="text-2xl font-bold text-center">Relaterade inlägg</p>
-      <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-4 my-4">
+      <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-2 gap-4 my-4">
         {displayedPosts.map((post) => (
           <RelatedPostItem key={post.id} post={post} />
         ))}

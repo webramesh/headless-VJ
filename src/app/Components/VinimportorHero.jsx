@@ -1,4 +1,3 @@
-import { formatEmbeddedContent } from '@/src/utils/utils';
 import Link from 'next/link';
 import React from 'react';
 
@@ -12,17 +11,13 @@ const VinimportorHero = ({ vinimporterData }) => {
           <h1 className="text-2xl md:text-4xl text-white font-black ">
             <span>Vinimportörer - {vinimporterData?.title}</span>
             <br />
-            {/* <span>{vinimporterData?.title}</span> */}
           </h1>
 
           {vinimporterData?.content && (
             <p
               className="my-8 font-light text-sm md:text-lg md:max-w-[70%]"
-              dangerouslySetInnerHTML={{ __html: formatEmbeddedContent(vinimporterData?.content) }}
-            >
-              {/* Vinimportören {vinimporterData?.title} är verksam i Sverige med försäljning av viner via Systembolaget. Nedan finner du mer
-   information om viner som säljs av {vinimporterData?.title} samt annan information om deras verksamhet. */}
-            </p>
+              dangerouslySetInnerHTML={{ __html: vinimporterData?.content }}
+            ></p>
           )}
 
           {vinimporterData?.importerFields?.vineImporterEmail && (

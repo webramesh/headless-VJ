@@ -31,8 +31,6 @@ export default function ProductRecommendation({ postProductRecommendation }) {
   const fargers = recommendedProduct?.fargers?.nodes;
   const matkombinationer = recommendedProduct?.matkombinationer?.nodes;
 
-  if (!recommendedProduct) return <p>Loading recommendations...</p>;
-
   return (
     <>
       {recommendedProduct && (

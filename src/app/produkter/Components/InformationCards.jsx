@@ -11,10 +11,14 @@ const QNA = ({ productTitle, produktslander, wineSaleStartDate, sugarBites }) =>
     <div className="w-full px-4 sm:px-20">
       <div className="flex flex-col mt-4 text-center  text-lg font-medium">Frågor och svar om {productTitle}</div>
       <div className="flex flex-col">
-        <div className="bg-[#f5f5f5] pt-6 pl-2">
+        {/* <div className="bg-[#f5f5f5] pt-6 pl-2">
+          <div className=" text-sm font-medium">I vilket land proudceras {productTitle}?</div>
+        </div> */}
+
+        <div className="bg-[#f5f5f5] py-4 pl-2">
           <div className=" text-sm font-medium">I vilket land proudceras {productTitle}?</div>
         </div>
-        <div className="text-gray-600 text-sm  pl-2">
+        <div className="text-gray-600 text-sm  pl-2 my-1">
           Vinet produceras i{' '}
           {produktslander.nodes.map((region, i, arr) => (
             <span key={i}>{i < arr.length - 1 ? region.name + ', ' : region.name}</span>
@@ -23,10 +27,14 @@ const QNA = ({ productTitle, produktslander, wineSaleStartDate, sugarBites }) =>
         <div className="mt-4">
           {productTitle && sugarBites && (
             <div>
-              <div className="bg-[#f5f5f5] pt-6 pl-2">
+              {/* <div className="bg-[#f5f5f5] pt-6 pl-2">
+                <div className=" text-sm font-medium"> Vad är {productTitle} sockermängd?</div>
+              </div> */}
+
+              <div className="bg-[#f5f5f5] py-4 pl-2">
                 <div className=" text-sm font-medium"> Vad är {productTitle} sockermängd?</div>
               </div>
-              <div className="text-gray-600 text-sm  pl-2">
+              <div className="text-gray-600 text-sm  pl-2 my-1">
                 {productTitle} har en sockermängd på cirka {sugarBites ? `${sugarBites}` : 'N/A'} gram per liter.
               </div>
             </div>
@@ -180,9 +188,8 @@ const InformationCards = ({ fieldsProduct, productTitle, typer, produktslander, 
                   Producent <br />
                   <div className="text-red-500 font-bold">
                     {producenterData?.title && producenterData?.slug ? (
-                      <Link href={`#more-on-producent`}>{producenterData?.title}</Link>
+                      <Link href={`#more-on-product`}>{producenterData?.title}</Link>
                     ) : (
-                      // <Link href={`/producenter/${producenterData.slug}`}>{producenterData?.title}</Link>
                       <p> N/A </p>
                     )}
                   </div>
@@ -206,23 +213,10 @@ const InformationCards = ({ fieldsProduct, productTitle, typer, produktslander, 
                   <div className="text-red-500 font-bold mb-9">
                     {' '}
                     {vinimporterData?.title && vinimporterData?.slug ? (
-                      <Link href={`#more-on-vinimportor`}>{vinimporterData?.title}</Link>
+                      <Link href={`#more-on-product`}>{vinimporterData?.title}</Link>
                     ) : (
                       <p> N/A </p>
                     )}
-                    {/* {vinimporterData ? (
-                      vinimporterData?.map((vinimportor, i) =>
-                        vinimportor?.title && vinimportor?.slug ? (
-                          <p key={i}>
-                            <Link href={`/vinimportor/${vinimportor.slug}`}>{vinimportor?.title}</Link>
-                          </p>
-                        ) : (
-                          <p key={i}>N/A</p>
-                        )
-                      )
-                    ) : (
-                      <p>N/A</p>
-                    )} */}
                   </div>
                 </div>
               </RenderBox>
@@ -240,7 +234,7 @@ const InformationCards = ({ fieldsProduct, productTitle, typer, produktslander, 
           )}
 
           {selected === 4 && (
-            <div className="flex flex-col items-center mt-6 justify-center">
+            <div className="flex flex-col items-center mt-6 justify-center mb-12">
               <QNA
                 productTitle={productTitle}
                 typer={typer}

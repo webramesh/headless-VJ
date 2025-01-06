@@ -37,14 +37,14 @@ export default async function Page({ params }) {
       />
       {similarProducts && similarProducts.length > 0 && <Price similarProducts={similarProducts} />}
 
-      <div className="my-8">
-        <hr />
-        <hr />
-        {(producentDetails?.title || vinimportorDetails?.title) && (
-          <MoreOnProduct vinimportorDetails={vinimportorDetails} producentDetails={producentDetails} />
-        )}
-        <hr />
-        <hr />
+      <div className="" id="more-on-product">
+        <div className="py-8">
+          <hr />
+          {(producentDetails?.title || vinimportorDetails?.title) && (
+            <MoreOnProduct vinimportorDetails={vinimportorDetails} producentDetails={producentDetails} />
+          )}
+          <hr />
+        </div>{' '}
       </div>
 
       <div className="px-8 container mx-auto block md:grid grid-cols-6 items-center justify-between gap-8 ">

@@ -48,7 +48,6 @@ const FactBox = ({ recommendedProduct, smakar, aromer, fargers, matkombinationer
         </div>
       </div>
       <FactBoxDescription fieldsProduct={fieldsProduct} />
-
       <div className="mb-3">
         <>
           {(tasteClock1FyllighetSotma || tasteClock2Fyllighetstravhet || tasteClock3Fruktsyra) && <hr />}
@@ -106,7 +105,6 @@ const FactBox = ({ recommendedProduct, smakar, aromer, fargers, matkombinationer
           </div>
         </>
       </div>
-
       <FactBoxMoreInfo smakar={smakar} aromer={aromer} fargers={fargers} />
     </>
   );

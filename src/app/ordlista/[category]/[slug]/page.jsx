@@ -30,7 +30,7 @@ const page = async ({ params }) => {
     <>
       <div className="container mx-auto px-4 my-10  grid grid-cols-4 gap-12">
         <div className="col-span-4 lg:col-span-3">
-          <h2 className="text-3xl font-bold text-gray-800">{ordlista?.title}</h2>
+          <h1 className="text-3xl font-bold text-gray-800">{ordlista?.title}</h1>
           <BreadCrumb
             title1="ordlista"
             link1="/ordlista"

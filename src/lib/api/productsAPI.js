@@ -228,6 +228,14 @@ export async function getProductBySlug(identifier) {
               wineSaleStartDate
               alcoholPerSek
               salePrice
+              salesByYears {
+                yearHistory
+                horozontalVolumeHistory
+              }
+              priceHistory {
+                price
+                priceHistoryDate
+              }
               productLabels {
                 bestSeller
                 familyWinery

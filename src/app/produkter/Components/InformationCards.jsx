@@ -1,10 +1,9 @@
 'use client';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import RenderBox from './RenderBox';
 import AlcoholInfo from './AlcoholInfo';
 import CommentForm from '../../Components/CommentForm';
 import Link from 'next/link';
-import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
 
 const QNA = ({ productTitle, produktslander, wineSaleStartDate, sugarBites }) => {
   return (
@@ -77,22 +76,6 @@ const InformationCards = ({ fieldsProduct, productTitle, typer, produktslander, 
     closure,
   } = fieldsProduct;
 
-  // Static price history data
-  const priceHistoryData = [
-    { date: 'Sep 2023', price: 45 },
-    { date: 'Oct 2023', price: 45 },
-    { date: 'Nov 2023', price: 45 },
-    { date: 'Dec 2023', price: 45 },
-    { date: 'Jan 2024', price: 44 },
-    { date: 'Feb 2024', price: 44 },
-    { date: 'Mar 2024', price: 44 },
-    { date: 'Apr 2024', price: 44 },
-    { date: 'May 2024', price: 43 },
-    { date: 'Jun 2024', price: 43 },
-    { date: 'Jul 2024', price: 43 },
-    { date: 'Aug 2024', price: 43 },
-  ];
-
   const productsLander = data?.produktslander?.nodes;
 
   const [selected, setSelected] = useState(4);
@@ -103,6 +86,15 @@ const InformationCards = ({ fieldsProduct, productTitle, typer, produktslander, 
   const handleClick = (index) => {
     setSelected((prevSelected) => (prevSelected === index ? null : index));
   };
+
+  useEffect(() => {
+    if (selected === 5) {
+      const element = document.getElementById('price-and-sales-history');
+      if (element) {
+        element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    }
+  }, [selected]);
 
   return (
     <div className="mt-8 border-y-2">
@@ -245,42 +237,7 @@ const InformationCards = ({ fieldsProduct, productTitle, typer, produktslander, 
             </div>
           )}
 
-          {selected === 5 && (
-            <div className="w-full max-w-4xl mx-auto p-4">
-              <h2 className="text-xl font-semibold mb-4 text-center">Prishistorik</h2>
-              <div className="w-full h-[200px] sm:h-[300px] md:h-[400px]">
-                <ResponsiveContainer width="100%" height="100%">
-                  <LineChart data={priceHistoryData} margin={{ top: 5, right: 10, left: 0, bottom: 5 }}>
-                    <CartesianGrid strokeDasharray="3 3" stroke="#eee" />
-                    <XAxis
-                      dataKey="date"
-                      tick={{ fontSize: 10, fill: '#666' }}
-                      tickMargin={10}
-                      interval="preserveStartEnd"
-                    />
-                    <YAxis domain={[-10, 100]} tick={{ fontSize: 10, fill: '#666' }} tickMargin={10} />
-                    <Tooltip
-                      contentStyle={{
-                        backgroundColor: 'white',
-                        border: '1px solid #ccc',
-                        borderRadius: '4px',
-                        padding: '8px',
-                        fontSize: '12px',
-                      }}
-                    />
-                    <Line
-                      type="monotone"
-                      dataKey="price"
-                      stroke="#22c55e"
-                      strokeWidth={2}
-                      dot={{ fill: '#22c55e', strokeWidth: 2, r: 4 }}
-                      activeDot={{ r: 6 }}
-                    />
-                  </LineChart>
-                </ResponsiveContainer>
-              </div>
-            </div>
-          )}
+          {selected === 5 && <></>}
         </div>
       </div>
     </div>

@@ -6,6 +6,8 @@ import SubscriptionForm from '../../Components/subscription/SubscriptionForm';
 import SubscriptionBox from '../../Components/subscription/SubscriptionBox';
 import { generateSeoMetadata } from '@/src/utils/utils';
 import MoreOnProduct from '../../Components/MoreOnProduct';
+import PriceHistory from '../../Components/PriceHistory';
+import SalesHistory from '../../Components/SalesHistory';
 export const revalidate = 60;
 // export const revalidate = 0;
 
@@ -43,7 +45,20 @@ export default async function Page({ params }) {
       {filteredSimilarProducts && filteredSimilarProducts.length > 0 && (
         <Price similarProducts={filteredSimilarProducts} product={product} />
       )}
-
+      {/* price and sales history section */}
+      <div className="w-full container mx-auto  py-16" id="price-and-sales-history">
+        <h2 className="text-xl font-semibold mb-4 text-center pt-8 ">Prishistorik</h2>
+        <div className=" grid md:grid-cols-2 items-center">
+          <div className="pt-16">
+            <PriceHistory product={product} />
+            <div className="text-center text-gray-600">Price History</div>
+          </div>
+          <div className="-ml-4 mt-6">
+            <SalesHistory product={product} />
+            <div className="text-center text-gray-600">Sales History</div>
+          </div>
+        </div>
+      </div>
       <div className="" id="more-on-product">
         <div className="py-8">
           <hr />

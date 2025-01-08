@@ -1,24 +1,27 @@
 import { useFilters } from '@/src/context/FilterContext';
 
-const Checkbox = ({ title, isChecked, action, count }) => {
+const Checkbox = ({ title, count, isChecked, action }) => {
   const { dispatch } = useFilters();
+
+  const handleToggle = () => {
+    dispatch({ type: action, payload: !isChecked });
+  };
+
   return (
     <div className="border-b mb-6 border-slate-200">
-      <button className="w-full flex justify-between items-center bg-[#F5F5F5] pl-3 py-1">
-        <h3 className="text-left text-lg">
-          <span>
-            {title} ({count})
-          </span>
-        </h3>
-        <label className="flex items-center">
-          <input
-            type="checkbox"
-            checked={isChecked}
-            onChange={(e) => dispatch({ type: action, payload: e.target.checked })}
-            className="mr-2"
-          />
+      <div className="w-full flex justify-between items-center bg-[#F5F5F5] pl-3">
+        <label htmlFor={title} className="flex-1 py-3 text-left text-lg cursor-pointer">
+          {title} ({count})
         </label>
-      </button>
+        <input
+          id={title}
+          type="checkbox"
+          checked={isChecked}
+          onChange={handleToggle}
+          className="mr-4 cursor-pointer min-w-[20px] min-h-[20px]"
+          aria-label={`${title} filter`}
+        />
+      </div>
     </div>
   );
 };

@@ -20,17 +20,6 @@ export async function generateMetadata({ params }) {
       return generateSeoMetadata(seo);
     }
   }
-  //  else {
-  //   const taxonomy = await getTaxonomySEO(category, slug);
-
-  //   if (taxonomy) {
-  //     const { seo } = taxonomy;
-  //     if (seo) {
-  //       return generateSeoMetadata(seo);
-  //     }
-  //   }
-  //   return null;
-  // }
 }
 export default async function Page({ params }) {
   const { slug } = params;
@@ -53,7 +42,7 @@ export default async function Page({ params }) {
             alt={vinimporterData.featuredImage.node.altText || vinimporterData.title}
             width={200}
             height={150}
-            objectFit="contain"
+            className="object-contain h-auto w-auto"
           />
         </div>
       )}
@@ -72,4 +61,3 @@ export default async function Page({ params }) {
     </div>
   );
 }
-

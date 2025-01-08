@@ -1,6 +1,6 @@
 import React from 'react';
 import Image from 'next/image';
-import bgimage from '@/public/bgimage.jpg';
+import bgimage from '@/public/bgimage.webp';
 import BreadCrumb from '../../Components/breadcrumb/BreadCrumb';
 
 const Hero = ({ params, pageTitle, pageSubtitle }) => {

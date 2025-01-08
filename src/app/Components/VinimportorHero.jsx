@@ -3,7 +3,7 @@ import React from 'react';
 
 const VinimportorHero = ({ vinimporterData }) => {
   return (
-    <div className="relative w-full text-white h-[80vh] bg-[url('/../bgimage.jpg')] bg-cover bg-center ">
+    <div className="relative w-full text-white h-[80vh] bg-[url('/../bgimage.webp')] bg-cover bg-center ">
       <div className="absolute inset-0 bg-black bg-opacity-60"></div>
 
       <div className="relative z-10 flex items-center  h-full ">
@@ -14,10 +14,10 @@ const VinimportorHero = ({ vinimporterData }) => {
           </h1>
 
           {vinimporterData?.content && (
-            <p
+            <div
               className="my-8 font-light text-sm md:text-lg md:max-w-[70%]"
               dangerouslySetInnerHTML={{ __html: vinimporterData?.content }}
-            ></p>
+            />
           )}
 
           {vinimporterData?.importerFields?.vineImporterEmail && (
@@ -30,14 +30,14 @@ const VinimportorHero = ({ vinimporterData }) => {
           )}
 
           {vinimporterData?.importerFields?.importerWebsite && (
-            <button className="mt-5">
+            <div className="mt-5">
               <Link
-                className="bg-[#FF0303] hover:bg-red-600 duration-300 px-5 py-2 rounded "
+                className="bg-[#FF0303] hover:bg-red-600 duration-300 px-5 py-2 rounded"
                 href={vinimporterData?.importerFields?.importerWebsite}
               >
                 Besök webbplatsen
               </Link>
-            </button>
+            </div>
           )}
         </div>
       </div>

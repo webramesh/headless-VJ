@@ -47,7 +47,7 @@ const SalesHistory = ({ product }) => {
         />
         <Tooltip />
         <Legend />
-        <Bar dataKey="price" barSize={20} fill="#AB4459" />
+        <Bar dataKey="price" barSize={20} fill="#EB7272" />
       </ComposedChart>
     </ResponsiveContainer>
   );

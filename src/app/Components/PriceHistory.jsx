@@ -22,14 +22,15 @@ const PriceHistory = ({ product }) => {
 
   return (
     <ResponsiveContainer width="100%" height={300}>
-      <LineChart data={priceHistoryData} margin={{ top: 0, right: 40, left: 0, bottom: 0 }}>
+      {/* <LineChart data={priceHistoryData} margin={{ top: 0, right: 40, left: 0, bottom: 0 }}> */}
+      <LineChart data={priceHistoryData} margin={{ top: 10, right: 40, left: 10, bottom: 20 }}>
         <CartesianGrid strokeDasharray="3 3" stroke="#eee" />
         <XAxis
           dataKey="date"
           tick={{
             fontSize: 12,
             fill: '#666',
-            angle: -30,
+            angle: -20,
             // textAnchor: 'start',
             dy: 8,
           }}
@@ -37,7 +38,13 @@ const PriceHistory = ({ product }) => {
           tickMargin={5}
           interval="preserveStartEnd"
         />
-        <YAxis domain={['auto', 'auto']} tick={{ fontSize: 12, fill: '#666' }} tickMargin={10} />
+        {/* <YAxis domain={['auto', 'auto']} tick={{ fontSize: 12, fill: '#666' }} tickMargin={10} /> */}
+        <YAxis
+          domain={['dataMin - 10', 'dataMax + 10']} // Add padding to min/max values
+          tick={{ fontSize: 12, fill: '#666' }}
+          tickMargin={10}
+          allowDataOverflow={false} // Prevents cutting off points
+        />
         <Tooltip
           contentStyle={{
             backgroundColor: 'white',
@@ -47,7 +54,7 @@ const PriceHistory = ({ product }) => {
             fontSize: '12px',
           }}
         />
-        <Line type="monotone" dataKey="price" stroke="#A31D1D" strokeWidth={2} dot={{ strokeWidth: 2 }} />
+        <Line type="monotone" dataKey="price" stroke="#EB7272" strokeWidth={2} dot={{ strokeWidth: 2 }} />
       </LineChart>
     </ResponsiveContainer>
   );

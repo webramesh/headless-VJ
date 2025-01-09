@@ -32,7 +32,7 @@ export default async function Home() {
   ]);
 
   return (
-    <div>
+    <>
       <Banner variant="default" />
       <HomeContent />
       <Hero posts={posts} />
@@ -56,6 +56,6 @@ export default async function Home() {
       <NewsPost title="NYHETER" subtitle="Den mest populära artikeln i dryckesvärlden" nyheter={nyheter.slice(0, 6)} />
 
       <Info />
-    </div>
+    </>
   );
 }

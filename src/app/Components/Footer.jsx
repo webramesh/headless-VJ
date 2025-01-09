@@ -23,7 +23,7 @@ const Footer = ({ menuItems }) => {
               className="object-cover w-52"
               width="auto"
               height="auto"
-              priority
+              loading="lazy"
             />
           </Link>
 

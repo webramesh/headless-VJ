@@ -112,12 +112,19 @@ export default function Navbar({ menuData }) {
       }`}
       aria-label="Main Navigation"
     >
-      <div className="container mx-auto px-8 py-2 lg:py-4 flex flex-col lg:flex-row lg:items-center lg:justify-between gap-1">
+      <div className="container mx-auto px-8 lg:px-0 py-2 lg:py-4 flex flex-col lg:flex-row lg:items-center lg:justify-between gap-1">
         {/* Logo and Hamburger Icon */}
         <div className={`w-full lg:w-auto flex justify-between items-center`}>
           <Link href="/" className="flex items-center">
             {/* Mobile Logo */}
-            <Image src={vinlogo} alt="VinLogo" className="object-cover md:hidden w-14" width="auto" height="auto" />
+            <Image
+              src={vinlogo}
+              alt="VinLogo"
+              className="object-cover md:hidden w-14"
+              width="auto"
+              height="auto"
+              loading="lazy"
+            />
             {/* Tablet and Desktop Logo */}
             <Image
               src={logo}
@@ -125,7 +132,7 @@ export default function Navbar({ menuData }) {
               className="object-cover hidden md:block w-44 xl:w-52"
               width="auto"
               height="auto"
-              priority
+              loading="lazy"
             />
           </Link>
           <div className="lg:hidden">
@@ -159,7 +166,7 @@ export default function Navbar({ menuData }) {
             </Link>
 
             <div className="mb-4 w-4/5 flex justify-center items-center">
-              <Searchbar />
+              <Searchbar closeMenu={closeMenu} />
             </div>
 
             {menu?.menuItems?.edges?.reduce((acc, { node }) => {

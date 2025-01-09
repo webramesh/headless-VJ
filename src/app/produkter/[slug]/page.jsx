@@ -48,7 +48,11 @@ export default async function Page({ params }) {
       {/* price and sales history section */}
       {(product?.fieldsProduct?.priceHistory?.length > 0 || product?.fieldsProduct?.salesByYears?.length > 0) && (
         <div className="w-full container mx-auto py-16" id="price-and-sales-history">
-          <h2 className="text-xl font-semibold mb-4 text-center pt-8">Prishistorik</h2>
+          <h2 className="text-xl font-semibold mb-4 text-center pt-8">Försäljning systembolaget</h2>
+          <div className="text-center font-light">
+            {' '}
+            Källa: <span className="text-red-600 font-extralight">Systembolaget Försäljningsstatistik</span>
+          </div>
           <div
             className={`grid ${
               product?.fieldsProduct?.priceHistory?.length > 0 && product?.fieldsProduct?.salesByYears?.length > 0
@@ -59,9 +63,14 @@ export default async function Page({ params }) {
             {product?.fieldsProduct?.priceHistory?.length > 0 && (
               <div className="pt-12">
                 <PriceHistory product={product} />
-                <div className="text-center text-gray-600">Pris över tid</div>
+                <div className="text-center text-gray-600 -mt-8 md:mt-0">Pris över tid</div>
               </div>
             )}
+            <div className="md:hidden">
+              {/* <hr className="my-8" /> */}
+              <hr />
+              <hr />
+            </div>
             {product?.fieldsProduct?.salesByYears?.length > 0 && (
               <div className="mt-6 -ml-4">
                 <SalesHistory product={product} />

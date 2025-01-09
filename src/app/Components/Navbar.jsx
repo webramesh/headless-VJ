@@ -113,7 +113,7 @@ export default function Navbar({ menuData }) {
       aria-label="Main Navigation"
     >
       <div className="container mx-auto px-8 py-2 lg:py-4 flex flex-col lg:flex-row lg:items-center lg:justify-between gap-1">
-          {/* Logo and Hamburger Icon */}
+        {/* Logo and Hamburger Icon */}
         <div className={`w-full lg:w-auto flex justify-between items-center`}>
           <Link href="/" className="flex items-center">
             {/* Mobile Logo */}
@@ -144,7 +144,9 @@ export default function Navbar({ menuData }) {
           className={`fixed inset-0 bg-[#F5F5F5] z-50 transform transition-transform duration-300 ease-in-out ${
             isMenuOpen ? 'translate-x-0' : 'translate-x-full'
           } lg:hidden h-screen overflow-y-auto`}
-          aria-hidden={!isMenuOpen}
+          role="dialog"
+          aria-modal="true"
+          aria-label="Mobile menu"
         >
           <div className="flex justify-end">
             <button onClick={closeMenu} className="p-2 focus:outline-none" aria-label="Close menu">
@@ -159,7 +161,6 @@ export default function Navbar({ menuData }) {
             <div className="mb-4 w-4/5 flex justify-center items-center">
               <Searchbar />
             </div>
-            <div className="mb-16"></div>
 
             {menu?.menuItems?.edges?.reduce((acc, { node }) => {
               const isSubmenuItem = menu?.menuItems?.edges?.some(({ node: parentNode }) =>

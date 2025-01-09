@@ -1,11 +1,11 @@
-import { getAllVinguidePosts } from '@/src/lib/api/vinguideApi';
+import { getVinguideData } from '@/src/lib/api/vinguideApi';
 import DryckerPage from '../../Components/DryckerPage';
 import { redirect } from 'next/navigation';
 import { generateSeoMetadata } from '@/src/utils/utils';
 
 export const revalidate = 60;
 export async function generateMetadata({ params }) {
-  const vinguideData = await getAllVinguidePosts(`/drycker/${params.type}/${params.country}`);
+  const vinguideData = await getVinguideData(`/drycker/${params.type}/${params.country}`);
 
   const seo = vinguideData?.seo;
 
@@ -15,25 +15,29 @@ export async function generateMetadata({ params }) {
 }
 
 export default async function page({ params, searchParams }) {
-  const { type, country } = params;
-  const vinguideData = await getAllVinguidePosts(`/drycker/${type}/${country}`);
-  if (!vinguideData) redirect('/not-found');
-  const typeVinguideData = await getAllVinguidePosts(`/drycker/${type}`);
-  const allProducts = typeVinguideData?.vinguideProducts?.vinguideproduct?.nodes || [];
+  try {
+    const { type, country } = params;
+    const vinguideData = await getVinguideData(`/drycker/${type}/${country}`);
+    const typeVinguideData = await getVinguideData(`/drycker/${type}`);
+    const allProducts = typeVinguideData?.vinguideProducts?.vinguideproduct?.nodes || [];
 
-  const products = allProducts.filter((product) => {
-    return product.produktslander.nodes.some((node) => node.slug === country);
-  });
-  const cardTitle = `Artiklar relaterade till ${vinguideData.title}`;
+    const products = allProducts.filter((product) => {
+      return product.produktslander.nodes.some((node) => node.slug === country);
+    });
+    const cardTitle = `Artiklar relaterade till ${vinguideData.title}`;
 
-  return (
-    <DryckerPage
-      initialProducts={products}
-      searchParams={searchParams}
-      params={params}
-      page="CountryPage"
-      cardTitle={cardTitle}
-      vinguideData={vinguideData}
-    />
-  );
+    return (
+      <DryckerPage
+        initialProducts={products}
+        searchParams={searchParams}
+        params={params}
+        page="CountryPage"
+        cardTitle={cardTitle}
+        vinguideData={vinguideData}
+      />
+    );
+  } catch (error) {
+    console.error('Error fetching vinguide data:', error.message);
+    redirect('/not-found');
+  }
 }

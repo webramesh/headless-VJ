@@ -4,7 +4,7 @@ import { getClient } from './apolloclient';
 
 const client = getClient();
 
-export async function getAllVinguidePosts(uri) {
+export async function getVinguideData(uri) {
   try {
     const { data } = await client.query({
       query: gql`
@@ -186,10 +186,10 @@ export async function getAllVinguidePosts(uri) {
       variables: { uri },
     });
 
-    return data?.landing || [];
+    return data?.landing;
   } catch (error) {
     console.error('Error fetching vinguide posts:', error);
-    return [];
+    return null;
   }
 }
 

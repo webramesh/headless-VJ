@@ -1,4 +1,3 @@
-import { Inter, Outfit } from 'next/font/google';
 import './globals.css';
 import ApolloProvider from '../app/Components/ApolloProvider';
 import Footer from './Components/Footer';
@@ -12,9 +11,6 @@ import { getAllCategories, getPostsByCategory } from '../lib/api/postAPI';
 import { CategoryAndPostsProvider } from '../context/CategoriesAndPostsContext';
 import { FilterProvider } from '../context/FilterContext';
 import { getAllCategoriesWithSuggestedPosts } from '../lib/api/postaccordion';
-
-const inter = Inter({ subsets: ['latin'] });
-const outfit = Outfit({ subsets: ['latin'] });
 
 export default async function RootLayout({ children }) {
   const menuData = await getMainMenu();
@@ -103,7 +99,7 @@ export default async function RootLayout({ children }) {
         <meta name="msapplication-TileColor" content="#F3EFE0" />
         <meta name="msapplication-tap-highlight" content="no" />
       </head>
-      <body className={`${outfit.className} ${inter.className}`}>
+      <body>
         <ApolloProvider>
           <FilterProvider>
             <PageProvider>

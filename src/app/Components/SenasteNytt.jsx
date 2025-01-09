@@ -15,12 +15,12 @@ const SenasteNytt = async () => {
           <Link
             key={nyhet.id}
             href={`/nyheter/${nyhet.slug}`}
-            className="flex justify-between items-center pt-3 first:pt-0  text-[14px]"
+            className="flex justify-between items-center pt-3 first:pt-0 text-[14px]"
           >
             <h3 className="truncate max-w-[90%]">{nyhet.title}</h3>
-            <button className="ml-2" role="button" tabIndex={0}>
+            <span className="ml-2 size-6" role="button" tabIndex={0} aria-label={`More about ${nyhet.title}`}>
               <FontAwesomeIcon icon={faArrowUpRightFromSquare} aria-hidden="true" />
-            </button>
+            </span>
           </Link>
         ))}
       </div>

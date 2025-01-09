@@ -46,19 +46,31 @@ export default async function Page({ params }) {
         <Price similarProducts={filteredSimilarProducts} product={product} />
       )}
       {/* price and sales history section */}
-      <div className="w-full container mx-auto  py-16" id="price-and-sales-history">
-        <h2 className="text-xl font-semibold mb-4 text-center pt-8 ">Prishistorik</h2>
-        <div className=" grid md:grid-cols-2 items-center">
-          <div className="pt-16">
-            <PriceHistory product={product} />
-            <div className="text-center text-gray-600">Price History</div>
-          </div>
-          <div className="-ml-4 mt-6">
-            <SalesHistory product={product} />
-            <div className="text-center text-gray-600">Sales History</div>
+      {(product?.fieldsProduct?.priceHistory?.length > 0 || product?.fieldsProduct?.salesByYears?.length > 0) && (
+        <div className="w-full container mx-auto py-16" id="price-and-sales-history">
+          <h2 className="text-xl font-semibold mb-4 text-center pt-8">Prishistorik</h2>
+          <div
+            className={`grid ${
+              product?.fieldsProduct?.priceHistory?.length > 0 && product?.fieldsProduct?.salesByYears?.length > 0
+                ? 'md:grid-cols-2'
+                : 'md:grid-cols-1'
+            } gap-4 items-center`}
+          >
+            {product?.fieldsProduct?.priceHistory?.length > 0 && (
+              <div className="pt-12">
+                <PriceHistory product={product} />
+                <div className="text-center text-gray-600">Pris över tid</div>
+              </div>
+            )}
+            {product?.fieldsProduct?.salesByYears?.length > 0 && (
+              <div className="mt-6 -ml-4">
+                <SalesHistory product={product} />
+                <div className="text-center text-gray-600">Försäljning i liter</div>
+              </div>
+            )}
           </div>
         </div>
-      </div>
+      )}
       <div className="" id="more-on-product">
         <div className="py-8">
           <hr />

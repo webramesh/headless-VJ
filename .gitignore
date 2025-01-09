@@ -37,3 +37,19 @@ next-env.d.ts
 
 
 
+
+# for pwa
+# PWA files
+**/public/sw.js
+**/public/sw.js.map
+**/public/worker-*.js
+**/public/workbox-*.js
+**/public/fallback-*.js
+**/public/precache-manifest.*.js
+
+# PWA cache
+**/public/cache/
+.cache/
+
+# PWA temp files
+**/public/*.js.map

@@ -1,7 +1,5 @@
 import './globals.css';
 import ApolloProvider from '../app/Components/ApolloProvider';
-import Footer from './Components/Footer';
-import ScrollToTopButton from './Components/ScrollToTopButton';
 import Navbar from './Components/Navbar';
 import { getFooterMenu, getMainMenu } from '../lib/api/menuAPI';
 import { PageProvider } from '../context/PageContext';
@@ -10,14 +8,19 @@ import { getAllOrdlistaCategories } from '../lib/api/ordilistaAPI';
 import { CategoryAndPostsProvider } from '../context/CategoriesAndPostsContext';
 import { FilterProvider } from '../context/FilterContext';
 import { getAllCategoriesWithSuggestedPosts } from '../lib/api/postaccordion';
+import dynamic from 'next/dynamic';
+
+const ScrollToTopButton = dynamic(() => import('./Components/ScrollToTopButton'), {
+  ssr: false,
+});
+
+const Footer = dynamic(() => import('./Components/Footer'));
 
 export default async function RootLayout({ children }) {
   const menuData = await getMainMenu();
   const footerMenu = await getFooterMenu();
   const ordlista = await getAllOrdlistaCategories();
   const categoriesWithSuggestedPosts = await getAllCategoriesWithSuggestedPosts();
-
-  const categoryPosts = [];
 
   return (
     <html lang="sv-SE">
@@ -51,10 +54,7 @@ export default async function RootLayout({ children }) {
         <ApolloProvider>
           <FilterProvider>
             <PageProvider>
-              <CategoryAndPostsProvider
-                categoryPosts={categoryPosts}
-                categoriesWithSuggestedPosts={categoriesWithSuggestedPosts}
-              >
+              <CategoryAndPostsProvider categoriesWithSuggestedPosts={categoriesWithSuggestedPosts}>
                 <OrdlistaProvider ordlista={ordlista}>
                   <Navbar menuData={menuData} />
 

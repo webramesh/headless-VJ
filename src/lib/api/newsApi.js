@@ -42,7 +42,7 @@ export async function getAllNyheter() {
     const { data } = await client.query({
       query: gql`
         query AllNyheter {
-          nyheter(first: 10) {
+          nyheter(first: 6) {
             nodes {
               id
               title

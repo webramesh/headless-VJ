@@ -40,7 +40,7 @@ export default async function Home() {
       <Trending
         title="TRENDIGT"
         subtitle="Artiklar värda att läsa från våra redaktörer"
-        trendingPosts={trendingPosts.slice(0, 6)}
+        trendingPosts={trendingPosts}
       />
       <div className="container mx-auto block md:grid grid-cols-6 items-center justify-between gap-14 px-2 my-10">
         <div className="col-span-4">
@@ -53,7 +53,7 @@ export default async function Home() {
 
       <WineSlider categories={wineCategories} />
 
-      <NewsPost title="NYHETER" subtitle="Den mest populära artikeln i dryckesvärlden" nyheter={nyheter.slice(0, 6)} />
+      <NewsPost title="NYHETER" subtitle="Den mest populära artikeln i dryckesvärlden" nyheter={nyheter} />
 
       <Info />
     </div>

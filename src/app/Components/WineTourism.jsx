@@ -6,7 +6,7 @@ const WineTourism = () => {
   return (
     <div className="flex flex-start flex-col gap-4 p-3">
       <Link href={'https://www.winetourism.com/'} target="_blank">
-        <Image src={wtlogo} alt="Logo" className="object-cover" priority />
+        <Image src={wtlogo} alt="Logo" className="object-cover" loading="lazy" />
         <div className=" text-xl  text-red-500">Vinturism | boka vingårdsbesök</div>
       </Link>
       <p className=" text-lg text-gray-500 font-extralight w-full leading-5">

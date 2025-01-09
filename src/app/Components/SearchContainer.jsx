@@ -4,7 +4,7 @@ import React, { useState, useCallback, useRef, useEffect } from 'react';
 import Link from 'next/link';
 import { useDebounce } from 'use-debounce';
 
-export default function SearchContainer({ onSearch }) {
+export default function SearchContainer({ onSearch, closeMenu }) {
   const [searchTerm, setSearchTerm] = useState('');
   const [debouncedSearchTerm] = useDebounce(searchTerm, 300);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
@@ -57,11 +57,13 @@ export default function SearchContainer({ onSearch }) {
     <div className="search-container relative">
       <form onSubmit={(e) => e.preventDefault()}>
         <input
+          name="search"
           type="text"
           value={searchTerm}
           onChange={handleInputChange}
           className="bg-white text-gray-600 text-sm py-2 pl-2 pr-10 rounded-md border-2 border-gray-200 shadow-lg focus:outline-none focus:border-gray-500 w-full"
           placeholder="Sök…"
+          autoComplete="search"
         />
         <svg
           className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5"
@@ -96,6 +98,7 @@ export default function SearchContainer({ onSearch }) {
               onClick={() => {
                 setIsDropdownOpen(false);
                 setSearchTerm('');
+                closeMenu();
               }}
               className="block py-3 px-4 hover:bg-gray-100 border-b last:border-b-0"
             >

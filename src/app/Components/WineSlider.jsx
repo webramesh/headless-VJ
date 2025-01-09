@@ -5,15 +5,22 @@ import Slider from 'react-slick';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
+import Image from 'next/image';
 
 const WineCard = ({ backgroundImage, title, category, articles, description, colorPicker, slug }) => {
   return (
     <Link href={`/${slug}`} className="block">
       <div className="p-2">
-        <div
-          className="relative w-full h-64 bg-cover bg-center transition-all duration-300 ease-in-out group cursor-pointer"
-          style={{ backgroundImage: `url('${backgroundImage}')` }}
-        >
+        <div className="relative w-full h-64 group cursor-pointer">
+          <Image
+            src={backgroundImage}
+            alt={title}
+            fill
+            sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
+            className="object-cover transition-all duration-300 ease-in-out"
+            quality={75}
+            loading="lazy"
+          />
           <div
             className="absolute inset-0 bg-black opacity-0 transition-opacity duration-300 ease-in-out group-hover:opacity-50"
             aria-hidden="true"

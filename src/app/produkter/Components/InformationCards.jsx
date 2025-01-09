@@ -100,7 +100,7 @@ const InformationCards = ({ fieldsProduct, productTitle, typer, produktslander, 
     <div className="mt-8 border-y-2">
       <div className="container mx-auto">
         <div className="flex gap-2 md:gap-4 px-4 py-2 items-center overflow-x-auto scroll-smooth lg:justify-center ">
-          {['Hälsa ', 'Övrigt', 'Omdömen', 'Frågor & Svar', 'Prishistorik'].map((item, index) => (
+          {['Hälsa ', 'Övrigt', 'Omdömen', 'Frågor & Svar', 'Försäljning systembolaget'].map((item, index) => (
             <div
               key={index}
               className={`px-2 py-2 w-auto text-center hover:bg-[#f4f1ed] hover:shadow-md cursor-pointer ${

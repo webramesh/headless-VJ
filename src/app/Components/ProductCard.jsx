@@ -32,8 +32,13 @@ function ProductCard({ product }) {
   };
 
   return (
-    <div className="border-2 shadow-md hover:shadow-lg transition-shadow duration-300 p-6 h-[450px]">
-      <div className="flex flex-col justify-between h-full items-start">
+    <div className="border-2 shadow-md hover:shadow-lg transition-shadow duration-300 p-6 h-[450px] relative">
+      {fieldsProduct?.salePrice && (
+        <span className="bg-red-600 inline text-white  absolute top-[16px]  right-1 px-[8px] py-1 rounded-md  rotate-45 text-xs">
+          On Sale
+        </span>
+      )}
+      <div className="flex flex-col justify-between h-full items-start relative">
         <div className="absolute">
           {fieldsProduct?.productLabels &&
             Object.entries(fieldsProduct.productLabels)
@@ -48,8 +53,7 @@ function ProductCard({ product }) {
                 );
               })}
         </div>
-
-        <Link href={`/produkter/${slug}`} className="flex justify-center w-full h-56">
+        <Link href={`/produkter/${slug}`} className="flex justify-center w-full h-56 relative  ">
           <Image
             src={featuredImage?.node?.sourceUrl || wine1}
             alt={title}
@@ -58,9 +62,8 @@ function ProductCard({ product }) {
             height={200}
             priority
           />
-
-          {/* //for product labels */}
         </Link>
+
         <div className=" text-red-600 mt-2">
           {displayedTypers?.map((type, i, arr) => (
             <Link href={`/produkt-typer/${type.slug}`} key={i} className="hover:text-red-500 mt-2 inline">
@@ -89,13 +92,15 @@ function ProductCard({ product }) {
             </div>
           </div>
         </div>
-        {/* <div className="text-lg  mt-2">{pice}:-</div> */}
+
         <div className="text-lg mt-2">
-          {pice}:-
-          {fieldsProduct.salePrice && (
-            <span className="text-red-600" style={{ textDecoration: 'line-through', marginLeft: '12px' }}>
-              {fieldsProduct.salePrice}:-
-            </span>
+          {fieldsProduct.salePrice ? (
+            <>
+              <span className="text-gray-700 font-medium">{fieldsProduct.salePrice}:-</span>
+              <span className="ml-2 text-red-600 line-through">{pice}:-</span>
+            </>
+          ) : (
+            <span className="text-gray-700">{pice}:-</span>
           )}
         </div>
       </div>

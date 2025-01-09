@@ -17,7 +17,7 @@ export const generatePdf = (productDetails, product) => {
   const logoUrl = '/vinjournalen-logo.png';
   // const logoUrl = '/logo.png';
   const logoWidth = 70;
-  const logoHeight = 16;
+  const logoHeight = 18;
   const logoX = (pageWidth - logoWidth) / 2;
   const logoY = 6;
   doc.addImage(logoUrl, 'PNG', logoX, logoY, logoWidth, logoHeight);
@@ -92,7 +92,7 @@ export const generatePdf = (productDetails, product) => {
   // Wine image
   const wineImageY = 50;
   const wineImageWidth = 100;
-  const wineImageHeight = 140;
+  const wineImageHeight = 170;
   const wineImageX = pageWidth - 120;
 
   doc.addImage(

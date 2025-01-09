@@ -101,14 +101,23 @@ export default function ProductSection({ product }) {
               </div>
               <div className="object-cover ">
                 {/* Featured Image */}
-                <Image
-                  src={featuredImage?.node?.sourceUrl}
-                  alt={title}
-                  className="mx-auto h-[500px]  "
-                  width={300} // Specify the width you want
-                  height={500} // Specify the height you want
-                  priority={true}
-                />
+                <div className="relative">
+                  <Image
+                    src={featuredImage?.node?.sourceUrl}
+                    alt={title}
+                    className="mx-auto h-[500px]  "
+                    width={300} // Specify the width you want
+                    height={500} // Specify the height you want
+                    priority={true}
+                  />
+                  <span className="absolute top-0 right-0">
+                    {fieldsProduct?.salePrice && (
+                      <span className="bg-red-600 inline text-white right-0 px-[8px] py-1 rounded-md   text-xs">
+                        On Sale
+                      </span>
+                    )}
+                  </span>
+                </div>
                 {/* Add image to the bottom right of the featured image */}
                 <div className="absolute bottom-0 right-0">
                   {wineSortiment && (
@@ -175,9 +184,20 @@ export default function ProductSection({ product }) {
           </div>
           <div className="bg-[#f9d7e1] mt-6 w-full py-8 px-4 rounded-md">
             <div className="flex flex-col sm:flex-row w-full p-4 justify-between">
-              <div className=" text-xl mb-2 sm:mb-0">Pris: {pice} :-</div>
+              {/* <div className=" text-xl mb-2 sm:mb-0">Pris: {pice} :-</div> */}
+              <div className="text-lg">
+                {fieldsProduct.salePrice ? (
+                  <>
+                    <span className="text-xl mb-2 sm:mb-0">Pris: {fieldsProduct.salePrice}:-</span>
+                    <span className="ml-2 text-red-600 line-through"> {pice}:-</span>
+                  </>
+                ) : (
+                  <span>Pris: {pice}:-</span>
+                )}
+              </div>
               <div className=" text-xl text-gray-500">Artikel nr: {productCode}</div>
             </div>
+
             <div className="relative p-4">
               <div className="w-full flex flex-col sm:flex-row justify-between gap-4 sm:gap-0">
                 <div className="w-full sm:w-1/3 p-2 border-2 border-[#eb7272] rounded-full flex justify-center items-center bg-white">

@@ -1,8 +1,3 @@
-// /** @type {import('next').NextConfig} */
-// const nextConfig = {};
-
-// export default nextConfig;
-
 import path from 'path';
 import { fileURLToPath } from 'url';
 
@@ -20,7 +15,7 @@ const nextConfig = {
     remotePatterns: [
       {
         protocol: 'https',
-        hostname: '**',
+        hostname: '**.vinjournalen.se',
       },
     ],
   },
@@ -82,3 +77,4 @@ const nextConfig = {
 };
 
 export default nextConfig;
+

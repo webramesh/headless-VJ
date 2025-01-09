@@ -4,12 +4,49 @@ import React from 'react';
 import PostAccordion from '../../Components/PostAccordion';
 import Breadcrumb from '../../Components/breadcrumb/BreadCrumb';
 import SubscriptionForm from '../../Components/subscription/SubscriptionForm';
+import Image from 'next/image';
+import parse, { domToReact, Element, attributesToProps } from 'html-react-parser';
 
 export const revalidate = 60;
+
 const NyheterContent = ({ nyhet }) => {
   if (!nyhet) {
     return <div className="container mx-auto p-4">Loading...</div>;
   }
+
+  const options = {
+    replace: (domNode) => {
+      if (domNode instanceof Element && domNode.name === 'img') {
+        const { src, alt, width, height, loading, decoding, sizes, ...rest } = domNode.attribs;
+        return (
+          <Image
+            src={src}
+            alt={alt || ''}
+            width={width ? parseInt(width) : 1}
+            height={height ? parseInt(height) : 1}
+            loading={loading || 'lazy'}
+            decoding={decoding || 'async'}
+            sizes={sizes || '100vw'}
+            style={{
+              width: '100%',
+              height: 'auto',
+            }}
+            {...attributesToProps(rest)}
+          />
+        );
+      }
+      if (domNode instanceof Element && domNode.name === 'figure') {
+        const { class: className, ...rest } = domNode.attribs;
+        return (
+          <figure className={className} {...attributesToProps(rest)}>
+            {domToReact(domNode.children, options)}
+          </figure>
+        );
+      }
+    },
+  };
+
+  const parsedContent = parse(nyhet.content, options);
 
   return (
     <div className="container mx-auto">
@@ -19,7 +56,7 @@ const NyheterContent = ({ nyhet }) => {
           <h1>{nyhet.title}</h1>
         </div>
         <div className="content">
-          <div className="text-base sm:text-lg" dangerouslySetInnerHTML={{ __html: nyhet.content }} />
+          <div className="text-base sm:text-lg">{parsedContent}</div>
         </div>
         {/* Comment Form */}
         {/* <div className="text-xl lg:text-2xl mt-6">Lämna ett svar</div>

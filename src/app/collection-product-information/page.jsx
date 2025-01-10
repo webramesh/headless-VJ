@@ -1,6 +1,7 @@
 import SenasteNytt from '../../app/Components/SenasteNytt';
 import WineTourism from '../../app/Components/WineTourism';
-import Subscription from '../Components/Subscription';
+import SubscriptionBox from '../Components/subscription/SubscriptionBox';
+import SubscriptionForm from '../Components/subscription/SubscriptionForm';
 import AuthorHero from '../author/Components/AuthorHero';
 
 export const metadata = {
@@ -29,7 +30,14 @@ export default function collection() {
         </p>
       </div>
 
-      <Subscription />
+      <div className="container mx-auto block md:grid grid-cols-6 items-center justify-between gap-14 px-2 my-10">
+        <div className="col-span-4">
+          <SubscriptionForm />
+        </div>
+        <div className="w-full grid col-span-2 mt-8 md:mt-0">
+          <SubscriptionBox />
+        </div>
+      </div>
       <div className="flex flex-col md:flex-row container mx-auto">
         <div className="flex items-center md:w-2/3 p-10">
           <WineTourism />

@@ -35,8 +35,8 @@ function ProductCard({ product }) {
   return (
     <div className="border-2 shadow-md hover:shadow-lg transition-shadow duration-300 p-6 h-[450px] relative">
       {fieldsProduct?.salePrice && (
-        // <span className="bg-red-600 inline text-white  absolute right-0 -top-3 z-10   px-[14px] py-2 rounded-md  text-xs">
-        <span className="bg-red-600 inline text-white  absolute top-[24px]  right-1 px-[14px] py-1 rounded-md  rotate-45 text-xs">
+        <span className="bg-red-600 inline text-white  absolute right-0 top-0 z-10   px-[14px] py-2 rounded-md  text-xs">
+          {/* // <span className="bg-red-600 inline text-white  absolute top-[24px]  right-1 px-[14px] py-1 rounded-md  rotate-45 text-xs"> */}
           Prissänkt
         </span>
       )}

@@ -28,14 +28,14 @@ const Card = ({ title, excerpt, date, author, category, imageUrl, slug, category
           />
         </div>
         <div className="p-4 bg-[#f5f5f5] flex-grow flex flex-col">
-          <h3 className="font-outfit font-medium text-black text-lg">{title || 'Untitled Article'}</h3>
+          <h3 className="font-outfit font-medium text-black text-lg">{title || 'Untitled Artiklar'}</h3>
           <p className="mt-2 font-outfit text-gray-900 text-xs">
-            {date ? format(new Date(date), 'dd MMMM, yyyy') : 'No date'}
+            {date ? format(new Date(date), 'dd MMMM, yyyy') : 'Inget datum'}
           </p>
-          <p className="text-[#694848] text-xs font-outfit mt-2">{author || 'Unknown Author'}</p>
+          <p className="text-[#694848] text-xs font-outfit mt-2">{author || 'Vinjournalen.se'}</p>
           <div
             className="font-outfit text-sm text-gray-900 font-extralight mt-2 leading-relaxed line-clamp-3 flex-grow"
-            dangerouslySetInnerHTML={{ __html: excerpt || 'No excerpt available' }}
+            dangerouslySetInnerHTML={{ __html: excerpt || 'Inget utdrag tillgängligt' }}
           />
           <div
             className="flex flex-start mt-2 w-fit px-3 py-1 text-white font-outfit text-xs font-thin rounded-full"
@@ -107,7 +107,7 @@ const ArticleContent = ({ totalPosts, sidebar }) => {
                 />
               ))
             ) : (
-              <p>No articles found.</p>
+              <p>Inga artiklar hittades.</p>
             )}
           </div>
           <Pagination pageInfo={pageInfo} pageLimit={POSTS_PER_PAGE} total={totalPosts} />

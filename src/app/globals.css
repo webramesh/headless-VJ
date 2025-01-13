@@ -70,6 +70,9 @@ body {
     --chart-5: 352 83% 91%;
   }
 }
+.content {
+  line-height: 1.5;
+}
 
 .ordlista-content-style h1 {
   font-size: 2rem;
@@ -95,12 +98,10 @@ body {
 }
 .content p {
   font-size: large;
-  margin-bottom: 2rem;
+  margin-bottom: 2.5rem;
   font-weight: 300;
 }
-.content {
-  line-height: 1.5;
-}
+
 .content strong {
   margin: 10px 0;
   font-weight: 600;
@@ -296,5 +297,25 @@ h2.wp-block-kadence-advancedheading {
   color: white;
   padding: 0.5rem;
   font-size: 0.9rem;
+  text-align: center;
+}
+
+.content .wp-block-columns-is-layout-flex {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+  margin: 2rem 0;
+}
+
+.content .wp-block-buttons {
+  color: white;
+  background-color: red;
+  padding: 2px;
+  border-radius: 2px solid red;
+  width: 35%;
+}
+.content .wp-block-buttons a {
+  color: white;
+  padding: 2px;
   text-align: center;
 }

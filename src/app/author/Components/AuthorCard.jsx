@@ -20,7 +20,7 @@ const AuthorCard = ({ title, subtitle, posts = [] }) => {
                 <div className="flex flex-col h-full cursor-pointer hover:shadow-lg transition-shadow bg-white rounded-lg overflow-hidden">
                   <div className="relative w-full pt-[56.25%]">
                     <Image
-                      src={post.featuredImage?.node?.sourceUrl || `/placeholder.svg?height=300&width=400`}
+                      src={post.featuredImage?.node?.sourceUrl || '/postplaceholder.jpg'}
                       alt={post.featuredImage?.node?.altText || post.title}
                       layout="fill"
                       objectFit="cover"

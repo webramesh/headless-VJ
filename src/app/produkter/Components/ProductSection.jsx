@@ -113,7 +113,8 @@ export default function ProductSection({ product }) {
                   <span className="absolute top-0 right-0">
                     {fieldsProduct?.salePrice && (
                       <span className="bg-red-600 inline text-white right-0 px-[8px] py-1 rounded-md   text-xs">
-                        On Sale
+                        {/* On Sale */}
+                        Prissänkt
                       </span>
                     )}
                   </span>

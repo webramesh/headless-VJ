@@ -99,6 +99,7 @@ export async function getVinguideData(uri) {
                         visitWinery
                       }
                       pice
+                      salePrice
                       bottlePackageVolume
                       containerType
                       wineSortiment

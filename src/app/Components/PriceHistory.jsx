@@ -11,7 +11,7 @@ const PriceHistory = ({ product }) => {
     return product.fieldsProduct.priceHistory
       .map((item) => ({
         date: item.priceHistoryDate,
-        price: item.price || 0,
+        Pris: item.price || 0,
       }))
       .sort((a, b) => new Date(a.date) - new Date(b.date));
   }, [product]);
@@ -54,7 +54,7 @@ const PriceHistory = ({ product }) => {
             fontSize: '12px',
           }}
         />
-        <Line type="monotone" dataKey="price" stroke="#EB7272" strokeWidth={2} dot={{ strokeWidth: 2 }} />
+        <Line type="monotone" dataKey="Pris" stroke="#EB7272" strokeWidth={2} dot={{ strokeWidth: 2 }} />
       </LineChart>
     </ResponsiveContainer>
   );

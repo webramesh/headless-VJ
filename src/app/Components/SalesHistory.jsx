@@ -12,7 +12,7 @@ const SalesHistory = ({ product }) => {
     return product.fieldsProduct.salesByYears
       .map((item) => ({
         date: item.yearHistory,
-        price: item.horozontalVolumeHistory || 0,
+        Liter: item.horozontalVolumeHistory || 0,
       }))
       .sort((a, b) => new Date(b.date) - new Date(a.date)); // Changed sorting order here
   }, [product]);
@@ -34,7 +34,7 @@ const SalesHistory = ({ product }) => {
         }}
       >
         <CartesianGrid stroke="#f5f5f5" />
-        <XAxis type="number" dataKey={'price'} fontSize={12} />
+        <XAxis type="number" dataKey={'Liter'} fontSize={12} />
         <YAxis
           dataKey="date"
           type="category"
@@ -47,7 +47,7 @@ const SalesHistory = ({ product }) => {
         />
         <Tooltip />
         <Legend />
-        <Bar dataKey="price" barSize={20} fill="#EB7272" />
+        <Bar dataKey="Liter" barSize={20} fill="#EB7272" />
       </ComposedChart>
     </ResponsiveContainer>
   );

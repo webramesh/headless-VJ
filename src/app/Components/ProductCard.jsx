@@ -2,6 +2,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import wine1 from '@/public/wine1.png';
 import { findDepth } from '@/src/utils/utils';
+import ProductLabelsWithTooltips from '../produkter/Components/ProductLabelsWithTooltip';
 
 function ProductCard({ product }) {
   const { featuredImage, fieldsProduct, produktTyper, slug, title, produktslander } = product;
@@ -21,26 +22,27 @@ function ProductCard({ product }) {
     const depthA = findDepth(a, produktslander.nodes);
     return depthA - depthB;
   });
-  const imageMap = {
-    bestSeller: '/best-seller.svg',
-    organicWine: '/ekologisk.svg',
-    familyWinery: '/family.svg',
-    newWine: '/new.svg',
-    sustainable: '/sustainable.svg',
-    veganWine: '/vegan.svg',
-    verifiedByVjse: '/verified.svg',
-  };
+  // const imageMap = {
+  //   bestSeller: '/best-seller.svg',
+  //   organicWine: '/ekologisk.svg',
+  //   familyWinery: '/family.svg',
+  //   newWine: '/new.svg',
+  //   sustainable: '/sustainable.svg',
+  //   veganWine: '/vegan.svg',
+  //   verifiedByVjse: '/verified.svg',
+  // };
 
   return (
     <div className="border-2 shadow-md hover:shadow-lg transition-shadow duration-300 p-6 h-[450px] relative">
       {fieldsProduct?.salePrice && (
-        <span className="bg-red-600 inline text-white  absolute top-[16px]  right-1 px-[8px] py-1 rounded-md  rotate-45 text-xs">
-          On Sale
+        // <span className="bg-red-600 inline text-white  absolute right-0 -top-3 z-10   px-[14px] py-2 rounded-md  text-xs">
+        <span className="bg-red-600 inline text-white  absolute top-[24px]  right-1 px-[14px] py-1 rounded-md  rotate-45 text-xs">
+          Prissänkt
         </span>
       )}
       <div className="flex flex-col justify-between h-full items-start relative">
-        <div className="absolute">
-          {fieldsProduct?.productLabels &&
+        <div className="absolute z-50">
+          {/* {fieldsProduct?.productLabels &&
             Object.entries(fieldsProduct.productLabels)
               .filter(([key, value]) => value && key !== '__typename') // Exclude __typename and filter labels with true values
               .map(([key]) => {
@@ -51,7 +53,8 @@ function ProductCard({ product }) {
                     </div>
                   </div>
                 );
-              })}
+              })} */}
+          <ProductLabelsWithTooltips fieldsProduct={fieldsProduct} />
         </div>
         <Link href={`/produkter/${slug}`} className="flex justify-center w-full h-56 relative  ">
           <Image

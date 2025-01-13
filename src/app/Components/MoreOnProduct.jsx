@@ -23,7 +23,7 @@ const MoreOnProduct = ({ producentDetails, vinimportorDetails }) => {
           <div className="my-6">
             {vinimportorDetails?.title && (
               <>
-                <p className="font-thin">Vinimportor</p>
+                <p className="font-thin">Vinimportör</p>
                 <p className="text-red-600 my-2">
                   <Link href={`/vinimportor/${vinimportorDetails?.slug}`}>{vinimportorDetails?.title}</Link>
                 </p>

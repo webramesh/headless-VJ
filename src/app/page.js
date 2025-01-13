@@ -53,7 +53,7 @@ export default async function Home() {
 
       <WineSlider categories={wineCategories} />
 
-      <NewsPost title="NYHETER" subtitle="Den mest populära artikeln i dryckesvärlden" nyheter={nyheter} />
+      <NewsPost title="NYHETER" subtitle="Den mest populära artikeln i dryckesvärlden" nyheter={nyheter.slice(0, 6)} />
 
       <Info />
     </div>

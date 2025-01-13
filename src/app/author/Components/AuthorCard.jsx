@@ -50,7 +50,7 @@ const AuthorCard = ({ title, subtitle, posts = [] }) => {
           })}
         </div>
       ) : (
-        <div className="text-center mt-8">No posts available for this author.</div>
+        <div className="text-center mt-8">Inga inlägg tillgängliga för denna författare.</div>
       )}
     </div>
   );

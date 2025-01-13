@@ -23,7 +23,7 @@ export default async function AuthorPage({ params }) {
   const author = await getAuthorBySlug(params.slug);
 
   if (!author) {
-    return <div>Author not found</div>;
+    return <div>Författaren hittades inte</div>;
   }
 
   return (
@@ -56,8 +56,8 @@ export default async function AuthorPage({ params }) {
         </div>
       </div>
       <AuthorCard
-        title="FROM AUTHOR"
-        subtitle={`Read more articles from ${author.name}`}
+        title="FRÅN FÖRFATTARE"
+        subtitle={`Läs fler artiklar från ${author.name}`}
         posts={author.posts?.nodes || []}
       />
       <div className="flex px-12 mt-8">

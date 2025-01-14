@@ -45,7 +45,7 @@ export default function PgBanner() {
               <button
                 onClick={handleAcceptCookies}
                 type="button"
-                className="px-4 py-2 bg-green-600 text-white rounded-md hover:bg-green-700 transition-colors duration-200"
+                className="px-4 py-2 bg-[#EB7273] text-white rounded-md hover:bg-[#ee5d5d] transition-colors duration-200"
               >
                 Acceptera cookies
               </button>

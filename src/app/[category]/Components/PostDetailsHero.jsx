@@ -26,9 +26,9 @@ const PostDetailsHero = ({ featuredImage, title, authorImage, authorName, author
         <div className="w-full lg:w-[50%] flex flex-col justify-center items-start gap-3 mt-4 lg:mt-0">
           {/* <div className=" text-sm text-red-500">{category?.name}</div> */}
           <div>
-            <h1 className="text-2xl lg:text-3xl ">{title}</h1>
+            <h1 className=" text-xl md:text-2xl lg:text-3xl ">{title}</h1>
           </div>
-          <div className="flex gap-4 items-center">
+          <div className="flex gap-2 md:gap-4 items-center">
             <div className="rounded-full overflow-hidden w-[40px] h-[40px] lg:w-[50px] lg:h-[50px] relative flex-shrink-0">
               {authorSlug ? (
                 <Link href={`/author/${authorSlug}/`}>

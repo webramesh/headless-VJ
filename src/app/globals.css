@@ -96,34 +96,170 @@ body {
 .content a {
   color: red;
 }
+/* Desktop styles */
 .content p {
-  font-size: large;
-  margin-bottom: 2.5rem;
+  font-size: 20px;
+  margin-bottom: 2rem;
   font-weight: 300;
 }
 
 .content strong {
   margin: 10px 0;
-  font-weight: 600;
-  font-size: large;
+  font-weight: 500;
+  font-size: 20px;
 }
 
 .content h2 {
-  font-size: x-large;
+  font-size: 24px;
   font-weight: 600;
   margin: 20px 0;
 }
 
+.content h2 strong {
+  font-size: 24px;
+  font-weight: 600;
+}
+
 .content h3 {
   font-weight: 500;
-  font-size: large;
+  font-size: 20px;
   line-height: 1.5;
 }
 
+.content h3 strong {
+  font-size: 20px;
+  font-weight: 500;
+}
+
+.content h4 {
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 1.5;
+}
+
+.content h4 strong {
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 1.5;
+}
+
+/* Tablet styles (768px to 1023px) */
+@media screen and (max-width: 1023px) {
+  .content p {
+    font-size: 18px;
+    margin-bottom: 1.75rem;
+  }
+
+  .content strong {
+    font-size: 18px;
+  }
+
+  .content h2 {
+    font-size: 22px;
+    margin: 18px 0;
+  }
+
+  .content h2 strong {
+    font-size: 22px;
+  }
+
+  .content h3 {
+    font-size: 18px;
+  }
+
+  .content h3 strong {
+    font-size: 18px;
+  }
+
+  .content h4 {
+    font-size: 16px;
+  }
+
+  .content h4 strong {
+    font-size: 16px;
+  }
+}
+
+/* Mobile styles (up to 767px) */
+@media screen and (max-width: 767px) {
+  .content p {
+    font-size: 16px;
+    margin-bottom: 1.5rem;
+  }
+
+  .content strong {
+    font-size: 16px;
+    margin: 8px 0;
+  }
+
+  .content h2 {
+    font-size: 20px;
+    margin: 16px 0;
+  }
+
+  .content h2 strong {
+    font-size: 20px;
+  }
+
+  .content h3 {
+    font-size: 16px;
+  }
+
+  .content h3 strong {
+    font-size: 16px;
+  }
+
+  .content h4 {
+    font-size: 14px;
+  }
+
+  .content h4 strong {
+    font-size: 14px;
+  }
+}
+
+/* Small mobile styles (up to 375px) */
+@media screen and (max-width: 375px) {
+  .content p {
+    font-size: 14px;
+    margin-bottom: 1.25rem;
+  }
+
+  .content strong {
+    font-size: 14px;
+    margin: 6px 0;
+  }
+
+  .content h2 {
+    font-size: 18px;
+    margin: 14px 0;
+  }
+
+  .content h2 strong {
+    font-size: 18px;
+  }
+
+  .content h3 {
+    font-size: 14px;
+  }
+
+  .content h3 strong {
+    font-size: 14px;
+  }
+
+  .content h4 {
+    font-size: 12px;
+  }
+
+  .content h4 strong {
+    font-size: 12px;
+  }
+}
 .content ul.wp-block-list li {
   font-size: large;
   font-weight: 300;
   margin-bottom: 0.3rem;
+  margin-left: 0.8rem;
 }
 
 .content ul.wp-block-list li:before {
@@ -134,6 +270,38 @@ body {
 }
 .content ul.wp-block-list {
   margin: 15px 0;
+}
+
+.content ol.wp-block-list {
+  margin: 15px 0;
+  list-style-type: none;
+  counter-reset: item;
+}
+
+.content ol.wp-block-list li {
+  font-size: large;
+  font-weight: 300;
+  margin-bottom: 0.3rem;
+  margin-left: 1rem;
+}
+
+.content ol.wp-block-list li strong {
+  position: relative;
+  display: inline-block;
+  padding-left: 1.5rem;
+  counter-increment: item;
+}
+
+.content ol.wp-block-list li strong:before {
+  content: counter(item) ".";
+  position: absolute;
+  left: 0;
+  font-weight: normal;
+}
+
+.content ol.wp-block-list li:not(:has(strong)) {
+  counter-increment: none;
+  margin-left: 2.5rem; 
 }
 
 .content figure.alignright {
@@ -256,7 +424,8 @@ h2.wp-block-kadence-advancedheading {
   height: auto;
   object-fit: contain;
   margin-bottom: 0.5rem;
-  padding: 0 10px;
+  margin-top: 0;
+  padding: 10px;
   transition: transform 0.3s ease;
 }
 
@@ -337,3 +506,14 @@ h2.wp-block-kadence-advancedheading {
   color: white;
 }
 
+@media screen and (max-width: 768px) {
+  .content iframe {
+    width: 100%;
+  height: auto;
+  }
+}
+.content iframe {
+  margin: 30px 0;
+}
+
+  

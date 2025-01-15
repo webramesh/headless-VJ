@@ -16,7 +16,7 @@ const Content = ({ pageData }) => {
               <div dangerouslySetInnerHTML={{ __html: pageData?.content }} className="text-base lg:text-lg content" />
               {faqItems?.length > 0 && (
                 <div className="mt-8 w-full">
-                  <h2 className="mb-4 font-medium text-lg md:text-xl text-black tracking-normal">Frågor och Svar</h2>
+                  <h2 className="mb-4 font-medium text-lg md:text-2xl text-black tracking-normal">Frågor och Svar</h2>
                   <AccordionNew faqItems={faqItems} />
                 </div>
               )}

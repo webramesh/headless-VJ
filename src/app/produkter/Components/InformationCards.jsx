@@ -8,7 +8,7 @@ import Link from 'next/link';
 const QNA = ({ productTitle, produktslander, wineSaleStartDate, sugarBites }) => {
   return (
     <div className="w-full px-4 sm:px-20">
-      <div className="flex flex-col my-4 text-center  text-lg font-medium">Frågor och svar om {productTitle}</div>
+      <div className="flex flex-col my-4 text-center  text-lg md:text-2xl font-medium">Frågor och svar om {productTitle}</div>
       <div className="flex flex-col">
         {/* <div className="bg-[#f5f5f5] pt-6 pl-2">
           <div className=" text-sm font-medium">I vilket land proudceras {productTitle}?</div>

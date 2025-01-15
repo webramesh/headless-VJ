@@ -25,7 +25,7 @@ const RegionalCardItem = ({ region }) => {
         </div>
 
         <Link
-          href={`/regioner/${lander.nodes[0].slug}/${slug}`}
+          href={`/regioner/${lander.nodes[0].slug}/${slug}/`}
           className="inline-flex justify-center items-center px-3 py-1 text-sm font-medium text-center text-white bg-[#FF0303]  rounded-lg hover:bg-[#ff8181] gap-2 w-1/2 md:w-2/3 mb-5 cursor-pointer"
         >
           Mer Info

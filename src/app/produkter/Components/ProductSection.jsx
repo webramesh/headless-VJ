@@ -88,7 +88,7 @@ export default function ProductSection({ product }) {
               </h1>
               <div className=" text-red-600 hover:text-red-500 mt-2 text-sm">
                 {updatedLinks.map((item, i, arr) => (
-                  <Link key={i} href={`/drycker/${item.slug}`}>
+                  <Link key={i} href={`/drycker/${item.slug}/`}>
                     {i < arr.length - 1 ? item.name + ' | ' : item.name}
                   </Link>
                 ))}
@@ -159,7 +159,7 @@ export default function ProductSection({ product }) {
             </h1>
             <div className="text-red-600 hover:text-red-500 mt-2 text-sm">
               {updatedLinks.map((item, i, arr) => (
-                <Link key={i} href={`/drycker/${item.slug}`}>
+                <Link key={i} href={`/drycker/${item.slug}/`}>
                   {i < arr.length - 1 ? item.name + ' | ' : item.name}
                 </Link>
               ))}
@@ -244,7 +244,7 @@ export default function ProductSection({ product }) {
             <div className="flex items-center justify-between mt-4 mb-4 px-6">
               {product?.produktslander?.nodes?.map((node, index) =>
                 node?.parent === null && node?.flag?.flagImage?.node?.sourceUrl ? (
-                  <Link key={index} href={`/lander/${node?.slug}`}>
+                  <Link key={index} href={`/lander/${node?.slug}/`}>
                     <Image src={node.flag.flagImage.node.sourceUrl} width={40} height={40} alt={node.name} />
                   </Link>
                 ) : null

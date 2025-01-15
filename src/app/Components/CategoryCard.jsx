@@ -15,7 +15,7 @@ const Card = ({ post }) => {
   };
 
   return (
-    <Link href={`/${post.categories?.nodes[0]?.slug || 'uncategorized'}/${post.slug}`}>
+    <Link href={`/${post.categories?.nodes[0]?.slug || 'uncategorized'}/${post.slug}/`}>
       <div className="flex flex-col cursor-pointer hover:shadow-lg transition-shadow h-full">
         <div className="relative w-full h-40">
           <Image

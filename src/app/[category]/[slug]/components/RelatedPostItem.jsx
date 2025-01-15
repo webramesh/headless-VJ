@@ -7,11 +7,11 @@ const RelatedPostItem = ({ post }) => {
     <div className="bg-white shadow-sm mt-4 hover:shadow-lg transition-shadow duration-300">
       <div>
         <Link
-          href={`/${post?.categories?.nodes[0]?.slug}/${post?.slug}`}
+          href={`${post?.uri}`}
           className="flex items-center hover:bg-gray-100 transition-colors duration-300 rounded-md p-2"
         >
           <Image
-            src={post.featuredImage.node.sourceUrl}
+            src={post?.featuredImage?.node?.sourceUrl || '/postplaceholder.jpg'}
             alt={post.title}
             width={100}
             height={100}

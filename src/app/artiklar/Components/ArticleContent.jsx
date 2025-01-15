@@ -15,7 +15,7 @@ const POSTS_PER_PAGE = 15;
 
 const Card = ({ title, excerpt, date, author, category, imageUrl, slug, categoryColor }) => {
   return (
-    <Link href={`/${category.slug || 'uncategorized'}/${slug}`}>
+    <Link href={`/${category.slug || 'uncategorized'}/${slug}/`}>
       <div className="flex flex-col cursor-pointer hover:shadow-lg transition-shadow h-full">
         <div className="relative w-full pt-[56.25%]">
           <Image

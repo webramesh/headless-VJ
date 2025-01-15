@@ -5,25 +5,11 @@ const OrdilistaCard = ({ ordlista, showCategory = true }) => {
   const ordlistaCategory = ordlista?.ordlistaCategories?.nodes[0];
   return (
     <div className="flex flex-col items-center shadow-sm py-8 mt-6 px-4 bg-white">
-      <Link href={`/ordlista/${ordlistaCategory?.slug}/${ordlista?.slug}`}>
-        {/* <Image
-          src={imageUrl || wine1}
-          className="object-cover h-52 w-50"
-          alt={ordlista.title}
-          // fill
-          width={200}
-          height={200}
-          // quality={10}
-          quality={100}
-          // sizes="(max-width: 1280px) 100vw, 1280px"
-          // sizes="(max-width: 600px) 400px, (max-width: 900px) 800px, 1200px"
-          priority
-        /> */}
-
+      <Link href={`/ordlista/${ordlistaCategory?.slug}/${ordlista?.slug}/`}>
         <h3 className="text-xl mt-4 font-semibold"> {ordlista.title} </h3>
       </Link>
       {showCategory && (
-        <Link href={`/ordlista/${ordlistaCategory?.slug}`} className="text-md text-red-700 font-light mt-">
+        <Link href={`/ordlista/${ordlistaCategory?.slug}/`} className="text-md text-red-700 font-light mt-">
           {ordlistaCategory?.name}
         </Link>
       )}

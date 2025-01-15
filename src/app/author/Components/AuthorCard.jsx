@@ -12,11 +12,7 @@ const AuthorCard = ({ title, subtitle, posts = [] }) => {
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
           {posts.map((post) => {
             return (
-              <Link
-                href={`/${post?.categories?.nodes[0]?.slug}/${post?.slug}`}
-                key={post?.id || Math.random()}
-                className="block h-full"
-              >
+              <Link href={`${post?.uri}`} key={post?.id || Math.random()} className="block h-full">
                 <div className="flex flex-col h-full cursor-pointer hover:shadow-lg transition-shadow bg-white rounded-lg overflow-hidden">
                   <div className="relative w-full pt-[56.25%]">
                     <Image

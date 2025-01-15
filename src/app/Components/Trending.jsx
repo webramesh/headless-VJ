@@ -24,7 +24,7 @@ const Trending = ({ title = '', subtitle = '', trendingPosts = [] }) => {
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-14 mt-8">
         {trendingPosts.map((post) => (
           <Link
-            href={`/${post?.categories?.nodes[0]?.slug || 'uncategorized'}/${post?.slug}`}
+            href={`/${post?.categories?.nodes[0]?.slug || 'uncategorized'}/${post?.slug}/`}
             key={post?.id || Math.random()}
             className="flex"
           >

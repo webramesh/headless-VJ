@@ -123,7 +123,7 @@ export default function Navbar({ menuData }) {
               className="object-cover md:hidden w-14"
               width="auto"
               height="auto"
-              loading="lazy"
+              priority
             />
             {/* Tablet and Desktop Logo */}
             <Image
@@ -132,7 +132,7 @@ export default function Navbar({ menuData }) {
               className="object-cover hidden md:block w-44 xl:w-52"
               width="auto"
               height="auto"
-              loading="lazy"
+              priority
             />
           </Link>
           <div className="lg:hidden">

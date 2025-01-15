@@ -14,11 +14,13 @@ const SenasteNytt = async () => {
         {nyheter.map((nyhet) => (
           <Link
             key={nyhet.id}
-            href={`/nyheter/${nyhet.slug}`}
+            href={`/nyheter/${nyhet.slug}/`}
             className="flex justify-between items-center pt-3 first:pt-0 text-[14px]"
+            role="button"
+            aria-label={`More about ${nyhet.title}`}
           >
             <h3 className="truncate max-w-[90%]">{nyhet.title}</h3>
-            <span className="ml-2 size-6" role="button" tabIndex={0} aria-label={`More about ${nyhet.title}`}>
+            <span className="ml-2 size-6">
               <FontAwesomeIcon icon={faArrowUpRightFromSquare} aria-hidden="true" />
             </span>
           </Link>

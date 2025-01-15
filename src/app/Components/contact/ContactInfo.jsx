@@ -8,7 +8,7 @@ const ContactInfo = () => {
     <div className="bg-gray-50 h-full px-5 py-10 rounded-lg text-gray-600">
       <div className="flex items-center gap-4 mb-8">
         <FontAwesomeIcon icon={faUser} className="text-blue-500" />
-        <Link href="author/gardner_vjnln901" className="underline">
+        <Link href="author/gardner_vjnln901/" className="underline">
           Jeanette Gardner
         </Link>
 

@@ -25,7 +25,7 @@ const LanderCardItem = ({ lander }) => {
 
         <div className="mt-auto">
           <Link
-            href={`/lander/${slug}`}
+            href={`/lander/${slug}/`}
             className="inline-flex justify-center items-center px-3 py-1 text-sm font-medium text-center text-white bg-[#FF0303] rounded-lg hover:bg-[#ff8181] gap-2 w-full cursor-pointer"
           >
             Mer Info

@@ -56,7 +56,7 @@ function ProductCard({ product }) {
               })} */}
           <ProductLabelsWithTooltips fieldsProduct={fieldsProduct} />
         </div>
-        <Link href={`/produkter/${slug}`} className="flex justify-center w-full h-56 relative  ">
+        <Link href={`/produkter/${slug}/`} className="flex justify-center w-full h-56 relative  ">
           <Image
             src={featuredImage?.node?.sourceUrl || wine1}
             alt={title}
@@ -69,13 +69,13 @@ function ProductCard({ product }) {
 
         <div className=" text-red-600 mt-2">
           {displayedTypers?.map((type, i, arr) => (
-            <Link href={`/produkt-typer/${type.slug}`} key={i} className="hover:text-red-500 mt-2 inline">
+            <Link href={`/produkt-typer/${type.slug}/`} key={i} className="hover:text-red-500 mt-2 inline">
               {i < arr.length - 1 ? `${type.name} | ` : type.name}
             </Link>
           ))}
         </div>
         <div>
-          <Link href={`/produkter/${slug}`} className="leading-6 text-lg">
+          <Link href={`/produkter/${slug}/`} className="leading-6 text-lg">
             {title}
           </Link>
           <div className="flex gap-2 mt-4 items-center">

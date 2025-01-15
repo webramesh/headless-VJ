@@ -4,6 +4,7 @@ import Link from 'next/link';
 import { useParams } from 'next/navigation';
 import React, { useState, useEffect } from 'react';
 import { useCategoriesWithSuggestedPosts } from '../../context/CategoriesAndPostsContext';
+import { ChevronDown } from 'lucide-react';
 
 const PostAccordion = () => {
   const params = useParams();
@@ -61,90 +62,28 @@ const PostAccordion = () => {
         <div key={category.id} className="border-b mb-2 border-slate-200">
           <button
             onClick={() => toggleAccordion(index)}
-            className="
-              flex
-              w-full
-              justify-between
-              items-center
-              bg-[#F5F5F5]
-              px-2 sm:pl-3
-              text-slate-800
-              py-2
-            "
+            className="flex w-full justify-between items-center bg-[#F5F5F5] px-2 sm:pl-3 text-slate-800 py-2"
           >
-            <h3
-              className="
-                text-left
-                font-semibold
-                text-xs sm:text-sm
-              "
-            >
+            <p className="text-left font-semibold text-xs sm:text-sm">
               <span>{category.name}</span>
-            </h3>
+            </p>
             <span
-              className={`
-                text-slate-800
-                transition-transform
-                duration-300
-                transform
-                ${openIndexes.includes(index) ? 'rotate-180' : 'rotate-0'}
-              `}
+              className={`text-slate-800 transition-transform duration-300 transform ${openIndexes.includes(index) ? 'rotate-180' : 'rotate-0'}`}
             >
               {openIndexes.includes(index) ? (
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  viewBox="0 0 16 16"
-                  fill="currentColor"
-                  className="w-6 h-6 sm:w-8 sm:h-8 text-red-600"
-                >
-                  <path
-                    fillRule="evenodd"
-                    d="M11.78 9.78a.75.75 0 0 1-1.06 0L8 7.06 5.28 9.78a.75.75 0 0 1-1.06-1.06l3.25-3.25a.75.75 0 0 1 1.06 0l3.25 3.25a.75.75 0 0 1 0 1.06Z"
-                    clipRule="evenodd"
-                  />
-                </svg>
+                <ChevronDown className="size-6 sm:size-8 text-red-600" strokeWidth={2.5} />
               ) : (
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  viewBox="0 0 16 16"
-                  fill="currentColor"
-                  className="w-6 h-6 sm:w-8 sm:h-8 text-red-600"
-                >
-                  <path
-                    fillRule="evenodd"
-                    d="M4.22 6.22a.75.75 0 0 1 1.06 0L8 8.94l2.72-2.72a.75.75 0 1 1 1.06 1.06l-3.25 3.25a.75.75 0 0 1-1.06 0L4.22 7.28a.75.75 0 0 1 0-1.06Z"
-                    clipRule="evenodd"
-                  />
-                </svg>
+                <ChevronDown className="size-6 sm:size-8 text-red-600" strokeWidth={2.5} />
               )}
             </span>
           </button>
           <div
-            className={`
-              overflow-hidden
-              transition-all
-              duration-300
-              ease-in-out
-              ${openIndexes.includes(index) ? 'max-h-screen' : 'max-h-0'}
-            `}
+            className={`overflow-hidden transition-all duration-300 ease-in-out ${openIndexes.includes(index) ? 'max-h-screen' : 'max-h-0'}`}
           >
-            <div
-              className="
-              pb-5 
-              bg-[#F5F5F5] 
-              grid 
-              grid-cols-1 
-              sm:grid-cols-2 
-              text-xs 
-              sm:text-sm 
-              px-2 
-              sm:pl-3 
-              text-red-500
-              "
-            >
+            <div className="pb-5 bg-[#F5F5F5] grid grid-cols-1 sm:grid-cols-2 text-xs sm:text-sm px-2 sm:pl-3 text-red-500">
               {/* Render post titles as links */}
               {category.filteredPostDetails.map((post) => (
-                <Link key={post.id} href={`/${category.slug}/${post.slug}`} className="block mb-2 hover:underline ">
+                <Link key={post.id} href={`/${category.slug}/${post.slug}/`} className="block mb-2 hover:underline ">
                   {post.title}
                 </Link>
               ))}

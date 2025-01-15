@@ -31,10 +31,9 @@ const PostDetailsHero = ({ featuredImage, title, authorImage, authorName, author
           <div className="flex gap-4 items-center">
             <div className="rounded-full overflow-hidden w-[40px] h-[40px] lg:w-[50px] lg:h-[50px] relative flex-shrink-0">
               {authorSlug ? (
-                <Link href={`/author/${authorSlug}`}>
+                <Link href={`/author/${authorSlug}/`}>
                   <Image
                     src={authorImage || '/vinlogo.svg'}
-                    // src={'/search.png'}
                     alt={authorName || 'Vinjournalen'}
                     className="object-cover"
                     width={100}
@@ -52,9 +51,8 @@ const PostDetailsHero = ({ featuredImage, title, authorImage, authorName, author
               )}
             </div>
             <div className=" text-xs lg:text-sm text-gray-600">
-              {/* <span>{authorName || 'Vinjournalen'}</span> | <span>{format(new Date(date), 'dd MMMM, yyyy')}</span> */}
               {authorSlug ? (
-                <Link href={`/author/${authorSlug}`}>
+                <Link href={`/author/${authorSlug}/`}>
                   <span>{authorName || 'Vinjournalen'} | </span>
                 </Link>
               ) : (

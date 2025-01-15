@@ -53,7 +53,7 @@ const Allcountry = ({ countries, params, countryCounts }) => {
 
   const renderCountryLink = useCallback(
     (country) => {
-      const url = `${basePath}/${country.slug}`;
+      const url = `${basePath}/${country.slug}/`;
       const imageUrl = country?.produktslander?.nodes[0]?.flag?.flagImage?.node?.sourceUrl;
       const imageAlt = country?.produktslander?.nodes[0]?.flag?.flagImage?.node?.altText || 'Flag';
       return (

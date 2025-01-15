@@ -27,7 +27,7 @@ export default async function Content({ params }) {
         {producenterWebsite && (
           <li>
             <b>Hemsida:&nbsp;</b>
-            <Link className="text-[#eb7272]" href="http://www.fitapreta.com/" target="_blank">
+            <Link className="text-[#eb7272]" href={producenterWebsite} target="_blank">
               {producenterWebsite}
             </Link>
           </li>

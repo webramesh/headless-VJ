@@ -84,12 +84,7 @@ export async function getAuthorBySlug(slug) {
                 date
                 slug
                 excerpt
-                categories {
-                  nodes {
-                    name
-                    slug
-                  }
-                }
+                uri
                 featuredImage {
                   node {
                     altText

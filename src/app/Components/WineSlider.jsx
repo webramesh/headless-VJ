@@ -9,7 +9,7 @@ import Image from 'next/image';
 
 const WineCard = ({ backgroundImage, title, category, articles, description, colorPicker, slug }) => {
   return (
-    <Link href={`/${slug}`} className="block">
+    <Link href={`/${slug}/`} className="block">
       <div className="p-2">
         <div className="relative w-full h-64 group cursor-pointer">
           <Image

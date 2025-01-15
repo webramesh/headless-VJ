@@ -9,7 +9,7 @@ const Hero = ({ posts }) => {
         {/* Main Article */}
 
         <Link
-          href={`/${posts[0].categories?.nodes[0]?.slug || 'uncategorized'}/${posts[0].slug}`}
+          href={`/${posts[0].categories?.nodes[0]?.slug || 'uncategorized'}/${posts[0].slug}/`}
           className="w-full lg:w-1/2 bg-[#f5f5f5] overflow-hidden"
         >
           <div className="relative w-full">
@@ -52,14 +52,14 @@ const Hero = ({ posts }) => {
             if (index === 0) return;
             return (
               <div key={post.id}>
-                <Link href={`/${post?.categories?.nodes[0]?.slug || 'uncategorized'}/${post.slug}`}>
+                <Link href={`/${post?.categories?.nodes[0]?.slug || 'uncategorized'}/${post.slug}/`}>
                   <div className="flex flex-col sm:flex-row gap-4 bg-[#f5f5f5] overflow-hidden lg:gap-0 xl:gap-4">
                     <div className="relative h-48 sm:h-auto sm:w-1/3">
                       <Image
                         src={post?.featuredImage?.node?.mediaItemUrl || '/postplaceholder.jpg'}
                         alt={post?.title}
                         fill
-                        priority
+                        loading="lazy"
                         className="object-cover"
                         placeholder="blur"
                         blurDataURL="/search.png"
@@ -88,10 +88,10 @@ const Hero = ({ posts }) => {
             );
           })}
           <div className="mt-8">
-            <Link href="/artiklar" passHref>
-              <button className="w-full py-2  text-red-500 hover:bg-red-100 border rounded-full border-red-500 transition duration-300">
+            <Link href="/artiklar/" passHref>
+              <div className="w-full py-2 text-center text-red-500 hover:bg-red-100 border rounded-full border-red-500 transition duration-300">
                 Se fler artiklar
-              </button>
+              </div>
             </Link>
           </div>
         </div>

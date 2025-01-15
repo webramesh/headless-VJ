@@ -29,7 +29,6 @@ export default async function RootLayout({ children }) {
         <link rel="manifest" href="/manifest.json" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0,maximum-scale=5.0" />
         <meta name="theme-color" content="#F3EFE0" />
-        <meta name="description" content="Vinjournalen är ett nätmagasin som fokuserar på ämnet vin" />
 
         {/* Android */}
         <meta name="mobile-web-app-capable" content="yes" />

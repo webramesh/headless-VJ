@@ -13,6 +13,7 @@ const nextConfig = withPWA({
   skipWaiting: true,
   //   reactStrictMode: true,
 })({
+  trailingSlash: true,
   staticPageGenerationTimeout: 360,
   webpack: (config) => {
     config.resolve.alias['@'] = path.resolve(__dirname);
@@ -84,4 +85,3 @@ const nextConfig = withPWA({
 });
 
 export default nextConfig;
-

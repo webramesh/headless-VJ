@@ -18,7 +18,7 @@ export default function RecentPostCard({ post }) {
   const postSlug = slug || '';
 
   return (
-    <Link href={`/${categorySlug}/${postSlug}`} key={post.id || Math.random()} className="flex">
+    <Link href={`/${categorySlug}/${postSlug}/`} key={post.id || Math.random()} className="flex">
       <div className="flex flex-col cursor-pointer hover:shadow-lg transition-shadow w-full my-6">
         <div className="relative w-full h-48">
           <Image
@@ -34,13 +34,13 @@ export default function RecentPostCard({ post }) {
           <h3 className="font-outfit font-medium text-black text-lg">{title || 'Untitled'}</h3>
           {/* <p className="mt-2 font-outfit text-gray-900 text-xs">{formattedDate}</p> */}
           <p className="mt-2 font-outfit text-gray-900 text-xs">
-          <span className="capitalize">
-                {new Date(date).toLocaleDateString('sv-SE', {
-                  day: '2-digit',
-                  month: 'long',
-                  year: 'numeric',
-                })}
-              </span>
+            <span className="capitalize">
+              {new Date(date).toLocaleDateString('sv-SE', {
+                day: '2-digit',
+                month: 'long',
+                year: 'numeric',
+              })}
+            </span>
           </p>
           {author?.node?.name && <p className="text-[#694848] text-xs font-outfit mt-2">{author.node.name}</p>}
           {formattedExcerpt && (
@@ -55,7 +55,7 @@ export default function RecentPostCard({ post }) {
                   key={category.slug || Math.random()}
                   className="flex flex-start mt-2 w-fit px-3 py-1 text-white font-outfit text-xs font-thin rounded-full"
                   style={{
-                    backgroundColor: category.categoriesImagesAndOtherFields?.categorycolorpicker || '#000000'
+                    backgroundColor: category.categoriesImagesAndOtherFields?.categorycolorpicker || '#000000',
                   }}
                 >
                   {category.name || 'Uncategorized'}
@@ -68,4 +68,3 @@ export default function RecentPostCard({ post }) {
     </Link>
   );
 }
-

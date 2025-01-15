@@ -12,7 +12,7 @@ const VinimportorerCard = ({ data }) => {
         {formatEmbeddedContent(data.content)}
         {/* {data.content} */}
       </p>
-      <Link href={`/vinimportor/${data.slug}`} className="text-red-600 font-bold flex items-center gap-2 my-3">
+      <Link href={`/vinimportor/${data.slug}/`} className="text-red-600 font-bold flex items-center gap-2 my-3">
         Läs mer
         <FontAwesomeIcon icon={faArrowRight} className="-rotate-45  " />
       </Link>

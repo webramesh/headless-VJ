@@ -207,19 +207,13 @@ export async function getPostBySlug(slug) {
             realatedPosts {
               relatedPosts {
                 nodes {
-                  id
-                  slug
                   ... on Post {
                     id
                     title
+                    uri
                     featuredImage {
                       node {
                         sourceUrl
-                      }
-                    }
-                    categories {
-                      nodes {
-                        slug
                       }
                     }
                   }

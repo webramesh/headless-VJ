@@ -13,7 +13,7 @@ const POSTS_PER_PAGE = 12;
 
 const Card = ({ title, excerpt, date, author, slug }) => {
   return (
-    <Link href={`/nyheter/${slug}`}>
+    <Link href={`/nyheter/${slug}/`}>
       <div className="flex flex-col cursor-pointer hover:shadow-lg transition-shadow h-full">
         <div className="p-4 bg-[#f5f5f5] flex-grow">
           <h3 className="font-outfit font-medium text-black text-lg">{title || 'Untitled News'}</h3>

@@ -5,10 +5,7 @@ function LinkElement({ title, link, noRed }) {
     return (
       <>
         &raquo;&nbsp;
-        <Link href={link} className={`capitalize ${noRed ? 'text-white' : 'text-red-600'}`}>
-          {/* <span className="md:hidden">{title.length > 18 ? title.slice(0, 18) + '...' : title}</span> */}
-          {/* <span className="">{title}</span> */}
-          {/* <span className="hidden md:block">{title}</span> */}
+        <Link href={`${link}/`} className={`capitalize ${noRed ? 'text-white' : 'text-red-600'}`}>
           <span className="">{title}</span>
         </Link>
       </>

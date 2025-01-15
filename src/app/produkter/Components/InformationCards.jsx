@@ -193,7 +193,7 @@ const InformationCards = ({ fieldsProduct, productTitle, typer, produktslander, 
                       ?.filter((land) => land.parent === null)
                       .map((land, i) => {
                         const { name, slug } = land;
-                        return <p key={i}>{name && slug ? <Link href={`/lander/${slug}`}>{name}</Link> : 'N/A'}</p>;
+                        return <p key={i}>{name && slug ? <Link href={`/lander/${slug}/`}>{name}</Link> : 'N/A'}</p>;
                       })}
                   </div>
                 </div>

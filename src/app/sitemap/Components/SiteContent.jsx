@@ -29,7 +29,7 @@ function ContentSection({ title, items, baseUrl }) {
         {items.map((item) => (
           <Link
             key={item.id}
-            href={`${baseUrl}/${item.slug}`}
+            href={`${baseUrl}/${item.slug}/`}
             className="rounded transition-colors text-sm text-red-500 hover:text-red-700 truncate"
           >
             {item.title}

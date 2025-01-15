@@ -5,7 +5,7 @@ import { formatEmbeddedContent } from '@/src/utils/utils';
 import { format } from 'date-fns';
 const PostCard = ({ title, date, authorName, excerpt, slug, imageURL }) => {
   return (
-    <Link href={`/posts/${slug}`}>
+    <Link href={`/posts/${slug}/`}>
       <div className="flex flex-col cursor-pointer hover:shadow-lg transition-shadow">
         <Image
           src={imageURL}

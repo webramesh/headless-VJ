@@ -14,7 +14,7 @@ const MoreOnProduct = ({ producentDetails, vinimportorDetails }) => {
                 {' '}
                 <p className="font-thin">Producent</p>
                 <p className="text-red-600 my-2">
-                  <Link href={`/producenter/${producentDetails?.slug}`}>{producentDetails?.title}</Link>
+                  <Link href={`/producenter/${producentDetails?.slug}/`}>{producentDetails?.title}</Link>
                 </p>
               </>
             )}
@@ -25,7 +25,7 @@ const MoreOnProduct = ({ producentDetails, vinimportorDetails }) => {
               <>
                 <p className="font-thin">Vinimportör</p>
                 <p className="text-red-600 my-2">
-                  <Link href={`/vinimportor/${vinimportorDetails?.slug}`}>{vinimportorDetails?.title}</Link>
+                  <Link href={`/vinimportor/${vinimportorDetails?.slug}/`}>{vinimportorDetails?.title}</Link>
                 </p>
               </>
             )}

@@ -2,7 +2,7 @@ import React from 'react';
 
 const ContentSkeleton = () => {
   return (
-    <div className="container mx-auto px-4 lg:px-0" id="arrow">
+    <div className="container mx-auto px-4 lg:px-0">
       <div className="mt-4 sm:mt-8">
         <div className="flex flex-col lg:flex-row lg:gap-10">
           {/* Left Section */}

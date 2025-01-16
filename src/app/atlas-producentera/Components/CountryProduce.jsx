@@ -3,8 +3,7 @@
 import React, { useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faArrowUpRightFromSquare } from '@fortawesome/free-solid-svg-icons';
+import { SquareArrowOutUpRight } from 'lucide-react';
 
 function CountryItem({ country }) {
   const [isHovered, setIsHovered] = useState(false);
@@ -29,24 +28,25 @@ function CountryItem({ country }) {
             <Image
               src={country.categoriesImagesAndOtherFields?.categoriesImage?.node?.sourceUrl || '/flag1.webp'}
               alt={`${country.name} Flag`}
-              layout="fill"
-              objectFit="cover"
-              className="rounded-full"
+              fill
+              sizes="(max-width: 640px) 100px, (max-width: 768px) 150px, 200px"
+              className="rounded-full object-cover"
+              loading="lazy"
+              quality={75}
+              placeholder="blur"
+              blurDataURL="/flag1.webp"
             />
           </div>
         )}
       </div>
-      <Link href={`/produktion-land/${country.slug}/`} className="flex items-center gap-2">
-        <span
-          className="text-base sm:text-md text-red-500 hover:text-red-600 cursor-pointer max-w-[120px] truncate"
-          title={country.name}
-        >
+      <Link
+        href={`/produktion-land/${country.slug}/`}
+        className="flex items-center gap-2 text-red-500 hover:text-red-600 cursor-pointer"
+      >
+        <span className="text-base sm:text-md max-w-[120px] truncate" title={country.name}>
           {country.name}
         </span>
-        <FontAwesomeIcon
-          icon={faArrowUpRightFromSquare}
-          className="w-3 h-3 sm:w-4 sm:h-4 text-red-500 hover:text-red-600 cursor-pointer"
-        />
+        <SquareArrowOutUpRight className="size-3 sm:size-4" strokeWidth={3} />
       </Link>
     </div>
   );

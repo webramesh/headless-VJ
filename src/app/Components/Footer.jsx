@@ -4,8 +4,9 @@ import Image from 'next/image';
 import logo from '@/public/vinjournalen-logo.svg';
 import Copyright from './Copyright';
 import Link from 'next/link';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faFacebookF, faInstagram, faXTwitter } from '@fortawesome/free-brands-svg-icons';
+import fb from '@/public/fbblack.png';
+import insta from '@/public/instalogo.png';
+import twitter from '@/public/twitterblack.png';
 import { usePathname } from 'next/navigation';
 
 const Footer = ({ menuItems }) => {
@@ -48,7 +49,13 @@ const Footer = ({ menuItems }) => {
               role="button"
               className="inline-flex items-center justify-center"
             >
-              <FontAwesomeIcon icon={faXTwitter} className="text-red-600 hover:text-[#1f2933]" aria-hidden="true" />
+              <Image
+                src={twitter}
+                alt="Twitter"
+                className="object-cover cursor-pointer size-4"
+                width={24}
+                height={24}
+              />
             </Link>
 
             <Link
@@ -59,7 +66,13 @@ const Footer = ({ menuItems }) => {
               role="button"
               className="inline-flex items-center justify-center"
             >
-              <FontAwesomeIcon icon={faFacebookF} className="text-red-600 hover:text-[#1f2933]" aria-hidden="true" />
+              <Image
+                src={fb}
+                alt="Facebook icon"
+                className="object-cover cursor-pointer size-5"
+                width={24}
+                height={24}
+              />
             </Link>
 
             <Link
@@ -70,7 +83,13 @@ const Footer = ({ menuItems }) => {
               role="button"
               className="inline-flex items-center justify-center"
             >
-              <FontAwesomeIcon icon={faInstagram} className="text-red-600 hover:text-[#1f2933]" aria-hidden="true" />
+              <Image
+                src={insta}
+                alt="Instagram icon"
+                className="object-cover cursor-pointer size-5"
+                width={24}
+                height={24}
+              />
             </Link>
           </div>
         </div>

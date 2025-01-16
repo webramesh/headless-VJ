@@ -1,5 +1,4 @@
-import { faArrowRight } from '@fortawesome/free-solid-svg-icons';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { ArrowRight } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
 
@@ -32,10 +31,7 @@ function ProducenterCard({ producenter }) {
               transition-colors duration-300 group"
           >
             Mer Info
-            <FontAwesomeIcon
-              icon={faArrowRight}
-              className="ml-2 text-xs sm:text-sm transition-transform group-hover:translate-x-1"
-            />
+            <ArrowRight strokeWidth={3} className="ml-2 group-hover:translate-x-1 transition-transform" size={18} />
           </Link>
         </div>
       </div>

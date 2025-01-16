@@ -1,8 +1,7 @@
 import React from 'react';
 import Link from 'next/link';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faArrowUpRightFromSquare } from '@fortawesome/free-solid-svg-icons';
 import { getAllNyheter } from '../../lib/api/newsApi';
+import { SquareArrowOutUpRight } from 'lucide-react';
 
 const SenasteNytt = async () => {
   const nyheter = await getAllNyheter();
@@ -20,8 +19,8 @@ const SenasteNytt = async () => {
             aria-label={`More about ${nyhet.title}`}
           >
             <h3 className="truncate max-w-[90%]">{nyhet.title}</h3>
-            <span className="ml-2 size-6">
-              <FontAwesomeIcon icon={faArrowUpRightFromSquare} aria-hidden="true" />
+            <span className="size-6">
+              <SquareArrowOutUpRight className="size-3 sm:size-4" strokeWidth={3} aria-hidden="true" />
             </span>
           </Link>
         ))}

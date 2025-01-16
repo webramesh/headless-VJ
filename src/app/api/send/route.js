@@ -5,10 +5,10 @@ import EmailTemplate from '../../Components/EmailTemplate';
 const resend = new Resend(process.env.RESEND_API_KEY);
 
 export async function POST(req) {
-  const { name, email, message } = await req.json();
+  const { name, contactEmail, message } = await req.json();
 
   // Validate required fields
-  if (!name || !email || !message) {
+  if (!name || !contactEmail || !message) {
     return NextResponse.json(
       {
         error: 'Missing required fields. Please provide name, email, and message.',
@@ -21,11 +21,11 @@ export async function POST(req) {
     const { data, error } = await resend.emails.send({
       from: 'onboarding@resend.dev', // Required test email for development
       to: ['rameshkunwar1110@gmail.com'],
-      reply_to: email,
+      reply_to: contactEmail,
       subject: `New Contact Form Message from ${name}`,
       react: EmailTemplate({
         name: name,
-        email: email,
+        email: contactEmail,
         message: message,
       }),
     });

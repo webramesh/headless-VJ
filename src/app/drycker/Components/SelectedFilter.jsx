@@ -1,5 +1,5 @@
 import { useFilters } from '@/src/context/FilterContext';
-import { Cross2Icon } from '@radix-ui/react-icons';
+import { X } from 'lucide-react';
 import { useRouter } from 'next/navigation';
 import React, { useCallback } from 'react';
 
@@ -30,7 +30,7 @@ function FilterBox({ onClick, filter, noCross }) {
         aria-label={`Filter: ${displayText}`}
       >
         {displayText}
-        {!noCross && <Cross2Icon />}
+        {!noCross && <X strokeWidth={1.5} size={18} />}
       </span>
     );
   }

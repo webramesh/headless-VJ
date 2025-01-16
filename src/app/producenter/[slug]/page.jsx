@@ -32,12 +32,12 @@ export default async function Page({ params }) {
       {producentData.featuredImage && (
         <div className="mb-8 p-6">
           <Image
-            src={producentData.featuredImage.node.sourceUrl}
-            alt={producentData.featuredImage.node.altText || producentData.title}
+            src={producentData?.featuredImage?.node?.sourceUrl}
+            alt={producentData?.featuredImage?.node?.altText || producentData?.title}
             width={30}
             height={20}
-            layout="responsive"
-            objectFit="cover"
+            sizes="100vw"
+            className="object-cover size-auto"
           />
         </div>
       )}

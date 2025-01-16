@@ -53,12 +53,12 @@ const Allcountry = ({ countries, params, countryCounts }) => {
 
   const renderCountryLink = useCallback(
     (country) => {
-      const url = `${basePath}/${country.slug}/`;
+      const url = `${basePath}${country.slug}/`;
       const imageUrl = country?.produktslander?.nodes[0]?.flag?.flagImage?.node?.sourceUrl;
       const imageAlt = country?.produktslander?.nodes[0]?.flag?.flagImage?.node?.altText || 'Flag';
       return (
         <Link key={country.slug} href={url} passHref>
-          <button className="w-full flex py-1 px-2 justify-center items-center gap-2 text-sm sm:text-base hover:bg-red-100 border rounded-lg border-red-500 transition duration-300">
+          <div className="w-full flex py-1 px-2 justify-center items-center gap-2 text-sm sm:text-base hover:bg-red-100 border rounded-lg border-red-500 transition duration-300">
             {imageUrl && (
               <div className="w-5 h-5 relative overflow-hidden rounded-full">
                 <Image
@@ -71,7 +71,7 @@ const Allcountry = ({ countries, params, countryCounts }) => {
               </div>
             )}
             {country.name || country.title}
-          </button>
+          </div>
         </Link>
       );
     },

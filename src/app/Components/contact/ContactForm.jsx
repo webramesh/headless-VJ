@@ -4,7 +4,7 @@ import React, { useState } from 'react';
 const ContactForm = () => {
   const [formData, setFormData] = useState({
     name: '',
-    email: '',
+    contactEmail: '',
     message: '',
   });
 
@@ -34,7 +34,7 @@ const ContactForm = () => {
 
       if (response.ok) {
         setStatus({ success: true, message: 'Email sent successfully!' });
-        setFormData({ name: '', email: '', message: '' }); // Reset form
+        setFormData({ name: '', contactEmail: '', message: '' }); // Reset form
       } else {
         setStatus({ success: false, message: result.error || 'Failed to send email.' });
       }
@@ -81,15 +81,15 @@ const ContactForm = () => {
         </div>
 
         <div className="mb-4">
-          <label htmlFor="email" className="block mb-2 text-sm font-medium text-gray-900">
+          <label htmlFor="contactEmail" className="block mb-2 text-sm font-medium text-gray-900">
             Email
           </label>
           <input
             type="email"
-            id="email"
+            id="contactEmail"
             className="border border-gray-300 text-gray-900 outline-none text-sm focus:ring-gray-500 focus:border-gray-500 rounded-lg block w-full p-2.5"
             placeholder="john@gmail.com"
-            value={formData.email}
+            value={formData.contactEmail}
             onChange={handleChange}
             required
           />
@@ -97,7 +97,7 @@ const ContactForm = () => {
 
         <div className="mb-4">
           <label htmlFor="message" className="block mb-2 text-sm font-medium text-gray-900">
-          Meddelande
+            Meddelande
           </label>
           <textarea
             id="message"
@@ -114,7 +114,7 @@ const ContactForm = () => {
           type="submit"
           className="focus:outline-none text-white w-full mt-5 bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 mb-2"
         >
-        Överlämna
+          Överlämna
         </button>
       </form>
     </div>

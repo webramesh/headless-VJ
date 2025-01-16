@@ -5,7 +5,7 @@ import { formatEmbeddedContent } from '@/src/utils/utils';
 const Hero = ({ posts }) => {
   return (
     <div className="container mt-6 mx-auto p-2">
-      <div className="flex flex-col lg:flex-row gap-8 lg:gap-12">
+      <div className="flex flex-col lg:flex-row gap-8">
         {/* Main Article */}
 
         <Link
@@ -54,7 +54,7 @@ const Hero = ({ posts }) => {
               <div key={post.id}>
                 <Link href={`/${post?.categories?.nodes[0]?.slug || 'uncategorized'}/${post.slug}/`}>
                   <div className="flex flex-col sm:flex-row gap-4 bg-[#f5f5f5] overflow-hidden lg:gap-0 xl:gap-4">
-                    <div className="relative h-48 sm:h-auto sm:w-1/3">
+                    <div className="relative h-48 lg:mt-6 xl:mt-0 sm:h-auto lg:h-40 xl:h-48 sm:w-1/3">
                       <Image
                         src={post?.featuredImage?.node?.mediaItemUrl || '/postplaceholder.jpg'}
                         alt={post?.title}
@@ -76,7 +76,6 @@ const Hero = ({ posts }) => {
                         })}
                       </p>
                       <p className="text-[#694848] text-xs  mt-2">{post?.author?.node?.name}</p>
-
                       <p
                         className=" text-sm text-gray-900 font-extralight mt-4 leading-relaxed"
                         dangerouslySetInnerHTML={{ __html: formatEmbeddedContent(post?.excerpt) }}
@@ -87,7 +86,7 @@ const Hero = ({ posts }) => {
               </div>
             );
           })}
-          <div className="mt-8">
+          <div className="mt-6">
             <Link href="/artiklar/" passHref>
               <div className="w-full py-2 text-center text-red-500 hover:bg-red-100 border rounded-full border-red-500 transition duration-300">
                 Se fler artiklar

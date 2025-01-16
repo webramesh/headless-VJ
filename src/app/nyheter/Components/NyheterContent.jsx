@@ -17,7 +17,7 @@ const NyheterContent = ({ nyhet }) => {
   const options = {
     replace: (domNode) => {
       if (domNode instanceof Element && domNode.name === 'img') {
-        const { src, alt, width, height, loading, decoding, sizes, ...rest } = domNode.attribs;
+        const { src, alt, width, height, loading, decoding, ...rest } = domNode.attribs;
         return (
           <Image
             src={src}
@@ -26,7 +26,6 @@ const NyheterContent = ({ nyhet }) => {
             height={height ? parseInt(height) : 1}
             loading={loading || 'lazy'}
             decoding={decoding || 'async'}
-            sizes={sizes || '100vw'}
             style={{
               width: '100%',
               height: 'auto',

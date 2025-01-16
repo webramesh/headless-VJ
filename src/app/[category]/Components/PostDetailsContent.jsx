@@ -11,7 +11,7 @@ const PostDetailsContent = ({ content, title }) => {
   const options = {
     replace: (domNode) => {
       if (domNode instanceof Element && domNode.name === 'img') {
-        const { src, alt, width, height, loading, decoding, sizes, ...rest } = domNode.attribs;
+        const { src, alt, width, height, loading, decoding, ...rest } = domNode.attribs;
         return (
           <Image
             src={src}
@@ -20,7 +20,6 @@ const PostDetailsContent = ({ content, title }) => {
             height={height ? parseInt(height) : 1}
             loading={loading || 'lazy'}
             decoding={decoding || 'async'}
-            sizes={sizes || '100vw'}
             style={{
               width: '100%',
               height: 'auto',
@@ -44,7 +43,7 @@ const PostDetailsContent = ({ content, title }) => {
 
   return (
     <div className="container mx-auto">
-      <div className="flex flex-col lg:flex-row lg:gap-16 mx-4 lg:mx-52 lg:-mt-16 z-10">
+      <div className="flex flex-col lg:flex-row lg:gap-16 mx-4 lg:mx-28 xl:mx-36 lg:-mt-16 z-10">
         <div className="flex flex-col gap-2 bg-white w-full lg:w-auto">
           <div className="shadow-2xl p-4 lg:p-16">
             <div className="content">

@@ -18,9 +18,10 @@ const AuthorCard = ({ title, subtitle, posts = [] }) => {
                     <Image
                       src={post.featuredImage?.node?.sourceUrl || '/postplaceholder.jpg'}
                       alt={post.featuredImage?.node?.altText || post.title}
-                      layout="fill"
-                      objectFit="cover"
-                      className="absolute top-0 left-0 w-full h-full"
+                      fill
+                      className="object-cover absolute top-0 left-0 w-full h-full"
+                      sizes="(max-width: 640px) 100vw, (max-width: 768px) 50vw, 25vw, 100vw"
+                      loading="lazy"
                     />
                   </div>
                   <div className="p-4 flex flex-col flex-grow bg-[#f5f5f5]">

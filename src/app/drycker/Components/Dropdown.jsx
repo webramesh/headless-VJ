@@ -14,9 +14,7 @@ const Dropdown = ({ title, options, openIndex, setOpenIndex, action }) => {
           className="w-full flex justify-between items-center bg-[#F5F5F5] pl-3 py-1"
           onClick={() => setOpenIndex((prev) => (title === prev ? false : title))}
         >
-          <h3 className="text-left text-lg">
-            <span>{title}</span>
-          </h3>
+          <span className="text-left text-lg">{title}</span>
 
           <span className={`text-slate-800 transition-transform ${openIndex === title ? 'rotate-60' : 'rotate-0'}`}>
             {openIndex === title ? <ChevronUp /> : <ChevronDown />}
@@ -29,9 +27,9 @@ const Dropdown = ({ title, options, openIndex, setOpenIndex, action }) => {
         >
           <div className="pb-2 flex flex-col text-sm pl-3 my-2">
             {options.map((option, index) => (
-              <option key={index} value={option[0]} onClick={handleChange} className="py-1 cursor-pointer">
+              <button key={index} value={option[0]} onClick={handleChange} className="py-1 cursor-pointer">
                 {`${option[0]} (${option[1]})`}
-              </option>
+              </button>
             ))}
           </div>
         </div>

@@ -1,7 +1,6 @@
 import Image from 'next/image';
 import Link from 'next/link';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faArrowRight } from '@fortawesome/free-solid-svg-icons';
+import { ArrowRight } from 'lucide-react';
 
 const RegionalCardItem = ({ region }) => {
   const { title, excerpt, slug, lander, featuredImage } = region;
@@ -29,7 +28,7 @@ const RegionalCardItem = ({ region }) => {
           className="inline-flex justify-center items-center px-3 py-1 text-sm font-medium text-center text-white bg-[#FF0303]  rounded-lg hover:bg-[#ff8181] gap-2 w-1/2 md:w-2/3 mb-5 cursor-pointer"
         >
           Mer Info
-          <FontAwesomeIcon icon={faArrowRight} />
+          <ArrowRight strokeWidth={3} size={18} />
         </Link>
       </div>
     </div>

@@ -6,11 +6,12 @@ import Image from 'next/image';
 import logo from '@/public/vinjournalen-logo.svg';
 import Searchbar from './Searchbar';
 import vinlogo from '@/public/vinlogo.svg';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faBars, faTimes } from '@fortawesome/free-solid-svg-icons';
+import fb from '@/public/fbblack.png';
+import insta from '@/public/instalogo.png';
+import twitter from '@/public/twitterblack.png';
 import { ChevronDownIcon } from '@heroicons/react/20/solid';
 import { usePathname } from 'next/navigation';
-import { faFacebookF, faInstagram, faXTwitter } from '@fortawesome/free-brands-svg-icons';
+import { Menu, X } from 'lucide-react';
 
 export default function Navbar({ menuData }) {
   const menu = menuData;
@@ -142,7 +143,7 @@ export default function Navbar({ menuData }) {
               aria-expanded={isMenuOpen}
               aria-label={isMenuOpen ? 'Close menu' : 'Open menu'}
             >
-              <FontAwesomeIcon icon={isMenuOpen ? faTimes : faBars} className="text-2xl w-6 h-6" />
+              {!isMenuOpen && <Menu strokeWidth={2.5} size={28} />}
             </button>
           </div>
         </div>
@@ -157,7 +158,7 @@ export default function Navbar({ menuData }) {
         >
           <div className="flex justify-end">
             <button onClick={closeMenu} className="p-2 focus:outline-none" aria-label="Close menu">
-              <FontAwesomeIcon icon={faTimes} className="text-2xl w-6 h-6" />
+              <X strokeWidth={3} />
             </button>
           </div>
           <div className="flex flex-col items-center space-y-8">
@@ -232,13 +233,31 @@ export default function Navbar({ menuData }) {
           </div>
           <div className="flex justify-center items-center mt-6 gap-6">
             <Link href="https://twitter.com/hashtag/Vinjournalen" target="_blank" aria-label="Twitter">
-              <FontAwesomeIcon icon={faXTwitter} className="text-red-600" />
+              <Image
+                src={twitter}
+                alt="Twitter"
+                className="object-cover cursor-pointer size-4"
+                width={24}
+                height={24}
+              />
             </Link>
             <Link href="https://m.facebook.com/vinjournalen" target="_blank" aria-label="Facebook">
-              <FontAwesomeIcon icon={faFacebookF} className="text-red-600" />
+              <Image
+                src={fb}
+                alt="Facebook icon"
+                className="object-cover cursor-pointer size-4"
+                width={24}
+                height={24}
+              />
             </Link>
             <Link href="https://www.instagram.com/vinjournalen.se/" target="_blank" aria-label="Instagram">
-              <FontAwesomeIcon icon={faInstagram} className="text-red-600" />
+              <Image
+                src={insta}
+                alt="Instagram icon"
+                className="object-cover cursor-pointer size-4"
+                width={24}
+                height={24}
+              />
             </Link>
           </div>
           <div className="flex justify-center w-full mt-6">

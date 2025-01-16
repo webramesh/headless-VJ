@@ -15,9 +15,7 @@ const AccordionItem = ({ index, openIndexes, toggleAccordion, title, content }) 
         aria-controls={`accordion-content-${index}`}
         id={`accordion-button-${index}`}
       >
-        <p className="text-left text-sm md:text-md">
-          <span>{title}</span>
-        </p>
+        <span className="text-left text-sm md:text-md">{title}</span>
         <span className={`transition-transform duration-300 transform`}>
           {isOpen ? <ChevronUp className="size-8 text-red-600" /> : <ChevronDown className="size-8 text-red-600" />}
         </span>

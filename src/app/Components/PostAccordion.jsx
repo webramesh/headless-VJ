@@ -64,17 +64,11 @@ const PostAccordion = () => {
             onClick={() => toggleAccordion(index)}
             className="flex w-full justify-between items-center bg-[#F5F5F5] px-2 sm:pl-3 text-slate-800 py-2"
           >
-            <p className="text-left font-semibold text-xs sm:text-sm">
-              <span>{category.name}</span>
-            </p>
+            <span className="text-left font-semibold text-xs sm:text-sm">{category.name}</span>
             <span
               className={`text-slate-800 transition-transform duration-300 transform ${openIndexes.includes(index) ? 'rotate-180' : 'rotate-0'}`}
             >
-              {openIndexes.includes(index) ? (
-                <ChevronDown className="size-6 sm:size-8 text-red-600" strokeWidth={2.5} />
-              ) : (
-                <ChevronDown className="size-6 sm:size-8 text-red-600" strokeWidth={2.5} />
-              )}
+              <ChevronDown className="size-6 sm:size-8 text-red-600" strokeWidth={2.5} />
             </span>
           </button>
           <div

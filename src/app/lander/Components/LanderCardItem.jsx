@@ -1,6 +1,5 @@
 import Link from 'next/link';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faArrowRight } from '@fortawesome/free-solid-svg-icons';
+import { ArrowRight } from 'lucide-react';
 
 const LanderCardItem = ({ lander }) => {
   const { name, description, slug, count } = lander;
@@ -29,7 +28,7 @@ const LanderCardItem = ({ lander }) => {
             className="inline-flex justify-center items-center px-3 py-1 text-sm font-medium text-center text-white bg-[#FF0303] rounded-lg hover:bg-[#ff8181] gap-2 w-full cursor-pointer"
           >
             Mer Info
-            <FontAwesomeIcon icon={faArrowRight} className="ml-2" />
+            <ArrowRight strokeWidth={3} size={18} className="ml-2" />
           </Link>
         </div>
       </div>

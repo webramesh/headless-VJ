@@ -1,8 +1,6 @@
 import { formatEmbeddedContent } from '@/src/utils/utils';
 import Link from 'next/link';
-
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faArrowRight } from '@fortawesome/free-solid-svg-icons';
+import { ArrowUpRight } from 'lucide-react';
 
 const VinimportorerCard = ({ data }) => {
   return (
@@ -14,7 +12,7 @@ const VinimportorerCard = ({ data }) => {
       </p>
       <Link href={`/vinimportor/${data.slug}/`} className="text-red-600 font-bold flex items-center gap-2 my-3">
         Läs mer
-        <FontAwesomeIcon icon={faArrowRight} className="-rotate-45  " />
+        <ArrowUpRight strokeWidth={3} size={18} />
       </Link>
     </div>
   );

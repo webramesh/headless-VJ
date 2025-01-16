@@ -60,11 +60,11 @@ export default async function AuthorPage({ params }) {
         subtitle={`Läs fler artiklar från ${author.name}`}
         posts={author.posts?.nodes || []}
       />
-      <div className="flex px-12 mt-8">
-        <div className="w-[70%] pr-12">
+      <div className="container mx-auto block md:grid grid-cols-6 items-center justify-between gap-14 px-2 my-10">
+        <div className="col-span-4">
           <SubscriptionForm />
         </div>
-        <div className="w-[30%]">
+        <div className="w-full grid col-span-2 mt-8 md:mt-0">
           <SubscriptionBox />
         </div>
       </div>

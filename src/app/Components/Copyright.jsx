@@ -5,7 +5,7 @@ const Copyright = () => {
 
   return (
     <div className="text-center text-gray-500 text-sm flex justify-center items-center h-full">
-      © 2013 - {currentYear} Vinjournalen.se All rights reserved.
+      &copy; 2013 - {currentYear} Vinjournalen.se All rights reserved.
     </div>
   );
 };

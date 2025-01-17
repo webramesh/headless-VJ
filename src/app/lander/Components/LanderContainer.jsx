@@ -6,7 +6,7 @@ import { usePagination } from '@/src/context/PageContext';
 import { useEffect, useState } from 'react';
 import Pagination from '../../Components/pagination/Pagination';
 
-const LANDERS_PER_PAGE = 12;
+const LANDERS_PER_PAGE = 15;
 
 const LanderContainer = ({ totalLanders }) => {
   const { state, dispatch } = usePagination();
@@ -39,7 +39,7 @@ const LanderContainer = ({ totalLanders }) => {
 
   return (
     <>
-      <div className="w-full grid container mx-auto justify-between gap-6 grid-cols-1 md:grid-cols-2 lg:grid-cols-4 mt-6">
+      <div className=" w-full grid container mx-auto justify-between gap-4 grid-cols-1 md:grid-cols-2 lg:grid-cols-3 mt-6">
         {landers.map((lander) => (
           <div key={lander.id}>
             <LanderCardItem lander={lander} />
@@ -53,4 +53,3 @@ const LanderContainer = ({ totalLanders }) => {
 };
 
 export default LanderContainer;
-

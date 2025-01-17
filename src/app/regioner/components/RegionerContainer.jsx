@@ -7,7 +7,7 @@ import { usePagination } from '@/src/context/PageContext';
 import { useEffect, useState } from 'react';
 import Pagination from '../../Components/pagination/Pagination';
 
-const REGIONS_PER_PAGE = 12;
+const REGIONS_PER_PAGE = 15;
 
 const RegionerContainer = ({ totalRegioners }) => {
   const { state, dispatch } = usePagination();
@@ -44,8 +44,7 @@ const RegionerContainer = ({ totalRegioners }) => {
         <Map />
       </div> */}
 
-      <div className=" w-full grid container mx-auto justify-between gap-6  grid-cols-1 md:grid-cols-2 lg:grid-cols-4   mt-6">
-        {/* <div className="w-full mx-4 md:mx-auto mt-5 block md:grid md:grid-cols-2 lg:grid-cols-3  gap-4 "> */}
+      <div className=" w-full grid container mx-auto justify-between gap-4 grid-cols-1 md:grid-cols-2 lg:grid-cols-3 mt-6">
         {regions.map((region) => (
           <div key={region.id}>
             <RegionalCardItem region={region} />

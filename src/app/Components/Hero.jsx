@@ -16,14 +16,16 @@ const Hero = ({ posts }) => {
             <div className="relative w-full h-0 pb-[66.67%] sm:pb-[50%] lg:pb-[66.67%]">
               <div className="absolute w-full h-full">
                 <Image
-                  src={posts[0]?.featuredImage?.node?.mediaItemUrl || '/postplaceholder.jpg'}
-                  alt={posts[0]?.title}
+                  src={posts[0]?.featuredImage?.node?.sourceUrl || '/postplaceholder.jpg'}
+                  alt={posts[0]?.featuredImage?.node?.altText || posts[0]?.title}
                   fill
                   priority
                   className="h-full w-full object-cover"
                   placeholder="blur"
-                  blurDataURL="/search.png"
-                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 25vw"
+                  blurDataURL="/postplaceholder.jpg"
+                  sizes={
+                    posts[0]?.featuredImage?.node?.sizes || '(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 25vw'
+                  }
                 />
               </div>
             </div>
@@ -56,14 +58,16 @@ const Hero = ({ posts }) => {
                   <div className="flex flex-col sm:flex-row gap-4 bg-[#f5f5f5] overflow-hidden lg:gap-0 xl:gap-4">
                     <div className="relative h-48 lg:mt-6 xl:mt-0 sm:h-auto lg:h-40 xl:h-48 sm:w-1/3">
                       <Image
-                        src={post?.featuredImage?.node?.mediaItemUrl || '/postplaceholder.jpg'}
-                        alt={post?.title}
+                        src={post?.featuredImage?.node?.sourceUrl || '/postplaceholder.jpg'}
+                        alt={post?.featuredImage?.node?.altText || post?.title}
                         fill
                         loading="lazy"
                         className="object-cover"
                         placeholder="blur"
                         blurDataURL="/search.png"
-                        sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 25vw"
+                        sizes={
+                          post?.featuredImage?.node?.sizes || '(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 25vw'
+                        }
                       />
                     </div>
                     <div className="p-4 sm:w-2/3">

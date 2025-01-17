@@ -50,7 +50,6 @@ export default async function Page({ params }) {
         <div className="w-full container mx-auto py-16" id="price-and-sales-history">
           <h2 className="text-xl font-semibold mb-4 text-center pt-8">Försäljning systembolaget</h2>
           <div className="text-center font-light">
-            {' '}
             Källa: <span className="text-red-600 font-extralight">Systembolaget Försäljningsstatistik</span>
           </div>
           <div

@@ -11,7 +11,7 @@ const loading = () => {
               <p className="h-6 w-3/12 bg-gray-300 rounded mt-12"></p>
             </div>
 
-            <div className="grid grid-cols-1 lg:grid-cols-4 md:grid-cols-2 gap-6 items-center justify-between flex-wrap rounded-md mb-10">
+            <div className="grid grid-cols-1 lg:grid-cols-3 md:grid-cols-2 gap-6 items-center justify-between flex-wrap rounded-md mb-10">
               {/* Render multiple skeleton cards to simulate loading state */}
               {Array.from({ length: 12 }).map((_, index) => (
                 <div key={index} className="flex flex-col items-start shadow-sm py-8 mt-6 px-4 bg-white animate-pulse">

@@ -5,13 +5,6 @@ import LanderContainer from './Components/LanderContainer';
 import { countLanders } from '@/src/lib/api/landerAPI';
 import PostAccordion from '../Components/PostAccordion';
 
-// wait for 3 seconds
-async function wait() {
-  return new Promise((resolve) => {
-    setTimeout(resolve, 3000);
-  });
-}
-
 export async function generateMetadata() {
   return {
     title: 'VINATLAS - Vinjournalen.se',
@@ -49,7 +42,6 @@ export async function generateMetadata() {
 }
 
 const Page = async () => {
-  wait();
   const totalLanders = await countLanders();
 
   return (

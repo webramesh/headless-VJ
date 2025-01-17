@@ -8,12 +8,10 @@ import Link from 'next/link';
 const QNA = ({ productTitle, produktslander, wineSaleStartDate, sugarBites }) => {
   return (
     <div className="w-full px-4 sm:px-20">
-      <div className="flex flex-col my-4 text-center  text-lg md:text-2xl font-medium">Frågor och svar om {productTitle}</div>
+      <div className="flex flex-col my-4 text-center text-lg md:text-2xl font-medium">
+        Frågor och svar om {productTitle}
+      </div>
       <div className="flex flex-col">
-        {/* <div className="bg-[#f5f5f5] pt-6 pl-2">
-          <div className=" text-sm font-medium">I vilket land proudceras {productTitle}?</div>
-        </div> */}
-
         <div className="bg-[#f5f5f5] py-4 pl-2">
           <div className=" text-sm font-medium">I vilket land proudceras {productTitle}?</div>
         </div>
@@ -26,10 +24,6 @@ const QNA = ({ productTitle, produktslander, wineSaleStartDate, sugarBites }) =>
         <div className="mt-4">
           {productTitle && sugarBites && (
             <div>
-              {/* <div className="bg-[#f5f5f5] pt-6 pl-2">
-                <div className=" text-sm font-medium"> Vad är {productTitle} sockermängd?</div>
-              </div> */}
-
               <div className="bg-[#f5f5f5] py-4 pl-2">
                 <div className=" text-sm font-medium"> Vad är {productTitle} sockermängd?</div>
               </div>
@@ -96,11 +90,16 @@ const InformationCards = ({ fieldsProduct, productTitle, typer, produktslander, 
     }
   }, [selected]);
 
+  const cards = ['Hälsa ', 'Övrigt', 'Omdömen', 'Frågor & Svar', 'Försäljning systembolaget'].slice(
+    0,
+    data?.fieldsProduct?.priceHistory?.length > 0 || data?.fieldsProduct?.salesByYears?.length > 0 ? undefined : -1
+  );
+
   return (
     <div className="mt-8 border-y-2">
       <div className="container mx-auto">
         <div className="flex gap-2 md:gap-4 px-4 py-2 items-center overflow-x-auto scroll-smooth lg:justify-center ">
-          {['Hälsa ', 'Övrigt', 'Omdömen', 'Frågor & Svar', 'Försäljning systembolaget'].map((item, index) => (
+          {cards.map((item, index) => (
             <div
               key={index}
               className={`px-2 py-2 w-auto text-center hover:bg-[#f4f1ed] hover:shadow-md cursor-pointer ${
@@ -203,7 +202,6 @@ const InformationCards = ({ fieldsProduct, productTitle, typer, produktslander, 
                 <div className="text-xs  text-center mt-2">
                   Importör <br />
                   <div className="text-red-500 font-bold mb-9">
-                    {' '}
                     {vinimporterData?.title && vinimporterData?.slug ? (
                       <Link href={`#more-on-product`}>{vinimporterData?.title}</Link>
                     ) : (
@@ -236,8 +234,6 @@ const InformationCards = ({ fieldsProduct, productTitle, typer, produktslander, 
               />
             </div>
           )}
-
-          {selected === 5 && <></>}
         </div>
       </div>
     </div>

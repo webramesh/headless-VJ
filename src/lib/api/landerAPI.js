@@ -49,6 +49,14 @@ export async function getAllLanders(first, last, after, before) {
               name
               description
               count
+              categoriesImagesAndOtherFields {
+                categoriesImage {
+                  node {
+                    sourceUrl
+                    altText
+                  }
+                }
+              }
             }
             pageInfo {
               endCursor

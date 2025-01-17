@@ -51,6 +51,7 @@ export async function getAllRegions(first, last, after, before) {
               featuredImage {
                 node {
                   sourceUrl
+                  altText
                 }
               }
               lander {

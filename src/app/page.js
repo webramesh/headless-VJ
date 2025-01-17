@@ -13,6 +13,7 @@ import Banner from './Components/Banner';
 import { generateSeoMetadata } from '../utils/utils';
 import HomeContent from './Components/HomeContent';
 
+
 export const revalidate = 60;
 
 export async function generateMetadata() {

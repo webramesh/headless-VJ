@@ -9,6 +9,7 @@ import { CategoryAndPostsProvider } from '../context/CategoriesAndPostsContext';
 import { FilterProvider } from '../context/FilterContext';
 import { getAllCategoriesWithSuggestedPosts } from '../lib/api/postaccordion';
 import dynamic from 'next/dynamic';
+import Topbanner from './Components/Topbanner';
 
 const ScrollToTopButton = dynamic(() => import('./Components/ScrollToTopButton'), {
   ssr: false,
@@ -55,6 +56,7 @@ export default async function RootLayout({ children }) {
             <PageProvider>
               <CategoryAndPostsProvider categoriesWithSuggestedPosts={categoriesWithSuggestedPosts}>
                 <OrdlistaProvider ordlista={ordlista}>
+                  <Topbanner />
                   <Navbar menuData={menuData} />
 
                   {children}

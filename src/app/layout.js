@@ -9,6 +9,7 @@ import { CategoryAndPostsProvider } from '../context/CategoriesAndPostsContext';
 import { FilterProvider } from '../context/FilterContext';
 import { getAllCategoriesWithSuggestedPosts } from '../lib/api/postaccordion';
 import dynamic from 'next/dynamic';
+import Topbanner from './Components/Topbanner';
 import { PostHogProvider } from './providers';
 import PgBanner from './PgBanner';
 
@@ -59,11 +60,10 @@ export default async function RootLayout({ children }) {
               <PageProvider>
                 <CategoryAndPostsProvider categoriesWithSuggestedPosts={categoriesWithSuggestedPosts}>
                   <OrdlistaProvider ordlista={ordlista}>
+                    <Topbanner />
                     <Navbar menuData={menuData} />
-
                     {children}
                     <PgBanner />
-
                     <ScrollToTopButton />
                     <Footer menuItems={footerMenu} />
                   </OrdlistaProvider>

@@ -49,15 +49,33 @@ const PostDetailsContent = ({ content, title }) => {
             <div className="content">
               <div className="prose prose-lg max-w-none">{parsedContent}</div>
             </div>
-            <div className="flex p-4 gap-6 items-center justify-end ">
+            <div className="flex p-4 gap-6 items-center justify-end">
               <EmailShareButton url={typeof window !== 'undefined' ? window.location.href : ''} title={title}>
-                <Image src={message} alt="Messagebox" className="object-cover" width={24} height={24} />
+                <Image
+                  src={message}
+                  alt="Messagebox"
+                  className="object-cover w-4 md:w-5 lg:w-6"
+                  width={24}
+                  height={24}
+                />
               </EmailShareButton>
               <FacebookShareButton url={typeof window !== 'undefined' ? window.location.href : ''} title={title}>
-                <Image src={fb} alt="Facebook icon" className="object-cover cursor-pointer" width={24} height={24} />
+                <Image
+                  src={fb}
+                  alt="Facebook icon"
+                  className="object-cover cursor-pointer w-4 md:w-5 lg:w-6"
+                  width={24}
+                  height={24}
+                />
               </FacebookShareButton>
               <TwitterShareButton url={typeof window !== 'undefined' ? window.location.href : ''} title={title}>
-                <Image src={twitter} alt="Twitter" className="object-cover cursor-pointer" width={24} height={24} />
+                <Image
+                  src={twitter}
+                  alt="Twitter"
+                  className="object-cover cursor-pointer w-4 md:w-5 lg:w-6"
+                  width={24}
+                  height={24}
+                />
               </TwitterShareButton>
             </div>
           </div>

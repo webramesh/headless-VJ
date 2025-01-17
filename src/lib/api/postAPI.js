@@ -79,7 +79,9 @@ export async function getHomePagePosts() {
               visitCount
               featuredImage {
                 node {
-                  mediaItemUrl
+                  sourceUrl
+                  altText
+                  sizes
                 }
               }
             }

@@ -7,7 +7,7 @@ function ProducenterCard({ producenter }) {
 
   return (
     <div className="w-full max-w-[280px] sm:max-w-[320px] md:max-w-[350px] lg:max-w-[380px] mx-auto transform transition-all duration-300 hover:scale-[1.02] hover:shadow-md bg-white rounded-xl overflow-hidden shadow-sm border border-gray-100">
-      <div className="relative w-full aspect-video h-[180px] sm:h-[200px] md:h-[220px]">
+      <div className="relative w-full aspect-video h-[180px] sm:h-[200px] ">
         <Image
           src={featuredImage?.node?.sourceUrl || '/producenter.jpg'}
           alt={title || 'Producent Image'}
@@ -26,9 +26,7 @@ function ProducenterCard({ producenter }) {
         <div className="flex items-center justify-between">
           <Link
             href={uri}
-            className="flex items-center justify-center w-auto px-4 py-2 text-xs sm:text-sm font-medium
-              text-white bg-[#FF0303] rounded-lg hover:bg-[#ff8181]
-              transition-colors duration-300 group"
+            className="inline-flex justify-center items-center px-3 py-1 text-sm font-medium text-center text-white bg-red-700 rounded-lg hover:bg-[#ff8181] gap-2 w-full cursor-pointer"
           >
             Mer Info
             <ArrowRight strokeWidth={3} className="ml-2 group-hover:translate-x-1 transition-transform" size={18} />

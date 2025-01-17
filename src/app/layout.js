@@ -9,6 +9,8 @@ import { CategoryAndPostsProvider } from '../context/CategoriesAndPostsContext';
 import { FilterProvider } from '../context/FilterContext';
 import { getAllCategoriesWithSuggestedPosts } from '../lib/api/postaccordion';
 import dynamic from 'next/dynamic';
+import { PostHogProvider } from './providers';
+import PgBanner from './PgBanner';
 
 const ScrollToTopButton = dynamic(() => import('./Components/ScrollToTopButton'), {
   ssr: false,
@@ -49,22 +51,27 @@ export default async function RootLayout({ children }) {
         <meta name="msapplication-TileColor" content="#F3EFE0" />
         <meta name="msapplication-tap-highlight" content="no" />
       </head>
-      <body>
-        <ApolloProvider>
-          <FilterProvider>
-            <PageProvider>
-              <CategoryAndPostsProvider categoriesWithSuggestedPosts={categoriesWithSuggestedPosts}>
-                <OrdlistaProvider ordlista={ordlista}>
-                  <Navbar menuData={menuData} />
 
-                  {children}
-                  <ScrollToTopButton />
-                  <Footer menuItems={footerMenu} />
-                </OrdlistaProvider>
-              </CategoryAndPostsProvider>
-            </PageProvider>
-          </FilterProvider>
-        </ApolloProvider>
+      <body>
+        <PostHogProvider>
+          <ApolloProvider>
+            <FilterProvider>
+              <PageProvider>
+                <CategoryAndPostsProvider categoriesWithSuggestedPosts={categoriesWithSuggestedPosts}>
+                  <OrdlistaProvider ordlista={ordlista}>
+                    <Navbar menuData={menuData} />
+
+                    {children}
+                    <PgBanner />
+
+                    <ScrollToTopButton />
+                    <Footer menuItems={footerMenu} />
+                  </OrdlistaProvider>
+                </CategoryAndPostsProvider>
+              </PageProvider>
+            </FilterProvider>
+          </ApolloProvider>
+        </PostHogProvider>
       </body>
     </html>
   );

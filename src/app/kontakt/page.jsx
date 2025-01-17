@@ -49,10 +49,10 @@ const page = () => {
         </div> */}
 
         <div className="container mx-auto block md:grid grid-cols-6 items-center justify-between gap-14  my-10">
-          <div className="col-span-4">
+          <div className="col-span-4 px-4 md:px-0 ">
             <SubscriptionForm />
           </div>
-          <div className="w-full grid col-span-2">
+          <div className="w-full grid col-span-2 mt:pt-0 pt-6 md:px-0 px-4">
             {/* <SubscriptionBox ordlista={ordlista} /> */}
             <SubscriptionBox />
           </div>

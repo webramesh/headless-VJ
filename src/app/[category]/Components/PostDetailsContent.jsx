@@ -16,12 +16,12 @@ const PostDetailsContent = ({ content, title }) => {
           <Image
             src={src}
             alt={alt || ''}
-            width={width ? parseInt(width) : 1}
-            height={height ? parseInt(height) : 1}
+            width={width ? parseInt(width) : 1000}
+            height={height ? parseInt(height) : 1000}
             loading={loading || 'lazy'}
             decoding={decoding || 'async'}
             style={{
-              width: '100%',
+              maxWidth: '100%',
               height: 'auto',
             }}
             {...attributesToProps(rest)}

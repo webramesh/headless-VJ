@@ -16,7 +16,9 @@ export async function generateMetadata() {
     icons: {
       icon: '/favicon.png',
     },
-    canonical: 'https://www.vinjournalen.se/ordlista/',
+    alternates: {
+      canonical: 'https://www.vinjournalen.se/ordlista/',
+    },
     openGraph: {
       locale: 'sv_SE',
       type: 'website',

@@ -42,7 +42,7 @@ const Footer = ({ menuItems }) => {
 
           <div className="flex gap-10 text-xl">
             <Link
-              href="https://twitter.com/hashtag/Vinjournalen"
+              href="https://x.com/hashtag/Vinjournalen"
               target="_blank"
               rel="noopener noreferrer"
               aria-label="Besök vår Twitter-sida"

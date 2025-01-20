@@ -232,7 +232,7 @@ export default function Navbar({ menuData }) {
             <hr className="w-[75%] border-t-1 mt-16 border-[#CCC]" />
           </div>
           <div className="flex justify-center items-center mt-6 gap-6">
-            <Link href="https://twitter.com/hashtag/Vinjournalen" target="_blank" aria-label="Twitter">
+            <Link href="https://x.com/hashtag/Vinjournalen" target="_blank" aria-label="Twitter">
               <Image
                 src={twitter}
                 alt="Twitter"

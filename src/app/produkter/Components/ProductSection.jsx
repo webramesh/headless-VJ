@@ -188,8 +188,8 @@ export default function ProductSection({ product }) {
               <div className="text-lg">
                 {fieldsProduct.salePrice ? (
                   <>
-                    <span className="text-xl mb-2 sm:mb-0">Pris: {fieldsProduct.salePrice}:-</span>
-                    <span className="ml-2 text-red-600 line-through"> {pice}:-</span>
+                    <span className="text-xl mb-2 sm:mb-0">Pris: {pice}:-</span>
+                    <span className="ml-2 text-red-600 line-through"> {fieldsProduct.salePrice}:-</span>
                   </>
                 ) : (
                   <span>Pris: {pice}:-</span>

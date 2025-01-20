@@ -99,8 +99,8 @@ function ProductCard({ product }) {
         <div className="text-lg mt-2">
           {fieldsProduct.salePrice ? (
             <>
-              <span className="text-gray-700 font-medium">{fieldsProduct.salePrice}:-</span>
-              <span className="ml-2 text-red-600 line-through">{pice}:-</span>
+              <span className="text-gray-700 font-medium">{pice}:-</span>
+              <span className="ml-2 text-red-600 line-through">{fieldsProduct.salePrice}:-</span>
             </>
           ) : (
             <span className="text-gray-700">{pice}:-</span>

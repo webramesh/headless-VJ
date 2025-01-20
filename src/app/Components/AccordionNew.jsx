@@ -15,7 +15,7 @@ const AccordionItem = ({ index, openIndexes, toggleAccordion, title, content }) 
         aria-controls={`accordion-content-${index}`}
         id={`accordion-button-${index}`}
       >
-        <span className="text-left text-sm md:text-md">{title}</span>
+        <span className="text-left text-sm">{title}</span>
         <span className={`transition-transform duration-300 transform`}>
           {isOpen ? <ChevronUp className="size-8 text-red-600" /> : <ChevronDown className="size-8 text-red-600" />}
         </span>
@@ -27,7 +27,7 @@ const AccordionItem = ({ index, openIndexes, toggleAccordion, title, content }) 
         aria-labelledby={`accordion-button-${index}`}
       >
         <div
-          className="pb-5 mt-2 mb-2 text-sm md:text-md pl-3 text-slate-900"
+          className="pb-5 mt-2 mb-2 text-sm pl-3 text-slate-900 faqContent"
           dangerouslySetInnerHTML={{ __html: content }}
         />
       </div>

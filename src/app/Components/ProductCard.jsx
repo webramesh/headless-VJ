@@ -22,38 +22,16 @@ function ProductCard({ product }) {
     const depthA = findDepth(a, produktslander.nodes);
     return depthA - depthB;
   });
-  // const imageMap = {
-  //   bestSeller: '/best-seller.svg',
-  //   organicWine: '/ekologisk.svg',
-  //   familyWinery: '/family.svg',
-  //   newWine: '/new.svg',
-  //   sustainable: '/sustainable.svg',
-  //   veganWine: '/vegan.svg',
-  //   verifiedByVjse: '/verified.svg',
-  // };
 
   return (
     <div className="border-2 shadow-md hover:shadow-lg transition-shadow duration-300 p-6 h-[450px] relative">
       {fieldsProduct?.salePrice && (
         <span className="bg-red-600 inline text-white  absolute right-0 top-0 z-10   px-[14px] py-2 rounded-md  text-xs">
-          {/* // <span className="bg-red-600 inline text-white  absolute top-[24px]  right-1 px-[14px] py-1 rounded-md  rotate-45 text-xs"> */}
           Prissänkt
         </span>
       )}
       <div className="flex flex-col justify-between h-full items-start relative">
-        <div className="absolute z-50">
-          {/* {fieldsProduct?.productLabels &&
-            Object.entries(fieldsProduct.productLabels)
-              .filter(([key, value]) => value && key !== '__typename') // Exclude __typename and filter labels with true values
-              .map(([key]) => {
-                return (
-                  <div key={key} className="relative block">
-                    <div className="my-1  ">
-                      <Image src={imageMap[key]} width={30} height={30} alt={key} className={`cursor-pointer `} />
-                    </div>
-                  </div>
-                );
-              })} */}
+        <div className="absolute z-20">
           <ProductLabelsWithTooltips fieldsProduct={fieldsProduct} />
         </div>
         <Link href={`/produkter/${slug}/`} className="flex justify-center w-full h-56 relative  ">

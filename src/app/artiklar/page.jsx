@@ -10,7 +10,6 @@ export async function generateMetadata() {
     description:
       'Denna sida innehåller artiklar om vin, mat och dryck, samt information om viner och vinodlingar från hela världen.',
     focusKeywords: ['vin', 'vinartiklar', 'vinodlingar', 'viner', 'mat och dryck'],
-    canonicalUrl: 'https://www.vinjournalen.se/artiklar/',
     icons: {
       icon: '/favicon.png',
     },
@@ -44,6 +43,9 @@ export async function generateMetadata() {
         type: 'image/png', // Favicon format
         sizes: '16x16', // Icon dimensions
       },
+    },
+    alternates: {
+      canonical: 'https://www.vinjournalen.se/artiklar/',
     },
   };
 }

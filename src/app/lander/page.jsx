@@ -38,6 +38,9 @@ export async function generateMetadata() {
         'I varje vinland så produceras viner inom olika områden. Varje område har sin egen karaktär som skiljer sig från grannliggande område.',
       image: 'https://www.vinjournalen.se/wp-content/uploads/2020/01/VinjournalenLogotype-scaled.jpg',
     },
+    alternates: {
+      canonical: 'https://www.vinjournalen.se/lander/',
+    },
   };
 }
 

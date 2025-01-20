@@ -8,7 +8,9 @@ export async function generateMetadata() {
     title: 'Vinimportörer Archive - Vinjournalen.se',
     robots: 'index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1',
     description: null, // No description provided in the data
-    canonicalUrl: 'https://www.vinjournalen.se/vinimportor/',
+    alternates: {
+      canonical: 'https://www.vinjournalen.se/vinimportor/',
+    },
     icons: {
       icon: '/favicon.png',
     },

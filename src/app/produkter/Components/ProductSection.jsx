@@ -30,7 +30,7 @@ export default function ProductSection({ product }) {
     extraReadMore2,
     extraReadMore3,
     pice,
-    bottlePackageVolume,
+    vintage,
     productCode,
     buyLink,
     wineSortiment,
@@ -40,11 +40,13 @@ export default function ProductSection({ product }) {
   } = fieldsProduct;
 
   const typer = produktTyper?.nodes?.filter((type) => type.parent !== null);
-  const sortedLanders = [...produktslander.nodes].sort((a, b) => {
-    const depthB = findDepth(b, produktslander.nodes);
-    const depthA = findDepth(a, produktslander.nodes);
-    return depthA - depthB;
-  });
+  const sortedLanders = [...produktslander.nodes]
+    .sort((a, b) => {
+      const depthB = findDepth(b, produktslander.nodes);
+      const depthA = findDepth(a, produktslander.nodes);
+      return depthA - depthB;
+    })
+    .slice(0, 2);
   const links = [...typer, ...sortedLanders];
   const updatedLinks = links.reduce((acc, current, index) => {
     if (index === 0) {
@@ -84,7 +86,7 @@ export default function ProductSection({ product }) {
           <div className="md:sticky md:top-10 lg:top-28">
             <div className="md:hidden">
               <h1 className=" items-start text-black text-2xl w-full">
-                {title} | {bottlePackageVolume} ml
+                {title} {vintage ? `| ${vintage}` : ''}
               </h1>
               <div className=" text-red-600 hover:text-red-500 mt-2 text-sm">
                 {updatedLinks.map((item, i, arr) => (
@@ -96,7 +98,6 @@ export default function ProductSection({ product }) {
             </div>
             <div className="mt-4 relative flex  gap-6">
               <div className="w-[10%]">
-                {/* The container with absolute positioning */} {/* Add any necessary positioning like top/left */}
                 <ProductLabelsWithTooltips fieldsProduct={fieldsProduct} />
               </div>
               <div className="object-cover ">
@@ -104,7 +105,8 @@ export default function ProductSection({ product }) {
                 <div className="relative">
                   <Image
                     src={featuredImage?.node?.sourceUrl}
-                    alt={title}
+                    alt={`${title} från www.vinjournalen.se`}
+                    title={`${title} - Vinjournalen.se`}
                     className="mx-auto h-[500px]  "
                     width={300} // Specify the width you want
                     height={500} // Specify the height you want
@@ -155,7 +157,7 @@ export default function ProductSection({ product }) {
         <div className="flex flex-col w-full md:w-2/3">
           <div className="hidden md:block">
             <h1 className="items-start text-black text-2xl w-full">
-              {title} | {bottlePackageVolume} ml
+              {title} {vintage ? `| ${vintage}` : ''}
             </h1>
             <div className="text-red-600 hover:text-red-500 mt-2 text-sm">
               {updatedLinks.map((item, i, arr) => (

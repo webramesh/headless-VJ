@@ -27,7 +27,7 @@ export default async function Page({ params }) {
   const faqItems = category?.faq?.faq || [];
 
   return (
-    <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+    <div className="container mx-auto">
       <Banner variant="default" />
       <div className="flex flex-col lg:flex-row lg:gap-10">
         {/* Main Content Section (3/4) */}

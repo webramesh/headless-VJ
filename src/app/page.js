@@ -12,7 +12,13 @@ import SubscriptionBox from './Components/subscription/SubscriptionBox';
 import Banner from './Components/Banner';
 import { generateSeoMetadata } from '../utils/utils';
 import HomeContent from './Components/HomeContent';
-
+import { Suspense } from 'react';
+import BannerSkeleton from './Components/SkeletonLoading/BannerSkeleton';
+import HeroSkeleton from './Components/SkeletonLoading/HeroSkeleton';
+import TrendingSkeleton from './Components/SkeletonLoading/TrendingPostSkeleton';
+import WineSkeleton from './Components/SkeletonLoading/WineSkeleton';
+import NewsPostSkeleton from './Components/SkeletonLoading/NewsPostSkeleton';
+import HomePageInfoSkeleton from './Components/SkeletonLoading/HomePageInfoSkeleton';
 
 export const revalidate = 60;
 
@@ -34,15 +40,23 @@ export default async function Home() {
 
   return (
     <div>
-      <Banner variant="default" />
+      <Suspense fallback={<BannerSkeleton />}>
+        <Banner variant="default" />
+      </Suspense>
       <HomeContent />
-      <Hero posts={posts} />
 
-      <Trending
-        title="TRENDIGT"
-        subtitle="Artiklar värda att läsa från våra redaktörer"
-        trendingPosts={trendingPosts}
-      />
+      <Suspense fallback={<HeroSkeleton />}>
+        <Hero posts={posts} />
+      </Suspense>
+
+      <Suspense fallback={<TrendingSkeleton />}>
+        <Trending
+          title="TRENDIGT"
+          subtitle="Artiklar värda att läsa från våra redaktörer"
+          trendingPosts={trendingPosts}
+        />
+      </Suspense>
+
       <div className="container mx-auto block md:grid grid-cols-6 items-center justify-between gap-14 px-2 my-10">
         <div className="col-span-4">
           <SubscriptionForm />
@@ -52,11 +66,21 @@ export default async function Home() {
         </div>
       </div>
 
-      <WineSlider categories={wineCategories} />
+      <Suspense fallback={<WineSkeleton />}>
+        <WineSlider categories={wineCategories} />
+      </Suspense>
 
-      <NewsPost title="NYHETER" subtitle="Den mest populära artikeln i dryckesvärlden" nyheter={nyheter.slice(0, 6)} />
+      <Suspense fallback={<NewsPostSkeleton />}>
+        <NewsPost
+          title="NYHETER"
+          subtitle="Den mest populära artikeln i dryckesvärlden"
+          nyheter={nyheter.slice(0, 6)}
+        />
+      </Suspense>
 
-      <Info />
+      <Suspense fallback={<HomePageInfoSkeleton />}>
+        <Info />
+      </Suspense>
     </div>
   );
 }

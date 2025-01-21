@@ -12,7 +12,7 @@ import {
 } from '@/src/lib/api/sitemapApi';
 
 export default async function sitemap() {
-  const baseUrl = process.env.NODE_ENV === 'development' ? 'http://localhost:3000' : 'https://vinjournalen.se';
+  const baseUrl = process.env.NODE_ENV === 'development' ? 'http://localhost:3000' : 'https://www.vinjournalen.se';
 
   try {
     // Fetch all dynamic data

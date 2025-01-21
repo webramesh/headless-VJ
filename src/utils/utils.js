@@ -245,3 +245,9 @@ export function countProductsByCountry(products) {
 
   return countryCountArray; // or return countryCounts for Map format
 }
+
+export const formatExternalUrl = (url) => {
+  if (!url) return '#';
+  // Add https if protocol is missing
+  return url.startsWith('http') ? url : `https://${url}`;
+};

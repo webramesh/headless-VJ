@@ -1,6 +1,7 @@
 import { getProducentBySlug } from '@/src/lib/api/producenterAPI';
 import Link from 'next/link';
 import BreadCrumb from '../../Components/breadcrumb/BreadCrumb';
+import { formatExternalUrl } from '@/src/utils/utils';
 
 export default async function Content({ params }) {
   const producent = await getProducentBySlug(params.slug);
@@ -27,7 +28,7 @@ export default async function Content({ params }) {
         {producenterWebsite && (
           <li>
             <b>Hemsida:&nbsp;</b>
-            <Link className="text-[#eb7272]" href={producenterWebsite} target="_blank">
+            <Link className="text-[#eb7272]" href={formatExternalUrl(producenterWebsite)} target="_blank">
               {producenterWebsite}
             </Link>
           </li>

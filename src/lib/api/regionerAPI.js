@@ -9,7 +9,7 @@ export async function countRegioners(cursor = null, allRegioners = []) {
     const { data } = await client.query({
       query: gql`
         query CountRegioners($cursor: String) {
-          regioner(first: 100, after: $cursor) {
+          regioner(first: 1000, after: $cursor) {
             nodes {
               id
             }

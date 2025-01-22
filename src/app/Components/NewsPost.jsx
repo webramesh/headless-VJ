@@ -50,7 +50,7 @@ const NewsPost = ({ title = '', subtitle = '', nyheter = [] }) => {
                 <h3 className="font-outfit font-medium text-black text-lg">{news?.title || 'Untitled'}</h3>
                 <p className="mt-2 font-outfit text-gray-900 text-xs">{formatDate(news?.date)}</p>
                 <p className="text-[#694848] text-xs font-outfit mt-2">
-                  {news?.author?.node?.name || 'Unknown Author'}
+                  {news?.author?.node?.name || 'Jeanette Gardner'}
                 </p>
                 <p className="font-outfit text-sm text-gray-900 font-extralight mt-2 leading-relaxed flex-grow">
                   {getExcerpt(news?.excerpt)}

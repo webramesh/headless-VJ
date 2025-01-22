@@ -12,6 +12,7 @@ import CommentsSection from '../../Components/CommentSection';
 import { generateSeoMetadata } from '@/src/utils/utils';
 import { getTaxonomySEO } from '@/src/lib/api/taxonomyApi';
 import RelatedPosts from './components/RelatedPosts';
+import Banner from '../../Components/Banner';
 
 export const revalidate = 60;
 
@@ -74,7 +75,9 @@ export default async function PostDetails({ params }) {
           <div className="container mx-auto px-4 lg:px-0">
             <div className="mt-6 sm:mt-10 lg:mt-24 mx-0 sm:mx-4 lg:mx-56 px-2 sm:px-3">
               {faqItems.length > 0 && (
-                <h2 className="font-medium text-lg sm:text-xl lg:text-2xl mb-3 sm:mb-4 pl-1 sm:pl-2">Frågor och Svar</h2>
+                <h2 className="font-medium text-lg sm:text-xl lg:text-2xl mb-3 sm:mb-4 pl-1 sm:pl-2">
+                  Frågor och Svar
+                </h2>
               )}
 
               <div className="w-full max-w-full mx-auto">
@@ -111,5 +114,10 @@ export default async function PostDetails({ params }) {
     );
   }
 
-  return <TaxonomyPage params={params} />;
+  return (
+    <>
+      <Banner variant="default" />
+      <TaxonomyPage params={params} />
+    </>
+  );
 }

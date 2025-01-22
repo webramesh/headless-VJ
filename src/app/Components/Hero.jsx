@@ -8,10 +8,7 @@ const Hero = ({ posts }) => {
       <div className="flex flex-col lg:flex-row gap-8">
         {/* Main Article */}
 
-        <Link
-          href={`/${posts[0].categories?.nodes[0]?.slug || 'uncategorized'}/${posts[0].slug}/`}
-          className="w-full lg:w-1/2 bg-[#f5f5f5] overflow-hidden"
-        >
+        <Link href={posts[0].uri} className="w-full lg:w-1/2 bg-[#f5f5f5] overflow-hidden">
           <div className="relative w-full">
             <div className="relative w-full h-0 pb-[66.67%] sm:pb-[50%] lg:pb-[66.67%]">
               <div className="absolute w-full h-full">
@@ -40,7 +37,7 @@ const Hero = ({ posts }) => {
               })}
             </p>
 
-            <p className="text-[#694848] text-xs  mt-2">{posts[0]?.author?.node?.name}</p>
+            <p className="text-[#694848] text-xs  mt-2">{posts[0]?.author?.node?.name || 'Jeanette Gardner'}</p>
             <p
               className=" text-sm text-gray-900 font-extralight mt-4 leading-relaxed"
               dangerouslySetInnerHTML={{ __html: formatEmbeddedContent(posts[0].excerpt) }}
@@ -54,7 +51,7 @@ const Hero = ({ posts }) => {
             if (index === 0) return;
             return (
               <div key={post.id}>
-                <Link href={`/${post?.categories?.nodes[0]?.slug || 'uncategorized'}/${post.slug}/`}>
+                <Link href={post?.uri}>
                   <div className="flex flex-col sm:flex-row gap-4 bg-[#f5f5f5] overflow-hidden lg:gap-0 xl:gap-4">
                     <div className="relative h-48 lg:mt-6 xl:mt-0 sm:h-auto lg:h-40 xl:h-48 sm:w-1/3">
                       <Image
@@ -79,7 +76,7 @@ const Hero = ({ posts }) => {
                           year: 'numeric',
                         })}
                       </p>
-                      <p className="text-[#694848] text-xs  mt-2">{post?.author?.node?.name}</p>
+                      <p className="text-[#694848] text-xs  mt-2">{post?.author?.node?.name || 'Jeanette Gardner'}</p>
                       <p
                         className=" text-sm text-gray-900 font-extralight mt-4 leading-relaxed"
                         dangerouslySetInnerHTML={{ __html: formatEmbeddedContent(post?.excerpt) }}

@@ -1,7 +1,7 @@
 import './globals.css';
 import ApolloProvider from '../app/Components/ApolloProvider';
 import Navbar from './Components/Navbar';
-import { getFooterMenu, getMainMenu } from '../lib/api/menuAPI';
+import { fetchMenu } from '../lib/api/menuAPI';
 import { PageProvider } from '../context/PageContext';
 import { OrdlistaProvider } from '../context/OrdlistaContext';
 import { getAllOrdlistaCategories } from '../lib/api/ordilistaAPI';
@@ -12,6 +12,7 @@ import dynamic from 'next/dynamic';
 import Topbanner from './Components/Topbanner';
 import { PostHogProvider } from './providers';
 import PgBanner from './PgBanner';
+import { getHomePagePosts } from '../lib/api/postAPI';
 
 const ScrollToTopButton = dynamic(() => import('./Components/ScrollToTopButton'), {
   ssr: false,
@@ -20,10 +21,13 @@ const ScrollToTopButton = dynamic(() => import('./Components/ScrollToTopButton')
 const Footer = dynamic(() => import('./Components/Footer'));
 
 export default async function RootLayout({ children }) {
-  const menuData = await getMainMenu();
-  const footerMenu = await getFooterMenu();
-  const ordlista = await getAllOrdlistaCategories();
-  const categoriesWithSuggestedPosts = await getAllCategoriesWithSuggestedPosts();
+  const [menuData, footerMenu, ordlista, categoriesWithSuggestedPosts, posts] = await Promise.all([
+    fetchMenu('primary-menu'),
+    fetchMenu('top-secondary-menu'),
+    getAllOrdlistaCategories(),
+    getAllCategoriesWithSuggestedPosts(),
+    getHomePagePosts(),
+  ]);
 
   return (
     <html lang="sv-SE">
@@ -60,7 +64,7 @@ export default async function RootLayout({ children }) {
               <PageProvider>
                 <CategoryAndPostsProvider categoriesWithSuggestedPosts={categoriesWithSuggestedPosts}>
                   <OrdlistaProvider ordlista={ordlista}>
-                    <Topbanner />
+                    <Topbanner post={posts[0]} />
                     <Navbar menuData={menuData} />
                     {children}
                     <PgBanner />

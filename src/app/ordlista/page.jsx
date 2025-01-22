@@ -8,6 +8,7 @@ import PostAccordion from '../Components/PostAccordion';
 
 export async function generateMetadata() {
   return {
+    metadataBase: new URL('https://www.vinjournalen.se/'),
     title: 'Ordlista arkiv - Vinjournalen.se',
     description: 'ORDLISTA DRUVOR, ORDLISTA SMAKDEFINITIONER, ORDLISTA FACKTERMER',
     robots: 'index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1',
@@ -26,12 +27,14 @@ export async function generateMetadata() {
       description: 'ORDLISTA DRUVOR, ORDLISTA SMAKDEFINITIONER, ORDLISTA FACKTERMER',
       url: 'https://www.vinjournalen.se/ordlista/',
       siteName: 'Vinjournalen.se',
-      image: {
-        url: 'https://www.vinjournalen.se/wp-content/uploads/2020/01/VinjournalenLogotype-scaled.jpg',
-        width: 2048,
-        height: 495,
-        type: 'image/jpeg',
-      },
+      images: [
+        {
+          height: 630,
+          type: 'image/jpeg',
+          url: '/vj-og.jpg',
+          width: 1200,
+        },
+      ],
     },
     twitter: {
       card: 'summary_large_image',

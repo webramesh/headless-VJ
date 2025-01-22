@@ -10,7 +10,7 @@ export async function countProducenters(cursor = null, allProducenters = []) {
     const { data } = await client.query({
       query: gql`
         query CountProducenters($cursor: String) {
-          producenter(first: 100, after: $cursor) {
+          producenter(first: 1000, after: $cursor) {
             nodes {
               id
             }
@@ -233,5 +233,79 @@ export async function getAllProducenterWithProducts(cursor = null, allProducente
   } catch (error) {
     console.error('Error fetching producenters with products', error);
     return allProducenters;
+  }
+}
+
+export async function countLanderProducenters(slug, cursor = null, allProducenters = []) {
+  try {
+    const { data } = await client.query({
+      query: gql`
+        query PostBySlug($slug: ID!, $cursor: String) {
+          produktLand(id: $slug, idType: SLUG) {
+            name
+            description
+            producenter(first: 1000, after: $cursor) {
+              nodes {
+                id
+              }
+              pageInfo {
+                endCursor
+                hasNextPage
+              }
+            }
+          }
+        }
+      `,
+      variables: { slug, cursor },
+    });
+
+    const newProducenters = data.produktLand.producenter.nodes;
+    const updatedProducenters = [...allProducenters, ...newProducenters];
+
+    if (data.produktLand.producenter.pageInfo.hasNextPage) {
+      return countLanderProducenters(slug, data.produktLand.producenter.pageInfo.endCursor, updatedProducenters);
+    }
+
+    return { lander: data?.produktLand, totalProducenters: updatedProducenters.length };
+  } catch (error) {
+    console.error('Error fetching producenter', error);
+    return allProducenters;
+  }
+}
+
+export async function getProducenterByLand(slug, first, last, after, before) {
+  try {
+    const { data } = await client.query({
+      query: gql`
+        query PostBySlug($slug: ID!, $first: Int, $last: Int, $after: String, $before: String) {
+          produktLand(id: $slug, idType: SLUG) {
+            producenter(first: $first, last: $last, after: $after, before: $before) {
+              nodes {
+                id
+                uri
+                title
+                featuredImage {
+                  node {
+                    sourceUrl
+                  }
+                }
+              }
+              pageInfo {
+                endCursor
+                hasNextPage
+                hasPreviousPage
+                startCursor
+              }
+            }
+          }
+        }
+      `,
+      variables: { slug, first, last, after, before },
+    });
+
+    return { producenters: data?.produktLand?.producenter?.nodes, pageInfo: data?.produktLand?.producenter?.pageInfo };
+  } catch (error) {
+    console.error('Error fetching producenters with products', error);
+    return [];
   }
 }

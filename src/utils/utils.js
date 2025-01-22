@@ -178,6 +178,7 @@ export function generateSeoMetadata(seo) {
   const keywords = seo?.focusKeywords?.join(', ') || '';
 
   return {
+    metadataBase: new URL('https://www.vinjournalen.se/'),
     title: seo?.title,
     description: seo?.description,
     robots: robotsMeta,
@@ -192,7 +193,7 @@ export function generateSeoMetadata(seo) {
       siteName: seo?.openGraph?.siteName,
       images: [
         {
-          url: seo?.openGraph?.image?.url,
+          url: seo?.openGraph?.image?.url || '/vj-og.jpg',
           width: seo?.openGraph?.image?.width,
           height: seo?.openGraph?.image?.height,
           alt: seo?.openGraph?.title,

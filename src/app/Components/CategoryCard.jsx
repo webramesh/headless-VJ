@@ -29,7 +29,7 @@ const Card = ({ post }) => {
         <div className="p-4 bg-[#f5f5f5] flex flex-col flex-grow">
           <h3 className="font-medium text-black text-lg">{post.title || 'Untitled'}</h3>
           <p className="mt-2 text-gray-900 text-xs">{post.date ? formatDate(post.date) : 'Date unavailable'}</p>
-          <p className="text-[#694848] text-xs mt-2">{post.author?.node?.name || 'Vinjournalen.se'}</p>
+          <p className="text-[#694848] text-xs mt-2">{post.author?.node?.name || 'Jeanette Gardner'}</p>
           <div className="flex-grow">
             <p className="text-sm text-gray-900 font-extralight mt-2 leading-relaxed">
               {formatEmbeddedContent(post.excerpt)}

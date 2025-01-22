@@ -69,14 +69,8 @@ export async function getHomePagePosts() {
               excerpt
               modified
               id
-              categories {
-                nodes {
-                  name
-                  slug
-                }
-              }
               slug
-              visitCount
+              uri
               featuredImage {
                 node {
                   sourceUrl

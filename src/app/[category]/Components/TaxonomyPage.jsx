@@ -12,7 +12,7 @@ async function TaxonomyPage({ params }) {
   }
   const { name, totalProducts } = taxonomyData;
   return (
-    <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+    <div className="container mx-auto">
       <div className="flex flex-col lg:flex-row lg:gap-10 mt-12">
         {/* Main Content Section (3/4) */}
         <div className="w-full lg:w-3/4 flex flex-col gap-6">

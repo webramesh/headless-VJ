@@ -5,6 +5,7 @@ import PostAccordion from '../Components/PostAccordion';
 
 export async function generateMetadata() {
   return {
+    metadataBase: new URL('https://www.vinjournalen.se/'),
     title: 'Vinimportörer Archive - Vinjournalen.se',
     robots: 'index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1',
     description: null, // No description provided in the data
@@ -21,13 +22,14 @@ export async function generateMetadata() {
       description: 'Information om vin på nätet', // Derived from OpenGraph description
       url: 'https://www.vinjournalen.se/vinimportor/',
       siteName: 'Vinjournalen.se',
-      image: {
-        height: 495,
-        secureUrl: null, // Not explicitly mentioned
-        type: 'image/jpeg',
-        url: 'https://www.vinjournalen.se/wp-content/uploads/2020/01/VinjournalenLogotype-scaled.jpg',
-        width: 2048,
-      },
+      images: [
+        {
+          height: 630,
+          type: 'image/jpeg',
+          url: '/vj-og.jpg',
+          width: 1200,
+        },
+      ],
     },
     twitterMeta: {
       card: 'summary_large_image',

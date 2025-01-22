@@ -9,7 +9,7 @@ export async function countArticles(cursor = null, allArticles = []) {
     const { data } = await client.query({
       query: gql`
         query CountArticles($cursor: String) {
-          posts(first: 100, after: $cursor) {
+          posts(first: 1000, after: $cursor) {
             nodes {
               id
             }

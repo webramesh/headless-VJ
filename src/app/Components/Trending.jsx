@@ -50,7 +50,7 @@ const Trending = ({ title = '', subtitle = '', trendingPosts = [] }) => {
                   })}
                 </p>
                 <p className="text-[#694848] text-xs font-outfit mt-2">
-                  {post?.author?.node?.name || 'Vinjournalen.se'}
+                  {post?.author?.node?.name || 'Jeanette Gardner'}
                 </p>
                 <p className="font-outfit text-sm text-gray-900 font-extralight mt-2 leading-relaxed flex-grow">
                   {formatEmbeddedContent(post?.excerpt)}

@@ -1,3 +1,4 @@
+import Banner from '../../Components/Banner';
 import PostAccordion from '../../Components/PostAccordion';
 import Sidebar from '../../Components/Sidebar';
 import SubscriptionForm from '../../Components/subscription/SubscriptionForm';
@@ -5,6 +6,7 @@ import SubscriptionForm from '../../Components/subscription/SubscriptionForm';
 function layout({ children }) {
   return (
     <>
+      <Banner variant={'default'} />
       <div className="container mx-auto flex  lg:flex-row gap-6 lg:gap-12 mt-4 lg:mt-10 bg-slate-50  p-4">
         <div className="md:w-3/4 ">
           {children}

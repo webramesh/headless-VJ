@@ -1,32 +1,64 @@
-import Map from '@/src/app/Components/Map';
-// import ProducenterCard from '@/src/app/Components/producenterCard/ProducenterCard';
-// import ProductCard from '../../Components/ProductCard';
+// import Map from '@/src/app/Components/Map';
+import { countLanderProducenters } from '@/src/lib/api/producenterAPI';
+import Container from './Components/Container';
 
-function page({ params }) {
+export async function generateMetadata({ params }) {
+  const { lander } = await countLanderProducenters(params.slug);
+  const title = `${lander.name} vinregion - arkiv - Vinjournalen.se`;
+  const url = `https://www.vinjournalen.se/produktion-land/${params.slug}/`;
+
+  return {
+    metadataBase: new URL('https://www.vinjournalen.se/'),
+    title: title,
+    description: null,
+    robots: 'index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1',
+    icons: {
+      icon: '/favicon.png',
+    },
+    keywords: lander.name,
+    openGraph: {
+      title: title,
+      description: null,
+      url: url,
+      siteName: 'Vinjournalen.se',
+      images: [
+        {
+          height: 630,
+          type: 'image/jpeg',
+          url: '/vj-og.jpg',
+          width: 1200,
+        },
+      ],
+      locale: 'sv_SE',
+      type: 'article',
+    },
+    twitter: {
+      twitterMeta: {
+        card: 'summary_large_image',
+        description: null,
+        image: '/vj-og.jpg',
+        creator: '@vinjournalense',
+        title: title,
+        site: '@vinjournalense',
+      },
+    },
+    alternates: {
+      canonical: url,
+    },
+  };
+}
+
+export default async function page({ params }) {
+  const { lander, totalProducenters } = await countLanderProducenters(params.slug);
   return (
     <>
-      <h1 className="text-2xl lg:text-3xl  mb-4 font-semibold uppercase ">vinproducenter från {params.slug}</h1>
-      <p className="text-sm lg:text-base mb-1 lg:mb-2">
-        Argentina räknades år 2011 som den femte största vinproducenten i världen. Speciellt för Argentina är deras högt
-        belägna vingårdar i Anderna där druvor som Malbec, landets nationaldruva, trivs utmärkt. Mendoza är landets
-        vinmekka, men druvor odlas överallt från Salta i norr och Patagonia i söder.
-      </p>
+      <h1 className="text-2xl lg:text-3xl mb-4 font-semibold uppercase ">vinproducenter från {lander?.name}</h1>
+      <p className="text-sm lg:text-base mb-1 lg:mb-2">{lander?.description}</p>
 
-      <div className="h-96 my-10">
+      {/* <div className="h-96 my-10">
         <Map />
-      </div>
-      <div className="mt-10 grid md:grid-cols-2 lg:grid-cols-3 gap-5">
-        {/* {Array.from({ length: 15 }, (_, i) => (
-          <div key={i}>
-            <ProducenterCard />
-          </div>
-        ))} */}
-      </div>
-      {/* pagination */}
-      {/* <Pagination pageNumber={params.slug} /> */}
-      <div className="md:grid-cols-2 lg:grid-cols-3 grid my-10">{/* <ProductCard /> */}</div>
+      </div> */}
+      <Container totalProducenters={totalProducenters} slug={params.slug} />
     </>
   );
 }
-
-export default page;

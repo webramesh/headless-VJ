@@ -41,15 +41,18 @@ function ContentSection({ title, items, baseUrl }) {
 }
 
 export default async function SiteContent() {
-  const pages = await getAllPages();
-  const ordlistaPages = await getAllOrdlistaPages();
-  const nyheterPages = await getAllNyheterPages();
-  const posts = await getAllPosts();
-  const producenter = await getAllProducenter();
-  const regioner = await getAllRegioner();
-  const vinguide = await getAllVinguide();
-  const vinimporterer = await getAllVinimporterer();
-  const produkter = await getAllProdukter();
+  const [pages, ordlistaPages, nyheterPages, posts, producenter, regioner, vinguide, vinimporterer, produkter] =
+    await Promise.all([
+      getAllPages(),
+      getAllOrdlistaPages(),
+      getAllNyheterPages(),
+      getAllPosts(),
+      getAllProducenter(),
+      getAllRegioner(),
+      getAllVinguide(),
+      getAllVinimporterer(),
+      getAllProdukter(),
+    ]);
 
   return (
     <div className="w-full px-2 sm:px-4 lg:px-6">

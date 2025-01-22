@@ -9,7 +9,7 @@ export async function countOrdlista(cursor = null, allOrdlista = []) {
     const { data } = await client.query({
       query: gql`
         query CountOrdlista($cursor: String) {
-          ordlista(first: 100, after: $cursor) {
+          ordlista(first: 1000, after: $cursor) {
             nodes {
               id
             }

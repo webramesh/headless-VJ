@@ -30,34 +30,24 @@ const PostDetailsHero = ({ featuredImage, title, authorImage, authorName, author
           </div>
           <div className="flex gap-2 md:gap-4 items-center">
             <div className="rounded-full overflow-hidden w-[40px] h-[40px] lg:w-[50px] lg:h-[50px] relative flex-shrink-0">
-              {authorSlug ? (
-                <Link href={`/author/${authorSlug}/`}>
-                  <Image
-                    src={authorImage || '/vinlogo.svg'}
-                    alt={authorName || 'Vinjournalen'}
-                    className="object-cover"
-                    width={100}
-                    height={100}
-                  />
-                </Link>
-              ) : (
+              <Link href={`/author/${authorSlug || 'gardner_vjnln901'}/`}>
                 <Image
-                  src={authorImage || '/vinlogo.svg'}
-                  alt={authorName || 'Vinjournalen'}
+                  src={
+                    authorImage ||
+                    'https://www.admin.vinjournalen.se/wp-content/uploads/2024/05/jeanettegardnervinjournalense-optimied.jpg'
+                  }
+                  alt={authorName || 'Jeanette Gardner'}
                   className="object-cover"
                   width={100}
                   height={100}
                 />
-              )}
+              </Link>
             </div>
             <div className=" text-xs lg:text-sm text-gray-600">
-              {authorSlug ? (
-                <Link href={`/author/${authorSlug}/`}>
-                  <span>{authorName || 'Vinjournalen'} | </span>
-                </Link>
-              ) : (
-                <span>{authorName || 'Vinjournalen'} | </span>
-              )}
+              <Link href={`/author/${authorSlug || 'gardner_vjnln901'}/`}>
+                <span>{authorName || 'Jeanette Gardner'} | </span>
+              </Link>
+
               <span className="capitalize">
                 {new Date(date).toLocaleDateString('sv-SE', {
                   day: '2-digit',

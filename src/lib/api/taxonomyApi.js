@@ -47,6 +47,11 @@ export async function countProductsByTaxonomy(category, slug) {
           ${taxonomy}(id: $slug, idType: SLUG) {
             name
             count
+            seo{
+              jsonLd{
+              raw
+              }
+            }
           }
         }
       `,

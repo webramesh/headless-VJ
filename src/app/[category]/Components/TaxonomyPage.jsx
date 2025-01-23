@@ -4,7 +4,6 @@ import SubscriptionForm from '../../Components/subscription/SubscriptionForm';
 import ProductsByTaxonomy from './ProductsByTaxonomy';
 import PostAccordion from '../../Components/PostAccordion';
 import { redirect } from 'next/navigation';
-import Script from 'next/script';
 
 async function TaxonomyPage({ params }) {
   const taxonomyData = await countProductsByTaxonomy(params.category, params.slug);
@@ -16,8 +15,7 @@ async function TaxonomyPage({ params }) {
 
   return (
     <>
-      <Script type="application/ld+json" id="ld-json-post" dangerouslySetInnerHTML={{ __html: jsonLd }} />
-
+      <section dangerouslySetInnerHTML={{ __html: jsonLd }} />
       <div className="container mx-auto">
         <div className="flex flex-col lg:flex-row lg:gap-10 mt-12">
           {/* Main Content Section (3/4) */}

@@ -8,7 +8,6 @@ import CategoryPage from './CategoryPage';
 import AccordionNew from '../Components/AccordionNew';
 import { generateSeoMetadata } from '@/src/utils/utils';
 import PostAccordion from '../Components/PostAccordion';
-import Script from 'next/script';
 
 export async function generateStaticParams() {
   const categories = await getAllCategories();
@@ -30,7 +29,7 @@ export default async function Page({ params }) {
 
   return (
     <>
-      <Script type="application/ld+json" id="ld-json-category" dangerouslySetInnerHTML={{ __html: jsonLd }} />
+      <section dangerouslySetInnerHTML={{ __html: jsonLd }} />
       <div className="container mx-auto">
         <Banner variant="default" />
         <div className="flex flex-col lg:flex-row lg:gap-10">

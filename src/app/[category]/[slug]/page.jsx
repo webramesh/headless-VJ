@@ -13,7 +13,6 @@ import { generateSeoMetadata } from '@/src/utils/utils';
 import { getTaxonomySEO } from '@/src/lib/api/taxonomyApi';
 import RelatedPosts from './components/RelatedPosts';
 import Banner from '../../Components/Banner';
-import Script from 'next/script';
 
 export const revalidate = 60;
 
@@ -62,7 +61,8 @@ export default async function PostDetails({ params }) {
 
     return (
       <>
-        <Script type="application/ld+json" id="ld-json-post" dangerouslySetInnerHTML={{ __html: jsonLd }} />
+        <section dangerouslySetInnerHTML={{ __html: jsonLd }} />
+
         <div className="bg-slate-50 min-h-full">
           <PostDetailsHero
             title={post?.title}

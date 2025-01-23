@@ -102,6 +102,7 @@ export async function getAllPosts() {
         id
         title
         slug
+        uri
         categories {
           nodes {
             slug
@@ -126,6 +127,7 @@ export async function getAllOrdlistaPages() {
         id
         title
         slug
+        uri
         ordlistaCategories {
           nodes {
             slug

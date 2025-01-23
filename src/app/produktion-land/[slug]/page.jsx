@@ -4,13 +4,14 @@ import Container from './Components/Container';
 
 export async function generateMetadata({ params }) {
   const { lander } = await countLanderProducenters(params.slug);
-  const title = `${lander.name} vinregion - arkiv - Vinjournalen.se`;
+  const title = `${lander.name} vinregion - Vinjournalen.se`;
+  const description = `Utforska ${lander.name}, hem till fantastiska vingårdar och viner. Upptäck dess unika vinkultur, natursköna landskap och världsklassiga viner som gör det till ett måste för vinälskare.`;
   const url = `https://www.vinjournalen.se/produktion-land/${params.slug}/`;
 
   return {
     metadataBase: new URL('https://www.vinjournalen.se/'),
     title: title,
-    description: null,
+    description: description,
     robots: 'index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1',
     icons: {
       icon: '/favicon.png',
@@ -18,7 +19,7 @@ export async function generateMetadata({ params }) {
     keywords: lander.name,
     openGraph: {
       title: title,
-      description: null,
+      description: description,
       url: url,
       siteName: 'Vinjournalen.se',
       images: [

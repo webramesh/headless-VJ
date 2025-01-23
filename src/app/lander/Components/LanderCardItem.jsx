@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import { ArrowRight } from 'lucide-react';
 import Image from 'next/image';
+import { formatEmbeddedContent } from '@/src/utils/utils';
 
 const LanderCardItem = ({ lander }) => {
   const { name, description, slug, count, categoriesImagesAndOtherFields } = lander;
@@ -22,7 +23,7 @@ const LanderCardItem = ({ lander }) => {
           {name}
         </h2>
         <div className="font-light text-gray-500 text-md h-24 text-ellipsis overflow-hidden mb-4">
-          <div dangerouslySetInnerHTML={{ __html: description }} />
+          <div dangerouslySetInnerHTML={{ __html: formatEmbeddedContent(description) }} />
         </div>
         <div className="text-sm text-gray-600 mb-2">Regions: {count}</div>
 

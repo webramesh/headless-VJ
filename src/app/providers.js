@@ -15,7 +15,7 @@ export function PostHogProvider({ children }) {
           persistence: 'localStorage+cookie',
           autocapture: false, // Reduce tracking attempts
           capture_pageview: false, // Disable automatic pageview tracking
-          loaded: (posthog) => {
+          loaded: () => {
             // Custom handling after PostHog loads
             if (process.env.NODE_ENV === 'development') {
               console.log('PostHog loaded successfully');

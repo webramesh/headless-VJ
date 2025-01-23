@@ -251,3 +251,15 @@ export const formatExternalUrl = (url) => {
   // Add https if protocol is missing
   return url.startsWith('http') ? url : `https://${url}`;
 };
+
+export const convertToWebP = (imagePath) => {
+  // if (!imagePath) return imagePath;
+
+  // Check if the path ends with jpg or jpeg
+  if (imagePath.toLowerCase().endsWith('.jpg') || imagePath.toLowerCase().endsWith('.jpeg')) {
+    // Replace the extension with .webp
+    return imagePath.replace(/\.(jpg|jpeg)$/i, '.webp');
+  }
+
+  return imagePath;
+};

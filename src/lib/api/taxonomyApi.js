@@ -49,7 +49,7 @@ export async function countProductsByTaxonomy(category, slug) {
             count
             seo{
               jsonLd{
-              raw
+                raw
               }
             }
           }
@@ -57,7 +57,7 @@ export async function countProductsByTaxonomy(category, slug) {
       `,
       variables: { category, slug },
     });
-    return { name: data[taxonomy].name, totalProducts: data[taxonomy].count };
+    return { name: data[taxonomy].name, totalProducts: data[taxonomy].count, seo: data[taxonomy].seo };
   } catch (error) {
     console.error('Error fetching products', error);
   }

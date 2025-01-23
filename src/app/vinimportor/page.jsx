@@ -4,11 +4,13 @@ import VinImportorContainer from './components/VinImportorContainer';
 import PostAccordion from '../Components/PostAccordion';
 
 export async function generateMetadata() {
+  const description =
+    'Upptäck vinimportörer i Sverige som säljer sina viner på Systembolaget. Hitta dina favoritviner, utforska unika sortiment och lägg till dina favoriter i din inköpslista idag.';
   return {
     metadataBase: new URL('https://www.vinjournalen.se/'),
-    title: 'Vinimportörer Archive - Vinjournalen.se',
+    title: 'Vinimportörer Sverige - Vinjournalen.se',
     robots: 'index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1',
-    description: null, // No description provided in the data
+    description: description,
     alternates: {
       canonical: 'https://www.vinjournalen.se/vinimportor/',
     },
@@ -19,7 +21,7 @@ export async function generateMetadata() {
       locale: 'sv_SE',
       type: 'website',
       title: 'Vinimportörer Archive - Vinjournalen.se',
-      description: 'Information om vin på nätet', // Derived from OpenGraph description
+      description: description,
       url: 'https://www.vinjournalen.se/vinimportor/',
       siteName: 'Vinjournalen.se',
       images: [

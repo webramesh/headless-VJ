@@ -11,8 +11,7 @@ export async function generateMetadata() {
     title: 'VINATLAS - Vinjournalen.se',
     description:
       'I varje vinland så produceras viner inom olika områden. Varje område har sin egen karaktär som skiljer sig från grannliggande område.',
-    robots: 'index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1',
-    // viewport: 'width=device-width, initial-scale=1, minimum-scale=1',
+    robots: 'index, follow, max-image-preview:standard, max-snippet:-1, max-video-preview:-1',
     icons: {
       icon: '/favicon.png',
     },
@@ -23,7 +22,7 @@ export async function generateMetadata() {
       url: 'https://www.vinjournalen.se/vin-atlas/',
       type: 'article',
       siteName: 'Vinjournalen.se',
-      locale: 'sv_SE',
+      locale: 'SV_SE',
       images: [
         {
           height: 630,
@@ -34,12 +33,13 @@ export async function generateMetadata() {
       ],
     },
     twitter: {
-      card: 'summary_large_image',
+      card: 'SUMMARY_LARGE_IMAGE',
       site: '@vinjournalense',
       title: 'VINATLAS - Vinjournalen.se',
       description:
         'I varje vinland så produceras viner inom olika områden. Varje område har sin egen karaktär som skiljer sig från grannliggande område.',
-      image: 'https://www.vinjournalen.se/wp-content/uploads/2020/01/VinjournalenLogotype-scaled.jpg',
+      image: '/vj-og.jpg',
+      creator: '@vinjournalense',
     },
     alternates: {
       canonical: 'https://www.vinjournalen.se/lander/',

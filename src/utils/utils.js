@@ -177,9 +177,12 @@ export function generateSeoMetadata(seo) {
   // Convert focus keywords array to comma-separated string
   const keywords = seo?.focusKeywords?.join(', ') || '';
 
+  const title = seo?.title;
+  const formattedTitle = title.includes('Vinjournalen.se') ? title : `${title} - Vinjournalen.se`;
+
   return {
     metadataBase: new URL('https://www.vinjournalen.se/'),
-    title: seo?.title,
+    title: formattedTitle,
     description: seo?.description,
     robots: robotsMeta,
     icons: {

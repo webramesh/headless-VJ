@@ -150,6 +150,9 @@ export async function getPostBySlug(slug) {
               description
               focusKeywords
               canonicalUrl
+              jsonLd {
+                raw
+              }
               openGraph {
                 locale
                 type
@@ -422,6 +425,9 @@ export async function getCategoryBySlug(slug) {
               description
               focusKeywords
               canonicalUrl
+              jsonLd {
+                raw
+              }
               openGraph {
                 locale
                 type

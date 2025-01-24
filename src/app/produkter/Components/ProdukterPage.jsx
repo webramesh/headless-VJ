@@ -1,10 +1,11 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { Suspense, useEffect, useState } from 'react';
 import ProductCard from '../../Components/ProductCard';
 import Pagination from '../../Components/pagination/Pagination';
 import { getAllProducts } from '@/src/lib/api/productsAPI';
 import { usePagination } from '@/src/context/PageContext';
+import ProductCardSkeleton from '../../Components/SkeletonLoading/ProductCardSkeleton';
 
 const PRODUCTS_PER_PAGE = 15;
 
@@ -38,7 +39,15 @@ export default function ProdukterPage({ totalProducts }) {
   }, [first, last, after, before, isReset, dispatch]);
 
   return (
-    <>
+    <Suspense
+      fallback={
+        <div className="grid grid-cols-1 md:grid-cols-3  gap-5 mt-10">
+          {Array.from({ length: PRODUCTS_PER_PAGE }).map((_, index) => (
+            <ProductCardSkeleton key={index} />
+          ))}
+        </div>
+      }
+    >
       <div className="grid grid-cols-1 md:grid-cols-3 gap-5 mt-10">
         {products?.map((product) => (
           <div key={product.id}>
@@ -48,6 +57,6 @@ export default function ProdukterPage({ totalProducts }) {
       </div>
       <hr className="my-10" />
       <Pagination pageInfo={pageInfo} pageLimit={PRODUCTS_PER_PAGE} total={totalProducts} />
-    </>
+    </Suspense>
   );
 }

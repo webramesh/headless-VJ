@@ -123,6 +123,9 @@ export async function getOrdlistaCategoryBySlug(slug) {
               description
               focusKeywords
               canonicalUrl
+              jsonLd {
+                raw
+              }
               openGraph {
                 locale
                 type
@@ -212,6 +215,11 @@ export async function getOrdlistaBySlug(slug) {
             date
             title
             content
+            seo {
+              jsonLd {
+                raw
+              }
+            }
             faq {
               faq {
                 faqAnswer

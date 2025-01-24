@@ -20,11 +20,13 @@ async function Page({ params }) {
   const { country, region } = params;
   const selectedRegion = await getRegionByURL(`/regioner/${region}`);
 
-  const { content, faq } = selectedRegion;
+  const { content, faq, seo } = selectedRegion;
   const faqItems = faq?.faq || [];
+  const jsonLd = seo?.jsonLd?.raw || null;
 
   return (
     <>
+      <section dangerouslySetInnerHTML={{ __html: jsonLd }} />
       <h1 className="text-2xl lg:text-3xl font-semibold uppercase">{region}</h1>
       <BreadCrumb title1="Regioner" link1="/regioner" title2={country} link2={`/lander/${country}`} title3={region} />
       {selectedRegion?.featuredImage?.node?.sourceUrl && (

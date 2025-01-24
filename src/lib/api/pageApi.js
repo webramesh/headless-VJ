@@ -84,6 +84,9 @@ export async function getPageBySlug(slug) {
               description
               focusKeywords
               canonicalUrl
+              jsonLd {
+                raw
+              }
               openGraph {
                 locale
                 type

@@ -12,9 +12,12 @@ export default async function Page({ params }) {
 
   // Fetch the specific news article data
   const nyhet = await getAllNyheterBySlug(slug);
+  const jsonLd = nyhet?.seo?.jsonLd?.raw || null;
 
   return (
     <>
+      <section dangerouslySetInnerHTML={{ __html: jsonLd }} />
+
       <NyheterContent nyhet={nyhet} />
     </>
   );

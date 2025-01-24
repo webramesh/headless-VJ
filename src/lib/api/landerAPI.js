@@ -92,6 +92,9 @@ export async function getLandBySlug(slug) {
               description
               focusKeywords
               canonicalUrl
+              jsonLd {
+                raw
+              }
               openGraph {
                 locale
                 type

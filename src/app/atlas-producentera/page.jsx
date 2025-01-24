@@ -20,9 +20,12 @@ export async function generateMetadata() {
 export default async function Page() {
   // Fetched all producenter and countries data
   const countries = await getAllCountries();
+  const data = await getPageBySlug('atlas-producentera');
+  const jsonLd = data?.seo?.jsonLd?.raw || null;
 
   return (
     <>
+      <section dangerouslySetInnerHTML={{ __html: jsonLd }} />
       <AtlasContent countries={countries} />
     </>
   );

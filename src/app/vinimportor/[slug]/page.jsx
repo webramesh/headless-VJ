@@ -31,9 +31,11 @@ export default async function Page({ params }) {
 
   const products = vinimporterData.importerFields?.productsVinimporter?.nodes || [];
   const formattedProducts = products.map((product) => ({ product }));
+  const jsonLd = vinimporterData?.seo?.jsonLd?.raw || null;
 
   return (
-    <div>
+    <>
+      <section dangerouslySetInnerHTML={{ __html: jsonLd }} />
       <VinimportorHero vinimporterData={vinimporterData} />
       {vinimporterData.featuredImage && (
         <div className="flex justify-center mb-4 sm:mb-6 lg:mb-8 p-3 sm:p-4 lg:p-6">
@@ -60,6 +62,6 @@ export default async function Page({ params }) {
         <SubscriptionForm />
         <PostAccordion />
       </div>
-    </div>
+    </>
   );
 }

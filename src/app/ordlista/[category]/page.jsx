@@ -21,8 +21,10 @@ export async function generateMetadata({ params }) {
 export default async function page({ params }) {
   const category = await getOrdlistaCategoryBySlug(params.category);
   const totalOrdlista = category.count;
+  const jsonLd = category?.seo?.jsonLd?.raw || null;
   return (
     <>
+      <section dangerouslySetInnerHTML={{ __html: jsonLd }} />
       <div className="container mx-auto px-4 my-10  grid grid-cols-4 gap-12">
         <div className="col-span-4 lg:col-span-3">
           <h2 className="text-3xl font-bold text-gray-800">{category?.name}</h2>

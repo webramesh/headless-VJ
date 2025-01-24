@@ -9,7 +9,6 @@ import MoreOnProduct from '../../Components/MoreOnProduct';
 import PriceHistory from '../../Components/PriceHistory';
 import SalesHistory from '../../Components/SalesHistory';
 export const revalidate = 60;
-// export const revalidate = 0;
 
 export async function generateMetadata({ params }) {
   const { product } = await getProductBySlug(params.slug);
@@ -32,8 +31,11 @@ export default async function Page({ params }) {
   const similarProducts = typerProduct?.vinguideProducts?.vinguideproduct?.nodes;
   const filteredSimilarProducts = similarProducts?.filter((product) => product.slug !== params.slug).slice(0, 4);
 
+  const jsonLd = product?.seo?.jsonLd?.raw || null;
+
   return (
     <>
+      <section dangerouslySetInnerHTML={{ __html: jsonLd }} />
       <ProductSection product={product} />
       <InformationCards
         fieldsProduct={product?.fieldsProduct}

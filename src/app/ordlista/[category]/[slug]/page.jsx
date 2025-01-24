@@ -24,10 +24,49 @@ const page = async ({ params }) => {
   const category = ordlista?.ordlistaCategories?.nodes[0];
   const faqItems = ordlista?.faq?.faq || [];
 
-  // if (!ordlista)
+  const jsonLd = {
+    '@context': 'https://schema.org',
+    '@graph': [
+      {
+        '@type': 'BreadcrumbList',
+        '@id': `https://www.vinjournalen.se/ordlista/${category.slug}/${slug}/#breadcrumb`,
+        itemListElement: [
+          {
+            '@type': 'ListItem',
+            position: '1',
+            item: {
+              '@id': 'https://www.vinjournalen.se',
+              name: 'Hem',
+            },
+          },
+          {
+            '@type': 'ListItem',
+            position: '2',
+            item: {
+              '@id': `https://www.vinjournalen.se/ordlista/${category.slug}/`,
+              name: `Ordlista ${category.name}`,
+            },
+          },
+          {
+            '@type': 'ListItem',
+            position: '3',
+            item: {
+              '@id': `https://www.vinjournalen.se/ordlista/${category.slug}/${slug}/`,
+              name: `${slug}`,
+            },
+          },
+        ],
+      },
+    ],
+  };
 
   return (
     <>
+      <script
+        type="application/ld+json"
+        className="rank-math-schema"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
       <div className="container mx-auto px-4 my-10  grid grid-cols-4 gap-12">
         <div className="col-span-4 lg:col-span-3">
           <h1 className="text-3xl font-bold text-gray-800">{ordlista?.title}</h1>

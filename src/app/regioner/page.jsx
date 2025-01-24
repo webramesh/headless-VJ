@@ -15,9 +15,11 @@ export async function generateMetadata() {
 
 const Page = async () => {
   const totalRegioners = await countRegioners();
-
+  const { seo } = await getContentTypeSEO('cG9zdF90eXBlOnJlZ2lvbmVy'); // id for regioner
+  const jsonLd = seo?.jsonLd?.raw || null;
   return (
     <>
+      <section dangerouslySetInnerHTML={{ __html: jsonLd }} />
       <div className="container mx-auto mt-5 px-4 md:px-0">
         <BreadCrumb title1="Regioner" />
         <div className="block md:grid md:grid-cols-4 md:gap-8">

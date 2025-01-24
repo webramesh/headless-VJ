@@ -121,7 +121,7 @@ export default function Navbar({ menuData }) {
               src={vinlogo}
               alt="VinLogo"
               className="object-cover md:hidden w-14"
-              width="auto"
+              width={56}
               height="auto"
               priority
             />
@@ -130,7 +130,7 @@ export default function Navbar({ menuData }) {
               src={logo}
               alt="Vinjournalen Logo"
               className="object-cover hidden md:block w-44 xl:w-52"
-              width="auto"
+              width={208}
               height="auto"
               priority
             />

@@ -14,8 +14,12 @@ export default function DryckerPage({ initialProducts, vinguideData, cardTitle, 
   const countries = vinguideData?.children?.nodes || [];
   const products = vinguideData?.vinguideProducts?.vinguideproduct?.nodes || [];
   const countryCounts = countProductsByCountry(products);
+  const jsonLd = vinguideData?.seo?.jsonLd?.raw || null;
+
   return (
     <>
+      <section dangerouslySetInnerHTML={{ __html: jsonLd }} />
+
       <Hero params={params} pageTitle={pageTitle} pageSubtitle={pageSubtitle} />
       <Paragraph shortTitle={shortTitle} shortDescription={shortDescription} />
       <Scrolltodown />

@@ -104,6 +104,9 @@ export async function getRegionByURL(url) {
               description
               focusKeywords
               canonicalUrl
+              jsonLd {
+                raw
+              }
               openGraph {
                 locale
                 type

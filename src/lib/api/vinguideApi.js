@@ -43,6 +43,9 @@ export async function getVinguideData(uri) {
               description
               focusKeywords
               canonicalUrl
+              jsonLd {
+                raw
+              }
               openGraph {
                 locale
                 type

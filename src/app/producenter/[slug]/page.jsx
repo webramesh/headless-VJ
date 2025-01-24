@@ -23,43 +23,46 @@ export default async function Page({ params }) {
   if (!producentData) {
     return <div>Produkten hittades inte</div>;
   }
-
+  const jsonLd = producentData?.seo?.jsonLd?.raw || null;
   const products = producentData.producenterFields?.products?.nodes || [];
   const formattedProducts = products.map((product) => ({ product }));
 
   return (
-    <div className="container mx-auto lg:mt-10 p-2">
-      {producentData.featuredImage && (
-        <div className="mb-8 p-6">
-          <Image
-            src={producentData?.featuredImage?.node?.sourceUrl}
-            alt={producentData?.featuredImage?.node?.altText || producentData?.title}
-            width={30}
-            height={20}
-            sizes="100vw"
-            className="object-cover size-auto"
-          />
-        </div>
-      )}
-      <div className="md:flex gap-2">
-        <div className="">
-          <Content params={params} />
-        </div>
-      </div>
-      <div className="mt-4">
-        {formattedProducts.length > 0 && (
-          <>
-            <h2 className="text-2xl font-bold mb-4 text-center md:text-left">Produkter från {producentData.title}</h2>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-              {formattedProducts.map((productWrapper, index) => (
-                <div key={productWrapper.product.id || index} className="w-full">
-                  <ProductCard {...productWrapper} />
-                </div>
-              ))}
-            </div>
-          </>
+    <>
+      <section dangerouslySetInnerHTML={{ __html: jsonLd }} />
+      <div className="container mx-auto lg:mt-10 p-2">
+        {producentData.featuredImage && (
+          <div className="mb-8 p-6">
+            <Image
+              src={producentData?.featuredImage?.node?.sourceUrl}
+              alt={producentData?.featuredImage?.node?.altText || producentData?.title}
+              width={30}
+              height={20}
+              sizes="100vw"
+              className="object-cover size-auto"
+            />
+          </div>
         )}
+        <div className="md:flex gap-2">
+          <div className="">
+            <Content params={params} />
+          </div>
+        </div>
+        <div className="mt-4">
+          {formattedProducts.length > 0 && (
+            <>
+              <h2 className="text-2xl font-bold mb-4 text-center md:text-left">Produkter från {producentData.title}</h2>
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                {formattedProducts.map((productWrapper, index) => (
+                  <div key={productWrapper.product.id || index} className="w-full">
+                    <ProductCard {...productWrapper} />
+                  </div>
+                ))}
+              </div>
+            </>
+          )}
+        </div>
       </div>
-    </div>
+    </>
   );
 }

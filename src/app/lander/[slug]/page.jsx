@@ -16,7 +16,8 @@ export async function generateMetadata({ params }) {
 
 async function page({ params }) {
   const landerDetails = await getLandBySlug(params.slug);
-  const { name, description, regioner } = landerDetails;
+  const { name, description, regioner, seo } = landerDetails;
+  const jsonLd = seo?.jsonLd?.raw || null;
   return (
     <>
       {/* <div className="flex flex-col lg:flex-row gap-6 lg:gap-12 mt-4 lg:mt-8 bg-slate-50  p-4">
@@ -27,6 +28,7 @@ async function page({ params }) {
           </div>
         </div>
       </div> */}
+      <section dangerouslySetInnerHTML={{ __html: jsonLd }} />
       <div className="container mx-auto">
         <div className="flex flex-col lg:flex-row mx-4 lg:mx-52 z-10">
           <div className="flex flex-col gap-2 bg-white w-full lg:w-auto">

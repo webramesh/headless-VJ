@@ -25,9 +25,11 @@ export default async function AuthorPage({ params }) {
   if (!author) {
     return <div>Författaren hittades inte</div>;
   }
+  const jsonLd = author?.seo?.jsonLd?.raw || null;
 
   return (
     <div>
+      <section dangerouslySetInnerHTML={{ __html: jsonLd }} />
       <AuthorHero title="Author" />
       <div className="container mx-auto">
         <div className="flex flex-col md:flex-row items-center">

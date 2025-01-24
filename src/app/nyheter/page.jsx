@@ -18,9 +18,12 @@ export async function generateMetadata() {
 export default async function NyheterPage() {
   const { nyheter, pageInfo } = await getAllNyheterPaginated(12, null, null, null);
   const totalNyheter = await countNyheter();
-
+  const { seo } = await getContentTypeSEO('cG9zdF90eXBlOm55aGV0ZXI='); // id for nyheter
+  const jsonLd = seo?.jsonLd?.raw || null;
   return (
     <PageProvider>
+      <section dangerouslySetInnerHTML={{ __html: jsonLd }} />
+
       <Banner variant="default" />
       <AllNews initialPosts={nyheter} initialPageInfo={pageInfo} totalPosts={totalNyheter} sidebar={<Sidebar />} />
     </PageProvider>

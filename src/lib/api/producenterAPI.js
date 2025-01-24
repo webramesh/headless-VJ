@@ -85,6 +85,11 @@ export async function getProducentBySlug(slug) {
             slug
             title
             content
+            seo {
+              jsonLd {
+                raw
+              }
+            }
             featuredImage {
               node {
                 altText

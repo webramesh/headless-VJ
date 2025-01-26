@@ -78,7 +78,7 @@ function ProductCard({ product }) {
           <Link href={`/produkter/${slug}/`} className="leading-6 text-lg">
             {title}
           </Link>
-          <div className="flex gap-2 mt-4 items-center">
+          <div className="flex gap-2 mt-4 items-start">
             {sortedLanders[0]?.flag?.flagImage?.node?.sourceUrl && (
               <Image
                 src={sortedLanders[0]?.flag?.flagImage?.node?.sourceUrl}

@@ -1,4 +1,4 @@
-import ProductSection from '../Components/ProductSection';
+import NewProdSection from '../Components/NewProdSection';
 import InformationCards from '../Components/InformationCards';
 import Price from '../Components/Price';
 import { getProductBySlug, getSimilarProducts } from '@/src/lib/api/productsAPI';
@@ -23,7 +23,7 @@ export async function generateMetadata({ params }) {
 
 export default async function Page({ params }) {
   const { product } = await getProductBySlug(params.slug);
-  const producentDetails = product?.fieldsProduct?.produkterproducer?.nodes[0];
+  const producenterData = product?.fieldsProduct?.produkterproducer?.nodes[0];
   const vinimportorDetails = product?.fieldsProduct?.vinimporter?.nodes[0];
 
   const typer = product?.produktTyper?.nodes?.filter((type) => type.parent !== null);
@@ -34,7 +34,7 @@ export default async function Page({ params }) {
 
   return (
     <>
-      <ProductSection product={product} />
+      <NewProdSection product={product} producenterData={producenterData} />
       <InformationCards
         fieldsProduct={product?.fieldsProduct}
         productTitle={product?.title}
@@ -82,8 +82,8 @@ export default async function Page({ params }) {
       <div className="" id="more-on-product">
         <div className="py-8">
           <hr />
-          {(producentDetails?.title || vinimportorDetails?.title) && (
-            <MoreOnProduct vinimportorDetails={vinimportorDetails} producentDetails={producentDetails} />
+          {(producenterData?.title || vinimportorDetails?.title) && (
+            <MoreOnProduct vinimportorDetails={vinimportorDetails} producentDetails={producenterData} />
           )}
           <hr />
         </div>{' '}

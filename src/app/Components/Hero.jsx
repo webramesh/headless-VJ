@@ -22,8 +22,8 @@ const Hero = ({ posts }) => {
                   fill
                   priority
                   className="h-full w-full object-cover"
-                  placeholder="blur"
-                  blurDataURL="/postplaceholder.jpg"
+                  // placeholder="blur"
+                  // blurDataURL="/postplaceholder.jpg"
                   sizes={
                     posts[0]?.featuredImage?.node?.sizes || '(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 25vw'
                   }
@@ -66,10 +66,10 @@ const Hero = ({ posts }) => {
                         }
                         alt={post?.featuredImage?.node?.altText || post?.title}
                         fill
-                        loading="lazy"
+                        priority
                         className="object-cover"
-                        placeholder="blur"
-                        blurDataURL="/search.png"
+                        // placeholder="blur"
+                        // blurDataURL="/search.png"
                         sizes={
                           post?.featuredImage?.node?.sizes || '(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 25vw'
                         }

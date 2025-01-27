@@ -1,4 +1,5 @@
-@tailwind base;
+
+/* @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
@@ -12,7 +13,9 @@
 
 body {
   font-family: 'Outfit', sans-serif;
-}
+} */
+
+
 
 @layer base {
   :root {

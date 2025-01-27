@@ -1,57 +1,114 @@
+// 'use client';
+// import React from 'react';
+// import Link from 'next/link';
+// import Slider from 'react-slick';
+// import 'slick-carousel/slick/slick.css';
+// import 'slick-carousel/slick/slick-theme.css';
+// import { ChevronLeft, ChevronRight } from 'lucide-react';
+// import Image from 'next/image';
+
+// const WineCard = ({ backgroundImage, title, category, articles, description, colorPicker, slug }) => {
+//   return (
 'use client';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import Link from 'next/link';
 import Slider from 'react-slick';
-import 'slick-carousel/slick/slick.css';
-import 'slick-carousel/slick/slick-theme.css';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 import Image from 'next/image';
 
+// Create a component to handle async CSS loading
+const AsyncCSS = () => {
+  useEffect(() => {
+    // Function to load CSS asynchronously
+    const loadCSS = (href) => {
+      const link = document.createElement('link');
+      link.rel = 'stylesheet';
+      link.href = href;
+      document.head.appendChild(link);
+    };
+
+    // Load both CSS files asynchronously
+    loadCSS('https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.css');
+    loadCSS('https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick-theme.min.css');
+  }, []);
+
+  return null;
+};
+
 const WineCard = ({ backgroundImage, title, category, articles, description, colorPicker, slug }) => {
+  // Add loading state to handle initial render without styles
+  const [isCSSDone, setIsCSSDone] = useState(false);
+
+  useEffect(() => {
+    if (isCSSDone) {
+      console.log('CSS processing completed');
+    }
+    // Check if styles are loaded
+    const checkStylesLoaded = () => {
+      const styleSheets = document.styleSheets;
+      for (let i = 0; i < styleSheets.length; i++) {
+        if (
+          styleSheets[i].href &&
+          (styleSheets[i].href.includes('slick.min.css') || styleSheets[i].href.includes('slick-theme.min.css'))
+        ) {
+          setIsCSSDone(true);
+          return;
+        }
+      }
+      // If not found, check again in 100ms
+      setTimeout(checkStylesLoaded, 100);
+    };
+
+    checkStylesLoaded();
+  }, [isCSSDone]);
+
   return (
-    <Link href={`/${slug}/`} className="block">
-      <div className="p-2">
-        <div className="relative w-full h-64 group cursor-pointer">
-          <Image
-            src={backgroundImage}
-            alt={title}
-            fill
-            sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
-            className="object-cover transition-all duration-300 ease-in-out"
-            quality={75}
-            loading="lazy"
-          />
-          <div
-            className="absolute inset-0 bg-black opacity-0 transition-opacity duration-300 ease-in-out group-hover:opacity-50"
-            aria-hidden="true"
-          ></div>
-          <div className="absolute inset-0 flex items-center justify-center text-center">
-            <h2 className="text-white text-3xl lg:text-4xl font-bold leading-snug group-hover:opacity-0 transition-opacity duration-300 ease-in-out">
-              {title.split('\n').map((line, index) => (
-                <React.Fragment key={index}>
-                  {line}
-                  {index < title.split('\n').length - 1 && <br />}
-                </React.Fragment>
-              ))}
-            </h2>
-            <div className="absolute inset-0 mt-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300 ease-in-out">
-              <div className="flex items-center justify-between px-4">
-                <div
-                  className="flex flex-start m-4 w-fit px-3 text-white font-outfit text-sm font-thin rounded-lg"
-                  style={{ backgroundColor: colorPicker || '#000000' }}
-                >
-                  {category.name}
+    <>
+      <AsyncCSS />
+      <Link href={`/${slug}/`} className="block">
+        <div className="p-2">
+          <div className="relative w-full h-64 group cursor-pointer">
+            <Image
+              src={backgroundImage}
+              alt={title}
+              fill
+              sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
+              className="object-cover transition-all duration-300 ease-in-out"
+              quality={75}
+              loading="lazy"
+            />
+            <div
+              className="absolute inset-0 bg-black opacity-0 transition-opacity duration-300 ease-in-out group-hover:opacity-50"
+              aria-hidden="true"
+            ></div>
+            <div className="absolute inset-0 flex items-center justify-center text-center">
+              <h2 className="text-white text-3xl lg:text-4xl font-bold leading-snug group-hover:opacity-0 transition-opacity duration-300 ease-in-out">
+                {title.split('\n').map((line, index) => (
+                  <React.Fragment key={index}>
+                    {line}
+                    {index < title.split('\n').length - 1 && <br />}
+                  </React.Fragment>
+                ))}
+              </h2>
+              <div className="absolute inset-0 mt-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300 ease-in-out">
+                <div className="flex items-center justify-between px-4">
+                  <div
+                    className="flex flex-start m-4 w-fit px-3 text-white font-outfit text-sm font-thin rounded-lg"
+                    style={{ backgroundColor: colorPicker || '#000000' }}
+                  >
+                    {category.name}
+                  </div>
+                  <div className="text-white text-sm font-outfit">{articles} ARTIKLAR</div>
                 </div>
-                <div className="text-white text-sm font-outfit">{articles} ARTIKLAR</div>
+                <p className="font-outfit text-lg md:text-2xl flex items-center justify-center leading-snug p-7 text-white font-medium">
+                  {description}
+                </p>
               </div>
-              <p className="font-outfit text-lg md:text-2xl flex items-center justify-center leading-snug p-7 text-white font-medium">
-                {description}
-              </p>
             </div>
           </div>
         </div>
-      </div>
-    </Link>
+      </Link>
+    </>
   );
 };
 

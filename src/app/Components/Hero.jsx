@@ -66,7 +66,7 @@ const Hero = ({ posts }) => {
                         }
                         alt={post?.featuredImage?.node?.altText || post?.title}
                         fill
-                        loading="lazy"
+                        priority
                         className="object-cover"
                         placeholder="blur"
                         blurDataURL="/search.png"

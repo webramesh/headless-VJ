@@ -1,4 +1,6 @@
-import './globals.css';
+import './critical.css';
+import Script from 'next/script';
+
 import ApolloProvider from '../app/Components/ApolloProvider';
 import Navbar from './Components/Navbar';
 import { fetchMenu } from '../lib/api/menuAPI';
@@ -55,6 +57,12 @@ export default async function RootLayout({ children }) {
         <meta name="msapplication-TileImage" content="/icons/icon512_maskable.png" />
         <meta name="msapplication-TileColor" content="#F3EFE0" />
         <meta name="msapplication-tap-highlight" content="no" />
+
+        {/* <link rel="stylesheet" href="/global.css" media="print" /> */}
+        <Script id="load-css">{`document.querySelector('link[href="/global.css"]').media='all'`}</Script>
+
+        {/* this css should be non-critical */}
+        {/* <link rel="preload" href="/global.css" as="style" /> */}
       </head>
 
       <body>

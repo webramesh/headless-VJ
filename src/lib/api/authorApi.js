@@ -49,9 +49,6 @@ export async function getAuthorBySlug(slug) {
               description
               focusKeywords
               canonicalUrl
-              jsonLd {
-                raw
-              }
               openGraph {
                 locale
                 type

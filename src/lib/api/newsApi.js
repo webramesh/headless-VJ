@@ -77,15 +77,14 @@ export async function getAllNyheterBySlug(slug) {
             title
             content
             slug
+            date
+            modified
             seo {
               title
               robots
               description
               focusKeywords
               canonicalUrl
-              jsonLd {
-                raw
-              }
               openGraph {
                 locale
                 type

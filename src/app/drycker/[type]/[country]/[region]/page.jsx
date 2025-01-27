@@ -2,6 +2,7 @@ import DryckerPage from '../../../Components/DryckerPage';
 import { getVinguideData, getProductByLander } from '@/src/lib/api/vinguideApi';
 import { redirect } from 'next/navigation';
 import { generateSeoMetadata } from '@/src/utils/utils';
+import { breadcrumbSchemaGenerator } from '@/src/utils/schemaUtils';
 
 export const revalidate = 60;
 export async function generateMetadata({ params }) {
@@ -23,6 +24,25 @@ const page = async ({ params, searchParams }) => {
     const products = await getProductByLander(region, type);
     const cardTitle = `Artiklar relaterade till ${vinguideData.title}`;
 
+    const breadcrumbs = breadcrumbSchemaGenerator([
+      {
+        name: 'Vinguide',
+        url: 'https://www.vinjournalen.se/',
+      },
+      {
+        name: type,
+        url: `https://www.vinjournalen.se/drycker/${type}`,
+      },
+      {
+        name: country,
+        url: `https://www.vinjournalen.se/drycker/${type}/${country}`,
+      },
+      {
+        name: region,
+        url: `https://www.vinjournalen.se/drycker/${type}/${country}/${region}`,
+      },
+    ]);
+
     return (
       <DryckerPage
         initialProducts={products}
@@ -31,6 +51,7 @@ const page = async ({ params, searchParams }) => {
         page="RegionPage"
         vinguideData={vinguideData}
         cardTitle={cardTitle}
+        breadcrumbs={breadcrumbs}
       />
     );
   } catch (error) {

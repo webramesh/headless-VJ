@@ -1,6 +1,5 @@
 import './critical.css';
 import Script from 'next/script';
-
 import ApolloProvider from '../app/Components/ApolloProvider';
 import Navbar from './Components/Navbar';
 import { fetchMenu } from '../lib/api/menuAPI';
@@ -15,6 +14,7 @@ import Topbanner from './Components/Topbanner';
 import { PostHogProvider } from './providers';
 import PgBanner from './PgBanner';
 import { getHomePagePosts } from '../lib/api/postAPI';
+import { navSchema } from '../utils/schemaUtils';
 
 const ScrollToTopButton = dynamic(() => import('./Components/ScrollToTopButton'), {
   ssr: false,
@@ -58,6 +58,11 @@ export default async function RootLayout({ children }) {
         <meta name="msapplication-TileColor" content="#F3EFE0" />
         <meta name="msapplication-tap-highlight" content="no" />
 
+        <script
+          type="application/ld+json"
+          className="rank-math-schema"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(navSchema) }}
+        />
         {/* <link rel="stylesheet" href="/global.css" media="print" /> */}
         <Script id="load-css">{`document.querySelector('link[href="/global.css"]').media='all'`}</Script>
 

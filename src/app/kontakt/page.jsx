@@ -6,6 +6,7 @@ import SubscriptionBox from '../Components/subscription/SubscriptionBox.jsx';
 import SubscriptionForm from '../Components/subscription/SubscriptionForm.jsx';
 import { generateSeoMetadata } from '@/src/utils/utils.js';
 import { getPageBySlug } from '@/src/lib/api/pageApi.js';
+import { breadcrumbSchemaGenerator } from '@/src/utils/schemaUtils.js';
 
 export async function generateMetadata() {
   const data = await getPageBySlug(`kontakt`);
@@ -18,11 +19,41 @@ export async function generateMetadata() {
 }
 
 const page = async () => {
-  const data = await getPageBySlug(`kontakt`);
-  const jsonLd = data?.seo?.jsonLd?.raw || null;
+  const schema = {
+    '@context': 'http://schema.org/',
+    '@type': 'Organization',
+    name: 'Vinjournalen.se',
+    logo: 'https://www.admin.vinjournalen.se/wp-content/uploads/2025/01/vj-og-jpg.jpg',
+    url: 'https://www.vinjournalen.se',
+    address: {
+      '@type': 'PostalAddress',
+      streetAddress: 'Bo Bergmans Gata 14',
+      addressLocality: 'Stockholm',
+      addressRegion: 'Stockholms län',
+      postalCode: '115 50',
+      addressCountry: 'SE',
+    },
+    sameAs: [
+      'https://x.com/hashtag/Vinjournalen',
+      'https://m.facebook.com/vinjournalen',
+      'https://www.instagram.com/vinjournalen.se/',
+    ],
+  };
+
+  const breadcrumbs = breadcrumbSchemaGenerator([{ name: 'Kontakt', url: 'https://www.vinjournalen.se/kontakt/' }]);
+
   return (
-    <div className="">
-      <section dangerouslySetInnerHTML={{ __html: jsonLd }} />
+    <>
+      <script
+        type="application/ld+json"
+        className="rank-math-schema"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
+      />
+      <script
+        type="application/ld+json"
+        className="rank-math-schema"
+        dangerouslySetInnerHTML={{ __html: breadcrumbs }}
+      />
       {/* <AuthorHero title={"KONTAKT"} /> */}
       <div className="container mx-auto max-w-6xl">
         <div className="mt-16">
@@ -57,7 +88,7 @@ const page = async () => {
           </div>
         </div>
       </div>
-    </div>
+    </>
   );
 };
 

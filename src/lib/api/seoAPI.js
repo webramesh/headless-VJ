@@ -17,9 +17,6 @@ export async function getContentTypeSEO(contentTypeId) {
               description
               focusKeywords
               canonicalUrl
-              jsonLd {
-                raw
-              }
               openGraph {
                 locale
                 type

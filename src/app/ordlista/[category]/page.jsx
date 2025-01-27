@@ -5,10 +5,9 @@ import { getOrdlistaCategoryBySlug } from '@/src/lib/api/ordilistaAPI';
 import OrdlistaByCategory from '../components/OrdlistaByCategory';
 import PostAccordion from '../../Components/PostAccordion';
 import { generateSeoMetadata } from '@/src/utils/utils';
+import { breadcrumbSchemaGenerator } from '@/src/utils/schemaUtils';
 
 export async function generateMetadata({ params }) {
-  // Fetch SEO data for the given slug
-  // const seo = await getHomePageSEO('/home-page');
   const category = await getOrdlistaCategoryBySlug(params.category);
 
   const seo = category?.seo;
@@ -21,10 +20,17 @@ export async function generateMetadata({ params }) {
 export default async function page({ params }) {
   const category = await getOrdlistaCategoryBySlug(params.category);
   const totalOrdlista = category.count;
-  const jsonLd = category?.seo?.jsonLd?.raw || null;
+  const breadcrumbs = breadcrumbSchemaGenerator([
+    { name: 'Ordlista arkiv - Vinjournalen.se', url: 'https://www.vinjournalen.se/ordlista/' },
+    { name: category?.seo?.title, url: `https://www.vinjournalen.se/ordlista/${params.category}` },
+  ]);
   return (
     <>
-      <section dangerouslySetInnerHTML={{ __html: jsonLd }} />
+      <script
+        type="application/ld+json"
+        className="rank-math-schema"
+        dangerouslySetInnerHTML={{ __html: breadcrumbs }}
+      />
       <div className="container mx-auto px-4 my-10  grid grid-cols-4 gap-12">
         <div className="col-span-4 lg:col-span-3">
           <h2 className="text-3xl font-bold text-gray-800">{category?.name}</h2>

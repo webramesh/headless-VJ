@@ -86,6 +86,7 @@ export async function getRegionByURL(url) {
       query: gql`
         query RegionByURL($url: String!) {
           regionBy(uri: $url) {
+            title
             faq {
               faq {
                 faqQuestion
@@ -104,9 +105,6 @@ export async function getRegionByURL(url) {
               description
               focusKeywords
               canonicalUrl
-              jsonLd {
-                raw
-              }
               openGraph {
                 locale
                 type

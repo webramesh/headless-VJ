@@ -7,6 +7,7 @@ import SubscriptionForm from '../../Components/subscription/SubscriptionForm';
 import SubscriptionBox from '../../Components/subscription/SubscriptionBox';
 import Image from 'next/image';
 import { generateSeoMetadata } from '@/src/utils/utils';
+import { breadcrumbSchemaGenerator } from '@/src/utils/schemaUtils';
 
 export const revalidate = 60;
 export async function generateMetadata({ params }) {
@@ -25,11 +26,22 @@ export default async function AuthorPage({ params }) {
   if (!author) {
     return <div>Författaren hittades inte</div>;
   }
-  const jsonLd = author?.seo?.jsonLd?.raw || null;
+
+  const breadcrumbs = breadcrumbSchemaGenerator([
+    { name: 'Author arkiv', url: 'https://www.vinjournalen.se/' },
+    {
+      name: `Author: ${author.name}, Utgivare på — Vinjournalen.se`,
+      url: `https://www.vinjournalen.se/author/${params.slug}/`,
+    },
+  ]);
 
   return (
-    <div>
-      <section dangerouslySetInnerHTML={{ __html: jsonLd }} />
+    <>
+      <script
+        type="application/ld+json"
+        className="rank-math-schema"
+        dangerouslySetInnerHTML={{ __html: breadcrumbs }}
+      />
       <AuthorHero title="Author" />
       <div className="container mx-auto">
         <div className="flex flex-col md:flex-row items-center">
@@ -78,7 +90,7 @@ export default async function AuthorPage({ params }) {
           <SenasteNytt />
         </div>
       </div>
-    </div>
+    </>
   );
 }
 

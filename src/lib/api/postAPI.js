@@ -142,17 +142,17 @@ export async function getPostBySlug(slug) {
           post(id: $slug, idType: SLUG) {
             id
             title
+            excerpt
             content
             date
+            modified
+            uri
             seo {
               title
               robots
               description
               focusKeywords
               canonicalUrl
-              jsonLd {
-                raw
-              }
               openGraph {
                 locale
                 type
@@ -425,9 +425,6 @@ export async function getCategoryBySlug(slug) {
               description
               focusKeywords
               canonicalUrl
-              jsonLd {
-                raw
-              }
               openGraph {
                 locale
                 type

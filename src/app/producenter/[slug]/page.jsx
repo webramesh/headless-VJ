@@ -5,6 +5,7 @@ import { getProducentBySlug } from '../../../lib/api/producenterAPI';
 import Content from '../components/Content';
 import ProductCard from '../../Components/ProductCard';
 import { generateSeoMetadata } from '@/src/utils/utils';
+import { breadcrumbSchemaGenerator } from '@/src/utils/schemaUtils';
 
 export async function generateMetadata({ params }) {
   const data = await getPageBySlug(`producenter/${params.slug}`);
@@ -23,13 +24,20 @@ export default async function Page({ params }) {
   if (!producentData) {
     return <div>Produkten hittades inte</div>;
   }
-  const jsonLd = producentData?.seo?.jsonLd?.raw || null;
   const products = producentData.producenterFields?.products?.nodes || [];
   const formattedProducts = products.map((product) => ({ product }));
 
+  const breadcrumbs = breadcrumbSchemaGenerator([
+    { name: 'Producenter', url: 'https://www.vinjournalen.se/producenter/' },
+    { name: producentData?.title, url: `https://www.vinjournalen.se/producenter/${slug}` },
+  ]);
   return (
     <>
-      <section dangerouslySetInnerHTML={{ __html: jsonLd }} />
+      <script
+        type="application/ld+json"
+        className="rank-math-schema"
+        dangerouslySetInnerHTML={{ __html: breadcrumbs }}
+      />
       <div className="container mx-auto lg:mt-10 p-2">
         {producentData.featuredImage && (
           <div className="mb-8 p-6">

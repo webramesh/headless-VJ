@@ -89,9 +89,6 @@ export async function getVinimporterBySlug(slug) {
               description
               focusKeywords
               canonicalUrl
-              jsonLd {
-                raw
-              }
               openGraph {
                 locale
                 type

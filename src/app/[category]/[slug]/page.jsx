@@ -13,6 +13,7 @@ import { generateSeoMetadata } from '@/src/utils/utils';
 import { getTaxonomySEO } from '@/src/lib/api/taxonomyApi';
 import RelatedPosts from './components/RelatedPosts';
 import Banner from '../../Components/Banner';
+import { breadcrumbSchemaGenerator, postSchemaGenerator } from '@/src/utils/schemaUtils';
 
 export const revalidate = 60;
 
@@ -46,7 +47,6 @@ export default async function PostDetails({ params }) {
 
   if (categories.includes(category)) {
     const post = await getPostBySlug(slug);
-    const jsonLd = post?.seo?.jsonLd?.raw || null;
 
     const relatedPosts = post?.realatedPosts?.relatedPosts?.nodes;
 
@@ -59,9 +59,25 @@ export default async function PostDetails({ params }) {
     // Extract FAQ items from the post data
     const faqItems = post.faq?.faq || [];
 
+    const postSchema = postSchemaGenerator(post);
+
+    const breadcrumbs = breadcrumbSchemaGenerator([
+      { name: post?.categories?.nodes[0].name, url: `https://www.vinjournalen.se/${category}/` },
+      { name: post?.title, url: `https://www.vinjournalen.se/${category}/${slug}/` },
+    ]);
+
     return (
       <>
-        <section dangerouslySetInnerHTML={{ __html: jsonLd }} />
+        <script
+          className="rank-math-schema"
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: postSchema }}
+        />
+        <script
+          type="application/ld+json"
+          className="rank-math-schema"
+          dangerouslySetInnerHTML={{ __html: breadcrumbs }}
+        />
 
         <div className="bg-slate-50 min-h-full">
           <PostDetailsHero

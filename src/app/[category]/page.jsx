@@ -8,6 +8,7 @@ import CategoryPage from './CategoryPage';
 import AccordionNew from '../Components/AccordionNew';
 import { generateSeoMetadata } from '@/src/utils/utils';
 import PostAccordion from '../Components/PostAccordion';
+import { breadcrumbSchemaGenerator } from '@/src/utils/schemaUtils';
 
 export async function generateStaticParams() {
   const categories = await getAllCategories();
@@ -19,7 +20,6 @@ export const revalidate = 60;
 
 export default async function Page({ params }) {
   const category = await getCategoryBySlug(params.category);
-  const jsonLd = category?.seo?.jsonLd?.raw || null;
 
   if (!category) {
     redirect('/not-found');
@@ -27,9 +27,18 @@ export default async function Page({ params }) {
   const totalPostsByCategory = category?.count;
   const faqItems = category?.faq?.faq || [];
 
+  const breadcrumbs = breadcrumbSchemaGenerator([
+    { name: category.name, url: `https://www.vinjournalen.se/${params.category}/` },
+  ]);
+
   return (
     <>
-      <section dangerouslySetInnerHTML={{ __html: jsonLd }} />
+      <script
+        type="application/ld+json"
+        className="rank-math-schema"
+        dangerouslySetInnerHTML={{ __html: breadcrumbs }}
+      />
+
       <div className="container mx-auto">
         <Banner variant="default" />
         <div className="flex flex-col lg:flex-row lg:gap-10">

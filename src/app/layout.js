@@ -13,6 +13,7 @@ import Topbanner from './Components/Topbanner';
 import { PostHogProvider } from './providers';
 import PgBanner from './PgBanner';
 import { getHomePagePosts } from '../lib/api/postAPI';
+import { navSchema } from '../utils/schemaUtils';
 
 const ScrollToTopButton = dynamic(() => import('./Components/ScrollToTopButton'), {
   ssr: false,
@@ -55,6 +56,12 @@ export default async function RootLayout({ children }) {
         <meta name="msapplication-TileImage" content="/icons/icon512_maskable.png" />
         <meta name="msapplication-TileColor" content="#F3EFE0" />
         <meta name="msapplication-tap-highlight" content="no" />
+
+        <script
+          type="application/ld+json"
+          className="rank-math-schema"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(navSchema) }}
+        />
       </head>
 
       <body>

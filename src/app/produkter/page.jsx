@@ -7,6 +7,7 @@ import { generateSeoMetadata } from '@/src/utils/utils';
 import { getContentTypeSEO } from '@/src/lib/api/seoAPI';
 import { Suspense } from 'react';
 import SidebarSkeleton from '../Components/SkeletonLoading/SidebarSkeleton';
+import { breadcrumbSchemaGenerator } from '@/src/utils/schemaUtils';
 
 export async function generateMetadata() {
   const { seo } = await getContentTypeSEO('cG9zdF90eXBlOnByb2R1a3Rlcg=='); // id for produkter
@@ -17,12 +18,17 @@ export async function generateMetadata() {
 }
 
 const page = async () => {
-  const { seo } = await getContentTypeSEO('cG9zdF90eXBlOnByb2R1a3Rlcg=='); // id for produkter
   const totalProducts = await countProducts();
-  const jsonLd = seo?.jsonLd?.raw || null;
+  const breadcrumbs = breadcrumbSchemaGenerator([
+    { name: 'Produkter Archive', url: 'https://www.vinjournalen.se/produkter/' },
+  ]);
   return (
     <>
-      <section dangerouslySetInnerHTML={{ __html: jsonLd }} />
+      <script
+        type="application/ld+json"
+        className="rank-math-schema"
+        dangerouslySetInnerHTML={{ __html: breadcrumbs }}
+      />
       <div className="container mx-auto flex  lg:flex-row gap-6 lg:gap-12 mt-4 lg:mt-10  p-4">
         <div className="lg:w-3/4">
           <h1 className="text-2xl lg:text-3xl mb-4 font-semibold">Produkter</h1>

@@ -4,17 +4,23 @@ import AuthorHero from '../../author/Components/AuthorHero';
 import Banner from '../../Components/Banner';
 import SubscriptionForm from '../../Components/subscription/SubscriptionForm';
 import PostAccordion from '../../Components/PostAccordion';
+import { breadcrumbSchemaGenerator } from '@/src/utils/schemaUtils';
 
 const PageContent = ({ pageData }) => {
   if (!pageData) {
     return <div>Loading...</div>;
   }
-  const jsonLd = pageData?.seo?.jsonLd?.raw || null;
+  const breadcrumbs = breadcrumbSchemaGenerator([
+    { name: pageData.title, url: `https://www.vinjournalen.se/${pageData.slug}/` },
+  ]);
 
   return (
     <>
-      <section dangerouslySetInnerHTML={{ __html: jsonLd }} />
-
+      <script
+        type="application/ld+json"
+        className="rank-math-schema"
+        dangerouslySetInnerHTML={{ __html: breadcrumbs }}
+      />
       <div className="container mx-auto ">
         <Banner variant="default" />
         <AuthorHero title={pageData.title} />

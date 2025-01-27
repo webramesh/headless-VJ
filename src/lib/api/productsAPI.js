@@ -134,9 +134,6 @@ export async function getProductBySlug(identifier) {
               description
               focusKeywords
               canonicalUrl
-              jsonLd {
-                raw
-              }
               openGraph {
                 locale
                 type

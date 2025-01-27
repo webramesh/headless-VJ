@@ -2,6 +2,7 @@ import { countArticles } from '../../lib/api/articleApi';
 import ArticleContent from './Components/ArticleContent';
 import Sidebar from '../Components/Sidebar';
 import Banner from '../Components/Banner';
+import { breadcrumbSchemaGenerator } from '@/src/utils/schemaUtils';
 
 export async function generateMetadata() {
   return {
@@ -55,12 +56,17 @@ export async function generateMetadata() {
 export default async function ArticlarPage() {
   const totalPosts = await countArticles();
 
-  const jsonLd =
-    '<script type="application/ld+json" class="rank-math-schema">{"@context":"https://schema.org","@graph":[{"@type":"NewsMediaOrganization","@id":"https://www.vinjournalen.se/#organization","name":"Vinjournalen","url":"https://www.vinjournalen.se","sameAs":["https://www.facebook.com/vinjournalen/","https://x.com/vinjournalense"],"logo":{"@type":"ImageObject","@id":"https://www.vinjournalen.se/#logo","url":"https://www.vinjournalen.se/wp-content/uploads/2024/05/vinjournalen-logo-1.webp","contentUrl":"https://www.vinjournalen.se/wp-content/uploads/2024/05/vinjournalen-logo-1.webp","caption":"Vinjournalen","inLanguage":"sv-SE"}},{"@type":"WebSite","@id":"https://www.vinjournalen.se/#website","url":"https://www.vinjournalen.se","name":"Vinjournalen.se","publisher":{"@id":"https://www.vinjournalen.se/#organization"},"inLanguage":"sv-SE"},{"@type":"BreadcrumbList","@id":"https://www.vinjournalen.se/artiklar/#breadcrumb","itemListElement":[{"@type":"ListItem","position":"1","item":{"@id":"https://www.vinjournalen.se","name":"Hem"}},{"@type":"ListItem","position":"2","item":{"@id":"https://www.vinjournalen.se/artiklar/","name":"Artiklar om vin"}}]},{"@type":"CollectionPage","@id":"https://www.vinjournalen.se/artiklar/#webpage","url":"https://www.vinjournalen.se/artiklar/","name":"Artiklar om vin - Vinjournalen.se","isPartOf":{"@id":"https://www.vinjournalen.se/#website"},"inLanguage":"sv-SE","breadcrumb":{"@id":"https://www.vinjournalen.se/artiklar/#breadcrumb"}}]}</script>';
+  const breadcrumbs = breadcrumbSchemaGenerator([
+    { name: 'Artiklar om vin', url: 'https://www.vinjournalen.se/artiklar/' },
+  ]);
 
   return (
     <>
-      <section dangerouslySetInnerHTML={{ __html: jsonLd }} />
+      <script
+        type="application/ld+json"
+        className="rank-math-schema"
+        dangerouslySetInnerHTML={{ __html: breadcrumbs }}
+      />
       <Banner variant="default" /> <ArticleContent totalPosts={totalPosts} sidebar={<Sidebar />} />
     </>
   );

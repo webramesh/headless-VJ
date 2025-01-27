@@ -5,6 +5,7 @@ import OrdlistaContainer from './components/OrdlistaContainer';
 import BreadCrumb from '../Components/breadcrumb/BreadCrumb';
 import { countOrdlista } from '@/src/lib/api/ordilistaAPI';
 import PostAccordion from '../Components/PostAccordion';
+import { breadcrumbSchemaGenerator } from '@/src/utils/schemaUtils';
 
 export async function generateMetadata() {
   return {
@@ -49,11 +50,17 @@ export async function generateMetadata() {
 export default async function Ordlista() {
   const totalOrdlista = await countOrdlista();
 
-  const jsonLd =
-    '<script type="application/ld+json" class="rank-math-schema">{"@context":"https://schema.org","@graph":[{"@type":"NewsMediaOrganization","@id":"https://www.vinjournalen.se/#organization","name":"Vinjournalen","url":"https://www.vinjournalen.se","sameAs":["https://www.facebook.com/vinjournalen/","https://x.com/vinjournalense"],"logo":{"@type":"ImageObject","@id":"https://www.vinjournalen.se/#logo","url":"https://www.vinjournalen.se/wp-content/uploads/2024/05/vinjournalen-logo-1.webp","contentUrl":"https://www.vinjournalen.se/wp-content/uploads/2024/05/vinjournalen-logo-1.webp","caption":"Vinjournalen","inLanguage":"sv-SE"}},{"@type":"WebSite","@id":"https://www.vinjournalen.se/#website","url":"https://www.vinjournalen.se","name":"Vinjournalen.se","publisher":{"@id":"https://www.vinjournalen.se/#organization"},"inLanguage":"sv-SE"},{"@type":"BreadcrumbList","@id":"https://www.vinjournalen.se/ordlista/#breadcrumb","itemListElement":[{"@type":"ListItem","position":"1","item":{"@id":"https://www.vinjournalen.se","name":"Hem"}},{"@type":"ListItem","position":"2","item":{"@id":"https://www.vinjournalen.se/ordlista/","name":"Ordlista"}}]},{"@type":"CollectionPage","@id":"https://www.vinjournalen.se/ordlista/#webpage","url":"https://www.vinjournalen.se/ordlista/","name":"Ordlista arkiv - Vinjournalen.se","description":"ORDLISTA DRUVOR, ORDLISTA SMAKDEFINITIONER, ORDLISTA FACKTERMER","isPartOf":{"@id":"https://www.vinjournalen.se/#website"},"inLanguage":"sv-SE","breadcrumb":{"@id":"https://www.vinjournalen.se/ordlista/#breadcrumb"}}]}</script>';
+  const breadcrumbs = breadcrumbSchemaGenerator([
+    { name: 'Ordlista arkiv - Vinjournalen.se', url: 'https://www.vinjournalen.se/ordlista/' },
+  ]);
+
   return (
     <>
-      <section dangerouslySetInnerHTML={{ __html: jsonLd }} />
+      <script
+        type="application/ld+json"
+        className="rank-math-schema"
+        dangerouslySetInnerHTML={{ __html: breadcrumbs }}
+      />
       <div className=" bg-gray-50">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 bg-gray-50">
           <div className="lg:flex lg:flex-row lg:gap-10">

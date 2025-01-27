@@ -1,4 +1,5 @@
 'use client';
+import { faqSchemaGenerator } from '@/src/utils/schemaUtils';
 import { ChevronDown, ChevronUp } from 'lucide-react';
 import React, { useState, useEffect } from 'react';
 
@@ -67,8 +68,11 @@ const Accordion = ({ faqItems = [] }) => {
     return null;
   }
 
+  const faqSchema = faqSchemaGenerator(faqItems);
+
   return (
-    <div>
+    <>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: faqSchema }} />
       {faqItems.map((item, index) => (
         <AccordionItem
           key={index}
@@ -80,7 +84,7 @@ const Accordion = ({ faqItems = [] }) => {
           isMobile={isMobile}
         />
       ))}
-    </div>
+    </>
   );
 };
 

@@ -46,12 +46,7 @@ export async function countProductsByTaxonomy(category, slug) {
         query GetTaxonomyBySlug($slug: ID!) {
           ${taxonomy}(id: $slug, idType: SLUG) {
             name
-            count
-            seo{
-              jsonLd{
-                raw
-              }
-            }
+            count  
           }
         }
       `,

@@ -8,6 +8,7 @@ import { generateSeoMetadata } from '@/src/utils/utils';
 import MoreOnProduct from '../../Components/MoreOnProduct';
 import PriceHistory from '../../Components/PriceHistory';
 import SalesHistory from '../../Components/SalesHistory';
+import { breadcrumbSchemaGenerator, productSchemaGenerator } from '@/src/utils/schemaUtils';
 export const revalidate = 60;
 
 export async function generateMetadata({ params }) {
@@ -31,11 +32,25 @@ export default async function Page({ params }) {
   const similarProducts = typerProduct?.vinguideProducts?.vinguideproduct?.nodes;
   const filteredSimilarProducts = similarProducts?.filter((product) => product.slug !== params.slug).slice(0, 4);
 
-  const jsonLd = product?.seo?.jsonLd?.raw || null;
+  const productSchema = productSchemaGenerator(product);
+
+  const breadcrumbs = breadcrumbSchemaGenerator([
+    { name: 'Produkter Archive', url: 'https://www.vinjournalen.se/produkter/' },
+    { name: product?.title, url: `https://www.vinjournalen.se/produkter/${params.slug}` },
+  ]);
 
   return (
     <>
-      <section dangerouslySetInnerHTML={{ __html: jsonLd }} />
+      <script
+        className="rank-math-schema"
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: productSchema }}
+      />
+      <script
+        type="application/ld+json"
+        className="rank-math-schema"
+        dangerouslySetInnerHTML={{ __html: breadcrumbs }}
+      />
       <ProductSection product={product} />
       <InformationCards
         fieldsProduct={product?.fieldsProduct}

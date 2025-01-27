@@ -162,7 +162,7 @@ export default function Navbar({ menuData }) {
           </div>
           <div className="flex flex-col items-center space-y-8">
             <Link href="/" className="mb-4">
-              <Image src={logo} alt="Vinjornalen Logo" className="object-cover w-52" width="auto" height="auto" />
+              <Image src={logo} priority alt="Vinjornalen Logo" className="object-cover w-52" width="208" height="80" />
             </Link>
 
             <div className="mb-4 w-4/5 flex justify-center items-center">

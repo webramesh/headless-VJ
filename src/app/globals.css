@@ -1,3 +1,4 @@
+
 /* @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -14,7 +15,9 @@ body {
   font-family: 'Outfit', sans-serif;
 } */
 
-/* @layer base {
+
+
+@layer base {
   :root {
     --background: 0 0% 100%;
     --foreground: 240 10% 3.9%;
@@ -68,7 +71,7 @@ body {
     --chart-4: 351 83% 82%;
     --chart-5: 352 83% 91%;
   }
-} */
+}
 .content {
   line-height: 1.5;
 }

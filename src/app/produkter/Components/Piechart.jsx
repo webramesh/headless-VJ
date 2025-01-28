@@ -1,19 +1,19 @@
 import React from 'react';
 import { PieChart as RechartsPieChart, Pie, Cell, ResponsiveContainer, Tooltip, Label } from 'recharts';
 
-const COLORS = ['#e51136', '#f199a8'];
+const COLORS = ['#f395a6', '#f1f3f4'];
 
 export default function PieChart({ data, title, total }) {
   return (
     <div className="flex flex-col items-center justify-center w-full">
-      <ResponsiveContainer width="100%" height={200}>
+      <ResponsiveContainer width="100%" height={100}>
         <RechartsPieChart>
           <Pie
             data={data}
             cx="50%"
             cy="50%"
-            innerRadius={40}
-            outerRadius={60}
+            innerRadius={20}
+            outerRadius={40}
             fill="#8884d8"
             dataKey="value"
             startAngle={90}
@@ -33,7 +33,7 @@ export default function PieChart({ data, title, total }) {
                     fill="#333"
                     textAnchor="middle"
                     dominantBaseline="central"
-                    className="text-sm font-medium"
+                    className="text-xs font-medium"
                   >
                     {`${data[0].value}/${total}`}
                   </text>
@@ -45,8 +45,8 @@ export default function PieChart({ data, title, total }) {
             content={({ payload }) => {
               if (payload && payload.length) {
                 return (
-                  <div className="bg-white p-2 border rounded shadow">
-                    <p className="text-sm">{`${payload[0].name}: ${payload[0].value}`}</p>
+                  <div className="bg-white border rounded shadow">
+                    <p className="text-xs">{`${payload[0].name}: ${payload[0].value}`}</p>
                   </div>
                 );
               }
@@ -55,7 +55,7 @@ export default function PieChart({ data, title, total }) {
           />
         </RechartsPieChart>
       </ResponsiveContainer>
-      <div className="mt-2 text-center">{title}</div>
+      <div className="text-center text-xs">{title}</div>
     </div>
   );
 }

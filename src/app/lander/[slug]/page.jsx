@@ -3,6 +3,7 @@ import BreadCrumb from '../../Components/breadcrumb/BreadCrumb';
 // import Map from '../../Components/Map';
 import RegionalCardItem from '../../Components/regionalCard/RegionalCardItem';
 import { generateSeoMetadata } from '@/src/utils/utils';
+import { breadcrumbSchemaGenerator } from '@/src/utils/schemaUtils';
 
 export async function generateMetadata({ params }) {
   const data = await getLandBySlug(params.slug);
@@ -17,6 +18,12 @@ export async function generateMetadata({ params }) {
 async function page({ params }) {
   const landerDetails = await getLandBySlug(params.slug);
   const { name, description, regioner } = landerDetails;
+
+  const breadcrumbs = breadcrumbSchemaGenerator([
+    { name: 'VINATLAS', url: 'https://www.vinjournalen.se/lander/' },
+    { name: name, url: `https://www.vinjournalen.se/lander/${params.slug}/` },
+  ]);
+
   return (
     <>
       {/* <div className="flex flex-col lg:flex-row gap-6 lg:gap-12 mt-4 lg:mt-8 bg-slate-50  p-4">
@@ -27,6 +34,11 @@ async function page({ params }) {
           </div>
         </div>
       </div> */}
+      <script
+        type="application/ld+json"
+        className="rank-math-schema"
+        dangerouslySetInnerHTML={{ __html: breadcrumbs }}
+      />
       <div className="container mx-auto">
         <div className="flex flex-col lg:flex-row mx-4 lg:mx-52 z-10">
           <div className="flex flex-col gap-2 bg-white w-full lg:w-auto">

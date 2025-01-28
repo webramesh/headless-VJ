@@ -2,13 +2,19 @@ import { countImportors } from '@/src/lib/api/vinimportorAPI';
 import SubscriptionForm from '../Components/subscription/SubscriptionForm';
 import VinImportorContainer from './components/VinImportorContainer';
 import PostAccordion from '../Components/PostAccordion';
+import { breadcrumbSchemaGenerator } from '@/src/utils/schemaUtils';
 
 export async function generateMetadata() {
+  const description =
+    'Upptäck vinimportörer i Sverige som säljer sina viner på Systembolaget. Hitta dina favoritviner, utforska unika sortiment och lägg till dina favoriter i din inköpslista idag.';
   return {
-    title: 'Vinimportörer Archive - Vinjournalen.se',
+    metadataBase: new URL('https://www.vinjournalen.se/'),
+    title: 'Vinimportörer Sverige - Vinjournalen.se',
     robots: 'index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1',
-    description: null, // No description provided in the data
-    canonicalUrl: 'https://www.vinjournalen.se/vinimportor/',
+    description: description,
+    alternates: {
+      canonical: 'https://www.vinjournalen.se/vinimportor/',
+    },
     icons: {
       icon: '/favicon.png',
     },
@@ -16,16 +22,17 @@ export async function generateMetadata() {
       locale: 'sv_SE',
       type: 'website',
       title: 'Vinimportörer Archive - Vinjournalen.se',
-      description: 'Information om vin på nätet', // Derived from OpenGraph description
+      description: description,
       url: 'https://www.vinjournalen.se/vinimportor/',
       siteName: 'Vinjournalen.se',
-      image: {
-        height: 495,
-        secureUrl: null, // Not explicitly mentioned
-        type: 'image/jpeg',
-        url: 'https://www.vinjournalen.se/wp-content/uploads/2020/01/VinjournalenLogotype-scaled.jpg',
-        width: 2048,
-      },
+      images: [
+        {
+          height: 630,
+          type: 'image/jpeg',
+          url: '/vj-og.jpg',
+          width: 1200,
+        },
+      ],
     },
     twitterMeta: {
       card: 'summary_large_image',
@@ -40,24 +47,37 @@ export async function generateMetadata() {
 
 const Vinimportor = async () => {
   const totalVinImportors = await countImportors();
+  const breadcrumbs = breadcrumbSchemaGenerator([
+    {
+      name: `Vinimportörer Sverige`,
+      url: `https://www.vinjournalen.se/vinimportor/`,
+    },
+  ]);
 
   return (
-    <div className="bg-gray-50">
-      <div className="container mx-auto px-4 py-8 ">
-        <h1 className="text-4xl font-bold my-8">Vinimportörer</h1>
+    <>
+      <script
+        type="application/ld+json"
+        className="rank-math-schema"
+        dangerouslySetInnerHTML={{ __html: breadcrumbs }}
+      />
+      <div className="bg-gray-50">
+        <div className="container mx-auto px-4 py-8 ">
+          <h1 className="text-4xl font-bold my-8">Vinimportörer</h1>
 
-        <VinImportorContainer totalVinImportors={totalVinImportors} />
+          <VinImportorContainer totalVinImportors={totalVinImportors} />
 
-        {/* Subscription  */}
-        <div className="my-10 max-w-4xl mx-auto">
-          <SubscriptionForm />
-        </div>
-        {/* End Subscription  */}
-        <div className="max-w-4xl mx-auto">
-          <PostAccordion />
+          {/* Subscription  */}
+          <div className="my-10 max-w-4xl mx-auto">
+            <SubscriptionForm />
+          </div>
+          {/* End Subscription  */}
+          <div className="max-w-4xl mx-auto">
+            <PostAccordion />
+          </div>
         </div>
       </div>
-    </div>
+    </>
   );
 };
 

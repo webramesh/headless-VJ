@@ -46,13 +46,13 @@ export async function countProductsByTaxonomy(category, slug) {
         query GetTaxonomyBySlug($slug: ID!) {
           ${taxonomy}(id: $slug, idType: SLUG) {
             name
-            count
+            count  
           }
         }
       `,
       variables: { category, slug },
     });
-    return { name: data[taxonomy].name, totalProducts: data[taxonomy].count };
+    return { name: data[taxonomy].name, totalProducts: data[taxonomy].count, seo: data[taxonomy].seo };
   } catch (error) {
     console.error('Error fetching products', error);
   }

@@ -2,7 +2,7 @@
 import React from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
-import { formatEmbeddedContent } from '@/src/utils/utils';
+import { convertToWebP, formatEmbeddedContent } from '@/src/utils/utils';
 
 const Trending = ({ title = '', subtitle = '', trendingPosts = [] }) => {
   if (!Array.isArray(trendingPosts)) {
@@ -31,7 +31,11 @@ const Trending = ({ title = '', subtitle = '', trendingPosts = [] }) => {
             <div className="flex flex-col cursor-pointer hover:shadow-lg transition-shadow w-full">
               <div className="relative w-full h-48">
                 <Image
-                  src={post?.featuredImage?.node?.sourceUrl || '/postplaceholder.jpg'}
+                  src={
+                    post?.featuredImage?.node?.sourceUrl
+                      ? convertToWebP(post?.featuredImage?.node?.sourceUrl)
+                      : '/postplaceholder.jpg'
+                  }
                   alt={post?.featuredImage?.node?.altText || post?.title || 'Trending article image'}
                   fill
                   sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
@@ -50,7 +54,7 @@ const Trending = ({ title = '', subtitle = '', trendingPosts = [] }) => {
                   })}
                 </p>
                 <p className="text-[#694848] text-xs font-outfit mt-2">
-                  {post?.author?.node?.name || 'Vinjournalen.se'}
+                  {post?.author?.node?.name || 'Jeanette Gardner'}
                 </p>
                 <p className="font-outfit text-sm text-gray-900 font-extralight mt-2 leading-relaxed flex-grow">
                   {formatEmbeddedContent(post?.excerpt)}

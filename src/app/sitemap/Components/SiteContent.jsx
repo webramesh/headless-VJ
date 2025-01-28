@@ -17,7 +17,7 @@ export const metadata = {
     'Explore all content on our site including pages, ordlista, news, posts, producers, regions, wine guides, wine importers, and products.',
 };
 
-function ContentSection({ title, items, baseUrl }) {
+function ContentSection({ title, items, baseUrl, isUri, isOrdlista }) {
   return (
     <div className="bg-white shadow-md rounded-lg p-4 mb-6">
       <div className="flex justify-between items-center mb-4">
@@ -26,41 +26,52 @@ function ContentSection({ title, items, baseUrl }) {
       </div>
 
       <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-2">
-        {items.map((item) => (
-          <Link
-            key={item.id}
-            href={`${baseUrl}/${item.slug}/`}
-            className="rounded transition-colors text-sm text-red-500 hover:text-red-700 truncate"
-          >
-            {item.title}
-          </Link>
-        ))}
+        {items.map((item) => {
+          return (
+            <Link
+              key={item.id}
+              href={
+                isUri
+                  ? item.uri
+                  : isOrdlista && item.ordlistaCategories?.nodes?.[0]?.slug
+                    ? `${baseUrl}/${item.ordlistaCategories.nodes[0].slug}/${item.slug}`
+                    : `${baseUrl}/${item.slug}/`
+              }
+              className="rounded transition-colors text-sm text-red-500 hover:text-red-700 truncate"
+            >
+              {item.title}
+            </Link>
+          );
+        })}
       </div>
     </div>
   );
 }
 
 export default async function SiteContent() {
-  const pages = await getAllPages();
-  const ordlistaPages = await getAllOrdlistaPages();
-  const nyheterPages = await getAllNyheterPages();
-  const posts = await getAllPosts();
-  const producenter = await getAllProducenter();
-  const regioner = await getAllRegioner();
-  const vinguide = await getAllVinguide();
-  const vinimporterer = await getAllVinimporterer();
-  const produkter = await getAllProdukter();
+  const [pages, ordlistaPages, nyheterPages, posts, producenter, regioner, vinguide, vinimporterer, produkter] =
+    await Promise.all([
+      getAllPages(),
+      getAllOrdlistaPages(),
+      getAllNyheterPages(),
+      getAllPosts(),
+      getAllProducenter(),
+      getAllRegioner(),
+      getAllVinguide(),
+      getAllVinimporterer(),
+      getAllProdukter(),
+    ]);
 
   return (
     <div className="w-full px-2 sm:px-4 lg:px-6">
       <ContentSection title="Pages" items={pages} baseUrl="" />
-      <ContentSection title="Ordlista" items={ordlistaPages} baseUrl="/ordlista" />
+      <ContentSection title="Ordlista" items={ordlistaPages} baseUrl="/ordlista" isOrdlista />
       <ContentSection title="Nyheter" items={nyheterPages} baseUrl="/nyheter" />
-      <ContentSection title="Posts" items={posts} baseUrl="" />
+      <ContentSection title="Posts" items={posts} baseUrl="" isUri />
       <ContentSection title="Producenter" items={producenter} baseUrl="/producenter" />
       <ContentSection title="Regioner" items={regioner} baseUrl="/regioner" />
-      <ContentSection title="Vinguide" items={vinguide} baseUrl="/vinguide" />
-      <ContentSection title="Vinimportörer" items={vinimporterer} baseUrl="/vinimportorer" />
+      <ContentSection title="Vinguide" items={vinguide} baseUrl="/vinguide" isUri />
+      <ContentSection title="Vinimportörer" items={vinimporterer} baseUrl="/vinimportor" />
       <ContentSection title="Produkter" items={produkter} baseUrl="/produkter" />
     </div>
   );

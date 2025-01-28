@@ -9,7 +9,7 @@ export async function countProducts(cursor = null, allProducts = []) {
     const { data } = await client.query({
       query: gql`
         query CountProducts($cursor: String) {
-          produkter(first: 100, after: $cursor) {
+          produkter(first: 1000, after: $cursor) {
             nodes {
               id
             }

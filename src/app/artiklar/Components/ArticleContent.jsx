@@ -32,7 +32,7 @@ const Card = ({ title, excerpt, date, author, category, imageUrl, slug, category
           <p className="mt-2 font-outfit text-gray-900 text-xs">
             {date ? format(new Date(date), 'dd MMMM, yyyy') : 'Inget datum'}
           </p>
-          <p className="text-[#694848] text-xs font-outfit mt-2">{author || 'Vinjournalen.se'}</p>
+          <p className="text-[#694848] text-xs font-outfit mt-2">{author || 'Jeanette Gardner'}</p>
           <div
             className="font-outfit text-sm text-gray-900 font-extralight mt-2 leading-relaxed line-clamp-3 flex-grow"
             dangerouslySetInnerHTML={{ __html: excerpt || 'Inget utdrag tillgängligt' }}
@@ -97,7 +97,7 @@ const ArticleContent = ({ totalPosts, sidebar }) => {
                   title={post.title}
                   excerpt={post.excerpt}
                   date={post.date}
-                  author={post.author?.node?.name || 'Vinjournalen.se'}
+                  author={post.author?.node?.name}
                   category={post.categories?.nodes?.[0] || 'Uncategorized'}
                   imageUrl={post.featuredImage?.node?.mediaItemUrl || '/postplaceholder.jpg'}
                   slug={post.slug || '#'}

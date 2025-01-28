@@ -6,6 +6,7 @@ import PostAccordion from '@/src/app/Components/PostAccordion';
 import AccordionNew from '../../../Components/AccordionNew';
 import { getPageBySlug } from '@/src/lib/api/pageApi';
 import { generateSeoMetadata } from '@/src/utils/utils';
+import { breadcrumbSchemaGenerator } from '@/src/utils/schemaUtils';
 
 export async function generateMetadata({ params }) {
   const data = await getPageBySlug(`ordlista/${params.slug}`);
@@ -24,10 +25,19 @@ const page = async ({ params }) => {
   const category = ordlista?.ordlistaCategories?.nodes[0];
   const faqItems = ordlista?.faq?.faq || [];
 
-  // if (!ordlista)
+  const breadcrumbs = breadcrumbSchemaGenerator([
+    { name: 'Ordlista arkiv - Vinjournalen.se', url: 'https://www.vinjournalen.se/ordlista/' },
+    { name: category?.seo?.title, url: `https://www.vinjournalen.se/ordlista/${category.slug}/` },
+    { name: ordlista?.seo?.title, url: `https://www.vinjournalen.se/ordlista/${category.slug}/${slug}/` },
+  ]);
 
   return (
     <>
+      <script
+        type="application/ld+json"
+        className="rank-math-schema"
+        dangerouslySetInnerHTML={{ __html: breadcrumbs }}
+      />
       <div className="container mx-auto px-4 my-10  grid grid-cols-4 gap-12">
         <div className="col-span-4 lg:col-span-3">
           <h1 className="text-3xl font-bold text-gray-800">{ordlista?.title}</h1>

@@ -4,7 +4,7 @@ import React, { useState } from 'react';
 import Link from 'next/link';
 import { X } from 'lucide-react';
 
-const TopBanner = () => {
+const TopBanner = ({ post }) => {
   const [showBanner, setShowBanner] = useState(true);
 
   if (!showBanner) {
@@ -16,7 +16,7 @@ const TopBanner = () => {
       <div className="container mx-auto flex items-center justify-center">
         <div className="text-center text-xs sm:text-sm md:text-base max-w-[90%] sm:max-w-[80%]">
           Vi har precis lanserat en ny artikel! Läs vår&nbsp;
-          <Link href="/artiklar" target="_blank">
+          <Link href={post.uri} target="_blank">
             <span className="underline hover:text-red-100 transition-colors">senaste artikel.</span>
           </Link>
         </div>

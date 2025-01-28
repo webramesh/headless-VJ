@@ -11,7 +11,6 @@ import { usePathname } from 'next/navigation';
 
 const Footer = ({ menuItems }) => {
   const pathname = usePathname();
-  const path = pathname + '/';
 
   return (
     <footer className="bg-[#F5F5F5]">
@@ -31,9 +30,9 @@ const Footer = ({ menuItems }) => {
           <nav className="flex flex-col md:flex-row text-sm gap-2 md:gap-4 text-center md:text-left mb-4 md:mb-0">
             {menuItems.map((menu) => (
               <Link
-                href={menu.path}
+                href={menu.uri}
                 key={menu.id}
-                className={`${path === menu.path ? 'text-[#c90022]' : 'hover:text-[#e70826]'}`}
+                className={`${pathname === menu.uri ? 'text-[#c90022]' : 'hover:text-[#e70826]'}`}
               >
                 {menu.label}
               </Link>
@@ -42,7 +41,7 @@ const Footer = ({ menuItems }) => {
 
           <div className="flex gap-10 text-xl">
             <Link
-              href="https://twitter.com/hashtag/Vinjournalen"
+              href="https://x.com/hashtag/Vinjournalen"
               target="_blank"
               rel="noopener noreferrer"
               aria-label="Besök vår Twitter-sida"

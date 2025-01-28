@@ -3,6 +3,7 @@ import BreadCrumb from '@/src/app/Components/breadcrumb/BreadCrumb';
 import { getRegionByURL } from '@/src/lib/api/regionerAPI';
 import { generateSeoMetadata } from '@/src/utils/utils';
 import AccordionNew from '@/src/app/Components/AccordionNew';
+import { breadcrumbSchemaGenerator } from '@/src/utils/schemaUtils';
 
 export const revalidate = 60;
 export async function generateMetadata({ params }) {
@@ -23,13 +24,33 @@ async function Page({ params }) {
   const { content, faq } = selectedRegion;
   const faqItems = faq?.faq || [];
 
+  const breadcrumbs = breadcrumbSchemaGenerator([
+    {
+      name: `Regioner Arkiv`,
+      url: `https://www.vinjournalen.se/regioner/`,
+    },
+    {
+      name: country,
+      url: `https://www.vinjournalen.se/lander/${country}`,
+    },
+    {
+      name: selectedRegion?.title,
+      url: `https://www.vinjournalen.se/regioner/${country}/${region}`,
+    },
+  ]);
+
   return (
     <>
-      <h1 className="text-2xl lg:text-3xl font-semibold uppercase">{region}</h1>
+      <script
+        type="application/ld+json"
+        className="rank-math-schema"
+        dangerouslySetInnerHTML={{ __html: breadcrumbs }}
+      />
+      <h1 className="text-2xl lg:text-3xl font-semibold uppercase">{selectedRegion?.title}</h1>
       <BreadCrumb title1="Regioner" link1="/regioner" title2={country} link2={`/lander/${country}`} title3={region} />
       {selectedRegion?.featuredImage?.node?.sourceUrl && (
         <Image
-          src={selectedRegion?.featuredImage.node.sourceUrl}
+          src={selectedRegion?.featuredImage?.node?.sourceUrl}
           alt={region}
           className="w-full my-4 lg:my-10 object-contain"
           width={250}

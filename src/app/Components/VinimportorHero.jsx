@@ -1,3 +1,4 @@
+import { formatExternalUrl } from '@/src/utils/utils';
 import Link from 'next/link';
 import React from 'react';
 
@@ -33,7 +34,7 @@ const VinimportorHero = ({ vinimporterData }) => {
             <div className="mt-3 sm:mt-4 lg:mt-5">
               <Link
                 className="bg-[#FF0303] hover:bg-red-600 duration-300 px-3 sm:px-4 lg:px-5 py-1.5 sm:py-1.5 lg:py-2 rounded text-sm sm:text-base"
-                href={vinimporterData?.importerFields?.importerWebsite}
+                href={formatExternalUrl(vinimporterData?.importerFields?.importerWebsite)}
               >
                 Besök webbplatsen
               </Link>

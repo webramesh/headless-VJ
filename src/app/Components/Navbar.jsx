@@ -16,7 +16,6 @@ import { Menu, X } from 'lucide-react';
 export default function Navbar({ menuData }) {
   const menu = menuData;
   const pathname = usePathname();
-  const path = pathname + '/';
 
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [activeDropdown, setActiveDropdown] = useState(null);
@@ -122,7 +121,7 @@ export default function Navbar({ menuData }) {
               src={vinlogo}
               alt="VinLogo"
               className="object-cover md:hidden w-14"
-              width="auto"
+              width={56}
               height="auto"
               priority
             />
@@ -131,7 +130,7 @@ export default function Navbar({ menuData }) {
               src={logo}
               alt="Vinjournalen Logo"
               className="object-cover hidden md:block w-44 xl:w-52"
-              width="auto"
+              width={208}
               height="auto"
               priority
             />
@@ -163,76 +162,77 @@ export default function Navbar({ menuData }) {
           </div>
           <div className="flex flex-col items-center space-y-8">
             <Link href="/" className="mb-4">
-              <Image src={logo} alt="Vinjornalen Logo" className="object-cover w-52" width="auto" height="auto" />
+              <Image src={logo} priority alt="Vinjornalen Logo" className="object-cover w-52" width="208" height="80" />
             </Link>
 
             <div className="mb-4 w-4/5 flex justify-center items-center">
               <Searchbar closeMenu={closeMenu} />
             </div>
 
-            {menu?.menuItems?.edges?.reduce((acc, { node }) => {
-              const isSubmenuItem = menu?.menuItems?.edges?.some(({ node: parentNode }) =>
-                parentNode?.childItems?.edges?.some(({ node: childNode }) => childNode.id === node.id)
-              );
-
-              if (!isSubmenuItem) {
-                acc.push(
-                  <div key={node.id} className="relative group" ref={(el) => (dropdownRefs.current[node.id] = el)}>
-                    <button
-                      onClick={() => (node.path ? (window.location.href = node.path) : toggleMobileDropdown(node.id))}
-                      onKeyDown={(e) => handleKeyDown(e, node.id, node?.childItems?.edges || [], node.path)}
-                      className={`flex items-center justify-between ${path === node.path && 'text-[#c90022]'}`}
-                      aria-expanded={mobileDropdowns[node.id]}
-                      aria-haspopup={node?.childItems?.edges?.length > 0 ? 'true' : 'false'}
-                    >
-                      {node?.label}
-                      {node?.childItems?.edges?.length > 0 && (
-                        <ChevronDownIcon
-                          className={`-mr-1 ml-2 h-5 w-5 transform transition-transform ${mobileDropdowns[node.id] ? 'rotate-180' : ''}`}
-                          aria-hidden="true"
-                        />
-                      )}
-                    </button>
-
-                    {node?.childItems?.edges?.length > 0 && mobileDropdowns[node.id] && (
-                      <div
-                        className="absolute bottom-8 left-0 z-10 pt-2 w-48 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none"
-                        role="menu"
-                        aria-orientation="vertical"
-                        aria-labelledby={`dropdown-button-${node.id}`}
-                      >
-                        {node.childItems.edges.map(({ node: childNode }, index) => (
-                          <div key={childNode.id}>
-                            <Link
-                              href={childNode.path || '#'}
-                              onClick={closeMenu}
-                              className={`block px-4 py-2 hover:bg-gray-200 ${path === childNode.path && 'text-[#c90022]'}`}
-                              role="menuitem"
-                              ref={(el) => {
-                                if (!itemRefs.current[node.id]) {
-                                  itemRefs.current[node.id] = [];
-                                }
-                                itemRefs.current[node.id][index] = el;
-                              }}
-                              tabIndex={mobileDropdowns[node.id] ? 0 : -1}
-                            >
-                              {childNode.label}
-                            </Link>
-                          </div>
-                        ))}
-                      </div>
+            {menu?.map((node) => (
+              <div key={node.id} className="relative group" ref={(el) => (dropdownRefs.current[node.id] = el)}>
+                {node.uri ? (
+                  <Link
+                    href={node.uri}
+                    onClick={closeMenu}
+                    onKeyDown={(e) => handleKeyDown(e, node.id, node?.childItems?.nodes || [], node.uri)}
+                    className={`flex items-center justify-between ${pathname === node.uri ? 'text-[#c90022]' : 'hover:text-[#e70826]'}`}
+                    aria-haspopup={false}
+                  >
+                    {node?.label}
+                  </Link>
+                ) : (
+                  <button
+                    onClick={() => toggleMobileDropdown(node.id)}
+                    onKeyDown={(e) => handleKeyDown(e, node.id, node?.childItems?.nodes || [], node.uri)}
+                    className={`flex items-center justify-between w-full`}
+                    aria-expanded={mobileDropdowns[node.id]}
+                    aria-haspopup={true}
+                    id={`dropdown-button-${node.id}`}
+                  >
+                    {node?.label}
+                    {node?.childItems?.nodes?.length > 0 && (
+                      <ChevronDownIcon className="-mr-1 ml-2 h-5 w-5" aria-hidden="true" />
                     )}
+                  </button>
+                )}
+
+                {node?.childItems?.nodes?.length > 0 && mobileDropdowns[node.id] && (
+                  <div
+                    className="absolute bottom-8 left-0 z-10 pt-2 w-48 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none"
+                    role="menu"
+                    aria-orientation="vertical"
+                    aria-labelledby={`dropdown-button-${node.id}`}
+                  >
+                    {node.childItems.nodes.map((childNode, index) => (
+                      <div key={childNode.id}>
+                        <Link
+                          href={childNode.uri || '#'}
+                          onClick={closeMenu}
+                          className={`block px-4 py-2 hover:bg-gray-200 ${pathname === childNode.uri && 'text-[#c90022]'}`}
+                          role="menuitem"
+                          ref={(el) => {
+                            if (!itemRefs.current[node.id]) {
+                              itemRefs.current[node.id] = [];
+                            }
+                            itemRefs.current[node.id][index] = el;
+                          }}
+                          tabIndex={mobileDropdowns[node.id] ? 0 : -1}
+                        >
+                          {childNode.label}
+                        </Link>
+                      </div>
+                    ))}
                   </div>
-                );
-              }
-              return acc;
-            }, [])}
+                )}
+              </div>
+            ))}
           </div>
           <div className="flex justify-center w-full ">
             <hr className="w-[75%] border-t-1 mt-16 border-[#CCC]" />
           </div>
           <div className="flex justify-center items-center mt-6 gap-6">
-            <Link href="https://twitter.com/hashtag/Vinjournalen" target="_blank" aria-label="Twitter">
+            <Link href="https://x.com/hashtag/Vinjournalen" target="_blank" aria-label="Twitter">
               <Image
                 src={twitter}
                 alt="Twitter"
@@ -266,63 +266,62 @@ export default function Navbar({ menuData }) {
         </div>
         {/* Desktop View */}
         <div className="hidden lg:text-sm xl:text-lg lg:flex lg:justify-center lg:items-center lg:space-x-2 xl:space-x-4">
-          {menu?.menuItems?.edges?.reduce((acc, { node }) => {
-            const isSubmenuItem = menu?.menuItems?.edges.some(
-              ({ node: parentNode }) =>
-                parentNode?.childItems &&
-                parentNode?.childItems.edges.some(({ node: childNode }) => childNode?.id === node.id)
-            );
-
-            if (!isSubmenuItem) {
-              acc.push(
-                <div key={node.id} className="relative group" ref={(el) => (dropdownRefs.current[node.id] = el)}>
-                  <button
-                    onClick={() => (node.path ? (window.location.href = node.path) : toggleDropDown(node.id))}
-                    onKeyDown={(e) => handleKeyDown(e, node.id, node?.childItems?.edges || [], node.path)}
-                    className={`flex items-center justify-between ${path === node.path ? 'text-[#c90022]' : 'hover:text-[#e70826]'}`}
-                    aria-expanded={activeDropdown === node.id}
-                    aria-haspopup={node?.childItems?.edges?.length > 0 ? 'true' : 'false'}
-                    id={`dropdown-button-${node.id}`}
-                  >
-                    {node?.label}
-                    {node?.childItems?.edges?.length > 0 && (
-                      <ChevronDownIcon className="-mr-1 ml-2 h-5 w-5" aria-hidden="true" />
-                    )}
-                  </button>
-
-                  {node?.childItems?.edges?.length > 0 && (
-                    <div
-                      className={`absolute ${activeDropdown === node.id ? 'block' : 'hidden'} group-hover:block right-0 z-10 pt-2 w-56 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none`}
-                      role="menu"
-                      aria-orientation="vertical"
-                      aria-labelledby={`dropdown-button-${node.id}`}
-                    >
-                      {node.childItems.edges.map(({ node: childNode }, index) => (
-                        <div key={childNode.id}>
-                          <Link
-                            href={childNode.path || '#'}
-                            onClick={closeMenu}
-                            className={`block px-4 py-2 hover:bg-gray-200 ${path === childNode.path ? 'text-[#c90022]' : 'hover:text-[#e70826]'}`}
-                            role="menuitem"
-                            ref={(el) => {
-                              if (!itemRefs.current[node.id]) {
-                                itemRefs.current[node.id] = [];
-                              }
-                              itemRefs.current[node.id][index] = el;
-                            }}
-                            tabIndex={activeDropdown === node.id ? 0 : -1}
-                          >
-                            {childNode.label}
-                          </Link>
-                        </div>
-                      ))}
-                    </div>
+          {menu?.map((node) => (
+            <div key={node.id} className="relative group" ref={(el) => (dropdownRefs.current[node.id] = el)}>
+              {node.uri ? (
+                <Link
+                  href={node.uri}
+                  onKeyDown={(e) => handleKeyDown(e, node.id, node?.childItems?.nodes || [], node.uri)}
+                  className={`flex items-center justify-between ${pathname === node.uri ? 'text-[#c90022]' : 'hover:text-[#e70826]'}`}
+                  aria-haspopup={false}
+                >
+                  {node?.label}
+                </Link>
+              ) : (
+                <button
+                  onClick={() => toggleDropDown(node.id)}
+                  onKeyDown={(e) => handleKeyDown(e, node.id, node?.childItems?.nodes || [], node.uri)}
+                  className={`flex items-center justify-between w-full`}
+                  aria-expanded={activeDropdown === node.id}
+                  aria-haspopup={true}
+                  id={`dropdown-button-${node.id}`}
+                >
+                  {node?.label}
+                  {node?.childItems?.nodes?.length > 0 && (
+                    <ChevronDownIcon className="-mr-1 ml-2 h-5 w-5" aria-hidden="true" />
                   )}
+                </button>
+              )}
+              {node?.childItems?.nodes?.length > 0 && (
+                <div
+                  className={`absolute ${activeDropdown === node.id ? 'block' : 'hidden'} group-hover:block right-0 z-10 pt-2 w-56 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none`}
+                  role="menu"
+                  aria-orientation="vertical"
+                  aria-labelledby={`dropdown-button-${node.id}`}
+                >
+                  {node.childItems.nodes.map((childNode, index) => (
+                    <div key={childNode.id}>
+                      <Link
+                        href={childNode.uri || '#'}
+                        onClick={closeMenu}
+                        className={`block px-4 py-2 hover:bg-gray-200 ${pathname === childNode.uri ? 'text-[#c90022]' : 'hover:text-[#e70826]'}`}
+                        role="menuitem"
+                        ref={(el) => {
+                          if (!itemRefs.current[node.id]) {
+                            itemRefs.current[node.id] = [];
+                          }
+                          itemRefs.current[node.id][index] = el;
+                        }}
+                        tabIndex={activeDropdown === node.id ? 0 : -1}
+                      >
+                        {childNode.label}
+                      </Link>
+                    </div>
+                  ))}
                 </div>
-              );
-            }
-            return acc;
-          }, [])}
+              )}
+            </div>
+          ))}
         </div>
         {/* Searchbar for Desktop */}
         <div className="hidden lg:block">

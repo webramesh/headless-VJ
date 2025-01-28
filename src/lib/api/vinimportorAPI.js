@@ -9,7 +9,7 @@ export async function countImportors(cursor = null, allImportors = []) {
     const { data } = await client.query({
       query: gql`
         query CountImportors($cursor: String) {
-          vinimporterer(first: 100, after: $cursor) {
+          vinimporterer(first: 1000, after: $cursor) {
             nodes {
               id
             }

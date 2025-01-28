@@ -7,15 +7,29 @@ import FilterSection from './FilterSection';
 import Hero from './Hero';
 import Paragraph from './Paragraph';
 
-export default function DryckerPage({ initialProducts, vinguideData, cardTitle, searchParams, params, page }) {
+export default function DryckerPage({
+  initialProducts,
+  vinguideData,
+  cardTitle,
+  searchParams,
+  params,
+  page,
+  breadcrumbs,
+}) {
   const vinguidePosts = vinguideData?.vinguidePosts?.vinguidePosts?.nodes || [];
   const vinguideDetails = vinguideData?.vinguidePosts || {};
   const { shortTitle, shortDescription, pageTitle, pageSubtitle, allProductTitle } = vinguideDetails;
   const countries = vinguideData?.children?.nodes || [];
   const products = vinguideData?.vinguideProducts?.vinguideproduct?.nodes || [];
   const countryCounts = countProductsByCountry(products);
+
   return (
     <>
+      <script
+        type="application/ld+json"
+        className="rank-math-schema"
+        dangerouslySetInnerHTML={{ __html: breadcrumbs }}
+      />
       <Hero params={params} pageTitle={pageTitle} pageSubtitle={pageSubtitle} />
       <Paragraph shortTitle={shortTitle} shortDescription={shortDescription} />
       <Scrolltodown />

@@ -6,6 +6,7 @@ import Sidebar from '../Components/Sidebar';
 import PostAccordion from '../Components/PostAccordion';
 import { generateSeoMetadata } from '@/src/utils/utils';
 import { getContentTypeSEO } from '@/src/lib/api/seoAPI';
+import { breadcrumbSchemaGenerator } from '@/src/utils/schemaUtils';
 
 export async function generateMetadata() {
   const { seo } = await getContentTypeSEO('cG9zdF90eXBlOnByb2R1Y2VudGVy'); // id for producenter
@@ -17,8 +18,18 @@ export async function generateMetadata() {
 
 export default async function page() {
   const totalProducenters = await countProducenters();
+
+  const breadcrumbs = breadcrumbSchemaGenerator([
+    { name: 'Producenter', url: 'https://www.vinjournalen.se/producenter/' },
+  ]);
+
   return (
     <>
+      <script
+        type="application/ld+json"
+        className="rank-math-schema"
+        dangerouslySetInnerHTML={{ __html: breadcrumbs }}
+      />
       <div className="container mx-auto flex  lg:flex-row gap-6 lg:gap-12 mt-4 lg:mt-10 p-4">
         <div className="md:w-3/4 ">
           <div className=" text-xs lg:text-sm flex gap-1 my-2">

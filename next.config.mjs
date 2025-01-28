@@ -9,6 +9,7 @@ const __dirname = path.dirname(__filename);
 const nextConfig = withPWA({
   dest: 'public',
   disable: false,
+
   register: true,
   skipWaiting: true,
   //   reactStrictMode: true,
@@ -82,6 +83,10 @@ const nextConfig = withPWA({
       },
     ];
   },
+  // experimental: {
+  //   // Enable app directory features
+  //   appDir: true,
+  // },
 });
 
 export default nextConfig;

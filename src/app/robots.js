@@ -4,9 +4,9 @@ export default function robots() {
       {
         userAgent: '*',
         allow: '/',
-        disallow: '/private/', // Specify the paths to disallow
+        disallow: ['/private/'],
       },
     ],
-    sitemap: 'https://www.vinjournalen.se/sitemap.xml', // Provide your sitemap URL
+    sitemap: 'https://vinjournalen.se/sitemap.xml',
   };
 }

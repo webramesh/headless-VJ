@@ -20,7 +20,7 @@ const Card = ({ title, excerpt, date, author, slug }) => {
           <p className="mt-2 font-outfit text-gray-900 text-xs">
             {date ? format(new Date(date), 'dd MMMM, yyyy') : 'No date'}
           </p>
-          <p className="text-[#694848] text-xs font-outfit mt-2">{author || 'Unknown Author'}</p>
+          <p className="text-[#694848] text-xs font-outfit mt-2">{author || 'Jeanette Gardner'}</p>
           <div
             className="font-outfit text-sm text-gray-900 font-extralight mt-2 leading-relaxed line-clamp-3"
             dangerouslySetInnerHTML={{ __html: excerpt || 'No excerpt available' }}
@@ -76,7 +76,7 @@ const AllNews = ({ initialPosts, initialPageInfo, totalPosts, sidebar }) => {
                   title={post.title}
                   excerpt={post.excerpt}
                   date={post.date}
-                  author={post.author?.node?.name || 'Unknown Author'}
+                  author={post.author?.node?.name}
                   imageUrl={post.featuredImage?.node?.mediaItemUrl || '/api/placeholder/400/300'}
                   slug={post.slug || '#'}
                 />

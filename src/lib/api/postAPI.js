@@ -69,14 +69,8 @@ export async function getHomePagePosts() {
               excerpt
               modified
               id
-              categories {
-                nodes {
-                  name
-                  slug
-                }
-              }
               slug
-              visitCount
+              uri
               featuredImage {
                 node {
                   sourceUrl
@@ -148,8 +142,11 @@ export async function getPostBySlug(slug) {
           post(id: $slug, idType: SLUG) {
             id
             title
+            excerpt
             content
             date
+            modified
+            uri
             seo {
               title
               robots

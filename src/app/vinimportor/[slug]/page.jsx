@@ -6,6 +6,7 @@ import ProductCard from '../../Components/ProductCard';
 import SubscriptionForm from '../../Components/subscription/SubscriptionForm';
 import PostAccordion from '../../Components/PostAccordion';
 import { generateSeoMetadata } from '@/src/utils/utils';
+import { breadcrumbSchemaGenerator } from '@/src/utils/schemaUtils';
 
 export const revalidate = 60;
 
@@ -32,8 +33,24 @@ export default async function Page({ params }) {
   const products = vinimporterData.importerFields?.productsVinimporter?.nodes || [];
   const formattedProducts = products.map((product) => ({ product }));
 
+  const breadcrumbs = breadcrumbSchemaGenerator([
+    {
+      name: `Vinimportörer Sverige`,
+      url: `https://www.vinjournalen.se/vinimportor/`,
+    },
+    {
+      name: vinimporterData?.title,
+      url: `https://www.vinjournalen.se/vinimportor/${slug}`,
+    },
+  ]);
+
   return (
-    <div>
+    <>
+      <script
+        type="application/ld+json"
+        className="rank-math-schema"
+        dangerouslySetInnerHTML={{ __html: breadcrumbs }}
+      />
       <VinimportorHero vinimporterData={vinimporterData} />
       {vinimporterData.featuredImage && (
         <div className="flex justify-center mb-4 sm:mb-6 lg:mb-8 p-3 sm:p-4 lg:p-6">
@@ -60,6 +77,6 @@ export default async function Page({ params }) {
         <SubscriptionForm />
         <PostAccordion />
       </div>
-    </div>
+    </>
   );
 }

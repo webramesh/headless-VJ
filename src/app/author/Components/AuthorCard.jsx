@@ -33,7 +33,7 @@ const AuthorCard = ({ title, subtitle, posts = [] }) => {
                         day: 'numeric',
                       })}
                     </p>
-                    <p className="text-[#694848] text-xs mb-2">{post.author?.node?.name || 'Vinjournalen.se'}</p>
+                    <p className="text-[#694848] text-xs mb-2">{post.author?.node?.name || 'Jeanette Gardner'}</p>
                     <div
                       className="text-sm text-gray-900 font-extralight leading-relaxed flex-grow overflow-hidden"
                       dangerouslySetInnerHTML={{

@@ -2,15 +2,16 @@ import { countArticles } from '../../lib/api/articleApi';
 import ArticleContent from './Components/ArticleContent';
 import Sidebar from '../Components/Sidebar';
 import Banner from '../Components/Banner';
+import { breadcrumbSchemaGenerator } from '@/src/utils/schemaUtils';
 
 export async function generateMetadata() {
   return {
+    metadataBase: new URL('https://www.vinjournalen.se/'),
     title: 'Artiklar om vin - Vinjournalen.se',
     robots: 'index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1',
     description:
       'Denna sida innehåller artiklar om vin, mat och dryck, samt information om viner och vinodlingar från hela världen.',
     focusKeywords: ['vin', 'vinartiklar', 'vinodlingar', 'viner', 'mat och dryck'],
-    canonicalUrl: 'https://www.vinjournalen.se/artiklar/',
     icons: {
       icon: '/favicon.png',
     },
@@ -23,13 +24,14 @@ export async function generateMetadata() {
         'En omfattande samling artiklar om vin, mat och dryck, samt information om vinodlingar och världens viner.',
       url: 'https://www.vinjournalen.se/artiklar/',
       siteName: 'Vinjournalen.se',
-      image: {
-        height: 495,
-        secureUrl: 'https://www.vinjournalen.se/wp-content/uploads/2020/01/VinjournalenLogotype-scaled.jpg',
-        type: 'image/jpeg',
-        url: 'https://www.vinjournalen.se/wp-content/uploads/2020/01/VinjournalenLogotype-scaled.jpg',
-        width: 2048,
-      },
+      images: [
+        {
+          height: 630,
+          type: 'image/jpeg',
+          url: '/vj-og.jpg',
+          width: 1200,
+        },
+      ],
       twitterMeta: {
         card: 'summary_large_image',
         description:
@@ -45,14 +47,26 @@ export async function generateMetadata() {
         sizes: '16x16', // Icon dimensions
       },
     },
+    alternates: {
+      canonical: 'https://www.vinjournalen.se/artiklar/',
+    },
   };
 }
 
 export default async function ArticlarPage() {
   const totalPosts = await countArticles();
 
+  const breadcrumbs = breadcrumbSchemaGenerator([
+    { name: 'Artiklar om vin', url: 'https://www.vinjournalen.se/artiklar/' },
+  ]);
+
   return (
     <>
+      <script
+        type="application/ld+json"
+        className="rank-math-schema"
+        dangerouslySetInnerHTML={{ __html: breadcrumbs }}
+      />
       <Banner variant="default" /> <ArticleContent totalPosts={totalPosts} sidebar={<Sidebar />} />
     </>
   );

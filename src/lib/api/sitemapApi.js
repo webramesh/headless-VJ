@@ -54,49 +54,11 @@ export async function getAllPages() {
   );
 }
 
-export async function getAllOrdlistaPages() {
-  return fetchAllItems(
-    'ordlista',
-    `
-    ordlista(first: $first, after: $after) {
-      nodes {
-        id
-        title
-        slug
-      }
-      pageInfo {
-        hasNextPage
-        endCursor
-      }
-    }
-  `
-  );
-}
-
 export async function getAllNyheterPages() {
   return fetchAllItems(
     'nyheter',
     `
     nyheter(first: $first, after: $after) {
-      nodes {
-        id
-        title
-        slug
-      }
-      pageInfo {
-        hasNextPage
-        endCursor
-      }
-    }
-  `
-  );
-}
-
-export async function getAllPosts() {
-  return fetchAllItems(
-    'posts',
-    `
-    posts(first: $first, after: $after) {
       nodes {
         id
         title
@@ -130,6 +92,57 @@ export async function getAllProducenter() {
   );
 }
 
+// -------------------------------------------------------------------------------
+export async function getAllPosts() {
+  return fetchAllItems(
+    'posts',
+    `
+    posts(first: $first, after: $after) {
+      nodes {
+        id
+        title
+        slug
+        uri
+        categories {
+          nodes {
+            slug
+          }
+        }
+      }
+      pageInfo {
+        hasNextPage
+        endCursor
+      }
+    }
+  `
+  );
+}
+
+export async function getAllOrdlistaPages() {
+  return fetchAllItems(
+    'ordlista',
+    `
+    ordlista(first: $first, after: $after) {
+      nodes {
+        id
+        title
+        slug
+        uri
+        ordlistaCategories {
+          nodes {
+            slug
+            name
+          }
+        }
+      }
+      pageInfo {
+        hasNextPage
+        endCursor
+      }
+    }
+  `
+  );
+}
 export async function getAllRegioner() {
   return fetchAllItems(
     'regioner',
@@ -139,6 +152,12 @@ export async function getAllRegioner() {
         id
         title
         slug
+       lander {
+        nodes {
+          slug
+          name
+        }
+      }
       }
       pageInfo {
         hasNextPage
@@ -158,6 +177,26 @@ export async function getAllVinguide() {
         id
         title
         slug
+        uri
+      }
+      pageInfo {
+        hasNextPage
+        endCursor
+      }
+    }
+  `
+  );
+}
+export async function getAllProdukter() {
+  return fetchAllItems(
+    'produkter',
+    `
+    produkter(first: $first, after: $after) {
+      nodes {
+        id
+        title
+        slug
+        uri
       }
       pageInfo {
         hasNextPage
@@ -177,6 +216,7 @@ export async function getAllVinimporterer() {
         id
         title
         slug
+        uri
       }
       pageInfo {
         hasNextPage
@@ -186,15 +226,14 @@ export async function getAllVinimporterer() {
   `
   );
 }
-
-export async function getAllProdukter() {
+export async function getAllLanders() {
   return fetchAllItems(
-    'produkter',
+    'lander',
     `
-    produkter(first: $first, after: $after) {
+    lander(first: $first, after: $after) {
       nodes {
         id
-        title
+        name
         slug
       }
       pageInfo {

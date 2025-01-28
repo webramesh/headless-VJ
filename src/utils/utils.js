@@ -177,8 +177,12 @@ export function generateSeoMetadata(seo) {
   // Convert focus keywords array to comma-separated string
   const keywords = seo?.focusKeywords?.join(', ') || '';
 
+  const title = seo?.title;
+  const formattedTitle = title.includes('Vinjournalen.se') ? title : `${title} - Vinjournalen.se`;
+
   return {
-    title: seo?.title,
+    metadataBase: new URL('https://www.vinjournalen.se/'),
+    title: formattedTitle,
     description: seo?.description,
     robots: robotsMeta,
     icons: {
@@ -192,7 +196,7 @@ export function generateSeoMetadata(seo) {
       siteName: seo?.openGraph?.siteName,
       images: [
         {
-          url: seo?.openGraph?.image?.url,
+          url: seo?.openGraph?.image?.url || '/vj-og.jpg',
           width: seo?.openGraph?.image?.width,
           height: seo?.openGraph?.image?.height,
           alt: seo?.openGraph?.title,
@@ -245,3 +249,21 @@ export function countProductsByCountry(products) {
 
   return countryCountArray; // or return countryCounts for Map format
 }
+
+export const formatExternalUrl = (url) => {
+  if (!url) return '#';
+  // Add https if protocol is missing
+  return url.startsWith('http') ? url : `https://${url}`;
+};
+
+export const convertToWebP = (imagePath) => {
+  // if (!imagePath) return imagePath;
+
+  // Check if the path ends with jpg or jpeg
+  if (imagePath.toLowerCase().endsWith('.jpg') || imagePath.toLowerCase().endsWith('.jpeg')) {
+    // Replace the extension with .webp
+    return imagePath.replace(/\.(jpg|jpeg)$/i, '.webp');
+  }
+
+  return imagePath;
+};

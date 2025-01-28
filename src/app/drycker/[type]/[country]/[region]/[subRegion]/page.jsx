@@ -1,5 +1,6 @@
 import DryckerPage from '@/src/app/drycker/Components/DryckerPage';
 import { getVinguideData, getProductByLander } from '@/src/lib/api/vinguideApi';
+import { breadcrumbSchemaGenerator } from '@/src/utils/schemaUtils';
 import { generateSeoMetadata } from '@/src/utils/utils';
 import { redirect } from 'next/navigation';
 import React from 'react';
@@ -23,6 +24,30 @@ const page = async ({ params, searchParams }) => {
     const vinguideData = await getVinguideData(`/drycker/${type}/${country}/${region}/${subRegion}`);
     const cardTitle = `Artiklar relaterade till ${vinguideData.title}`;
     const products = await getProductByLander(subRegion, type);
+
+    const breadcrumbs = breadcrumbSchemaGenerator([
+      {
+        name: 'Vinguide',
+        url: 'https://www.vinjournalen.se/',
+      },
+      {
+        name: type,
+        url: `https://www.vinjournalen.se/drycker/${type}`,
+      },
+      {
+        name: country,
+        url: `https://www.vinjournalen.se/drycker/${type}/${country}`,
+      },
+      {
+        name: region,
+        url: `https://www.vinjournalen.se/drycker/${type}/${country}/${region}`,
+      },
+      {
+        name: subRegion,
+        url: `https://www.vinjournalen.se/drycker/${type}/${country}/${region}/${subRegion}`,
+      },
+    ]);
+
     return (
       <DryckerPage
         initialProducts={products}
@@ -31,6 +56,7 @@ const page = async ({ params, searchParams }) => {
         page="SubRegionPage"
         cardTitle={cardTitle}
         vinguideData={vinguideData}
+        breadcrumbs={breadcrumbs}
       />
     );
   } catch (error) {

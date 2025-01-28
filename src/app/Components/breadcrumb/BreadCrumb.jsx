@@ -28,7 +28,7 @@ function BreadCrumb({ title1, link1, title2, link2, title3, link3, title4, link4
   return (
     <div className=" text-[0.5rem] sm:text-xs md:text-sm my-1 lg:my-4 flex gap-1">
       <Link href="/" className={`${noRed ? 'text-white' : 'text-red-600'} `}>
-        Hem
+        Allt om Vin
       </Link>
       {breadcrumb.map((crumb, index) => (
         <LinkElement key={index} title={crumb.title} link={crumb.link} noRed={noRed} />

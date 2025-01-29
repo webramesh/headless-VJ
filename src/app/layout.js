@@ -15,6 +15,7 @@ import { PostHogProvider } from './providers';
 import PgBanner from './PgBanner';
 import { getHomePagePosts } from '../lib/api/postAPI';
 import { navSchema } from '../utils/schemaUtils';
+import { GoogleTagManager } from '@next/third-parties/google';
 
 const ScrollToTopButton = dynamic(() => import('./Components/ScrollToTopButton'), {
   ssr: false,
@@ -34,6 +35,7 @@ export default async function RootLayout({ children }) {
   return (
     <html lang="sv-SE">
       <head>
+        <GoogleTagManager gtmId="GTM-MVC4G9ZN" />
         {/* PWA Primary */}
         <link rel="manifest" href="/manifest.json" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0,maximum-scale=5.0" />

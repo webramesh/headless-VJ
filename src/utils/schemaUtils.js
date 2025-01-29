@@ -195,6 +195,13 @@ export function productSchemaGenerator(product) {
     name: product?.title,
     image: product?.featuredImage?.node?.sourceUrl,
     description: product?.fieldsProduct?.productShortText,
+    offers: {
+      '@type': 'Offer',
+      priceCurrency: 'SEK',
+      price: product?.fieldsProduct?.pice,
+      availability: product?.fieldsProduct?.buyLink ? 'InStock' : 'Not in Stock',
+      itemCondition: product?.fieldsProduct?.buyLink ? 'NewCondition' : 'Not Available',
+    },
   };
   return JSON.stringify(productSchema);
 }

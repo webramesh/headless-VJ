@@ -22,7 +22,7 @@ export default async function page({ params }) {
   const totalOrdlista = category.count;
   const breadcrumbs = breadcrumbSchemaGenerator([
     { name: 'Ordlista arkiv - Vinjournalen.se', url: 'https://www.vinjournalen.se/ordlista/' },
-    { name: category?.seo?.title, url: `https://www.vinjournalen.se/ordlista/${params.category}` },
+    { name: category?.name, url: `https://www.vinjournalen.se/ordlista/${params.category}` },
   ]);
   return (
     <>

@@ -13,6 +13,7 @@ import ProductLabelsWithTooltips from './ProductLabelsWithTooltip';
 import { generatePdf } from '@/src/utils/generatePDF';
 import { EmailShareButton, FacebookShareButton, TwitterShareButton } from 'react-share';
 import { findDepth } from '@/src/utils/utils';
+import { sendGTMEvent } from '@next/third-parties/google';
 
 export default function NewProdSection({ product, producenterData }) {
   const matkombinationer = product?.matkombinationer?.nodes;
@@ -271,6 +272,7 @@ export default function NewProdSection({ product, producenterData }) {
               href={buyLink || '#'}
               target="_blank"
               className="w-full text-center text-sm border rounded-full p-1 bg-[#0C7054] text-white block mb-2"
+              onClick={() => sendGTMEvent({ event: 'buttonClicked', value: 'Systembolaget By DetailsProduct' })}
             >
               Köp på Systembolaget
             </Link>
@@ -456,6 +458,7 @@ export default function NewProdSection({ product, producenterData }) {
                     href={buyLink || '#'}
                     target="_blank"
                     className="w-full text-center border text-sm rounded-full p-1 bg-[#0C7054] text-white block hover:bg-[#0A5A40] hover:text-white hover:shadow-lg transition-all duration-300"
+                    onClick={() => sendGTMEvent({ event: 'buttonClicked', value: 'Systembolaget By DetailsProduct' })}
                   >
                     Köp på Systembolaget
                   </Link>

@@ -39,7 +39,7 @@ export default async function Page({ params }) {
         dangerouslySetInnerHTML={{ __html: breadcrumbs }}
       />
 
-      <div className="container mx-auto">
+      <div className="container mx-auto px-2">
         <Banner variant="default" />
         <div className="flex flex-col lg:flex-row lg:gap-10">
           {/* Main Content Section (3/4) */}

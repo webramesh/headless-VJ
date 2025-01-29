@@ -294,12 +294,6 @@ export async function getProductBySlug(identifier) {
                 slug
               }
             }
-            fargers {
-              nodes {
-                name
-                slug
-              }
-            }
           }
         }
       `,

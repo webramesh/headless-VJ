@@ -103,7 +103,7 @@ export default async function Page({ params }) {
             <MoreOnProduct vinimportorDetails={vinimportorDetails} producentDetails={producenterData} />
           )}
           <hr />
-        </div>{' '}
+        </div>
       </div>
 
       <div className="px-8 container mx-auto block md:grid grid-cols-6 items-center justify-between gap-8 ">

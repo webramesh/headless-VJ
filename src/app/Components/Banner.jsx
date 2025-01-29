@@ -1,6 +1,7 @@
 import React from 'react';
 import { getAllBanners } from '../../lib/api/bannerApi';
-import BannerImage from './BannerImage';
+import Link from 'next/link';
+import Image from 'next/image';
 
 function getRandomItem(array) {
   return array[Math.floor(Math.random() * array.length)];
@@ -30,7 +31,16 @@ export default async function Banner({ variant }) {
 
   return (
     <div className={`container mx-auto ${variant === 'sidebar' ? 'mb-4' : ''}`}>
-      <BannerImage bannerUrl={bannerUrl} imageUrl={imageUrl} imageAlt={imageAlt} variant={variant} />
+      <Link href={bannerUrl} target="_blank" rel="noopener noreferrer" className="block">
+        <Image
+          src={imageUrl || '/banner.webp'}
+          alt={imageAlt}
+          width={variant === 'sidebar' ? 300 : 1200}
+          height={variant === 'sidebar' ? 250 : 400}
+          className="object-cover cursor-pointer w-full hover:opacity-90 transition-opacity"
+          priority
+        />
+      </Link>
     </div>
   );
 }

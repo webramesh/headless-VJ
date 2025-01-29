@@ -13,14 +13,12 @@ import ProductLabelsWithTooltips from './ProductLabelsWithTooltip';
 import { generatePdf } from '@/src/utils/generatePDF';
 import { EmailShareButton, FacebookShareButton, TwitterShareButton } from 'react-share';
 import { findDepth } from '@/src/utils/utils';
-import { sendGTMEvent } from '@next/third-parties/google';
 
 export default function NewProdSection({ product, producenterData }) {
   const matkombinationer = product?.matkombinationer?.nodes;
 
   const smakar = product?.smakar?.nodes;
   const aromer = product?.aromer?.nodes;
-  const fargers = product?.fargers?.nodes;
 
   const [showReadMore, setShowReadMore] = useState(false);
   const [isMobile, setIsMobile] = useState(true);
@@ -272,7 +270,6 @@ export default function NewProdSection({ product, producenterData }) {
               href={buyLink || '#'}
               target="_blank"
               className="w-full text-center text-sm border rounded-full p-1 bg-[#0C7054] text-white block mb-2"
-              onClick={() => sendGTMEvent({ event: 'buttonClicked', value: 'Systembolaget By DetailsProduct' })}
             >
               Köp på Systembolaget
             </Link>
@@ -326,9 +323,9 @@ export default function NewProdSection({ product, producenterData }) {
             </div>
           )}
         </div>
-        {((smakar && smakar.length > 0) || (aromer && aromer.length > 0) || (fargers && fargers.length > 0)) && (
+        {((smakar && smakar.length > 0) || (aromer && aromer.length > 0)) && (
           <div className="bg-gray-50 mt-4 py-4">
-            <FactBoxMoreInfo smakar={smakar} aromer={aromer} fargers={fargers} />
+            <FactBoxMoreInfo smakar={smakar} aromer={aromer} />
           </div>
         )}
       </div>
@@ -376,7 +373,7 @@ export default function NewProdSection({ product, producenterData }) {
           </div>
         </div>
         <div className="w-2/3">
-          <div className="flex gap-4">
+          <div className="flex gap-4 items-center">
             <div className="w-[70%] flex flex-col gap-2 pr-2">
               {isMobile ? (
                 <div className="items-start text-2xl">
@@ -452,13 +449,12 @@ export default function NewProdSection({ product, producenterData }) {
                   {extraReadMore3}
                 </div>
               )}
-              <div className="bg-[#dfece2] mt-1 w-full p-1 rounded-md">
+              <div className="bg-[#dfece2] mt-1 w-full px-1 py-2 rounded-md">
                 {buyLink ? (
                   <Link
                     href={buyLink || '#'}
                     target="_blank"
                     className="w-full text-center border text-sm rounded-full p-1 bg-[#0C7054] text-white block hover:bg-[#0A5A40] hover:text-white hover:shadow-lg transition-all duration-300"
-                    onClick={() => sendGTMEvent({ event: 'buttonClicked', value: 'Systembolaget By DetailsProduct' })}
                   >
                     Köp på Systembolaget
                   </Link>
@@ -516,6 +512,11 @@ export default function NewProdSection({ product, producenterData }) {
                   </div>
                 )}
               </div>
+              {((smakar && smakar.length > 0) || (aromer && aromer.length > 0)) && (
+                <div className="bg-gray-50 mt-4 py-2 w-full">
+                  <FactBoxMoreInfo smakar={smakar} aromer={aromer} />
+                </div>
+              )}
             </div>
             <div className="w-[30%] flex flex-col gap-2 items-start border-l-2 pl-10 border-gray-200">
               <div className="flex flex-col text-start">
@@ -561,11 +562,6 @@ export default function NewProdSection({ product, producenterData }) {
               </div>
             </div>
           </div>
-          {((smakar && smakar.length > 0) || (aromer && aromer.length > 0) || (fargers && fargers.length > 0)) && (
-            <div className="bg-gray-50 mt-4 py-2">
-              <FactBoxMoreInfo smakar={smakar} aromer={aromer} fargers={fargers} />
-            </div>
-          )}
         </div>
       </div>
     </div>

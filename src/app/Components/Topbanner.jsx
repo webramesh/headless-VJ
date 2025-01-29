@@ -3,11 +3,14 @@
 import React, { useState } from 'react';
 import Link from 'next/link';
 import { X } from 'lucide-react';
+import { usePathname } from 'next/navigation';
 
 const TopBanner = ({ post }) => {
   const [showBanner, setShowBanner] = useState(true);
+  const pathname = usePathname();
 
-  if (!showBanner) {
+  // Hide banner if path matches /produkter/[slug] or banner is closed
+  if (!showBanner || (pathname.startsWith('/produkter') && pathname !== '/produkter/')) {
     return null;
   }
 

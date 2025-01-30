@@ -1,14 +1,3 @@
-// 'use client';
-// import React from 'react';
-// import Link from 'next/link';
-// import Slider from 'react-slick';
-// import 'slick-carousel/slick/slick.css';
-// import 'slick-carousel/slick/slick-theme.css';
-// import { ChevronLeft, ChevronRight } from 'lucide-react';
-// import Image from 'next/image';
-
-// const WineCard = ({ backgroundImage, title, category, articles, description, colorPicker, slug }) => {
-//   return (
 'use client';
 import React, { useEffect, useState } from 'react';
 import Link from 'next/link';

@@ -395,3 +395,177 @@ export async function getSimilarProducts(uri) {
     return [];
   }
 }
+
+export async function getProductSlider(id) {
+  try {
+    const { data } = await client.query({
+      query: gql`
+        query PageById($id: ID!) {
+          page(id: $id) {
+            date
+            productSlider {
+              productSlider {
+                nodes {
+                  slug
+                  ... on Produkt {
+                    id
+                    title
+                    slug
+                    featuredImage {
+                      node {
+                        sourceUrl
+                      }
+                    }
+                    produktTyper {
+                      nodes {
+                        name
+                        slug
+                        parent {
+                          node {
+                            name
+                          }
+                        }
+                      }
+                    }
+
+                    produktslander {
+                      nodes {
+                        name
+                        slug
+                        parent {
+                          node {
+                            name
+                          }
+                        }
+                        flag {
+                          flagImage {
+                            node {
+                              sourceUrl
+                            }
+                          }
+                        }
+                      }
+                    }
+                    fieldsProduct {
+                      closure
+                      composition
+                      productShortText
+                      extraReadMore1
+                      extraReadMore2
+                      pice
+                      pricePerLitter
+                      productCode
+                      buyLink
+                      wineSortiment
+                      alcohol
+                      vintage
+                      bottlePackageVolume
+                      allergener
+                      tasteClock1FyllighetSotma
+                      tasteClock2Fyllighetstravhet
+                      tasteClock3Fruktsyra
+                      caloriesInAlcPer15cl
+                      caloriesInAlcPerContainerVolume
+                      caloriesInAlcPerLitter
+                      caloriesInSugarPer15cl
+                      caloriesInSugarPerContainerVolume
+                      caloriesInSugarPerLitter
+                      totalCaloriesPer15Cl
+                      totalCaloriesPerContainerVolume
+                      totalCaloriesPerLitter
+                      sugerLevel
+                      sugarLevelIn1Litter
+                      sugarBites
+                      containerType
+                      produktPackaging
+                      wineSaleStartDate
+                      alcoholPerSek
+                      salePrice
+                      salesByYears {
+                        yearHistory
+                        horozontalVolumeHistory
+                      }
+                      priceHistory {
+                        price
+                        priceHistoryDate
+                      }
+                      productLabels {
+                        bestSeller
+                        familyWinery
+                        featuredWine
+                        newWine
+                        onlineWine
+                        organicWine
+                        veganWine
+                        verifiedByVjse
+                        visitWinery
+                        sustainable
+                      }
+
+                      vinimporter {
+                        nodes {
+                          ... on Vinimporter {
+                            id
+                            title
+                            slug
+                            content
+                          }
+                        }
+                      }
+                      produkterproducer {
+                        nodes {
+                          ... on Producent {
+                            id
+                            title
+                            slug
+                            content
+                          }
+                        }
+                      }
+                    }
+                    matkombinationer {
+                      nodes {
+                        name
+                        categoriesImagesAndOtherFields {
+                          categoriesImage {
+                            node {
+                              sourceUrl
+                            }
+                          }
+                        }
+                      }
+                    }
+                    smakar {
+                      nodes {
+                        name
+                        slug
+                      }
+                    }
+                    aromer {
+                      nodes {
+                        name
+                        slug
+                      }
+                    }
+                    fargers {
+                      nodes {
+                        name
+                        slug
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      `,
+      variables: { id },
+    });
+
+    return data.page;
+  } catch (error) {
+    console.error('Error fetching page:', error);
+    return null;
+  }
+}

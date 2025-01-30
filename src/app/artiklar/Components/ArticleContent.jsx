@@ -28,7 +28,7 @@ const Card = ({ title, excerpt, date, author, category, imageUrl, slug, category
           />
         </div>
         <div className="p-4 bg-[#f5f5f5] flex-grow flex flex-col">
-          <h3 className="font-outfit font-medium text-black text-lg">{title || 'Untitled Artiklar'}</h3>
+          <h3 className="font-outfit font-medium text-black text-lg">{title || 'Ofrälse Artiklar'}</h3>
           <p className="mt-2 font-outfit text-gray-900 text-xs">
             {date ? format(new Date(date), 'dd MMMM, yyyy') : 'Inget datum'}
           </p>

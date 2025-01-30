@@ -27,7 +27,7 @@ const Card = ({ post }) => {
           />
         </div>
         <div className="p-4 bg-[#f5f5f5] flex flex-col flex-grow">
-          <h3 className="font-medium text-black text-lg">{post.title || 'Untitled'}</h3>
+          <h2 className="font-medium text-black text-lg">{post.title || 'Ofrälse'}</h2>
           <p className="mt-2 text-gray-900 text-xs">{post.date ? formatDate(post.date) : 'Date unavailable'}</p>
           <p className="text-[#694848] text-xs mt-2">{post.author?.node?.name || 'Jeanette Gardner'}</p>
           <div className="flex-grow">

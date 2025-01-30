@@ -83,6 +83,7 @@ export default async function PostDetails({ params }) {
           <PostDetailsHero
             title={post?.title}
             featuredImage={post?.featuredImage?.node?.sourceUrl}
+            sizes={post?.featuredImage?.node?.sizes}
             authorImage={post?.author?.node?.customAvatar}
             authorName={post?.author?.node?.name}
             authorSlug={post?.author?.node?.slug}

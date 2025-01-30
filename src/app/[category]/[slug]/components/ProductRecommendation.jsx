@@ -47,7 +47,7 @@ export default function ProductRecommendation({ postProductRecommendation }) {
                     className="mx-auto xl:w-full xl:h-full"
                     width={200}
                     height={200}
-                    priority
+                    loading="lazy"
                   />
                 </div>
               </div>

@@ -19,6 +19,8 @@ import TrendingSkeleton from './Components/SkeletonLoading/TrendingPostSkeleton'
 import WineSkeleton from './Components/SkeletonLoading/WineSkeleton';
 import NewsPostSkeleton from './Components/SkeletonLoading/NewsPostSkeleton';
 import HomePageInfoSkeleton from './Components/SkeletonLoading/HomePageInfoSkeleton';
+import { getProductSlider } from '../lib/api/productsAPI';
+import ProductSlider from './Components/ProductSlider';
 
 export const revalidate = 60;
 
@@ -31,11 +33,12 @@ export async function generateMetadata() {
 }
 
 export default async function Home() {
-  const [nyheter, trendingPosts, wineCategories, posts] = await Promise.all([
+  const [nyheter, trendingPosts, wineCategories, posts, productSlider] = await Promise.all([
     getAllNyheter(),
     getAllTrendingPosts(),
     getAllWineCategories(),
     getHomePagePosts(),
+    getProductSlider('cG9zdDo1NTM='),
   ]);
 
   return (
@@ -48,6 +51,15 @@ export default async function Home() {
       <Suspense fallback={<HeroSkeleton />}>
         <Hero posts={posts} />
       </Suspense>
+
+      <div className="my-12 container mx-auto px-4 max-w-7xl  ">
+        <div className="text-center font-outfit text-xl md:text-2xl font-medium my-4 md:my-6">
+          Redaktionens utvalda produkter
+        </div>
+        <div className=" border shadow-xl border-gray-300 md:py-8 rounded-md ">
+          <ProductSlider productSlider={productSlider} />
+        </div>
+      </div>
 
       <Suspense fallback={<TrendingSkeleton />}>
         <Trending

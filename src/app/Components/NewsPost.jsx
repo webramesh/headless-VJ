@@ -47,7 +47,7 @@ const NewsPost = ({ title = '', subtitle = '', nyheter = [] }) => {
           <Link href={`/nyheter/${news?.slug || '#'}/`} key={news?.id || Math.random()} className="flex">
             <div className="flex flex-col cursor-pointer hover:shadow-lg transition-shadow w-full">
               <div className="p-4 bg-[#f5f5f5] flex flex-col flex-grow">
-                <h3 className="font-outfit font-medium text-black text-lg">{news?.title || 'Untitled'}</h3>
+                <h3 className="font-outfit font-medium text-black text-lg">{news?.title || 'Ofrälse'}</h3>
                 <p className="mt-2 font-outfit text-gray-900 text-xs">{formatDate(news?.date)}</p>
                 <p className="text-[#694848] text-xs font-outfit mt-2">
                   {news?.author?.node?.name || 'Jeanette Gardner'}

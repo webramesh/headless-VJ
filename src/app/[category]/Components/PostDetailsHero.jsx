@@ -2,7 +2,7 @@ import React from 'react';
 import Image from 'next/image';
 import BreadCrumb from '../../Components/breadcrumb/BreadCrumb';
 import Link from 'next/link';
-const PostDetailsHero = ({ featuredImage, title, authorImage, authorName, authorSlug, date, categories }) => {
+const PostDetailsHero = ({ featuredImage, title, authorImage, authorName, authorSlug, date, categories, sizes }) => {
   return (
     <div className="container mx-auto px-4 lg:px-0 ">
       <div className="p-4 ">
@@ -10,7 +10,6 @@ const PostDetailsHero = ({ featuredImage, title, authorImage, authorName, author
       </div>
       <div className="flex flex-col lg:flex-row gap-6 lg:gap-12 lg:pt-4 bg-slate-50 p-4">
         <div className="w-full lg:w-[50%] flex flex-col gap-2">
-          {/* <BreadCrumb title1={category?.name} link1={`/${category?.slug}`} title2={title} /> */}
           <div>
             <Image
               src={featuredImage || '/postplaceholder.jpg'}
@@ -19,6 +18,7 @@ const PostDetailsHero = ({ featuredImage, title, authorImage, authorName, author
               width={500}
               height={300}
               priority
+              sizes={sizes}
             />
           </div>
         </div>

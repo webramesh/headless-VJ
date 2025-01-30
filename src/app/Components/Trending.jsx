@@ -44,7 +44,7 @@ const Trending = ({ title = '', subtitle = '', trendingPosts = [] }) => {
                 />
               </div>
               <div className="p-4 bg-[#f5f5f5] flex flex-col flex-grow">
-                <h3 className="font-outfit font-medium text-black text-lg">{post?.title || 'Untitled'}</h3>
+                <h3 className="font-outfit font-medium text-black text-lg">{post?.title || 'Ofrälse'}</h3>
 
                 <p className="mt-4 font-outfit text-gray-900 text-xs capitalize">
                   {new Date(post?.date).toLocaleDateString('sv-SE', {

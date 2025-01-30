@@ -31,7 +31,7 @@ export default function RecentPostCard({ post }) {
           />
         </div>
         <div className="p-4 bg-[#f5f5f5] flex flex-col flex-grow">
-          <h3 className="font-outfit font-medium text-black text-lg">{title || 'Untitled'}</h3>
+          <h3 className="font-outfit font-medium text-black text-lg">{title || 'Ofrälse'}</h3>
           {/* <p className="mt-2 font-outfit text-gray-900 text-xs">{formattedDate}</p> */}
           <p className="mt-2 font-outfit text-gray-900 text-xs">
             <span className="capitalize">

@@ -187,6 +187,7 @@ export async function getPostBySlug(slug) {
             featuredImage {
               node {
                 sourceUrl
+                sizes
               }
             }
             categories {

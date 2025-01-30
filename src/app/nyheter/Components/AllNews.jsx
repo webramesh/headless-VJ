@@ -16,7 +16,7 @@ const Card = ({ title, excerpt, date, author, slug }) => {
     <Link href={`/nyheter/${slug}/`}>
       <div className="flex flex-col cursor-pointer hover:shadow-lg transition-shadow h-full">
         <div className="p-4 bg-[#f5f5f5] flex-grow">
-          <h3 className="font-outfit font-medium text-black text-lg">{title || 'Untitled News'}</h3>
+          <h3 className="font-outfit font-medium text-black text-lg">{title || 'Ofrälse News'}</h3>
           <p className="mt-2 font-outfit text-gray-900 text-xs">
             {date ? format(new Date(date), 'dd MMMM, yyyy') : 'No date'}
           </p>

@@ -44,49 +44,49 @@ export default async function sitemap() {
     // Static routes
     const staticRoutes = [
       {
-        url: baseUrl,
+        url: `${baseUrl}`,
         lastModified: new Date(),
         changeFrequency: 'daily',
         priority: 1,
       },
       {
-        url: `${baseUrl}/ordlista`,
+        url: `${baseUrl}/ordlista/`,
         lastModified: new Date(),
         changeFrequency: 'weekly',
         priority: 0.8,
       },
       {
-        url: `${baseUrl}/lander`,
+        url: `${baseUrl}/lander/`,
         lastModified: new Date(),
         changeFrequency: 'weekly',
         priority: 0.8,
       },
       {
-        url: `${baseUrl}/produkter`,
+        url: `${baseUrl}/produkter/`,
         lastModified: new Date(),
         changeFrequency: 'daily',
         priority: 0.8,
       },
       {
-        url: `${baseUrl}/producenter`,
+        url: `${baseUrl}/producenter/`,
         lastModified: new Date(),
         changeFrequency: 'weekly',
         priority: 0.8,
       },
       {
-        url: `${baseUrl}/vinimportor`,
+        url: `${baseUrl}/vinimportor/`,
         lastModified: new Date(),
         changeFrequency: 'weekly',
         priority: 0.8,
       },
       {
-        url: `${baseUrl}/nyheter`,
+        url: `${baseUrl}/nyheter/`,
         lastModified: new Date(),
         changeFrequency: 'weekly',
         priority: 0.8,
       },
       {
-        url: `${baseUrl}/not-found`,
+        url: `${baseUrl}/not-found/`,
         lastModified: new Date(),
         changeFrequency: 'yearly',
         priority: 0.1,
@@ -112,7 +112,7 @@ export default async function sitemap() {
         .filter((page) => !excludedPages.includes(page.slug))
         .map((page) => {
           return {
-            url: `${baseUrl}/${page.slug}`,
+            url: `${baseUrl}/${page.slug}/`,
             lastModified: new Date(),
             changeFrequency: 'weekly',
             priority: 0.7,
@@ -121,14 +121,14 @@ export default async function sitemap() {
       ...ordlistaPages.map((page) => {
         const ordlistaCategory = page.ordlistaCategories?.nodes?.[0]?.slug || 'uncategorized';
         return {
-          url: `${baseUrl}/ordlista/${ordlistaCategory}/${page.slug}`,
+          url: `${baseUrl}/ordlista/${ordlistaCategory}/${page.slug}/`,
           lastModified: new Date(),
           changeFrequency: 'weekly',
           priority: 0.7,
         };
       }),
       ...nyheterPages.map((page) => ({
-        url: `${baseUrl}/nyheter/${page.slug}`,
+        url: `${baseUrl}/nyheter/${page.slug}/`,
         lastModified: new Date(),
         changeFrequency: 'daily',
         priority: 0.8,
@@ -137,14 +137,14 @@ export default async function sitemap() {
         // Get the post's category and use it in the URL
         const postCategory = post.categories?.nodes?.[0]?.slug || 'uncategorized';
         return {
-          url: `${baseUrl}/${postCategory}/${post.slug}`,
+          url: `${baseUrl}/${postCategory}/${post.slug}/`,
           lastModified: new Date(),
           changeFrequency: 'daily',
           priority: 0.6,
         };
       }),
       ...producenter.map((producer) => ({
-        url: `${baseUrl}/producenter/${producer.slug}`,
+        url: `${baseUrl}/producenter/${producer.slug}/`,
         lastModified: new Date(),
         changeFrequency: 'weekly',
         priority: 0.7,
@@ -152,7 +152,7 @@ export default async function sitemap() {
       ...regioner.map((region) => {
         const country = region.lander?.nodes?.[0]?.slug || 'uncategorized';
         return {
-          url: `${baseUrl}/regioner/${country}/${region.slug}`,
+          url: `${baseUrl}/regioner/${country}/${region.slug}/`,
           lastModified: new Date(),
           changeFrequency: 'weekly',
           priority: 0.7,
@@ -170,7 +170,7 @@ export default async function sitemap() {
       }),
 
       ...produkter.map((product) => ({
-        url: `${baseUrl}/produkter/${product.slug}`,
+        url: `${baseUrl}/produkter/${product.slug}/`,
         lastModified: new Date(),
         changeFrequency: 'monthly',
         priority: 0.6,
@@ -187,7 +187,7 @@ export default async function sitemap() {
 
       ...landers.map((lander) => {
         return {
-          url: `${baseUrl}/lander/${lander.slug}`,
+          url: `${baseUrl}/lander/${lander.slug}/`,
           lastModified: new Date(),
           changeFrequency: 'weekly',
           priority: 0.7,

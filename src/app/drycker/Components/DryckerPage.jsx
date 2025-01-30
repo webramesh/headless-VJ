@@ -40,7 +40,7 @@ export default function DryckerPage({
         page={page}
         allProductTitle={allProductTitle}
       />
-      <Allcountry countries={countries} params={params} countryCounts={countryCounts} />
+      {page !== 'SubRegionPage' && <Allcountry countries={countries} params={params} countryCounts={countryCounts} />}
       <Content pageData={vinguideData} />
       <Card title={cardTitle} subtitle="Från vår redaktion" posts={vinguidePosts.slice(0, 6)} />
     </>

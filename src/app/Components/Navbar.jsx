@@ -112,7 +112,7 @@ export default function Navbar({ menuData }) {
       }`}
       aria-label="Main Navigation"
     >
-      <div className="container mx-auto px-8 lg:px-0 py-2 lg:py-4 flex flex-col lg:flex-row lg:items-center lg:justify-between gap-1">
+      <div className="container mx-auto px-8 lg:px-0 py-1 lg:py-2 flex flex-col lg:flex-row lg:items-center lg:justify-between gap-1">
         {/* Logo and Hamburger Icon */}
         <div className={`w-full lg:w-auto flex justify-between items-center`}>
           <Link href="/" className="flex items-center">
@@ -120,8 +120,8 @@ export default function Navbar({ menuData }) {
             <Image
               src={vinlogo}
               alt="VinLogo"
-              className="object-cover md:hidden w-14"
-              width={56}
+              className="object-cover md:hidden w-12"
+              width={48}
               height="auto"
               priority
             />

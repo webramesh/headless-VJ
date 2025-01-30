@@ -16,7 +16,7 @@ const QNA = ({ productTitle, produktslander, wineSaleStartDate, sugarBites }) =>
           <div className=" text-sm font-medium">I vilket land proudceras {productTitle}?</div>
         </div>
         <div className="text-gray-600 text-sm  pl-2 my-1">
-          Vinet produceras i{' '}
+          Vinet produceras i&nbsp;
           {produktslander.nodes.map((region, i, arr) => (
             <span key={i}>{i < arr.length - 1 ? region.name + ', ' : region.name}</span>
           ))}
@@ -96,9 +96,9 @@ const InformationCards = ({ fieldsProduct, productTitle, typer, produktslander, 
   );
 
   return (
-    <div className="mt-8 border-y-2">
+    <div className="lg:mt-8 border-y-2">
       <div className="container mx-auto">
-        <div className="flex gap-2 md:gap-4 px-4 py-2 items-center overflow-x-auto scroll-smooth lg:justify-center ">
+        <div className="flex gap-2 md:gap-4 px-4 py-2 items-center overflow-x-auto scroll-smooth md:justify-center ">
           {cards.map((item, index) => (
             <div
               key={index}

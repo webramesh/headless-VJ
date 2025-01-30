@@ -1,7 +1,7 @@
 import React from 'react';
+import { getAllBanners } from '../../lib/api/bannerApi';
 import Link from 'next/link';
 import Image from 'next/image';
-import { getAllBanners } from '../../lib/api/bannerApi';
 
 function getRandomItem(array) {
   return array[Math.floor(Math.random() * array.length)];

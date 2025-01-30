@@ -15,6 +15,7 @@ import { PostHogProvider } from './providers';
 import PgBanner from './PgBanner';
 import { getHomePagePosts } from '../lib/api/postAPI';
 import { navSchema } from '../utils/schemaUtils';
+import Script from 'next/script';
 
 const ScrollToTopButton = dynamic(() => import('./Components/ScrollToTopButton'), {
   ssr: false,
@@ -34,6 +35,35 @@ export default async function RootLayout({ children }) {
   return (
     <html lang="sv-SE">
       <head>
+        {/* google analytics */}
+        <Script async src="https://www.googletagmanager.com/gtag/js?id=G-QTFVGQ97WC"></Script>
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-QTFVGQ97WC');`,
+          }}
+        />
+        {/* google tag manager */}
+        <Script
+          id="google_tag_manager"
+          dangerouslySetInnerHTML={{
+            __html: `
+          (function (w, d, s, l, i) {
+            w[l] = w[l] || [];
+            w[l].push({ 'gtm.start': new Date().getTime(), event: 'gtm.js' });
+            var f = d.getElementsByTagName(s)[0],
+              j = d.createElement(s),
+              dl = l != 'dataLayer' ? '&l=' + l : '';
+            j.async = true;
+            j.src = 'https://www.googletagmanager.com/gtm.js?id=' + i + dl;
+            f.parentNode.insertBefore(j, f);
+          })(window, document, 'script', 'dataLayer', 'GTM-5ZJLP9N');
+            `,
+          }}
+        />
+
         {/* PWA Primary */}
         <link rel="manifest" href="/manifest.json" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0,maximum-scale=5.0" />
@@ -66,6 +96,16 @@ export default async function RootLayout({ children }) {
       </head>
 
       <body>
+        {/* <!-- Google Tag Manager (noscript) --> */}
+        <noscript>
+          <iframe
+            src="https://www.googletagmanager.com/ns.html?id=GTM-5ZJLP9N"
+            height="0"
+            width="0"
+            style={{ display: 'none', visibility: 'hidden' }}
+          ></iframe>
+        </noscript>
+        {/* <!-- End Google Tag Manager (noscript) --> */}
         <PostHogProvider>
           <ApolloProvider>
             <FilterProvider>

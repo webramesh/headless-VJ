@@ -27,8 +27,8 @@ const page = async ({ params }) => {
 
   const breadcrumbs = breadcrumbSchemaGenerator([
     { name: 'Ordlista arkiv - Vinjournalen.se', url: 'https://www.vinjournalen.se/ordlista/' },
-    { name: category?.seo?.title, url: `https://www.vinjournalen.se/ordlista/${category.slug}/` },
-    { name: ordlista?.seo?.title, url: `https://www.vinjournalen.se/ordlista/${category.slug}/${slug}/` },
+    { name: category?.name, url: `https://www.vinjournalen.se/ordlista/${category.slug}/` },
+    { name: ordlista?.title, url: `https://www.vinjournalen.se/ordlista/${category.slug}/${slug}/` },
   ]);
 
   return (

@@ -11,7 +11,6 @@ const MoreOnProduct = ({ producentDetails, vinimportorDetails }) => {
           <div>
             {producentDetails?.title && (
               <>
-                {' '}
                 <p className="font-thin">Producent</p>
                 <p className="text-red-600 my-2">
                   <Link href={`/producenter/${producentDetails?.slug}/`}>{producentDetails?.title}</Link>

@@ -481,14 +481,7 @@ export async function getProductSlider(id) {
                       wineSaleStartDate
                       alcoholPerSek
                       salePrice
-                      salesByYears {
-                        yearHistory
-                        horozontalVolumeHistory
-                      }
-                      priceHistory {
-                        price
-                        priceHistoryDate
-                      }
+
                       productLabels {
                         bestSeller
                         familyWinery
@@ -502,23 +495,12 @@ export async function getProductSlider(id) {
                         sustainable
                       }
 
-                      vinimporter {
-                        nodes {
-                          ... on Vinimporter {
-                            id
-                            title
-                            slug
-                            content
-                          }
-                        }
-                      }
                       produkterproducer {
                         nodes {
                           ... on Producent {
                             id
                             title
                             slug
-                            content
                           }
                         }
                       }
@@ -533,24 +515,6 @@ export async function getProductSlider(id) {
                             }
                           }
                         }
-                      }
-                    }
-                    smakar {
-                      nodes {
-                        name
-                        slug
-                      }
-                    }
-                    aromer {
-                      nodes {
-                        name
-                        slug
-                      }
-                    }
-                    fargers {
-                      nodes {
-                        name
-                        slug
                       }
                     }
                   }

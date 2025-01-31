@@ -11,7 +11,8 @@ import ProductLabelsWithTooltips from '../produkter/Components/ProductLabelsWith
 
 import { findDepth } from '@/src/utils/utils';
 
-export default function ProductSliderItem({ product, producenterData }) {
+export default function ProductSliderItem({ product }) {
+  const producenterData = product?.fieldsProduct?.produkterproducer?.nodes[0];
   const matkombinationer = product?.matkombinationer?.nodes;
 
   const [isMobile, setIsMobile] = useState(true);
@@ -100,9 +101,9 @@ export default function ProductSliderItem({ product, producenterData }) {
         </div>
         {/* Title */}
         {isMobile ? (
-          <h1 className="text-black text-xl md:text-2xl mb-2 z-10">
+          <div className="text-black text-xl md:text-2xl mb-2 z-10">
             {title} {vintage && <span className="text-gray-400">{` ${vintage}`}</span>}
-          </h1>
+          </div>
         ) : (
           <div className="text-black text-xl md:text-2xl mb-2 z-10">
             {title} {vintage && <span className="text-gray-400">{` ${vintage}`}</span>}
@@ -198,9 +199,9 @@ export default function ProductSliderItem({ product, producenterData }) {
                 </div>
               </div>
               <div className="flex flex-col text-xs md:text-sm text-left">
-                <div className="text-gray-500 font-light">Producent</div>
-                <div className="font-light text-red-500">
-                  {producenterData?.title ? <Link href={`#more-on-product`}>{producenterData.title}</Link> : 'N/A'}
+                <div className="text-gray-500 font-light">PRODUCENT</div>
+                <div className="font-light ">
+                  {producenterData?.title ? <span>{producenterData.title}</span> : 'N/A'}
                 </div>
               </div>
             </div>
@@ -226,7 +227,7 @@ export default function ProductSliderItem({ product, producenterData }) {
             <Link
               href={buyLink || '#'}
               target="_blank"
-              className="w-full text-center text border rounded-xl p-2 bg-[#0C7054] text-white block mb-2"
+              className="w-full text-center border rounded-xl p-2 bg-[#0C7054] text-white block mb-2 relative overflow-hidden animate-shine"
             >
               Köp på Systembolaget
             </Link>
@@ -306,7 +307,7 @@ export default function ProductSliderItem({ product, producenterData }) {
                     ) : null
                   )}
                 </div>
-                <div className="text-red-600 hover:text-red-500 text-sm">
+                <div className="text-red-600 hover:text-red-500 text-md">
                   {updatedLinks.map((item, i) => (
                     <Link key={i} href={`/drycker/${item.slug}/`}>
                       {i < updatedLinks.length - 1 ? `${item.name} | ` : item.name}
@@ -325,7 +326,7 @@ export default function ProductSliderItem({ product, producenterData }) {
                   <span>{pice}:-</span>
                 )}
               </div>
-              <div className="text-xs text-gray-600 mt-2">{productShortText}</div>
+              <div className="text-sm text-gray-600 mt-2">{productShortText}</div>
 
               <div className=" mt-1 w-full p-1 rounded-md">
                 {buyLink ? (
@@ -357,7 +358,7 @@ export default function ProductSliderItem({ product, producenterData }) {
                 )}
               </div>
             </div>
-            <div className="w-[30%] flex flex-col gap-2 items-start border-l-2 pl-10 border-gray-200 ">
+            <div className="w-[30%] flex flex-col gap-2 items-start justify-center border-l-2 pl-10 border-gray-200 ">
               <div className="flex flex-col text-start">
                 <div className="text-gray-500 font-light text-sm">VOLYM</div>
                 <div className="font-light text-sm">
@@ -387,10 +388,8 @@ export default function ProductSliderItem({ product, producenterData }) {
                 </div>
               </div>
               <div className="flex flex-col text-center md:text-left">
-                <div className="text-gray-500 text-sm font-light">Producent</div>
-                <div className="font-light text-sm text-red-500">
-                  {producenterData?.title ? <Link href={`#more-on-product`}>{producenterData.title}</Link> : 'N/A'}
-                </div>
+                <div className="text-gray-500 text-sm font-light"> PRODUCENT</div>
+                <div className="font-light text-sm ">{producenterData.title}</div>
               </div>
               {matkombinationer?.length > 0 && (
                 <div>

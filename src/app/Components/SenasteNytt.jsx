@@ -9,12 +9,12 @@ const SenasteNytt = async () => {
   return (
     <div className="container mx-auto mt-8 p-3">
       <h2 className=" text-xl text-black">Senaste nytt</h2>
-      <div className=" text-lg mt-4 text-gray-500 font-extralight w-full justify-normal leading-5">
+      <div className="text-lg mt-4 text-gray-500 font-light w-full justify-normal leading-5">
         {nyheter.map((nyhet) => (
           <Link
             key={nyhet.id}
             href={`/nyheter/${nyhet.slug}/`}
-            className="flex justify-between items-center pt-3 first:pt-0 text-[14px]"
+            className="flex justify-between items-center pt-3 first:pt-0 text-sm md:text-base"
             role="button"
             aria-label={`More about ${nyhet.title}`}
           >

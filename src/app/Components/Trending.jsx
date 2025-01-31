@@ -60,7 +60,7 @@ const Trending = ({ title = '', subtitle = '', trendingPosts = [] }) => {
                   {formatEmbeddedContent(post?.excerpt)}
                 </p>
                 <div
-                  className="flex flex-start mt-2 w-fit px-3 py-1 text-white font-outfit text-xs font-thin rounded-full"
+                  className="flex flex-start mt-2 w-fit px-3 py-1 text-white text-xs font-extralight rounded-full"
                   style={{
                     backgroundColor:
                       post?.categories?.nodes[0]?.categoriesImagesAndOtherFields?.categorycolorpicker || '#000000',

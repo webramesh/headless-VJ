@@ -34,7 +34,7 @@ export default function NewProdSection({ product, producenterData }) {
     return () => window.removeEventListener('resize', handleResize);
   }, []);
 
-  const { title, featuredImage, fieldsProduct, produktslander, produktTyper } = product;
+  const { title, featuredImage, fieldsProduct, produktslander, produktTyper, wineStyles } = product;
   const {
     productShortText,
     extraReadMore1,
@@ -112,15 +112,34 @@ export default function NewProdSection({ product, producenterData }) {
         </div>
         {/* Wine Type and Article */}
         <div className="flex justify-between items-center mb-2 text-xs md:text-sm">
-          <div className="flex gap-2">
+          <div className="flex gap-2 flex-wrap">
             {displayTypes.map((type, index) => (
-              <div key={index} className={`text-white rounded px-2 ${index === 0 ? 'bg-red-600' : 'bg-green-600'}`}>
+              <div
+                key={index}
+                className={`text-white rounded px-2`}
+                style={{
+                  backgroundColor: type?.categoriesImagesAndOtherFields?.categorycolorpicker || '#dc2626', // Fallback to red-600
+                }}
+              >
                 {type.name}
               </div>
             ))}
+            {wineStyles?.nodes.map((style, index) => (
+              <div
+                key={index}
+                className={`text-white rounded px-2 text-sm`}
+                style={{
+                  backgroundColor:
+                    style?.categoriesImagesAndOtherFields?.categorycolorpicker || // Dynamic color
+                    (index === 0 ? '#919788' : '#8B8C88'), // Fallback colors
+                }}
+              >
+                {style.name}
+              </div>
+            ))}
           </div>
-          <div className="text-md text-gray-500">Artikel: {productCode}</div>
         </div>
+        <div className="text-md text-gray-500">Artikel: {productCode}</div>
         {/* Title */}
         {isMobile ? (
           <h1 className="text-black text-xl md:text-2xl mb-2 z-10">
@@ -135,14 +154,13 @@ export default function NewProdSection({ product, producenterData }) {
         <div className="flex gap-2 items-center mb-4 z-10">
           {product?.produktslander?.nodes?.map((node, index) =>
             node?.parent === null && node?.flag?.flagImage?.node?.sourceUrl ? (
-              <Link key={index} href={`/lander/${node?.slug}/`}>
-                <Image
-                  src={node.flag.flagImage.node.sourceUrl || '/placeholder.svg'}
-                  width={20}
-                  height={20}
-                  alt={node.name}
-                />
-              </Link>
+              <Image
+                src={node.flag.flagImage.node.sourceUrl || '/placeholder.svg'}
+                width={20}
+                height={20}
+                alt={node.name}
+                key={index}
+              />
             ) : null
           )}
           <div className="text-red-600 hover:text-red-500 text-sm md:text-base z-10">
@@ -330,235 +348,251 @@ export default function NewProdSection({ product, producenterData }) {
         )}
       </div>
       {/* Desktop Layout */}
-      <div className="hidden lg:flex gap-6 items-center">
-        <div className="w-1/3">
-          <div className="flex flex-col gap-1">
-            <div className="text-xs z-10 -my-2">
-              <BreadCrumb title1="Produkter" link1="/produkter" title2={title} />
-            </div>
-            <div className="flex justify-between items-center">
-              <div className="flex gap-2 z-10">
-                {displayTypes.map((type, index) => (
-                  <div
-                    key={index}
-                    className={`text-white rounded px-2 text-sm ${index === 0 ? 'bg-red-600' : 'bg-green-600'}`}
-                  >
-                    {type.name}
-                  </div>
-                ))}
+      <div className="hidden lg:block">
+        <BreadCrumb title1="Produkter" link1="/produkter" title2={title} />
+        <div className="flex gap-6 items-center">
+          <div className="w-1/3">
+            <div className="flex flex-col gap-1">
+              <div className="text-xs z-10 -my-2"></div>
+              <div className="flex justify-between items-center">
+                <div className="flex flex-wrap gap-2 z-10 w-full">
+                  {displayTypes.map((type, index) => (
+                    <div
+                      key={index}
+                      className={`text-white rounded px-2 text-sm`}
+                      style={{
+                        backgroundColor: type?.categoriesImagesAndOtherFields?.categorycolorpicker || '#dc2626', // Fallback to red-600
+                      }}
+                    >
+                      {type.name}
+                    </div>
+                  ))}
+                  {wineStyles?.nodes.map((style, index) => (
+                    <div
+                      key={index}
+                      className={`text-white rounded px-2 text-sm`}
+                      style={{
+                        backgroundColor:
+                          style?.categoriesImagesAndOtherFields?.categorycolorpicker || // Dynamic color
+                          (index === 0 ? '#919788' : '#8B8C88'), // Fallback colors
+                      }}
+                    >
+                      {style.name}
+                    </div>
+                  ))}
+                </div>
+                <div className="mr-0 lg:mr-10 xl:mr-20 2xl:mr-32 z-10">
+                  {fieldsProduct?.salePrice && (
+                    <span className="bg-red-600 inline text-white right-0 px-[8px] py-1 rounded-md text-xs">
+                      Prissänkt
+                    </span>
+                  )}
+                </div>
               </div>
-              <div className="mr-0 lg:mr-10 xl:mr-20 2xl:mr-32 z-10">
-                {fieldsProduct?.salePrice && (
-                  <span className="bg-red-600 inline text-white right-0 px-[8px] py-1 rounded-md text-xs">
-                    Prissänkt
-                  </span>
-                )}
+              <div className="text-sm text-gray-500 z-10">Artikel: {productCode}</div>
+              <div className="relative">
+                <div className="absolute left-0 top-0 z-10">
+                  <ProductLabelsWithTooltips fieldsProduct={fieldsProduct} />
+                </div>
+                <Image
+                  src={featuredImage?.node?.sourceUrl || '/placeholder.svg'}
+                  alt={`${title} från www.vinjournalen.se`}
+                  title={`${title} - Vinjournalen.se`}
+                  className="mx-auto -mt-16 h-[450px] z-0"
+                  width={250}
+                  height={450}
+                  priority={true}
+                />
               </div>
-            </div>
-            <div className="text-sm text-gray-500 z-10">Artikel: {productCode}</div>
-            <div className="relative">
-              <div className="absolute left-0 top-0 z-10">
-                <ProductLabelsWithTooltips fieldsProduct={fieldsProduct} />
-              </div>
-              <Image
-                src={featuredImage?.node?.sourceUrl || '/placeholder.svg'}
-                alt={`${title} från www.vinjournalen.se`}
-                title={`${title} - Vinjournalen.se`}
-                className="mx-auto -mt-16 h-[450px] z-0"
-                width={250}
-                height={450}
-                priority={true}
-              />
             </div>
           </div>
-        </div>
-        <div className="w-2/3">
-          <div className="flex gap-4 items-center">
-            <div className="w-[70%] flex flex-col gap-2 pr-2">
-              {isMobile ? (
-                <div className="items-start text-2xl">
-                  {title} {vintage && <span className="text-gray-400">{` ${vintage}`}</span>}
-                </div>
-              ) : (
-                <h1 className="items-start text-2xl">
-                  {title} {vintage && <span className="text-gray-400">{` ${vintage}`}</span>}
-                </h1>
-              )}
-              <div className="flex gap-2 items-center text-center">
-                <div>
-                  {product?.produktslander?.nodes?.map((node, index) =>
-                    node?.parent === null && node?.flag?.flagImage?.node?.sourceUrl ? (
-                      <Link key={index} href={`/lander/${node?.slug}/`}>
+          <div className="w-2/3">
+            <div className="flex gap-4 items-center">
+              <div className="w-[70%] flex flex-col gap-2 pr-2">
+                {isMobile ? (
+                  <div className="items-start text-2xl">
+                    {title} {vintage && <span className="text-gray-400">{` ${vintage}`}</span>}
+                  </div>
+                ) : (
+                  <h1 className="items-start text-2xl">
+                    {title} {vintage && <span className="text-gray-400">{` ${vintage}`}</span>}
+                  </h1>
+                )}
+                <div className="flex gap-2 items-center text-center">
+                  <div>
+                    {product?.produktslander?.nodes?.map((node, index) =>
+                      node?.parent === null && node?.flag?.flagImage?.node?.sourceUrl ? (
                         <Image
                           src={node.flag.flagImage.node.sourceUrl || '/placeholder.svg'}
                           width={20}
                           height={20}
                           alt={node.name}
+                          key={index}
                         />
+                      ) : null
+                    )}
+                  </div>
+                  <div className="text-red-600 hover:text-red-500 text-sm">
+                    {updatedLinks.map((item, i) => (
+                      <Link key={i} href={`/drycker/${item.slug}/`}>
+                        {i < updatedLinks.length - 1 ? `${item.name} | ` : item.name}
                       </Link>
-                    ) : null
+                    ))}
+                  </div>
+                </div>
+                <div className="text-xl">
+                  {fieldsProduct.salePrice ? (
+                    <>
+                      <span className="mb-0">{pice}:-</span>
+                      <span className="ml-2 text-red-600 line-through"> {fieldsProduct.salePrice}:-</span>
+                    </>
+                  ) : (
+                    <span>{pice}:-</span>
                   )}
                 </div>
-                <div className="text-red-600 hover:text-red-500 text-sm">
-                  {updatedLinks.map((item, i) => (
-                    <Link key={i} href={`/drycker/${item.slug}/`}>
-                      {i < updatedLinks.length - 1 ? `${item.name} | ` : item.name}
-                    </Link>
-                  ))}
-                </div>
-              </div>
-              <div className="text-xl">
-                {fieldsProduct.salePrice ? (
-                  <>
-                    <span className="mb-0">{pice}:-</span>
-                    <span className="ml-2 text-red-600 line-through"> {fieldsProduct.salePrice}:-</span>
-                  </>
-                ) : (
-                  <span>{pice}:-</span>
-                )}
-              </div>
-              <div className="text-xs text-gray-600 mt-2">
-                {shortDescription}
-                {words.length > 30 && (
-                  <>
-                    {showReadMore ? (
-                      <>
-                        {longDescription}
+                <div className="text-xs text-gray-600 mt-2">
+                  {shortDescription}
+                  {words.length > 30 && (
+                    <>
+                      {showReadMore ? (
+                        <>
+                          {longDescription}
+                          <span
+                            className="inline text-pink-500 cursor-pointer decoration-dotted hover:underline underline-offset-4 w-1/3 md:w-3/12"
+                            onClick={() => setShowReadMore(false)}
+                          >
+                            {' Läs mindre'}
+                          </span>
+                        </>
+                      ) : (
                         <span
                           className="inline text-pink-500 cursor-pointer decoration-dotted hover:underline underline-offset-4 w-1/3 md:w-3/12"
-                          onClick={() => setShowReadMore(false)}
+                          onClick={() => setShowReadMore(true)}
                         >
-                          {' Läs mindre'}
+                          {' Läs mer'}
                         </span>
-                      </>
-                    ) : (
-                      <span
-                        className="inline text-pink-500 cursor-pointer decoration-dotted hover:underline underline-offset-4 w-1/3 md:w-3/12"
-                        onClick={() => setShowReadMore(true)}
-                      >
-                        {' Läs mer'}
-                      </span>
-                    )}
-                  </>
-                )}
-              </div>
-              {showReadMore && (
-                <div className="text-sm text-gray-600 mt-2">
-                  {extraReadMore1}
-                  {extraReadMore2}
-                  {extraReadMore3}
+                      )}
+                    </>
+                  )}
                 </div>
-              )}
-              <div className="bg-[#dfece2] mt-1 w-full px-1 py-2 rounded-md">
-                {buyLink ? (
-                  <Link
-                    href={buyLink || '#'}
-                    target="_blank"
-                    className="w-full text-center border text-sm rounded-full p-1 bg-[#0C7054] text-white block hover:bg-[#0A5A40] hover:text-white hover:shadow-lg transition-all duration-300"
-                  >
-                    Köp på Systembolaget
-                  </Link>
-                ) : (
-                  <div className="w-full text-center text-sm border rounded-full p-1 text-gray-600 bg-gray-200 cursor-not-allowed block border-[#0C7054]">
-                    Produkten har utgått
+                {showReadMore && (
+                  <div className="text-sm text-gray-600 mt-2">
+                    {extraReadMore1}
+                    {extraReadMore2}
+                    {extraReadMore3}
                   </div>
                 )}
-                <div className="text-gray-500 text-xs p-2">
-                  Vinjournalen.se har ingen egen försäljning utan hela köpet genomförs på systembolaget.se.
-                  Vinjournalen.se har heller ingen koppling till eller kommersiellt samarbete med Systembolaget.
+                <div className="bg-[#dfece2] mt-1 w-full px-1 py-2 rounded-md">
+                  {buyLink ? (
+                    <Link
+                      href={buyLink || '#'}
+                      target="_blank"
+                      className="w-full text-center border text-sm rounded-full p-1 bg-[#0C7054] text-white block hover:bg-[#0A5A40] hover:text-white hover:shadow-lg transition-all duration-300"
+                    >
+                      Köp på Systembolaget
+                    </Link>
+                  ) : (
+                    <div className="w-full text-center text-sm border rounded-full p-1 text-gray-600 bg-gray-200 cursor-not-allowed block border-[#0C7054]">
+                      Produkten har utgått
+                    </div>
+                  )}
+                  <div className="text-gray-500 text-xs p-2">
+                    Vinjournalen.se har ingen egen försäljning utan hela köpet genomförs på systembolaget.se.
+                    Vinjournalen.se har heller ingen koppling till eller kommersiellt samarbete med Systembolaget.
+                  </div>
+                  <div className="flex gap-2 px-2 items-center">
+                    <div className="text-black text-sm pr-8">Berätta för en vän</div>
+                    <EmailShareButton url={typeof window !== 'undefined' ? window.location.href : ''} title={title}>
+                      <Image
+                        src={message || '/placeholder.svg'}
+                        alt="Messagebox"
+                        width={12}
+                        height={12}
+                        className="object-cover"
+                      />
+                    </EmailShareButton>
+                    <FacebookShareButton url={typeof window !== 'undefined' ? window.location.href : ''} title={title}>
+                      <Image
+                        src={fb || '/placeholder.svg'}
+                        alt="Facebook icon"
+                        width={12}
+                        height={12}
+                        className="object-cover cursor-pointer"
+                      />
+                    </FacebookShareButton>
+                    <TwitterShareButton url={typeof window !== 'undefined' ? window.location.href : ''} title={title}>
+                      <Image
+                        src={twitter || '/placeholder.svg'}
+                        alt="Twitter"
+                        width={12}
+                        height={12}
+                        className="object-cover cursor-pointer"
+                      />
+                    </TwitterShareButton>
+                  </div>
                 </div>
-                <div className="flex gap-2 px-2 items-center">
-                  <div className="text-black text-sm pr-8">Berätta för en vän</div>
-                  <EmailShareButton url={typeof window !== 'undefined' ? window.location.href : ''} title={title}>
-                    <Image
-                      src={message || '/placeholder.svg'}
-                      alt="Messagebox"
-                      width={12}
-                      height={12}
-                      className="object-cover"
-                    />
-                  </EmailShareButton>
-                  <FacebookShareButton url={typeof window !== 'undefined' ? window.location.href : ''} title={title}>
-                    <Image
-                      src={fb || '/placeholder.svg'}
-                      alt="Facebook icon"
-                      width={12}
-                      height={12}
-                      className="object-cover cursor-pointer"
-                    />
-                  </FacebookShareButton>
-                  <TwitterShareButton url={typeof window !== 'undefined' ? window.location.href : ''} title={title}>
-                    <Image
-                      src={twitter || '/placeholder.svg'}
-                      alt="Twitter"
-                      width={12}
-                      height={12}
-                      className="object-cover cursor-pointer"
-                    />
-                  </TwitterShareButton>
+                <div>
+                  {[tasteClock1FyllighetSotma, tasteClock2Fyllighetstravhet, tasteClock3Fruktsyra].filter(Boolean)
+                    .length >= 2 && (
+                    <div className="grid grid-cols-1 sm:grid-cols-3 ">
+                      {tasteClock1FyllighetSotma && (
+                        <PieChart data={pieChartData1} title="Smakintensitet" total={total} />
+                      )}
+                      {tasteClock2Fyllighetstravhet && (
+                        <PieChart data={pieChartData2} title="Fyllighet/Strävhet" total={total} />
+                      )}
+                      {tasteClock3Fruktsyra && <PieChart data={pieChartData3} title="Syra" total={total} />}
+                    </div>
+                  )}
                 </div>
-              </div>
-              <div>
-                {[tasteClock1FyllighetSotma, tasteClock2Fyllighetstravhet, tasteClock3Fruktsyra].filter(Boolean)
-                  .length >= 2 && (
-                  <div className="grid grid-cols-1 sm:grid-cols-3 ">
-                    {tasteClock1FyllighetSotma && (
-                      <PieChart data={pieChartData1} title="Smakintensitet" total={total} />
-                    )}
-                    {tasteClock2Fyllighetstravhet && (
-                      <PieChart data={pieChartData2} title="Fyllighet/Strävhet" total={total} />
-                    )}
-                    {tasteClock3Fruktsyra && <PieChart data={pieChartData3} title="Syra" total={total} />}
+                {((smakar && smakar.length > 0) || (aromer && aromer.length > 0)) && (
+                  <div className="bg-gray-50 mt-4 py-2 w-full">
+                    <FactBoxMoreInfo smakar={smakar} aromer={aromer} />
                   </div>
                 )}
               </div>
-              {((smakar && smakar.length > 0) || (aromer && aromer.length > 0)) && (
-                <div className="bg-gray-50 mt-4 py-2 w-full">
-                  <FactBoxMoreInfo smakar={smakar} aromer={aromer} />
+              <div className="w-[30%] flex flex-col gap-2 items-start border-l-2 pl-10 border-gray-200">
+                <div className="flex flex-col text-start">
+                  <div className="text-gray-500 font-light text-sm">VOLYM</div>
+                  <div className="font-light text-sm">
+                    {fieldsProduct?.bottlePackageVolume ? <p>{fieldsProduct?.bottlePackageVolume} ml </p> : <p>N/A</p>}
+                  </div>
                 </div>
-              )}
-            </div>
-            <div className="w-[30%] flex flex-col gap-2 items-start border-l-2 pl-10 border-gray-200">
-              <div className="flex flex-col text-start">
-                <div className="text-gray-500 font-light text-sm">VOLYM</div>
-                <div className="font-light text-sm">
-                  {fieldsProduct?.bottlePackageVolume ? <p>{fieldsProduct?.bottlePackageVolume} ml </p> : <p>N/A</p>}
+                <div className="flex flex-col text-start">
+                  <div className="text-gray-500 font-light text-sm">ALKOHOL</div>
+                  <div className="font-light text-sm">
+                    {fieldsProduct?.alcohol ? <p>{fieldsProduct?.alcohol} % </p> : <p>N/A</p>}
+                  </div>
                 </div>
-              </div>
-              <div className="flex flex-col text-start">
-                <div className="text-gray-500 font-light text-sm">ALKOHOL</div>
-                <div className="font-light text-sm">
-                  {fieldsProduct?.alcohol ? <p>{fieldsProduct?.alcohol} % </p> : <p>N/A</p>}
+                <div className="flex flex-col text-start">
+                  <div className="text-gray-500 font-light text-sm">DRUVOR</div>
+                  <div className="font-light text-sm">
+                    {fieldsProduct?.composition ? <p>{fieldsProduct?.composition} </p> : <p>N/A</p>}
+                  </div>
                 </div>
-              </div>
-              <div className="flex flex-col text-start">
-                <div className="text-gray-500 font-light text-sm">DRUVOR</div>
-                <div className="font-light text-sm">
-                  {fieldsProduct?.composition ? <p>{fieldsProduct?.composition} </p> : <p>N/A</p>}
+                <div className="flex flex-col text-start">
+                  <div className="text-gray-500 font-light text-sm">SORTIMENT</div>
+                  <div className="font-light text-sm">
+                    {fieldsProduct?.wineSortiment ? <p>{fieldsProduct?.wineSortiment[0]}</p> : <p>N/A</p>}
+                  </div>
                 </div>
-              </div>
-              <div className="flex flex-col text-start">
-                <div className="text-gray-500 font-light text-sm">SORTIMENT</div>
-                <div className="font-light text-sm">
-                  {fieldsProduct?.wineSortiment ? <p>{fieldsProduct?.wineSortiment[0]}</p> : <p>N/A</p>}
+                <div className="flex flex-col text-center md:text-left">
+                  <div className="text-gray-500 text-sm font-light">PRODUCENT</div>
+                  <div className="font-light text-sm text-red-500">
+                    {producenterData?.title ? <Link href={`#more-on-product`}>{producenterData.title}</Link> : 'N/A'}
+                  </div>
                 </div>
-              </div>
-              <div className="flex flex-col text-center md:text-left">
-                <div className="text-gray-500 text-sm font-light">PRODUCENT</div>
-                <div className="font-light text-sm text-red-500">
-                  {producenterData?.title ? <Link href={`#more-on-product`}>{producenterData.title}</Link> : 'N/A'}
+                {matkombinationer?.length > 0 && (
+                  <div className="w-full">
+                    <div className="mt-2 text-gray-500 font-light text-sm">MAT SOM PASSAR</div>
+                    <FactBoxMatCombinationer matkombinationer={matkombinationer} />
+                  </div>
+                )}
+                <div className="w-full px-2 py-1 border text-xs border-black rounded items-center bg-white hover:shadow-sm hover:bg-gray-50">
+                  <button className="w-full" onClick={viwePdf}>
+                    Skriv ut PDF
+                  </button>
                 </div>
-              </div>
-              {matkombinationer?.length > 0 && (
-                <div className="w-full">
-                  <div className="mt-2 text-gray-500 font-light text-sm">MAT SOM PASSAR</div>
-                  <FactBoxMatCombinationer matkombinationer={matkombinationer} />
-                </div>
-              )}
-              <div className="w-full px-2 py-1 border text-xs border-black rounded items-center bg-white hover:shadow-sm hover:bg-gray-50">
-                <button className="w-full" onClick={viwePdf}>
-                  Skriv ut PDF
-                </button>
               </div>
             </div>
           </div>

@@ -22,8 +22,6 @@ const Hero = ({ posts }) => {
                   fill
                   priority
                   className="h-full w-full object-cover"
-                  // placeholder="blur"
-                  // blurDataURL="/postplaceholder.jpg"
                   sizes={
                     posts[0]?.featuredImage?.node?.sizes || '(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 25vw'
                   }
@@ -41,11 +39,11 @@ const Hero = ({ posts }) => {
               })}
             </p>
 
-            <p className="text-[#694848] text-xs  mt-2">{posts[0]?.author?.node?.name || 'Jeanette Gardner'}</p>
+            <p className="text-[#694848] text-xs mt-2">{posts[0]?.author?.node?.name || 'Jeanette Gardner'}</p>
             <p
-              className=" text-sm text-gray-900 font-extralight mt-4 leading-relaxed"
-              dangerouslySetInnerHTML={{ __html: formatEmbeddedContent(posts[0].excerpt) }}
-            ></p>
+              className="text-sm text-gray-900 font-extralight mt-4 leading-relaxed text-justify"
+              dangerouslySetInnerHTML={{ __html: formatEmbeddedContent(posts[0].excerpt, 'all') }}
+            />
           </div>
         </Link>
 
@@ -56,8 +54,8 @@ const Hero = ({ posts }) => {
             return (
               <div key={post.id}>
                 <Link href={post?.uri}>
-                  <div className="flex flex-col sm:flex-row gap-4 bg-[#f5f5f5] overflow-hidden lg:gap-0 xl:gap-4">
-                    <div className="relative h-48 lg:mt-6 xl:mt-0 sm:h-auto lg:h-40 xl:h-48 sm:w-1/3">
+                  <div className="flex flex-col sm:flex-row gap-4 bg-[#f5f5f5] overflow-hidden lg:gap-0 xl:gap-4 lg:h-40 xl:h-48">
+                    <div className="relative h-48 sm:h-auto lg:h-40 xl:h-auto sm:w-1/3 aspect-video">
                       <Image
                         src={
                           post?.featuredImage?.node?.sourceUrl
@@ -66,28 +64,27 @@ const Hero = ({ posts }) => {
                         }
                         alt={post?.featuredImage?.node?.altText || post?.title}
                         fill
-                        priority
-                        className="object-cover"
-                        // placeholder="blur"
-                        // blurDataURL="/search.png"
+                        className="object-contain"
                         sizes={
                           post?.featuredImage?.node?.sizes || '(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 25vw'
                         }
                       />
                     </div>
-                    <div className="p-4 sm:w-2/3">
-                      <h2 className=" font-medium text-black text-lg">{post?.title}</h2>
-                      <p className="mt-4  text-gray-900 text-xs capitalize">
+                    <div className="px-4 py-1 sm:w-2/3">
+                      <h2 className="font-medium text-black text-lg max-h-14 overflow-hidden text-ellipsis line-clamp-2">
+                        {post?.title}
+                      </h2>
+                      <p className="mt-2 text-gray-900 text-xs capitalize">
                         {new Date(post?.date).toLocaleDateString('sv-SE', {
                           day: '2-digit',
                           month: 'long',
                           year: 'numeric',
                         })}
                       </p>
-                      <p className="text-[#694848] text-xs  mt-2">{post?.author?.node?.name || 'Jeanette Gardner'}</p>
+                      <p className="text-[#694848] text-xs mt-2">{post?.author?.node?.name || 'Jeanette Gardner'}</p>
                       <p
-                        className=" text-sm text-gray-900 font-extralight mt-4 leading-relaxed"
-                        dangerouslySetInnerHTML={{ __html: formatEmbeddedContent(post?.excerpt) }}
+                        className="text-sm text-gray-900 font-extralight mt-2 leading-relaxed line-clamp-2"
+                        dangerouslySetInnerHTML={{ __html: formatEmbeddedContent(post?.excerpt, 'all') }}
                       ></p>
                     </div>
                   </div>
@@ -95,7 +92,7 @@ const Hero = ({ posts }) => {
               </div>
             );
           })}
-          <div className="mt-6">
+          <div className="">
             <Link href="/artiklar/" passHref>
               <div className="w-full py-2 text-center text-red-500 hover:bg-red-100 border rounded-full border-red-500 transition duration-300">
                 Se fler artiklar

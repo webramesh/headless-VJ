@@ -291,3 +291,24 @@ export async function getProductByLander(slug, type) {
     return { error, data: null };
   }
 }
+
+export async function getProduktsLanderSlug(title) {
+  try {
+    const { data } = await client.query({
+      query: gql`
+        query GetProduktsLanderSlug($title: [String]) {
+          produktslander(where: { name: $title }) {
+            nodes {
+              slug
+            }
+          }
+        }
+      `,
+      variables: { title },
+    });
+    return data?.produktslander?.nodes[0]?.slug;
+  } catch (error) {
+    console.error('Error fetching produktsLander slug:', error);
+    return null;
+  }
+}

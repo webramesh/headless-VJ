@@ -8,7 +8,7 @@ const AccordionItem = ({ index, openIndexes, toggleAccordion, title, content }) 
   const isOpen = openIndexes.includes(index);
 
   return (
-    <div className="border-b mb-2 border-slate-200">
+    <div className="border-b mb-3 border-slate-200">
       <button
         onClick={() => toggleAccordion(index)}
         className="w-full flex justify-between items-center bg-[#F5F5F5] pl-3 hover:bg-[#e6e6e6] transition-colors duration-200"
@@ -16,7 +16,7 @@ const AccordionItem = ({ index, openIndexes, toggleAccordion, title, content }) 
         aria-controls={`accordion-content-${index}`}
         id={`accordion-button-${index}`}
       >
-        <span className="text-left text-sm">{title}</span>
+        <span className="text-left text-sm md:text-lg">{title}</span>
         <span className={`transition-transform duration-300 transform`}>
           {isOpen ? <ChevronUp className="size-8 text-red-600" /> : <ChevronDown className="size-8 text-red-600" />}
         </span>
@@ -27,10 +27,7 @@ const AccordionItem = ({ index, openIndexes, toggleAccordion, title, content }) 
         role="region"
         aria-labelledby={`accordion-button-${index}`}
       >
-        <div
-          className="pb-5 mt-2 mb-2 text-sm pl-3 text-slate-900 faqContent"
-          dangerouslySetInnerHTML={{ __html: content }}
-        />
+        <div className="pl-3 text-slate-900 content" dangerouslySetInnerHTML={{ __html: content }} />
       </div>
     </div>
   );

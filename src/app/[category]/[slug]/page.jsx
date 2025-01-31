@@ -91,21 +91,32 @@ export default async function PostDetails({ params }) {
             categoryName={post?.categories?.nodes[0]?.name}
             categories={post?.categories?.nodes[0]}
           />
-          <PostDetailsContent content={post?.content} />
+          <div className="container mx-auto">
+            <div className="flex flex-col lg:flex-row lg:gap-16 mx-4 lg:mx-28 xl:mx-36 lg:-mt-16 z-10">
+              <div className="flex flex-col gap-2 bg-white w-full lg:w-auto">
+                <div className="shadow-2xl p-4 lg:p-16">
+                  <PostDetailsContent content={post?.content} />
+                  <div className="container mx-auto">
+                    {faqItems.length > 0 && (
+                      <h2 className="font-medium text-lg sm:text-xl lg:text-2xl mb-3 sm:mb-4 pl-1 sm:pl-2">
+                        Frågor och Svar
+                      </h2>
+                    )}
+                    {faqItems.length > 0 && (
+                      <AccordionNew
+                        faqItems={faqItems}
+                        className="space-y-2 sm:space-y-3 w-full px-1 sm:px-2 max-w-full"
+                      />
+                    )}
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
 
           <div className="container mx-auto px-4 lg:px-0">
             <div className="mt-6 sm:mt-10 lg:mt-24 mx-0 sm:mx-4 lg:mx-56 px-2 sm:px-3">
-              {faqItems.length > 0 && (
-                <h2 className="font-medium text-lg sm:text-xl lg:text-2xl mb-3 sm:mb-4 pl-1 sm:pl-2">
-                  Frågor och Svar
-                </h2>
-              )}
-
               <div className="w-full max-w-full mx-auto">
-                {faqItems.length > 0 && (
-                  <AccordionNew faqItems={faqItems} className="space-y-2 sm:space-y-3 w-full px-1 sm:px-2 max-w-full" />
-                )}
-
                 {relatedPosts && relatedPosts.length > 0 && (
                   <div className="my-16">
                     <RelatedPosts relatedPosts={relatedPosts} />

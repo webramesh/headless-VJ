@@ -70,8 +70,6 @@ const InformationCards = ({ fieldsProduct, productTitle, typer, produktslander, 
     closure,
   } = fieldsProduct;
 
-  const productsLander = data?.produktslander?.nodes;
-
   const [selected, setSelected] = useState(4);
 
   const vinimporterData = data?.fieldsProduct?.vinimporter?.nodes[0];
@@ -102,7 +100,7 @@ const InformationCards = ({ fieldsProduct, productTitle, typer, produktslander, 
           {cards.map((item, index) => (
             <div
               key={index}
-              className={`px-2 py-2 w-auto text-center hover:bg-[#f4f1ed] hover:shadow-md cursor-pointer ${
+              className={`px-2 py-2 w-auto text-center hover:bg-gray-50 hover:shadow-md cursor-pointer ${
                 selected === index + 1 && 'border-b-2 border-red-500'
               }`}
               onClick={() => handleClick(index + 1)}
@@ -183,17 +181,6 @@ const InformationCards = ({ fieldsProduct, productTitle, typer, produktslander, 
                     ) : (
                       <p> N/A </p>
                     )}
-                  </div>
-                </div>
-                <div className="text-xs  text-center mt-2">
-                  Land <br />
-                  <div className="text-red-500 font-bold">
-                    {productsLander
-                      ?.filter((land) => land.parent === null)
-                      .map((land, i) => {
-                        const { name, slug } = land;
-                        return <p key={i}>{name && slug ? <Link href={`/lander/${slug}/`}>{name}</Link> : 'N/A'}</p>;
-                      })}
                   </div>
                 </div>
               </RenderBox>

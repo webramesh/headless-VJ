@@ -167,11 +167,22 @@ export async function getProductBySlug(identifier) {
               nodes {
                 name
                 slug
+                categoriesImagesAndOtherFields {
+                  categorycolorpicker
+                }
                 parent {
                   node {
                     name
                   }
                 }
+              }
+            }
+            wineStyles {
+              nodes {
+                categoriesImagesAndOtherFields {
+                  categorycolorpicker
+                }
+                name
               }
             }
 

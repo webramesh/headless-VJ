@@ -1,5 +1,5 @@
 import DryckerPage from '@/src/app/drycker/Components/DryckerPage';
-import { getVinguideData, getProductByLander } from '@/src/lib/api/vinguideApi';
+import { getVinguideData, getProductByLander, getProduktsLanderSlug } from '@/src/lib/api/vinguideApi';
 import { breadcrumbSchemaGenerator } from '@/src/utils/schemaUtils';
 import { generateSeoMetadata } from '@/src/utils/utils';
 import { redirect } from 'next/navigation';
@@ -23,7 +23,8 @@ const page = async ({ params, searchParams }) => {
     const { type, country, region, subRegion } = params;
     const vinguideData = await getVinguideData(`/drycker/${type}/${country}/${region}/${subRegion}`);
     const cardTitle = `Artiklar relaterade till ${vinguideData.title}`;
-    const products = await getProductByLander(subRegion, type);
+    const produktsLanderSlug = await getProduktsLanderSlug(vinguideData?.title);
+    const products = await getProductByLander(produktsLanderSlug || subRegion, type);
 
     const breadcrumbs = breadcrumbSchemaGenerator([
       {

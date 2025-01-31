@@ -46,7 +46,7 @@ export default function PieChart({ data, title, total }) {
               if (payload && payload.length) {
                 return (
                   <div className="bg-white border rounded shadow">
-                    <p className="text-xs">{`${payload[0].name}: ${payload[0].value}`}</p>
+                    <p className="text-xs">{`${payload[0].name === 'Filled' ? title : 'Tömma'}: ${payload[0].value}`}</p>
                   </div>
                 );
               }

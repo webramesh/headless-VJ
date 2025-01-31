@@ -73,9 +73,6 @@ export default function ProductSliderItem({ product, producenterData }) {
     { name: 'Empty', value: total - tasteClock3Fruktsyra },
   ];
 
-  const words = productShortText.split(' ');
-  const longDescription = words.slice(50).join(' ');
-
   //Function to get the main wine type and characteristic type
   const getDisplayTypes = () => {
     if (!produktTyper?.nodes) return [];
@@ -328,7 +325,7 @@ export default function ProductSliderItem({ product, producenterData }) {
                   <span>{pice}:-</span>
                 )}
               </div>
-              <div className="text-xs text-gray-600 mt-2">{longDescription}</div>
+              <div className="text-xs text-gray-600 mt-2">{productShortText}</div>
 
               <div className=" mt-1 w-full p-1 rounded-md">
                 {buyLink ? (

@@ -3,6 +3,8 @@ import React from 'react';
 import Slider from 'react-slick';
 import ProductSliderItem from './ProductSliderItem';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
+import 'slick-carousel/slick/slick.css';
+import 'slick-carousel/slick/slick-theme.css';
 const CustomArrow = ({ direction, onClick }) => (
   <button
     onClick={onClick}

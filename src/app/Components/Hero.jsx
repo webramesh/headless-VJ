@@ -64,7 +64,7 @@ const Hero = ({ posts }) => {
                         }
                         alt={post?.featuredImage?.node?.altText || post?.title}
                         fill
-                        className="object-contain"
+                        className="object-cover md:object-contain"
                         sizes={
                           post?.featuredImage?.node?.sizes || '(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 25vw'
                         }

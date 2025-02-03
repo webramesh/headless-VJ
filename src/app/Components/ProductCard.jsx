@@ -1,6 +1,5 @@
 import Image from 'next/image';
 import Link from 'next/link';
-import wine1 from '@/public/wine1.png';
 import { findDepth } from '@/src/utils/utils';
 import ProductLabelsWithTooltips from '../produkter/Components/ProductLabelsWithTooltip';
 
@@ -36,7 +35,7 @@ function ProductCard({ product }) {
         </div>
         <Link href={`/produkter/${slug}/`} className="flex justify-center w-full h-56 relative  ">
           <Image
-            src={featuredImage?.node?.sourceUrl || wine1}
+            src={featuredImage?.node?.sourceUrl || '/wine-placeholder.webp'}
             alt={title}
             className="object-contain h-full w-full"
             width={200}
@@ -53,7 +52,7 @@ function ProductCard({ product }) {
           ))}
         </div>
         <div>
-          <Link href={`/produkter/${slug}/`} className="leading-6 text-lg">
+          <Link href={`/produkter/${slug}/`} className="leading-6 text-lg line-clamp-2">
             {title}
           </Link>
           <div className="flex gap-2 mt-4 items-start">

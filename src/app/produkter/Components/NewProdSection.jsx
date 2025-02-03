@@ -189,7 +189,7 @@ export default function NewProdSection({ product, producenterData }) {
               <ProductLabelsWithTooltips fieldsProduct={fieldsProduct} />
             </div>
             <Image
-              src={featuredImage?.node?.sourceUrl || '/placeholder.svg'}
+              src={featuredImage?.node?.sourceUrl || '/wine-placeholder.webp'}
               alt={`${title} från www.vinjournalen.se`}
               title={`${title} - Vinjournalen.se`}
               className="h-[300px] md:h-[400px] w-auto object-contain z-1"
@@ -395,7 +395,7 @@ export default function NewProdSection({ product, producenterData }) {
                 <ProductLabelsWithTooltips fieldsProduct={fieldsProduct} />
               </div>
               <Image
-                src={featuredImage?.node?.sourceUrl || '/placeholder.svg'}
+                src={featuredImage?.node?.sourceUrl || '/wine-placeholder.webp'}
                 alt={`${title} från www.vinjournalen.se`}
                 title={`${title} - Vinjournalen.se`}
                 className="mx-auto -mt-16 h-[450px] z-0"

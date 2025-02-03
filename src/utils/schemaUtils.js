@@ -246,3 +246,33 @@ export function productSchemaGenerator(product) {
   };
   return JSON.stringify(productSchema);
 }
+
+export function profilePageSchemaGenerator(profile) {
+  const profileSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'Person',
+    name: profile?.name || 'Vinjournalen.se',
+    description: profile?.description,
+    url: `https://www.vinjournalen.se/author/${profile.slug}/`,
+    sameAs: profile.seo?.additionalProfiles || [],
+    mainEntityOfPage: {
+      '@type': 'ProfilePage',
+      '@id': `https://www.vinjournalen.se/author/${profile.slug}/`,
+      name: profile?.seo?.title || profile?.name,
+      description: profile?.seo?.description || profile?.description,
+    },
+    image: {
+      '@type': 'ImageObject',
+      '@id': `https://www.vinjournalen.se/author/${profile.slug}/`,
+      url:
+        profile.customAvatar ||
+        'https://www.admin.vinjournalen.se/wp-content/uploads/2023/07/VinjournalenLogotype_symbol.jpg',
+      caption: profile?.name,
+    },
+    worksFor: {
+      '@type': 'Organization',
+      name: 'Vinjournalen.se',
+    },
+  };
+  return JSON.stringify(profileSchema);
+}

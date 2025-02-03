@@ -7,6 +7,7 @@ import FilterFields from './FilterFields';
 import { extractFields, extractFieldsForFilteredProducts, filterProducts } from '@/src/utils/utils';
 import { useFilters } from '@/src/context/FilterContext';
 import SelectedFilter from './SelectedFilter';
+import ProductCardSkeleton from '../../Components/SkeletonLoading/ProductCardSkeleton';
 
 const PRODUCTS_PER_PAGE = 15;
 
@@ -144,13 +145,15 @@ const FilterSection = ({ products, filters, allProductTitle }) => {
               <div>
                 <div className="container mx-auto p-8">
                   <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                    {displayProducts?.length > 0
-                      ? displayProducts?.map((product) => (
+                    {displayProducts.length > 0
+                      ? displayProducts.map((product) => (
                           <div key={product.id} className="col-span-1">
                             <ProductCard product={product} />
                           </div>
                         ))
-                      : 'Produkten hittades inte'}
+                      : Array.from({ length: PRODUCTS_PER_PAGE }).map((_, index) => (
+                          <ProductCardSkeleton key={index} />
+                        ))}
                   </div>
                 </div>
                 <Pagination pageLimit={PRODUCTS_PER_PAGE} total={filteredProducts?.length} />

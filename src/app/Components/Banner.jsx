@@ -38,7 +38,8 @@ export default async function Banner({ variant }) {
           width={variant === 'sidebar' ? 300 : 1200}
           height={variant === 'sidebar' ? 250 : 400}
           className="object-cover cursor-pointer w-full hover:opacity-90 transition-opacity"
-          priority
+          priority={variant === 'sidebar' ? false : true}
+          loading={variant === 'sidebar' ? 'lazy' : 'eager'}
         />
       </Link>
     </div>

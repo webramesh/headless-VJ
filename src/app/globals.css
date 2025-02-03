@@ -217,6 +217,12 @@ body {
   }
 }
 
+@media screen and (max-width: 425px) {
+  .content p {
+    font-size: 14px;
+    margin-bottom: 1.25rem;
+  }
+}
 /* Small mobile styles (up to 375px) */
 @media screen and (max-width: 375px) {
   .content p {

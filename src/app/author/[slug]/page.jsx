@@ -7,7 +7,7 @@ import SubscriptionForm from '../../Components/subscription/SubscriptionForm';
 import SubscriptionBox from '../../Components/subscription/SubscriptionBox';
 import Image from 'next/image';
 import { generateSeoMetadata } from '@/src/utils/utils';
-import { breadcrumbSchemaGenerator } from '@/src/utils/schemaUtils';
+import { breadcrumbSchemaGenerator, profilePageSchemaGenerator } from '@/src/utils/schemaUtils';
 
 export const revalidate = 60;
 export async function generateMetadata({ params }) {
@@ -35,12 +35,19 @@ export default async function AuthorPage({ params }) {
     },
   ]);
 
+  const authorSchema = profilePageSchemaGenerator(author);
+
   return (
     <>
       <script
         type="application/ld+json"
         className="rank-math-schema"
         dangerouslySetInnerHTML={{ __html: breadcrumbs }}
+      />
+      <script
+        type="application/ld+json"
+        className="rank-math-schema"
+        dangerouslySetInnerHTML={{ __html: authorSchema }}
       />
       <AuthorHero title="Author" />
       <div className="container mx-auto">

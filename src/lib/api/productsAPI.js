@@ -431,11 +431,22 @@ export async function getProductSlider(id) {
                       nodes {
                         name
                         slug
+                        categoriesImagesAndOtherFields {
+                          categorycolorpicker
+                        }
                         parent {
                           node {
                             name
                           }
                         }
+                      }
+                    }
+                    wineStyles {
+                      nodes {
+                        categoriesImagesAndOtherFields {
+                          categorycolorpicker
+                        }
+                        name
                       }
                     }
 

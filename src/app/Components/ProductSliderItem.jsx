@@ -28,7 +28,7 @@ export default function ProductSliderItem({ product }) {
     return () => window.removeEventListener('resize', handleResize);
   }, []);
 
-  const { title, featuredImage, fieldsProduct, produktslander, produktTyper } = product;
+  const { title, featuredImage, fieldsProduct, produktslander, produktTyper, wineStyles } = product;
   const {
     productShortText,
 
@@ -90,10 +90,29 @@ export default function ProductSliderItem({ product }) {
       <div className="block lg:hidden">
         {/* Wine Type and Article */}
         <div className="flex justify-between items-center mb-2 text-xs md:text-sm">
-          <div className="flex gap-2">
+          <div className="flex gap-2 flex-wrap">
             {displayTypes.map((type, index) => (
-              <div key={index} className={`text-white rounded px-2 ${index === 0 ? 'bg-red-600' : 'bg-green-600'}`}>
+              <div
+                key={index}
+                className={`text-white rounded px-2 text-sm`}
+                style={{
+                  backgroundColor: type?.categoriesImagesAndOtherFields?.categorycolorpicker || '#dc2626', // Fallback to red-600
+                }}
+              >
                 {type.name}
+              </div>
+            ))}
+            {wineStyles?.nodes.map((style, index) => (
+              <div
+                key={index}
+                className={`text-white rounded px-2 text-sm`}
+                style={{
+                  backgroundColor:
+                    style?.categoriesImagesAndOtherFields?.categorycolorpicker || // Dynamic color
+                    (index === 0 ? '#919788' : '#8B8C88'), // Fallback colors
+                }}
+              >
+                {style.name}
               </div>
             ))}
           </div>
@@ -113,14 +132,13 @@ export default function ProductSliderItem({ product }) {
         <div className="flex gap-2 items-center mb-4 z-10">
           {product?.produktslander?.nodes?.map((node, index) =>
             node?.parent === null && node?.flag?.flagImage?.node?.sourceUrl ? (
-              <Link key={index} href={`/lander/${node?.slug}/`}>
-                <Image
-                  src={node.flag.flagImage.node.sourceUrl || '/placeholder.svg'}
-                  width={20}
-                  height={20}
-                  alt={node.name}
-                />
-              </Link>
+              <Image
+                src={node.flag.flagImage.node.sourceUrl || '/placeholder.svg'}
+                width={20}
+                height={20}
+                alt={node.name}
+                key={index}
+              />
             ) : null
           )}
           <div className="text-red-600 hover:text-red-500 text-sm md:text-base z-10">
@@ -133,7 +151,6 @@ export default function ProductSliderItem({ product }) {
         </div>
         {/* Price */}
         <div className="text-xl md:text-2xl mb-6 z-10">
-          {' '}
           {fieldsProduct.salePrice ? (
             <>
               <span className="mb-2">{pice}:-</span>
@@ -158,7 +175,7 @@ export default function ProductSliderItem({ product }) {
                 className="h-[300px] md:h-[400px] w-auto object-contain z-1"
                 width={300}
                 height={500}
-                priority={true}
+                loading="lazy"
               />
             </Link>
             <span className="absolute top-0 ">
@@ -174,21 +191,18 @@ export default function ProductSliderItem({ product }) {
               <div className="flex flex-col text-xs md:text-sm text-left">
                 <div className="text-gray-500 font-light">VOLYM</div>
                 <div className="font-light ">
-                  {' '}
                   {fieldsProduct?.bottlePackageVolume ? <p>{fieldsProduct?.bottlePackageVolume} ml </p> : <p>N/A</p>}
                 </div>
               </div>
               <div className="flex flex-col text-xs md:text-sm text-left">
                 <div className="text-gray-500 font-light">ALKOHOL</div>
                 <div className="font-light">
-                  {' '}
                   {fieldsProduct?.alcohol ? <p>{fieldsProduct?.alcohol} % </p> : <p>N/A</p>}
                 </div>
               </div>
               <div className="flex flex-col text-left text-xs md:text-sm">
                 <div className="text-gray-500 font-light">DRUVOR</div>
                 <div className="font-light">
-                  {' '}
                   {fieldsProduct?.composition ? <p>{fieldsProduct?.composition} </p> : <p>N/A</p>}
                 </div>
               </div>
@@ -243,13 +257,29 @@ export default function ProductSliderItem({ product }) {
         <div className="w-1/3">
           <div className="flex flex-col gap-1">
             <div className="flex justify-between items-center">
-              <div className="flex gap-2 z-10">
+              <div className="flex gap-2 z-10 flex-wrap">
                 {displayTypes.map((type, index) => (
                   <div
                     key={index}
-                    className={`text-white rounded px-2 text-sm ${index === 0 ? 'bg-red-600' : 'bg-green-600'}`}
+                    className={`text-white rounded px-2 text-sm`}
+                    style={{
+                      backgroundColor: type?.categoriesImagesAndOtherFields?.categorycolorpicker || '#dc2626', // Fallback to red-600
+                    }}
                   >
                     {type.name}
+                  </div>
+                ))}
+                {wineStyles?.nodes.map((style, index) => (
+                  <div
+                    key={index}
+                    className={`text-white rounded px-2 text-sm`}
+                    style={{
+                      backgroundColor:
+                        style?.categoriesImagesAndOtherFields?.categorycolorpicker || // Dynamic color
+                        (index === 0 ? '#919788' : '#8B8C88'), // Fallback colors
+                    }}
+                  >
+                    {style.name}
                   </div>
                 ))}
               </div>
@@ -274,7 +304,7 @@ export default function ProductSliderItem({ product }) {
                   className="mx-auto -mt-16 h-[450px] z-0"
                   width={250}
                   height={450}
-                  priority={true}
+                  loading="lazy"
                 />
               </Link>
             </div>
@@ -296,14 +326,13 @@ export default function ProductSliderItem({ product }) {
                 <div>
                   {product?.produktslander?.nodes?.map((node, index) =>
                     node?.parent === null && node?.flag?.flagImage?.node?.sourceUrl ? (
-                      <Link key={index} href={`/lander/${node?.slug}/`}>
-                        <Image
-                          src={node.flag.flagImage.node.sourceUrl || '/placeholder.svg'}
-                          width={20}
-                          height={20}
-                          alt={node.name}
-                        />
-                      </Link>
+                      <Image
+                        src={node.flag.flagImage.node.sourceUrl || '/placeholder.svg'}
+                        width={20}
+                        height={20}
+                        alt={node.name}
+                        key={index}
+                      />
                     ) : null
                   )}
                 </div>
@@ -316,7 +345,6 @@ export default function ProductSliderItem({ product }) {
                 </div>
               </div>
               <div className="text-xl">
-                {' '}
                 {fieldsProduct.salePrice ? (
                   <>
                     <span className="mb-0">{pice}:-</span>
@@ -362,28 +390,24 @@ export default function ProductSliderItem({ product }) {
               <div className="flex flex-col text-start">
                 <div className="text-gray-500 font-light text-sm">VOLYM</div>
                 <div className="font-light text-sm">
-                  {' '}
                   {fieldsProduct?.bottlePackageVolume ? <p>{fieldsProduct?.bottlePackageVolume} ml </p> : <p>N/A</p>}
                 </div>
               </div>
               <div className="flex flex-col text-start">
                 <div className="text-gray-500 font-light text-sm">ALKOHOL</div>
                 <div className="font-light text-sm">
-                  {' '}
                   {fieldsProduct?.alcohol ? <p>{fieldsProduct?.alcohol} % </p> : <p>N/A</p>}
                 </div>
               </div>
               <div className="flex flex-col text-start">
                 <div className="text-gray-500 font-light text-sm">DRUVOR</div>
                 <div className="font-light text-sm">
-                  {' '}
                   {fieldsProduct?.composition ? <p>{fieldsProduct?.composition} </p> : <p>N/A</p>}
                 </div>
               </div>
               <div className="flex flex-col text-start">
                 <div className="text-gray-500 font-light text-sm">SORTIMENT</div>
                 <div className="font-light text-sm">
-                  {' '}
                   {fieldsProduct?.wineSortiment ? <p>{fieldsProduct?.wineSortiment[0]}</p> : <p>N/A</p>}
                 </div>
               </div>

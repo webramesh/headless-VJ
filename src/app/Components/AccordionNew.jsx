@@ -27,7 +27,7 @@ const AccordionItem = ({ index, openIndexes, toggleAccordion, title, content }) 
         role="region"
         aria-labelledby={`accordion-button-${index}`}
       >
-        <div className="pl-3 text-slate-900 content" dangerouslySetInnerHTML={{ __html: content }} />
+        <div className="mt-1 pl-3 text-slate-900 content" dangerouslySetInnerHTML={{ __html: content }} />
       </div>
     </div>
   );

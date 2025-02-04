@@ -260,9 +260,13 @@ export const convertToWebP = (imagePath) => {
   // if (!imagePath) return imagePath;
 
   // Check if the path ends with jpg or jpeg
-  if (imagePath.toLowerCase().endsWith('.jpg') || imagePath.toLowerCase().endsWith('.jpeg')) {
+  if (
+    imagePath.toLowerCase().endsWith('.jpg') ||
+    imagePath.toLowerCase().endsWith('.jpeg') ||
+    imagePath.toLowerCase().endsWith('.png')
+  ) {
     // Replace the extension with .webp
-    return imagePath.replace(/\.(jpg|jpeg)$/i, '.webp');
+    return imagePath.replace(/\.(jpg|jpeg|png)$/i, '.webp');
   }
 
   return imagePath;

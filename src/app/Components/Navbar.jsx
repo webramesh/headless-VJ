@@ -188,7 +188,7 @@ export default function Navbar({ menuData }) {
                     className={`flex items-center justify-between w-full`}
                     aria-expanded={mobileDropdowns[node.id]}
                     aria-haspopup={true}
-                    id={`dropdown-button-${node.id}`}
+                    id={`mobile-dropdown-button-${node.id}`}
                   >
                     {node?.label}
                     {node?.childItems?.nodes?.length > 0 && (
@@ -202,7 +202,7 @@ export default function Navbar({ menuData }) {
                     className="absolute bottom-8 left-0 z-10 pt-2 w-48 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none"
                     role="menu"
                     aria-orientation="vertical"
-                    aria-labelledby={`dropdown-button-${node.id}`}
+                    aria-labelledby={`mobile-dropdown-button-${node.id}`}
                   >
                     {node.childItems.nodes.map((childNode, index) => (
                       <div key={childNode.id}>

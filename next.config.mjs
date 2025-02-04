@@ -81,6 +81,12 @@ const nextConfig = withPWA({
         destination: '/produkt-land/:wine',
         permanent: true,
       },
+      //drycker
+      {
+        source: '/drycker/:type/nya-zeland',
+        destination: '/drycker/:type/nya-zeeland/',
+        permanent: true,
+      },
     ];
   },
   // experimental: {

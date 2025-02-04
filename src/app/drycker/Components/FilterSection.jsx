@@ -121,6 +121,16 @@ const FilterSection = ({ products, filters, allProductTitle }) => {
     extractOptionsAgain(filteredProducts, dispatch);
   }, [filteredProducts]);
 
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setIsLoading(false);
+    }, 10000); // 10 seconds
+
+    return () => clearTimeout(timer);
+  }, []);
+
   return (
     <div className="container mx-auto">
       <div className="mt-4 sm:mt-6 md:mt-10">
@@ -151,9 +161,11 @@ const FilterSection = ({ products, filters, allProductTitle }) => {
                             <ProductCard product={product} />
                           </div>
                         ))
-                      : Array.from({ length: PRODUCTS_PER_PAGE }).map((_, index) => (
-                          <ProductCardSkeleton key={index} />
-                        ))}
+                      : isLoading
+                        ? Array.from({ length: PRODUCTS_PER_PAGE }).map((_, index) => (
+                            <ProductCardSkeleton key={index} />
+                          ))
+                        : 'Produkten hittades inte'}
                   </div>
                 </div>
                 <Pagination pageLimit={PRODUCTS_PER_PAGE} total={filteredProducts?.length} />

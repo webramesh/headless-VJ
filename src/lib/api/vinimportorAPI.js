@@ -146,7 +146,13 @@ export async function getVinimporterBySlug(slug) {
                     }
                     produktTyper {
                       nodes {
+                        slug
                         name
+                        parent {
+                          node {
+                            name
+                          }
+                        }
                       }
                     }
                     produktslander {

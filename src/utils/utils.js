@@ -168,7 +168,7 @@ export const filterProducts = (products, filters) => {
 
 // meta data for pages
 
-export function generateSeoMetadata(seo) {
+export function generateSeoMetadata(seo, canonical) {
   if (!seo) return null;
 
   // Convert robots array to string format
@@ -214,7 +214,7 @@ export function generateSeoMetadata(seo) {
       creator: seo?.openGraph?.twitterMeta?.creator,
     },
     alternates: {
-      canonical: seo?.canonicalUrl,
+      canonical: canonical ? canonical : seo?.canonicalUrl,
     },
   };
 }

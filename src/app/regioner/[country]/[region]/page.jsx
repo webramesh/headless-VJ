@@ -7,13 +7,13 @@ import { breadcrumbSchemaGenerator } from '@/src/utils/schemaUtils';
 
 export const revalidate = 60;
 export async function generateMetadata({ params }) {
-  const { region } = params;
+  const { country, region } = params;
   const selectedRegion = await getRegionByURL(`/regioner/${region}`);
 
   const { seo } = selectedRegion;
 
   if (seo) {
-    return generateSeoMetadata(seo);
+    return generateSeoMetadata(seo, `https://www.vinjournalen.se/regioner/${country}/${region}/`);
   }
 }
 

@@ -12,9 +12,9 @@ import FactBoxMoreInfo from '../../[category]/[slug]/components/FactBoxMoreInfo'
 import ProductLabelsWithTooltips from './ProductLabelsWithTooltip';
 import { generatePdf } from '@/src/utils/generatePDF';
 import { EmailShareButton, FacebookShareButton, TwitterShareButton } from 'react-share';
-import { findDepth } from '@/src/utils/utils';
+import DryckerLinks from './DryckerLinks';
 
-export default function NewProdSection({ product, producenterData }) {
+export default function NewProdSection({ product, producenterData, dryckerURIs }) {
   const matkombinationer = product?.matkombinationer?.nodes;
 
   const smakar = product?.smakar?.nodes;
@@ -48,25 +48,6 @@ export default function NewProdSection({ product, producenterData }) {
     tasteClock2Fyllighetstravhet,
     tasteClock3Fruktsyra,
   } = fieldsProduct;
-
-  const typer = produktTyper?.nodes?.filter((type) => type.parent !== null);
-  const sortedLanders = [...produktslander.nodes]
-    .sort((a, b) => {
-      const depthB = findDepth(b, produktslander.nodes);
-      const depthA = findDepth(a, produktslander.nodes);
-      return depthA - depthB;
-    })
-    .slice(0, 2);
-  const links = [...typer, ...sortedLanders];
-  const updatedLinks = links.reduce((acc, current, index) => {
-    if (index === 0) {
-      acc.push(current);
-    } else {
-      const newSlug = `${acc[index - 1].slug}/${current.slug}`;
-      acc.push({ ...current, slug: newSlug });
-    }
-    return acc;
-  }, []);
 
   const total = 12;
   const pieChartData1 = [
@@ -163,13 +144,7 @@ export default function NewProdSection({ product, producenterData }) {
               />
             ) : null
           )}
-          <div className="text-red-600 hover:text-red-500 text-sm md:text-base z-10">
-            {updatedLinks.map((item, i) => (
-              <Link key={i} href={`/drycker/${item.slug}/`}>
-                {i < updatedLinks.length - 1 ? `${item.name} | ` : item.name}
-              </Link>
-            ))}
-          </div>
+          <DryckerLinks produktTyper={produktTyper} produktslander={produktslander} dryckerURIs={dryckerURIs} />
         </div>
         {/* Price */}
         <div className="text-xl md:text-2xl mb-6 z-10">
@@ -432,13 +407,7 @@ export default function NewProdSection({ product, producenterData }) {
                     ) : null
                   )}
                 </div>
-                <div className="text-red-600 hover:text-red-500 text-sm">
-                  {updatedLinks.map((item, i) => (
-                    <Link key={i} href={`/drycker/${item.slug}/`}>
-                      {i < updatedLinks.length - 1 ? `${item.name} | ` : item.name}
-                    </Link>
-                  ))}
-                </div>
+                <DryckerLinks produktTyper={produktTyper} produktslander={produktslander} dryckerURIs={dryckerURIs} />
               </div>
               <div className="text-xl">
                 {fieldsProduct.salePrice ? (

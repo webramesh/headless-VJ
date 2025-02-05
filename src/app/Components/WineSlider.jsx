@@ -30,7 +30,7 @@ const WineCard = ({ backgroundImage, title, category, articles, description, col
 
   useEffect(() => {
     if (isCSSDone) {
-      console.log('CSS processing completed');
+      // console.log('CSS processing completed');
     }
     // Check if styles are loaded
     const checkStylesLoaded = () => {

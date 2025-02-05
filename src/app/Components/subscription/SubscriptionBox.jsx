@@ -35,7 +35,7 @@ const SubscriptionBox = () => {
         </div>
         <div className="text-start md:text-center">
           <div className="text-sm font-semibold">{label}</div>
-          <p className="text-sm text-red-600">
+          <p className="text-sm text-red-600 min-h-5">
             {title?.title && <Link href={`/ordlista/druvor/${title?.slug}/`}>{title?.title || ''}</Link>}
           </p>
         </div>

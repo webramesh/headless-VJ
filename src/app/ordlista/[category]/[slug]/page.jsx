@@ -9,12 +9,13 @@ import { generateSeoMetadata } from '@/src/utils/utils';
 import { breadcrumbSchemaGenerator } from '@/src/utils/schemaUtils';
 
 export async function generateMetadata({ params }) {
-  const data = await getPageBySlug(`ordlista/${params.slug}`);
+  const { category, slug } = params;
+  const data = await getPageBySlug(`ordlista/${slug}`);
 
   const seo = data?.seo;
 
   if (seo) {
-    return generateSeoMetadata(seo);
+    return generateSeoMetadata(seo, `https://www.vinjournalen.se/ordlista/${category}/${slug}/`);
   }
 }
 export const revalidate = 60;

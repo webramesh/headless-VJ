@@ -123,7 +123,13 @@ export async function getProducentBySlug(slug) {
                     }
                     produktTyper {
                       nodes {
+                        slug
                         name
+                        parent {
+                          node {
+                            name
+                          }
+                        }
                       }
                     }
                     produktslander {

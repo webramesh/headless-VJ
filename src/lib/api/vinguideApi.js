@@ -312,3 +312,23 @@ export async function getProduktsLanderSlug(title) {
     return null;
   }
 }
+
+export async function fetchVinguideLinks() {
+  try {
+    const { data } = await client.query({
+      query: gql`
+        query fetchAllVinguides {
+          vinguide(first: 1000) {
+            nodes {
+              uri
+            }
+          }
+        }
+      `,
+    });
+    return data?.vinguide?.nodes.map((item) => item.uri);
+  } catch (error) {
+    console.error('Error fetching drycker links:', error);
+    return null;
+  }
+}

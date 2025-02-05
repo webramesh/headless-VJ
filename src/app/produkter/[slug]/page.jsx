@@ -9,6 +9,7 @@ import MoreOnProduct from '../../Components/MoreOnProduct';
 import PriceHistory from '../../Components/PriceHistory';
 import SalesHistory from '../../Components/SalesHistory';
 import { breadcrumbSchemaGenerator, productSchemaGenerator } from '@/src/utils/schemaUtils';
+import { fetchVinguideLinks } from '@/src/lib/api/vinguideApi';
 export const revalidate = 60;
 
 export async function generateMetadata({ params }) {
@@ -39,6 +40,8 @@ export default async function Page({ params }) {
     { name: product?.title, url: `https://www.vinjournalen.se/produkter/${params.slug}` },
   ]);
 
+  const dryckerURIs = await fetchVinguideLinks();
+
   return (
     <>
       <script
@@ -51,7 +54,7 @@ export default async function Page({ params }) {
         className="rank-math-schema"
         dangerouslySetInnerHTML={{ __html: breadcrumbs }}
       />
-      <NewProdSection product={product} producenterData={producenterData} />
+      <NewProdSection product={product} producenterData={producenterData} dryckerURIs={dryckerURIs} />
       <InformationCards
         fieldsProduct={product?.fieldsProduct}
         productTitle={product?.title}

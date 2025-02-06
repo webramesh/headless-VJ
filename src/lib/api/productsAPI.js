@@ -413,7 +413,6 @@ export async function getProductSlider(id) {
       query: gql`
         query PageById($id: ID!) {
           page(id: $id) {
-            date
             productSlider {
               productSlider {
                 nodes {
@@ -469,39 +468,18 @@ export async function getProductSlider(id) {
                       }
                     }
                     fieldsProduct {
-                      closure
                       composition
                       productShortText
-                      extraReadMore1
-                      extraReadMore2
                       pice
-                      pricePerLitter
                       productCode
                       buyLink
                       wineSortiment
                       alcohol
                       vintage
                       bottlePackageVolume
-                      allergener
                       tasteClock1FyllighetSotma
                       tasteClock2Fyllighetstravhet
                       tasteClock3Fruktsyra
-                      caloriesInAlcPer15cl
-                      caloriesInAlcPerContainerVolume
-                      caloriesInAlcPerLitter
-                      caloriesInSugarPer15cl
-                      caloriesInSugarPerContainerVolume
-                      caloriesInSugarPerLitter
-                      totalCaloriesPer15Cl
-                      totalCaloriesPerContainerVolume
-                      totalCaloriesPerLitter
-                      sugerLevel
-                      sugarLevelIn1Litter
-                      sugarBites
-                      containerType
-                      produktPackaging
-                      wineSaleStartDate
-                      alcoholPerSek
                       salePrice
 
                       productLabels {

@@ -67,9 +67,7 @@ export async function getHomePagePosts() {
               date
               title
               excerpt
-              modified
               id
-              slug
               uri
               featuredImage {
                 node {

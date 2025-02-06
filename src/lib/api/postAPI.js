@@ -91,6 +91,27 @@ export async function getHomePagePosts() {
   }
 }
 
+export async function getLatestPost() {
+  try {
+    const { data } = await client.query({
+      query: gql`
+        query AllPosts {
+          posts(first: 1) {
+            nodes {
+              uri
+            }
+          }
+        }
+      `,
+    });
+
+    return data.posts.nodes[0];
+  } catch (error) {
+    console.error('Error fetching latest post:', error);
+    return [];
+  }
+}
+
 export async function getAllArticles() {
   try {
     const { data } = await client.query({

@@ -118,7 +118,6 @@ const InformationCards = ({ fieldsProduct, productTitle, typer, produktslander, 
                   per15cl={caloriesInAlcPer15cl}
                   perLitre={caloriesInAlcPerLitter}
                   perVolume={caloriesInAlcPerContainerVolume}
-                  closure={closure}
                 />
               </RenderBox>
               <RenderBox title="Kalorier (baserat på ungefärlig sockermängd)">
@@ -126,7 +125,6 @@ const InformationCards = ({ fieldsProduct, productTitle, typer, produktslander, 
                   per15cl={caloriesInSugarPer15cl}
                   perLitre={caloriesInSugarPerLitter}
                   perVolume={caloriesInSugarPerContainerVolume}
-                  closure={closure}
                 />
               </RenderBox>
               <RenderBox title="Total mängd kalorier">
@@ -134,7 +132,6 @@ const InformationCards = ({ fieldsProduct, productTitle, typer, produktslander, 
                   per15cl={totalCaloriesPer15Cl}
                   perLitre={totalCaloriesPerLitter}
                   perVolume={totalCaloriesPerContainerVolume}
-                  closure={closure}
                 />
               </RenderBox>
               <RenderBox title="Sockerdetaljer">

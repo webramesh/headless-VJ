@@ -31,7 +31,6 @@ export default function ProductSliderItem({ product }) {
   const { title, featuredImage, fieldsProduct, produktslander, produktTyper, wineStyles } = product;
   const {
     productShortText,
-
     pice,
     vintage,
     productCode,
@@ -39,6 +38,11 @@ export default function ProductSliderItem({ product }) {
     tasteClock1FyllighetSotma,
     tasteClock2Fyllighetstravhet,
     tasteClock3Fruktsyra,
+    salePrice,
+    bottlePackageVolume,
+    alcohol,
+    composition,
+    wineSortiment,
   } = fieldsProduct;
 
   const typer = produktTyper?.nodes?.filter((type) => type.parent !== null);
@@ -130,7 +134,7 @@ export default function ProductSliderItem({ product }) {
         )}
         {/* Country and Type */}
         <div className="flex gap-2 items-center mb-4 z-10">
-          {product?.produktslander?.nodes?.map((node, index) =>
+          {produktslander?.nodes?.map((node, index) =>
             node?.parent === null && node?.flag?.flagImage?.node?.sourceUrl ? (
               <Image
                 src={node.flag.flagImage.node.sourceUrl || '/placeholder.svg'}
@@ -151,10 +155,10 @@ export default function ProductSliderItem({ product }) {
         </div>
         {/* Price */}
         <div className="text-xl md:text-2xl mb-6 z-10">
-          {fieldsProduct.salePrice ? (
+          {salePrice ? (
             <>
               <span className="mb-2">{pice}:-</span>
-              <span className="ml-2 text-red-600 line-through"> {fieldsProduct.salePrice}:-</span>
+              <span className="ml-2 text-red-600 line-through"> {salePrice}:-</span>
             </>
           ) : (
             <span>{pice}:-</span>
@@ -179,7 +183,7 @@ export default function ProductSliderItem({ product }) {
               />
             </Link>
             <span className="absolute top-0 ">
-              {fieldsProduct?.salePrice && (
+              {salePrice && (
                 <span className="bg-red-600 inline text-white right-0 px-[8px] py-1 rounded-md text-xs">Prissänkt</span>
               )}
             </span>
@@ -190,27 +194,19 @@ export default function ProductSliderItem({ product }) {
             <div className="grid md:grid-cols-2 gap-4">
               <div className="flex flex-col text-xs md:text-sm text-left">
                 <div className="text-gray-500 font-light">VOLYM</div>
-                <div className="font-light ">
-                  {fieldsProduct?.bottlePackageVolume ? <p>{fieldsProduct?.bottlePackageVolume} ml </p> : <p>N/A</p>}
-                </div>
+                <div className="font-light ">{bottlePackageVolume ? <p>{bottlePackageVolume} ml </p> : <p>N/A</p>}</div>
               </div>
               <div className="flex flex-col text-xs md:text-sm text-left">
                 <div className="text-gray-500 font-light">ALKOHOL</div>
-                <div className="font-light">
-                  {fieldsProduct?.alcohol ? <p>{fieldsProduct?.alcohol} % </p> : <p>N/A</p>}
-                </div>
+                <div className="font-light">{alcohol ? <p>{alcohol} % </p> : <p>N/A</p>}</div>
               </div>
               <div className="flex flex-col text-left text-xs md:text-sm">
                 <div className="text-gray-500 font-light">DRUVOR</div>
-                <div className="font-light">
-                  {fieldsProduct?.composition ? <p>{fieldsProduct?.composition} </p> : <p>N/A</p>}
-                </div>
+                <div className="font-light">{composition ? <p>{composition} </p> : <p>N/A</p>}</div>
               </div>
               <div className="flex flex-col text-left text-xs md:text-sm">
                 <div className="text-gray-500 font-light">SORTIMENT</div>
-                <div className="font-light">
-                  {fieldsProduct?.wineSortiment ? <p>{fieldsProduct?.wineSortiment[0]}</p> : <p>N/A</p>}
-                </div>
+                <div className="font-light">{wineSortiment ? <p>{wineSortiment[0]}</p> : <p>N/A</p>}</div>
               </div>
               <div className="flex flex-col text-xs md:text-sm text-left">
                 <div className="text-gray-500 font-light">PRODUCENT</div>
@@ -284,7 +280,7 @@ export default function ProductSliderItem({ product }) {
                 ))}
               </div>
               <div className="mr-0 lg:mr-10 xl:mr-20 2xl:mr-32 z-10">
-                {fieldsProduct?.salePrice && (
+                {salePrice && (
                   <span className="bg-red-600 inline text-white right-0 px-[8px] py-1 rounded-md text-xs">
                     Prissänkt
                   </span>
@@ -324,7 +320,7 @@ export default function ProductSliderItem({ product }) {
               )}
               <div className="flex gap-2 items-center text-center">
                 <div>
-                  {product?.produktslander?.nodes?.map((node, index) =>
+                  {produktslander?.nodes?.map((node, index) =>
                     node?.parent === null && node?.flag?.flagImage?.node?.sourceUrl ? (
                       <Image
                         src={node.flag.flagImage.node.sourceUrl || '/placeholder.svg'}
@@ -345,10 +341,10 @@ export default function ProductSliderItem({ product }) {
                 </div>
               </div>
               <div className="text-xl">
-                {fieldsProduct.salePrice ? (
+                {salePrice ? (
                   <>
                     <span className="mb-0">{pice}:-</span>
-                    <span className="ml-2 text-red-600 line-through"> {fieldsProduct.salePrice}:-</span>
+                    <span className="ml-2 text-red-600 line-through"> {salePrice}:-</span>
                   </>
                 ) : (
                   <span>{pice}:-</span>
@@ -390,26 +386,20 @@ export default function ProductSliderItem({ product }) {
               <div className="flex flex-col text-start">
                 <div className="text-gray-500 font-light text-sm">VOLYM</div>
                 <div className="font-light text-sm">
-                  {fieldsProduct?.bottlePackageVolume ? <p>{fieldsProduct?.bottlePackageVolume} ml </p> : <p>N/A</p>}
+                  {bottlePackageVolume ? <p>{bottlePackageVolume} ml </p> : <p>N/A</p>}
                 </div>
               </div>
               <div className="flex flex-col text-start">
                 <div className="text-gray-500 font-light text-sm">ALKOHOL</div>
-                <div className="font-light text-sm">
-                  {fieldsProduct?.alcohol ? <p>{fieldsProduct?.alcohol} % </p> : <p>N/A</p>}
-                </div>
+                <div className="font-light text-sm">{alcohol ? <p>{alcohol} % </p> : <p>N/A</p>}</div>
               </div>
               <div className="flex flex-col text-start">
                 <div className="text-gray-500 font-light text-sm">DRUVOR</div>
-                <div className="font-light text-sm">
-                  {fieldsProduct?.composition ? <p>{fieldsProduct?.composition} </p> : <p>N/A</p>}
-                </div>
+                <div className="font-light text-sm">{composition ? <p>{composition} </p> : <p>N/A</p>}</div>
               </div>
               <div className="flex flex-col text-start">
                 <div className="text-gray-500 font-light text-sm">SORTIMENT</div>
-                <div className="font-light text-sm">
-                  {fieldsProduct?.wineSortiment ? <p>{fieldsProduct?.wineSortiment[0]}</p> : <p>N/A</p>}
-                </div>
+                <div className="font-light text-sm">{wineSortiment ? <p>{wineSortiment[0]}</p> : <p>N/A</p>}</div>
               </div>
               <div className="flex flex-col text-center md:text-left">
                 <div className="text-gray-500 text-sm font-light"> PRODUCENT</div>

@@ -2,16 +2,35 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Fallback font metrics */
+@font-face {
+  font-family: 'Outfit-Fallback';
+  src: local(Arial);
+  font-display: swap;
+}
+
 @font-face {
   font-family: 'Outfit';
   src: url('/fonts/Outfit-VariableFont_wght.ttf') format('truetype');
-  font-weight: 100 200 300 400 500 600 700 800 900;
+  font-weight: 100 900;
   font-style: normal;
   font-display: swap;
 }
 
 body {
-  font-family: 'Outfit', sans-serif;
+  font-family:
+    'Outfit',
+    system-ui,
+    -apple-system,
+    sans-serif;
+  text-rendering: optimizeLegibility;
+}
+
+/* Prevent layout shift during font load */
+html {
+  font-synthesis: none;
+  -webkit-font-smoothing: antialiased; /* Move this here for consistency */
+  -moz-osx-font-smoothing: grayscale; /* Add for Firefox */
 }
 
 @layer base {

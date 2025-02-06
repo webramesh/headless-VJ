@@ -13,7 +13,6 @@ import Banner from './Components/Banner';
 import { generateSeoMetadata } from '../utils/utils';
 import HomeContent from './Components/HomeContent';
 import { Suspense } from 'react';
-import BannerSkeleton from './Components/SkeletonLoading/BannerSkeleton';
 import HeroSkeleton from './Components/SkeletonLoading/HeroSkeleton';
 import TrendingSkeleton from './Components/SkeletonLoading/TrendingPostSkeleton';
 import WineSkeleton from './Components/SkeletonLoading/WineSkeleton';
@@ -43,9 +42,7 @@ export default async function Home() {
 
   return (
     <div>
-      <Suspense fallback={<BannerSkeleton />}>
-        <Banner variant="default" />
-      </Suspense>
+      <Banner variant="default" />
       <HomeContent />
 
       <Suspense fallback={<HeroSkeleton />}>

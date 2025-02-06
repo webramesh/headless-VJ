@@ -19,27 +19,30 @@ const DryckerLinks = ({ produktTyper, produktslander, dryckerURIs }) => {
     }
     return acc;
   }, []);
+
+  let lastValidPath = '';
   return (
     <div className="text-red-600 hover:text-red-500 text-sm">
       <div className="text-sm">
         {updatedLinks.map((item, index) => {
           const isLastItem = index === updatedLinks.length - 1;
-          const isDrycker = dryckerURIs.includes(`/drycker/${item.slug}/`);
+          const currentPath = `/drycker/${item.slug}/`;
+          const isDrycker = dryckerURIs.includes(currentPath);
           const separator = !isLastItem && <span className="mx-1">|</span>;
+
+          if (isDrycker) {
+            lastValidPath = currentPath;
+          }
 
           return (
             <span key={`link-${item.slug}-${index}`}>
-              {isDrycker ? (
-                <Link
-                  href={`/drycker/${item.slug}/`}
-                  className="text-red-600 hover:text-red-500 transition-colors"
-                  aria-label={`Navigate to ${item.name}`}
-                >
-                  {item.name}
-                </Link>
-              ) : (
-                <span className="text-red-600">{item.name}</span>
-              )}
+              <Link
+                href={isDrycker ? currentPath : lastValidPath}
+                className="text-red-600 hover:text-red-500 transition-colors"
+                aria-label={`Navigate to ${item.name}`}
+              >
+                {item.name}
+              </Link>
               {separator}
             </span>
           );

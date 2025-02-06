@@ -13,7 +13,7 @@ import dynamic from 'next/dynamic';
 import Topbanner from './Components/Topbanner';
 import { PostHogProvider } from './providers';
 import PgBanner from './PgBanner';
-import { getHomePagePosts } from '../lib/api/postAPI';
+import { getLatestPost } from '../lib/api/postAPI';
 import { navSchema } from '../utils/schemaUtils';
 import Script from 'next/script';
 
@@ -24,19 +24,19 @@ const ScrollToTopButton = dynamic(() => import('./Components/ScrollToTopButton')
 const Footer = dynamic(() => import('./Components/Footer'));
 
 export default async function RootLayout({ children }) {
-  const [menuData, footerMenu, ordlista, categoriesWithSuggestedPosts, posts] = await Promise.all([
+  const [menuData, footerMenu, ordlista, categoriesWithSuggestedPosts, latestPost] = await Promise.all([
     fetchMenu('primary-menu'),
     fetchMenu('top-secondary-menu'),
     getAllOrdlistaCategories(),
     getAllCategoriesWithSuggestedPosts(),
-    getHomePagePosts(),
+    getLatestPost(),
   ]);
 
   return (
     <html lang="sv-SE">
       <head>
         {/* google analytics */}
-        <Script async src="https://www.googletagmanager.com/gtag/js?id=G-QTFVGQ97WC"></Script>
+        <Script async src="https://www.googletagmanager.com/gtag/js?id=G-QTFVGQ97WC" loading="lazy" />
         <script
           dangerouslySetInnerHTML={{
             __html: `window.dataLayer = window.dataLayer || [];
@@ -44,6 +44,7 @@ export default async function RootLayout({ children }) {
   gtag('js', new Date());
   gtag('config', 'G-QTFVGQ97WC');`,
           }}
+          loading="lazy"
         />
         {/* google tag manager */}
         <Script
@@ -62,6 +63,7 @@ export default async function RootLayout({ children }) {
           })(window, document, 'script', 'dataLayer', 'GTM-5ZJLP9N');
             `,
           }}
+          loading="lazy"
         />
 
         {/* PWA Primary */}
@@ -112,7 +114,7 @@ export default async function RootLayout({ children }) {
               <PageProvider>
                 <CategoryAndPostsProvider categoriesWithSuggestedPosts={categoriesWithSuggestedPosts}>
                   <OrdlistaProvider ordlista={ordlista}>
-                    <Topbanner post={posts[0]} />
+                    <Topbanner post={latestPost} />
                     <Navbar menuData={menuData} />
                     {children}
                     <PgBanner />

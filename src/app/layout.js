@@ -11,11 +11,10 @@ import { FilterProvider } from '../context/FilterContext';
 import { getAllCategoriesWithSuggestedPosts } from '../lib/api/postaccordion';
 import dynamic from 'next/dynamic';
 import Topbanner from './Components/Topbanner';
-import { PostHogProvider } from './providers';
-import PgBanner from './PgBanner';
 import { getLatestPost } from '../lib/api/postAPI';
 import { navSchema } from '../utils/schemaUtils';
 import Analytics from './Components/google/Analytics';
+// import Script from 'next/script';
 
 const ScrollToTopButton = dynamic(() => import('./Components/ScrollToTopButton'), {
   ssr: false,
@@ -86,24 +85,36 @@ export default async function RootLayout({ children }) {
           ></iframe>
         </noscript>
         {/* <!-- End Google Tag Manager (noscript) --> */}
-        <PostHogProvider>
-          <ApolloProvider>
-            <FilterProvider>
-              <PageProvider>
-                <CategoryAndPostsProvider categoriesWithSuggestedPosts={categoriesWithSuggestedPosts}>
-                  <OrdlistaProvider ordlista={ordlista}>
-                    <Topbanner post={latestPost} />
-                    <Navbar menuData={menuData} />
-                    {children}
-                    <PgBanner />
-                    <ScrollToTopButton />
-                    <Footer menuItems={footerMenu} />
-                  </OrdlistaProvider>
-                </CategoryAndPostsProvider>
-              </PageProvider>
-            </FilterProvider>
-          </ApolloProvider>
-        </PostHogProvider>
+        <ApolloProvider>
+          <FilterProvider>
+            <PageProvider>
+              <CategoryAndPostsProvider categoriesWithSuggestedPosts={categoriesWithSuggestedPosts}>
+                <OrdlistaProvider ordlista={ordlista}>
+                  <Topbanner post={latestPost} />
+                  <Navbar menuData={menuData} />
+                  {children}
+                  <ScrollToTopButton />
+                  <Footer menuItems={footerMenu} />
+                </OrdlistaProvider>
+              </CategoryAndPostsProvider>
+            </PageProvider>
+          </FilterProvider>
+        </ApolloProvider>
+        {/* <Script
+          type="text/javascript"
+          id="cookieinfo"
+          src="//cookieinfoscript.com/js/cookieinfo.min.js"
+          data-font-family="inherit"
+          data-text-align="left"
+          data-fg="white"
+          data-bg="rgb(17 24 39 / 0.95)"
+          data-message="För att kunna ge dig bästa möjliga upplevelse och förstå hur vi ska förbättra tjänsten använder vi kakor."
+          data-close-text="Acceptera cookies"
+          data-divlinkbg="#EB7273"
+          data-divlink="white"
+          data-linkmsg="Mer info"
+          data-moreinfo="http://www.vinjournalen.se/integritetspolicy/"
+        /> */}
       </body>
     </html>
   );

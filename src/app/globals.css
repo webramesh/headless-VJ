@@ -236,17 +236,15 @@ html {
   }
 }
 
+/* Small mobile styles (up to 425px) */
 @media screen and (max-width: 425px) {
   .content p {
     font-size: 14px;
     margin-bottom: 1.25rem;
   }
-}
-/* Small mobile styles (up to 375px) */
-@media screen and (max-width: 375px) {
-  .content p {
+
+  .content a {
     font-size: 14px;
-    margin-bottom: 1.25rem;
   }
 
   .content strong {
@@ -329,8 +327,8 @@ html {
   margin-left: 2.5rem;
 }
 
-/* Small mobile styles (up to 375px) */
-@media screen and (max-width: 375px) {
+/* Small mobile styles (up to 425px) */
+@media screen and (max-width: 425px) {
   .content p {
     font-size: 14px;
     margin-bottom: 1.25rem;

@@ -42,7 +42,7 @@ export default function ProductRecommendation({ postProductRecommendation }) {
               <div className="w-full xl:w-[20%] mb-6 xl:mb-0 ">
                 <div className="xl:sticky xl:top-4 ">
                   <Image
-                    src={productFeaturedImage}
+                    src={productFeaturedImage || '/wine-placeholder.webp'}
                     alt={recommendedProduct?.title}
                     className="mx-auto xl:w-full xl:h-full"
                     width={200}

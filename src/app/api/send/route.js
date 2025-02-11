@@ -1,46 +1,36 @@
-import { Resend } from 'resend';
 import { NextResponse } from 'next/server';
-import EmailTemplate from '../../Components/EmailTemplate';
+import nodemailer from 'nodemailer';
 
-const resend = new Resend(process.env.RESEND_API_KEY);
+const transporter = nodemailer.createTransport({
+  host: 'smtp.gmail.com',
+  port: 465,
+  auth: {
+    user: 'ramankhadgi0@gmail.com',
+    pass: 'equp jlpr gnvk tqxa',
+  },
+});
 
-export async function POST(req) {
-  const { name, contactEmail, message } = await req.json();
-
-  // Validate required fields
-  if (!name || !contactEmail || !message) {
-    return NextResponse.json(
-      {
-        error: 'Missing required fields. Please provide name, email, and message.',
-      },
-      { status: 400 }
-    );
-  }
-  // TODO: Solve -> The mailinator.com domain is not verified. Please, add and verify your domain on https://resend.com/domains
+export async function POST(request) {
   try {
-    const { data, error } = await resend.emails.send({
-      from: 'onboarding@resend.dev', // Required test email for development
-      to: ['rameshkunwar1110@gmail.com'],
-      reply_to: contactEmail,
-      subject: `New Contact Form Message from ${name}`,
-      react: EmailTemplate({
-        name: name,
-        email: contactEmail,
-        message: message,
-      }),
-    });
+    const body = await request.json();
+    const { name, contactEmail, message } = body;
 
-    if (error) {
-      return NextResponse.json({ error: error.message }, { status: 400 });
-    }
+    const mailOptions = {
+      to: 'editorial@vinjournalen.se',
+      subject: `New Contact Form Submission from ${name}`,
+      text: message,
+      html: `
+        <h3>New Contact Form Submission</h3>
+        <p><strong>Name:</strong> ${name}</p>
+        <p><strong>Email:</strong> ${contactEmail}</p>
+        <p><strong>Message:</strong> ${message}</p>
+      `,
+    };
 
-    return NextResponse.json({ data });
+    await transporter.sendMail(mailOptions);
+
+    return NextResponse.json({ message: 'Email sent successfully!' }, { status: 200 });
   } catch (error) {
-    return NextResponse.json(
-      {
-        error: 'Error sending email. Please try again later.',
-      },
-      { status: 500 }
-    );
+    return NextResponse.json({ error: 'Failed to send email' }, { status: 500 });
   }
 }

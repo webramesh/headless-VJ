@@ -117,7 +117,7 @@ html {
 /* Desktop styles */
 .content p {
   font-size: 18px;
-  margin-bottom: 2rem;
+  margin-bottom: 1rem;
   font-weight: 300;
 }
 
@@ -142,6 +142,7 @@ html {
   font-weight: 500;
   font-size: 20px;
   line-height: 1.5;
+  margin: 20px 0;
 }
 
 .content h3 strong {

@@ -173,7 +173,7 @@ export default function ProductSliderItem({ product }) {
 
             <Link href={`/produkter/${product.slug}`}>
               <Image
-                src={featuredImage?.node?.sourceUrl || '/placeholder.svg'}
+                src={featuredImage?.node?.sourceUrl || '/wine-placeholder.webp'}
                 alt={`${title} från www.vinjournalen.se`}
                 title={`${title} - Vinjournalen.se`}
                 className="h-[300px] md:h-[400px] w-auto object-contain z-1"
@@ -293,15 +293,18 @@ export default function ProductSliderItem({ product }) {
                 <ProductLabelsWithTooltips fieldsProduct={fieldsProduct} />
               </div>
               <Link href={`/produkter/${product.slug}`}>
-                <Image
-                  src={featuredImage?.node?.sourceUrl || '/placeholder.svg'}
-                  alt={`${title} från www.vinjournalen.se`}
-                  title={`${title} - Vinjournalen.se`}
-                  className="mx-auto -mt-16 h-[450px] z-0"
-                  width={250}
-                  height={450}
-                  loading="lazy"
-                />
+                <div className="relative aspect-[256/455] w-[250px]">
+                  <Image
+                    src={featuredImage?.node?.sourceUrl || '/wine-placeholder.webp'}
+                    alt={`${title} från www.vinjournalen.se`}
+                    title={`${title} - Vinjournalen.se`}
+                    className="object-contain"
+                    fill
+                    sizes="250px"
+                    loading="lazy"
+                    quality={75}
+                  />
+                </div>
               </Link>
             </div>
           </div>

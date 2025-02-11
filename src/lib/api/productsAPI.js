@@ -413,6 +413,7 @@ export async function getProductSlider(id) {
       query: gql`
         query PageById($id: ID!) {
           page(id: $id) {
+            id
             productSlider {
               productSlider {
                 nodes {

@@ -1,5 +1,6 @@
 'use client';
 import React, { useState } from 'react';
+// import { sendEmail } from '../../api/send/route';
 
 const ContactForm = () => {
   const [formData, setFormData] = useState({
@@ -9,6 +10,7 @@ const ContactForm = () => {
   });
 
   const [status, setStatus] = useState(null);
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const handleChange = (e) => {
     const { id, value } = e.target;
@@ -20,6 +22,7 @@ const ContactForm = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setIsSubmitting(true);
 
     try {
       const response = await fetch('/api/send', {
@@ -34,25 +37,17 @@ const ContactForm = () => {
 
       if (response.ok) {
         setStatus({ success: true, message: 'Email sent successfully!' });
-        setFormData({ name: '', contactEmail: '', message: '' }); // Reset form
+        setFormData({ name: '', contactEmail: '', message: '' });
       } else {
         setStatus({ success: false, message: result.error || 'Failed to send email.' });
       }
-
-      // Clear status message after 2 seconds
-      setTimeout(() => {
-        setStatus(null);
-      }, 2000);
     } catch (error) {
       setStatus({ success: false, message: 'An error occurred. Please try again later.' });
-
-      // Clear status message after 2 seconds
-      setTimeout(() => {
-        setStatus(null);
-      }, 2000);
+    } finally {
+      setIsSubmitting(false);
+      setTimeout(() => setStatus(null), 3000);
     }
   };
-
   return (
     <div>
       {status && (
@@ -113,8 +108,9 @@ const ContactForm = () => {
         <button
           type="submit"
           className="focus:outline-none text-white w-full mt-5 bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 mb-2"
+          disabled={isSubmitting}
         >
-          Överlämna
+          {isSubmitting ? 'Skickar...' : 'Överlämna'}
         </button>
       </form>
     </div>

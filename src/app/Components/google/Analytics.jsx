@@ -4,13 +4,16 @@ export default function Analytics() {
   return (
     <>
       {/* Google Analytics */}
-      <Script src="https://www.googletagmanager.com/gtag/js?id=G-QTFVGQ97WC" strategy="afterInteractive" />
+      <Script
+        src={`https://www.googletagmanager.com/gtag/js?id=${process.env.GOOGLE_ANALYTICS_ID}`}
+        strategy="afterInteractive"
+      />
       <Script id="google-analytics" strategy="afterInteractive">
         {`
           window.dataLayer = window.dataLayer || [];
           function gtag(){dataLayer.push(arguments);}
           gtag('js', new Date());
-          gtag('config', 'G-QTFVGQ97WC');
+          gtag('config', '${process.env.GOOGLE_ANALYTICS_ID}');
         `}
       </Script>
 
@@ -21,7 +24,7 @@ export default function Analytics() {
           new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
           j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
           'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-          })(window,document,'script','dataLayer','GTM-5ZJLP9N');
+          })(window,document,'script','dataLayer','${process.env.GOOGLE_TAG_ID}');
         `}
       </Script>
     </>

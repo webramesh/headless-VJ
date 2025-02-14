@@ -8,8 +8,9 @@ import fb from '@/public/fbblack.png';
 import insta from '@/public/instalogo.png';
 import twitter from '@/public/twitterblack.png';
 import { usePathname } from 'next/navigation';
+import { footerMenu } from '@/src/utils/constants';
 
-const Footer = ({ menuItems }) => {
+const Footer = () => {
   const pathname = usePathname();
 
   return (
@@ -28,7 +29,7 @@ const Footer = ({ menuItems }) => {
           </Link>
 
           <nav className="flex flex-col md:flex-row text-sm gap-2 md:gap-4 text-center md:text-left mb-4 md:mb-0">
-            {menuItems.map((menu) => (
+            {footerMenu.map((menu) => (
               <Link
                 href={menu.uri}
                 key={menu.id}

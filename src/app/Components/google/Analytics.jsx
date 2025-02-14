@@ -1,6 +1,7 @@
 import Script from 'next/script';
+import { memo } from 'react';
 
-export default function Analytics() {
+function Analytics() {
   return (
     <>
       {/* Google Analytics */}
@@ -30,3 +31,5 @@ export default function Analytics() {
     </>
   );
 }
+
+export default memo(Analytics);

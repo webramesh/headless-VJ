@@ -12,9 +12,9 @@ import twitter from '@/public/twitterblack.png';
 import { ChevronDownIcon } from '@heroicons/react/20/solid';
 import { usePathname } from 'next/navigation';
 import { Menu, X } from 'lucide-react';
+import { menu } from '@/src/utils/constants';
 
-export default function Navbar({ menuData }) {
-  const menu = menuData;
+export default function Navbar() {
   const pathname = usePathname();
 
   const [isMenuOpen, setIsMenuOpen] = useState(false);

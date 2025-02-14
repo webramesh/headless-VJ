@@ -1,35 +1,25 @@
 import './globals.css';
 
-import ApolloProvider from '../app/Components/ApolloProvider';
 import Navbar from './Components/Navbar';
-import { fetchMenu } from '../lib/api/menuAPI';
-import { PageProvider } from '../context/PageContext';
-import { OrdlistaProvider } from '../context/OrdlistaContext';
-import { getAllOrdlistaCategories } from '../lib/api/ordilistaAPI';
-import { CategoryAndPostsProvider } from '../context/CategoriesAndPostsContext';
-import { FilterProvider } from '../context/FilterContext';
-import { getAllCategoriesWithSuggestedPosts } from '../lib/api/postaccordion';
 import dynamic from 'next/dynamic';
 import Topbanner from './Components/Topbanner';
 import { getLatestPost } from '../lib/api/postAPI';
-import { navSchema } from '../utils/schemaUtils';
+import { navSchema } from '../utils/constants';
 import Analytics from './Components/google/Analytics';
-// import Script from 'next/script';
+import PWA from './Components/PWA/PWA';
+import Providers from './Components/Providers';
+import Script from 'next/script';
 
 const ScrollToTopButton = dynamic(() => import('./Components/ScrollToTopButton'), {
   ssr: false,
 });
 
-const Footer = dynamic(() => import('./Components/Footer'));
+const Footer = dynamic(() => import('./Components/Footer'), {
+  ssr: false,
+});
 
 export default async function RootLayout({ children }) {
-  const [menuData, footerMenu, ordlista, categoriesWithSuggestedPosts, latestPost] = await Promise.all([
-    fetchMenu('primary-menu'),
-    fetchMenu('top-secondary-menu'),
-    getAllOrdlistaCategories(),
-    getAllCategoriesWithSuggestedPosts(),
-    getLatestPost(),
-  ]);
+  const latestPost = await getLatestPost();
 
   return (
     <html lang="sv-SE">
@@ -41,31 +31,9 @@ export default async function RootLayout({ children }) {
           as="font"
           type="font/ttf"
           crossOrigin="anonymous"
+          fetchPriority="high"
         />
-
-        {/* PWA Primary */}
-        <link rel="manifest" href="/manifest.json" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0,maximum-scale=5.0" />
-        <meta name="theme-color" content="#F3EFE0" />
-
-        {/* Android */}
-        <meta name="mobile-web-app-capable" content="yes" />
-        <link rel="icon" type="image/png" sizes="192x192" href="/favicon.png" />
-        <link rel="icon" type="image/png" sizes="512x512" href="/favicon.png" />
-
-        {/* iOS */}
-        <link rel="apple-touch-icon" href="/favicon.png" />
-        <link rel="apple-touch-icon" sizes="152x152" href="/favicon.png" />
-        <link rel="apple-touch-icon" sizes="180x180" href="/favicon.png" />
-        <link rel="apple-touch-icon" sizes="167x167" href="/favicon.png" />
-        <meta name="apple-mobile-web-app-capable" content="yes" />
-        <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
-        <meta name="apple-mobile-web-app-title" content="Vinjournalen" />
-
-        {/* Microsoft */}
-        <meta name="msapplication-TileImage" content="/favicon.png" />
-        <meta name="msapplication-TileColor" content="#F3EFE0" />
-        <meta name="msapplication-tap-highlight" content="no" />
+        <PWA />
 
         <script
           type="application/ld+json"
@@ -78,32 +46,25 @@ export default async function RootLayout({ children }) {
         {/* <!-- Google Tag Manager (noscript) --> */}
         <noscript>
           <iframe
-            src="https://www.googletagmanager.com/ns.html?id=GTM-5ZJLP9N"
+            src={`https://www.googletagmanager.com/ns.html?id=${process.env.GOOGLE_TAG_ID}`}
             height="0"
             width="0"
             style={{ display: 'none', visibility: 'hidden' }}
           ></iframe>
         </noscript>
         {/* <!-- End Google Tag Manager (noscript) --> */}
-        <ApolloProvider>
-          <FilterProvider>
-            <PageProvider>
-              <CategoryAndPostsProvider categoriesWithSuggestedPosts={categoriesWithSuggestedPosts}>
-                <OrdlistaProvider ordlista={ordlista}>
-                  <Topbanner post={latestPost} />
-                  <Navbar menuData={menuData} />
-                  {children}
-                  <ScrollToTopButton />
-                  <Footer menuItems={footerMenu} />
-                </OrdlistaProvider>
-              </CategoryAndPostsProvider>
-            </PageProvider>
-          </FilterProvider>
-        </ApolloProvider>
-        {/* <Script
+        <Providers>
+          {latestPost && <Topbanner post={latestPost} />}
+          <Navbar />
+          <main>{children}</main>
+          <ScrollToTopButton />
+          <Footer />
+        </Providers>
+
+        <Script
           type="text/javascript"
           id="cookieinfo"
-          src="//cookieinfoscript.com/js/cookieinfo.min.js"
+          src="https://cookieinfoscript.com/js/cookieinfo.min.js"
           data-font-family="inherit"
           data-text-align="left"
           data-fg="white"
@@ -114,14 +75,8 @@ export default async function RootLayout({ children }) {
           data-divlink="white"
           data-linkmsg="Mer info"
           data-moreinfo="http://www.vinjournalen.se/integritetspolicy/"
-        /> */}
+        />
       </body>
     </html>
   );
 }
-
-export function generateStaticParams() {
-  return [];
-}
-
-export const dynamicParams = true;

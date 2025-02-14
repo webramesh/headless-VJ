@@ -33,8 +33,12 @@ export async function getAllBanners() {
       `,
       fetchPolicy: 'no-cache',
     });
+    const banners = data.allBanner.nodes;
+    if (!banners || banners.length === 0) return null;
 
-    return data.allBanner.nodes;
+    // Get random banner
+    const randomIndex = Math.floor(Math.random() * banners.length);
+    return banners[randomIndex];
   } catch (error) {
     console.error('Error fetching banners:', error);
     return [];

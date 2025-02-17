@@ -4,6 +4,7 @@ import React, { useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { SquareArrowOutUpRight } from 'lucide-react';
+import { GLOBAL_BLUR_DATA_URL } from '@/src/utils/constants';
 
 function CountryItem({ country }) {
   const [isHovered, setIsHovered] = useState(false);
@@ -34,7 +35,7 @@ function CountryItem({ country }) {
               loading="lazy"
               quality={75}
               placeholder="blur"
-              blurDataURL="/flag1.webp"
+              blurDataURL={GLOBAL_BLUR_DATA_URL}
             />
           </div>
         )}

@@ -1,6 +1,7 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import { convertToWebP, formatEmbeddedContent } from '@/src/utils/utils';
+import { GLOBAL_BLUR_DATA_URL } from '@/src/utils/constants';
 
 const Hero = ({ posts }) => {
   return (
@@ -22,9 +23,9 @@ const Hero = ({ posts }) => {
                   fill
                   priority
                   className="h-full w-full object-cover"
-                  sizes={
-                    posts[0]?.featuredImage?.node?.sizes || '(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 25vw'
-                  }
+                  sizes={posts[0]?.featuredImage?.node?.sizes || '(max-width: 768px) 100vw, 50vw'}
+                  placeholder="blur"
+                  blurDataURL={GLOBAL_BLUR_DATA_URL}
                 />
               </div>
             </div>
@@ -68,6 +69,8 @@ const Hero = ({ posts }) => {
                         sizes={
                           post?.featuredImage?.node?.sizes || '(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 25vw'
                         }
+                        placeholder="blur"
+                        blurDataURL={GLOBAL_BLUR_DATA_URL}
                       />
                     </div>
                     <div className="px-4 py-1 sm:w-2/3">

@@ -8,7 +8,7 @@ import { navSchema } from '../utils/constants';
 import Analytics from './Components/google/Analytics';
 import PWA from './Components/PWA/PWA';
 import Providers from './Components/Providers';
-import Script from 'next/script';
+import CookieInfo from './Components/cookie/CookieInfo';
 
 const ScrollToTopButton = dynamic(() => import('./Components/ScrollToTopButton'), {
   ssr: false,
@@ -24,7 +24,6 @@ export default async function RootLayout({ children }) {
   return (
     <html lang="sv-SE">
       <head>
-        <Analytics />
         <link
           rel="preload"
           href="/fonts/Outfit-VariableFont_wght.ttf"
@@ -61,21 +60,8 @@ export default async function RootLayout({ children }) {
           <Footer />
         </Providers>
 
-        <Script
-          type="text/javascript"
-          id="cookieinfo"
-          src="https://cookieinfoscript.com/js/cookieinfo.min.js"
-          data-font-family="inherit"
-          data-text-align="left"
-          data-fg="white"
-          data-bg="rgb(17 24 39 / 0.95)"
-          data-message="För att kunna ge dig bästa möjliga upplevelse och förstå hur vi ska förbättra tjänsten använder vi kakor."
-          data-close-text="Acceptera cookies"
-          data-divlinkbg="#EB7273"
-          data-divlink="white"
-          data-linkmsg="Mer info"
-          data-moreinfo="http://www.vinjournalen.se/integritetspolicy/"
-        />
+        <Analytics />
+        <CookieInfo />
       </body>
     </html>
   );
